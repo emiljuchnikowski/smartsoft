@@ -1,0 +1,22 @@
+{
+  "name": "@smartsoft001/auth-domain",
+  "version": "1.0.2",
+  "description": "Utils to authorization",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "keywords": [
+    "smartsoft",
+    "oauth",
+    "angular",
+    "nestjs"
+  ],
+  "main": "src/index.ts",
+  "author": "Emil Juchnikowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme"
+}
