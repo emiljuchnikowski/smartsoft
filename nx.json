@@ -9,7 +9,27 @@
   },
   "projects": {
     "auth-domain": {
-      "tags": []
+      "tags": [
+        "scope:auth",
+        "type:domain"
+      ]
+    },
+    "auth-shell-app-services": {
+      "tags": [
+        "scope:auth",
+        "type:shell"
+      ]
+    },
+    "auth-shell-nestjs": {
+      "tags": [
+        "scope:auth",
+        "type:shell"
+      ]
+    },
+    "api-auth": {
+      "tags": [
+        "scope:app"
+      ]
     }
   }
 }

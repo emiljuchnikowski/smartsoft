@@ -53,7 +53,12 @@
       {
         "allow": [],
         "depConstraints": [
-          { "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }
+          { "sourceTag": "scope:app", "onlyDependOnLibsWithTags": ["type:shell"] },
+          { "sourceTag": "scope:auth", "onlyDependOnLibsWithTags": ["scope:auth", "scope:shared"] },
+          { "sourceTag": "scope:shared", "onlyDependOnLibsWithTags": ["scope:shared"] },
+
+          { "sourceTag": "type:shell", "onlyDependOnLibsWithTags": ["type:domain", "type:util"] },
+          { "sourceTag": "type:util", "onlyDependOnLibsWithTags": ["type:domain"] }
         ]
       }
     ]
