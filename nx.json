@@ -9,27 +9,22 @@
   },
   "projects": {
     "auth-domain": {
-      "tags": [
-        "scope:auth",
-        "type:domain"
-      ]
+      "tags": ["scope:auth", "type:domain"]
     },
     "auth-shell-app-services": {
-      "tags": [
-        "scope:auth",
-        "type:shell"
-      ]
+      "tags": ["scope:auth", "type:shell"]
     },
     "auth-shell-nestjs": {
-      "tags": [
-        "scope:auth",
-        "type:shell"
-      ]
+      "tags": ["scope:auth", "type:shell"]
     },
     "api-auth": {
-      "tags": [
-        "scope:app"
-      ]
+      "tags": ["scope:app"]
+    },
+    "shared-users": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-domain-core": {
+      "tags": ["scope:shared", "type:domain"]
     }
   }
 }

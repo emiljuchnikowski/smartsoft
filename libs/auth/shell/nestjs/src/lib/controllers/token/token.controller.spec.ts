@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { TokenController } from './token.controller';
-import {AuthTokenRequestDto} from "../../dtos";
-import {AuthService, IAuthToken} from "@smartsoft001/auth-shell-app-services";
+import {AuthService} from "@smartsoft001/auth-shell-app-services";
+import {IAuthToken, IAuthTokenRequest} from "@smartsoft001/auth-domain";
 
 describe('auth-shell-nestjs: TokenController', () => {
   let controller: TokenController;
@@ -10,7 +11,7 @@ describe('auth-shell-nestjs: TokenController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TokenController],
-      providers: [AuthService]
+      providers: [ { provide: AuthService, useValue: new AuthService(null) } ]
     }).compile();
 
     controller = module.get<TokenController>(TokenController);
@@ -24,10 +25,11 @@ describe('auth-shell-nestjs: TokenController', () => {
   describe('create()', () => {
 
     it('send model', () => {
-      const model: AuthTokenRequestDto = {
-        grant_type: "refresh_token"
+      const model: IAuthTokenRequest = {
+        grant_type: "refresh_token",
+        refresh_token: "123"
       };
-      const spy = jest.spyOn(service, 'create');
+      const spy = jest.spyOn(service, 'create').mockReturnValueOnce(Promise.resolve({} as any));
 
       controller.create(model);
 
@@ -36,8 +38,9 @@ describe('auth-shell-nestjs: TokenController', () => {
     });
 
     it('get token', async done => {
-      const model: AuthTokenRequestDto = {
-        grant_type: "refresh_token"
+      const model: IAuthTokenRequest = {
+        grant_type: "refresh_token",
+        refresh_token: "123"
       };
       const token: IAuthToken = {
         access_token: '123',
@@ -52,7 +55,7 @@ describe('auth-shell-nestjs: TokenController', () => {
       expect(result).toBe(token);
 
       done();
-    })
+    });
 
   });
 });

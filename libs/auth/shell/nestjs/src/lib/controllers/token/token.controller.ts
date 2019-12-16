@@ -1,14 +1,14 @@
 import {Body, Controller, Post} from '@nestjs/common';
 
-import {AuthTokenRequestDto} from "../../dtos";
-import {AuthService, IAuthToken} from "@smartsoft001/auth-shell-app-services";
+import {AuthService} from "@smartsoft001/auth-shell-app-services";
+import {IAuthToken, IAuthTokenRequest} from "@smartsoft001/auth-domain";
 
 @Controller('token')
 export class TokenController {
     constructor(private service: AuthService) { }
 
     @Post()
-    create(@Body() req: AuthTokenRequestDto): Promise<IAuthToken> {
+    create(@Body() req: IAuthTokenRequest): Promise<IAuthToken> {
         return this.service.create(req);
     }
 }

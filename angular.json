@@ -14,10 +14,7 @@
               "libs/auth/domain/tsconfig.lib.json",
               "libs/auth/domain/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/auth/domain/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/auth/domain/**"]
           }
         },
         "test": {
@@ -70,10 +67,7 @@
               "libs/auth/shell/nestjs/tsconfig.lib.json",
               "libs/auth/shell/nestjs/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/auth/shell/nestjs/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/auth/shell/nestjs/**"]
           }
         },
         "test": {
@@ -98,9 +92,7 @@
             "outputPath": "dist/apps/api/auth",
             "main": "apps/api/auth/src/main.ts",
             "tsConfig": "apps/api/auth/tsconfig.app.json",
-            "assets": [
-              "apps/api/auth/src/assets"
-            ]
+            "assets": ["apps/api/auth/src/assets"]
           },
           "configurations": {
             "production": {
@@ -129,10 +121,7 @@
               "apps/api/auth/tsconfig.app.json",
               "apps/api/auth/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/api/auth/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/api/auth/**"]
           }
         },
         "test": {
@@ -140,6 +129,56 @@
           "options": {
             "jestConfig": "apps/api/auth/jest.config.js",
             "tsConfig": "apps/api/auth/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "shared-users": {
+      "root": "libs/shared/users",
+      "sourceRoot": "libs/shared/users/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/users/tsconfig.lib.json",
+              "libs/shared/users/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/users/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/users/jest.config.js",
+            "tsConfig": "libs/shared/users/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "shared-domain-core": {
+      "root": "libs/shared/domain-core",
+      "sourceRoot": "libs/shared/domain-core/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/domain-core/tsconfig.lib.json",
+              "libs/shared/domain-core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/domain-core/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/domain-core/jest.config.js",
+            "tsConfig": "libs/shared/domain-core/tsconfig.spec.json"
           }
         }
       }
