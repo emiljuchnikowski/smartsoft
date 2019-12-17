@@ -24,7 +24,10 @@
         "libs/auth/shell/nestjs/src/index.ts"
       ],
       "@smartsoft001/shared-users": ["libs/shared/users/src/index.ts"],
-      "@smartsoft001/shared-domain-core": ["libs/shared/domain-core/src/index.ts"]
+      "@smartsoft001/shared-domain-core": [
+        "libs/shared/domain-core/src/index.ts"
+      ],
+      "@smartsoft001/shared-utils": ["libs/shared/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

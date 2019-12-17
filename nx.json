@@ -25,6 +25,9 @@
     },
     "shared-domain-core": {
       "tags": ["scope:shared", "type:domain"]
+    },
+    "shared-utils": {
+      "tags": ["scope:shared", "type:util"]
     }
   }
 }

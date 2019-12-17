@@ -20,9 +20,7 @@ export class User implements IEntity<string>, IUser {
     @Column("password")
     password: string;
 
-    @Column("auth")
-    auth: {
-        refreshToken: string;
-    }
+    @Column("authRefreshToken")
+    authRefreshToken: string;
 
 }

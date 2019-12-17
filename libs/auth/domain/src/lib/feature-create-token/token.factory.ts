@@ -1,20 +1,66 @@
 import {Injectable} from "@nestjs/common";
 import {Repository} from "typeorm";
+import { JwtService } from '@nestjs/jwt';
 
 import {DomainValidationError, IFactory} from "@smartsoft001/shared-domain-core";
 import {IAuthToken, IAuthTokenRequest, User} from "@smartsoft001/auth-domain";
 import {TokenConfig} from "./token.config";
+import {PasswordService} from "@smartsoft001/shared-utils";
+import {Guid} from "guid-typescript";
 
 @Injectable()
 export class TokenFactory implements IFactory<IAuthToken, IAuthTokenRequest> {
-    constructor(private config: TokenConfig, private repository: Repository<User>) { }
+    private _invalidUsernameOrPasswordMessage = "Invalid username or password";
 
-    create(config: NonNullable<IAuthTokenRequest>): Promise<IAuthToken> {
+    constructor(private config: TokenConfig, private repository: Repository<User>, private jwtService: JwtService) { }
+
+    async create(config: NonNullable<IAuthTokenRequest>): Promise<IAuthToken> {
         this.valid(config);
 
-        //this.repository.
+        const query = this.getQuery(config);
+        const user = await this.repository.findOne(query);
 
-        return null;
+        this.checkUser(config, user);
+        await this.checkPassword(config, user);
+
+        const refreshToken = Guid.raw();
+        await this.repository.update(query, {
+            authRefreshToken: refreshToken
+        });
+
+
+        // TODO: correct jwt token
+        return {
+            expired_in: this.config.expiredIn,
+            token_type: 'bearer',
+            access_token: this.jwtService.sign({
+                roles: user.roles
+            }, {
+                expiresIn: this.config.expiredIn,
+                subject: user.username,
+
+            }),
+            refresh_token: refreshToken
+        };
+    }
+
+    private checkUser(config: IAuthTokenRequest, user: User): void {
+        if (!user)
+            throw new DomainValidationError(config.grant_type === "password"
+                ? this._invalidUsernameOrPasswordMessage
+                : 'Invalid token'
+            );
+    }
+
+    private async checkPassword(config: IAuthTokenRequest, user: User): Promise<void> {
+        if (config.grant_type === "password" && !(await PasswordService.compare(config.password, user.password)))
+            throw new DomainValidationError(this._invalidUsernameOrPasswordMessage);
+    }
+
+    private getQuery(config: IAuthTokenRequest): Partial<User> {
+      return (config.grant_type === "password")
+          ? { username: config.username }
+          : { authRefreshToken: config.refresh_token };
     }
 
     private valid(req: NonNullable<IAuthTokenRequest>): void {
