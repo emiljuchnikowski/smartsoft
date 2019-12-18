@@ -4,4 +4,5 @@ import {Injectable} from "@nestjs/common";
 export class TokenConfig {
     expiredIn: number;
     clients: Array<string> = [];
+    secretOrPrivateKey: string;
 }

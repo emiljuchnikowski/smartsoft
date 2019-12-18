@@ -1,4 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import {PassportModule} from "@nestjs/passport";
+import {JwtModule} from "@nestjs/jwt";
 
 import { TokenController } from './token.controller';
 import {AuthService} from "@smartsoft001/auth-shell-app-services";
@@ -10,6 +12,15 @@ describe('auth-shell-nestjs: TokenController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        PassportModule.register({ defaultStrategy: 'jwt', session: false }),
+        JwtModule.register({
+          secretOrPrivateKey: 'thisismykickasssecretthatiwilltotallychangelater',
+          signOptions: {
+            expiresIn: 3600
+          }
+        }),
+      ],
       controllers: [TokenController],
       providers: [ { provide: AuthService, useValue: new AuthService(null) } ]
     }).compile();

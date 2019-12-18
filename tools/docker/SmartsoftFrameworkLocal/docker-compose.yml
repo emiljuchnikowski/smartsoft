@@ -6,7 +6,7 @@ services:
     image: "mongo:4.2"
     restart: always
     ports:
-      - 8101:8081
+      - 8101:27017
     volumes:
     - smartsoft_db:/data/db
 

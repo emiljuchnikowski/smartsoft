@@ -1,8 +1,8 @@
-import * as bodyParser from 'body-parser';
-import { NestFactory } from '@nestjs/core';
-import {ValidationPipe} from "@nestjs/common";
+import * as bodyParser from "body-parser";
+import { NestFactory } from "@nestjs/core";
+import { ValidationPipe } from "@nestjs/common";
 
-import { AppModule } from './app/app.module';
+import { AppModule } from "./app/app.module";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,7 +11,7 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(port, () => {
-    console.log('Listening at http://localhost:' + port);
+    console.log("Listening at http://localhost:" + port);
   });
 }
 

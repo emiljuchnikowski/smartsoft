@@ -28,6 +28,9 @@
     },
     "shared-utils": {
       "tags": ["scope:shared", "type:util"]
+    },
+    "shared-nestjs": {
+      "tags": ["scope:shared", "type:shell"]
     }
   }
 }

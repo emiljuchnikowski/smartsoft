@@ -27,7 +27,8 @@
       "@smartsoft001/shared-domain-core": [
         "libs/shared/domain-core/src/index.ts"
       ],
-      "@smartsoft001/shared-utils": ["libs/shared/utils/src/index.ts"]
+      "@smartsoft001/shared-utils": ["libs/shared/utils/src/index.ts"],
+      "@smartsoft001/shared-nestjs": ["libs/shared/nestjs/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist/out-tsc",
+    "module": "commonjs",
+    "types": ["jest", "node"]
+  },
+  "include": [
+    "lib/**/*.spec.ts",
+    "lib/**/*.spec.tsx",
+    "lib/**/*.spec.js",
+    "lib/**/*.spec.jsx",
+    "lib/**/*.d.ts",
+
+    "apps/**/*.spec.ts",
+    "apps/**/*.spec.tsx",
+    "apps/**/*.spec.js",
+    "apps/**/*.spec.jsx",
+    "apps/**/*.d.ts"
+  ]
+}

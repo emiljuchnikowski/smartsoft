@@ -207,6 +207,31 @@
           }
         }
       }
+    },
+    "shared-nestjs": {
+      "root": "libs/shared/nestjs",
+      "sourceRoot": "libs/shared/nestjs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/nestjs/tsconfig.lib.json",
+              "libs/shared/nestjs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/nestjs/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/nestjs/jest.config.js",
+            "tsConfig": "libs/shared/nestjs/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

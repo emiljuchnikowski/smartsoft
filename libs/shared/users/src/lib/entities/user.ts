@@ -1,4 +1,4 @@
 export interface IUser {
     username: string;
-    roles: Array<string>;
+    permissions: Array<string>;
 }
