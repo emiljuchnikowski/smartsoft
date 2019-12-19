@@ -17,5 +17,8 @@
     "apps/**/*.spec.js",
     "apps/**/*.spec.jsx",
     "apps/**/*.d.ts"
+  ],
+  "exclude": [
+    "apps/ui/test-e2e/**/*.spec.ts"
   ]
 }

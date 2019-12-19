@@ -28,7 +28,10 @@
         "libs/shared/domain-core/src/index.ts"
       ],
       "@smartsoft001/shared-utils": ["libs/shared/utils/src/index.ts"],
-      "@smartsoft001/shared-nestjs": ["libs/shared/nestjs/src/index.ts"]
+      "@smartsoft001/shared-nestjs": ["libs/shared/nestjs/src/index.ts"],
+      "@smartsoft001/auth-shell-angular": [
+        "libs/auth/shell/angular/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -10,7 +10,7 @@ jobs:
           command:
             npm install
       - run:
-          name: Unit test
+          name: Unit tests
           command:
             npm test
 

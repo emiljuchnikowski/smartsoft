@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+
+  mongo:
+    image: "mongo:4.2"
+    restart: always
+    ports:
+      - 8101:27017
+    volumes:
+      - smartsoft_db:/data/db
+
+  auth:
+    image: "smartsoft001/auth_api:latest"
+    ports:
+      - 8102:3333
+    depends_on:
+      - mongo
+    environment:
+      TOKEN_CONFIG_SECRET_OR_PRIVATE_KEY: "test"
+      TOKEN_CONFIG_CLIENTS: "client1"
+      TOKEN_CONFIG_EXPIRED_IN_SECONDS: 600
+      DB_SERVER:  "mongo"
+      DB_PORT:  27017
+      DB_NAME:  "smartsoft"
+
+volumes:
+  smartsoft_db:
