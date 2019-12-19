@@ -16,7 +16,19 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@smartsoft001/auth-domain": ["libs/auth/domain/src/index.ts"]
+      "@smartsoft001/auth-domain": ["libs/auth/domain/src/index.ts"],
+      "@smartsoft001/auth-shell-app-services": [
+        "libs/auth/shell/app-services/src/index.ts"
+      ],
+      "@smartsoft001/auth-shell-nestjs": [
+        "libs/auth/shell/nestjs/src/index.ts"
+      ],
+      "@smartsoft001/shared-users": ["libs/shared/users/src/index.ts"],
+      "@smartsoft001/shared-domain-core": [
+        "libs/shared/domain-core/src/index.ts"
+      ],
+      "@smartsoft001/shared-utils": ["libs/shared/utils/src/index.ts"],
+      "@smartsoft001/shared-nestjs": ["libs/shared/nestjs/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

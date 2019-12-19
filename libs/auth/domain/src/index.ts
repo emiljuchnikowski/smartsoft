@@ -1,2 +1,8 @@
-export * from './lib/auth-domain';
-export {  } from '@smartsoft001/auth'
+import {TokenFactory} from "./lib/feature-create-token";
+
+export * from './lib/entities';
+export * from './lib/feature-create-token';
+
+export const DOMAIN_SERVICES = [
+    TokenFactory
+];
