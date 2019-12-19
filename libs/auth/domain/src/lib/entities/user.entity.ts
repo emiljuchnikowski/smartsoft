@@ -18,6 +18,9 @@ export class User implements IEntity<string>, IUser {
     @Column("password")
     password: string;
 
+    @Column("disabled")
+    disabled: boolean;
+
     @Column("authRefreshToken")
     authRefreshToken: string;
 

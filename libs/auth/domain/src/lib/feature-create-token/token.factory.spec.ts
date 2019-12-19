@@ -180,7 +180,7 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       await factory.create(baseReqPassword);
 
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith({ username: baseReqPassword.username });
+      expect(spy).toHaveBeenCalledWith({ username: baseReqPassword.username, disabled: false });
       done();
     });
 
@@ -194,7 +194,7 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       await factory.create(req);
 
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith({ authRefreshToken: req.refresh_token });
+      expect(spy).toHaveBeenCalledWith({ authRefreshToken: req.refresh_token, disabled: false });
       done();
     });
 
@@ -247,7 +247,7 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(
-        { username: baseReqPassword.username },
+        { username: baseReqPassword.username, disabled: false },
         { authRefreshToken: testToken }
       );
       done();
@@ -274,6 +274,21 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       const result = await factory.create(baseReqPassword);
 
       expect(result.refresh_token).toBe(testToken);
+      done();
+    });
+
+    it("should throw error when user disabled", async done => {
+      user.disabled = true;
+
+      let error;
+
+      try {
+        await factory.create(baseReqPassword);
+      } catch (e) {
+        error = e;
+      }
+
+      expect(error).toBeInstanceOf(DomainValidationError);
       done();
     });
 

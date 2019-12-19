@@ -25,8 +25,13 @@ export class TokenFactory implements IFactory<IAuthToken, IAuthTokenRequest> {
 
   static getQuery(config: IAuthTokenRequest): Partial<User> {
     return config.grant_type === "password"
-        ? { username: config.username }
-        : { authRefreshToken: config.refresh_token };
+        ? { username: config.username, disabled: false }
+        : { authRefreshToken: config.refresh_token, disabled: false };
+  }
+
+  static checkDisabled(user: User) {
+    if (user.disabled)
+      throw new DomainValidationError("user disabled");
   }
 
   async create(config: NonNullable<IAuthTokenRequest>): Promise<IAuthToken> {
@@ -36,6 +41,7 @@ export class TokenFactory implements IFactory<IAuthToken, IAuthTokenRequest> {
     const user = await this.repository.findOne(query);
 
     this.checkUser(config, user);
+    TokenFactory.checkDisabled(user);
     await this.checkPassword(config, user);
 
     const refreshToken = Guid.raw();
