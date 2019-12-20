@@ -6,14 +6,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install packages
-        command:
-          npm install
-
-      - run:
-        name: Install Jest global
-        command:
-          npm install jest -g
+          name: Install packages
+          command:
+            npm install jest -g && npm install
 
       - run:
           name: Run tests with JUnit as reporter
