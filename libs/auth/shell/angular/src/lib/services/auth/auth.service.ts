@@ -8,7 +8,6 @@ import {tap} from "rxjs/operators";
 
 export const AUTH_TOKEN = 'AUTH_TOKEN';
 
-// TODO: unit tests
 @Injectable()
 export class AuthService {
 

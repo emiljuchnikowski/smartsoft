@@ -7,5 +7,8 @@ module.exports = {
   moduleFileExtensions: ["ts", "js", "html"],
   coverageReporters: ["html"],
   reporters: ["default", "jest-junit"],
-  passWithNoTests: true
+  passWithNoTests: true,
+  setupFiles: [
+    "mock-local-storage"
+  ]
 };

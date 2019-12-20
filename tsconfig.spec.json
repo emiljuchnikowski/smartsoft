@@ -20,5 +20,8 @@
   ],
   "exclude": [
     "apps/ui/test-e2e/**/*.spec.ts"
-  ]
+  ],
+  "jest": {
+    "setupTestFrameworkScriptFile": "mock-local-storage"
+  }
 }
