@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: node:12-alpine
+      - image: circleci/node:12-alpine
     steps:
       - checkout
       - run:
@@ -10,8 +10,13 @@ jobs:
           command:
             npm install
       - run:
-          name: Unit tests
-          command: jest --ci --runInBand --reporters=default --reporters=jest-junit
-            environment:
-              JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
+          name: "JavaScript Test Suite"
+          # yarn here makes sure we are using the local jest binary
+          command: yarn jest -- --ci --testResultsProcessor="jest-junit"
+          environment:
+            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+            - store_test_results:
+                path: reports/junit
+            - store_artifacts:
+                path: reports/junit
 
