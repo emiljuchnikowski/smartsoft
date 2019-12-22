@@ -58,7 +58,11 @@
     "@angular/platform-browser-dynamic": "^8.2.0",
     "@angular/router": "^8.2.0",
     "core-js": "^2.5.4",
-    "zone.js": "^0.9.1"
+    "zone.js": "^0.9.1",
+    "@ngrx/store": "8.5.0",
+    "@ngrx/effects": "8.5.0",
+    "@ngrx/entity": "8.5.0",
+    "@ngrx/router-store": "8.5.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.20",
@@ -91,6 +95,8 @@
     "tsickle": "^0.37.0",
     "tslint": "~5.11.0",
     "typescript": "~3.5.3",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "@ngrx/schematics": "8.5.0",
+    "@ngrx/store-devtools": "8.5.0"
   }
 }

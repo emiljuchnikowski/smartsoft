@@ -2,7 +2,7 @@ import "jest-preset-angular";
 
 import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {of} from "rxjs";
 
 import {AUTH_TOKEN, AuthService} from "./auth.service";
@@ -111,7 +111,20 @@ describe("auth-shell-angular: AuthService", () => {
 
       const result = sessionStorage.getItem(AUTH_TOKEN);
 
-      expect(!!result).not.toBeTruthy()
+      expect(!!result).not.toBeTruthy();
+      done()
+    });
+
+  });
+
+  describe("token", () => {
+
+    it('should return from storage', async done => {
+      sessionStorage.setItem(AUTH_TOKEN, "{}");
+
+      const result = service.token;
+
+      expect(result).toStrictEqual({});
       done()
     });
 
