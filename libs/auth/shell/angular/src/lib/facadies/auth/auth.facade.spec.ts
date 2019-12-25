@@ -9,14 +9,14 @@ import { StoreModule, Store } from "@ngrx/store";
 
 import { NxModule } from "@nrwl/angular";
 
-import { AuthEffects } from "./auth.effects";
+import { AuthEffects } from "../../+state/auth.effects";
 import { AuthFacade } from "./auth.facade";
 
-import * as AuthActions from "./auth.actions";
-import { AUTH_FEATURE_KEY, State, reducer } from "./auth.reducer";
-import {AuthService} from "../services";
+import * as AuthActions from "../../+state/auth.actions";
+import { AUTH_FEATURE_KEY, State, reducer } from "../../+state/auth.reducer";
+import {AuthService} from "../../services";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {AuthConfig} from "../auth.config";
+import {AuthConfig} from "../../auth.config";
 
 interface TestSchema {
   auth: State;
@@ -90,6 +90,18 @@ describe("auth-shell-angular: AuthFacade", () => {
 
     });
 
+    describe("logout()", () => {
+
+      it("should dispose action", () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.logout();
+
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith(AuthActions.removeToken());
+      });
+
+    });
 
   });
 });

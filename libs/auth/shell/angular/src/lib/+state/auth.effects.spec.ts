@@ -94,4 +94,66 @@ describe("auth-shell-angular: AuthEffects", () => {
       });
     });
   });
+
+  describe("removeToken$", () => {
+    it("should work", () => {
+      scheduler.run(({ hot, expectObservable }) => {
+        actions = hot("-a-|", {a: AuthActions.removeToken()});
+        jest.spyOn(service, 'removeToken').mockReturnValue(of({} as any));
+
+        const expected = "-a-|";
+
+        expectObservable(effects.removeToken$).toBe(expected, {
+          a: AuthActions.removeTokenSuccess()
+        });
+      });
+    });
+
+    it("should throw error", () => {
+      scheduler.run(({ hot, cold, expectObservable }) => {
+        const failureAction = AuthActions.removeTokenFailure({ error: {} });
+        const action = AuthActions.removeToken();
+
+        actions = hot("5ms a", { a: action });
+        jest.spyOn(service, 'removeToken').mockReturnValue(cold('1s #', null, failureAction.error));
+
+        const expected = "5ms 1s z";
+
+        expectObservable(effects.removeToken$).toBe(expected, {
+          z: failureAction
+        });
+      });
+    });
+  });
+
+  describe("refreshToken$", () => {
+    it("should work", () => {
+      scheduler.run(({ hot, expectObservable }) => {
+        actions = hot("-a-|", {a: AuthActions.refreshToken()});
+        jest.spyOn(service, 'refreshToken').mockReturnValue(of({} as any));
+
+        const expected = "-a-|";
+
+        expectObservable(effects.refreshToken$).toBe(expected, {
+          a: AuthActions.refreshTokenSuccess()
+        });
+      });
+    });
+
+    it("should throw error", () => {
+      scheduler.run(({ hot, cold, expectObservable }) => {
+        const failureAction = AuthActions.refreshTokenFailure({ error: {} });
+        const action = AuthActions.refreshToken();
+
+        actions = hot("5ms a", { a: action });
+        jest.spyOn(service, 'refreshToken').mockReturnValue(cold('1s #', null, failureAction.error));
+
+        const expected = "5ms 1s z";
+
+        expectObservable(effects.refreshToken$).toBe(expected, {
+          z: failureAction
+        });
+      });
+    });
+  });
 });

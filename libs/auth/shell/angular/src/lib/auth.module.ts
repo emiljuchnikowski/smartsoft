@@ -7,7 +7,7 @@ import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import * as fromAuth from "./+state/auth.reducer";
 import { AuthEffects } from "./+state/auth.effects";
-import { AuthFacade } from "./+state/auth.facade";
+import {FACADIES} from "./facadies";
 
 @NgModule({
   imports: [
@@ -15,13 +15,13 @@ import { AuthFacade } from "./+state/auth.facade";
     StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects])
   ],
-  providers: [AuthFacade]
+  providers: [...FACADIES]
 })
 export class AuthModule {
   static forRoot(config: AuthConfig): ModuleWithProviders {
     return {
       ngModule: AuthModule,
-      providers: [{ provide: AuthConfig, useValue: config }, ...SERVICES, AuthFacade]
+      providers: [{ provide: AuthConfig, useValue: config }, ...SERVICES, ...FACADIES]
     };
   }
 }

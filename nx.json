@@ -40,6 +40,9 @@
     },
     "ui-test": {
       "tags": []
+    },
+    "shared-angular": {
+      "tags": ["scope:shared", "type:shell"]
     }
   }
 }

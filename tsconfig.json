@@ -31,7 +31,8 @@
       "@smartsoft001/shared-nestjs": ["libs/shared/nestjs/src/index.ts"],
       "@smartsoft001/auth-shell-angular": [
         "libs/auth/shell/angular/src/index.ts"
-      ]
+      ],
+      "@smartsoft/shared-angular": ["libs/shared/angular/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

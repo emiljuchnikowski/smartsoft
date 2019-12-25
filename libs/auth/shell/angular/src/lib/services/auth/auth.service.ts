@@ -5,6 +5,7 @@ import {Observable, of} from "rxjs";
 import {AuthConfig} from "../../auth.config";
 import {IAuthToken} from "@smartsoft001/auth-domain";
 import {tap} from "rxjs/operators";
+import {IUser, IUserCredentials} from "@smartsoft001/shared-users";
 
 export const AUTH_TOKEN = 'AUTH_TOKEN';
 
@@ -21,8 +22,8 @@ export class AuthService {
 
   constructor(private config: AuthConfig, private http: HttpClient) { }
 
-  createToken({ username, password }): Observable<IAuthToken> {
-    const data = `grant_type=password&username=${username}&password=${password}&client_id=${this.config.clientId}`;
+  createToken(userCreds: IUserCredentials): Observable<IAuthToken> {
+    const data = `grant_type=password&username=${userCreds.username}&password=${userCreds.password}&client_id=${this.config.clientId}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
 
     return this.http.post<IAuthToken>(this.config.apiUrl + '/token', data, { headers }).pipe(

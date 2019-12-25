@@ -73,6 +73,40 @@ describe("auth-shell-angular:Auth Reducer", () => {
       expect(result.error).toBe(error);
     });
 
+    it("removeToken should set load state", () => {
+      const action = AuthActions.removeToken();
+      initialState.token = {} as any;
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.token).toStrictEqual(initialState.token);
+      expect(!!result.error).not.toBeTruthy()
+    });
+
+    it("removeTokenSuccess should set data to state", () => {
+      const token = {} as any;
+      const action = AuthActions.removeTokenSuccess();
+      initialState.token = token;
+
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(true);
+      expect(result.token).toBe(null);
+      expect(!!result.error).toBe(false);
+    });
+
+    it("removeTokenFailure should set error to state", () => {
+      const error = {};
+      const action = AuthActions.removeTokenFailure({ error });
+      initialState.token = {} as any;
+
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.token).toBe(initialState.token);
+      expect(result.error).toBe(error);
+    });
+
   });
 
   describe("unknown action", () => {

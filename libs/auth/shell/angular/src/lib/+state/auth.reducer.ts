@@ -39,10 +39,21 @@ const authReducer = createReducer(
     }
   ),
   on(
-      AuthActions.initTokenFailure,
-      AuthActions.createTokenFailure,
-      (state, { error }) => ({ ...state, error })
-  )
+    AuthActions.initTokenFailure,
+    AuthActions.createTokenFailure,
+    AuthActions.removeTokenFailure,
+    (state, { error }) => ({ ...state, error })
+  ),
+  on(AuthActions.removeToken, state => ({
+    ...state,
+    loaded: false,
+    error: null
+  })),
+  on(AuthActions.removeTokenSuccess, state => ({
+    ...state,
+    loaded: true,
+    token: null
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

@@ -72,6 +72,8 @@
     "@angular/language-service": "^8.2.0",
     "@nestjs/schematics": "^6.7.0",
     "@nestjs/testing": "^6.8.3",
+    "@ngrx/schematics": "8.5.0",
+    "@ngrx/store-devtools": "8.5.0",
     "@nrwl/angular": "^8.9.0",
     "@nrwl/cypress": "8.9.0",
     "@nrwl/jest": "^8.9.0",
@@ -86,7 +88,7 @@
     "eslint": "6.1.0",
     "jest": "^24.1.0",
     "jest-junit": "^10.0.0",
-    "jest-preset-angular": "7.0.0",
+    "jest-preset-angular": "^8.0.0",
     "mock-local-storage": "^1.1.11",
     "ng-packagr": "^5.4.0",
     "prettier": "1.18.2",
@@ -95,8 +97,6 @@
     "tsickle": "^0.37.0",
     "tslint": "~5.11.0",
     "typescript": "~3.5.3",
-    "webpack-merge": "^4.2.2",
-    "@ngrx/schematics": "8.5.0",
-    "@ngrx/store-devtools": "8.5.0"
+    "webpack-merge": "^4.2.2"
   }
 }

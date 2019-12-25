@@ -1,10 +1,10 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 import {IEntity} from "@smartsoft001/shared-domain-core";
-import {IUser} from "@smartsoft001/shared-users";
+import {IUser, IUserCredentials} from "@smartsoft001/shared-users";
 
 @Entity('users')
-export class User implements IEntity<string>, IUser {
+export class User implements IEntity<string>, IUser, IUserCredentials {
 
     @PrimaryGeneratedColumn()
     id: string;
