@@ -32,7 +32,8 @@
       "@smartsoft001/auth-shell-angular": [
         "libs/auth/shell/angular/src/index.ts"
       ],
-      "@smartsoft/shared-angular": ["libs/shared/angular/src/index.ts"]
+      "@smartsoft001/shared-angular": ["libs/shared/angular/src/index.ts"],
+      "@smartsoft001/shared-models": ["libs/shared/models/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

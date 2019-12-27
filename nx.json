@@ -43,6 +43,9 @@
     },
     "shared-angular": {
       "tags": ["scope:shared", "type:shell"]
+    },
+    "shared-models": {
+      "tags": ["scope:shared", "type:util"]
     }
   }
 }

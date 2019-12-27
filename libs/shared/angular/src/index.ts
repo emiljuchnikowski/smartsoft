@@ -1,1 +1,2 @@
-export * from "./lib/decorators";
+export * from "./lib/factories";
+export * from './lib/shared.module';
