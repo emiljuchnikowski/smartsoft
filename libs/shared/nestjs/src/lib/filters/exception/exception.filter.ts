@@ -5,7 +5,7 @@ import {
   HttpException,
   HttpStatus
 } from "@nestjs/common";
-import { DomainValidationError } from "@smartsoft001/shared-domain-core";
+import { DomainValidationError } from "@smartsoft001/domain-core";
 
 @Catch()
 export class AppExceptionFilter implements ExceptionFilter {

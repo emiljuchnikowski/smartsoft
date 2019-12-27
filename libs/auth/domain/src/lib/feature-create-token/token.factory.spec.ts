@@ -5,9 +5,9 @@ import { PassportModule } from "@nestjs/passport";
 import {getRepositoryToken} from "@nestjs/typeorm";
 
 import {TokenFactory, User} from "@smartsoft001/auth-domain";
-import { DomainValidationError } from "@smartsoft001/shared-domain-core";
+import { DomainValidationError } from "@smartsoft001/domain-core";
 import { TokenConfig } from "./token.config";
-import { PasswordService } from "@smartsoft001/shared-utils";
+import { PasswordService } from "@smartsoft001/utils";
 
 describe("auth-domain-feature-create-token: TokenFactory", () => {
   let factory: TokenFactory;

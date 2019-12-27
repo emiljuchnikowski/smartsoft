@@ -1,4 +1,4 @@
-import {IUserCredentials} from "@smartsoft001/shared-users";
+import {IUserCredentials} from "@smartsoft001/users";
 
 export type IAuthTokenRequest = IAuthTokenRequestPassword | IAuthTokenRequestRefreshToken;
 

@@ -4,9 +4,15 @@ export interface IModelOptions {
     list?: any;
     details?: any;
     customs?: Array<any>;
-    fields?: Array<string>;
+    fields?: { [key: string]: any };
 }
 
 export interface IFieldOptions {
     required?: boolean;
+    type?: FieldType;
+}
+
+export enum FieldType {
+    text = "text",
+    password = "password"
 }

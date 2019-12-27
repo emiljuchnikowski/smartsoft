@@ -7,10 +7,10 @@ import { Guid } from "guid-typescript";
 import {
   DomainValidationError,
   IFactory
-} from "@smartsoft001/shared-domain-core";
+} from "@smartsoft001/domain-core";
 import { User } from "../entities";
 import { TokenConfig } from "./token.config";
-import { PasswordService } from "@smartsoft001/shared-utils";
+import { PasswordService } from "@smartsoft001/utils";
 import {IAuthToken, IAuthTokenRequest} from "./interfaces";
 
 @Injectable()

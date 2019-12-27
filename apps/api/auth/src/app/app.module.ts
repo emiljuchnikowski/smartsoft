@@ -5,7 +5,7 @@ import { ConnectionOptions } from "typeorm";
 import { AuthShellNestjsModule } from "@smartsoft001/auth-shell-nestjs";
 import { ENTITIES } from "@smartsoft001/auth-domain";
 import { APP_FILTER } from "@nestjs/core";
-import { AppExceptionFilter } from "@smartsoft001/shared-nestjs";
+import { AppExceptionFilter } from "@smartsoft001/nestjs";
 
 const dbOptions: Partial<ConnectionOptions> = {
   type: "mongodb",

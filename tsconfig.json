@@ -23,17 +23,17 @@
       "@smartsoft001/auth-shell-nestjs": [
         "libs/auth/shell/nestjs/src/index.ts"
       ],
-      "@smartsoft001/shared-users": ["libs/shared/users/src/index.ts"],
-      "@smartsoft001/shared-domain-core": [
+      "@smartsoft001/users": ["libs/shared/users/src/index.ts"],
+      "@smartsoft001/domain-core": [
         "libs/shared/domain-core/src/index.ts"
       ],
-      "@smartsoft001/shared-utils": ["libs/shared/utils/src/index.ts"],
-      "@smartsoft001/shared-nestjs": ["libs/shared/nestjs/src/index.ts"],
+      "@smartsoft001/utils": ["libs/shared/utils/src/index.ts"],
+      "@smartsoft001/nestjs": ["libs/shared/nestjs/src/index.ts"],
       "@smartsoft001/auth-shell-angular": [
         "libs/auth/shell/angular/src/index.ts"
       ],
-      "@smartsoft001/shared-angular": ["libs/shared/angular/src/index.ts"],
-      "@smartsoft001/shared-models": ["libs/shared/models/src/index.ts"]
+      "@smartsoft001/angular": ["libs/shared/angular/src/index.ts"],
+      "@smartsoft001/models": ["libs/shared/models/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

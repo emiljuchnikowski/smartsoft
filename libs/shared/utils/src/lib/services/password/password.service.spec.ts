@@ -1,4 +1,4 @@
-import { PasswordService } from "@smartsoft001/shared-utils";
+import { PasswordService } from "@smartsoft001/utils";
 
 describe("shared-utils: PasswordService", () => {
   it("should hash", async done => {

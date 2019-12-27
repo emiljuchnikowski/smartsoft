@@ -5,7 +5,7 @@ import {Observable, of} from "rxjs";
 import {AuthConfig} from "../../auth.config";
 import {IAuthToken} from "@smartsoft001/auth-domain";
 import {tap} from "rxjs/operators";
-import {IUser, IUserCredentials} from "@smartsoft001/shared-users";
+import {IUserCredentials} from "@smartsoft001/users";
 
 export const AUTH_TOKEN = 'AUTH_TOKEN';
 

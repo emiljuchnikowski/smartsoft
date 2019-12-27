@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 
 import {Injectable} from "@angular/core";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-import {IModelOptions, SYMBOL_FIELD, SYMBOL_MODEL} from "@smartsoft001/shared-models";
+import {getModelFieldKeys, IFieldOptions, SYMBOL_FIELD, SYMBOL_MODEL} from "@smartsoft001/models";
 
 
 @Injectable()
@@ -16,23 +16,35 @@ export class FormFactory {
             throw new Error('You should mark class with @Model decorator');
     }
 
+    static setValidators(control: AbstractControl, options: IFieldOptions): void {
+        const result = [];
+
+        if (options.required) {
+            result.push(Validators.required);
+        }
+
+        control.setValidators(result);
+    }
+
+    static getOptions<T>(obj: T, key: string): IFieldOptions {
+        return Reflect.getMetadata(SYMBOL_FIELD, obj, key);
+    }
+
     async create<T>(obj: T): Promise<FormGroup> {
         FormFactory.checkModelMeta(obj);
 
         const result = this.fb.group({});
 
-        const options: IModelOptions = Reflect.getMetadata(SYMBOL_MODEL, obj.constructor);
-
-        if (!options.fields) return result;
-
-        options.fields
-            .filter(key => {
-                return Reflect.hasMetadata(SYMBOL_FIELD, obj, key);
-            })
+        getModelFieldKeys(obj.constructor)
             .forEach(key => {
-                result.addControl(key, this.fb.control(null));
+                const options: IFieldOptions = FormFactory.getOptions(obj, key);
+                const control = this.fb.control(null);
+
+                FormFactory.setValidators(control, options);
+
+                result.addControl(key, control);
             });
 
         return result;
     }
-}
+ }
