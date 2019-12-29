@@ -12,9 +12,11 @@ module.exports = {
   ],
   "globals": {
     "ts-jest": {
-      "diagnostics": {
-        "ignoreCodes": [ "TS151001" ]
-      }
+      "stringifyContentPathRegex": "\\.html$",
+      "astTransformers": [
+        "jest-preset-angular/build/InlineFilesTransformer",
+        "jest-preset-angular/build/StripStylesTransformer"
+      ]
     }
   }
 };
