@@ -6,9 +6,15 @@ module.exports = {
   resolver: "@nrwl/jest/plugins/resolver",
   moduleFileExtensions: ["ts", "js", "html"],
   coverageReporters: ["html"],
-  reporters: ["default", "jest-junit"],
   passWithNoTests: true,
   setupFiles: [
     "mock-local-storage"
-  ]
+  ],
+  "globals": {
+    "ts-jest": {
+      "diagnostics": {
+        "ignoreCodes": [ "TS151001" ]
+      }
+    }
+  }
 };

@@ -57,7 +57,7 @@ describe('shared-angular: BaseComponent', () => {
       const model = new TestModel();
       const spy = jest.spyOn(formFactory, 'create').mockReturnValueOnce((Promise.resolve(form as any)));
 
-      component.model = model;
+      component.options = { model };
 
       setTimeout(() => {
         expect(spy).toHaveBeenCalledTimes(1);
@@ -65,6 +65,32 @@ describe('shared-angular: BaseComponent', () => {
         expect(component.form).toBe(form);
 
         done();
+      });
+    });
+
+  });
+
+  describe('submit', () => {
+
+    it('should emit event invokeSubmit', done => {
+
+      @Model({}) class TestModel {}
+
+      const form = {};
+      const model = new TestModel();
+      jest.spyOn(formFactory, 'create').mockReturnValueOnce((Promise.resolve(form as any)));
+
+      component.options = { model };
+
+      setTimeout(() => {
+        const sub = component.invokeSubmit.subscribe(val => {
+          sub.unsubscribe();
+
+          expect(val).toBe(component.form.value);
+          done();
+        });
+
+        component.submit();
       });
     });
 
