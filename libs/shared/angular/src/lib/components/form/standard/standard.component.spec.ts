@@ -10,7 +10,7 @@ describe('shared-angular: StandardComponent', () => {
   let component: FormStandardComponent<any>;
   let fixture: ComponentFixture<FormStandardComponent<any>>;
 
-  // TODO : Failed to load standard.component.html
+  // @todo Failed to load standard.component.html
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FormStandardComponent ],
