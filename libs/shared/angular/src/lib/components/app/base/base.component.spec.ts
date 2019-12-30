@@ -2,9 +2,9 @@ import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {Component} from "@angular/core";
+import {of} from "rxjs";
 
 import { AppBaseComponent } from './base.component';
-import {of} from "rxjs";
 
 describe('shared-angular: AppBaseComponent', () => {
     @Component({
@@ -37,7 +37,7 @@ describe('shared-angular: AppBaseComponent', () => {
     describe('showMenu$', () => {
         it('should true when logged and block for anonymous', done => {
             component.options = {
-                facade: {
+                provider: {
                     logged$: of(true)
                 },
                 menu: {
@@ -55,7 +55,7 @@ describe('shared-angular: AppBaseComponent', () => {
 
         it('should true when not logged and allow for anonymous', done => {
             component.options = {
-                facade: {
+                provider: {
                     logged$: of(false)
                 },
                 menu: {
@@ -73,7 +73,7 @@ describe('shared-angular: AppBaseComponent', () => {
 
         it('should false when not logged and block for anonymous', done => {
             component.options = {
-                facade: {
+                provider: {
                     logged$: of(false)
                 },
                 menu: {

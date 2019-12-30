@@ -15,7 +15,7 @@ export abstract class AppBaseComponent {
     }
 
     private initShowMenu(): void {
-        this.showMenu$ = this._options.facade.logged$.pipe(
+        this.showMenu$ = this._options.provider.logged$.pipe(
             map(logged => {
                 return logged || (this._options.menu && this._options.menu.showForAnonymous);
             })

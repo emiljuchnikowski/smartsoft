@@ -12,7 +12,7 @@ export class AppComponent {
   title = "ui-test";
 
   appOptions: IAppOptions = {
-    facade: {
+    provider: {
       logged$: of(false)
     }
   }

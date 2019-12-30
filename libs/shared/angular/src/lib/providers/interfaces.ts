@@ -1,9 +1,9 @@
 import {Observable} from "rxjs";
 
-export interface IFormFacade {
+export interface IFormProvider {
     submit(): void;
 }
 
-export interface IAppFacade {
+export interface IAppProvider {
     logged$: Observable<boolean>;
 }

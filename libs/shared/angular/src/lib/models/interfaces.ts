@@ -1,7 +1,7 @@
-import {IAppFacade} from "../facadies";
+import {IAppProvider} from "../providers";
 
 export interface IAppOptions {
-    facade: IAppFacade;
+    provider: IAppProvider;
     menu?: {
         showForAnonymous?: boolean
     }
