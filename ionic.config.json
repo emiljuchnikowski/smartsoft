@@ -1,0 +1,6 @@
+{
+  "name": "ui-test",
+  "integrations": {},
+  "type": "angular",
+  "root": "apps/ui/test"
+}

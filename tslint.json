@@ -78,8 +78,8 @@
         ]
       }
     ],
-    "directive-selector": [true, "attribute", "smartsoft", "camelCase"],
-    "component-selector": [true, "element", "smartsoft", "kebab-case"],
+    "directive-selector": [true, "attribute", "smart", "camelCase"],
+    "component-selector": [true, "element", "smart", "kebab-case"],
     "no-conflicting-lifecycle": true,
     "no-host-metadata-property": true,
     "no-input-rename": true,

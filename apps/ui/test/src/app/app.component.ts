@@ -1,4 +1,7 @@
 import { Component } from "@angular/core";
+import {of} from "rxjs";
+
+import {IAppOptions} from "@smartsoft001/angular";
 
 @Component({
   selector: "smartsoft-root",
@@ -7,4 +10,10 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   title = "ui-test";
+
+  appOptions: IAppOptions = {
+    facade: {
+      logged$: of(false)
+    }
+  }
 }

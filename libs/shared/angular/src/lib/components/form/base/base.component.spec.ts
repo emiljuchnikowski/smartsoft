@@ -8,7 +8,7 @@ import {Component} from "@angular/core";
 import {FormFactory} from "@smartsoft001/angular";
 import {Model} from "@smartsoft001/models";
 
-describe('shared-angular: BaseComponent', () => {
+describe('shared-angular: FormBaseComponent', () => {
 
   @Component({
     // tslint:disable-next-line:component-selector
