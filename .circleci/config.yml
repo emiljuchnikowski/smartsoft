@@ -8,11 +8,8 @@ jobs:
       - run:
           name: Install packages
           command:
-            npm install jest -g && npm install
-
+            npm install
       - run:
-          name: Run tests with JUnit as reporter
-          command: jest --ci --runInBand --reporters=default --reporters=jest-junit
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
-
+          name: Unit test
+          command:
+            npm test

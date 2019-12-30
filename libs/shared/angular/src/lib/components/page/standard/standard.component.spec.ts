@@ -1,6 +1,7 @@
 import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {IonicModule} from "@ionic/angular";
 
 import { PageStandardComponent } from './standard.component';
 
@@ -10,7 +11,10 @@ describe('shared-angular: PageStandardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageStandardComponent ]
+      declarations: [ PageStandardComponent ],
+      imports: [
+          IonicModule.forRoot()
+      ]
     })
     .compileComponents();
   }));
