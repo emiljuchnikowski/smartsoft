@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import {Field, Model} from "@smartsoft001/models";
+import {IFormOptions} from "@smartsoft001/angular";
+
 @Component({
   selector: 'smartsoft-shared',
   templateUrl: './shared.component.html',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SharedComponent implements OnInit {
 
+  formOptions: IFormOptions<Test> = {
+    model: new Test()
+  };
+
   constructor() { }
 
   ngOnInit() {
   }
 
+}
+
+@Model({})
+export class Test {
+  @Field({})
+  firstName: string;
+  @Field({})
+  lastName: string;
 }

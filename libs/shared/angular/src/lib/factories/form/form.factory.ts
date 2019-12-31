@@ -12,6 +12,9 @@ export class FormFactory {
     constructor(private fb: FormBuilder) { }
 
     static checkModelMeta<T>(obj: T) {
+        if (!obj)
+            throw new Error('You should set object as param');
+
         if (!Reflect.hasMetadata(SYMBOL_MODEL, obj.constructor))
             throw new Error('You should mark class with @Model decorator');
     }

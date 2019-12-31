@@ -1,8 +1,9 @@
 import {ElementRef, Input, OnInit, Renderer2} from "@angular/core";
 
+import {IPageOptions} from "../../../models";
+
 export abstract class PageBaseComponent implements OnInit {
-    @Input() title: string;
-    @Input() hideHeader: boolean;
+    @Input() options: IPageOptions;
 
     protected constructor(private el: ElementRef, private renderer: Renderer2) { }
 

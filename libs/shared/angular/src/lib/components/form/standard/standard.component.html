@@ -1,1 +1,5 @@
-<p>standard works!</p>
+<ion-list>
+    <ng-container *ngFor="let field of fields">
+        <smart-input [options]="{ fieldKey: field, control: form[field], type: type }"></smart-input>
+    </ng-container>
+</ion-list>

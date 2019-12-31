@@ -1,6 +1,6 @@
-<ion-header *ngIf="!hideHeader">
+<ion-header [hidden]="!options || options.hideHeader">
     <ion-toolbar>
-        <ion-title>{{ title }}</ion-title>
+        <ion-title>{{ options?.title }}</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content>

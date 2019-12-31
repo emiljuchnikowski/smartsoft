@@ -2,11 +2,11 @@ import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {ReactiveFormsModule} from "@angular/forms";
+import {ChangeDetectorRef, Component} from "@angular/core";
 
 import { FormBaseComponent } from './base.component';
-import {Component} from "@angular/core";
-import {FormFactory} from "@smartsoft001/angular";
-import {Model} from "@smartsoft001/models";
+import {FormFactory} from "../../../factories";
+import {Field, Model} from "@smartsoft001/models";
 
 describe('shared-angular: FormBaseComponent', () => {
 
@@ -16,8 +16,8 @@ describe('shared-angular: FormBaseComponent', () => {
     template: 'test'
   })
   class TestFormBaseComponent extends FormBaseComponent<any> {
-    constructor(factory: FormFactory) {
-      super(factory);
+    constructor(factory: FormFactory, cd: ChangeDetectorRef) {
+      super(factory, cd);
     }
   }
 
@@ -49,7 +49,6 @@ describe('shared-angular: FormBaseComponent', () => {
   });
 
   describe('form', () => {
-
     it('should return form from model',  done => {
       @Model({}) class TestModel {}
 
@@ -67,11 +66,53 @@ describe('shared-angular: FormBaseComponent', () => {
         done();
       });
     });
+  });
 
+  describe('fields', () => {
+    it('should return fields from model',  done => {
+      @Model({}) class TestModel {
+        @Field({})
+        test1: string;
+
+        @Field({})
+        test2: string;
+      }
+
+      const model = new TestModel();
+
+      component.options = { model };
+
+      setTimeout(() => {
+        expect(component.fields).toStrictEqual([ 'test1', 'test2' ]);
+
+        done();
+      });
+    });
+  });
+
+  describe('type', () => {
+    it('should return type from model',  done => {
+      @Model({}) class TestModel {
+        @Field({})
+        test1: string;
+
+        @Field({})
+        test2: string;
+      }
+
+      const model = new TestModel();
+
+      component.options = { model };
+
+      setTimeout(() => {
+        expect(component.type).toStrictEqual(TestModel);
+
+        done();
+      });
+    });
   });
 
   describe('submit', () => {
-
     it('should emit event invokeSubmit', done => {
 
       @Model({}) class TestModel {}
@@ -93,6 +134,5 @@ describe('shared-angular: FormBaseComponent', () => {
         component.submit();
       });
     });
-
   })
 });
