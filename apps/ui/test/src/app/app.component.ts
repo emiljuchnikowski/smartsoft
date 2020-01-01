@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import {of} from "rxjs";
 
 import {IAppOptions} from "@smartsoft001/angular";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: "smartsoft-root",
@@ -15,5 +16,9 @@ export class AppComponent {
     provider: {
       logged$: of(false)
     }
+  };
+
+  constructor(translateService: TranslateService) {
+    translateService.use('eng');
   }
 }

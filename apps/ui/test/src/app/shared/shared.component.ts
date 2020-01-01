@@ -25,6 +25,6 @@ export class SharedComponent implements OnInit {
 export class Test {
   @Field({})
   firstName: string;
-  @Field({})
+  @Field({ required: true })
   lastName: string;
 }
