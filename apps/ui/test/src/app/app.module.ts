@@ -13,6 +13,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { AppComponent } from "./app.component";
 import { environment } from "../environments/environment";
 import { SharedModule } from "@smartsoft001/angular";
+import {AuthModule} from "@smartsoft001/auth-shell-angular";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { SharedModule } from "@smartsoft001/angular";
           path: "shared",
           loadChildren: () =>
             import("./shared/shared.module").then(m => m.SharedModule)
-        }
+        },
+      { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) }
       ],
       { initialNavigation: "enabled", useHash: true }
     ),
@@ -42,6 +44,10 @@ import { SharedModule } from "@smartsoft001/angular";
     IonicModule.forRoot(),
     EffectsModule.forRoot([]),
     SharedModule,
+    AuthModule.forRoot({
+      apiUrl: 'test',
+      clientId: 'admin'
+    }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot()
   ],

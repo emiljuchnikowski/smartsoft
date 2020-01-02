@@ -1,7 +1,6 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 
 import {FormBaseComponent} from "../base/base.component";
-import {FormFactory} from "../../../factories";
 
 @Component({
   selector: 'smart-form-standard',
@@ -10,10 +9,6 @@ import {FormFactory} from "../../../factories";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormStandardComponent<T> extends FormBaseComponent<T> implements OnInit {
-
-  constructor(ff: FormFactory, cd: ChangeDetectorRef) {
-    super(ff, cd);
-  }
 
   ngOnInit() {
   }

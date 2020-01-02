@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 
-import * as fromAuth from "../../+state/auth.reducer";
-import * as AuthSelectors from "../../+state/auth.selectors";
-import * as AuthActions from "../../+state/auth.actions";
+import * as fromAuth from "./auth.reducer";
+import * as AuthSelectors from "./auth.selectors";
+import * as AuthActions from "./auth.actions";
 
 @Injectable()
 export class AuthFacade {

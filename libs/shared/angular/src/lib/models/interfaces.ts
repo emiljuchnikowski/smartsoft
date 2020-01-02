@@ -28,3 +28,7 @@ export interface IInputFromFieldOptions<T> {
     model: T;
     fieldKey: string;
 }
+
+export interface IButtonOptions {
+    type: 'submit' | 'button';
+}

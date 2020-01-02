@@ -7,7 +7,7 @@ export function setDefaultTranslationsAndLang(service: TranslateService) {
     };
 
     Object.keys(map).forEach(key => {
-       service.setTranslation(key, map[key]);
+       service.setTranslation(key, map[key], true);
     });
 
     if (!service.currentLang) {
@@ -20,7 +20,8 @@ export interface ITranslateData {
     MODEL: {
         firstName: string,
         lastName: string,
-        password: string
+        password: string,
+        username: string
     },
     INPUT: {
         ERRORS: {
@@ -33,7 +34,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     MODEL: {
         firstName: 'first name',
         lastName: 'last name',
-        password: 'password'
+        password: 'password',
+        username: 'user name'
     },
     INPUT: {
         ERRORS: {
@@ -46,7 +48,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     MODEL: {
         firstName: 'imię',
         lastName: 'nazwisko',
-        password: 'hasło'
+        password: 'hasło',
+        username: 'nazwa użytkownika'
     },
     INPUT: {
         ERRORS: {

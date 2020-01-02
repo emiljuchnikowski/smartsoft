@@ -1,2 +1,2 @@
-export * from './lib/facadies';
+export * from './lib/+state/auth.facade';
 export * from "./lib/auth.module";

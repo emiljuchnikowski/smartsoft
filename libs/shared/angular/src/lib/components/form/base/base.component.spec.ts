@@ -2,7 +2,7 @@ import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {ReactiveFormsModule} from "@angular/forms";
-import {ChangeDetectorRef, Component} from "@angular/core";
+import {Component} from "@angular/core";
 
 import { FormBaseComponent } from './base.component';
 import {FormFactory} from "../../../factories";
@@ -16,8 +16,8 @@ describe('shared-angular: FormBaseComponent', () => {
     template: 'test'
   })
   class TestFormBaseComponent extends FormBaseComponent<any> {
-    constructor(factory: FormFactory, cd: ChangeDetectorRef) {
-      super(factory, cd);
+    constructor() {
+      super();
     }
   }
 
@@ -46,26 +46,6 @@ describe('shared-angular: FormBaseComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  describe('form', () => {
-    it('should return form from model',  done => {
-      @Model({}) class TestModel {}
-
-      const form = {};
-      const model = new TestModel();
-      const spy = jest.spyOn(formFactory, 'create').mockReturnValueOnce((Promise.resolve(form as any)));
-
-      component.options = { model };
-
-      setTimeout(() => {
-        expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(model);
-        expect(component.form).toBe(form);
-
-        done();
-      });
-    });
   });
 
   describe('fields', () => {
@@ -122,6 +102,7 @@ describe('shared-angular: FormBaseComponent', () => {
       jest.spyOn(formFactory, 'create').mockReturnValueOnce((Promise.resolve(form as any)));
 
       component.options = { model };
+      component.form = form as any;
 
       setTimeout(() => {
         const sub = component.invokeSubmit.subscribe(val => {

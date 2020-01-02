@@ -6,17 +6,16 @@ import { readFirst } from "@nrwl/angular/testing";
 
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule, Store } from "@ngrx/store";
-
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 import { NxModule } from "@nrwl/angular";
 
-import { AuthEffects } from "../../+state/auth.effects";
+import { AuthEffects } from "./auth.effects";
 import { AuthFacade } from "./auth.facade";
 
-import * as AuthActions from "../../+state/auth.actions";
-import { AUTH_FEATURE_KEY, State, reducer } from "../../+state/auth.reducer";
-import {AuthService} from "../../services";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {AuthConfig} from "../../auth.config";
+import * as AuthActions from "../+state/auth.actions";
+import { AUTH_FEATURE_KEY, State, reducer } from "./auth.reducer";
+import {AuthService} from "../services";
+import {AuthConfig} from "../auth.config";
 
 interface TestSchema {
   auth: State;

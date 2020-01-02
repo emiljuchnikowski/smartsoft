@@ -1,24 +1,24 @@
 import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {IonicModule} from "@ionic/angular";
 
-import { SharedComponent } from './shared.component';
+import { CardComponent } from './card.component';
 
-describe('SharedComponent', () => {
-  let component: SharedComponent;
-  let fixture: ComponentFixture<SharedComponent>;
+describe('shared-angular: CardComponent', () => {
+  let component: CardComponent;
+  let fixture: ComponentFixture<CardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SharedComponent ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      declarations: [ CardComponent ],
+      imports: [ IonicModule.forRoot() ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SharedComponent);
+    fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,57 +9,31 @@
   },
   "projects": {
     "auth-domain": {
-      "tags": [
-        "scope:auth",
-        "type:domain"
-      ]
+      "tags": ["scope:auth", "type:domain"]
     },
     "auth-shell-app-services": {
-      "tags": [
-        "scope:auth",
-        "type:shell"
-      ]
+      "tags": ["scope:auth", "type:shell"]
     },
     "auth-shell-nestjs": {
-      "tags": [
-        "scope:auth",
-        "type:shell"
-      ]
+      "tags": ["scope:auth", "type:shell"]
     },
     "auth-shell-angular": {
-      "tags": [
-        "scope:auth",
-        "type:shell"
-      ]
+      "tags": ["scope:auth", "type:shell"]
     },
     "api-auth": {
-      "tags": [
-        "scope:app"
-      ]
+      "tags": ["scope:app"]
     },
     "shared-users": {
-      "tags": [
-        "scope:shared",
-        "type:util"
-      ]
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-domain-core": {
-      "tags": [
-        "scope:shared",
-        "type:domain"
-      ]
+      "tags": ["scope:shared", "type:domain"]
     },
     "shared-utils": {
-      "tags": [
-        "scope:shared",
-        "type:util"
-      ]
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-nestjs": {
-      "tags": [
-        "scope:shared",
-        "type:shell"
-      ]
+      "tags": ["scope:shared", "type:shell"]
     },
     "ui-test-e2e": {
       "tags": []
@@ -68,19 +42,16 @@
       "tags": []
     },
     "shared-angular": {
-      "tags": [
-        "scope:shared",
-        "type:shell"
-      ]
+      "tags": ["scope:shared", "type:shell"]
     },
     "shared-models": {
-      "tags": [
-        "scope:shared",
-        "type:util"
-      ]
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-angular-e2e": {
       "tags": []
+    },
+    "auth-shell-dtos": {
+      "tags": ["scope:auth", "type:shell"]
     }
   }
 }

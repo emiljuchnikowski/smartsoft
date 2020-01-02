@@ -14,10 +14,7 @@
               "libs/auth/domain/tsconfig.lib.json",
               "libs/auth/domain/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/auth/domain/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/auth/domain/**"]
           }
         },
         "test": {
@@ -70,10 +67,7 @@
               "libs/auth/shell/nestjs/tsconfig.lib.json",
               "libs/auth/shell/nestjs/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/auth/shell/nestjs/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/auth/shell/nestjs/**"]
           }
         },
         "test": {
@@ -98,9 +92,7 @@
             "outputPath": "dist/apps/api/auth",
             "main": "apps/api/auth/src/main.ts",
             "tsConfig": "apps/api/auth/tsconfig.app.json",
-            "assets": [
-              "apps/api/auth/src/assets"
-            ]
+            "assets": ["apps/api/auth/src/assets"]
           },
           "configurations": {
             "production": {
@@ -129,10 +121,7 @@
               "apps/api/auth/tsconfig.app.json",
               "apps/api/auth/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/api/auth/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/api/auth/**"]
           }
         },
         "test": {
@@ -157,10 +146,7 @@
               "libs/shared/users/tsconfig.lib.json",
               "libs/shared/users/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/users/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/users/**"]
           }
         },
         "test": {
@@ -185,10 +171,7 @@
               "libs/shared/domain-core/tsconfig.lib.json",
               "libs/shared/domain-core/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/domain-core/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/domain-core/**"]
           }
         },
         "test": {
@@ -213,10 +196,7 @@
               "libs/shared/utils/tsconfig.lib.json",
               "libs/shared/utils/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/utils/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/utils/**"]
           }
         },
         "test": {
@@ -241,10 +221,7 @@
               "libs/shared/nestjs/tsconfig.lib.json",
               "libs/shared/nestjs/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/nestjs/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/nestjs/**"]
           }
         },
         "test": {
@@ -269,10 +246,7 @@
               "libs/auth/shell/angular/tsconfig.lib.json",
               "libs/auth/shell/angular/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/auth/shell/angular/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/auth/shell/angular/**"]
           }
         },
         "test": {
@@ -404,10 +378,7 @@
               "apps/ui/test/tsconfig.app.json",
               "apps/ui/test/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/ui/test/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/ui/test/**"]
           }
         },
         "test": {
@@ -465,13 +436,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/ui/test-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/ui/test-e2e/**"
-            ]
+            "tsConfig": ["apps/ui/test-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/ui/test-e2e/**"]
           }
         }
       }
@@ -489,10 +455,7 @@
               "libs/shared/angular/tsconfig.lib.json",
               "libs/shared/angular/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/angular/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/angular/**"]
           }
         },
         "test": {
@@ -532,10 +495,7 @@
               "libs/shared/models/tsconfig.lib.json",
               "libs/shared/models/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/models/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/models/**"]
           }
         },
         "test": {
@@ -568,13 +528,33 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
+            "tsConfig": ["apps/shared-angular-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/shared-angular-e2e/**"]
+          }
+        }
+      }
+    },
+    "auth-shell-dtos": {
+      "root": "libs/auth/shell/dtos",
+      "sourceRoot": "libs/auth/shell/dtos/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
             "tsConfig": [
-              "apps/shared-angular-e2e/tsconfig.e2e.json"
+              "libs/auth/shell/dtos/tsconfig.lib.json",
+              "libs/auth/shell/dtos/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/shared-angular-e2e/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/auth/shell/dtos/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/auth/shell/dtos/jest.config.js",
+            "tsConfig": "libs/auth/shell/dtos/tsconfig.spec.json"
           }
         }
       }
