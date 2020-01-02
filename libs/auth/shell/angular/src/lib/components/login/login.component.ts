@@ -12,16 +12,21 @@ import {LoginDto} from "@smartsoft001/auth-shell-dtos";
 export class LoginComponent implements OnInit {
 
   buttonOptions: IButtonOptions = {
-    type: 'submit'
+    type: 'submit',
+    click: () => this.login()
   };
   formOptions: IFormOptions<LoginDto> = {
     model: new LoginDto()
   };
 
   @ViewChild(FormComponent, { read: FormComponent, static: false })
-  component: FormComponent<LoginDto>;
+  formComponent: FormComponent<LoginDto>;
 
-  constructor(facade: AuthFacade) { }
+  constructor(private facade: AuthFacade) { }
+
+  login(): void {
+    this.facade.login(this.formComponent.form.value);
+  }
 
   ngOnInit() {
   }

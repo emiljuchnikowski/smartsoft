@@ -5,7 +5,6 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 
 import {getModelFieldKeys, IFieldOptions, SYMBOL_FIELD, SYMBOL_MODEL} from "@smartsoft001/models";
 
-
 @Injectable()
 export class FormFactory {
 

@@ -30,5 +30,6 @@ export interface IInputFromFieldOptions<T> {
 }
 
 export interface IButtonOptions {
-    type: 'submit' | 'button';
+    type?: 'submit' | 'button';
+    click: () => void
 }

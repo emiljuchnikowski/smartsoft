@@ -23,10 +23,12 @@ export class AuthService {
   constructor(private config: AuthConfig, private http: HttpClient) { }
 
   createToken(userCreds: IUserCredentials): Observable<IAuthToken> {
-    const data = `grant_type=password&username=${userCreds.username}&password=${userCreds.password}&client_id=${this.config.clientId}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-
-    return this.http.post<IAuthToken>(this.config.apiUrl + '/token', data, { headers }).pipe(
+    return this.http.post<IAuthToken>(this.config.apiUrl + '/token', {
+      grant_type: 'password',
+      username: userCreds.username,
+      password: userCreds.password,
+      client_id: this.config.clientId
+    }).pipe(
         tap(token => {
           sessionStorage.setItem(AUTH_TOKEN, JSON.stringify(token));
         })

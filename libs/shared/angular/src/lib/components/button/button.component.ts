@@ -11,6 +11,7 @@ import {IButtonOptions} from "../../models";
 export class ButtonComponent implements OnInit {
 
   @Input() options: IButtonOptions;
+  @Input() disabled: boolean;
 
   constructor() { }
 

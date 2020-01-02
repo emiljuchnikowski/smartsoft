@@ -16,6 +16,10 @@ export class AuthFacade {
     this.store.dispatch(AuthActions.initToken());
   }
 
+  login(model: { username: string, password: string }): void {
+    this.store.dispatch(AuthActions.createToken(model));
+  }
+
   logout(): void {
     this.store.dispatch(AuthActions.removeToken());
   }

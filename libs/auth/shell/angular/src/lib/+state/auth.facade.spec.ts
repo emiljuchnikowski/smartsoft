@@ -55,7 +55,6 @@ describe("auth-shell-angular: AuthFacade", () => {
     });
 
     describe("init()", () => {
-
       it("should return null token with loaded == true", async done => {
         try {
           let token = await readFirst(facade.token$);
@@ -86,11 +85,9 @@ describe("auth-shell-angular: AuthFacade", () => {
         expect(spy).toHaveBeenCalledTimes(1);
         expect(spy).toHaveBeenCalledWith(AuthActions.initToken());
       });
-
     });
 
     describe("logout()", () => {
-
       it("should dispose action", () => {
         const spy = jest.spyOn(store, 'dispatch');
 
@@ -99,8 +96,18 @@ describe("auth-shell-angular: AuthFacade", () => {
         expect(spy).toHaveBeenCalledTimes(1);
         expect(spy).toHaveBeenCalledWith(AuthActions.removeToken());
       });
-
     });
 
+    describe("login()", () => {
+      it("should dispose action", () => {
+        const spy = jest.spyOn(store, 'dispatch');
+        const model = { username: 'user', password: 'pass' };
+
+        facade.login(model);
+
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith(AuthActions.createToken(model));
+      });
+    });
   });
 });
