@@ -19,6 +19,6 @@ export class AppComponent {
   };
 
   constructor(translateService: TranslateService) {
-    translateService.use('eng');
+    //translateService.use('eng');
   }
 }

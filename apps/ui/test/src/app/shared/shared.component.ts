@@ -27,4 +27,6 @@ export class Test {
   firstName: string;
   @Field({ required: true })
   lastName: string;
+  @Field({ required: true })
+  password: string;
 }

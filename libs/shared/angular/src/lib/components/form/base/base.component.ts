@@ -8,7 +8,7 @@ import {getModelFieldKeys} from "@smartsoft001/models";
 export abstract class FormBaseComponent<T> {
   private _form: FormGroup;
   private _fields: Array<string>;
-  private _type: any;
+  private _model: any;
 
   get form(): FormGroup {
     return this._form;
@@ -18,16 +18,16 @@ export abstract class FormBaseComponent<T> {
     return this._fields;
   }
 
-  get type(): any {
-      return this._type;
+  get model(): any {
+      return this._model;
   }
 
   @Input() set options(obj: IFormOptions<T>) {
     this.formFactory.create(obj.model)
         .then(res => {
           this._form = res;
-          this._type = obj.model.constructor;
-          this._fields = getModelFieldKeys(this._type);
+          this._model = obj.model;
+          this._fields = getModelFieldKeys(this._model.constructor);
           this.cd.detectChanges();
         });
   }

@@ -6,7 +6,7 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 import {COMPONENTS} from "./components";
 import {FACTORIES} from "./factories";
-import {setDefaultTranslations} from "./translations-default";
+import {setDefaultTranslationsAndLang} from "./translations-default";
 
 @NgModule({
     providers: [ ...FACTORIES ],
@@ -17,6 +17,6 @@ import {setDefaultTranslations} from "./translations-default";
 })
 export class SharedModule {
     constructor(translateService: TranslateService) {
-        setDefaultTranslations(translateService);
+        setDefaultTranslationsAndLang(translateService);
     }
 }

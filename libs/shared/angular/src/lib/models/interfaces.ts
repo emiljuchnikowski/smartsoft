@@ -25,6 +25,6 @@ export interface IInputOptions {
 }
 
 export interface IInputFromFieldOptions<T> {
-    type: T;
+    model: T;
     fieldKey: string;
 }

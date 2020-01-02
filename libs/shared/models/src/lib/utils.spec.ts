@@ -1,9 +1,7 @@
-import {Field, getModelFieldKeys, Model} from "@smartsoft001/models";
+import {Field, FieldType, getModelFieldKeys, getModelFieldOptions, Model} from "@smartsoft001/models";
 
 describe('shared-models: utils', () => {
-
     describe('getModelFieldKeys()', () => {
-
         it('should return empty array when fields is not defined', () => {
             @Model({})
             class Test {
@@ -26,7 +24,18 @@ describe('shared-models: utils', () => {
 
             expect(result).toStrictEqual([ 'test1', 'test2', 'test3' ]);
         });
-
     });
 
+    describe('getModelFieldOptions', () => {
+       it('should return options', () => {
+           const options = { required: true, type: FieldType.password };
+
+           @Model({})
+           class Test {
+               @Field(options) test: string;
+           }
+
+           expect(getModelFieldOptions(new Test(), 'test')).toStrictEqual(options);
+       });
+    });
 });

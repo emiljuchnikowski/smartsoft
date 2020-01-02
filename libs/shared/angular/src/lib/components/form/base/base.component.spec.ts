@@ -105,7 +105,7 @@ describe('shared-angular: FormBaseComponent', () => {
       component.options = { model };
 
       setTimeout(() => {
-        expect(component.type).toStrictEqual(TestModel);
+        expect(component.model).toStrictEqual(model);
 
         done();
       });
