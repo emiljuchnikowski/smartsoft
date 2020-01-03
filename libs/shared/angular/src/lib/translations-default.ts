@@ -27,6 +27,10 @@ export interface ITranslateData {
         ERRORS: {
             required: string
         }
+    },
+    ERRORS: {
+        invalidUsernameOrPassword: string,
+        other: string
     }
 }
 
@@ -41,6 +45,10 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
         ERRORS: {
             required: 'field is required'
         }
+    },
+    ERRORS: {
+        invalidUsernameOrPassword: 'Invalid username or password',
+        other: 'Error'
     }
 };
 
@@ -55,6 +63,10 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
         ERRORS: {
             required: 'to pole jest wymagane'
         }
+    },
+    ERRORS: {
+        invalidUsernameOrPassword: 'Niepoprawna nazwa użytkownika, lub hasło',
+        other: 'Wystąpił błąd'
     }
 };
 

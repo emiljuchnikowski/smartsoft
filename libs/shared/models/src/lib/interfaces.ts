@@ -9,6 +9,8 @@ export interface IModelOptions {
 
 export interface IFieldOptions {
     required?: boolean;
+    // TODO : to fix
+    focused?: boolean;
     type?: FieldType;
 }
 

@@ -1,18 +1,18 @@
 import { Injectable } from "@angular/core";
 import { createEffect, Actions } from "@ngrx/effects";
 import { DataPersistence } from "@nrwl/angular";
+import { map } from "rxjs/operators";
+import {Router} from "@angular/router";
 
 import * as fromAuth from "./auth.reducer";
 import * as AuthActions from "./auth.actions";
 import { AuthService } from "../services";
-import { map } from "rxjs/operators";
-import { removeToken } from "./auth.actions";
 
 @Injectable()
 export class AuthEffects {
   initToken$ = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.initToken, {
-      run: (action: ReturnType<typeof AuthActions.initToken>) => {
+      run: () => {
         return AuthActions.initTokenSuccess({ token: this.service.token });
       },
 
@@ -38,9 +38,17 @@ export class AuthEffects {
     })
   );
 
+    createTokenSuccess$ = createEffect(() =>
+        this.dataPersistence.fetch(AuthActions.createTokenSuccess, {
+            run: () => {
+                this.router.navigate(['']);
+            }
+        }), { dispatch: false }
+    );
+
   removeToken$ = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.removeToken, {
-      run: (action: ReturnType<typeof AuthActions.removeToken>) => {
+      run: () => {
         return this.service.removeToken().pipe(
           map(() => {
             return AuthActions.removeTokenSuccess();
@@ -57,7 +65,7 @@ export class AuthEffects {
 
   refreshToken$ = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.refreshToken, {
-      run: (action: ReturnType<typeof AuthActions.refreshToken>) => {
+      run: () => {
         return this.service.refreshToken().pipe(
           map(() => {
             return AuthActions.refreshTokenSuccess();
@@ -75,6 +83,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private service: AuthService,
-    private dataPersistence: DataPersistence<fromAuth.AuthPartialState>
+    private dataPersistence: DataPersistence<fromAuth.AuthPartialState>,
+    private router: Router
   ) {}
 }

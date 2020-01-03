@@ -42,7 +42,7 @@ const authReducer = createReducer(
     AuthActions.initTokenFailure,
     AuthActions.createTokenFailure,
     AuthActions.removeTokenFailure,
-    (state, { error }) => ({ ...state, error })
+    (state, { error }) => ({ ...state, error, loaded: true })
   ),
   on(AuthActions.removeToken, state => ({
     ...state,

@@ -1,6 +1,7 @@
 import {AbstractControl} from "@angular/forms";
 
 import {IAppProvider} from "../providers";
+import {Observable} from "rxjs";
 
 export interface IAppOptions {
     provider: IAppProvider;
@@ -16,6 +17,7 @@ export interface IPageOptions {
 
 export interface IFormOptions<T> {
     model: T;
+    loading$?: Observable<boolean>;
 }
 
 export type InputOptions<T> = IInputOptions & IInputFromFieldOptions<T>;
@@ -31,5 +33,6 @@ export interface IInputFromFieldOptions<T> {
 
 export interface IButtonOptions {
     type?: 'submit' | 'button';
-    click: () => void
+    click: () => void;
+    loading$?: Observable<boolean>;
 }

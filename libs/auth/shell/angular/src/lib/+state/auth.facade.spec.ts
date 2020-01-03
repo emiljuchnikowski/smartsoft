@@ -16,6 +16,7 @@ import * as AuthActions from "../+state/auth.actions";
 import { AUTH_FEATURE_KEY, State, reducer } from "./auth.reducer";
 import {AuthService} from "../services";
 import {AuthConfig} from "../auth.config";
+import {RouterTestingModule} from "@angular/router/testing";
 
 interface TestSchema {
   auth: State;
@@ -31,6 +32,7 @@ describe("auth-shell-angular: AuthFacade", () => {
     beforeEach(() => {
       @NgModule({
         imports: [
+            RouterTestingModule,
           StoreModule.forFeature(AUTH_FEATURE_KEY, reducer),
           EffectsModule.forFeature([AuthEffects]),
             HttpClientTestingModule

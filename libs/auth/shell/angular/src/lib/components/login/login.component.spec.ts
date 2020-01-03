@@ -2,6 +2,7 @@ import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {TranslateModule} from "@ngx-translate/core";
+import {of} from "rxjs";
 
 import { LoginComponent } from './login.component';
 import {IFormOptions, SharedModule} from "@smartsoft001/angular";
@@ -16,7 +17,7 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
-      providers: [ { provide: AuthFacade, useValue: { login: () => {} } } ],
+      providers: [ { provide: AuthFacade, useValue: { login: () => {}, loaded$: of(false) } } ],
       imports: [
           SharedModule, TranslateModule.forRoot()
       ]
@@ -41,7 +42,7 @@ describe('LoginComponent', () => {
         model: new LoginDto()
       };
 
-      expect(component.formOptions).toStrictEqual(option);
+      expect(component.formOptions.model).toStrictEqual(option.model);
     });
   });
 
@@ -57,17 +58,45 @@ describe('LoginComponent', () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
     });
+
+    it('should set loading from facade', done => {
+      authFacade.loaded$ = of(false);
+
+      component.buttonOptions.loading$.subscribe(val => {
+        expect(val).toBeTruthy();
+        done();
+      });
+    });
   });
 
   describe('submit()', () => {
-    it('should send form value', () => {
-      const value = component.formComponent.form.value;
+    it('should dont send form value when invalid', () => {
       const spy = jest.spyOn(authFacade, 'login');
 
       component.login();
 
+      expect(spy).toHaveBeenCalledTimes(0);
+    });
+
+    it('should send form value when valid', () => {
+      const spy = jest.spyOn(authFacade, 'login');
+
+      component.formComponent.form.controls['username'].setValue('test');
+      component.formComponent.form.controls['password'].setValue('test');
+      component.formComponent.form.updateValueAndValidity();
+      component.login();
+
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(value);
+      expect(spy).toHaveBeenCalledWith({ username: 'test', password: 'test' });
+    });
+
+    it('should clear password', () => {
+      component.formComponent.form.controls['username'].setValue('test');
+      component.formComponent.form.controls['password'].setValue('test');
+      component.formComponent.form.updateValueAndValidity();
+      component.login();
+
+      expect(component.formComponent.form.controls['password'].value).toBe('');
     });
   });
 });

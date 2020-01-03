@@ -12,8 +12,8 @@ import { TranslateModule } from "@ngx-translate/core";
 
 import { AppComponent } from "./app.component";
 import { environment } from "../environments/environment";
-import { SharedModule } from "@smartsoft001/angular";
-import {AuthModule} from "@smartsoft001/auth-shell-angular";
+import {NgrxSharedModule, SharedModule} from "@smartsoft001/angular";
+import {AuthModule, PermissionsGuard} from "@smartsoft001/auth-shell-angular";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +23,10 @@ import {AuthModule} from "@smartsoft001/auth-shell-angular";
       [
         {
           path: "shared",
+          canActivate: [ PermissionsGuard ],
+          data: {
+            expectedPermissions: ['admin']
+          },
           loadChildren: () =>
             import("./shared/shared.module").then(m => m.SharedModule)
         },
@@ -44,9 +48,10 @@ import {AuthModule} from "@smartsoft001/auth-shell-angular";
     IonicModule.forRoot(),
     EffectsModule.forRoot([]),
     SharedModule,
+    NgrxSharedModule,
     AuthModule.forRoot({
-      apiUrl: 'test',
-      clientId: 'admin'
+      apiUrl: 'http://localhost:3333',
+      clientId: 'test'
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot()

@@ -25,8 +25,8 @@ export class TokenFactory implements IFactory<IAuthToken, IAuthTokenRequest> {
 
   static getQuery(config: IAuthTokenRequest): Partial<User> {
     return config.grant_type === "password"
-        ? { username: config.username, disabled: false }
-        : { authRefreshToken: config.refresh_token, disabled: false };
+        ? { username: config.username }
+        : { authRefreshToken: config.refresh_token};
   }
 
   static checkDisabled(user: User) {

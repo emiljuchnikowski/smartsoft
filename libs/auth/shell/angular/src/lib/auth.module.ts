@@ -3,7 +3,7 @@ import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { DataPersistence } from "@nrwl/angular";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import {TranslateService} from "@ngx-translate/core";
+import { TranslateService } from "@ngx-translate/core";
 
 import { AuthConfig } from "./auth.config";
 import { SERVICES } from "./services";
@@ -13,9 +13,14 @@ import { AuthFacade } from "./+state/auth.facade";
 import { SharedModule } from "@smartsoft001/angular";
 import { INTERCEPTORS, AuthInterceptor } from "./interceptors";
 import { COMPONENTS } from "./components";
-import {setDefaultTranslationsAndLang} from "./translations-default";
+import { setDefaultTranslationsAndLang } from "./translations-default";
+import { GUARDS } from "./guards";
+import {DIRECTIVES} from "./directives";
 
-const initializer = (facade: AuthFacade, translateService: TranslateService) => () => {
+const initializer = (
+  facade: AuthFacade,
+  translateService: TranslateService
+) => () => {
   facade.init();
   setDefaultTranslationsAndLang(translateService);
 };
@@ -27,9 +32,9 @@ const initializer = (facade: AuthFacade, translateService: TranslateService) => 
     EffectsModule.forFeature([AuthEffects])
   ],
   providers: [AuthEffects, AuthFacade],
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, ...DIRECTIVES],
   entryComponents: [...COMPONENTS],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS, ...DIRECTIVES]
 })
 export class AuthModule {
   static forRoot(config: AuthConfig): ModuleWithProviders {
@@ -48,6 +53,7 @@ export class AuthModule {
           deps: [AuthFacade, TranslateService],
           multi: true
         },
+        ...GUARDS,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
       ]
     };

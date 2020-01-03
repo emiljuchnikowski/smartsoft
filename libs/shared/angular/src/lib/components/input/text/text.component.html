@@ -3,5 +3,5 @@
     {{ translateKey | translate }}
     <span *ngIf="fieldOptions?.required">*</span>
   </ion-label>
-  <ion-input [formControl]="control"></ion-input>
+  <ion-input [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-input>
 </ng-container>

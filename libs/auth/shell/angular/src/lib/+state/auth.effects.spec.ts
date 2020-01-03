@@ -2,11 +2,12 @@ import "jest-preset-angular";
 
 import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import {TestScheduler} from "rxjs/testing";
-import {Observable, of} from "rxjs";
+import { TestScheduler } from "rxjs/testing";
+import { Observable, of } from "rxjs";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { provideMockStore } from "@ngrx/store/testing";
 import { NxModule, DataPersistence } from "@nrwl/angular";
+import { RouterTestingModule } from "@angular/router/testing";
 
 import { AuthEffects } from "./auth.effects";
 import * as AuthActions from "./auth.actions";
@@ -21,7 +22,11 @@ describe("auth-shell-angular: AuthEffects", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NxModule.forRoot(), HttpClientTestingModule],
+      imports: [
+        NxModule.forRoot(),
+        HttpClientTestingModule,
+        RouterTestingModule
+      ],
       providers: [
         AuthEffects,
         AuthService,
@@ -43,12 +48,12 @@ describe("auth-shell-angular: AuthEffects", () => {
   describe("initToken$", () => {
     it("should work", () => {
       scheduler.run(({ hot, expectObservable }) => {
-        actions = hot("-a-|", {a: AuthActions.initToken()});
+        actions = hot("-a-|", { a: AuthActions.initToken() });
 
         const expected = "-a-|";
 
         expectObservable(effects.initToken$).toBe(expected, {
-          a: AuthActions.initTokenSuccess({token: null})
+          a: AuthActions.initTokenSuccess({ token: null })
         });
       });
     });
@@ -62,14 +67,14 @@ describe("auth-shell-angular: AuthEffects", () => {
           password: "testPassword1"
         };
         const token = {} as any;
-        jest.spyOn(service, 'createToken').mockReturnValue(of(token));
+        jest.spyOn(service, "createToken").mockReturnValue(of(token));
 
-        actions = hot("-a-|", {a: AuthActions.createToken(data)});
+        actions = hot("-a-|", { a: AuthActions.createToken(data) });
 
         const expected = "-a-|";
 
         expectObservable(effects.createToken$).toBe(expected, {
-          a: AuthActions.createTokenSuccess({token})
+          a: AuthActions.createTokenSuccess({ token })
         });
       });
     });
@@ -84,7 +89,9 @@ describe("auth-shell-angular: AuthEffects", () => {
         const action = AuthActions.createToken(data);
 
         actions = hot("5ms a", { a: action });
-        jest.spyOn(service, 'createToken').mockReturnValue(cold('1s #', null, failureAction.error));
+        jest
+          .spyOn(service, "createToken")
+          .mockReturnValue(cold("1s #", null, failureAction.error));
 
         const expected = "5ms 1s z";
 
@@ -98,8 +105,8 @@ describe("auth-shell-angular: AuthEffects", () => {
   describe("removeToken$", () => {
     it("should work", () => {
       scheduler.run(({ hot, expectObservable }) => {
-        actions = hot("-a-|", {a: AuthActions.removeToken()});
-        jest.spyOn(service, 'removeToken').mockReturnValue(of({} as any));
+        actions = hot("-a-|", { a: AuthActions.removeToken() });
+        jest.spyOn(service, "removeToken").mockReturnValue(of({} as any));
 
         const expected = "-a-|";
 
@@ -115,7 +122,9 @@ describe("auth-shell-angular: AuthEffects", () => {
         const action = AuthActions.removeToken();
 
         actions = hot("5ms a", { a: action });
-        jest.spyOn(service, 'removeToken').mockReturnValue(cold('1s #', null, failureAction.error));
+        jest
+          .spyOn(service, "removeToken")
+          .mockReturnValue(cold("1s #", null, failureAction.error));
 
         const expected = "5ms 1s z";
 
@@ -129,8 +138,8 @@ describe("auth-shell-angular: AuthEffects", () => {
   describe("refreshToken$", () => {
     it("should work", () => {
       scheduler.run(({ hot, expectObservable }) => {
-        actions = hot("-a-|", {a: AuthActions.refreshToken()});
-        jest.spyOn(service, 'refreshToken').mockReturnValue(of({} as any));
+        actions = hot("-a-|", { a: AuthActions.refreshToken() });
+        jest.spyOn(service, "refreshToken").mockReturnValue(of({} as any));
 
         const expected = "-a-|";
 
@@ -146,7 +155,9 @@ describe("auth-shell-angular: AuthEffects", () => {
         const action = AuthActions.refreshToken();
 
         actions = hot("5ms a", { a: action });
-        jest.spyOn(service, 'refreshToken').mockReturnValue(cold('1s #', null, failureAction.error));
+        jest
+          .spyOn(service, "refreshToken")
+          .mockReturnValue(cold("1s #", null, failureAction.error));
 
         const expected = "5ms 1s z";
 

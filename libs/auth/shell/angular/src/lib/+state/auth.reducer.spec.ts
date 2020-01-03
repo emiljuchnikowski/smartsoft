@@ -36,7 +36,7 @@ describe("auth-shell-angular:Auth Reducer", () => {
 
       const result: State = reducer(initialState, action);
 
-      expect(result.loaded).toBe(false);
+      expect(result.loaded).toBe(true);
       expect(result.token).not.toBeDefined();
       expect(result.error).toBe(error);
     });
@@ -68,7 +68,7 @@ describe("auth-shell-angular:Auth Reducer", () => {
 
       const result: State = reducer(initialState, action);
 
-      expect(result.loaded).toBe(false);
+      expect(result.loaded).toBe(true);
       expect(result.token).not.toBeDefined();
       expect(result.error).toBe(error);
     });
@@ -102,7 +102,7 @@ describe("auth-shell-angular:Auth Reducer", () => {
 
       const result: State = reducer(initialState, action);
 
-      expect(result.loaded).toBe(false);
+      expect(result.loaded).toBe(true);
       expect(result.token).toBe(initialState.token);
       expect(result.error).toBe(error);
     });

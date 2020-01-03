@@ -8,9 +8,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { COMPONENTS } from "./components";
 import { FACTORIES } from "./factories";
 import { setDefaultTranslationsAndLang } from "./translations-default";
+import {SERVICES} from "./services";
 
 @NgModule({
-  providers: [...FACTORIES],
+  providers: [...FACTORIES, ...SERVICES],
   declarations: [...COMPONENTS],
   entryComponents: [...COMPONENTS],
   imports: [
