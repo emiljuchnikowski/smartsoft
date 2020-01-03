@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "dist/out-tsc",
     "module": "commonjs",
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "esModuleInterop": true
   },
   "include": [
     "lib/**/*.spec.ts",
@@ -17,5 +18,11 @@
     "apps/**/*.spec.js",
     "apps/**/*.spec.jsx",
     "apps/**/*.d.ts"
-  ]
+  ],
+  "exclude": [
+    "apps/ui/test-e2e/**/*.spec.ts"
+  ],
+  "jest": {
+    "setupTestFrameworkScriptFile": "mock-local-storage"
+  }
 }

@@ -4,8 +4,8 @@ import {JwtModule} from "@nestjs/jwt";
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import {CONTROLLERS} from "./controllers";
-import {SERVICES} from "@smartsoft001/auth-shell-app-services";
 import {DOMAIN_SERVICES, ENTITIES, TokenConfig} from "@smartsoft001/auth-domain";
+import {SERVICES} from "@smartsoft001/auth-shell-app-services";
 
 @Module({ })
 export class AuthShellNestjsModule {

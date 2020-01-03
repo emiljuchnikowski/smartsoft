@@ -1,6 +1,8 @@
+import {IUserCredentials} from "@smartsoft001/users";
+
 export type IAuthTokenRequest = IAuthTokenRequestPassword | IAuthTokenRequestRefreshToken;
 
-export interface IAuthTokenRequestPassword {
+export interface IAuthTokenRequestPassword extends IUserCredentials {
     grant_type: "password";
     username: string;
     password: string;

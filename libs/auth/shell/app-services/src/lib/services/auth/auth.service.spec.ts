@@ -3,7 +3,7 @@ import {getRepositoryToken} from "@nestjs/typeorm";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
 
-import { AuthService } from "@smartsoft001/auth-shell-app-services";
+import { AuthService } from "./auth.service";
 import {
   IAuthToken,
   IAuthTokenRequest,

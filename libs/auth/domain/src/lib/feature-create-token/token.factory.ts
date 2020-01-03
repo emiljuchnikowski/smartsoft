@@ -7,10 +7,10 @@ import { Guid } from "guid-typescript";
 import {
   DomainValidationError,
   IFactory
-} from "@smartsoft001/shared-domain-core";
+} from "@smartsoft001/domain-core";
 import { User } from "../entities";
 import { TokenConfig } from "./token.config";
-import { PasswordService } from "@smartsoft001/shared-utils";
+import { PasswordService } from "@smartsoft001/utils";
 import {IAuthToken, IAuthTokenRequest} from "./interfaces";
 
 @Injectable()
@@ -25,8 +25,8 @@ export class TokenFactory implements IFactory<IAuthToken, IAuthTokenRequest> {
 
   static getQuery(config: IAuthTokenRequest): Partial<User> {
     return config.grant_type === "password"
-        ? { username: config.username, disabled: false }
-        : { authRefreshToken: config.refresh_token, disabled: false };
+        ? { username: config.username }
+        : { authRefreshToken: config.refresh_token};
   }
 
   static checkDisabled(user: User) {

@@ -6,11 +6,14 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install jest
+          command:
+            npm install jest -g
+      - run:
           name: Install packages
           command:
             npm install
       - run:
           name: Unit test
           command:
-            npm test
-
+            jest

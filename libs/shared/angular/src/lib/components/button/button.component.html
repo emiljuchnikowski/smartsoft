@@ -1,0 +1,6 @@
+<ion-button [type]="options?.type" (click)="options.click()" [disabled]="disabled || (options?.loading$ | async)">
+    <ion-spinner *ngIf="options?.loading$ | async; else content"></ion-spinner>
+    <ng-template #content>
+        <ng-content ></ng-content>
+    </ng-template>
+</ion-button>

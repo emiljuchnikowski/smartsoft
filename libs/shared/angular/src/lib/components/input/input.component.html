@@ -1,0 +1,17 @@
+<ion-item>
+    <ng-container [ngSwitch]="fieldOptions?.type">
+        <smart-input-text *ngSwitchCase="FieldType.text"
+                            [options]="options"
+                            [fieldOptions]="fieldOptions"
+        ></smart-input-text>
+
+        <smart-input-password *ngSwitchCase="FieldType.password"
+                          [options]="options"
+                          [fieldOptions]="fieldOptions"
+        ></smart-input-password>
+    </ng-container>
+</ion-item>
+
+<ion-item *ngIf="options?.control?.errors && options?.control?.touched">
+    <smart-input-error [errors]="options?.control?.errors"></smart-input-error>
+</ion-item>
