@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import decode from "jwt-decode";
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { first, tap } from "rxjs/operators";
 
 import { AuthConfig } from "../../auth.config";
 import { IAuthToken } from "@smartsoft001/auth-domain";
-import { first, tap } from "rxjs/operators";
 import { IUserCredentials } from "@smartsoft001/users";
-import { JwtHelperService } from "@auth0/angular-jwt";
 
 export const AUTH_TOKEN = "AUTH_TOKEN";
 
@@ -73,8 +73,7 @@ export class AuthService {
     const helper = new JwtHelperService();
 
     if (!token) return false;
-    // Check whether the token is expired and return
-    // true or false
+
     return !helper.isTokenExpired(token.access_token);
   }
 

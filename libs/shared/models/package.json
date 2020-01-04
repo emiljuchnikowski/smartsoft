@@ -1,0 +1,27 @@
+{
+  "name": "@smartsoft001/models",
+  "version": "1.0.1",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    }
+  },
+  "description": "This library was generated with [Nx](https://nx.dev).",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "author": "Emil Juchnikowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
+  "peerDependencies": {
+    "reflect-metadata": "^0.1.13"
+  }
+}
