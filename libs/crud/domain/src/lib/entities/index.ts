@@ -1,1 +1,1 @@
-export const ENTITIES = [];
+export * from './item/item.entity';

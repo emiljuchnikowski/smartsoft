@@ -1,1 +1,2 @@
-export * from "./lib/crud-shell-app-services";
+export * from "./lib/services";
+export * from './lib/commands';

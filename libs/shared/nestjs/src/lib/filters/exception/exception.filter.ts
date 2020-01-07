@@ -5,7 +5,7 @@ import {
   HttpException,
   HttpStatus
 } from "@nestjs/common";
-import { DomainValidationError } from "@smartsoft001/domain-core";
+import {DomainForbiddenError, DomainValidationError} from "@smartsoft001/domain-core";
 
 @Catch()
 export class AppExceptionFilter implements ExceptionFilter {
@@ -20,6 +20,9 @@ export class AppExceptionFilter implements ExceptionFilter {
       message = exception.message;
     } else if (exception instanceof DomainValidationError) {
       status = HttpStatus.BAD_REQUEST;
+      message = exception.message;
+    } else if (exception instanceof DomainForbiddenError) {
+      status = HttpStatus.FORBIDDEN;
       message = exception.message;
     }
 
