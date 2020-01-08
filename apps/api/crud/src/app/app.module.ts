@@ -32,6 +32,7 @@ if (process.env.DB_USERNAME) {
  * - PERMISSION_DELETE
  * - DB_USERNAME
  * - DB_PASSWORD
+ * - URL_PREFIX
  */
 @Module({
   imports: [

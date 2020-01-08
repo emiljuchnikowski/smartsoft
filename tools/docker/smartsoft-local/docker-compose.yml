@@ -2,6 +2,17 @@ version: "3.7"
 
 services:
 
+  node-proxy:
+    image: nginx
+    restart: always
+    # maps config file into the proxy container
+    volumes:
+      - ./node-proxy/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8102:80
+    links:
+      - auth
+
   mongo:
     image: "mongo:4.2"
     restart: always
@@ -12,17 +23,33 @@ services:
 
   auth:
     image: "smartsoft001/auth_api:latest"
-    ports:
-      - 8102:3333
     depends_on:
       - mongo
     environment:
       TOKEN_CONFIG_SECRET_OR_PRIVATE_KEY: "test"
       TOKEN_CONFIG_CLIENTS: "client1"
-      TOKEN_CONFIG_EXPIRED_IN_SECONDS: 600
+      TOKEN_CONFIG_EXPIRED_IN_SECONDS: 6000
       DB_SERVER:  "mongo"
       DB_PORT:  27017
       DB_NAME:  "smartsoft"
+      URL_PREFIX:  "auth"
+
+  users:
+    image: "smartsoft001/crud_api:latest"
+    depends_on:
+      - mongo
+    environment:
+      TOKEN_CONFIG_SECRET_OR_PRIVATE_KEY: "test"
+      TOKEN_CONFIG_EXPIRED_IN_SECONDS: 6000
+      PERMISSION_CREATE: "admin"
+      PERMISSION_READ: "admin"
+      PERMISSION_UPDATE: "admin"
+      PERMISSION_DELETE: "admin"
+      DB_SERVER: "mongo"
+      DB_PORT: 27017
+      DB_NAME: "smartsoft"
+      DB_COLLECTION: "users"
+      URL_PREFIX:  "users"
 
 volumes:
   smartsoft_db:
