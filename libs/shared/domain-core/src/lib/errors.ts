@@ -3,3 +3,9 @@ export class DomainValidationError extends Error {
         super(msg);
     }
 }
+
+export class DomainForbiddenError extends Error {
+    constructor(msg) {
+        super(msg);
+    }
+}

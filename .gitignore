@@ -4,3 +4,6 @@
 /dist/
 /coverage/
 /junit.xml
+/libs/shared/models/dist/
+/libs/shared/domain-core/dist/
+/libs/shared/utils/dist/

@@ -41,7 +41,7 @@ export class AuthEffects {
     createTokenSuccess$ = createEffect(() =>
         this.dataPersistence.fetch(AuthActions.createTokenSuccess, {
             run: () => {
-                this.router.navigate(['']);
+                this.router.navigateByUrl('');
             }
         }), { dispatch: false }
     );

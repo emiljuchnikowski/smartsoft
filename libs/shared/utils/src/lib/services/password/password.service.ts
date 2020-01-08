@@ -1,5 +1,6 @@
 import * as md5 from 'md5';
 
+// @dynamic
 export class PasswordService {
     static hash(p: string): Promise<string> {
         return Promise.resolve(md5(p));
@@ -7,6 +8,6 @@ export class PasswordService {
     }
 
     static compare(p: string, h: string): Promise<boolean> {
-        return this.hash(p).then(hp => hp === h);
+        return PasswordService.hash(p).then(hp => hp === h);
     }
 }

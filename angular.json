@@ -558,6 +558,213 @@
           }
         }
       }
+    },
+    "crud-domain": {
+      "root": "libs/crud/domain",
+      "sourceRoot": "libs/crud/domain/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/crud/domain/tsconfig.lib.json",
+              "libs/crud/domain/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/crud/domain/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/crud/domain/jest.config.js",
+            "tsConfig": "libs/crud/domain/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "crud-shell-angular": {
+      "root": "libs/crud/shell/angular",
+      "sourceRoot": "libs/crud/shell/angular/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/crud/shell/angular/tsconfig.lib.json",
+              "libs/crud/shell/angular/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/crud/shell/angular/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/crud/shell/angular/jest.config.js",
+            "tsConfig": "libs/crud/shell/angular/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "crud-shell-app-services": {
+      "root": "libs/crud/shell/app-services",
+      "sourceRoot": "libs/crud/shell/app-services/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/crud/shell/app-services/tsconfig.lib.json",
+              "libs/crud/shell/app-services/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/crud/shell/app-services/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/crud/shell/app-services/jest.config.js",
+            "tsConfig": "libs/crud/shell/app-services/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "crud-shell-dtos": {
+      "root": "libs/crud/shell/dtos",
+      "sourceRoot": "libs/crud/shell/dtos/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/crud/shell/dtos/tsconfig.lib.json",
+              "libs/crud/shell/dtos/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/crud/shell/dtos/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/crud/shell/dtos/jest.config.js",
+            "tsConfig": "libs/crud/shell/dtos/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "crud-shell-nestjs": {
+      "root": "libs/crud/shell/nestjs",
+      "sourceRoot": "libs/crud/shell/nestjs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/crud/shell/nestjs/tsconfig.lib.json",
+              "libs/crud/shell/nestjs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/crud/shell/nestjs/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/crud/shell/nestjs/jest.config.js",
+            "tsConfig": "libs/crud/shell/nestjs/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "api-crud": {
+      "root": "apps/api/crud",
+      "sourceRoot": "apps/api/crud/src",
+      "projectType": "application",
+      "prefix": "api-crud",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/api/crud",
+            "main": "apps/api/crud/src/main.ts",
+            "tsConfig": "apps/api/crud/tsconfig.app.json",
+            "assets": ["apps/api/crud/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/crud/src/environments/environment.ts",
+                  "with": "apps/api/crud/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-crud:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api/crud/tsconfig.app.json",
+              "apps/api/crud/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/api/crud/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/crud/jest.config.js",
+            "tsConfig": "apps/api/crud/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "shared-mongo": {
+      "root": "libs/shared/mongo",
+      "sourceRoot": "libs/shared/mongo/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/mongo/tsconfig.lib.json",
+              "libs/shared/mongo/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/mongo/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/mongo/jest.config.js",
+            "tsConfig": "libs/shared/mongo/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

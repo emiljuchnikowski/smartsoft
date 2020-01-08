@@ -5,7 +5,7 @@ import {IAuthToken, IAuthTokenRequest} from "@smartsoft001/auth-domain";
 
 @Controller('token')
 export class TokenController {
-    constructor(private service: AuthService) { }
+    constructor(private readonly service: AuthService) { }
 
     @Post()
     create(@Body() req: IAuthTokenRequest): Promise<IAuthToken> {
