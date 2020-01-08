@@ -33,6 +33,7 @@ if (process.env.DB_USERNAME) {
  * Optional node.js environment variables:
  * - DB_USERNAME
  * - DB_PASSWORD
+ * - URL_PREFIX
  */
 @Module({
   imports: [
