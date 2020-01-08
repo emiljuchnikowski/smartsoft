@@ -5,7 +5,7 @@ import { CqrsModule } from "@nestjs/cqrs";
 
 import { CONTROLLERS } from "./controllers";
 import {
-  COMMAND_HANDLERS,
+  COMMAND_HANDLERS, QUERY_HANDLERS,
   SERVICES
 } from "@smartsoft001/crud-shell-app-services";
 import { SharedConfig, SharedModule } from "@smartsoft001/nestjs";
@@ -29,7 +29,7 @@ export class CrudShellNestjsModule {
     return {
       module: CrudShellNestjsModule,
       controllers: CONTROLLERS,
-      providers: [...SERVICES, ...COMMAND_HANDLERS, ...DOMAIN_HANDLERS],
+      providers: [...SERVICES, ...COMMAND_HANDLERS, ...DOMAIN_HANDLERS, ...QUERY_HANDLERS],
       imports: [
         PassportModule.register({ defaultStrategy: "jwt", session: false }),
         JwtModule.register({

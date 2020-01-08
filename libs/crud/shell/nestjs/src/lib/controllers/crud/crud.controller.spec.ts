@@ -1,9 +1,9 @@
 import { Test, TestingModule } from "@nestjs/testing";
+import {CommandBus, CqrsModule, QueryBus} from "@nestjs/cqrs";
 
 import { CrudController } from "./crud.controller";
 import { CrudService } from "@smartsoft001/crud-shell-app-services";
 import { IUser } from "@smartsoft001/users";
-import { CommandBus, CqrsModule } from "@nestjs/cqrs";
 
 describe("crud-shell-nestjs: CrudController", () => {
   let controller: CrudController<any>;
@@ -19,6 +19,12 @@ describe("crud-shell-nestjs: CrudController", () => {
           provide: CommandBus,
           useValue: {
             execute: () => Promise.resolve()
+          }
+        },
+        {
+          provide: QueryBus,
+          useValue: {
+            execute: () => Promise.resolve({})
           }
         }
       ]
@@ -105,21 +111,23 @@ describe("crud-shell-nestjs: CrudController", () => {
     it("should set correct user", async done => {
       const user = {} as IUser;
       const spy = jest.spyOn(service, "read");
+      const response = [{}, {}] as IUser[];
+      jest.spyOn(service, "read").mockReturnValue(Promise.resolve({ data: response, totalCount: 20 }));
 
-      await controller.read(user);
+      await controller.read(user, { headers: {} });
 
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(user);
+      expect(spy).toHaveBeenCalledWith(expect.anything(), expect.anything(), user);
       done();
     });
 
     it("should return correct value", async done => {
       const response = [{}, {}] as IUser[];
-      jest.spyOn(service, "read").mockReturnValue(Promise.resolve(response));
+      jest.spyOn(service, "read").mockReturnValue(Promise.resolve({ data: response, totalCount: 20 }));
 
-      const result = await controller.read({} as IUser);
+      const result = await controller.read({} as IUser, { headers: {} });
 
-      expect(result).toBe(response);
+      expect(result).toStrictEqual({ data: response, totalCount: 20, links: null });
       done();
     });
   });

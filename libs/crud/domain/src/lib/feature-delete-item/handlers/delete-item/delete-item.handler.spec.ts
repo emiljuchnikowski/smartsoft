@@ -22,6 +22,9 @@ describe('crud-domain: DeleteItemHandler', () => {
             },
             delete(): Promise<void> {
                 return Promise.resolve()
+            },
+            getById(): Promise<any> {
+                return Promise.resolve(null)
             }
         };
 

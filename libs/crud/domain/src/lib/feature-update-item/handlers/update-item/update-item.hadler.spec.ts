@@ -4,6 +4,7 @@ import {IItemRepository} from "@smartsoft001/domain-core";
 import {IUser} from "@smartsoft001/users";
 import {UpdateItemHandler} from "./update-item.handler";
 import {UpdateItemEvent} from "../../update-item.event";
+import {PasswordService} from "@smartsoft001/utils";
 
 describe('crud-domain: UpdateItemHandler', () => {
     let handler: UpdateItemHandler<any>;
@@ -22,6 +23,12 @@ describe('crud-domain: UpdateItemHandler', () => {
             },
             delete(): Promise<void> {
                 return Promise.resolve()
+            },
+            getById(): Promise<any> {
+                return Promise.resolve(null)
+            },
+            getByCriteria(): Promise<{ data: any[]; totalCount: number }> {
+                return Promise.resolve(null)
             }
         };
 
@@ -48,6 +55,24 @@ describe('crud-domain: UpdateItemHandler', () => {
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(event.item, event.user);
+        });
+
+        it("should hash password", async done => {
+            const event = new UpdateItemEvent(
+                { id: "test", password: "123" },
+                {} as IUser
+            );
+            const spy = jest.spyOn(repository, "update");
+
+            await handler.handle(event);
+
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(
+                { ...event.item, password: await PasswordService.hash("123") },
+                event.user
+            );
+
+            done();
         });
     })
 });

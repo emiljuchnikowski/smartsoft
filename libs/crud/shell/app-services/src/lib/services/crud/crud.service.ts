@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import {CommandBus} from "@nestjs/cqrs";
+import {CommandBus, QueryBus} from "@nestjs/cqrs";
 import {Guid} from "guid-typescript";
 
 import {IUser} from "@smartsoft001/users";
@@ -8,10 +8,12 @@ import {CreateCommand} from "../../commands";
 import {UpdateCommand} from "../../commands/update.command";
 import {DeleteCommand} from "../../commands/delete.command";
 import {UpdatePartialCommand} from "../../commands/update-partial.command";
+import {GetByIdQuery} from "../../queries/get-by-id.query";
+import {GetByCriteriaQuery} from "../../queries/get-by-criteria.query";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
-    constructor(private readonly commandBus: CommandBus) {}
+    constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
     async create(data: T, user: IUser): Promise<string> {
         data.id = Guid.raw();
@@ -22,11 +24,11 @@ export class CrudService<T extends IEntity<string>> {
     }
 
     readById(id: string, user: IUser): Promise<T> {
-        return Promise.resolve(null);
+        return this.queryBus.execute(new GetByIdQuery(id, user));
     }
 
-    read(user: IUser): Promise<T[]>  {
-        return Promise.resolve(null);
+    read(criteria: any, options: any, user: IUser): Promise<{ data: T[], totalCount: number }>  {
+        return this.queryBus.execute(new GetByCriteriaQuery(criteria, options, user));
     }
 
     async update(id: string, data: T, user: IUser): Promise<void> {

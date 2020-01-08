@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {CommandBus} from "@nestjs/cqrs";
+import {CommandBus, QueryBus} from "@nestjs/cqrs";
 import {Guid} from "guid-typescript";
 
 import { CrudService } from './crud.service';
@@ -8,20 +8,28 @@ import {CreateCommand} from "@smartsoft001/crud-shell-app-services";
 import {UpdateCommand} from "../../commands/update.command";
 import {DeleteCommand} from "../../commands/delete.command";
 import {UpdatePartialCommand} from "../../commands/update-partial.command";
+import {GetByIdQuery} from "../../queries/get-by-id.query";
+import {GetByCriteriaQuery} from "../../queries/get-by-criteria.query";
 
 describe('crud-shared-app-services: CrudService', () => {
     let service: CrudService<any>;
     let commandBus;
+    let queryBus;
 
     beforeEach(async () => {
         commandBus = {
             execute: () => Promise.resolve()
         };
 
+        queryBus = {
+            execute: () => Promise.resolve()
+        };
+
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CrudService,
-                { provide: CommandBus, useValue: commandBus }
+                { provide: CommandBus, useValue: commandBus },
+                { provide: QueryBus, useValue: queryBus }
             ]
         }).compile();
 
@@ -101,6 +109,36 @@ describe('crud-shared-app-services: CrudService', () => {
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(new UpdatePartialCommand(id, model, user));
+
+            done();
+        });
+    });
+
+    describe('readById()', () => {
+        it('should invoke query', async done => {
+            const item = {};
+            const spy = jest.spyOn(queryBus, 'execute').mockReturnValue(Promise.resolve(item));
+
+            const result =  await service.readById('test', {} as IUser);
+
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(new GetByIdQuery('test', {} as IUser));
+            expect(result).toBe(item);
+
+            done();
+        });
+    });
+
+    describe('readByCriteria()', () => {
+        it('should invoke query', async done => {
+            const item = {};
+            const spy = jest.spyOn(queryBus, 'execute').mockReturnValue(Promise.resolve({ data: [ item ], totalCount: 1 }));
+
+            const result =  await service.read({ test: 2 }, { test: 1 }, {} as IUser);
+
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(new GetByCriteriaQuery({ test: 2 }, { test: 1 }, {} as IUser));
+            expect(result).toStrictEqual({ data: [ item ], totalCount: 1 });
 
             done();
         });
