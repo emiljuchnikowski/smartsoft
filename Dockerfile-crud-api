@@ -26,7 +26,7 @@ RUN npm install && \
 COPY --from=builder /home/node/app/dist/apps/api/crud .
 
 # Expose ports (for orchestrators and dynamic reverse proxies)
-EXPOSE 3333
+EXPOSE 3334
 
 # Start the app
 CMD node main.js
