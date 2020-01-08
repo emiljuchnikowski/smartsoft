@@ -9,6 +9,11 @@ async function bootstrap() {
   const port = process.env.port || 3333;
   app.use(bodyParser.urlencoded({ extended: true }));
   app.enableCors();
+
+  if (process.env.URL_PREFIX) {
+    app.setGlobalPrefix(process.env.URL_PREFIX)
+  }
+
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(port, () => {
     console.log("Listening at http://localhost:" + port);
