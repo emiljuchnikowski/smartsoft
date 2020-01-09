@@ -79,14 +79,13 @@ describe("auth-shell-angular: AuthService", () => {
       const refreshToken = "testToken";
       const mockToken = {} as any;
       const spy = jest.spyOn(http, "post").mockReturnValue(of(mockToken));
-      const data = `grant_type=refresh_token&refresh_token=${refreshToken}`;
       const url = config.apiUrl + '/token';
       sessionStorage.setItem(AUTH_TOKEN, JSON.stringify({ refresh_token: refreshToken }));
 
       await service.refreshToken().toPromise();
 
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(url, data, expect.anything());
+      expect(spy).toHaveBeenCalledWith(url, { grant_type: 'refresh_token', refresh_token: refreshToken  });
       done()
     });
 
@@ -104,15 +103,13 @@ describe("auth-shell-angular: AuthService", () => {
 
   describe("removeToken()", () => {
 
-    it('should invoke sessionStorage', async done => {
+    it('should invoke sessionStorage', () => {
       sessionStorage.setItem(AUTH_TOKEN, "test");
 
-      await service.removeToken().toPromise();
-
+      service.removeToken();
       const result = sessionStorage.getItem(AUTH_TOKEN);
 
       expect(!!result).not.toBeTruthy();
-      done()
     });
 
   });

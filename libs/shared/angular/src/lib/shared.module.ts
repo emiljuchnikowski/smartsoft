@@ -4,6 +4,8 @@ import { IonicModule } from "@ionic/angular";
 import { CommonModule } from "@angular/common";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
+import {RouterModule} from "@angular/router";
+import {DeviceDetectorModule} from "ngx-device-detector";
 
 import { COMPONENTS } from "./components";
 import { FACTORIES } from "./factories";
@@ -15,11 +17,13 @@ import {SERVICES} from "./services";
   declarations: [...COMPONENTS],
   entryComponents: [...COMPONENTS],
   imports: [
+    RouterModule,
     ReactiveFormsModule,
     IonicModule,
     CommonModule,
     TranslateModule,
-    HttpClientModule
+    HttpClientModule,
+    DeviceDetectorModule.forRoot()
   ],
   exports: [
     ReactiveFormsModule,

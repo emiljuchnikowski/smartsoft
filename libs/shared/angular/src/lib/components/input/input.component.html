@@ -1,11 +1,11 @@
 <ion-item>
     <ng-container [ngSwitch]="fieldOptions?.type">
-        <smart-input-text *ngSwitchCase="FieldType.text"
+        <smart-input-text class="input-type" *ngSwitchCase="FieldType.text"
                             [options]="options"
                             [fieldOptions]="fieldOptions"
         ></smart-input-text>
 
-        <smart-input-password *ngSwitchCase="FieldType.password"
+        <smart-input-password class="input-type" *ngSwitchCase="FieldType.password"
                           [options]="options"
                           [fieldOptions]="fieldOptions"
         ></smart-input-password>

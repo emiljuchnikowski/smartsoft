@@ -12,8 +12,8 @@ import { TranslateModule } from "@ngx-translate/core";
 
 import { AppComponent } from "./app.component";
 import { environment } from "../environments/environment";
-import {NgrxSharedModule, SharedModule} from "@smartsoft001/angular";
-import {AuthModule, PermissionsGuard} from "@smartsoft001/auth-shell-angular";
+import { NgrxSharedModule, SharedModule } from "@smartsoft001/angular";
+import { AuthModule, PermissionsGuard } from "@smartsoft001/auth-shell-angular";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,14 +23,28 @@ import {AuthModule, PermissionsGuard} from "@smartsoft001/auth-shell-angular";
       [
         {
           path: "shared",
-          canActivate: [ PermissionsGuard ],
+          canActivate: [PermissionsGuard],
           data: {
-            expectedPermissions: ['admin']
+            expectedPermissions: ["admin"]
           },
           loadChildren: () =>
             import("./shared/shared.module").then(m => m.SharedModule)
         },
-      { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) }
+        {
+          path: "users",
+          canActivate: [PermissionsGuard],
+          data: {
+            expectedPermissions: ["admin"]
+          },
+          loadChildren: () =>
+            import("./users/users.module").then(m => m.UsersModule)
+        },
+        {
+          path: "login",
+          loadChildren: () =>
+            import("./login/login.module").then(m => m.LoginModule)
+        },
+        { path: "", redirectTo: "/users", pathMatch: "full" }
       ],
       { initialNavigation: "enabled", useHash: true }
     ),
@@ -50,8 +64,8 @@ import {AuthModule, PermissionsGuard} from "@smartsoft001/auth-shell-angular";
     SharedModule,
     NgrxSharedModule,
     AuthModule.forRoot({
-      apiUrl: 'http://localhost:3333',
-      clientId: 'test'
+      apiUrl: "http://localhost:8102/auth",
+      clientId: "client1"
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot()

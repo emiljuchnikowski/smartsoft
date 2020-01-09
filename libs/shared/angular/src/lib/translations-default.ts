@@ -17,24 +17,32 @@ export function setDefaultTranslationsAndLang(service: TranslateService) {
 }
 
 export interface ITranslateData {
+    APP: {
+        logout: string,
+        logged: string
+    };
     MODEL: {
         firstName: string,
         lastName: string,
         password: string,
         username: string
-    },
+    };
     INPUT: {
         ERRORS: {
             required: string
         }
-    },
+    };
     ERRORS: {
         invalidUsernameOrPassword: string,
         other: string
-    }
+    };
 }
 
 export const TRANSLATE_DATA_ENG: ITranslateData = {
+    APP: {
+        logout: 'log out',
+        logged: 'logged'
+    },
     MODEL: {
         firstName: 'first name',
         lastName: 'last name',
@@ -53,6 +61,10 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
 };
 
 export const TRANSLATE_DATA_PL: ITranslateData = {
+    APP: {
+        logout: 'wyloguj się',
+        logged: 'zalogowany'
+    },
     MODEL: {
         firstName: 'imię',
         lastName: 'nazwisko',

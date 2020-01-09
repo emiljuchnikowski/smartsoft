@@ -6,8 +6,15 @@ import {Observable} from "rxjs";
 export interface IAppOptions {
     provider: IAppProvider;
     menu?: {
-        showForAnonymous?: boolean
+        showForAnonymous?: boolean,
+        items$?: Observable<IMenuItem[]>
     }
+}
+
+export interface IMenuItem {
+    route: string,
+    caption: string,
+    icon?: string,
 }
 
 export interface IPageOptions {
@@ -18,6 +25,13 @@ export interface IPageOptions {
 export interface IFormOptions<T> {
     model: T;
     loading$?: Observable<boolean>;
+}
+
+export interface IListOptions<T> {
+    provider: {
+        getData(): Observable<{ data: T[], totalCount: number, links: any }>
+    };
+    type: any;
 }
 
 export type InputOptions<T> = IInputOptions & IInputFromFieldOptions<T>;

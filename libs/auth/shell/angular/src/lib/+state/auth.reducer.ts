@@ -7,6 +7,7 @@ export const AUTH_FEATURE_KEY = "auth";
 
 export interface State {
   token?: IAuthToken;
+  username?: string;
   loaded: boolean; // has the Auth list been loaded
   error?: string | null; // last none error (if any)
 }
@@ -25,16 +26,18 @@ const authReducer = createReducer(
     ...state,
     loaded: false,
     error: null,
-    token: null
+    token: null,
+      username: null
   })),
   on(
     AuthActions.initTokenSuccess,
     AuthActions.createTokenSuccess,
-    (state, { token }) => {
+    (state, { token, username }) => {
       return {
         ...state,
         loaded: true,
-        token
+        token,
+          username
       };
     }
   ),

@@ -5,13 +5,13 @@ services:
   node-proxy:
     image: nginx
     restart: always
-    # maps config file into the proxy container
     volumes:
       - ./node-proxy/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 8102:80
     links:
       - auth
+      - users
 
   mongo:
     image: "mongo:4.2"
@@ -23,6 +23,7 @@ services:
 
   auth:
     image: "smartsoft001/auth_api:latest"
+    restart: always
     depends_on:
       - mongo
     environment:
@@ -36,6 +37,7 @@ services:
 
   users:
     image: "smartsoft001/crud_api:latest"
+    restart: always
     depends_on:
       - mongo
     environment:

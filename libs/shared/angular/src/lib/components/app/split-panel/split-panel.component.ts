@@ -1,6 +1,7 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 
 import {AppBaseComponent} from "../base/base.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'smart-app-split-panel',
@@ -10,11 +11,10 @@ import {AppBaseComponent} from "../base/base.component";
 })
 export class AppSplitPanelComponent extends AppBaseComponent implements OnInit {
 
-  constructor() {
-    super();
+  constructor(router: Router, cd: ChangeDetectorRef) {
+    super(router, cd);
   }
 
   ngOnInit() {
   }
-
 }

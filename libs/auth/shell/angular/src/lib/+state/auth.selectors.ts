@@ -24,3 +24,8 @@ export const getAuthToken = createSelector(
   getAuthState,
   (state: State) => state.token
 );
+
+export const getAuthUsername = createSelector(
+    getAuthState,
+    (state: State) => state.username
+);

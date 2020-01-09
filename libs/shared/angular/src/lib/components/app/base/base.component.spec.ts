@@ -1,8 +1,10 @@
 import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {Component} from "@angular/core";
+import {ChangeDetectorRef, Component} from "@angular/core";
 import {of} from "rxjs";
+import {Router} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
 
 import { AppBaseComponent } from './base.component';
 
@@ -12,14 +14,19 @@ describe('shared-angular: AppBaseComponent', () => {
         selector: 'smartsoft-test',
         template: 'test'
     })
-    class TestFormBaseComponent extends AppBaseComponent { }
+    class TestFormBaseComponent extends AppBaseComponent {
+        constructor(router: Router, cd: ChangeDetectorRef) {
+            super(router, cd);
+        }
+    }
 
     let component: TestFormBaseComponent;
     let fixture: ComponentFixture<TestFormBaseComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ TestFormBaseComponent ]
+            declarations: [ TestFormBaseComponent ],
+            imports: [ RouterTestingModule ]
         })
             .compileComponents();
     }));
@@ -89,4 +96,21 @@ describe('shared-angular: AppBaseComponent', () => {
             });
         });
     });
+
+    describe('menuItems$', () => {
+        it('should set from option', () => {
+            const menuItems$ = of([]);
+            component.options = {
+                provider: {
+                    logged$: of(false)
+                },
+                menu: {
+                    showForAnonymous: true,
+                    items$: menuItems$
+                }
+            };
+
+            expect(component.menuItems$).toBe(menuItems$);
+        });
+    })
 });

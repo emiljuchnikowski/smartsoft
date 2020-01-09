@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { Observable} from "rxjs";
 import decode from "jwt-decode";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { first, tap } from "rxjs/operators";
+import {first, tap} from "rxjs/operators";
 
 import { AuthConfig } from "../../auth.config";
 import { IAuthToken } from "@smartsoft001/auth-domain";
@@ -19,6 +19,14 @@ export class AuthService {
     if (!str) return null;
 
     return JSON.parse(str);
+  }
+
+  get username(): string {
+    if (!this.token) return null;
+
+    const tokenPayload = decode(this.token.access_token);
+
+    return tokenPayload.sub;
   }
 
   constructor(private config: AuthConfig, private http: HttpClient) {}
@@ -48,19 +56,16 @@ export class AuthService {
       );
   }
 
-  removeToken(): Observable<void> {
+  removeToken(): void {
     sessionStorage.removeItem(AUTH_TOKEN);
-    return of();
   }
 
   refreshToken(): Observable<IAuthToken> {
-    const data = `grant_type=refresh_token&refresh_token=${this.token.refresh_token}`;
-    const headers = new HttpHeaders({
-      "Content-Type": "application/x-www-form-urlencoded"
-    });
-
     return this.http
-      .post<IAuthToken>(this.config.apiUrl + "/token", data, { headers })
+      .post<IAuthToken>(this.config.apiUrl + "/token", {
+        grant_type: 'refresh_token',
+        refresh_token: this.token.refresh_token
+      })
       .pipe(
         tap(token => {
           sessionStorage.setItem(AUTH_TOKEN, JSON.stringify(token));

@@ -1,8 +1,22 @@
 import { Component } from "@angular/core";
 import {of} from "rxjs";
-
-import {IAppOptions} from "@smartsoft001/angular";
 import {TranslateService} from "@ngx-translate/core";
+
+import {IAppOptions, IMenuItem} from "@smartsoft001/angular";
+import {AuthFacade} from "@smartsoft001/auth-shell-angular";
+import {map} from "rxjs/operators";
+
+const MENU_ITEMS: Array<IMenuItem> = [
+  {
+    caption: 'Users',
+    icon: 'person',
+    route: '/users'
+  },
+  {
+    caption: 'Shared',
+    route: '/shared'
+  }
+];
 
 @Component({
   selector: "smartsoft-root",
@@ -10,15 +24,18 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  title = "ui-test";
-
   appOptions: IAppOptions = {
     provider: {
-      logged$: of(false)
+      logged$: this.authFacade.token$.pipe(map(token => !!token)),
+      username$: this.authFacade.username$,
+      logout: () => this.authFacade.logout()
+    },
+    menu: {
+      items$: of(MENU_ITEMS)
     }
   };
 
-  constructor(translateService: TranslateService) {
+  constructor(translateService: TranslateService, private authFacade: AuthFacade) {
     //translateService.use('eng');
   }
 }

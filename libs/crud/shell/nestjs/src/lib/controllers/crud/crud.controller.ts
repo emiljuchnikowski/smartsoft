@@ -25,6 +25,10 @@ import { IEntity } from "@smartsoft001/domain-core";
 export class CrudController<T extends IEntity<string>> {
   constructor(private readonly service: CrudService<T>) {}
 
+  static getLink(req: Request): string {
+    return req.protocol + "://" + req.headers.host + req.url;
+  }
+
   @UseGuards(AuthGuard("jwt"))
   @Post()
   async create(
@@ -33,7 +37,7 @@ export class CrudController<T extends IEntity<string>> {
     @Res() res: Response
   ): Promise<Response> {
     const id = await this.service.create(data, user);
-    res.set("Location", this.getLink(res.req) + id);
+    res.set("Location", CrudController.getLink(res.req) + id);
     return res.send();
   }
 
@@ -44,6 +48,8 @@ export class CrudController<T extends IEntity<string>> {
     @User() user: IUser
   ): Promise<T> {
     const result = await this.service.readById(params.id, user);
+
+    console.log(params);
 
     if (!result) {
       throw new NotFoundException("Invalid id");
@@ -72,7 +78,7 @@ export class CrudController<T extends IEntity<string>> {
     return {
       data,
       totalCount,
-      links: object.links(this.getLink(req).split('?')[0], totalCount)
+      links: object.links(CrudController.getLink(req).split('?')[0], totalCount)
     };
   }
 
@@ -103,9 +109,5 @@ export class CrudController<T extends IEntity<string>> {
     @User() user: IUser
   ): Promise<void> {
     await this.service.delete(params.id, user);
-  }
-
-  private getLink(req: Request): string {
-    return req.protocol + "://" + req.headers.host + req.url;
   }
 }
