@@ -1,1 +1,1 @@
-export * from "./lib/crud-shell-angular";
+export * from "./lib/crud.module";
