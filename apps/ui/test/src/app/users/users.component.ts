@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable, of} from "rxjs";
 
 import {IListOptions} from "@smartsoft001/angular";
 import {User} from "./user.dto";
+import {CrudFacade} from "@smartsoft001/crud-shell-angular";
 
 @Component({
   selector: 'smartsoft-users',
@@ -12,17 +12,20 @@ import {User} from "./user.dto";
 export class UsersComponent implements OnInit {
   listOptions: IListOptions<User> = {
     provider: {
-      getData(): Observable<{ data: User[]; totalCount: number; links: any }> {
-        return of(null);
-      }
+      getData(): void {
+        this.facade.read();
+      },
+      list$: this.facade.list$
     },
-    type: User
+    type: User,
+    details: true
   }
 
 
-  constructor() { }
+  constructor(private facade: CrudFacade<User>) { }
 
   ngOnInit() {
+    this.facade.read();
   }
 
 }

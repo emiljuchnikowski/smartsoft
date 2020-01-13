@@ -4,13 +4,22 @@ import { HttpClient } from "@angular/common/http";
 
 import { IEntity } from "@smartsoft001/domain-core";
 import { CrudConfig } from "../../crud.config";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
   constructor(private config: CrudConfig, private http: HttpClient) {}
 
-  create(item: T): Observable<void> {
-    return this.http.post<void>(this.config.apiUrl, item);
+  // TODO : Location is null
+  create(item: T): Observable<string> {
+    return this.http.post<void>(this.config.apiUrl, item, { observe: 'response' }).pipe(
+        map(response => {
+          const location = response.headers['Location'];
+          if (!location) return null;
+          const array = location.split('/');
+          return array[array.length - 1];
+        })
+    );
   }
 
   getById(id: string): Observable<T> {

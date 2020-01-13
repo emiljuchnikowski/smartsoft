@@ -1,4 +1,3 @@
-import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
 import { RouterModule } from "@angular/router";
@@ -14,11 +13,12 @@ import { AppComponent } from "./app.component";
 import { environment } from "../environments/environment";
 import { NgrxSharedModule, SharedModule } from "@smartsoft001/angular";
 import { AuthModule, PermissionsGuard } from "@smartsoft001/auth-shell-angular";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+      BrowserAnimationsModule,
     RouterModule.forRoot(
       [
         {

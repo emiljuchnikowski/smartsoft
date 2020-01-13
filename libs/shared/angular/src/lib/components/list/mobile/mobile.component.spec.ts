@@ -1,16 +1,19 @@
 import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {IonicModule} from "@ionic/angular";
+import {TranslateModule} from "@ngx-translate/core";
 
 import { ListMobileComponent } from './mobile.component';
 
 describe('MobileComponent', () => {
-  let component: ListMobileComponent;
-  let fixture: ComponentFixture<ListMobileComponent>;
+  let component: ListMobileComponent<any>;
+  let fixture: ComponentFixture<ListMobileComponent<any>>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListMobileComponent ]
+      declarations: [ ListMobileComponent ],
+      imports: [ IonicModule.forRoot(), TranslateModule.forRoot() ]
     })
     .compileComponents();
   }));

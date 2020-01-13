@@ -9,7 +9,11 @@ async function bootstrap() {
     app.setGlobalPrefix(process.env.URL_PREFIX)
   }
 
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: [ 'Location', 'authorization', 'content-type' ]
+  });
 
   const port = process.env.port || 3334;
   await app.listen(port, () => {

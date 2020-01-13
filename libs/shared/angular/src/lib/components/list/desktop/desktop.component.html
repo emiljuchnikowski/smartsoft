@@ -1,1 +1,24 @@
-<p>desktop works!</p>
+<table mat-table [dataSource]="list$ | async" style="width: 100%">
+  <ng-container
+    *ngFor="let key of desktopKeys"
+    matColumnDef="{{ key }}"
+  >
+    <ng-container *ngIf="key !== 'detailsAction'; else detailsTpl">
+      <th mat-header-cell *matHeaderCellDef>{{ "MODEL." + key | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{ element[key] }}</td>
+    </ng-container>
+
+    <ng-template #detailsTpl>
+      <th mat-header-cell class="cell-details" *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <smart-button [smartDetails]="{ component: detailsComponent, props: element, mode: 'bottom' }">
+          {{ 'APP.details' | translate }}
+        </smart-button>
+      </td>
+    </ng-template>
+
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="desktopKeys; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: desktopKeys"></tr>
+</table>

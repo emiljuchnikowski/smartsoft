@@ -1,1 +1,10 @@
-<p>mobile works!</p>
+<ion-list>
+    <ion-item *ngFor="let item of list$ | async"
+              [smartDetails]="{ component: detailsComponent, props: item, mode: 'bottom' }"
+    >
+        <ion-text *ngFor="let key of keys">
+            <ion-label color="primary" position="stacked">{{ 'MODEL.' + key | translate }}</ion-label>
+            <p >{{ item[key] }}</p>
+        </ion-text>
+    </ion-item>
+</ion-list>

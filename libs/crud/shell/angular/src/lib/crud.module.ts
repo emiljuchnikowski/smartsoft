@@ -6,6 +6,7 @@ import {SERVICES} from "./services";
 import {CrudEffects} from "./+state/crud.effects";
 import {getReducer} from "./+state/crud.reducer";
 import {AuthSharedModule} from "@smartsoft001/auth-shell-angular";
+import {CrudFacade} from "./+state/crud.facade";
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ export class CrudModule {
             providers: [
                 { provide: CrudConfig, useValue: config },
                 ...SERVICES,
-                CrudEffects
+                CrudEffects,
+                CrudFacade
             ]
         }
     }

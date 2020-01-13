@@ -1,37 +1,45 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {DeviceDetectorService} from "ngx-device-detector";
+import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import * as _ from 'lodash';
 
-import {IListOptions} from "../../models";
 import {getModelFieldsWithOptions, IFieldOptions} from "@smartsoft001/models";
+import {IListOptions} from "../../models";
+import {HardwareService} from "../../services";
 
 @Component({
   selector: 'smart-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  styleUrls: ['./list.component.scss', "../../styles/global.scss"],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent<T> implements OnInit {
-  private _options: IListOptions<T>;
+  private _options: IListInternalOptions<T>;
 
   mobile: boolean;
-  fields: Array<{ key: string, options: IFieldOptions }>;
 
   @Input() set options(val: IListOptions<T>) {
     this._options = val;
     this.initFields();
   }
 
-  constructor(private deviceDetector: DeviceDetectorService) { }
+  get internalOptions(): IListInternalOptions<T> {
+    return this._options;
+  }
+
+  constructor(private hardwareService: HardwareService) { }
 
   ngOnInit() {
-    this.mobile = this.deviceDetector.isMobile();
+    this.mobile = this.hardwareService.isMobile;
   }
 
   private initFields(): void {
-    this.fields = getModelFieldsWithOptions(new this._options.type())
-        .filter(item => item.options.list)
-        ;
-    console.log(this.fields);
+    this._options.fields = _.sortBy(
+        getModelFieldsWithOptions(new this._options.type()).filter(item => item.options.list),
+        item => item.options.list.order
+    );
   }
+}
+
+export interface IListInternalOptions<T> extends IListOptions<T> {
+  fields?: Array<{ key: string, options: IFieldOptions }>;
 }

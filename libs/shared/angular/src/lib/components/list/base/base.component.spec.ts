@@ -9,8 +9,9 @@ describe('BaseComponent', () => {
   @Component({
     template: ''
   })
-  class TestComponent extends ListBaseComponent {
-
+  class TestComponent extends ListBaseComponent<any> {
+    afterSetProvider(): void {
+    }
   }
 
   let component: TestComponent;

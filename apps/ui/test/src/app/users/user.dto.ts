@@ -1,4 +1,5 @@
 import {Field, FieldType, IFieldModifyMetadata, Model} from "@smartsoft001/models";
+import {IEntity} from "@smartsoft001/domain-core";
 
 const modifyMetdata : IFieldModifyMetadata = {
     required: true
@@ -9,7 +10,9 @@ export enum UserPermission {
 }
 
 @Model({})
-export class User {
+export class User implements IEntity<string> {
+    id: string;
+
     @Field({
         create: modifyMetdata,
         update: modifyMetdata,

@@ -45,7 +45,9 @@ describe('shared-angular: AppBaseComponent', () => {
         it('should true when logged and block for anonymous', done => {
             component.options = {
                 provider: {
-                    logged$: of(true)
+                    logged$: of(true),
+                    username$: of('test'),
+                    logout: () => {}
                 },
                 menu: {
                     showForAnonymous: false
@@ -63,7 +65,9 @@ describe('shared-angular: AppBaseComponent', () => {
         it('should true when not logged and allow for anonymous', done => {
             component.options = {
                 provider: {
-                    logged$: of(false)
+                    logged$: of(false),
+                    username$: of('test'),
+                    logout: () => {}
                 },
                 menu: {
                     showForAnonymous: true
@@ -81,7 +85,9 @@ describe('shared-angular: AppBaseComponent', () => {
         it('should false when not logged and block for anonymous', done => {
             component.options = {
                 provider: {
-                    logged$: of(false)
+                    logged$: of(false),
+                    username$: of('test'),
+                    logout: () => {}
                 },
                 menu: {
                     showForAnonymous: false
@@ -102,7 +108,9 @@ describe('shared-angular: AppBaseComponent', () => {
             const menuItems$ = of([]);
             component.options = {
                 provider: {
-                    logged$: of(false)
+                    logged$: of(false),
+                    username$: of('test'),
+                    logout: () => {}
                 },
                 menu: {
                     showForAnonymous: true,

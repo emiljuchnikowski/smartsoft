@@ -19,7 +19,8 @@ export function setDefaultTranslationsAndLang(service: TranslateService) {
 export interface ITranslateData {
     APP: {
         logout: string,
-        logged: string
+        logged: string,
+        details: string
     };
     MODEL: {
         firstName: string,
@@ -41,7 +42,8 @@ export interface ITranslateData {
 export const TRANSLATE_DATA_ENG: ITranslateData = {
     APP: {
         logout: 'log out',
-        logged: 'logged'
+        logged: 'logged',
+        details: 'details'
     },
     MODEL: {
         firstName: 'first name',
@@ -63,7 +65,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
 export const TRANSLATE_DATA_PL: ITranslateData = {
     APP: {
         logout: 'wyloguj się',
-        logged: 'zalogowany'
+        logged: 'zalogowany',
+        details: 'szczegóły'
     },
     MODEL: {
         firstName: 'imię',

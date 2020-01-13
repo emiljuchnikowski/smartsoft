@@ -7,8 +7,8 @@ import {DeviceDetectorModule} from "ngx-device-detector";
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {
-  let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
+  let component: ListComponent<any>;
+  let fixture: ComponentFixture<ListComponent<any>>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

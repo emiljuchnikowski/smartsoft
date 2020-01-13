@@ -28,10 +28,14 @@ export interface IFormOptions<T> {
 }
 
 export interface IListOptions<T> {
-    provider: {
-        getData(): Observable<{ data: T[], totalCount: number, links: any }>
-    };
+    provider: IListProvider<T>;
     type: any;
+    details?: boolean;
+}
+
+export interface IListProvider<T> {
+    getData: (filter) => void;
+    list$: Observable<T[]>;
 }
 
 export type InputOptions<T> = IInputOptions & IInputFromFieldOptions<T>;
