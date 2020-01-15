@@ -3,6 +3,7 @@ import 'jest-preset-angular';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {IonicModule} from "@ionic/angular";
 import {Renderer2, Type} from "@angular/core";
+import {TranslateModule} from "@ngx-translate/core";
 
 import {PageComponent} from "./page.component";
 import {PageStandardComponent} from "./standard/standard.component";
@@ -16,7 +17,7 @@ describe('shared-angular: PageComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ PageComponent, PageStandardComponent ],
-            imports: [ IonicModule.forRoot() ]
+            imports: [ IonicModule.forRoot(), TranslateModule.forRoot() ]
         })
             .compileComponents();
     }));

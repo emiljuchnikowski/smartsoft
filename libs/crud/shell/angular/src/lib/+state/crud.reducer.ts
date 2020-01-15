@@ -42,7 +42,10 @@ const crudReducer = (state = initialState, action, entity) => {
                 ...state,
                 loaded: false,
                 filter: action.filter,
-                error: null
+                error: null,
+                list: null,
+                totalCount: null,
+                links: null,
             };
 
         case `[${entity}] Read Success`:
@@ -66,6 +69,7 @@ const crudReducer = (state = initialState, action, entity) => {
             return {
                 ...state,
                 loaded: false,
+                selected: null,
                 error: null
             };
 
@@ -82,6 +86,14 @@ const crudReducer = (state = initialState, action, entity) => {
                 ...state,
                 loaded: true,
                 error: action.error
+            };
+
+        case `[${entity}] Unselect`:
+            return {
+                ...state,
+                loaded: true,
+                selected: null,
+                error: null
             };
 
         case `[${entity}] Update`:

@@ -39,6 +39,10 @@ export class CrudFacade<T extends IEntity<string>> {
     this.store.dispatch(CrudActions.select(this.config.entity, id));
   }
 
+  unselect(): void {
+    this.store.dispatch(CrudActions.unselect(this.config.entity));
+  }
+
   update(item: T): void {
     this.store.dispatch(CrudActions.update(this.config.entity, item));
   }

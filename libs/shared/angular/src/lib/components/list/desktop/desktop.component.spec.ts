@@ -1,10 +1,13 @@
 import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {CdkTableModule} from "@angular/cdk/table";
+import {MatTableModule} from "@angular/material";
 import {TranslateModule} from "@ngx-translate/core";
+import {IonicModule} from "@ionic/angular";
 
 import { ListDesktopComponent } from './desktop.component';
+import {ButtonComponent} from "../../button";
+import {DetailsDirective} from "../../../directives/details/details.directive";
 
 describe('DesktopComponent', () => {
   let component: ListDesktopComponent<any>;
@@ -12,8 +15,8 @@ describe('DesktopComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListDesktopComponent ],
-      imports: [ CdkTableModule, TranslateModule.forRoot() ]
+      declarations: [ ListDesktopComponent, ButtonComponent, DetailsDirective ],
+      imports: [ MatTableModule, TranslateModule.forRoot(), IonicModule.forRoot() ]
     })
     .compileComponents();
   }));

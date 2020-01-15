@@ -39,8 +39,7 @@ export class User implements IEntity<string> {
 
     @Field({
         create: modifyMetdata,
-        update: modifyMetdata,
-        details: true
+        update: modifyMetdata
     })
     password: string;
 
@@ -64,7 +63,8 @@ export class User implements IEntity<string> {
     @Field({
         create: modifyMetdata,
         update: modifyMetdata,
-        details: true
+        details: true,
+        type: FieldType.email
     })
     email: string;
 }

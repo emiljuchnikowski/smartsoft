@@ -5,6 +5,7 @@ import {IonicModule} from "@ionic/angular";
 import {TranslateModule} from "@ngx-translate/core";
 
 import { ListMobileComponent } from './mobile.component';
+import {DetailsDirective} from "../../../directives/details/details.directive";
 
 describe('MobileComponent', () => {
   let component: ListMobileComponent<any>;
@@ -12,7 +13,7 @@ describe('MobileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListMobileComponent ],
+      declarations: [ ListMobileComponent, DetailsDirective ],
       imports: [ IonicModule.forRoot(), TranslateModule.forRoot() ]
     })
     .compileComponents();

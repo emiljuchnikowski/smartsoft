@@ -2,6 +2,7 @@ import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {Component, ElementRef, Renderer2, Type} from "@angular/core";
+import {TranslateModule} from "@ngx-translate/core";
 
 import {PageBaseComponent} from "./base.component";
 
@@ -24,7 +25,8 @@ describe('shared-angular: PageBaseComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ TestFormBaseComponent ]
+            declarations: [ TestFormBaseComponent ],
+            imports: [ TranslateModule.forRoot() ]
         })
             .compileComponents();
     }));

@@ -1,8 +1,9 @@
 export enum FieldType {
     text = "text",
     password = "password",
+    email = "email",
     flag = "flag",
-    enum = "check"
+    enum = "enum"
 }
 
 export interface IModelMetadata {

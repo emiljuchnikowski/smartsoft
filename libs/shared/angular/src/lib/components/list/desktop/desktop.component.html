@@ -11,8 +11,12 @@
     <ng-template #detailsTpl>
       <th mat-header-cell class="cell-details" *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <smart-button [smartDetails]="{ component: detailsComponent, props: element, mode: 'bottom' }">
-          {{ 'APP.details' | translate }}
+        <smart-button [options]='{ loading$: loading$ }'
+                      [smartDetails]="{ component: detailsComponent, params: detailsComponentProps, mode: 'bottom' }" 
+                      (smartDetailsShowed)='select && select(element.id)'
+                      (smartDetailsDismissed)='unselect() && unselect()'
+        >
+          {{ 'details' | translate }}
         </smart-button>
       </td>
     </ng-template>

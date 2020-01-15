@@ -82,6 +82,12 @@ export const selectFailure = function <F>(entity: string, id: string, error): Ac
     };
 };
 
+export const unselect = function (entity: string): Action {
+    return {
+        type: `[${entity}] Unselect`
+    };
+};
+
 /*
  * Update
  */

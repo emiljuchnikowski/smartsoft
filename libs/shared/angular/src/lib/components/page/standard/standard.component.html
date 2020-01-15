@@ -1,9 +1,9 @@
 <ion-header [hidden]="!options || options.hideHeader">
     <ion-toolbar>
-        <ion-buttons slot="start">
+        <ion-buttons slot="start" [hidden]="!options || options.hideMenuButton">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>{{ options?.title }}</ion-title>
+        <ion-title>{{ options?.title | translate }}</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content>

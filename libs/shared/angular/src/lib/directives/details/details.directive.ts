@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input } from "@angular/core";
+import { Directive, HostListener, Input, Output, EventEmitter } from "@angular/core";
 
 import { HardwareService, ModalService } from "../../services";
 
@@ -7,7 +7,10 @@ import { HardwareService, ModalService } from "../../services";
 })
 export class DetailsDirective {
   @Input("smartDetails")
-  options: { component: any; params: any };
+  options: { component: any; params: any, mode?: 'bottom' | 'default' };
+
+  @Output("smartDetailsShowed") smartDetailsShowed = new EventEmitter();
+  @Output("smartDetailsDismissed") smartDetailsDismissed = new EventEmitter();
 
   constructor(
     private modalService: ModalService,
@@ -20,9 +23,12 @@ export class DetailsDirective {
 
     let modal = await this.modalService.show({
       component: this.options.component,
-      props: this.options.params,
-      mode: "bottom"
+      props: {
+        value: this.options.params
+      },
+      mode: this.options.mode ? this.options.mode: "bottom"
     });
+    this.smartDetailsShowed.emit();
 
     const handler = this.hardwareService.onBackButtonClick(async () => {
       if (modal) {
@@ -35,5 +41,7 @@ export class DetailsDirective {
     handler.remove();
 
     modal = null;
+
+    this.smartDetailsDismissed.emit();
   }
 }

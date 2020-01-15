@@ -5,6 +5,9 @@ import {INPUT_COMPONENTS} from "./input";
 import {BUTTON_COMPONENTS} from "./button";
 import {CARD_COMPONENTS} from "./card";
 import {LIST_COMPONENTS} from "./list";
+import { DETAILS_COMPONENTS } from './details';
+import { LOADER_COMPONENTS } from './loader';
+import {DETAIL_COMPONENTS} from "./detail";
 
 export * from './form';
 export * from './app';
@@ -13,6 +16,8 @@ export * from './input';
 export * from './button';
 export * from './card';
 export * from './list';
+export * from './loader';
+export * from './detail';
 
 export const COMPONENTS = [
     ...FORM_COMPONENTS,
@@ -21,5 +26,8 @@ export const COMPONENTS = [
     ...INPUT_COMPONENTS,
     ...BUTTON_COMPONENTS,
     ...CARD_COMPONENTS,
-    ...LIST_COMPONENTS
+    ...LIST_COMPONENTS,
+    ...DETAILS_COMPONENTS,
+    ...LOADER_COMPONENTS,
+    ...DETAIL_COMPONENTS
 ];

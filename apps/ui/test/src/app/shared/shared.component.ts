@@ -9,7 +9,6 @@ import {IFormOptions} from "@smartsoft001/angular";
   styleUrls: ['./shared.component.css']
 })
 export class SharedComponent implements OnInit {
-
   formOptions: IFormOptions<Test> = {
     model: new Test()
   };

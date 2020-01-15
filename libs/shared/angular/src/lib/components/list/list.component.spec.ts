@@ -2,9 +2,9 @@ import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
-import {DeviceDetectorModule} from "ngx-device-detector";
 
 import { ListComponent } from './list.component';
+import {HardwareService} from "@smartsoft001/angular";
 
 describe('ListComponent', () => {
   let component: ListComponent<any>;
@@ -14,8 +14,11 @@ describe('ListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ListComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-      imports:[
-          DeviceDetectorModule.forRoot()
+      providers:[
+        {
+          provide: HardwareService,
+          useValue: {}
+        }
       ]
     })
     .compileComponents();
