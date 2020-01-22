@@ -18,7 +18,9 @@ export function setDefaultTranslationsAndLang(service: TranslateService) {
 
 export interface ITranslateData {
     details: string,
-    admin: string
+    admin: string,
+    add: string,
+    change: string,
 
     APP: {
         logout: string,
@@ -28,14 +30,18 @@ export interface ITranslateData {
         firstName: string,
         lastName: string,
         password: string,
+        passwordConfirm: string,
         username: string,
         disabled: string,
         permissions: string,
-        email: string
+        email: string,
+        price: string,
+        date: string,
     };
     INPUT: {
         ERRORS: {
-            required: string
+            required: string,
+            confirm: string
         }
     };
     ERRORS: {
@@ -47,6 +53,8 @@ export interface ITranslateData {
 export const TRANSLATE_DATA_ENG: ITranslateData = {
     details: 'details',
     admin: 'admin',
+    add: 'add',
+    change: 'change',
     
     APP: {
         logout: 'log out',
@@ -56,14 +64,18 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
         firstName: 'first name',
         lastName: 'last name',
         password: 'password',
+        passwordConfirm: 'confirm password',
         username: 'user name',
         disabled: 'disabled',
         permissions: 'permissions',
-        email: 'email'
+        email: 'email',
+        price: 'price',
+        date: 'date',
     },
     INPUT: {
         ERRORS: {
-            required: 'field is required'
+            required: 'field is required',
+            confirm: 'bad confirmed'
         }
     },
     ERRORS: {
@@ -75,6 +87,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
 export const TRANSLATE_DATA_PL: ITranslateData = {
     details: 'szczegóły',
     admin: 'administrator',
+    add: 'dodaj',
+    change: 'zmień',
 
     APP: {
         logout: 'wyloguj się',
@@ -84,14 +98,18 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
         firstName: 'imię',
         lastName: 'nazwisko',
         password: 'hasło',
+        passwordConfirm: 'powtórz hasło',
         username: 'nazwa użytkownika',
         disabled: 'nieaktywny',
         permissions: 'uprawnienia',
-        email: 'email'
+        email: 'email',
+        price: 'cena',
+        date: 'data',
     },
     INPUT: {
         ERRORS: {
-            required: 'to pole jest wymagane'
+            required: 'to pole jest wymagane',
+            confirm: 'źle powtórzone'
         }
     },
     ERRORS: {

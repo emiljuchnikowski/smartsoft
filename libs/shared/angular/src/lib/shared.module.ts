@@ -13,11 +13,12 @@ import { FACTORIES } from "./factories";
 import { setDefaultTranslationsAndLang } from "./translations-default";
 import { SERVICES } from "./services";
 import { DIRECTIVES } from "./directives";
-import {PAGES} from "./pages";
+import { PAGES } from "./pages";
+import { PIPES } from "./pipes";
 
 @NgModule({
   providers: [...FACTORIES, ...SERVICES],
-  declarations: [...COMPONENTS, ...DIRECTIVES, ...PAGES],
+  declarations: [...COMPONENTS, ...DIRECTIVES, ...PAGES, ...PIPES],
   entryComponents: [...COMPONENTS, ...PAGES],
   imports: [
     RouterModule,
@@ -35,6 +36,7 @@ import {PAGES} from "./pages";
     CommonModule,
     ...COMPONENTS,
     ...DIRECTIVES,
+    ...PIPES,
     ...PAGES,
     TranslateModule,
     HttpClientModule

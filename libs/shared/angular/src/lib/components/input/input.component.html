@@ -9,6 +9,31 @@
                           [options]="options"
                           [fieldOptions]="fieldOptions"
         ></smart-input-password>
+
+        <smart-input-flag class="input-type" *ngSwitchCase="FieldType.flag"
+                              [options]="options"
+                              [fieldOptions]="fieldOptions"
+        ></smart-input-flag>
+
+        <smart-input-enum class="input-type" *ngSwitchCase="FieldType.enum"
+                          [options]="options"
+                          [fieldOptions]="fieldOptions"
+        ></smart-input-enum>
+
+        <smart-input-email class="input-type" *ngSwitchCase="FieldType.email"
+                          [options]="options"
+                          [fieldOptions]="fieldOptions"
+        ></smart-input-email>
+
+        <smart-input-currency class="input-type" *ngSwitchCase="FieldType.currency"
+                           [options]="options"
+                           [fieldOptions]="fieldOptions"
+        ></smart-input-currency>
+
+        <smart-input-date class="input-type" *ngSwitchCase="FieldType.date"
+                              [options]="options"
+                              [fieldOptions]="fieldOptions"
+        ></smart-input-date>
     </ng-container>
 </ion-item>
 

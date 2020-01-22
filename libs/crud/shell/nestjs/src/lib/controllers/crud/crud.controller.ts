@@ -37,7 +37,7 @@ export class CrudController<T extends IEntity<string>> {
     @Res() res: Response
   ): Promise<Response> {
     const id = await this.service.create(data, user);
-    res.set("Location", CrudController.getLink(res.req) + id);
+    res.set("Location", CrudController.getLink(res.req) + '/' + id);
     return res.send();
   }
 

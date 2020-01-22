@@ -18,10 +18,16 @@ export abstract class InputBaseComponent<T> {
     this.control = this._options.control;
     this.setTranslateKey();
 
+    this.afterSetOptionsHandler();
+
     this.cd.detectChanges();
   }
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(protected cd: ChangeDetectorRef) { }
+
+  protected afterSetOptionsHandler(): void {
+
+  }
 
   private setTranslateKey(): void {
     this.translateKey = "MODEL." + this._options.fieldKey;

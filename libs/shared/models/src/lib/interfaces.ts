@@ -3,23 +3,24 @@ export enum FieldType {
     password = "password",
     email = "email",
     flag = "flag",
-    enum = "enum"
+    enum = "enum",
+    currency = "currency",
+    date = "date"
 }
 
 export interface IModelMetadata {
     permissions: Array<string>;
 }
 
-export interface IFieldMetadata {
-    required?: boolean;
-    focused?: boolean;
+export interface IFieldMetadata extends IFieldModifyMetadata {
     type?: FieldType;
-    options?: any;
+    possibilities?: Array<any> | any;
 }
 
 export interface IFieldModifyMetadata {
     required?: boolean;
     focused?: boolean;
+    confirm?: boolean;
 }
 
 export interface IFieldListMetadata {

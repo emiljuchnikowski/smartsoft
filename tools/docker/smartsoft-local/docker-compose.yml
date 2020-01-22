@@ -53,5 +53,23 @@ services:
       DB_COLLECTION: "users"
       URL_PREFIX:  "users"
 
+  todos:
+    image: "smartsoft001/crud_api:latest"
+    restart: always
+    depends_on:
+      - mongo
+    environment:
+      TOKEN_CONFIG_SECRET_OR_PRIVATE_KEY: "test"
+      TOKEN_CONFIG_EXPIRED_IN_SECONDS: 6000
+      PERMISSION_CREATE: "admin"
+      PERMISSION_READ: "admin"
+      PERMISSION_UPDATE: "admin"
+      PERMISSION_DELETE: "admin"
+      DB_SERVER: "mongo"
+      DB_PORT: 27017
+      DB_NAME: "smartsoft"
+      DB_COLLECTION: "todos"
+      URL_PREFIX:  "todos"
+
 volumes:
   smartsoft_db:

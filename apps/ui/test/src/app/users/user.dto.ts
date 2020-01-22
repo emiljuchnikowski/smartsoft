@@ -6,7 +6,10 @@ const modifyMetdata : IFieldModifyMetadata = {
 };
 
 export enum UserPermission {
-    admin = "admin"
+    admin = "admin",
+    test = "test",
+    test2 = "test2",
+    test3 = "test3"
 }
 
 @Model({})
@@ -31,32 +34,38 @@ export class User implements IEntity<string> {
 
     @Field({
         create: modifyMetdata,
-        update: modifyMetdata,
         details: true,
         list: { order: 1 }
     })
     username: string;
 
     @Field({
-        create: modifyMetdata,
-        update: modifyMetdata
+        create: {
+            ...modifyMetdata,
+            confirm: true
+        }
     })
     password: string;
 
     @Field({
-        create: modifyMetdata,
-        update: modifyMetdata,
+        update: true,
         details: true,
         type: FieldType.flag
     })
     disabled: boolean;
 
     @Field({
-        create: modifyMetdata,
-        update: modifyMetdata,
+        create: {
+            ...modifyMetdata,
+            required: false
+        },
+        update: {
+            ...modifyMetdata,
+            required: false
+        },
         details: true,
         type: FieldType.enum,
-        options: UserPermission
+        possibilities: UserPermission
     })
     permissions: Array<UserPermission>;
 
@@ -67,4 +76,20 @@ export class User implements IEntity<string> {
         type: FieldType.email
     })
     email: string;
+
+    @Field({
+        create: modifyMetdata,
+        update: modifyMetdata,
+        details: true,
+        type: FieldType.date
+    })
+    date: string;
+
+    @Field({
+        create: modifyMetdata,
+        update: modifyMetdata,
+        details: true,
+        type: FieldType.currency
+    })
+    price: string;
 }

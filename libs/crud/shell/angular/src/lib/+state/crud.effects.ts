@@ -13,7 +13,7 @@ export class CrudEffects<T extends IEntity<string>> {
     constructor(
         private actions$: ActionsSubject,
         private service: CrudService<T>,
-        private config: CrudConfig,
+        private config: CrudConfig<T>,
         private store: Store<any>
     ) { }
 
@@ -30,6 +30,10 @@ export class CrudEffects<T extends IEntity<string>> {
                             return of();
                         })
                     ).subscribe();
+                    break;
+
+                case `[${this.config.entity}] Create Success`:
+                    this.store.dispatch(CrudActions.read(this.config.entity));
                     break;
 
                 case `[${this.config.entity}] Read`:
@@ -57,15 +61,20 @@ export class CrudEffects<T extends IEntity<string>> {
                     break;
 
                 case `[${this.config.entity}] Update`:
-                    this.service.update(action.item).pipe(
+                    this.service.updatePartial(action.item).pipe(
                         tap(() =>
                             this.store.dispatch(CrudActions.updateSuccess(this.config.entity, action.item))
                         ),
                         catchError(error => {
                             this.store.dispatch(CrudActions.updateFailure(this.config.entity, action.item, error));
+                            this.store.dispatch(CrudActions.read(this.config.entity));
                             return of();
                         })
                     ).subscribe();
+                    break;
+
+                case `[${this.config.entity}] Update Success`:
+                    this.store.dispatch(CrudActions.read(this.config.entity));
                     break;
 
                 case `[${this.config.entity}] Update partial`:
@@ -75,9 +84,14 @@ export class CrudEffects<T extends IEntity<string>> {
                         ),
                         catchError(error => {
                             this.store.dispatch(CrudActions.updatePartialFailure(this.config.entity, action.item, error));
+                            this.store.dispatch(CrudActions.read(this.config.entity));
                             return of();
                         })
                     ).subscribe();
+                    break;
+
+                case `[${this.config.entity}] Update partial Success`:
+                    this.store.dispatch(CrudActions.read(this.config.entity));
                     break;
 
                 case `[${this.config.entity}] Delete`:
@@ -90,6 +104,10 @@ export class CrudEffects<T extends IEntity<string>> {
                             return of();
                         })
                     ).subscribe();
+                    break;
+
+                case `[${this.config.entity}] Delete Success`:
+                    this.store.dispatch(CrudActions.read(this.config.entity));
                     break;
 
                 default:

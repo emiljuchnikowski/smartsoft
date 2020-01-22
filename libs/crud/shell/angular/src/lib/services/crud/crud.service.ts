@@ -8,7 +8,7 @@ import {map} from "rxjs/operators";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
-  constructor(private config: CrudConfig, private http: HttpClient) {}
+  constructor(private config: CrudConfig<T>, private http: HttpClient) {}
 
   // TODO : Location is null
   create(item: T): Observable<string> {

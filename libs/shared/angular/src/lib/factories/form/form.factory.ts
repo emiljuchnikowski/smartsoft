@@ -2,8 +2,14 @@ import 'reflect-metadata';
 
 import {Injectable} from "@angular/core";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import * as _ from 'lodash';
 
-import {getModelFieldKeys, IFieldOptions, SYMBOL_FIELD, SYMBOL_MODEL} from "@smartsoft001/models";
+import {
+    getModelFieldsWithOptions, IFieldModifyMetadata,
+    IFieldOptions,
+    SYMBOL_FIELD,
+    SYMBOL_MODEL
+} from "@smartsoft001/models";
 
 @Injectable()
 export class FormFactory {
@@ -32,19 +38,67 @@ export class FormFactory {
         return Reflect.getMetadata(SYMBOL_FIELD, obj, key);
     }
 
-    async create<T>(obj: T): Promise<FormGroup> {
+    static getOptionsFromMode(options: IFieldOptions, mode?: 'create' | 'update' | string): IFieldOptions {
+        let result = options;
+
+        if (!mode) return result;
+
+        if (mode === 'create' && _.isObject(options.create)) {
+            result = {
+                ...options,
+                ...(options.create as IFieldModifyMetadata)
+            };
+        } else if (mode === 'update' && _.isObject(options.update)) {
+            result = {
+                ...options,
+                ...(options.update as IFieldModifyMetadata)
+            };
+        }
+
+        return result;
+    }
+
+    async create<T>(obj: T, ops: { mode?: 'create' | 'update' | string } = {}): Promise<FormGroup> {
         FormFactory.checkModelMeta(obj);
 
         const result = this.fb.group({});
 
-        getModelFieldKeys(obj.constructor)
-            .forEach(key => {
-                const options: IFieldOptions = FormFactory.getOptions(obj, key);
-                const control = this.fb.control(null);
+        getModelFieldsWithOptions(obj)
+            .filter(field => {
+                return (
+                    !ops.mode
+                    || (ops.mode === 'create' && field.options.create)
+                    || (ops.mode === 'update' && field.options.update)
+                    || (
+                        (ops.mode !== 'create' && ops.mode !== 'update')
+                        && field.options.customs.some(custom => custom.mode === ops.mode)
+                    )
+                );
+            })
+            .forEach(field => {
+                const control = this.fb.control(obj[field.key]);
+                const options = FormFactory.getOptionsFromMode(field.options, ops.mode);
 
                 FormFactory.setValidators(control, options);
 
-                result.addControl(key, control);
+                result.addControl(field.key, control);
+
+                if (options.confirm) {
+                    const confirmControl = this.fb.control(null, [
+                        Validators.required,
+                        (a: AbstractControl) => {
+                            if (a.value !== result.controls[field.key].value) {
+                                return {
+                                    confirm: true
+                                }
+                            }
+
+                            return null;
+                        }
+                    ]);
+
+                    result.addControl(field.key + 'Confirm', confirmControl);
+                }
             });
 
         return result;

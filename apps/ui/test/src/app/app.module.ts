@@ -34,11 +34,20 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
           path: "users",
           canActivate: [PermissionsGuard],
           data: {
-            expectedPermissions: ["admin"]
+              expectedPermissions: ["admin"]
           },
           loadChildren: () =>
-            import("./users/users.module").then(m => m.UsersModule)
-        },
+              import("./users/users.module").then(m => m.UsersModule)
+      },
+          {
+              path: "todos",
+              canActivate: [PermissionsGuard],
+              data: {
+                  expectedPermissions: ["admin"]
+              },
+              loadChildren: () =>
+                  import("./todos/todos.module").then(m => m.TodosModule)
+          },
         {
           path: "login",
           loadChildren: () =>

@@ -3,8 +3,9 @@ import { Observable } from 'rxjs';
 
 import {IDetailsOptions} from "../../../models";
 import {getModelFieldsWithOptions, IFieldOptions} from "@smartsoft001/models";
+import {IEntity} from "@smartsoft001/domain-core";
 
-export abstract class DetailsBaseComponent<T> {
+export abstract class DetailsBaseComponent<T extends IEntity<string>> {
   private _fields: Array<{ key: string, options: IFieldOptions }>;
   private _type: any;
 

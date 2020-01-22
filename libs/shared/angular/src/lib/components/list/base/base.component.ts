@@ -2,11 +2,13 @@ import {Input, OnInit} from '@angular/core';
 import {IFieldOptions} from "@smartsoft001/models";
 import {Observable} from "rxjs";
 
-import {IListInternalOptions, IListProvider} from "@smartsoft001/angular";
+import {IButtonOptions, IListInternalOptions, IListProvider} from "@smartsoft001/angular";
 import {DetailsPage} from "../../../pages/details/details.page";
 import { IDetailsOptions } from '../../../models';
+import {Router} from "@angular/router";
+import {IEntity} from "@smartsoft001/domain-core";
 
-export abstract class ListBaseComponent<T> implements OnInit {
+export abstract class ListBaseComponent<T extends IEntity<string>> implements OnInit {
   private _provider: IListProvider<T>;
   private _fields: Array<{ key: string, options: IFieldOptions }>;
 
@@ -14,6 +16,8 @@ export abstract class ListBaseComponent<T> implements OnInit {
   detailsComponentProps: IDetailsOptions<T>;
   select: (id: string) => void;
   unselect: () => void;
+  editHandler: (id: string) => void;
+  detailsButtonOptions: IButtonOptions;
 
   keys: Array<string>;
   list$: Observable<T[]>;
@@ -26,6 +30,15 @@ export abstract class ListBaseComponent<T> implements OnInit {
     this.initList();
     this.initLoading();
 
+    if (val.edit) {
+      if (!val.editOptions)
+        throw Error('Must set edit options');
+
+      this.editHandler = id => {
+        this.router.navigate([ val.editOptions.routingPrefix, id ]);
+      };
+    }
+
     if (val.details) {
       if (!val.detailsProvider)
         throw Error('Must set details provider');
@@ -34,7 +47,8 @@ export abstract class ListBaseComponent<T> implements OnInit {
       this.detailsComponentProps = {
         item$: val.detailsProvider.item$,
         type: val.type,
-        loading$: val.detailsProvider.loading$
+        loading$: val.detailsProvider.loading$,
+        editHandler: this.editHandler
       };
 
       this.select = val.detailsProvider.getData;
@@ -42,7 +56,14 @@ export abstract class ListBaseComponent<T> implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(private router:Router) {
+    this.detailsButtonOptions = {
+      loading$: this.loading$,
+      click: () =>  {
+        this.unselect();
+      }
+    };
+  }
 
   protected initKeys(): void {
     this.keys = this._fields.map(field => field.key);

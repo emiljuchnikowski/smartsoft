@@ -36,9 +36,10 @@ export class FormComponent<T> implements OnDestroy {
     this._options = val;
 
     this.initLoading();
-    this.formFactory.create(this._options.model)
+    this.formFactory.create(this._options.model, { mode: val.mode })
         .then(res => {
           this.form = res;
+          this.registerChanges();
           this.cd.detectChanges();
         });
   }
@@ -47,6 +48,9 @@ export class FormComponent<T> implements OnDestroy {
   }
 
   @Output() invokeSubmit = new EventEmitter();
+  @Output() valueChange = new EventEmitter<T>();
+  @Output() valuePartialChange = new EventEmitter<Partial<T>>();
+  @Output() validChange = new EventEmitter<boolean>();
 
   constructor(private formFactory: FormFactory, private cd: ChangeDetectorRef) {
   }
@@ -69,5 +73,23 @@ export class FormComponent<T> implements OnDestroy {
             }
           }));
     }
+  }
+
+  private registerChanges(): void {
+    this._subscription.add(this.form.valueChanges.subscribe(() => {
+      this.validChange.emit(this.form.valid);
+      this.valueChange.emit(this.form.value);
+
+      const partialModel = {} as Partial<T>;
+      Object.keys(this.form.controls)
+          .filter(key => !key.endsWith('Confirm') && this.form.controls[key].dirty)
+          .forEach(key => {
+            partialModel[key] = this.form.controls[key].value;
+          });
+
+      this.valuePartialChange.emit(partialModel);
+    }));
+
+    this.form.updateValueAndValidity();
   }
 }

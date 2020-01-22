@@ -26,6 +26,10 @@ export class ModalService {
 
         return modal as any;
     }
+
+    dismiss(): void {
+        this.modalCtrl.dismiss();
+    }
 }
 
 export interface IModal {

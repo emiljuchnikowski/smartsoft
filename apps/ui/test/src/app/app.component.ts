@@ -13,6 +13,10 @@ const MENU_ITEMS: Array<IMenuItem> = [
     route: '/users'
   },
   {
+    caption: 'Zadania',
+    route: '/todos'
+  },
+  {
     caption: 'Shared',
     route: '/shared'
   }
