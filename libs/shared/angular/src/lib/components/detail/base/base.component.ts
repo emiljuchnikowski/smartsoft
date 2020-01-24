@@ -1,6 +1,6 @@
 import {Input} from "@angular/core";
 
-import {IDetailOptions} from "@smartsoft001/angular";
+import { IDetailOptions } from '../../../models';
 
 export abstract class DetailBaseComponent<T> {
     @Input() options: IDetailOptions<T>;

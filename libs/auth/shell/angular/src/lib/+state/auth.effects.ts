@@ -1,17 +1,17 @@
 import { Injectable } from "@angular/core";
-import { createEffect, Actions, ofType } from "@ngrx/effects";
+import { createEffect, Actions } from "@ngrx/effects";
 import { DataPersistence } from "@nrwl/angular";
-import { map, switchMap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
+import {Observable} from "rxjs";
 
 import * as fromAuth from "./auth.reducer";
 import * as AuthActions from "./auth.actions";
 import { AuthService } from "../services";
-import { interval } from "rxjs";
 
 @Injectable()
 export class AuthEffects {
-  initToken$ = createEffect(() =>
+  initToken$: Observable<any> = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.initToken, {
       run: () => {
         return AuthActions.initTokenSuccess({
@@ -27,7 +27,7 @@ export class AuthEffects {
     })
   );
 
-  createToken$ = createEffect(() =>
+  createToken$: Observable<any> = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.createToken, {
       run: (action: ReturnType<typeof AuthActions.createToken>) => {
         return this.service
@@ -37,7 +37,7 @@ export class AuthEffects {
               AuthActions.createTokenSuccess({
                 token,
                 username: action.username
-              })
+              }) as any
             )
           );
       },
@@ -49,7 +49,7 @@ export class AuthEffects {
     })
   );
 
-  createTokenSuccess$ = createEffect(
+  createTokenSuccess$: Observable<any> = createEffect(
     () =>
       this.dataPersistence.fetch(AuthActions.createTokenSuccess, {
         run: () => {
@@ -59,7 +59,7 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-    removeTokenSuccess$ = createEffect(
+    removeTokenSuccess$: Observable<any> = createEffect(
         () =>
             this.dataPersistence.fetch(AuthActions.removeTokenSuccess, {
                 run: () => {
@@ -69,7 +69,7 @@ export class AuthEffects {
         { dispatch: false }
     );
 
-  removeToken$ = createEffect(() =>
+  removeToken$: Observable<any> = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.removeToken, {
       run: () => {
         this.service.removeToken();
@@ -83,7 +83,7 @@ export class AuthEffects {
     })
   );
 
-  refreshToken$ = createEffect(() =>
+  refreshToken$: Observable<any> = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.refreshToken, {
       run: () => {
         return this.service.refreshToken().pipe(
@@ -100,18 +100,18 @@ export class AuthEffects {
     })
   );
 
-  refreshTokenInterval$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.createTokenSuccess),
-      switchMap(action =>
-        interval(((action.token.expired_in * 3) / 4) * 1000).pipe(
-          map(() => {
-            return AuthActions.refreshToken();
-          })
-        )
-      )
-    )
-  );
+  // refreshTokenInterval$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(AuthActions.createTokenSuccess),
+  //     switchMap(action =>
+  //       interval(((action.token.expired_in * 3) / 4) * 1000).pipe(
+  //         map(() => {
+  //           return AuthActions.refreshToken();
+  //         })
+  //       )
+  //     )
+  //   )
+  // );
 
   constructor(
     private actions$: Actions,

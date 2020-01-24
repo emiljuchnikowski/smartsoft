@@ -1,0 +1,26 @@
+{
+  "name": "@smartsoft001/angular",
+  "version": "1.0.5",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    }
+  },
+  "description": "This library was generated with [Nx](https://nx.dev).",
+  "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "author": "Emil Juchnikowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
+  "peerDependencies": {
+    "@angular/cdk": "~8.2.3",
+    "@smartsoft001/domain-core": "^1.0.3",
+    "@smartsoft001/models": "^1.0.3"
+  }
+}

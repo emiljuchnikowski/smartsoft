@@ -6,16 +6,37 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 
 import { AuthConfig } from "./auth.config";
-import { SERVICES } from "./services";
+import {AuthService} from "./services";
 import * as fromAuth from "./+state/auth.reducer";
 import { AuthEffects } from "./+state/auth.effects";
 import { AuthFacade } from "./+state/auth.facade";
 import { SharedModule } from "@smartsoft001/angular";
-import { INTERCEPTORS, AuthInterceptor } from "./interceptors";
-import { COMPONENTS } from "./components";
+import { AuthInterceptor } from "./interceptors";
+// import {LoginComponent} from "./components";
 import { setDefaultTranslationsAndLang } from "./translations-default";
-import { GUARDS } from "./guards";
-import {DIRECTIVES} from "./directives";
+import {AuthGuard, PermissionsGuard} from "./guards";
+import {AuthDirective} from "./directives";
+
+const COMPONENTS = [
+  // LoginComponent
+];
+
+const DIRECTIVES = [
+  AuthDirective
+];
+
+const GUARDS = [
+  AuthGuard,
+  PermissionsGuard
+];
+
+const INTERCEPTORS = [
+  AuthInterceptor
+];
+
+const SERVICES = [
+    AuthService]
+;
 
 const initializer = (
   facade: AuthFacade,
@@ -25,6 +46,7 @@ const initializer = (
   setDefaultTranslationsAndLang(translateService);
 };
 
+// @dynamic
 @NgModule({
   imports: [
     SharedModule,
@@ -33,8 +55,8 @@ const initializer = (
   ],
   providers: [AuthEffects, AuthFacade],
   declarations: [...COMPONENTS, ...DIRECTIVES],
-  entryComponents: [...COMPONENTS],
-  exports: [...COMPONENTS, ...DIRECTIVES]
+  // entryComponents: [...COMPONENTS],
+  // exports: [...COMPONENTS, ...DIRECTIVES]
 })
 export class AuthModule {
   static forRoot(config: AuthConfig): ModuleWithProviders {

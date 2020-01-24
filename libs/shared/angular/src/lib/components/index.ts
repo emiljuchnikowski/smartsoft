@@ -1,14 +1,3 @@
-import {FORM_COMPONENTS} from "./form";
-import {APP_COMPONENTS} from "./app";
-import {PAGE_COMPONENTS} from "./page";
-import {INPUT_COMPONENTS} from "./input";
-import {BUTTON_COMPONENTS} from "./button";
-import {CARD_COMPONENTS} from "./card";
-import {LIST_COMPONENTS} from "./list";
-import { DETAILS_COMPONENTS } from './details';
-import { LOADER_COMPONENTS } from './loader';
-import {DETAIL_COMPONENTS} from "./detail";
-
 export * from './form';
 export * from './app';
 export * from './page';
@@ -18,16 +7,3 @@ export * from './card';
 export * from './list';
 export * from './loader';
 export * from './detail';
-
-export const COMPONENTS = [
-    ...FORM_COMPONENTS,
-    ...APP_COMPONENTS,
-    ...PAGE_COMPONENTS,
-    ...INPUT_COMPONENTS,
-    ...BUTTON_COMPONENTS,
-    ...CARD_COMPONENTS,
-    ...LIST_COMPONENTS,
-    ...DETAILS_COMPONENTS,
-    ...LOADER_COMPONENTS,
-    ...DETAIL_COMPONENTS
-];

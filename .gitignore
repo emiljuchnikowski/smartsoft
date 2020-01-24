@@ -7,3 +7,6 @@
 /libs/shared/models/dist/
 /libs/shared/domain-core/dist/
 /libs/shared/utils/dist/
+/libs/shared/angular/package-lock.json
+/libs/shared/angular/dist/
+/libs/shared/angular/node_modules/
