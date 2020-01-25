@@ -4,7 +4,7 @@ import { filter, tap } from "rxjs/operators";
 import { Action } from "@ngrx/store";
 import {Observable} from "rxjs";
 
-import {ErrorService} from "../services";
+import {ErrorService} from "../services/error/error.service";
 
 @Injectable()
 export class ErrorEffects {

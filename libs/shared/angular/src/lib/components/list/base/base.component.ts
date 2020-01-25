@@ -1,11 +1,11 @@
 import {Input, OnInit} from '@angular/core';
 import {IFieldOptions} from "@smartsoft001/models";
 import {Observable} from "rxjs";
-
-import {DetailsPage} from "../../../pages/details/details.page";
-import { IDetailsOptions, IListProvider, IButtonOptions } from '../../../models';
 import {Router} from "@angular/router";
 import {IEntity} from "@smartsoft001/domain-core";
+
+import {DetailsPage} from "../../../pages/details/details.page";
+import { IDetailsOptions, IListProvider, IButtonOptions } from '../../../models/interfaces';
 import { IListInternalOptions } from '../list.component';
 
 export abstract class ListBaseComponent<T extends IEntity<string>> implements OnInit {

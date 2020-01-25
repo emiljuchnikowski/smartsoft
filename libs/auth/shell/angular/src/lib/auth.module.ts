@@ -12,13 +12,13 @@ import { AuthEffects } from "./+state/auth.effects";
 import { AuthFacade } from "./+state/auth.facade";
 import { SharedModule } from "@smartsoft001/angular";
 import { AuthInterceptor } from "./interceptors";
-// import {LoginComponent} from "./components";
+import {LoginComponent} from "./components";
 import { setDefaultTranslationsAndLang } from "./translations-default";
 import {AuthGuard, PermissionsGuard} from "./guards";
 import {AuthDirective} from "./directives";
 
 const COMPONENTS = [
-  // LoginComponent
+  LoginComponent
 ];
 
 const DIRECTIVES = [
@@ -38,7 +38,7 @@ const SERVICES = [
     AuthService]
 ;
 
-const initializer = (
+export const initializer = (
   facade: AuthFacade,
   translateService: TranslateService
 ) => () => {
@@ -55,8 +55,8 @@ const initializer = (
   ],
   providers: [AuthEffects, AuthFacade],
   declarations: [...COMPONENTS, ...DIRECTIVES],
-  // entryComponents: [...COMPONENTS],
-  // exports: [...COMPONENTS, ...DIRECTIVES]
+  entryComponents: [...COMPONENTS],
+  exports: [...COMPONENTS, ...DIRECTIVES]
 })
 export class AuthModule {
   static forRoot(config: AuthConfig): ModuleWithProviders {

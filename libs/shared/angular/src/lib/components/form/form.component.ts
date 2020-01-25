@@ -6,11 +6,11 @@ import {
   Output,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-
-import { IFormOptions } from "../../models";
-import {FormFactory} from "../../factories";
 import {Subscription} from "rxjs";
 import {filter} from "rxjs/operators";
+
+import { IFormOptions } from "../../models/interfaces";
+import {FormFactory} from "../../factories/form/form.factory";
 
 @Component({
   selector: "smart-form",

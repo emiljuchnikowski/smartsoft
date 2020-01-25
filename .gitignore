@@ -10,3 +10,5 @@
 /libs/shared/angular/package-lock.json
 /libs/shared/angular/dist/
 /libs/shared/angular/node_modules/
+/libs/auth/shell/angular/dist/
+/libs/auth/shell/angular/node_modules/

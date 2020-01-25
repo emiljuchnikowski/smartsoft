@@ -8,7 +8,7 @@ import {
     Renderer2,
 } from "@angular/core";
 
-import {IPageOptions} from "../../models";
+import {IPageOptions} from "../../models/interfaces";
 
 @Component({
     selector: 'smart-page',

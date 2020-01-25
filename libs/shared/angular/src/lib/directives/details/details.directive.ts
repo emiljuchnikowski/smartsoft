@@ -1,6 +1,8 @@
 import { Directive, HostListener, Input, Output, EventEmitter } from "@angular/core";
 
-import { HardwareService, ModalService } from "../../services";
+import { ModalService } from '../../services/modal/modal.service';
+import { HardwareService } from '../../services/hardware/hardware.service';
+
 
 @Directive({
   selector: "[smartDetails]"
@@ -9,8 +11,8 @@ export class DetailsDirective {
   @Input("smartDetails")
   options: { component: any; params: any, mode?: 'bottom' | 'default' };
 
-  @Output("smartDetailsShowed") smartDetailsShowed = new EventEmitter();
-  @Output("smartDetailsDismissed") smartDetailsDismissed = new EventEmitter();
+  @Output() smartDetailsShowed = new EventEmitter();
+  @Output() smartDetailsDismissed = new EventEmitter();
 
   constructor(
     private modalService: ModalService,

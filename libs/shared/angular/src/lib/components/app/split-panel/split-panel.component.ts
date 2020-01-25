@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 import {AppBaseComponent} from "../base/base.component";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'smart-app-split-panel',

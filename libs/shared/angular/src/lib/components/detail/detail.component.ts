@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 
-import {IDetailOptions} from "../../models";
+import {IDetailOptions} from "../../models/interfaces";
 import {FieldType} from "@smartsoft001/models";
 
 @Component({

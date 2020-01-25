@@ -3,7 +3,7 @@ import {Observable, Subscription} from "rxjs";
 import {filter, map} from "rxjs/operators";
 import {NavigationEnd, Router} from "@angular/router";
 
-import {IAppOptions, IMenuItem} from "../../../models";
+import {IAppOptions, IMenuItem} from "../../../models/interfaces";
 
 export abstract class AppBaseComponent implements OnDestroy {
     private _options: IAppOptions;

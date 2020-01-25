@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 
-import {IButtonOptions} from "../../models";
+import {IButtonOptions} from "../../models/interfaces";
 
 @Component({
   selector: 'smart-button',

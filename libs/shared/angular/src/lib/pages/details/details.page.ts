@@ -2,9 +2,9 @@ import { Component } from "@angular/core";
 import { NavParams } from "@ionic/angular";
 import { first } from "rxjs/operators";
 
-import { IPageOptions, IDetailsOptions } from "../../models";
+import { IPageOptions, IDetailsOptions } from "../../models/interfaces";
 import {IEntity} from "@smartsoft001/domain-core";
-import {ModalService} from "../../services";
+import {ModalService} from "../../services/modal/modal.service";
 
 @Component({
   templateUrl: "./details.page.html",

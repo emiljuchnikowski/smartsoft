@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import * as _ from 'lodash';
 
-import {InputOptions} from "../../models";
+import {InputOptions} from "../../models/interfaces";
 import {FieldType, getModelFieldOptions, IFieldOptions} from "@smartsoft001/models";
 
 @Component({

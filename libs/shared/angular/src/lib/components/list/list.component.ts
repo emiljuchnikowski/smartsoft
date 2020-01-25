@@ -2,8 +2,8 @@ import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} fr
 import * as _ from 'lodash';
 
 import {getModelFieldsWithOptions, IFieldOptions} from "@smartsoft001/models";
-import {IListOptions} from "../../models";
-import {HardwareService} from "../../services";
+import {IListOptions} from "../../models/interfaces";
+import {HardwareService} from "../../services/hardware/hardware.service";
 
 @Component({
   selector: 'smart-list',

@@ -1,7 +1,7 @@
 import {AbstractControl} from "@angular/forms";
 import {Observable} from "rxjs";
 
-import {IAppProvider} from "../providers";
+import {IAppProvider} from "../providers/interfaces";
 import {IFieldOptions} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
 
