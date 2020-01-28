@@ -4,11 +4,13 @@ import {StoreModule} from "@ngrx/store";
 import {routerReducer} from "@ngrx/router-store";
 
 import {ErrorEffects} from "./+state/error.effects";
+import {SharedModule} from "./shared.module";
 
 @NgModule({
     imports: [
-        EffectsModule.forFeature([ ErrorEffects ]),
-        StoreModule.forFeature('router', routerReducer)
+        SharedModule,
+        StoreModule.forFeature('router', routerReducer),
+        EffectsModule.forFeature([ ErrorEffects ])
     ]
 })
 export class NgrxSharedModule { }

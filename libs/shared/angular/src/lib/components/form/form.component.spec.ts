@@ -9,9 +9,8 @@ import { CommonModule } from "@angular/common";
 import { FormComponent } from "./form.component";
 import { FormStandardComponent } from "./standard/standard.component";
 import { FormFactory } from "../../factories";
-import {INPUT_COMPONENTS} from "../input";
 import {Model} from "@smartsoft001/models";
-import {PIPES} from "../../pipes";
+import {INPUT_COMPONENTS, PIPES} from '../../shared.module';
 
 describe("shared-angular: FormComponent", () => {
   let component: FormComponent<any>;

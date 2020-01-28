@@ -5,7 +5,9 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import * as _ from 'lodash';
 
 import {
-    getModelFieldsWithOptions, IFieldModifyMetadata,
+    FieldType,
+    getModelFieldsWithOptions,
+    IFieldModifyMetadata,
     IFieldOptions,
     SYMBOL_FIELD,
     SYMBOL_MODEL
@@ -63,7 +65,7 @@ export class FormFactory {
 
         const result = this.fb.group({});
 
-        getModelFieldsWithOptions(obj)
+        const fields = getModelFieldsWithOptions(obj)
             .filter(field => {
                 return (
                     !ops.mode
@@ -74,32 +76,45 @@ export class FormFactory {
                         && field.options.customs.some(custom => custom.mode === ops.mode)
                     )
                 );
-            })
-            .forEach(field => {
-                const control = this.fb.control(obj[field.key]);
-                const options = FormFactory.getOptionsFromMode(field.options, ops.mode);
-
-                FormFactory.setValidators(control, options);
-
-                result.addControl(field.key, control);
-
-                if (options.confirm) {
-                    const confirmControl = this.fb.control(null, [
-                        Validators.required,
-                        (a: AbstractControl) => {
-                            if (a.value !== result.controls[field.key].value) {
-                                return {
-                                    confirm: true
-                                }
-                            }
-
-                            return null;
-                        }
-                    ]);
-
-                    result.addControl(field.key + 'Confirm', confirmControl);
-                }
             });
+
+        for (let index = 0; index < fields.length; index++) {
+            const field = fields[index];
+            let control: AbstractControl = null;
+
+            if (field.options.type === FieldType.object) {
+                control = await this.create(obj[field.key], ops);
+            } else {
+                control = this.fb.control(obj[field.key]);
+            }
+
+            const options = FormFactory.getOptionsFromMode(field.options, ops.mode);
+
+            FormFactory.setValidators(control, options);
+
+            result.addControl(field.key, control);
+
+            if (options.confirm && options.type === FieldType.object) {
+                throw Error('Object not supported confirms');
+            }
+
+            if (options.confirm) {
+                const confirmControl = this.fb.control(null, [
+                    Validators.required,
+                    (a: AbstractControl) => {
+                        if (a.value !== result.controls[field.key].value) {
+                            return {
+                                confirm: true
+                            }
+                        }
+
+                        return null;
+                    }
+                ]);
+
+                result.addControl(field.key + 'Confirm', confirmControl);
+            }
+        }
 
         return result;
     }

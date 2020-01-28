@@ -7,7 +7,7 @@ import { CommonModule } from "@angular/common";
 
 import { DetailsComponent } from "./details.component";
 import {DetailsStandardComponent} from "./standard/standard.component";
-import {DETAIL_COMPONENTS} from "../detail";
+import { DETAIL_COMPONENTS } from '../../shared.module';
 
 describe("shared-angular: DetailsComponent", () => {
   let component: DetailsComponent<any>;

@@ -15,10 +15,6 @@ const MENU_ITEMS: Array<IMenuItem> = [
   {
     caption: 'Zadania',
     route: '/todos'
-  },
-  {
-    caption: 'Shared',
-    route: '/shared'
   }
 ];
 

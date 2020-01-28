@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-
-import {ToastService} from "../toast/toast.service";
+import {Injectable} from '@angular/core';
 import {HttpErrorResponse} from "@angular/common/http";
 import {TranslateService} from "@ngx-translate/core";
+
+import {ToastService} from "../toast/toast.service";
 
 @Injectable()
 export class ErrorService {

@@ -1,4 +1,4 @@
-import {ModuleWithProviders, NgModule} from "@angular/core";
+import {ModuleWithProviders, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader} from "@angular/core";
 import {Store, StoreModule} from "@ngrx/store";
 
 import {CrudConfig, CrudFullConfig} from "./crud.config";
@@ -10,11 +10,13 @@ import {CrudFacade} from "./+state/crud.facade";
 import {IEntity} from "@smartsoft001/domain-core";
 import {PIPES} from "./pipes";
 import {CrudFullModule} from "./crud-full.module";
+import {SharedModule} from "@smartsoft001/angular";
 
 @NgModule({
     imports: [
         AuthSharedModule,
-        StoreModule
+        StoreModule,
+        SharedModule
     ],
     declarations: [
         ...PIPES
@@ -27,6 +29,7 @@ export class CrudModule<T extends IEntity<string>> {
         return {
             ngModule: options.routing ? CrudFullModule : CrudModule,
             providers: [
+                //{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader },
                 { provide: CrudConfig, useValue: options.config },
                 { provide: CrudFullConfig, useValue: options.config },
                 ...SERVICES,

@@ -7,8 +7,8 @@ import { TranslateModule } from "@ngx-translate/core";
 
 import { FormStandardComponent } from "./standard.component";
 import { FormFactory } from "../../../factories";
-import {INPUT_COMPONENTS} from "../../input";
-import {PIPES} from "../../../pipes";
+import {INPUT_COMPONENTS} from "../../../shared.module";
+import {PIPES} from "../../../shared.module";
 
 describe("shared-angular: StandardComponent", () => {
   let component: FormStandardComponent<any>;

@@ -5,7 +5,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {IonicModule} from "@ionic/angular";
 
 import { InputEnumComponent } from './enum.component';
-import {PIPES} from "../../../pipes";
+import {PIPES} from "../../../shared.module";
 
 describe('shared-angular: InputEnumComponent', () => {
   let component: InputEnumComponent<any>;

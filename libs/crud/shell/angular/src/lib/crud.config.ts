@@ -15,3 +15,9 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     edit?: boolean;
     add?: boolean;
 }
+
+export interface ICrudDynamicComponentManifest {
+    componentId: 'details_top',
+    path: string;
+    loadChildren: any
+}

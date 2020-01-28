@@ -5,7 +5,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {IonicModule} from "@ionic/angular";
 
 import { DetailComponent } from './detail.component';
-import {DETAIL_COMPONENTS} from "@smartsoft001/angular";
+import { DETAIL_COMPONENTS } from '../../shared.module';
 
 describe('DetailComponent', () => {
   let component: DetailComponent<any>;

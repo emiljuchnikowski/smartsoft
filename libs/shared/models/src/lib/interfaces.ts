@@ -5,7 +5,8 @@ export enum FieldType {
     flag = "flag",
     enum = "enum",
     currency = "currency",
-    date = "date"
+    date = "date",
+    object = "object"
 }
 
 export interface IModelMetadata {
