@@ -7,9 +7,10 @@ import {CommonModule} from "@angular/common";
 
 import { InputComponent } from './input.component';
 import {Field, FieldType, IFieldOptions, Model} from "@smartsoft001/models";
-import {INPUT_COMPONENTS, InputOptions} from "@smartsoft001/angular";
+import {InputOptions} from "@smartsoft001/angular";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {PIPES} from "../../shared.module";
+import {INPUT_COMPONENTS} from "../components.module";
+import {PIPES} from "../../pipes/pipes.module";
 
 describe('shared-angular: InputComponent', () => {
 

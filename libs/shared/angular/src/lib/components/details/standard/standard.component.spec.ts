@@ -6,7 +6,7 @@ import { IonicModule } from "@ionic/angular";
 import { TranslateModule } from "@ngx-translate/core";
 
 import { DetailsStandardComponent } from "./standard.component";
-import { DETAIL_COMPONENTS } from '../../../shared.module';
+import {DETAIL_COMPONENTS} from "../../components.module";
 
 describe("shared-angular: DetailsStandardComponent", () => {
   let component: DetailsStandardComponent<any>;
