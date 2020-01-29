@@ -48,7 +48,8 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
         item$: val.detailsProvider.item$,
         type: val.type,
         loading$: val.detailsProvider.loading$,
-        editHandler: this.editHandler
+        editHandler: this.editHandler,
+        componentFactories: val.detailsComponentFactories
       };
 
       this.select = val.detailsProvider.getData;

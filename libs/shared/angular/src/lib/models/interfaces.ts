@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {IAppProvider} from "../providers/interfaces";
 import {IFieldOptions} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
+import {ComponentFactory} from "@angular/core";
 
 export interface IAppOptions {
     provider: IAppProvider;
@@ -19,12 +20,21 @@ export interface IButtonOptions {
     loading$?: Observable<boolean>;
 }
 
+export interface ICardOptions {
+    title?: string;
+}
+
+export interface IDetailsComponentFactories<T> {
+    top?: ComponentFactory<any>
+}
+
 export interface IDetailsOptions<T extends IEntity<string>> {
     title?: string;
     type: T;
     item$: Observable<T>;
     loading$?: Observable<boolean>;
     editHandler?: (id: string) => void
+    componentFactories?: IDetailsComponentFactories<T>;
 }
 
 export interface IDetailOptions<T> {
@@ -85,6 +95,7 @@ export interface IListOptions<T> {
 
     details?: boolean;
     detailsProvider?: IDetailsProvider<T>;
+    detailsComponentFactories?: IDetailsComponentFactories<T>;
 
     edit?: boolean;
     editOptions?: EditOptions;

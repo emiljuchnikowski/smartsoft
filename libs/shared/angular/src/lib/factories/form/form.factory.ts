@@ -73,6 +73,7 @@ export class FormFactory {
                     || (ops.mode === 'update' && field.options.update)
                     || (
                         (ops.mode !== 'create' && ops.mode !== 'update')
+                        && field.options.customs
                         && field.options.customs.some(custom => custom.mode === ops.mode)
                     )
                 );

@@ -1,5 +1,9 @@
 <ion-card class="ion-padding">
 
+    <ion-card-header *ngIf="options?.title; let title">
+        <ion-card-title>{{ title }}</ion-card-title>
+    </ion-card-header>
+
     <ng-content></ng-content>
 
 </ion-card>
