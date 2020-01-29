@@ -10,6 +10,8 @@ import {IButtonOptions} from "../../models/interfaces";
 })
 export class ButtonComponent implements OnInit {
 
+  mode: 'default' | 'confirm';
+
   @Input() options: IButtonOptions;
   @Input() disabled: boolean;
 
@@ -18,4 +20,24 @@ export class ButtonComponent implements OnInit {
   ngOnInit() {
   }
 
+  invoke(): void {
+    if (!this.options) return;
+
+    if (this.options.confirm) {
+      this.mode = 'confirm';
+    } else {
+      this.options.click();
+    }
+  }
+
+  confirmInvoke(): void {
+    if (!this.options) return;
+    this.options.click();
+    this.mode = 'default';
+  }
+
+  confirmCancel(): void {
+    if (!this.options) return;
+    this.mode = 'default';
+  }
 }

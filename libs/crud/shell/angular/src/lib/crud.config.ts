@@ -5,6 +5,7 @@ export class CrudConfig<T> {
     apiUrl: string;
     entity: string;
     type?: any;
+    externalModule?: any;
 }
 
 @Injectable()
@@ -14,10 +15,7 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     details?: boolean;
     edit?: boolean;
     add?: boolean;
-}
-
-export interface ICrudDynamicComponentManifest {
-    componentId: 'details_top',
-    path: string;
-    loadChildren: any
+    detailsComponents?: {
+        top: any
+    };
 }

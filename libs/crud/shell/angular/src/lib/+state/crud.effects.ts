@@ -3,7 +3,7 @@ import {catchError, tap} from "rxjs/operators";
 import {of} from "rxjs";
 import {Action, ActionsSubject, Store} from "@ngrx/store";
 
-import {CrudService} from "../services";
+import {CrudService} from "../services/crud/crud.service";
 import {IEntity} from "@smartsoft001/domain-core";
 import * as CrudActions from './crud.actions';
 import {CrudConfig} from "../crud.config";

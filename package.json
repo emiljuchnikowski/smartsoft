@@ -34,7 +34,9 @@
     "shared-angular:build": "ng-packagr -p libs/shared/angular/package.json",
     "shared-angular:publish": "npm run shared-angular:build && npm publish libs/shared/angular/dist --access public",
     "auth-shell-angular:build": "ng-packagr -p libs/auth/shell/angular/package.json",
-    "auth-shell-angular:publish": "npm run auth-shell-angular:build && npm publish libs/auth/shell/angular/dist --access public"
+    "auth-shell-angular:publish": "npm run auth-shell-angular:build && npm publish libs/auth/shell/angular/dist --access public",
+    "crud-shell-angular:build": "ng-packagr -p libs/crud/shell/angular/package.json",
+    "crud-shell-angular:publish": "npm run crud-shell-angular:build && npm publish libs/crud/shell/angular/dist --access public"
   },
   "private": true,
   "dependencies": {

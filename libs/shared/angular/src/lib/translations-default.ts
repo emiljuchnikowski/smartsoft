@@ -21,6 +21,8 @@ export interface ITranslateData {
     admin: string,
     add: string,
     change: string,
+    confirm: string,
+    cancel: string,
 
     APP: {
         logout: string,
@@ -55,6 +57,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     admin: 'admin',
     add: 'add',
     change: 'change',
+    confirm: 'confirm',
+    cancel: 'cancel',
     
     APP: {
         logout: 'log out',
@@ -89,6 +93,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     admin: 'administrator',
     add: 'dodaj',
     change: 'zmień',
+    confirm: 'potwierdź',
+    cancel: 'anuluj',
 
     APP: {
         logout: 'wyloguj się',

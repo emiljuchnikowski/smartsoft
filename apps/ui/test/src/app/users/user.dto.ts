@@ -43,7 +43,10 @@ export class User implements IEntity<string> {
         create: {
             ...modifyMetdata,
             confirm: true
-        }
+        },
+        customs: [
+            { mode: 'changePassword' }
+        ]
     })
     password: string;
 

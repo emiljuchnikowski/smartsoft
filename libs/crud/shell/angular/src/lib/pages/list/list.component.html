@@ -1,5 +1,5 @@
 <smart-page [options]="pageOptions">
 
-    <smart-list [options]="listOptions"></smart-list>
+    <smart-list *ngIf="listOptions" [options]="listOptions"></smart-list>
 
 </smart-page>

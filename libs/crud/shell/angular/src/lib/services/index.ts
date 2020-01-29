@@ -1,7 +1,2 @@
-import {CrudService} from "./crud/crud.service";
-
 export * from './crud/crud.service';
-
-export const SERVICES = [
-    CrudService
-];
+export * from './dynamic-component-loader/dynamic-component-loader.service';

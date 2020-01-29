@@ -16,6 +16,7 @@ export interface IAppOptions {
 
 export interface IButtonOptions {
     type?: 'submit' | 'button';
+    confirm?: boolean;
     click: () => void;
     loading$?: Observable<boolean>;
 }
