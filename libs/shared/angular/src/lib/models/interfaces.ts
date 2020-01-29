@@ -94,12 +94,14 @@ export interface IListOptions<T> {
     provider: IListProvider<T>;
     type: any;
 
-    details?: boolean;
-    detailsProvider?: IDetailsProvider<T>;
-    detailsComponentFactories?: IDetailsComponentFactories<T>;
+    details?: boolean | {
+        provider?: IDetailsProvider<T>,
+        componentFactories?: IDetailsComponentFactories<T>
+    };
 
-    edit?: boolean;
-    editOptions?: EditOptions;
+    edit?: boolean | {
+        options?: EditOptions;
+    };
 }
 
 export interface IEditOptionsForPage {

@@ -31,29 +31,29 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
     this.initLoading();
 
     if (val.edit) {
-      if (!val.editOptions)
+      if (!val.edit['options'])
         throw Error('Must set edit options');
 
       this.editHandler = id => {
-        this.router.navigate([ val.editOptions.routingPrefix, id ]);
+        this.router.navigate([ val.edit['options'].routingPrefix, id ]);
       };
     }
 
     if (val.details) {
-      if (!val.detailsProvider)
+      if (!val.details['provider'])
         throw Error('Must set details provider');
 
       this.detailsComponent = DetailsPage;
       this.detailsComponentProps = {
-        item$: val.detailsProvider.item$,
+        item$: val.details['provider'].item$,
         type: val.type,
-        loading$: val.detailsProvider.loading$,
+        loading$: val.details['provider'].loading$,
         editHandler: this.editHandler,
-        componentFactories: val.detailsComponentFactories
+        componentFactories: val.details['componentFactories']
       };
 
-      this.select = val.detailsProvider.getData;
-      this.unselect = val.detailsProvider.clearData;
+      this.select = val.details['provider'].getData;
+      this.unselect = val.details['provider'].clearData;
     }
   }
 
