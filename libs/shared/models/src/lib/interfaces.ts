@@ -10,7 +10,7 @@ export enum FieldType {
 }
 
 export interface IModelMetadata {
-    permissions: Array<string>;
+    permissions?: Array<string>;
 }
 
 export interface IFieldMetadata extends IFieldModifyMetadata {
