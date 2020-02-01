@@ -20,23 +20,24 @@ export class DynamicComponentLoader<T> {
       factory: ComponentFactory<any>;
     }[]
   > {
-    const components = options.components.filter(comp => !DynamicComponentLoader.declaredComponents.some(dec => dec === comp));
+    const components = options.components.filter(
+      comp =>
+        !DynamicComponentLoader.declaredComponents.some(dec => dec === comp)
+    );
 
     @NgModule({
       imports: options.imports,
       declarations: components,
-      entryComponents: options.components
+      entryComponents: components
     })
     class DynamicModule {}
-
-    this.compiler.clearCacheFor(DynamicModule);
 
     return await this.compiler
       .compileModuleAndAllComponentsAsync(DynamicModule)
       .then(res => {
-        this._declaredComponents = [
-            ...DynamicComponentLoader.declaredComponents,
-            components
+        DynamicComponentLoader.declaredComponents = [
+          ...DynamicComponentLoader.declaredComponents,
+          ...components
         ];
 
         return options.components.map(c => {
