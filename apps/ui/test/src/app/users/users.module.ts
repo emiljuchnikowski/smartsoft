@@ -8,6 +8,9 @@ import {CrudModule} from "@smartsoft001/crud-shell-angular";
 import {ChangePasswordComponent} from "./component";
 
 @NgModule({
+  declarations: [
+    ChangePasswordComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -19,12 +22,13 @@ import {ChangePasswordComponent} from "./component";
         title: 'Użytkownicy',
         entity: "users",
         apiUrl: "http://localhost:8102/users",
-        details: true,
+        details: {
+          components: {
+            top: ChangePasswordComponent
+          }
+        },
         edit: true,
         add: true,
-        detailsComponents: {
-          top: ChangePasswordComponent
-        }
       }
     })
   ]

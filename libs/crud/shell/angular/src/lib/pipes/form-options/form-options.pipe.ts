@@ -2,7 +2,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import {IEntity} from "@smartsoft001/domain-core";
 import {IFormOptions} from "@smartsoft001/angular";
-import {CrudFullConfig} from "../../crud.config";
 
 @Pipe({
   name: 'smartFormOptions'

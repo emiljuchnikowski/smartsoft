@@ -1,9 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  Injector,
-  OnInit
-} from "@angular/core";
+import { ChangeDetectorRef, Component, Injector, OnInit } from "@angular/core";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 
@@ -58,9 +53,12 @@ export class ListComponent<T extends IEntity<string>> implements OnInit {
 
     const compiledComponents = await this.dynamicComponentLoader.getComponentsWithFactories(
       {
-        components: this.config.detailsComponents && this.config.detailsComponents.top
-          ? [this.config.detailsComponents.top]
-          : [],
+        components:
+          this.config.details &&
+          this.config.details["components"] &&
+          this.config.details["components"].top
+            ? [this.config.details["components"].top]
+            : [],
         imports: [SharedModule, CommonModule]
       }
     );
@@ -73,29 +71,33 @@ export class ListComponent<T extends IEntity<string>> implements OnInit {
         list$: this.facade.list$,
         loading$: this.facade.loaded$.pipe(map(l => !l))
       },
-      detailsProvider: {
-        getData: id => {
-          this.facade.select(id);
-        },
-        clearData: () => {
-          this.facade.unselect();
-        },
-        item$: this.facade.selected$,
-        loading$: this.facade.loaded$.pipe(map(l => !l))
-      },
       type: this.config.type,
-      details: this.config.details,
-      detailsComponentFactories: {
-        top:
-          this.config.detailsComponents && this.config.detailsComponents.top
-            ? compiledComponents.find(
-                cc => cc.component === this.config.detailsComponents.top
-              ).factory
-            : null
+      details: {
+        provider: {
+          getData: id => {
+            this.facade.select(id);
+          },
+          clearData: () => {
+            this.facade.unselect();
+          },
+          item$: this.facade.selected$,
+          loading$: this.facade.loaded$.pipe(map(l => !l))
+        },
+        componentFactories: {
+          top:
+            this.config.details &&
+            this.config.details["components"] &&
+            this.config.details["components"].top
+              ? compiledComponents.find(
+                  cc => cc.component === this.config.details["components"].top
+                ).factory
+              : null
+        }
       },
-      edit: this.config.edit,
-      editOptions: {
-        routingPrefix: "/" + this.router.routerState.snapshot.url + "/"
+      edit: {
+        options: {
+          routingPrefix: "/" + this.router.routerState.snapshot.url + "/"
+        }
       }
     };
 

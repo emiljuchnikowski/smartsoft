@@ -7,26 +7,37 @@ import {getReducer} from "./+state/crud.reducer";
 import {AuthSharedModule} from "@smartsoft001/auth-shell-angular";
 import {IEntity} from "@smartsoft001/domain-core";
 import {SharedModule} from "@smartsoft001/angular";
-import {CrudPipesModule} from "./pipes/pipes.module";
-import {CrudPagesModule} from "./pages/pages.module";
 import {HttpClientModule} from "@angular/common/http";
-import {CrudServicesModule} from "./services/services.module";
-import {CrudStateModule} from "./+state/state.module";
+import {RouterModule} from "@angular/router";
+import {ListComponent} from "./pages/list/list.component";
+import {EditComponent} from "./pages/edit/edit.component";
+import {CrudPipesModule} from "./pipes/pipes.module";
 
 @NgModule({
+    declarations: [
+        EditComponent,
+        ListComponent
+    ],
+    entryComponents: [
+        EditComponent,
+        ListComponent
+    ],
     imports: [
         AuthSharedModule,
         StoreModule,
         SharedModule,
-        CrudPagesModule,
-        HttpClientModule,
         CrudPipesModule,
-        CrudServicesModule,
-        CrudStateModule
+        HttpClientModule,
+        RouterModule.forChild([
+            {path: '', component: ListComponent}
+            , {path: 'add', component: EditComponent}
+            , {path: ':id', component: EditComponent}
+        ])
     ],
     exports: [
-        CrudPipesModule,
-        CrudPagesModule
+        EditComponent,
+        ListComponent,
+        CrudPipesModule
     ]
 })
 export class CrudFullModule<T extends IEntity<string>> {

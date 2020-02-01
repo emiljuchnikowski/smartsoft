@@ -12,3 +12,5 @@
 /libs/shared/angular/node_modules/
 /libs/auth/shell/angular/dist/
 /libs/auth/shell/angular/node_modules/
+/libs/crud/shell/angular/node_modules/
+/libs/crud/shell/angular/package-lock.json
