@@ -6,11 +6,9 @@ import { AuthModule } from "@smartsoft001/auth-shell-angular";
 import {User} from "./user.dto";
 import {CrudModule} from "@smartsoft001/crud-shell-angular";
 import {ChangePasswordComponent} from "./component";
+import {environment} from "../../environments/environment";
 
 @NgModule({
-  declarations: [
-    ChangePasswordComponent
-  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -21,7 +19,7 @@ import {ChangePasswordComponent} from "./component";
         type: User,
         title: 'Użytkownicy',
         entity: "users",
-        apiUrl: "http://localhost:8102/users",
+        apiUrl: environment.apiUrl + "users",
         details: {
           components: {
             top: ChangePasswordComponent

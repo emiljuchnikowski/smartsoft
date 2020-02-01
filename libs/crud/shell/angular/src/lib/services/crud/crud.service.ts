@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import {map} from "rxjs/operators";
 
 import { IEntity } from "@smartsoft001/domain-core";
 import { CrudConfig } from "../../crud.config";
-import {map} from "rxjs/operators";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {

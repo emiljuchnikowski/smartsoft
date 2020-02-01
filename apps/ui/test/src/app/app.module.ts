@@ -14,6 +14,7 @@ import { AppComponent } from "./app.component";
 import { environment } from "../environments/environment";
 import { NgrxSharedModule, SharedModule } from "@smartsoft001/angular";
 import { AuthModule, PermissionsGuard } from "@smartsoft001/auth-shell-angular";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -58,14 +59,15 @@ import { AuthModule, PermissionsGuard } from "@smartsoft001/auth-shell-angular";
         }
       }
     ),
+      HttpClientModule,
     TranslateModule.forRoot(),
     IonicModule.forRoot(),
     EffectsModule.forRoot([]),
       SharedModule,
-    AuthModule.forRoot({
-      apiUrl: "http://localhost:8102/auth",
-      clientId: "client1"
-    }),
+      AuthModule.forRoot({
+          apiUrl: environment.apiUrl + "auth",
+          clientId: "admin"
+      }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
       SharedModule,

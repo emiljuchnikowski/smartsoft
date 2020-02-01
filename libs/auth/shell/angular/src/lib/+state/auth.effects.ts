@@ -3,7 +3,7 @@ import { createEffect, Actions } from "@ngrx/effects";
 import { DataPersistence } from "@nrwl/angular";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 
 import * as fromAuth from "./auth.reducer";
 import * as AuthActions from "./auth.actions";
@@ -11,7 +11,7 @@ import { AuthService } from "../services";
 
 @Injectable()
 export class AuthEffects {
-  initToken$: Observable<any> = createEffect(() =>
+  initToken$ = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.initToken, {
       run: () => {
         return AuthActions.initTokenSuccess({
@@ -33,11 +33,12 @@ export class AuthEffects {
         return this.service
           .createToken({ username: action.username, password: action.password })
           .pipe(
-            map(token =>
-              AuthActions.createTokenSuccess({
-                token,
-                username: action.username
-              }) as any
+            map(
+              token =>
+                AuthActions.createTokenSuccess({
+                  token,
+                  username: action.username
+                }) as any
             )
           );
       },
@@ -59,15 +60,15 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-    removeTokenSuccess$: Observable<any> = createEffect(
-        () =>
-            this.dataPersistence.fetch(AuthActions.removeTokenSuccess, {
-                run: () => {
-                    document.location.reload();
-                }
-            }),
-        { dispatch: false }
-    );
+  removeTokenSuccess$: Observable<any> = createEffect(
+    () =>
+      this.dataPersistence.fetch(AuthActions.removeTokenSuccess, {
+        run: () => {
+          document.location.reload();
+        }
+      }),
+    { dispatch: false }
+  );
 
   removeToken$: Observable<any> = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.removeToken, {
