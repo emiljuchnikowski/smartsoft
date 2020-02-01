@@ -63,10 +63,12 @@
       "tags": ["scope:shared", "type:util"]
     },
     "shared-angular-e2e": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["shared-angular"]
     },
     "ui-test-e2e": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["ui-test"]
     },
     "ui-test": {
       "tags": []

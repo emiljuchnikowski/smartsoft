@@ -75,7 +75,8 @@
             "sourceTag": "type:util",
             "onlyDependOnLibsWithTags": ["type:domain"]
           }
-        ]
+        ],
+        "enforceBuildableLibDependency": true
       }
     ],
     "directive-selector": [true, "attribute", "smart", "camelCase"],
