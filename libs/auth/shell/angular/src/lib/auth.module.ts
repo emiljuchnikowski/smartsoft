@@ -6,37 +6,18 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 
 import { AuthConfig } from "./auth.config";
-import {AuthService} from "./services";
 import * as fromAuth from "./+state/auth.reducer";
 import { AuthEffects } from "./+state/auth.effects";
 import { AuthFacade } from "./+state/auth.facade";
 import { SharedModule } from "@smartsoft001/angular";
-import { AuthInterceptor } from "./interceptors";
-import {LoginComponent} from "./components";
 import { setDefaultTranslationsAndLang } from "./translations-default";
-import {AuthGuard, PermissionsGuard} from "./guards";
-import {AuthDirective} from "./directives";
+import {AuthInterceptor} from "./interceptors/auth/auth.interceptor";
+import {LoginComponent} from "./components/login/login.component";
+import {AuthDirective} from "./directives/auth/auth.directive";
+import { AuthGuard } from './guards/auth/auth.guard';
+import {PermissionsGuard} from "./guards/permissions/permissions.guard";
+import {AuthService} from "./services/auth/auth.service";
 
-const COMPONENTS = [
-  LoginComponent
-];
-
-const DIRECTIVES = [
-  AuthDirective
-];
-
-const GUARDS = [
-  AuthGuard,
-  PermissionsGuard
-];
-
-const INTERCEPTORS = [
-  AuthInterceptor
-];
-
-const SERVICES = [
-    AuthService]
-;
 
 export const initializer = (
   facade: AuthFacade,
@@ -53,10 +34,10 @@ export const initializer = (
     StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects])
   ],
-  providers: [AuthEffects, AuthFacade],
-  declarations: [...COMPONENTS, ...DIRECTIVES],
-  entryComponents: [...COMPONENTS],
-  exports: [...COMPONENTS, ...DIRECTIVES]
+  providers: [AuthEffects, AuthFacade, AuthService],
+  declarations: [LoginComponent, AuthDirective],
+  entryComponents: [LoginComponent],
+  exports: [LoginComponent, AuthDirective]
 })
 export class AuthModule {
   static forRoot(config: AuthConfig): ModuleWithProviders {
@@ -64,8 +45,8 @@ export class AuthModule {
       ngModule: AuthModule,
       providers: [
         { provide: AuthConfig, useValue: config },
-        ...SERVICES,
-        ...INTERCEPTORS,
+        AuthInterceptor,
+        AuthService,
         AuthEffects,
         AuthFacade,
         DataPersistence,
@@ -75,7 +56,8 @@ export class AuthModule {
           deps: [AuthFacade, TranslateService],
           multi: true
         },
-        ...GUARDS,
+        AuthGuard,
+        PermissionsGuard,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
       ]
     };

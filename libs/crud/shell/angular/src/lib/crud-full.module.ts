@@ -24,7 +24,7 @@ import { CrudFacade } from './+state/crud.facade';
         ListComponent
     ],
     imports: [
-        AuthSharedModule,
+       AuthSharedModule,
         StoreModule,
         SharedModule,
         CrudPipesModule,

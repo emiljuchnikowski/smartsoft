@@ -6,7 +6,7 @@ import {
   ViewContainerRef
 } from "@angular/core";
 
-import { AuthService } from "../../services";
+import { AuthService } from "../../services/auth/auth.service";
 
 @Directive({
   selector: "[smartAuth]"

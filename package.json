@@ -29,6 +29,8 @@
     "serve:api-auth": "ng serve api-auth",
     "serve:api-crud": "ng serve api-crud",
     "serve:ui-test": "ng serve ui-test",
+    "shared-domain-core:build": "ng-packagr -p libs/shared/domain-core/package.json",
+    "shared-domain-core:publish": "npm run shared-domain-core:build && npm publish libs/shared/domain-core/dist --access public",
     "shared-models:build": "ng-packagr -p libs/shared/models/package.json",
     "shared-models:publish": "npm run shared-models:build && npm publish libs/shared/models/dist --access public",
     "shared-angular:build": "ng-packagr -p libs/shared/angular/package.json",

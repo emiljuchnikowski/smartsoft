@@ -1,12 +1,16 @@
 {
   "name": "@smartsoft001/auth-shell-angular",
-  "version": "1.0.8",
+  "version": "1.0.12",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
     },
     "whitelistedNonPeerDependencies": [
+      "@smartsoft001/angular",
       "@smartsoft001/auth-domain",
+      "@smartsoft001/auth-shell-dtos",
+      "@smartsoft001/domain-core",
+      "@smartsoft001/models",
       "@smartsoft001/users"
     ]
   },
@@ -22,12 +26,12 @@
     "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
   },
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
-  "peerDependencies": {
-    "@smartsoft001/angular": "1.0.20",
+  "dependencies": {
+    "@smartsoft001/angular": "^1.0.24",
     "@smartsoft001/auth-domain": "^1.0.3",
     "@smartsoft001/auth-shell-dtos": "^1.0.3",
-    "@smartsoft001/domain-core": "^1.0.3",
-    "@smartsoft001/models": "^1.0.3",
+    "@smartsoft001/domain-core": "^1.0.4",
+    "@smartsoft001/models": "^1.0.5",
     "@smartsoft001/users": "^1.0.3"
   }
 }
