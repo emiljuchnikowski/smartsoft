@@ -1,0 +1,9 @@
+<smart-page [options]="pageOptions">
+
+    <smart-form [options]="(selected$ | async) | smartFormOptions : mode : config?.type"
+                (valuePartialChange)="onPartialChange($event)"
+                (valueChange)="onChange($event)"
+                (validChange)="onValidChange($event)"
+    ></smart-form>
+
+</smart-page>

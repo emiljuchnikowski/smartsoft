@@ -6,4 +6,6 @@ export interface IFormProvider {
 
 export interface IAppProvider {
     logged$: Observable<boolean>;
+    username$: Observable<string>;
+    logout: () => void;
 }

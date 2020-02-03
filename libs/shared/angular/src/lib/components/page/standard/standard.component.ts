@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, ElementRef, Renderer2} from '@angular/core';
+import { Location } from '@angular/common';
 
 import {PageBaseComponent} from "../base/base.component";
 
@@ -9,7 +10,7 @@ import {PageBaseComponent} from "../base/base.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageStandardComponent extends PageBaseComponent {
-  constructor(el: ElementRef, renderer: Renderer2) {
-    super(el, renderer);
+  constructor(el: ElementRef, renderer: Renderer2, location: Location) {
+    super(el, renderer, location);
   }
 }

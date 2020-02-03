@@ -1,10 +1,14 @@
 /*TODO: move to app folder*/
 :root {
     /* Set the background of the entire app */
-    --ion-background-color: #edffc6;
+    --ion-background-color: #fbf8ff;
 
     /* Set the font family of the entire app */
     --ion-font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Roboto", sans-serif;
+}
+
+ion-menu {
+    --ion-background-color: #b3fff7;
 }
 
 /* Set text color of the entire app for iOS only */

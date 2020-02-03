@@ -48,28 +48,6 @@ describe('shared-angular: FormBaseComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('fields', () => {
-    it('should return fields from model',  done => {
-      @Model({}) class TestModel {
-        @Field({})
-        test1: string;
-
-        @Field({})
-        test2: string;
-      }
-
-      const model = new TestModel();
-
-      component.options = { model };
-
-      setTimeout(() => {
-        expect(component.fields).toStrictEqual([ 'test1', 'test2' ]);
-
-        done();
-      });
-    });
-  });
-
   describe('type', () => {
     it('should return type from model',  done => {
       @Model({}) class TestModel {
@@ -92,28 +70,4 @@ describe('shared-angular: FormBaseComponent', () => {
     });
   });
 
-  describe('submit', () => {
-    it('should emit event invokeSubmit', done => {
-
-      @Model({}) class TestModel {}
-
-      const form = {};
-      const model = new TestModel();
-      jest.spyOn(formFactory, 'create').mockReturnValueOnce((Promise.resolve(form as any)));
-
-      component.options = { model };
-      component.form = form as any;
-
-      setTimeout(() => {
-        const sub = component.invokeSubmit.subscribe(val => {
-          sub.unsubscribe();
-
-          expect(val).toBe(component.form.value);
-          done();
-        });
-
-        component.submit();
-      });
-    });
-  })
 });

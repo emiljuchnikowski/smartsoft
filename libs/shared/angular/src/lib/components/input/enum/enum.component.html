@@ -1,0 +1,9 @@
+<ion-label>
+    {{ translateKey | translate }}
+    <span *ngIf="fieldOptions?.required">*</span>:
+</ion-label>
+
+<ion-item lines="none" *ngFor="let item of fieldOptions?.possibilities | smartEnumToList">
+    <ion-label>{{item | translate}}</ion-label>
+    <ion-checkbox slot="end" [checked]="checked(item)" (ionChange)="change(item)"></ion-checkbox>
+</ion-item>

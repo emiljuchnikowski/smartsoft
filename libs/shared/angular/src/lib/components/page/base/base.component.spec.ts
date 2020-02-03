@@ -2,6 +2,9 @@ import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {Component, ElementRef, Renderer2, Type} from "@angular/core";
+import {TranslateModule} from "@ngx-translate/core";
+import { Location } from '@angular/common';
+import {RouterTestingModule} from "@angular/router/testing";
 
 import {PageBaseComponent} from "./base.component";
 
@@ -13,8 +16,8 @@ describe('shared-angular: PageBaseComponent', () => {
         template: 'test'
     })
     class TestFormBaseComponent extends PageBaseComponent {
-        constructor(el: ElementRef, r: Renderer2) {
-            super(el, r);
+        constructor(el: ElementRef, r: Renderer2, l: Location) {
+            super(el, r, l);
         }
     }
 
@@ -24,7 +27,8 @@ describe('shared-angular: PageBaseComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ TestFormBaseComponent ]
+            declarations: [ TestFormBaseComponent ],
+            imports: [ TranslateModule.forRoot(), RouterTestingModule  ]
         })
             .compileComponents();
     }));

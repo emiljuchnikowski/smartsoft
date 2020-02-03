@@ -1,0 +1,10 @@
+<ng-container *ngIf="mobile; then mobileTpl; else desktopTpl"></ng-container>
+
+
+<ng-template #desktopTpl>
+    <smart-list-desktop [options]="internalOptions"></smart-list-desktop>
+</ng-template>
+
+<ng-template #mobileTpl>
+    <smart-list-mobile [options]="internalOptions"></smart-list-mobile>
+</ng-template>

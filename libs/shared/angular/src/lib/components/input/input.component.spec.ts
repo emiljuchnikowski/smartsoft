@@ -6,12 +6,11 @@ import {TranslateModule} from "@ngx-translate/core";
 import {CommonModule} from "@angular/common";
 
 import { InputComponent } from './input.component';
-import {InputErrorComponent} from "./error/error.component";
 import {Field, FieldType, IFieldOptions, Model} from "@smartsoft001/models";
 import {InputOptions} from "@smartsoft001/angular";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {InputTextComponent} from "./text/text.component";
-import {InputPasswordComponent} from "./password/password.component";
+import {INPUT_COMPONENTS} from "../components.module";
+import {PIPES} from "../../pipes/pipes.module";
 
 describe('shared-angular: InputComponent', () => {
 
@@ -32,7 +31,7 @@ describe('shared-angular: InputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InputComponent, InputErrorComponent, InputTextComponent, InputPasswordComponent ],
+      declarations: [ INPUT_COMPONENTS, PIPES],
       imports: [
           IonicModule.forRoot(),
           TranslateModule.forRoot(),

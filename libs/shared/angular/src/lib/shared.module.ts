@@ -5,29 +5,30 @@ import { CommonModule } from "@angular/common";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
 
-import { COMPONENTS } from "./components";
-import { FACTORIES } from "./factories";
 import { setDefaultTranslationsAndLang } from "./translations-default";
-import {SERVICES} from "./services";
+import { SharedFactoriesModule } from "./factories/factories.module";
+import { SharedServicesModule } from "./services/services.module";
+import { SharedPipesModule } from "./pipes/pipes.module";
+import { SharedPagesModule } from "./pages/pages.module";
+import { SharedDirectivesModule } from "./directives/directives.module";
+import { SharedComponentsModule } from "./components/components.module";
 
 @NgModule({
-  providers: [...FACTORIES, ...SERVICES],
-  declarations: [...COMPONENTS],
-  entryComponents: [...COMPONENTS],
   imports: [
-    ReactiveFormsModule,
-    IonicModule,
-    CommonModule,
-    TranslateModule,
-    HttpClientModule
+    TranslateModule
   ],
   exports: [
+    TranslateModule,
+    HttpClientModule,
     ReactiveFormsModule,
     IonicModule,
     CommonModule,
-    ...COMPONENTS,
-    TranslateModule,
-    HttpClientModule
+    SharedFactoriesModule,
+    SharedServicesModule,
+    SharedPipesModule,
+    SharedComponentsModule,
+    SharedPagesModule,
+    SharedDirectivesModule
   ]
 })
 export class SharedModule {

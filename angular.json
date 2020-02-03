@@ -317,6 +317,9 @@
                 "input": "node_modules/@ionic/angular/css/flex-utils.css"
               },
               {
+                "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+              },
+              {
                 "input": "src/theme/variables.css"
               }
             ],

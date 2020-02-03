@@ -2,11 +2,13 @@ import {EventEmitter, Input, Output} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 
 import {IFormOptions} from "../../../models";
-import {getModelFieldKeys} from "@smartsoft001/models";
 
 export abstract class FormBaseComponent<T> {
   private _fields: Array<string>;
   private _model: any;
+  private _form: FormGroup;
+
+  mode: string;
 
   get fields(): Array<string> {
     return this._fields;
@@ -16,11 +18,19 @@ export abstract class FormBaseComponent<T> {
       return this._model;
   }
 
-  @Input() form: FormGroup;
+  @Input() set form(val: FormGroup) {
+    this._form = val;
+    this._fields = Object.keys(this._form.controls);
+  }
+  get form(): FormGroup {
+    return this._form;
+  }
+
   @Input() set options(obj: IFormOptions<T>) {
       this._model = obj.model;
-      this._fields = getModelFieldKeys(this._model.constructor);
+      this.mode = obj.mode;
   }
+
   @Output() invokeSubmit = new EventEmitter();
 
   submit(): void {

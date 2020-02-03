@@ -1,36 +1,51 @@
-import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
 import { RouterModule } from "@angular/router";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {TranslateModule} from "@ngx-translate/core";
 
 // required
 import { IonicModule } from "@ionic/angular";
-import { TranslateModule } from "@ngx-translate/core";
 
 import { AppComponent } from "./app.component";
 import { environment } from "../environments/environment";
-import {NgrxSharedModule, SharedModule} from "@smartsoft001/angular";
-import {AuthModule, PermissionsGuard} from "@smartsoft001/auth-shell-angular";
+import { NgrxSharedModule, SharedModule } from "@smartsoft001/angular";
+import { AuthModule, PermissionsGuard } from "@smartsoft001/auth-shell-angular";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+      BrowserAnimationsModule,
     RouterModule.forRoot(
       [
         {
-          path: "shared",
-          canActivate: [ PermissionsGuard ],
+          path: "users",
+          canActivate: [PermissionsGuard],
           data: {
-            expectedPermissions: ['admin']
+              expectedPermissions: ["admin"]
           },
           loadChildren: () =>
-            import("./shared/shared.module").then(m => m.SharedModule)
+              import("./users/users.module").then(m => m.UsersModule)
+      },
+          {
+              path: "todos",
+              canActivate: [PermissionsGuard],
+              data: {
+                  expectedPermissions: ["admin"]
+              },
+              loadChildren: () =>
+                  import("./todos/todos.module").then(m => m.TodosModule)
+          },
+        {
+          path: "login",
+          loadChildren: () =>
+            import("./login/login.module").then(m => m.LoginModule)
         },
-      { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) }
+        { path: "", redirectTo: "/users", pathMatch: "full" }
       ],
       { initialNavigation: "enabled", useHash: true }
     ),
@@ -44,17 +59,19 @@ import {AuthModule, PermissionsGuard} from "@smartsoft001/auth-shell-angular";
         }
       }
     ),
+      HttpClientModule,
     TranslateModule.forRoot(),
     IonicModule.forRoot(),
     EffectsModule.forRoot([]),
-    SharedModule,
-    NgrxSharedModule,
-    AuthModule.forRoot({
-      apiUrl: 'http://localhost:3333',
-      clientId: 'test'
-    }),
+      SharedModule,
+      AuthModule.forRoot({
+          apiUrl: environment.apiUrl + "auth",
+          clientId: "admin"
+      }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+      SharedModule,
+      NgrxSharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

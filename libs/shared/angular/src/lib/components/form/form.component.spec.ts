@@ -9,11 +9,9 @@ import { CommonModule } from "@angular/common";
 import { FormComponent } from "./form.component";
 import { FormStandardComponent } from "./standard/standard.component";
 import { FormFactory } from "../../factories";
-import { InputComponent } from "../input";
-import { InputErrorComponent } from "../input/error/error.component";
-import { InputTextComponent } from "../input/text/text.component";
-import { InputPasswordComponent } from "../input/password/password.component";
 import {Model} from "@smartsoft001/models";
+import { INPUT_COMPONENTS } from '../components.module';
+import {PIPES} from "../../pipes/pipes.module";
 
 describe("shared-angular: FormComponent", () => {
   let component: FormComponent<any>;
@@ -25,13 +23,11 @@ describe("shared-angular: FormComponent", () => {
       declarations: [
         FormComponent,
         FormStandardComponent,
-        InputComponent,
-        InputErrorComponent,
-        InputTextComponent,
-        InputPasswordComponent
+        INPUT_COMPONENTS,
+          PIPES
       ],
       imports: [
-        IonicModule.forRoot(),
+        IonicModule,
         ReactiveFormsModule,
         TranslateModule,
         CommonModule
@@ -66,7 +62,7 @@ describe("shared-angular: FormComponent", () => {
 
       setTimeout(() => {
         expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(model);
+        expect(spy).toHaveBeenCalledWith(model, { "mode": undefined });
         expect(component.form).toBe(form);
 
         done();

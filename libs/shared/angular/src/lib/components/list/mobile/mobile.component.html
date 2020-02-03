@@ -1,0 +1,14 @@
+<ion-list>
+    <ion-item *ngFor="let item of list$ | async"
+              [smartDetails]="{ component: detailsComponent, params: detailsComponentProps, mode: 'bottom' }"
+              (smartDetailsShowed)='select && select(item.id)'
+              (click)='unselect && unselect()'
+    >
+        <ion-label>
+            <ng-container *ngFor="let key of keys; let first = first">
+                <h2 *ngIf='first'>{{ item[key] }}</h2>
+                <p *ngIf='!first'>{{ item[key] }}</p>
+            </ng-container>
+        </ion-label>
+    </ion-item>
+</ion-list>

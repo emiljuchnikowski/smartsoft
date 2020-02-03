@@ -7,3 +7,14 @@
 /libs/shared/models/dist/
 /libs/shared/domain-core/dist/
 /libs/shared/utils/dist/
+/libs/shared/angular/package-lock.json
+/libs/shared/angular/dist/
+/libs/shared/angular/node_modules/
+/libs/auth/shell/angular/dist/
+/libs/auth/shell/angular/node_modules/
+/libs/crud/shell/angular/dist/
+/libs/crud/shell/angular/node_modules/
+/libs/crud/shell/angular/package-lock.json
+/libs/shared/domain-core/dist/
+/libs/shared/domain-core/node_modules/
+/libs/shared/domain-core/package-lock.json

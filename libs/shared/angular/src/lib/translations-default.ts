@@ -17,33 +17,69 @@ export function setDefaultTranslationsAndLang(service: TranslateService) {
 }
 
 export interface ITranslateData {
+    details: string,
+    admin: string,
+    add: string,
+    change: string,
+    confirm: string,
+    cancel: string,
+
+    APP: {
+        logout: string,
+        logged: string
+    };
     MODEL: {
         firstName: string,
         lastName: string,
         password: string,
-        username: string
-    },
+        passwordConfirm: string,
+        username: string,
+        disabled: string,
+        permissions: string,
+        email: string,
+        price: string,
+        date: string,
+    };
     INPUT: {
         ERRORS: {
-            required: string
+            required: string,
+            confirm: string
         }
-    },
+    };
     ERRORS: {
         invalidUsernameOrPassword: string,
         other: string
-    }
+    };
 }
 
 export const TRANSLATE_DATA_ENG: ITranslateData = {
+    details: 'details',
+    admin: 'admin',
+    add: 'add',
+    change: 'change',
+    confirm: 'confirm',
+    cancel: 'cancel',
+    
+    APP: {
+        logout: 'log out',
+        logged: 'logged'
+    },
     MODEL: {
         firstName: 'first name',
         lastName: 'last name',
         password: 'password',
-        username: 'user name'
+        passwordConfirm: 'confirm password',
+        username: 'user name',
+        disabled: 'disabled',
+        permissions: 'permissions',
+        email: 'email',
+        price: 'price',
+        date: 'date',
     },
     INPUT: {
         ERRORS: {
-            required: 'field is required'
+            required: 'field is required',
+            confirm: 'bad confirmed'
         }
     },
     ERRORS: {
@@ -53,15 +89,33 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
 };
 
 export const TRANSLATE_DATA_PL: ITranslateData = {
+    details: 'szczegóły',
+    admin: 'administrator',
+    add: 'dodaj',
+    change: 'zmień',
+    confirm: 'potwierdź',
+    cancel: 'anuluj',
+
+    APP: {
+        logout: 'wyloguj się',
+        logged: 'zalogowany'
+    },
     MODEL: {
         firstName: 'imię',
         lastName: 'nazwisko',
         password: 'hasło',
-        username: 'nazwa użytkownika'
+        passwordConfirm: 'powtórz hasło',
+        username: 'nazwa użytkownika',
+        disabled: 'nieaktywny',
+        permissions: 'uprawnienia',
+        email: 'email',
+        price: 'cena',
+        date: 'data',
     },
     INPUT: {
         ERRORS: {
-            required: 'to pole jest wymagane'
+            required: 'to pole jest wymagane',
+            confirm: 'źle powtórzone'
         }
     },
     ERRORS: {

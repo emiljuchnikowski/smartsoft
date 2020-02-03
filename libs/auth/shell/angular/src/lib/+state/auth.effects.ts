@@ -1,19 +1,23 @@
-import { Injectable } from "@angular/core";
+import {Injectable, Optional} from "@angular/core";
 import { createEffect, Actions } from "@ngrx/effects";
 import { DataPersistence } from "@nrwl/angular";
 import { map } from "rxjs/operators";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 
 import * as fromAuth from "./auth.reducer";
 import * as AuthActions from "./auth.actions";
-import { AuthService } from "../services";
+import { AuthService } from "../services/auth/auth.service";
 
 @Injectable()
 export class AuthEffects {
   initToken$ = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.initToken, {
       run: () => {
-        return AuthActions.initTokenSuccess({ token: this.service.token });
+        return AuthActions.initTokenSuccess({
+          token: this.service.token,
+          username: this.service.username
+        });
       },
 
       onError: (action: ReturnType<typeof AuthActions.initToken>, error) => {
@@ -23,12 +27,20 @@ export class AuthEffects {
     })
   );
 
-  createToken$ = createEffect(() =>
+  createToken$: Observable<any> = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.createToken, {
       run: (action: ReturnType<typeof AuthActions.createToken>) => {
         return this.service
           .createToken({ username: action.username, password: action.password })
-          .pipe(map(token => AuthActions.createTokenSuccess({ token })));
+          .pipe(
+            map(
+              token =>
+                AuthActions.createTokenSuccess({
+                  token,
+                  username: action.username
+                }) as any
+            )
+          );
       },
 
       onError: (action: ReturnType<typeof AuthActions.createToken>, error) => {
@@ -38,22 +50,31 @@ export class AuthEffects {
     })
   );
 
-    createTokenSuccess$ = createEffect(() =>
-        this.dataPersistence.fetch(AuthActions.createTokenSuccess, {
-            run: () => {
-                this.router.navigateByUrl('');
-            }
-        }), { dispatch: false }
-    );
+  createTokenSuccess$: Observable<any> = createEffect(
+    () =>
+      this.dataPersistence.fetch(AuthActions.createTokenSuccess, {
+        run: () => {
+          this.router.navigateByUrl("");
+        }
+      }),
+    { dispatch: false }
+  );
 
-  removeToken$ = createEffect(() =>
+  removeTokenSuccess$: Observable<any> = createEffect(
+    () =>
+      this.dataPersistence.fetch(AuthActions.removeTokenSuccess, {
+        run: () => {
+          document.location.reload();
+        }
+      }),
+    { dispatch: false }
+  );
+
+  removeToken$: Observable<any> = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.removeToken, {
       run: () => {
-        return this.service.removeToken().pipe(
-          map(() => {
-            return AuthActions.removeTokenSuccess();
-          })
-        );
+        this.service.removeToken();
+        return AuthActions.removeTokenSuccess();
       },
 
       onError: (action: ReturnType<typeof AuthActions.removeToken>, error) => {
@@ -63,7 +84,7 @@ export class AuthEffects {
     })
   );
 
-  refreshToken$ = createEffect(() =>
+  refreshToken$: Observable<any> = createEffect(() =>
     this.dataPersistence.fetch(AuthActions.refreshToken, {
       run: () => {
         return this.service.refreshToken().pipe(
@@ -80,9 +101,22 @@ export class AuthEffects {
     })
   );
 
+  // refreshTokenInterval$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(AuthActions.createTokenSuccess),
+  //     switchMap(action =>
+  //       interval(((action.token.expired_in * 3) / 4) * 1000).pipe(
+  //         map(() => {
+  //           return AuthActions.refreshToken();
+  //         })
+  //       )
+  //     )
+  //   )
+  // );
+
   constructor(
     private actions$: Actions,
-    private service: AuthService,
+    @Optional() private service: AuthService,
     private dataPersistence: DataPersistence<fromAuth.AuthPartialState>,
     private router: Router
   ) {}

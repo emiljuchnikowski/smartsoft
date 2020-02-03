@@ -1,3 +1,10 @@
-<span *ngIf="errors?.required">
+<span *ngIf="errors?.required; else checkConfirm">
     {{ 'INPUT.ERRORS.required' | translate }}
 </span>
+
+<ng-template #checkConfirm>
+    <span *ngIf="errors?.confirm">
+        {{ 'INPUT.ERRORS.confirm' | translate }}
+    </span>
+</ng-template>
+

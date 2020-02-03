@@ -7,10 +7,8 @@ import { TranslateModule } from "@ngx-translate/core";
 
 import { FormStandardComponent } from "./standard.component";
 import { FormFactory } from "../../../factories";
-import { InputComponent } from "../../input";
-import { InputErrorComponent } from "../../input/error/error.component";
-import { InputTextComponent } from "../../input/text/text.component";
-import { InputPasswordComponent } from "../../input/password/password.component";
+import {INPUT_COMPONENTS} from "../../../components/components.module";
+import {PIPES} from "../../../pipes/pipes.module";
 
 describe("shared-angular: StandardComponent", () => {
   let component: FormStandardComponent<any>;
@@ -20,10 +18,8 @@ describe("shared-angular: StandardComponent", () => {
     TestBed.configureTestingModule({
       declarations: [
         FormStandardComponent,
-        InputComponent,
-        InputErrorComponent,
-        InputTextComponent,
-        InputPasswordComponent
+        INPUT_COMPONENTS,
+          PIPES
       ],
       providers: [FormFactory],
       imports: [

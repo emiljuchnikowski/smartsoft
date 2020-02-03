@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { createEffect, Actions } from "@ngrx/effects";
-
-import {ErrorService} from "../services";
 import { filter, tap } from "rxjs/operators";
 import { Action } from "@ngrx/store";
+import {Observable} from "rxjs";
+
+import {ErrorService} from "../services/error/error.service";
 
 @Injectable()
 export class ErrorEffects {
-  error$ = createEffect(
+  error$: Observable<any> = createEffect(
     () =>
       this.actions$.pipe(
         filter(action => {

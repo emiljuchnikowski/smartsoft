@@ -75,7 +75,7 @@ describe("crud-shell-nestjs: CrudController", () => {
       await controller.create(data, user, res);
 
       expect(spec).toHaveBeenCalledTimes(1);
-      expect(spec).toHaveBeenCalledWith("Location", "http://test/123");
+      expect(spec).toHaveBeenCalledWith("Location", "http://test//123");
 
       done();
     });

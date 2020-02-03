@@ -1,8 +1,10 @@
 import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {Component} from "@angular/core";
+import {ChangeDetectorRef, Component} from "@angular/core";
 import {of} from "rxjs";
+import {Router} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
 
 import { AppBaseComponent } from './base.component';
 
@@ -12,14 +14,19 @@ describe('shared-angular: AppBaseComponent', () => {
         selector: 'smartsoft-test',
         template: 'test'
     })
-    class TestFormBaseComponent extends AppBaseComponent { }
+    class TestFormBaseComponent extends AppBaseComponent {
+        constructor(router: Router, cd: ChangeDetectorRef) {
+            super(router, cd);
+        }
+    }
 
     let component: TestFormBaseComponent;
     let fixture: ComponentFixture<TestFormBaseComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ TestFormBaseComponent ]
+            declarations: [ TestFormBaseComponent ],
+            imports: [ RouterTestingModule ]
         })
             .compileComponents();
     }));
@@ -38,7 +45,9 @@ describe('shared-angular: AppBaseComponent', () => {
         it('should true when logged and block for anonymous', done => {
             component.options = {
                 provider: {
-                    logged$: of(true)
+                    logged$: of(true),
+                    username$: of('test'),
+                    logout: () => {}
                 },
                 menu: {
                     showForAnonymous: false
@@ -56,7 +65,9 @@ describe('shared-angular: AppBaseComponent', () => {
         it('should true when not logged and allow for anonymous', done => {
             component.options = {
                 provider: {
-                    logged$: of(false)
+                    logged$: of(false),
+                    username$: of('test'),
+                    logout: () => {}
                 },
                 menu: {
                     showForAnonymous: true
@@ -74,7 +85,9 @@ describe('shared-angular: AppBaseComponent', () => {
         it('should false when not logged and block for anonymous', done => {
             component.options = {
                 provider: {
-                    logged$: of(false)
+                    logged$: of(false),
+                    username$: of('test'),
+                    logout: () => {}
                 },
                 menu: {
                     showForAnonymous: false
@@ -89,4 +102,23 @@ describe('shared-angular: AppBaseComponent', () => {
             });
         });
     });
+
+    describe('menuItems$', () => {
+        it('should set from option', () => {
+            const menuItems$ = of([]);
+            component.options = {
+                provider: {
+                    logged$: of(false),
+                    username$: of('test'),
+                    logout: () => {}
+                },
+                menu: {
+                    showForAnonymous: true,
+                    items$: menuItems$
+                }
+            };
+
+            expect(component.menuItems$).toBe(menuItems$);
+        });
+    })
 });

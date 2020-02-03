@@ -1,0 +1,5 @@
+<p *ngIf='options?.item$ | async; let item'>
+    <span *ngFor="let val of item[options?.key]; let first = first">
+        <ng-container *ngIf="!first">,&nbsp;</ng-container>{{ val | translate }}
+    </span>
+</p>

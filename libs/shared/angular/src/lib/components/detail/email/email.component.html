@@ -1,0 +1,3 @@
+<p>
+    <a *ngIf='options?.item$ | async; let item' [href]="'mailto:' + item[options?.key]">{{ item[options?.key] }}</a>
+</p>

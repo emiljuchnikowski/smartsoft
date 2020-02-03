@@ -9,7 +9,7 @@ export const initToken = createAction("[Auth] Init token");
 
 export const initTokenSuccess = createAction(
   "[Auth] Init Token Success",
-  props<{ token: IAuthToken }>()
+  props<{ token: IAuthToken, username: string }>()
 );
 
 export const initTokenFailure = createAction(
@@ -27,7 +27,7 @@ export const createToken = createAction(
 
 export const createTokenSuccess = createAction(
     "[Auth] Create Token Success",
-    props<{ token: IAuthToken }>()
+    props<{ token: IAuthToken, username: string }>()
 );
 
 export const createTokenFailure = createAction(

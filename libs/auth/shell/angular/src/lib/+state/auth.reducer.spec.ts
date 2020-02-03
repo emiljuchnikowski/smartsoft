@@ -16,17 +16,20 @@ describe("auth-shell-angular:Auth Reducer", () => {
 
       expect(result.loaded).toBe(false);
       expect(result.token).toBe(null);
+      expect(result.username).toBe(null);
       expect(result.error).toBe(null);
     });
 
     it("initTokenSuccess should set data to state", () => {
       const token = {} as any;
-      const action = AuthActions.initTokenSuccess({ token });
+      const username = 'username';
+      const action = AuthActions.initTokenSuccess({ token, username });
 
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(true);
       expect(result.token).toBe(token);
+      expect(result.username).toBe(username);
       expect(!!result.error).toBe(false);
     });
 
@@ -53,7 +56,8 @@ describe("auth-shell-angular:Auth Reducer", () => {
 
     it("createTokenSuccess should set data to state", () => {
       const token = {} as any;
-      const action = AuthActions.createTokenSuccess({ token });
+      const username = 'username';
+      const action = AuthActions.createTokenSuccess({ token, username });
 
       const result: State = reducer(initialState, action);
 
