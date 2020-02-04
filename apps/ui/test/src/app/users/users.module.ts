@@ -8,6 +8,7 @@ import {CrudModule} from "@smartsoft001/crud-shell-angular";
 import {ChangePasswordComponent} from "./component";
 import {environment} from "../../environments/environment";
 import {IonicModule} from "@ionic/angular";
+import {SERVICES} from "./services";
 
 @NgModule({
   declarations: [ChangePasswordComponent],
@@ -19,6 +20,9 @@ import {IonicModule} from "@ionic/angular";
 export class FakeModule {}
 
 @NgModule({
+  providers: [
+      ...SERVICES
+  ],
   imports: [
     CommonModule,
     SharedModule,
