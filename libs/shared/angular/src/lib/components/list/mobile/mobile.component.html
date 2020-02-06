@@ -1,14 +1,20 @@
 <ion-list>
-    <ion-item *ngFor="let item of list$ | async"
-              [smartDetails]="{ component: detailsComponent, params: detailsComponentProps, mode: 'bottom' }"
-              (smartDetailsShowed)='select && select(item.id)'
-              (click)='unselect && unselect()'
-    >
-        <ion-label>
-            <ng-container *ngFor="let key of keys; let first = first">
-                <h2 *ngIf='first'>{{ item[key] }}</h2>
-                <p *ngIf='!first'>{{ item[key] }}</p>
-            </ng-container>
-        </ion-label>
-    </ion-item>
+    <ion-item-sliding *ngFor="let item of list$ | async">
+        <ion-item-options side="start" (ionSwipe)="removeHandler && removeHandler(item)" *ngIf="removeHandler">
+            <ion-item-option color="danger" expandable (click)="removeHandler && removeHandler(item)">
+                {{ 'delete' | translate }}
+            </ion-item-option>
+        </ion-item-options>
+        <ion-item
+                [smartDetails]="{ component: detailsComponent, params: detailsComponentProps, mode: 'bottom' }"
+                (smartDetailsShowed)='select && select(item.id)'
+                (click)='unselect && unselect()'>
+            <ion-label>
+                <ng-container *ngFor="let key of keys; let first = first">
+                    <h2 *ngIf='first'>{{ item[key] }}</h2>
+                    <p *ngIf='!first'>{{ item[key] }}</p>
+                </ng-container>
+            </ion-label>
+        </ion-item>
+    </ion-item-sliding>
 </ion-list>

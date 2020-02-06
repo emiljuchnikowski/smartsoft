@@ -23,7 +23,12 @@ export interface ITranslateData {
     change: string,
     confirm: string,
     cancel: string,
+    delete: string,
+    undo: string,
 
+    OBJECT: {
+        deleted: string
+    },
     APP: {
         logout: string,
         logged: string
@@ -59,7 +64,12 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     change: 'change',
     confirm: 'confirm',
     cancel: 'cancel',
-    
+    delete: 'delete',
+    undo: 'undo',
+
+    OBJECT: {
+        deleted: 'object deleted'
+    },
     APP: {
         logout: 'log out',
         logged: 'logged'
@@ -95,7 +105,12 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     change: 'zmień',
     confirm: 'potwierdź',
     cancel: 'anuluj',
+    delete: 'usuń',
+    undo: 'cofnij',
 
+    OBJECT: {
+        deleted: 'obiekt został usunięty'
+    },
     APP: {
         logout: 'wyloguj się',
         logged: 'zalogowany'

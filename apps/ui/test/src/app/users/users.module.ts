@@ -41,6 +41,7 @@ export class FakeModule {}
         },
         edit: true,
         add: true,
+        remove: true
       }
     })
   ]
