@@ -16,14 +16,11 @@ export class ListDesktopComponent<T extends IEntity<string>> extends ListBaseCom
 
   get desktopKeys(): Array<string> {
     if (this.keys) {
-      if (this.detailsComponent) {
-        return [
-          ...this.keys,
-          "detailsAction"
-        ];
-      } else {
-        return this.keys;
-      }
+      return [
+        ...this.keys,
+        ...(this.detailsComponent ? ["detailsAction"] : []),
+        ...(this.editHandler ? ["editAction"] : [])
+      ];
     }
 
     return null;

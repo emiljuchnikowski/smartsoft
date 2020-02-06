@@ -5,6 +5,7 @@
                 {{ 'delete' | translate }}
             </ion-item-option>
         </ion-item-options>
+
         <ion-item
                 [smartDetails]="{ component: detailsComponent, params: detailsComponentProps, mode: 'bottom' }"
                 (smartDetailsShowed)='select && select(item.id)'
@@ -16,5 +17,11 @@
                 </ng-container>
             </ion-label>
         </ion-item>
+
+        <ion-item-options side="end" *ngIf="editHandler">
+            <ion-item-option (click)="editHandler && editHandler(item.id)">
+                &nbsp;{{ 'edit' | translate }}&nbsp;&nbsp;
+            </ion-item-option>
+        </ion-item-options>
     </ion-item-sliding>
 </ion-list>

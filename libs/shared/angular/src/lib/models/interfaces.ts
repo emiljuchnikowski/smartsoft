@@ -23,6 +23,7 @@ export interface IButtonOptions {
 
 export interface ICardOptions {
   title?: string;
+  buttons?: Array<IIconButtonOptions>;
 }
 
 export interface IDetailsComponentFactories<T> {
@@ -70,10 +71,10 @@ export interface IPageOptions {
   hideHeader?: boolean;
   hideMenuButton?: boolean;
   showBackButton?: boolean;
-  endButtons?: Array<IPageButtonOptions>;
+  endButtons?: Array<IIconButtonOptions>;
 }
 
-export interface IPageButtonOptions {
+export interface IIconButtonOptions {
   icon: string;
   handler: () => void;
   disabled$?: Observable<boolean>;
