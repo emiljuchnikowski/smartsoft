@@ -4,7 +4,7 @@
     matColumnDef="{{ key }}"
   >
     <div [ngSwitch]="key">
-      <ng-container *ngSwitchCase="'detailsAction'">
+      <ng-container *ngSwitchCase="'editAction'">
         <th mat-header-cell class="cell-details" *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
           <smart-button (click)="editHandler(element.id)"
@@ -14,7 +14,7 @@
         </td>
       </ng-container>
 
-      <ng-container *ngSwitchCase="'editAction'">
+      <ng-container *ngSwitchCase="'detailsAction'">
         <th mat-header-cell class="cell-details" *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
           <smart-button [options]='detailsButtonOptions'
