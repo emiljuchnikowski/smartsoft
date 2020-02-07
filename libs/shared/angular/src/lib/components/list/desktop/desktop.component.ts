@@ -18,8 +18,9 @@ export class ListDesktopComponent<T extends IEntity<string>> extends ListBaseCom
     if (this.keys) {
       return [
         ...this.keys,
-        ...(this.detailsComponent ? ["detailsAction"] : []),
-        ...(this.editHandler ? ["editAction"] : [])
+        ...(this.removeHandler ? ["removeAction"] : []),
+        ...(this.editHandler ? ["editAction"] : []),
+        ...(this.detailsComponent ? ["detailsAction"] : [])
       ];
     }
 

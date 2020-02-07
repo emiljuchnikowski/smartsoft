@@ -4,25 +4,35 @@
     matColumnDef="{{ key }}"
   >
     <div [ngSwitch]="key">
-      <ng-container *ngSwitchCase="'editAction'">
-        <th mat-header-cell class="cell-details" *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <smart-button (click)="editHandler(element.id)"
-          >
-            {{ 'change' | translate }}
-          </smart-button>
-        </td>
-      </ng-container>
-
       <ng-container *ngSwitchCase="'detailsAction'">
         <th mat-header-cell class="cell-details" *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <smart-button [options]='detailsButtonOptions'
+          <ion-button (click)='detailsButtonOptions.click()'
                         [smartDetails]="{ component: detailsComponent, params: detailsComponentProps, mode: 'bottom' }"
                         (smartDetailsShowed)='select && select(element.id)'
           >
-            {{ 'details' | translate }}
-          </smart-button>
+            <ion-icon slot="icon-only" name="more"></ion-icon>
+          </ion-button>
+        </td>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'removeAction'">
+        <th mat-header-cell class="cell-details" *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <ion-button (click)="removeHandler(element)"
+          >
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </td>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'editAction'">
+        <th mat-header-cell class="cell-details" *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <ion-button (click)="editHandler(element.id)"
+          >
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-button>
         </td>
       </ng-container>
 
