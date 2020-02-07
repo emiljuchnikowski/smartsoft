@@ -5,5 +5,9 @@
 
 <ion-item lines="none" *ngFor="let item of fieldOptions?.possibilities | smartEnumToList">
     <ion-label>{{item | translate}}</ion-label>
-    <ion-checkbox slot="end" [checked]="checked(item)" (ionChange)="change(item)"></ion-checkbox>
+
+    <ion-checkbox slot="end" *ngIf="checked(item); else noChecned" [checked]="true" (ionChange)="change(item)"></ion-checkbox>
+    <ng-template #noChecned>
+        <ion-checkbox slot="end" [checked]="false" (ionChange)="change(item)"></ion-checkbox>
+    </ng-template>
 </ion-item>

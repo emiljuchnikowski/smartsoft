@@ -18,15 +18,12 @@ export class AuthFacade {
 
   constructor(private store: Store<fromAuth.AuthPartialState>, private config: AuthConfig, private actions$: ActionsSubject) {
     this.actions$.pipe(
-        filter(action => action.type === AuthActions.createTokenSuccess.type)
+        filter(action =>
+            action.type === AuthActions.createTokenSuccess.type
+            || action.type === AuthActions.initTokenSuccess.type
+        )
     ).subscribe((action: Action & { token: IAuthToken }) => {
-      if (this._intervalId) {
-        clearInterval(this._intervalId);
-      }
-
-      this._intervalId = setInterval(() => {
-        this.store.dispatch(AuthActions.refreshToken());
-      }, action.token.expired_in * 0.75 * 1000);
+      this.initRefreshToken(action.token)
     });
   }
 
@@ -40,5 +37,17 @@ export class AuthFacade {
 
   logout(): void {
     this.store.dispatch(AuthActions.removeToken());
+  }
+
+  private initRefreshToken(token: IAuthToken): void {
+    if (!token || !token.expired_in) return;
+
+    if (this._intervalId) {
+      clearInterval(this._intervalId);
+    }
+
+    this._intervalId = setInterval(() => {
+      this.store.dispatch(AuthActions.refreshToken());
+    }, token.expired_in * 0.75 * 1000);
   }
 }
