@@ -32,7 +32,7 @@ export class EditComponent<T extends IEntity<string>> implements OnInit, OnDestr
     private router: Router,
     private facade: CrudFacade<T>,
     private route: ActivatedRoute,
-    private config: CrudFullConfig<T>,
+    public config: CrudFullConfig<T>,
     private location: Location
   ) {
     this.selected$ = this.facade.selected$;

@@ -11,6 +11,7 @@ import {
 import { SharedConfig, SharedModule } from "@smartsoft001/nestjs";
 import { DOMAIN_HANDLERS } from "@smartsoft001/crud-domain";
 import { MongoModule } from "@smartsoft001/mongo";
+import {AuthJwtGuard} from "./guards/auth/auth.guard";
 
 @Module({})
 export class CrudShellNestjsModule {
@@ -29,7 +30,7 @@ export class CrudShellNestjsModule {
     return {
       module: CrudShellNestjsModule,
       controllers: CONTROLLERS,
-      providers: [...SERVICES, ...COMMAND_HANDLERS, ...DOMAIN_HANDLERS, ...QUERY_HANDLERS],
+      providers: [...SERVICES, ...COMMAND_HANDLERS, ...DOMAIN_HANDLERS, ...QUERY_HANDLERS, AuthJwtGuard],
       imports: [
         PassportModule.register({ defaultStrategy: "jwt", session: false }),
         JwtModule.register({

@@ -5,6 +5,7 @@ import {User} from "../../user.dto";
 import {IButtonOptions, IFormOptions} from "@smartsoft001/angular";
 import {CrudFacade} from "@smartsoft001/crud-shell-angular";
 import {map} from "rxjs/operators";
+import {UserService} from "../../services";
 
 @Component({
   selector: 'smartsoft-change-password',
@@ -37,12 +38,19 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     }
   };
 
-  constructor(public facade: CrudFacade<User>) { }
+  constructor(public facade: CrudFacade<User>, private service: UserService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this._subscriptions.add(this.facade.selected$.subscribe(selected => {
       this._user = selected;
     }));
+
+    console.log('Action result', this.service.log1());
+    console.log('Action result (promise)', await this.service.log2());
+
+    this.service.log3(2, new Date()).subscribe((...args) => {
+      console.log('Action result (rxjs)', args);
+    });
   }
 
   ngOnDestroy(): void {

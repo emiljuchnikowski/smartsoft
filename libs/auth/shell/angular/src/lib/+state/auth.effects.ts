@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable, Optional} from "@angular/core";
 import { createEffect, Actions } from "@ngrx/effects";
 import { DataPersistence } from "@nrwl/angular";
 import { map } from "rxjs/operators";
@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 
 import * as fromAuth from "./auth.reducer";
 import * as AuthActions from "./auth.actions";
-import { AuthService } from "../services";
+import { AuthService } from "../services/auth/auth.service";
 
 @Injectable()
 export class AuthEffects {
@@ -116,7 +116,7 @@ export class AuthEffects {
 
   constructor(
     private actions$: Actions,
-    private service: AuthService,
+    @Optional() private service: AuthService,
     private dataPersistence: DataPersistence<fromAuth.AuthPartialState>,
     private router: Router
   ) {}

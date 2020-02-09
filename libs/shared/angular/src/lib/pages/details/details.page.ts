@@ -32,6 +32,17 @@ export class DetailsPage<T extends IEntity<string>> {
   private initButtons(): void {
     const buttons = [];
 
+    if (this.detailsOptions.removeHandler) {
+      buttons.push({
+        handler: () => {
+          this.detailsOptions.item$.pipe(first()).subscribe(item => {
+            this.detailsOptions.removeHandler(item);
+            this.modalService.dismiss();
+          });
+        }, icon: 'trash'
+      });
+    }
+
     if (this.detailsOptions.editHandler) {
       buttons.push({
         handler: () => {

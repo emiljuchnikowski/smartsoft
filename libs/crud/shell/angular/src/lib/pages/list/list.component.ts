@@ -72,7 +72,7 @@ export class ListComponent<T extends IEntity<string>> implements OnInit {
         loading$: this.facade.loaded$.pipe(map(l => !l))
       },
       type: this.config.type,
-      details: {
+      details: this.config.details ? {
         provider: {
           getData: id => {
             this.facade.select(id);
@@ -93,12 +93,17 @@ export class ListComponent<T extends IEntity<string>> implements OnInit {
                 ).factory
               : null
         }
-      },
-      edit: {
+      } : null,
+      edit: this.config.edit ?  {
         options: {
           routingPrefix: "/" + this.router.routerState.snapshot.url + "/"
         }
-      }
+      } : null,
+      remove: this.config.remove ? {
+        provider: {
+          invoke: id => this.facade.delete(id)
+        }
+      } : null
     };
 
     this.cd.detectChanges();

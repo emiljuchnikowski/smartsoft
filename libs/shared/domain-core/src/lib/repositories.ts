@@ -1,9 +1,6 @@
-import {Injectable} from "@nestjs/common";
-
-import {IEntity} from "@smartsoft001/domain-core";
 import {IUser} from "@smartsoft001/users";
+import { IEntity } from './interfaces';
 
-@Injectable()
 export abstract class IItemRepository<T extends IEntity<string>> {
     abstract create(item: T, user: IUser): Promise<void>;
 

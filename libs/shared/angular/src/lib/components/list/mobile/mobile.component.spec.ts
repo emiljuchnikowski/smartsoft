@@ -7,6 +7,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
 import { ListMobileComponent } from './mobile.component';
 import {DetailsDirective} from "../../../directives/details/details.directive";
+import {ToastService} from "@smartsoft001/angular";
 
 describe('MobileComponent', () => {
   let component: ListMobileComponent<any>;
@@ -14,6 +15,7 @@ describe('MobileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers: [ ToastService ],
       declarations: [ ListMobileComponent, DetailsDirective ],
       imports: [ IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule ]
     })
