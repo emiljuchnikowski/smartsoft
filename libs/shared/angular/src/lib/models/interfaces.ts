@@ -58,6 +58,9 @@ export interface IFormOptions<T> {
   model: T;
   mode?: "create" | "update" | string;
   loading$?: Observable<boolean>;
+  possibilities?: {
+    [key: string]: Observable<{ id: any, text: string }[]>;
+  }
 }
 
 export interface IMenuItem {
@@ -76,7 +79,9 @@ export interface IPageOptions {
 
 export interface IIconButtonOptions {
   icon: string;
-  handler: () => void;
+  handler?: () => void;
+  component?: any;
+  type?: 'default' | 'popover'
   disabled$?: Observable<boolean>;
 }
 
@@ -84,6 +89,7 @@ export type InputOptions<T> = IInputOptions & IInputFromFieldOptions<T>;
 
 export interface IInputOptions {
   control: AbstractControl;
+  possibilities$?: Observable<{ id: any, text: string }[]>;
 }
 
 export interface IInputFromFieldOptions<T> {

@@ -6,7 +6,9 @@ export enum FieldType {
     enum = "enum",
     currency = "currency",
     date = "date",
-    object = "object"
+    object = "object",
+    file = "file",
+    radio = "radio"
 }
 
 export interface IModelMetadata {

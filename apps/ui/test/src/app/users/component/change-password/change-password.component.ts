@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
+import {of, Subscription} from "rxjs";
 
 import {User} from "../../user.dto";
 import {IButtonOptions, IFormOptions} from "@smartsoft001/angular";
@@ -21,7 +21,13 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   formOptions: IFormOptions<User> = {
     mode: 'changePassword',
     model: new User(),
-    loading$: this.facade.loaded$.pipe(map(x => !x))
+    loading$: this.facade.loaded$.pipe(map(x => !x)),
+    possibilities: {
+      mode: of([
+        { id: 12, text: 'test1' },
+        { id: 13, text: 'test2' }
+      ])
+    }
   };
 
   buttonOptions: IButtonOptions = {

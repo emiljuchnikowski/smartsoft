@@ -26,9 +26,9 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "serve:api-auth": "ng serve api-auth",
-    "serve:api-crud": "ng serve api-crud",
-    "serve:ui-test": "ng serve ui-test",
+    "api-auth:serve": "ng serve api-auth",
+    "api-crud:api-crud": "ng serve api-crud",
+    "ui-test:serve": "ng serve ui-test",
     "shared-domain-core:build": "ng-packagr -p libs/shared/domain-core/package.json",
     "shared-domain-core:publish": "npm run shared-domain-core:build && npm publish libs/shared/domain-core/dist --access public",
     "shared-models:build": "ng-packagr -p libs/shared/models/package.json",
@@ -38,7 +38,8 @@
     "auth-shell-angular:build": "ng-packagr -p libs/auth/shell/angular/package.json",
     "auth-shell-angular:publish": "npm run auth-shell-angular:build && npm publish libs/auth/shell/angular/dist --access public",
     "crud-shell-angular:build": "ng-packagr -p libs/crud/shell/angular/package.json",
-    "crud-shell-angular:publish": "npm run crud-shell-angular:build && npm publish libs/crud/shell/angular/dist --access public"
+    "crud-shell-angular:publish": "npm run crud-shell-angular:build && npm publish libs/crud/shell/angular/dist --access public",
+    "docker-crud:publish": "docker push smartsoft001/crud_api:latest"
   },
   "private": true,
   "dependencies": {

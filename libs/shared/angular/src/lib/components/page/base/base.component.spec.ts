@@ -5,6 +5,7 @@ import {Component, ElementRef, Renderer2, Type} from "@angular/core";
 import {TranslateModule} from "@ngx-translate/core";
 import { Location } from '@angular/common';
 import {RouterTestingModule} from "@angular/router/testing";
+import {IonicModule, PopoverController} from "@ionic/angular";
 
 import {PageBaseComponent} from "./base.component";
 
@@ -16,8 +17,8 @@ describe('shared-angular: PageBaseComponent', () => {
         template: 'test'
     })
     class TestFormBaseComponent extends PageBaseComponent {
-        constructor(el: ElementRef, r: Renderer2, l: Location) {
-            super(el, r, l);
+        constructor(el: ElementRef, r: Renderer2, l: Location, pop: PopoverController) {
+            super(el, r, l, pop);
         }
     }
 
@@ -28,7 +29,7 @@ describe('shared-angular: PageBaseComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ TestFormBaseComponent ],
-            imports: [ TranslateModule.forRoot(), RouterTestingModule  ]
+            imports: [ TranslateModule.forRoot(), RouterTestingModule, IonicModule.forRoot()  ]
         })
             .compileComponents();
     }));

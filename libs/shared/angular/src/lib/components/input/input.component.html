@@ -15,6 +15,11 @@
                               [fieldOptions]="fieldOptions"
         ></smart-input-flag>
 
+        <smart-input-file class="input-type" *ngSwitchCase="FieldType.file"
+                          [options]="options"
+                          [fieldOptions]="fieldOptions"
+        ></smart-input-file>
+
         <smart-input-enum class="input-type" *ngSwitchCase="FieldType.enum"
                           [options]="options"
                           [fieldOptions]="fieldOptions"
@@ -34,6 +39,11 @@
                               [options]="options"
                               [fieldOptions]="fieldOptions"
         ></smart-input-date>
+
+        <smart-input-radio class="input-type" *ngSwitchCase="FieldType.radio"
+                          [options]="options"
+                          [fieldOptions]="fieldOptions"
+        ></smart-input-radio>
     </ng-container>
 </ion-item>
 

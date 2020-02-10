@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import {Component, NgModule} from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { SharedModule } from "@smartsoft001/angular";
@@ -19,7 +19,14 @@ import {SERVICES} from "./services";
 })
 export class FakeModule {}
 
+@Component({
+  template: 'test'
+})
+export class TestComponent {}
+
 @NgModule({
+  declarations: [TestComponent],
+  entryComponents: [TestComponent],
   providers: [
       ...SERVICES
   ],
@@ -41,7 +48,10 @@ export class FakeModule {}
         },
         edit: true,
         add: true,
-        remove: true
+        remove: true,
+        buttons: [
+          { type: "popover", icon: 'cloud-upload', component: TestComponent }
+        ]
       }
     })
   ]

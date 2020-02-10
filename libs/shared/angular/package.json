@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/angular",
-  "version": "1.0.31",
+  "version": "1.0.34",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
@@ -44,7 +44,7 @@
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "dependencies": {
     "@smartsoft001/domain-core": "^1.0.4",
-    "@smartsoft001/models": "^1.0.5",
+    "@smartsoft001/models": "^1.0.6",
     "@angular/animations": "^8.2.0",
     "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.0",

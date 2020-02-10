@@ -44,6 +44,7 @@ export interface ITranslateData {
         email: string,
         price: string,
         date: string,
+        file: string
     };
     INPUT: {
         ERRORS: {
@@ -85,6 +86,7 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
         email: 'email',
         price: 'price',
         date: 'date',
+        file: 'file'
     },
     INPUT: {
         ERRORS: {
@@ -126,6 +128,7 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
         email: 'email',
         price: 'cena',
         date: 'data',
+        file: 'plik'
     },
     INPUT: {
         ERRORS: {

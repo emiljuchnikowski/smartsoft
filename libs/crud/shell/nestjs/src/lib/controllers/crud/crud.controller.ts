@@ -42,6 +42,17 @@ export class CrudController<T extends IEntity<string>> {
   }
 
   @UseGuards(AuthJwtGuard)
+  @Post('bulk')
+  async createMany(
+      @Body() data: T[],
+      @User() user: IUser,
+      @Res() res: Response
+  ): Promise<Response> {
+    const result = await this.service.createMany(data, user);
+    return res.send(result);
+  }
+
+  @UseGuards(AuthJwtGuard)
   @Get(":id")
   async readById(
     @Param() params: { id: string },

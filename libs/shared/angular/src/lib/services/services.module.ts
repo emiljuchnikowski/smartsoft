@@ -8,6 +8,7 @@ import { ErrorService } from "./error/error.service";
 import { HardwareService } from "./hardware/hardware.service";
 import { ModalService } from "./modal/modal.service";
 import { DynamicComponentLoader } from "./dynamic-component-loader/dynamic-component-loader.service";
+import {PopoverService} from "./popover/popover.service";
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { DynamicComponentLoader } from "./dynamic-component-loader/dynamic-compo
     ErrorService,
     HardwareService,
     ModalService,
-    DynamicComponentLoader
+    DynamicComponentLoader,
+      PopoverService
   ]
 })
 export class SharedServicesModule {}

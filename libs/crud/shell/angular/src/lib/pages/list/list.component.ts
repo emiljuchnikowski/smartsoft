@@ -37,18 +37,21 @@ export class ListComponent<T extends IEntity<string>> implements OnInit {
 
     this.pageOptions = {
       title: this.config.title,
-      endButtons: this.config.add
-        ? [
-            {
-              icon: "add",
-              handler: () => {
-                this.router.navigate([
-                  "/" + this.router.routerState.snapshot.url + "/add"
-                ]);
+      endButtons: [
+        ...(this.config.add
+          ? [
+              {
+                icon: "add",
+                handler: () => {
+                  this.router.navigate([
+                    "/" + this.router.routerState.snapshot.url + "/add"
+                  ]);
+                }
               }
-            }
-          ]
-        : []
+            ]
+          : []),
+        ...(this.config.buttons ? this.config.buttons : [])
+      ]
     };
 
     const compiledComponents = await this.dynamicComponentLoader.getComponentsWithFactories(
@@ -72,38 +75,45 @@ export class ListComponent<T extends IEntity<string>> implements OnInit {
         loading$: this.facade.loaded$.pipe(map(l => !l))
       },
       type: this.config.type,
-      details: this.config.details ? {
-        provider: {
-          getData: id => {
-            this.facade.select(id);
-          },
-          clearData: () => {
-            this.facade.unselect();
-          },
-          item$: this.facade.selected$,
-          loading$: this.facade.loaded$.pipe(map(l => !l))
-        },
-        componentFactories: {
-          top:
-            this.config.details &&
-            this.config.details["components"] &&
-            this.config.details["components"].top
-              ? compiledComponents.find(
-                  cc => cc.component === this.config.details["components"].top
-                ).factory
-              : null
-        }
-      } : null,
-      edit: this.config.edit ?  {
-        options: {
-          routingPrefix: "/" + this.router.routerState.snapshot.url + "/"
-        }
-      } : null,
-      remove: this.config.remove ? {
-        provider: {
-          invoke: id => this.facade.delete(id)
-        }
-      } : null
+      details: this.config.details
+        ? {
+            provider: {
+              getData: id => {
+                this.facade.select(id);
+              },
+              clearData: () => {
+                this.facade.unselect();
+              },
+              item$: this.facade.selected$,
+              loading$: this.facade.loaded$.pipe(map(l => !l))
+            },
+            componentFactories: {
+              top:
+                this.config.details &&
+                this.config.details["components"] &&
+                this.config.details["components"].top
+                  ? compiledComponents.find(
+                      cc =>
+                        cc.component === this.config.details["components"].top
+                    ).factory
+                  : null
+            }
+          }
+        : null,
+      edit: this.config.edit
+        ? {
+            options: {
+              routingPrefix: "/" + this.router.routerState.snapshot.url + "/"
+            }
+          }
+        : null,
+      remove: this.config.remove
+        ? {
+            provider: {
+              invoke: id => this.facade.delete(id)
+            }
+          }
+        : null
     };
 
     this.cd.detectChanges();
