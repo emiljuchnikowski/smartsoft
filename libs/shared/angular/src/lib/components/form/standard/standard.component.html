@@ -1,5 +1,11 @@
 <ion-list>
     <ng-container *ngFor="let field of fields">
-        <smart-input *ngIf="form.controls[field]" [options]="{ fieldKey: field, control: form.controls[field], model: model, mode: mode }"></smart-input>
+        <smart-input *ngIf="form.controls[field]" [options]="{
+            fieldKey: field,
+            control: form.controls[field],
+            model: model,
+            mode: mode,
+            possibilities$: possibilities[field]
+        }"></smart-input>
     </ng-container>
 </ion-list>

@@ -9,9 +9,15 @@
         <ion-title>{{ options?.title | translate }}</ion-title>
 
         <ion-buttons slot="end" *ngIf="options?.endButtons">
-            <ion-button *ngFor="let btn of options.endButtons" (click)="btn.handler()" [disabled]="btn.disabled$ | async">
-                <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
-            </ion-button>
+            <ng-container *ngFor="let btn of options.endButtons" [ngSwitch]="btn.type">
+                <ion-button (click)="presentPopover($event, btn)" [disabled]="btn.disabled$ | async" *ngSwitchCase="'popover'">
+                    <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
+                </ion-button>
+
+                <ion-button (click)="btn.handler()" [disabled]="btn.disabled$ | async" *ngSwitchDefault>
+                    <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
+                </ion-button>
+            </ng-container>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>

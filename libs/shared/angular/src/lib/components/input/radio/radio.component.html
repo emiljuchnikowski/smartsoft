@@ -1,0 +1,12 @@
+<ng-container *ngIf="control">
+    <ion-radio-group [formControl]="control" [attr.autofocus]="fieldOptions?.focused">
+        <ion-list-header>
+            {{ translateKey | translate }}
+        </ion-list-header>
+
+        <ion-item *ngFor="let item of possibilities$ | async">
+            <ion-label>{{ item.text  | translate }}</ion-label>
+            <ion-radio [value]="item.id"></ion-radio>
+        </ion-item>
+    </ion-radio-group>
+</ng-container>

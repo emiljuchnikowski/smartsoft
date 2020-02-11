@@ -4,7 +4,7 @@ import {Guid} from "guid-typescript";
 
 import {IUser} from "@smartsoft001/users";
 import {IEntity} from "@smartsoft001/domain-core";
-import {CreateCommand} from "../../commands";
+import {CreateCommand} from "../../commands/create.command";
 import {UpdateCommand} from "../../commands/update.command";
 import {DeleteCommand} from "../../commands/delete.command";
 import {UpdatePartialCommand} from "../../commands/update-partial.command";
@@ -21,6 +21,16 @@ export class CrudService<T extends IEntity<string>> {
         await this.commandBus.execute(new CreateCommand(data, user));
 
         return data.id;
+    }
+
+    async createMany(data: T[], user: IUser): Promise<T[]> {
+        data.forEach(item => {
+           item.id = Guid.raw()
+        });
+
+        await this.commandBus.execute(new CreateCommand(data, user));
+
+        return data;
     }
 
     readById(id: string, user: IUser): Promise<T> {

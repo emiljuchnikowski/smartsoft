@@ -91,8 +91,15 @@ export class User implements IEntity<string> {
     @Field({
         create: modifyMetdata,
         update: modifyMetdata,
-        details: true,
-        type: FieldType.currency
+        type: FieldType.file
     })
-    price: string;
+    file: File;
+
+    @Field({
+        customs: [
+            { mode: 'changePassword' }
+        ],
+        type: FieldType.radio
+    })
+    mode: string;
 }

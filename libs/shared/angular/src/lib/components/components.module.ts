@@ -36,6 +36,8 @@ import {SharedPipesModule} from "../pipes/pipes.module";
 import {SharedDirectivesModule} from "../directives/directives.module";
 import {DetailsComponent} from "./details/details.component";
 import { DetailsStandardComponent } from './details/standard/standard.component';
+import {InputFileComponent} from "./input/file/file.component";
+import {InputRadioComponent} from "./input/radio/radio.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -67,7 +69,9 @@ export const INPUT_COMPONENTS = [
     InputEnumComponent,
     InputEmailComponent,
     InputCurrencyComponent,
-    InputDateComponent
+    InputDateComponent,
+    InputFileComponent,
+    InputRadioComponent
 ];
 
 export const LIST_COMPONENTS = [
