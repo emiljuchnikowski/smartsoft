@@ -49,6 +49,8 @@ export class TestComponent {}
         edit: true,
         add: true,
         remove: true,
+        search: true,
+        pagination: { limit: 10 },
         buttons: [
           { type: "popover", icon: 'cloud-upload', component: TestComponent }
         ]

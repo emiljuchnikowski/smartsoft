@@ -1,11 +1,20 @@
-import {ElementRef, Input, OnInit, Renderer2} from "@angular/core";
+import {ElementRef, Input, OnDestroy, OnInit, Renderer2} from "@angular/core";
 import { Location } from '@angular/common';
 import {PopoverController} from "@ionic/angular";
+import { Subscription} from "rxjs";
 
 import {IIconButtonOptions, IPageOptions} from "../../../models/interfaces";
 
-export abstract class PageBaseComponent implements OnInit {
-    @Input() options: IPageOptions;
+export abstract class PageBaseComponent implements OnInit, OnDestroy {
+    private _options: IPageOptions;
+    private _subscriptions = new Subscription();
+
+    @Input() set options(val: IPageOptions) {
+        this._options = val;
+    }
+    get options(): IPageOptions {
+        return this._options;
+    }
 
     protected constructor(
         private el: ElementRef,
@@ -31,5 +40,11 @@ export abstract class PageBaseComponent implements OnInit {
 
     ngOnInit() {
         this.renderer.setStyle(this.el.nativeElement, 'height', '100%');
+    }
+
+    ngOnDestroy(): void {
+        if (this._subscriptions) {
+            this._subscriptions.unsubscribe();
+        }
     }
 }

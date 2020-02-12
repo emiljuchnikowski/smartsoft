@@ -38,6 +38,7 @@ import {DetailsComponent} from "./details/details.component";
 import { DetailsStandardComponent } from './details/standard/standard.component';
 import {InputFileComponent} from "./input/file/file.component";
 import {InputRadioComponent} from "./input/radio/radio.component";
+import {SearchbarComponent} from "./searchbar/searchbar.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -84,6 +85,8 @@ export const LOADER_COMPONENTS = [LoaderComponent];
 
 export const PAGE_COMPONENTS = [PageStandardComponent, PageComponent];
 
+export const SEARCHBAR_COMPONENTS = [SearchbarComponent];
+
 export const COMPONENTS = [
     ...FORM_COMPONENTS,
     ...APP_COMPONENTS,
@@ -94,7 +97,8 @@ export const COMPONENTS = [
     ...LIST_COMPONENTS,
     ...LOADER_COMPONENTS,
     ...DETAIL_COMPONENTS,
-    ...DETAILS_COMPONENTS
+    ...DETAILS_COMPONENTS,
+    ...SEARCHBAR_COMPONENTS
 ];
 
 @NgModule({

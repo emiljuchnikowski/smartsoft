@@ -27,6 +27,11 @@ export const getCrudLoaded = (entity) => createSelector(
     (state) => state.loaded
 );
 
+export const getCrudFilter = (entity) => createSelector(
+    getCrudState(entity),
+    (state) => state.filter
+);
+
 export const getCrudError = (entity) => createSelector(
     getCrudState(entity),
     (state) => state.error

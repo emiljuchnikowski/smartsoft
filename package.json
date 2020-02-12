@@ -27,7 +27,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "api-auth:serve": "ng serve api-auth",
-    "api-crud:api-crud": "ng serve api-crud",
+    "api-crud:serve": "ng serve api-crud",
     "ui-test:serve": "ng serve ui-test",
     "shared-domain-core:build": "ng-packagr -p libs/shared/domain-core/package.json",
     "shared-domain-core:publish": "npm run shared-domain-core:build && npm publish libs/shared/domain-core/dist --access public",

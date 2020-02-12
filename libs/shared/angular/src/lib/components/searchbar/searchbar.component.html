@@ -1,0 +1,11 @@
+<ion-searchbar
+  #searchbar
+  [hidden]="!control || !show"
+  animated
+  (ionBlur)="tryHide()"
+  [formControl]="control"
+  [placeholder]="('search' | translate) + '...'"
+></ion-searchbar>
+<ion-button (click)="setShow()" *ngIf="!show">
+  <ion-icon style="font-weight: bold" slot="icon-only" name="search"></ion-icon>
+</ion-button>

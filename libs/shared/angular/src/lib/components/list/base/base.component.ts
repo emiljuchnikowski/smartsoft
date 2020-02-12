@@ -24,9 +24,13 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
   detailsButtonOptions: IButtonOptions;
   removed: Set<string> = new Set<string>();
   keys: Array<string>;
+  loadPrevPage: (event) => void;
+  loadNextPage: (event) => void;
 
   list$: Observable<T[]>;
   loading$: Observable<boolean>;
+  page$: Observable<number>;
+  totalPages$: Observable<number>;
 
   @Input() set options(val: IListInternalOptions<T>) {
     this._fields = val.fields;
@@ -91,6 +95,29 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
 
       this.select = val.details['provider'].getData;
       this.unselect = val.details['provider'].clearData;
+    }
+
+    if (val.pagination) {
+      this.loadNextPage = async event => {
+        await val.pagination.loadNextPage();
+        event.target.complete();
+
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        });
+      };
+
+      this.loadPrevPage = async event => {
+        await val.pagination.loadPrevPage();
+        event.target.complete();
+
+        setTimeout(() => {
+          window.scrollTo(0, 10000);
+        });
+      };
+
+      this.page$ = val.pagination.page$;
+      this.totalPages$ = val.pagination.totalPages$;
     }
   }
 

@@ -1,5 +1,5 @@
 import { AbstractControl } from "@angular/forms";
-import { Observable } from "rxjs";
+import {Observable} from "rxjs";
 
 import { IAppProvider } from "../providers/interfaces";
 import { IFieldOptions } from "@smartsoft001/models";
@@ -75,6 +75,7 @@ export interface IPageOptions {
   hideMenuButton?: boolean;
   showBackButton?: boolean;
   endButtons?: Array<IIconButtonOptions>;
+  search?: { text$: Observable<string>, set: (txt) => void }
 }
 
 export interface IIconButtonOptions {
@@ -101,6 +102,19 @@ export interface IInputFromFieldOptions<T> {
 export interface IListOptions<T> {
   provider: IListProvider<T>;
   type: any;
+
+  pagination?: {
+    limit: number,
+    loadNextPage: () => Promise<boolean>,
+    loadPrevPage: () => Promise<boolean>,
+    page$: Observable<number>,
+    totalPages$: Observable<number>
+  };
+
+  sort?: boolean | {
+    default?: boolean;
+    defaultDesc?: boolean;
+  }
 
   details?:
     | boolean

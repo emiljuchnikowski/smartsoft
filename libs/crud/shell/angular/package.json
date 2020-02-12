@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/crud-shell-angular",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
@@ -60,7 +60,7 @@
     "@ngrx/router-store": "^8.5.0",
     "@ngrx/store": "^8.5.0",
     "@ngx-translate/core": "^11.0.1",
-    "@smartsoft001/angular": "^1.0.32",
+    "@smartsoft001/angular": "^1.0.36",
     "@smartsoft001/auth-shell-angular": "^1.0.12",
     "@smartsoft001/domain-core": "^1.0.4",
     "@smartsoft001/models": "^1.0.6",
