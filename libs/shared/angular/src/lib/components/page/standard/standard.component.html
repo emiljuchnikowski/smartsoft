@@ -8,7 +8,7 @@
         </ion-buttons>
         <ion-title>{{ options?.title | translate }}</ion-title>
 
-        <ion-buttons slot="end" *ngIf="options?.endButtons || options.search">
+        <ion-buttons slot="end" *ngIf="options?.endButtons || options?.search">
             <smart-searchbar *ngIf="options.search" [text]="options.search.text$ | async" (textChange)="options.search.set($event)"></smart-searchbar>
 
             <ng-container *ngIf="options?.endButtons">

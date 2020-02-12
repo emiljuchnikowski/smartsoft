@@ -51,6 +51,9 @@ export class TestComponent {}
         remove: true,
         search: true,
         pagination: { limit: 10 },
+        sort: {
+          default: 'firstName'
+        },
         buttons: [
           { type: "popover", icon: 'cloud-upload', component: TestComponent }
         ]

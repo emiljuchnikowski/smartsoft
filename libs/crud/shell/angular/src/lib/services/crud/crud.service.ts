@@ -42,6 +42,10 @@ export class CrudService<T extends IEntity<string>> {
       query += `&limit=${filter.limit}&offset=${filter.offset ? filter.offset : 0}`;
     }
 
+    if (filter && filter.sortBy) {
+      query += `&sort=${ (filter.sortDesc ? '-' : '') + filter.sortBy}`;
+    }
+
     return this.http.get<{ data: T[]; totalCount: number; links }>(
       this.config.apiUrl + (query ? "?" + query.replace('&', '') : "")
     );

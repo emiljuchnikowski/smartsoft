@@ -22,5 +22,9 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     remove?: boolean;
     search?: boolean;
     pagination?: { limit: number };
+    sort?: boolean | {
+        default?: string;
+        defaultDesc?: boolean;
+    };
     buttons?: Array<IIconButtonOptions>;
 }

@@ -4,7 +4,7 @@ import {IonicModule} from "@ionic/angular";
 import {ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
 import {HttpClientModule} from "@angular/common/http";
-import {MatTableModule} from "@angular/material";
+import {MatSortModule, MatTableModule} from "@angular/material";
 import {RouterModule} from "@angular/router";
 
 import {DetailTextComponent} from "./detail/text/text.component";
@@ -121,6 +121,7 @@ export const COMPONENTS = [
         SharedDirectivesModule,
         HttpClientModule,
         MatTableModule,
+        MatSortModule
     ]
 })
 export class SharedComponentsModule {

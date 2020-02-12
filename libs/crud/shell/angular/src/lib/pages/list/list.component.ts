@@ -59,7 +59,9 @@ export class ListComponent<T extends IEntity<string>>
   async ngOnInit() {
     this.facade.read({
       limit: this.config.pagination ? this.config.pagination.limit : null,
-      offset: this.config.pagination ? 0 : null
+      offset: this.config.pagination ? 0 : null,
+      sortBy: this.config.sort['default'],
+      sortDesc: this.config.sort['defaultDesc']
     });
 
     this.pageOptions = {
@@ -108,8 +110,12 @@ export class ListComponent<T extends IEntity<string>>
 
     this.listOptions = {
       provider: {
-        getData(filter): void {
-          this.facade.read(filter);
+        getData: (filter): void => {
+          const global = {
+            ...this.filter,
+            ...filter
+          };
+          this.facade.read(global);
         },
         list$: this.facade.list$,
         loading$: this.facade.loaded$.pipe(map(l => !l))
@@ -207,7 +213,8 @@ export class ListComponent<T extends IEntity<string>>
             return Math.ceil(totalCount / filter.limit);
           })
         )
-      }
+      },
+      sort: this.config.sort
     };
 
     this.cd.detectChanges();

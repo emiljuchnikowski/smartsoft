@@ -10,7 +10,7 @@
   </ion-refresher-content>
 </ion-refresher>
 
-<table mat-table [dataSource]="list$ | async" style="width: 100%">
+<table mat-table matSort [dataSource]="list$ | async" style="width: 100%">
   <ng-container
     *ngFor="let key of desktopKeys; let last = last"
     matColumnDef="{{ key }}"
@@ -30,7 +30,7 @@
             }"
             (smartDetailsShowed)="select && select(element.id)"
           >
-            <ion-icon slot="icon-only" name="more"></ion-icon>
+            <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
           </ion-button>
         </td>
       </ng-container>
@@ -58,7 +58,7 @@
       </ng-container>
 
       <ng-container *ngSwitchDefault>
-        <th mat-header-cell *matHeaderCellDef>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="{{ key }}">
           {{ "MODEL." + key | translate }}
           <ng-container *ngTemplateOutlet="pagination"></ng-container>
         </th>

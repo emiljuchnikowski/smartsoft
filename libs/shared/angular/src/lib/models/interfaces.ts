@@ -112,7 +112,7 @@ export interface IListOptions<T> {
   };
 
   sort?: boolean | {
-    default?: boolean;
+    default?: string;
     defaultDesc?: boolean;
   }
 
