@@ -1,10 +1,13 @@
 import {IEntity} from "@smartsoft001/domain-core";
 import {Action} from "@ngrx/store";
 
+import {ICrudFilter} from "../models/interfaces";
+
 export interface State<T extends IEntity<string>> {
     selected?: T;
     list?: T[];
     totalCount?: number;
+    filter?: ICrudFilter;
     links?: any;
     loaded: boolean; // has the Auth list been loaded
     error?: string | null; // last none error (if any)

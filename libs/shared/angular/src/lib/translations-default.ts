@@ -25,6 +25,8 @@ export interface ITranslateData {
     cancel: string,
     delete: string,
     undo: string,
+    search: string,
+    page: string,
 
     OBJECT: {
         deleted: string
@@ -67,6 +69,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     cancel: 'cancel',
     delete: 'delete',
     undo: 'undo',
+    search: 'search',
+    page: 'page',
 
     OBJECT: {
         deleted: 'object deleted'
@@ -109,6 +113,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     cancel: 'anuluj',
     delete: 'usuń',
     undo: 'cofnij',
+    search: 'wyszukaj',
+    page: 'strona',
 
     OBJECT: {
         deleted: 'obiekt został usunięty'

@@ -8,15 +8,19 @@
         </ion-buttons>
         <ion-title>{{ options?.title | translate }}</ion-title>
 
-        <ion-buttons slot="end" *ngIf="options?.endButtons">
-            <ng-container *ngFor="let btn of options.endButtons" [ngSwitch]="btn.type">
-                <ion-button (click)="presentPopover($event, btn)" [disabled]="btn.disabled$ | async" *ngSwitchCase="'popover'">
-                    <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
-                </ion-button>
+        <ion-buttons slot="end" *ngIf="options?.endButtons || options?.search">
+            <smart-searchbar *ngIf="options.search" [text]="options.search.text$ | async" (textChange)="options.search.set($event)"></smart-searchbar>
 
-                <ion-button (click)="btn.handler()" [disabled]="btn.disabled$ | async" *ngSwitchDefault>
-                    <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
-                </ion-button>
+            <ng-container *ngIf="options?.endButtons">
+                <ng-container *ngFor="let btn of options.endButtons" [ngSwitch]="btn.type">
+                    <ion-button (click)="presentPopover($event, btn)" [disabled]="btn.disabled$ | async" *ngSwitchCase="'popover'">
+                        <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
+                    </ion-button>
+
+                    <ion-button (click)="btn.handler()" [disabled]="btn.disabled$ | async" *ngSwitchDefault>
+                        <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
+                    </ion-button>
+                </ng-container>
             </ng-container>
         </ion-buttons>
     </ion-toolbar>

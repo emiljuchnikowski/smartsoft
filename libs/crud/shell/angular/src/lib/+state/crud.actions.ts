@@ -1,5 +1,6 @@
 import {Action} from "@ngrx/store";
 import {IEntity} from "@smartsoft001/domain-core";
+import {ICrudFilter} from "../models/interfaces";
 
 /*
  * Create
@@ -29,7 +30,7 @@ export const createFailure = function <T extends IEntity<string>>(entity: string
 /*
  * Read
  */
-export const read = function <F>(entity: string, filter: F = null): Action & { filter: F } {
+export const read = function (entity: string, filter: ICrudFilter = null): Action & { filter: ICrudFilter } {
     return {
         type: `[${entity}] Read`,
         filter
