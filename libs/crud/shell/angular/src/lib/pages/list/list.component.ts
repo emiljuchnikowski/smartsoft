@@ -60,8 +60,8 @@ export class ListComponent<T extends IEntity<string>>
     this.facade.read({
       limit: this.config.pagination ? this.config.pagination.limit : null,
       offset: this.config.pagination ? 0 : null,
-      sortBy: this.config.sort['default'],
-      sortDesc: this.config.sort['defaultDesc']
+      sortBy: this.config.sort ? this.config.sort['default'] : null,
+      sortDesc: this.config.sort ? this.config.sort['defaultDesc'] : null
     });
 
     this.pageOptions = {
