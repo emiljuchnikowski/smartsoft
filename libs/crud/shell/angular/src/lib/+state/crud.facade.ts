@@ -6,6 +6,7 @@ import { CrudConfig } from "../crud.config";
 import * as CrudActions from "./crud.actions";
 import * as CrudSelectors from "./crud.selectors";
 import { IEntity } from "@smartsoft001/domain-core";
+import {ICrudFilter} from "../models/interfaces";
 
 @Injectable()
 export class CrudFacade<T extends IEntity<string>> {
@@ -17,6 +18,9 @@ export class CrudFacade<T extends IEntity<string>> {
   );
   list$: Observable<T[]> = this.store.pipe(
     select(CrudSelectors.getCrudList(this.config.entity))
+  );
+  filter$: Observable<ICrudFilter> = this.store.pipe(
+      select(CrudSelectors.getCrudFilter(this.config.entity))
   );
   totalCount$: Observable<number> = this.store.pipe(
     select(CrudSelectors.getCrudTotalCount(this.config.entity))
@@ -31,7 +35,7 @@ export class CrudFacade<T extends IEntity<string>> {
     this.store.dispatch(CrudActions.create(this.config.entity, item));
   }
 
-  read<F>(filter: F = null): void {
+  read(filter: ICrudFilter = null): void {
     this.store.dispatch(CrudActions.read(this.config.entity, filter));
   }
 

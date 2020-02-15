@@ -23,7 +23,14 @@ export interface ITranslateData {
     change: string,
     confirm: string,
     cancel: string,
+    delete: string,
+    undo: string,
+    search: string,
+    page: string,
 
+    OBJECT: {
+        deleted: string
+    },
     APP: {
         logout: string,
         logged: string
@@ -39,6 +46,7 @@ export interface ITranslateData {
         email: string,
         price: string,
         date: string,
+        file: string
     };
     INPUT: {
         ERRORS: {
@@ -59,7 +67,14 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     change: 'change',
     confirm: 'confirm',
     cancel: 'cancel',
-    
+    delete: 'delete',
+    undo: 'undo',
+    search: 'search',
+    page: 'page',
+
+    OBJECT: {
+        deleted: 'object deleted'
+    },
     APP: {
         logout: 'log out',
         logged: 'logged'
@@ -75,6 +90,7 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
         email: 'email',
         price: 'price',
         date: 'date',
+        file: 'file'
     },
     INPUT: {
         ERRORS: {
@@ -95,7 +111,14 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     change: 'zmień',
     confirm: 'potwierdź',
     cancel: 'anuluj',
+    delete: 'usuń',
+    undo: 'cofnij',
+    search: 'wyszukaj',
+    page: 'strona',
 
+    OBJECT: {
+        deleted: 'obiekt został usunięty'
+    },
     APP: {
         logout: 'wyloguj się',
         logged: 'zalogowany'
@@ -111,6 +134,7 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
         email: 'email',
         price: 'cena',
         date: 'data',
+        file: 'plik'
     },
     INPUT: {
         ERRORS: {

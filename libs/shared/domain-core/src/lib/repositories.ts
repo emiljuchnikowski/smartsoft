@@ -4,6 +4,8 @@ import { IEntity } from './interfaces';
 export abstract class IItemRepository<T extends IEntity<string>> {
     abstract create(item: T, user: IUser): Promise<void>;
 
+    abstract createMany(list: T[], user: IUser): Promise<void>;
+
     abstract update(item: T, user: IUser): Promise<void>;
 
     abstract updatePartial(item: Partial<T> & { id: string }, user: IUser): Promise<void>;

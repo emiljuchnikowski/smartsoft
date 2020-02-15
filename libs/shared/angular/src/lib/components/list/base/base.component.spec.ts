@@ -3,17 +3,20 @@ import 'jest-preset-angular';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {RouterTestingModule} from "@angular/router/testing";
 import {Router} from "@angular/router";
+import {ChangeDetectorRef, Component} from "@angular/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 import { ListBaseComponent } from './base.component';
-import {Component} from "@angular/core";
+import {ToastService} from "@smartsoft001/angular";
+import {IonicModule} from "@ionic/angular";
 
 describe('BaseComponent', () => {
   @Component({
     template: ''
   })
   class TestComponent extends ListBaseComponent<any> {
-    constructor(router: Router) {
-      super(router);
+    constructor(router: Router, translateService: TranslateService, cd: ChangeDetectorRef, toastService: ToastService) {
+      super(router, toastService, cd, translateService);
     }
 
     afterSetProvider(): void {
@@ -26,7 +29,8 @@ describe('BaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TestComponent ],
-      imports: [ RouterTestingModule ]
+      providers: [ ToastService ],
+      imports: [ RouterTestingModule, TranslateModule.forRoot(), IonicModule.forRoot() ]
     })
     .compileComponents();
   }));

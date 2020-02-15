@@ -15,7 +15,7 @@ export class Todo implements IEntity<string> {
         details: true,
         list: { order: 1 }
     })
-    title: string;
+    number: string;
 
     @Field({
         create: modifyMetdata,

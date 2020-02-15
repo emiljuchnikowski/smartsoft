@@ -42,6 +42,17 @@ export class CrudController<T extends IEntity<string>> {
   }
 
   @UseGuards(AuthJwtGuard)
+  @Post('bulk')
+  async createMany(
+      @Body() data: T[],
+      @User() user: IUser,
+      @Res() res: Response
+  ): Promise<Response> {
+    const result = await this.service.createMany(data, user);
+    return res.send(result);
+  }
+
+  @UseGuards(AuthJwtGuard)
   @Get(":id")
   async readById(
     @Param() params: { id: string },
@@ -68,7 +79,7 @@ export class CrudController<T extends IEntity<string>> {
     totalCount: number;
     links: { prev: string; first: string; next: string; last: string };
   }> {
-    const object = q2m(req.query);
+    const object = this.getQueryObject(req.query);
     const { data, totalCount } = await this.service.read(
       object.criteria,
       object.options,
@@ -109,5 +120,24 @@ export class CrudController<T extends IEntity<string>> {
     @User() user: IUser
   ): Promise<void> {
     await this.service.delete(params.id, user);
+  }
+
+  private getQueryObject(q: string): { criteria, options, links} {
+    let customCriteria = {} as any;
+
+    const result = q2m(q);
+
+    if (result.criteria['$search']) {
+      customCriteria = { $text: { $search: ' \"' + result.criteria['$search'].toString() + '\" ' } };
+
+      delete result.criteria['$search'];
+
+      result.criteria = {
+        ...result.criteria,
+        ...customCriteria
+      }
+    }
+
+    return result;
   }
 }

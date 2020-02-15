@@ -1,8 +1,6 @@
 import {Injectable} from "@angular/core";
 import {ModalController} from "@ionic/angular";
 
-import {modalFromBottomEnterAnimation, modalFromBottomLeaveAnimation} from "../../shared.animations";
-
 @Injectable()
 export class ModalService {
     constructor(private modalCtrl: ModalController) { }
@@ -17,8 +15,6 @@ export class ModalService {
             modalOptions.cssClass =  [
                 'smart-modal-bottom'
             ];
-            modalOptions.enterAnimation = modalFromBottomEnterAnimation;
-            modalOptions.leaveAnimation = modalFromBottomLeaveAnimation;
         }
 
         const modal = await this.modalCtrl.create(modalOptions);

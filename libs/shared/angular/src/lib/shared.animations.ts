@@ -1,15 +1,15 @@
-import { Animation } from "@ionic/core";
+import { createAnimation } from '@ionic/core';
 
 export function modalFromBottomEnterAnimation(
-  AnimationC: Animation,
+  AnimationC: any,
   baseEl: HTMLElement
-): Promise<Animation> {
-  const baseAnimation = new AnimationC();
+): Promise<any> {
+  const baseAnimation = createAnimation();
 
-  const backdropAnimation = new AnimationC();
+  const backdropAnimation = createAnimation();
   backdropAnimation.addElement(baseEl.querySelector("ion-backdrop"));
 
-  const wrapperAnimation = new AnimationC();
+  const wrapperAnimation = createAnimation();
   wrapperAnimation.addElement(baseEl.querySelector(".modal-wrapper"));
 
   wrapperAnimation
@@ -24,21 +24,21 @@ export function modalFromBottomEnterAnimation(
       .easing("cubic-bezier(0.36,0.66,0.04,1)")
       .duration(400)
       .beforeAddClass("show-modal")
-      .add(backdropAnimation)
-      .add(wrapperAnimation)
+      .addAnimation(backdropAnimation)
+      .addAnimation(wrapperAnimation)
   );
 }
 
 export function modalFromBottomLeaveAnimation(
-  AnimationC: Animation,
+  AnimationC: any,
   baseEl: HTMLElement
-): Promise<Animation> {
-  const baseAnimation = new AnimationC();
+): Promise<any> {
+  const baseAnimation = createAnimation();
 
-  const backdropAnimation = new AnimationC();
+  const backdropAnimation = createAnimation();
   backdropAnimation.addElement(baseEl.querySelector("ion-backdrop"));
 
-  const wrapperAnimation = new AnimationC();
+  const wrapperAnimation = createAnimation();
   const wrapperEl = baseEl.querySelector(".modal-wrapper");
   wrapperAnimation.addElement(wrapperEl);
   const wrapperElRect = wrapperEl ? wrapperEl.getBoundingClientRect() : null;
@@ -54,7 +54,7 @@ export function modalFromBottomLeaveAnimation(
       .addElement(baseEl)
       .easing("ease-out")
       .duration(250)
-      .add(backdropAnimation)
-      .add(wrapperAnimation)
+      .addAnimation(backdropAnimation)
+      .addAnimation(wrapperAnimation)
   );
 }

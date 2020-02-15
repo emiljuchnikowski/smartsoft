@@ -9,6 +9,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import { ListDesktopComponent } from './desktop.component';
 import {ButtonComponent} from "../../button";
 import {DetailsDirective} from "../../../directives/details/details.directive";
+import {ToastService} from "@smartsoft001/angular";
 
 describe('DesktopComponent', () => {
   let component: ListDesktopComponent<any>;
@@ -16,6 +17,7 @@ describe('DesktopComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers: [ ToastService ],
       declarations: [ ListDesktopComponent, ButtonComponent, DetailsDirective ],
       imports: [ MatTableModule, TranslateModule.forRoot(), IonicModule.forRoot(), RouterTestingModule ]
     })

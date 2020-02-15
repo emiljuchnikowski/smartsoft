@@ -39,6 +39,32 @@ export class MongoItemRepository<
     });
   }
 
+  createMany(list: T[], user: IUser): Promise<void> {
+    return new Promise<void>((res, rej) => {
+      MongoClient.connect(this.getUrl(), (err, client) => {
+        if (err) {
+          rej(err);
+          return;
+        }
+
+        const db = client.db(this.config.database);
+
+        db.collection(this.config.collection).insertMany(
+            list.map(item => this.getModelToCreate(item, user)),
+            errInsert => {
+              if (errInsert) {
+                rej(errInsert);
+                return;
+              }
+
+              client.close();
+              res();
+            }
+        );
+      });
+    });
+  }
+
   update(item: T, user: IUser): Promise<void> {
     return new Promise<void>((res, rej) => {
       MongoClient.connect(this.getUrl(), async (err, client) => {

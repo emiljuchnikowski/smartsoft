@@ -1,15 +1,18 @@
-import {Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Input, OnInit} from '@angular/core';
 import {IFieldOptions} from "@smartsoft001/models";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {IEntity} from "@smartsoft001/domain-core";
+import {map} from "rxjs/operators";
+import {TranslateService} from "@ngx-translate/core";
 
 import {DetailsPage} from "../../../pages/details/details.page";
 import { IDetailsOptions, IListProvider, IButtonOptions } from '../../../models/interfaces';
 import { IListInternalOptions } from '../list.component';
+import {ToastService} from "../../../services/toast/toast.service";
 
 export abstract class ListBaseComponent<T extends IEntity<string>> implements OnInit {
-  private _provider: IListProvider<T>;
+  protected provider: IListProvider<T>;
   private _fields: Array<{ key: string, options: IFieldOptions }>;
 
   detailsComponent;
@@ -17,18 +20,60 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
   select: (id: string) => void;
   unselect: () => void;
   editHandler: (id: string) => void;
+  removeHandler: (item: T) => void;
   detailsButtonOptions: IButtonOptions;
-
+  removed: Set<string> = new Set<string>();
   keys: Array<string>;
+  loadPrevPage: (event) => void;
+  loadNextPage: (event) => void;
+
   list$: Observable<T[]>;
   loading$: Observable<boolean>;
+  page$: Observable<number>;
+  totalPages$: Observable<number>;
+  sort: boolean | {
+    default?: string;
+    defaultDesc?: boolean;
+  };
 
   @Input() set options(val: IListInternalOptions<T>) {
     this._fields = val.fields;
-    this._provider = val.provider;
+    this.provider = val.provider;
+    this.sort = val.sort;
     this.initKeys();
     this.initList();
     this.initLoading();
+
+    if (val.remove) {
+      this.removeHandler = (obj: T) => {
+        let timeoutId;
+        if (val.remove['provider']) {
+          timeoutId = setTimeout(() => {
+            val.remove['provider'].invoke(obj.id);
+          }, 5000)
+        }
+
+        this.removed.add(obj.id);
+        this.initList();
+        this.cd.detectChanges();
+        this.toastService.info({
+          message: this.translateService.instant('OBJECT.deleted'),
+          duration: 5000,
+          buttons: [
+            {
+              text: this.translateService.instant('undo'),
+              position: 'end',
+              handler: () => {
+                if (timeoutId) clearTimeout(timeoutId);
+                this.removed.delete(obj.id);
+                this.initList();
+                this.cd.detectChanges();
+              }
+            }
+          ]
+        });
+      };
+    }
 
     if (val.edit) {
       if (!val.edit['options'])
@@ -49,15 +94,44 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
         type: val.type,
         loading$: val.details['provider'].loading$,
         editHandler: this.editHandler,
+        removeHandler: this.removeHandler,
         componentFactories: val.details['componentFactories']
       };
 
       this.select = val.details['provider'].getData;
       this.unselect = val.details['provider'].clearData;
     }
+
+    if (val.pagination) {
+      this.loadNextPage = async event => {
+        await val.pagination.loadNextPage();
+        event.target.complete();
+
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        });
+      };
+
+      this.loadPrevPage = async event => {
+        await val.pagination.loadPrevPage();
+        event.target.complete();
+
+        setTimeout(() => {
+          window.scrollTo(0, 10000);
+        });
+      };
+
+      this.page$ = val.pagination.page$;
+      this.totalPages$ = val.pagination.totalPages$;
+    }
   }
 
-  constructor(private router:Router) {
+  constructor(
+      protected router:Router,
+      protected toastService: ToastService,
+      protected cd: ChangeDetectorRef,
+      protected translateService: TranslateService
+  ) {
     this.detailsButtonOptions = {
       loading$: this.loading$,
       click: () =>  {
@@ -71,11 +145,16 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
   }
 
   protected initList(): void {
-    this.list$ = this._provider.list$;
+    this.list$ = this.provider.list$.pipe(
+        map(list => {
+          if (!list) return list;
+          return list.filter(item => !this.removed.has(item.id));
+        })
+    );
   }
 
   protected initLoading(): void {
-    this.loading$ = this._provider.loading$;
+    this.loading$ = this.provider.loading$;
   }
 
   ngOnInit() {

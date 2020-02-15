@@ -18,10 +18,12 @@ import {environment} from "../../environments/environment";
         type: Todo,
         title: 'Zadania',
         entity: "todos",
-        apiUrl: environment.apiUrl + "users",
+        apiUrl: environment.apiUrl + "cards",
         details: true,
         edit: true,
-        add: true
+        add: true,
+        search: true,
+        pagination: { limit: 25 },
       }
     })
   ]

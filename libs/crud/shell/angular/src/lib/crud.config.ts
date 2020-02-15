@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import {IIconButtonOptions} from "@smartsoft001/angular";
 
 @Injectable()
 export class CrudConfig<T> {
@@ -18,4 +19,12 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     };
     edit?: boolean;
     add?: boolean;
+    remove?: boolean;
+    search?: boolean;
+    pagination?: { limit: number };
+    sort?: boolean | {
+        default?: string;
+        defaultDesc?: boolean;
+    };
+    buttons?: Array<IIconButtonOptions>;
 }
