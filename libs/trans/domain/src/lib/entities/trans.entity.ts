@@ -1,62 +1,72 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryColumn} from "typeorm";
+import {
+    Column,
+    Entity,
+    ObjectID,
+    ObjectIdColumn
+} from "typeorm";
 
 import {IEntity} from "@smartsoft001/domain-core";
 
 @Entity('trans')
-export class Trans<T> implements IEntity<string> {
-    @PrimaryColumn({ name: '_id' })
-    id: string;
+export class Trans<T> implements IEntity<ObjectID> {
+    @ObjectIdColumn()
+    id: ObjectID;
 
-    @Column('amount')
+    @Column()
+    name: string;
+
+    @Column()
     amount: number;
 
-    @Column({
-        type: 'json',
-        name: 'data'
-    })
+    @Column()
+    firstName: string;
+
+    @Column()
+    lastName: string;
+
+    @Column()
+    email: string;
+
+    @Column()
+    contactPhone: string;
+
+    @Column()
     data: T;
 
-    @Column('system')
+    @Column()
     system: TransSystem;
 
-    @Column('status')
-    status: TransStatus = 'prepare';
+    @Column()
+    status: TransStatus;
 
-    @Column('modifyDate')
+    @Column()
     modifyDate: Date;
 
-    @OneToMany(() => TransHistory, his => his.trans)
+    @Column(() => TransHistory)
     history: TransHistory<T>[];
+
+    @Column()
+    clientIp: string;
 }
 
-@Entity('transHistory')
 export class TransHistory<T> {
-    @PrimaryColumn({ name: '_id' })
-    id: string;
-
-    @Column('amount')
+    @Column()
     amount: number;
 
-    @Column({
-        type: 'json',
-        name: 'data'
-    })
+    @Column()
     data: any;
 
-    @Column('system')
+    @Column()
     system: TransSystem;
 
-    @Column('status')
-    status: TransStatus = 'prepare';
+    @Column()
+    status: TransStatus;
 
-    @Column('modifyDate')
+    @Column()
     modifyDate: Date;
-
-    @ManyToOne(() => Trans, t => t.history)
-    trans: Trans<T>;
 }
 
 export type TransSystem = 'payu';
-export type TransStatus = 'prepare' | 'new';
+export type TransStatus = 'prepare' | 'new' | 'error' | 'started';
 
 export const TRANS_SYSTEMS = [ 'payu' ];

@@ -1,4 +1,4 @@
-import {Body, Controller, Post, Res} from "@nestjs/common";
+import {Body, Controller, Post, Req} from "@nestjs/common";
 
 import {ITransCreate} from "@smartsoft001/trans-domain";
 import {TransService} from "@smartsoft001/trans-shell-app-services";
@@ -9,8 +9,11 @@ export class TransController {
     }
 
     @Post()
-    async create<T>(@Body() obj: ITransCreate<T>, @Res() res) {
+    async create<T>(@Body() obj: ITransCreate<T>, @Req() req) {
+        obj.clientIp = req.connection.remoteAddress;
         const url = await this.service.create(obj);
-        res.redirect('http://wp.pl');
+        return {
+            url
+        }
     }
 }

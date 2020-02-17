@@ -1,32 +1,40 @@
-import {DynamicModule, Module} from "@nestjs/common";
+import {DynamicModule, HttpModule, Module} from "@nestjs/common";
 import {PassportModule} from "@nestjs/passport";
 import {JwtModule} from "@nestjs/jwt";
 import {TypeOrmModule} from "@nestjs/typeorm";
 
 import {CONTROLLERS} from "./controllers";
 import {SERVICES} from "@smartsoft001/trans-shell-app-services";
-import {DOMAIN_SERVICES} from "@smartsoft001/trans-domain";
+import {DOMAIN_SERVICES, TransConfig} from "@smartsoft001/trans-domain";
 import {ENTITIES} from "@smartsoft001/trans-domain";
+import {PayuConfig, PayuService} from "@smartsoft001/payu";
 
-@Module({ })
+@Module({
+    imports: [ HttpModule ]
+})
 export class TransShellNestjsModule {
-    static forRoot(options: {
-        tokenConfig: {
-            secretOrPrivateKey: string,
-            expiredIn: number
-        }
+    static forRoot(config: TransConfig & {
+        payuConfig?: PayuConfig
     }): DynamicModule {
         return {
             module: TransShellNestjsModule,
             controllers: CONTROLLERS,
-            providers: [ ...SERVICES, ...DOMAIN_SERVICES ],
+            providers: [
+                ...SERVICES,
+                ...DOMAIN_SERVICES,
+                { provide: TransConfig, useValue: config },
+                ...(config.payuConfig ? [
+                    { provide: PayuConfig, useValue: config.payuConfig },
+                    PayuService
+                ] : [])
+            ],
             imports: [
                 TypeOrmModule.forFeature(ENTITIES),
                 PassportModule.register({ defaultStrategy: 'jwt', session: false }),
                 JwtModule.register({
-                    secret: options.tokenConfig.secretOrPrivateKey,
+                    secret: config.tokenConfig.secretOrPrivateKey,
                     signOptions: {
-                        expiresIn: options.tokenConfig.expiredIn
+                        expiresIn: config.tokenConfig.expiredIn
                     }
                 })
             ]

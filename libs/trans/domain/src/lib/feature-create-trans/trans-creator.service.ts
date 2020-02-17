@@ -1,64 +1,115 @@
-import {Injectable} from "@nestjs/common";
-import {Guid} from "guid-typescript";
+import { Injectable } from "@nestjs/common";
 
-import {ITransCreate} from "./interfaces";
-import {DomainValidationError} from "@smartsoft001/domain-core";
-import {Trans, TRANS_SYSTEMS, TransHistory} from "../entities/trans.entity";
-import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {
+  ITransCreate,
+  ITransCreateInternalService,
+  ITransCreatePaymentService
+} from "./interfaces";
+import { DomainValidationError } from "@smartsoft001/domain-core";
+import { Trans, TRANS_SYSTEMS, TransHistory } from "../entities/trans.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { TransBaseService } from "../trans.service";
 
 @Injectable()
-export class TransCreatorService<T> {
-    constructor(@InjectRepository(Trans) private repository: Repository<Trans<T>>,) {
+export class TransCreatorService<T> extends TransBaseService<T> {
+  constructor(
+    @InjectRepository(Trans) private repository: Repository<Trans<T>>
+  ) {
+    super();
+  }
+
+  async create(
+    config: ITransCreate<T>,
+    internalService: ITransCreateInternalService<T>,
+    paymentService: ITransCreatePaymentService
+  ): Promise<string> {
+    this.valid(config);
+
+    const trans = await this.prepare(config);
+
+    try {
+      await this.setAsNew(trans, internalService);
+
+      return await this.setAsStarted(trans, paymentService);
+    } catch (e) {
+      await this.setError(trans, e);
+      console.error(e);
+      throw e;
     }
 
-    async create(config: ITransCreate<T>): Promise<string> {
-        this.valid(config);
+    return null;
+  }
 
-        const trans = this.prepare(config);
+  private async setAsStarted(
+    trans: Trans<T>,
+    paymentService: ITransCreatePaymentService
+  ): Promise<string> {
+    const paymentResult = await paymentService[trans.system].create({
+      id: trans.id.toString(),
+      name: trans.name,
+      amount: trans.amount,
+      firstName: trans.firstName,
+      lastName: trans.lastName,
+      email: trans.email,
+      contactPhone: trans.contactPhone,
+      clientIp: trans.clientIp
+    });
+    trans.status = "started";
+    trans.modifyDate = new Date();
+    this.addHistory(trans, paymentResult);
 
-        try {
-            await this.repository.insert(trans);
-        } catch (e) {
-            console.error(e);
-        }
+    await this.repository.save(trans as any);
 
-        return null;
-    }
+    return paymentResult.redirectUrl;
+  }
 
-    private prepare(config: ITransCreate<T>): Trans<T> {
-        const trans = new Trans<T>();
+  private async setAsNew(
+    trans: Trans<T>,
+    internalService: ITransCreateInternalService<T>
+  ): Promise<void> {
+    const internalResult = await internalService.create(trans);
+    trans.status = "new";
+    trans.modifyDate = new Date();
+    this.addHistory(trans, internalResult);
 
-        trans.id = Guid.raw();
-        trans.amount = config.amount;
-        trans.data = config.data;
-        trans.modifyDate = new Date();
-        trans.status = 'prepare';
-        trans.system = config.system;
+    await this.repository.save(trans as any);
+  }
 
-        this.addHistory(trans, trans.data);
+  private async prepare(config: ITransCreate<T>): Promise<Trans<T>> {
+    const trans = new Trans<T>();
 
-        return trans;
-    }
+    Object.keys(config).forEach(key => {
+      trans[key] = config[key];
+    });
 
-    private addHistory(trans: Trans<T>, data: any): void {
-        const historyItem = new TransHistory<T>();
-        historyItem.id = Guid.raw();
-        historyItem.amount = trans.amount;
-        historyItem.modifyDate = trans.modifyDate;
-        historyItem.data = data;
-        historyItem.system = trans.system;
-        historyItem.status = trans.status;
-        if (!trans.history) trans.history = [];
-        trans.history.push(historyItem);
-    }
+    trans.modifyDate = new Date();
+    trans.status = "prepare";
 
-    private valid(req: ITransCreate<T>) {
-        if (!req) throw new DomainValidationError("config is empty");
+    this.addHistory(trans, trans.data);
 
-        if (!req.amount || req.amount < 1) throw new DomainValidationError("amount is empty");
-        if (!req.data) throw new DomainValidationError("data is empty");
-        if (!req.system || !TRANS_SYSTEMS.some(s => s === req.system))
-            throw new DomainValidationError("system is empty");
-    }
+    await this.repository.save(trans as any);
+
+    return trans;
+  }
+
+  private async setError(trans: Trans<T>, error): Promise<void> {
+    trans.modifyDate = new Date();
+    trans.status = "error";
+    this.addHistory(trans, error);
+
+    await this.repository.save(trans as any);
+  }
+
+  private valid(req: ITransCreate<T>) {
+    if (!req) throw new DomainValidationError("config is empty");
+
+    if (!req.name) throw new DomainValidationError("name is empty");
+    if (!req.clientIp) throw new DomainValidationError("client ip is empty");
+    if (!req.amount || req.amount < 1)
+      throw new DomainValidationError("amount is empty");
+    if (!req.data) throw new DomainValidationError("data is empty");
+    if (!req.system || !TRANS_SYSTEMS.some(s => s === req.system))
+      throw new DomainValidationError("system is empty");
+  }
 }
