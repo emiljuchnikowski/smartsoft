@@ -19,26 +19,27 @@ export class TransCreatorService<T> extends TransBaseService<T> {
     super();
   }
 
-  async create(
+  create(
     config: ITransCreate<T>,
     internalService: ITransCreateInternalService<T>,
     paymentService: ITransCreatePaymentService
   ): Promise<string> {
     this.valid(config);
+    let trans = null;
 
-    const trans = await this.prepare(config);
-
-    try {
-      await this.setAsNew(trans, internalService);
-
-      return await this.setAsStarted(trans, paymentService);
-    } catch (e) {
-      await this.setError(trans, e);
-      console.error(e);
-      throw e;
-    }
-
-    return null;
+    return this.prepare(config)
+      .then(r => {
+        trans = r;
+        return this.setAsNew(trans, internalService);
+      })
+      .then(() => {
+        return this.setAsStarted(trans, paymentService);
+      })
+      .catch(e => {
+        this.setError(trans, e);
+        console.error(e);
+        throw e;
+      });
   }
 
   private async setAsStarted(
@@ -65,10 +66,13 @@ export class TransCreatorService<T> extends TransBaseService<T> {
   }
 
   private async setAsNew(
-    trans: Trans<T>,
+    trans: Trans<any & { amount?: number }>,
     internalService: ITransCreateInternalService<T>
   ): Promise<void> {
     const internalResult = await internalService.create(trans);
+    if (internalResult.amount) {
+      trans.amount = internalResult.amount;
+    }
     trans.status = "new";
     trans.modifyDate = new Date();
     this.addHistory(trans, internalResult);
