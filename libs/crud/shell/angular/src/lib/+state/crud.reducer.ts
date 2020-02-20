@@ -46,16 +46,31 @@ const crudReducer = (state = initialState, action, entity) => {
                 loaded: false,
                 filter: action.filter,
                 error: null,
-                list: null,
                 totalCount: null,
                 links: null,
             };
 
         case `[${entity}] Read Success`:
+
+            let list = [];
+
+            if (action.filter && action.filter.offset && state.list) {
+                state.list.forEach(i => {
+                   list.push(i);
+                });
+
+                list = [
+                    ...list,
+                    ...action.result.data
+                ];
+            } else {
+                list = action.result.data;
+            }
+
             return {
                 ...state,
                 loaded: true,
-                list: action.result.data,
+                list,
                 totalCount: action.result.totalCount,
                 links: action.result.links,
                 error: null
