@@ -5,7 +5,7 @@ import {Store, StoreModule} from "@ngrx/store";
 import {CrudConfig} from "./crud.config";
 import {CrudEffects} from "./+state/crud.effects";
 import {getReducer} from "./+state/crud.reducer";
-import {AuthSharedModule} from "@smartsoft001/auth-shell-angular";
+//import {AuthSharedModule} from "@smartsoft001/auth-shell-angular";
 import {SharedModule} from "@smartsoft001/angular";
 import {ListComponent} from "./pages/list/list.component";
 import {EditComponent} from "./pages/edit/edit.component";
@@ -24,7 +24,7 @@ import { CrudFacade } from './+state/crud.facade';
         ListComponent
     ],
     imports: [
-       AuthSharedModule,
+      // AuthSharedModule,
         StoreModule,
         SharedModule,
         CrudPipesModule,

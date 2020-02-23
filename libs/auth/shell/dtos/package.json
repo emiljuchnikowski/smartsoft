@@ -1,5 +1,5 @@
 {
-  "name": "@smartsoft001/auth-domain",
+  "name": "@smartsoft001/auth-shared-dtos",
   "version": "1.0.4",
   "description": "Utils to authorization",
   "ngPackage": {
@@ -7,13 +7,11 @@
       "entryFile": "src/index.ts"
     },
     "whitelistedNonPeerDependencies": [
-      "@smartsoft001/domain-core",
-      "@smartsoft001/users",
-      "@smartsoft001/utils"
+      "@smartsoft001/models"
     ]
   },
   "scripts": {
-    "refresh": "npm version patch && npm i && npm i @smartsoft001/users@latest --save && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/utils@latest --save"
+    "refresh": "npm version patch && npm i && npm i @smartsoft001/models@latest --save"
   },
   "repository": {
     "type": "git",
@@ -33,8 +31,6 @@
   },
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "dependencies": {
-    "@smartsoft001/domain-core": "^1.0.5",
-    "@smartsoft001/users": "^1.0.3",
-    "@smartsoft001/utils": "^1.0.4"
+    "@smartsoft001/models": "^1.0.8"
   }
 }

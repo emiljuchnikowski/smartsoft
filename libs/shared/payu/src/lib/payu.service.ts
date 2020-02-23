@@ -1,10 +1,10 @@
 import {HttpService, Injectable} from "@nestjs/common";
 
-import { ITransCreatePaymentSingleService } from "@smartsoft001/trans-domain";
+import {ITransPaymentSingleService, Trans, TransStatus} from "@smartsoft001/trans-domain";
 import {PayuConfig} from "./payu.config";
 
 @Injectable()
-export class PayuService implements ITransCreatePaymentSingleService {
+export class PayuService implements ITransPaymentSingleService {
   constructor(private readonly httpService: HttpService, private config: PayuConfig) {}
 
   async create(obj: {
@@ -67,6 +67,37 @@ export class PayuService implements ITransCreatePaymentSingleService {
     }
   }
 
+  async getStatus<T>(trans: Trans<T>): Promise<{ status: TransStatus; data: any }> {
+    const historyItem = trans.history.find(x => x.status === 'started');
+
+    if (!historyItem) {
+      console.warn('Transaction without start status');
+      return null;
+    }
+
+    const orderId = historyItem.data.orderId;
+
+    const token = await this.getToken();
+
+    const response = await this.httpService.get(this.getBaseUrl() + '/api/v2_1/orders/' + orderId, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        'X-Requested-With': "XMLHttpRequest"
+      },
+      maxRedirects: 0
+    }).toPromise();
+
+    if (!response.data.orders) return null;
+
+    const order = response.data.orders[0];
+
+    return {
+      status: this.getStatusFromExternal(order.status),
+      data: order
+    }
+  }
+
   private async  getToken(): Promise<string> {
     const response = await this.httpService.post(
         this.getBaseUrl() + '/pl/standard/user/oauth/authorize',
@@ -80,5 +111,18 @@ export class PayuService implements ITransCreatePaymentSingleService {
     if (this.config.test) return 'https://secure.snd.payu.com';
 
     return 'https://secure.payu.com'
+  }
+
+  private getStatusFromExternal(status: string) {
+    switch (status) {
+      case 'COMPLETED':
+        return 'completed';
+      case 'CANCELED':
+        return 'canceled';
+      case 'PENDING':
+        return 'pending';
+      default:
+        throw new Error('Status not supported');
+    }
   }
 }

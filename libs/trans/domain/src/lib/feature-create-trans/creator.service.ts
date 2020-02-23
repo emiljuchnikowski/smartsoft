@@ -1,28 +1,28 @@
-import { Injectable } from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
+import {Guid} from "guid-typescript";
 
 import {
   ITransCreate,
-  ITransCreateInternalService,
-  ITransCreatePaymentService
 } from "./interfaces";
 import { DomainValidationError } from "@smartsoft001/domain-core";
-import { Trans, TRANS_SYSTEMS, TransHistory } from "../entities/trans.entity";
+import { Trans, TRANS_SYSTEMS } from "../entities/trans.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { TransBaseService } from "../trans.service";
+import {ITransInternalService, ITransPaymentService} from "../interfaces";
 
 @Injectable()
-export class TransCreatorService<T> extends TransBaseService<T> {
+export class CreatorService<T> extends TransBaseService<T> {
   constructor(
-    @InjectRepository(Trans) private repository: Repository<Trans<T>>
+    @InjectRepository(Trans) repository: Repository<Trans<T>>
   ) {
-    super();
+    super(repository);
   }
 
   create(
     config: ITransCreate<T>,
-    internalService: ITransCreateInternalService<T>,
-    paymentService: ITransCreatePaymentService
+    internalService: ITransInternalService<T>,
+    paymentService: ITransPaymentService
   ): Promise<string> {
     this.valid(config);
     let trans = null;
@@ -44,10 +44,10 @@ export class TransCreatorService<T> extends TransBaseService<T> {
 
   private async setAsStarted(
     trans: Trans<T>,
-    paymentService: ITransCreatePaymentService
+    paymentService: ITransPaymentService
   ): Promise<string> {
     const paymentResult = await paymentService[trans.system].create({
-      id: trans.id.toString(),
+      id: trans.id,
       name: trans.name,
       amount: trans.amount,
       firstName: trans.firstName,
@@ -67,7 +67,7 @@ export class TransCreatorService<T> extends TransBaseService<T> {
 
   private async setAsNew(
     trans: Trans<any & { amount?: number }>,
-    internalService: ITransCreateInternalService<T>
+    internalService: ITransInternalService<T>
   ): Promise<void> {
     const internalResult = await internalService.create(trans);
     if (internalResult.amount) {
@@ -87,6 +87,9 @@ export class TransCreatorService<T> extends TransBaseService<T> {
       trans[key] = config[key];
     });
 
+    // hack: generate id
+    trans['_id'] = Guid.raw();
+
     trans.modifyDate = new Date();
     trans.status = "prepare";
 
@@ -95,14 +98,6 @@ export class TransCreatorService<T> extends TransBaseService<T> {
     await this.repository.save(trans as any);
 
     return trans;
-  }
-
-  private async setError(trans: Trans<T>, error): Promise<void> {
-    trans.modifyDate = new Date();
-    trans.status = "error";
-    this.addHistory(trans, error);
-
-    await this.repository.save(trans as any);
   }
 
   private valid(req: ITransCreate<T>) {

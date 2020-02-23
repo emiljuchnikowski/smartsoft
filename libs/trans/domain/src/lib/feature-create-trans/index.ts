@@ -1,2 +1,2 @@
 export * from './interfaces';
-export * from './trans-creator.service';
+export * from './creator.service';

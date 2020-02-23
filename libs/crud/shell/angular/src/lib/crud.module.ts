@@ -4,7 +4,7 @@ import { Store, StoreModule } from "@ngrx/store";
 import { CrudConfig, CrudFullConfig } from "./crud.config";
 import { CrudEffects } from "./+state/crud.effects";
 import { getReducer } from "./+state/crud.reducer";
-import {AuthSharedModule} from "@smartsoft001/auth-shell-angular";
+//import {AuthSharedModule} from "@smartsoft001/auth-shell-angular";
 import { IEntity } from "@smartsoft001/domain-core";
 import { SharedModule } from "@smartsoft001/angular";
 import { CrudService } from "./services/crud/crud.service";
@@ -14,7 +14,7 @@ import {CrudFullModule} from "./crud-full.module";
 
 @NgModule({
   imports: [
-      AuthSharedModule,
+      //AuthSharedModule,
     StoreModule,
     SharedModule,
     CrudPipesModule

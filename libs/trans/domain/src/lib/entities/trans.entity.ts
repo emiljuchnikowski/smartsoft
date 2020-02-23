@@ -1,72 +1,74 @@
-import {
-    Column,
-    Entity,
-    ObjectID,
-    ObjectIdColumn
-} from "typeorm";
+import { Column, Entity, ObjectIdColumn } from "typeorm";
 
-import {IEntity} from "@smartsoft001/domain-core";
+import { IEntity } from "@smartsoft001/domain-core";
 
-@Entity('trans')
-export class Trans<T> implements IEntity<ObjectID> {
-    @ObjectIdColumn()
-    id: ObjectID;
+@Entity("trans")
+export class Trans<T> implements IEntity<string> {
+  @ObjectIdColumn({ generated: false })
+  id: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column()
-    amount: number;
+  @Column()
+  amount: number;
 
-    @Column()
-    firstName: string;
+  @Column()
+  firstName: string;
 
-    @Column()
-    lastName: string;
+  @Column()
+  lastName: string;
 
-    @Column()
-    email: string;
+  @Column()
+  email: string;
 
-    @Column()
-    contactPhone: string;
+  @Column()
+  contactPhone: string;
 
-    @Column()
-    data: T;
+  @Column()
+  data: T;
 
-    @Column()
-    system: TransSystem;
+  @Column()
+  system: TransSystem;
 
-    @Column()
-    status: TransStatus;
+  @Column()
+  status: TransStatus;
 
-    @Column()
-    modifyDate: Date;
+  @Column()
+  modifyDate: Date;
 
-    @Column(() => TransHistory)
-    history: TransHistory<T>[];
+  @Column(() => TransHistory)
+  history: TransHistory<T>[];
 
-    @Column()
-    clientIp: string;
+  @Column()
+  clientIp: string;
 }
 
 export class TransHistory<T> {
-    @Column()
-    amount: number;
+  @Column()
+  amount: number;
 
-    @Column()
-    data: any;
+  @Column()
+  data: any;
 
-    @Column()
-    system: TransSystem;
+  @Column()
+  system: TransSystem;
 
-    @Column()
-    status: TransStatus;
+  @Column()
+  status: TransStatus;
 
-    @Column()
-    modifyDate: Date;
+  @Column()
+  modifyDate: Date;
 }
 
-export type TransSystem = 'payu';
-export type TransStatus = 'prepare' | 'new' | 'error' | 'started';
+export type TransSystem = "payu";
+export type TransStatus =
+  | "prepare"
+  | "new"
+  | "error"
+  | "started"
+  | "completed"
+  | "canceled"
+  | "pending";
 
-export const TRANS_SYSTEMS = [ 'payu' ];
+export const TRANS_SYSTEMS = ["payu"];

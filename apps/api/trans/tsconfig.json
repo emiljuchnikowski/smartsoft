@@ -5,7 +5,8 @@
       "node",
       "jest"
     ],
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": [
     "**/*.ts"
