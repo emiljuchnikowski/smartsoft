@@ -12,6 +12,8 @@ jobs:
 
     steps:
       
+    - name: List files
+      run: ls
           
     - name: Publish auth image
       uses: mr-smithers-excellent/docker-build-push@v2
