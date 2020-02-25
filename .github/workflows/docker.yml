@@ -11,32 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Login to docker hub
-      uses: actions-hub/docker/login@master
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        
-    - name: auth:build
-      run: docker build -t smartsoft001/auth_api:latest -f Dockerfile-auth-api .
-
-    - name: auth:push
-      uses: actions-hub/docker@master
+      
+          
+    - name: Publish auth image
+      uses: mr-smithers-excellent/docker-build-push@v2
       with:
-        args: push smartsoft001/auth_api:latest
-        
-    - name: crud:build
-      run: docker build -t smartsoft001/crud_api:latest -f Dockerfile-crud-api .
-
-    - name: crud:push
-      uses: actions-hub/docker@master
-      with:
-        args: push smartsoft001/crud_api:latest  
-        
-    - name: trans:build
-      run: docker build -t smartsoft001/trans_api:latest -f Dockerfile-trans-api .
-
-    - name: trans:push
-      uses: actions-hub/docker@master
-      with:
-        args: push smartsoft001/trans_api:latest
+        image: smartsoft001/auth_api
+        tag: latest
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        dockerfile: Dockerfile-auth-api
