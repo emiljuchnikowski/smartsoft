@@ -26,6 +26,7 @@ export class PayuService implements ITransPaymentSingleService {
       "description": obj.name,
       "currencyCode": "PLN",
       "totalAmount": obj.amount,
+      "notifyUrl": this.config.notifyUrl,
       "products": [
         {
           "name": obj.name,

@@ -8,7 +8,6 @@ FROM node:12-alpine AS builder
 WORKDIR /home/node/app
 COPY . .
 # Install dependencies and build whatever you have to build
-# (babel, grunt, webpack, etc.)
 RUN npm install && npm run build api-trans --prod
 
 ###############################################################################

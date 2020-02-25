@@ -1,0 +1,7 @@
+.circeleci
+.github
+.storybook
+coverage
+dist
+node_modules
+tools
