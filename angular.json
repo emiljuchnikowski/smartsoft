@@ -768,6 +768,213 @@
           }
         }
       }
+    },
+    "trans-domain": {
+      "root": "libs/trans/domain",
+      "sourceRoot": "libs/trans/domain/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/trans/domain/tsconfig.lib.json",
+              "libs/trans/domain/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/trans/domain/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/trans/domain/jest.config.js",
+            "tsConfig": "libs/trans/domain/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "trans-shell-dtos": {
+      "root": "libs/trans/shell/dtos",
+      "sourceRoot": "libs/trans/shell/dtos/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/trans/shell/dtos/tsconfig.lib.json",
+              "libs/trans/shell/dtos/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/trans/shell/dtos/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/trans/shell/dtos/jest.config.js",
+            "tsConfig": "libs/trans/shell/dtos/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "trans-shell-angular": {
+      "root": "libs/trans/shell/angular",
+      "sourceRoot": "libs/trans/shell/angular/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/trans/shell/angular/tsconfig.lib.json",
+              "libs/trans/shell/angular/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/trans/shell/angular/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/trans/shell/angular/jest.config.js",
+            "tsConfig": "libs/trans/shell/angular/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "trans-shell-app-services": {
+      "root": "libs/trans/shell/app-services",
+      "sourceRoot": "libs/trans/shell/app-services/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/trans/shell/app-services/tsconfig.lib.json",
+              "libs/trans/shell/app-services/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/trans/shell/app-services/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/trans/shell/app-services/jest.config.js",
+            "tsConfig": "libs/trans/shell/app-services/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "trans-shell-nestjs": {
+      "root": "libs/trans/shell/nestjs",
+      "sourceRoot": "libs/trans/shell/nestjs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/trans/shell/nestjs/tsconfig.lib.json",
+              "libs/trans/shell/nestjs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/trans/shell/nestjs/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/trans/shell/nestjs/jest.config.js",
+            "tsConfig": "libs/trans/shell/nestjs/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "api-trans": {
+      "root": "apps/api/trans",
+      "sourceRoot": "apps/api/trans/src",
+      "projectType": "application",
+      "prefix": "api-trans",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/api/trans",
+            "main": "apps/api/trans/src/main.ts",
+            "tsConfig": "apps/api/trans/tsconfig.app.json",
+            "assets": ["apps/api/trans/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/trans/src/environments/environment.ts",
+                  "with": "apps/api/trans/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-trans:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api/trans/tsconfig.app.json",
+              "apps/api/trans/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/api/trans/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/trans/jest.config.js",
+            "tsConfig": "apps/api/trans/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "shared-payu": {
+      "root": "libs/shared/payu",
+      "sourceRoot": "libs/shared/payu/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/payu/tsconfig.lib.json",
+              "libs/shared/payu/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/payu/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/payu/jest.config.js",
+            "tsConfig": "libs/shared/payu/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

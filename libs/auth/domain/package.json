@@ -1,7 +1,20 @@
 {
   "name": "@smartsoft001/auth-domain",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Utils to authorization",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    },
+    "whitelistedNonPeerDependencies": [
+      "@smartsoft001/domain-core",
+      "@smartsoft001/users",
+      "@smartsoft001/utils"
+    ]
+  },
+  "scripts": {
+    "refresh": "npm version patch && npm i && npm i @smartsoft001/users@latest --save && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/utils@latest --save"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
@@ -18,5 +31,10 @@
   "bugs": {
     "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
   },
-  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme"
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
+  "dependencies": {
+    "@smartsoft001/domain-core": "^1.0.5",
+    "@smartsoft001/users": "^1.0.3",
+    "@smartsoft001/utils": "^1.0.4"
+  }
 }

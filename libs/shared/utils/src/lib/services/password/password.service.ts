@@ -1,4 +1,6 @@
-import * as md5 from 'md5';
+import * as md5_ from 'md5';
+
+const md5 = md5_;
 
 // @dynamic
 export class PasswordService {

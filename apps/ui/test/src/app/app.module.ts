@@ -22,6 +22,11 @@ import {HttpClientModule} from "@angular/common/http";
       BrowserAnimationsModule,
     RouterModule.forRoot(
       [
+          {
+              path: "trans",
+              loadChildren: () =>
+                  import("./trans/trans.module").then(m => m.TransModule)
+          },
         {
           path: "users",
           canActivate: [PermissionsGuard],

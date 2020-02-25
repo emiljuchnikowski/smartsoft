@@ -41,6 +41,21 @@
     "crud-shell-nestjs": {
       "tags": ["scope:crud", "type:shell"]
     },
+    "trans-domain": {
+      "tags": ["scope:trans", "type:domain"]
+    },
+    "trans-shell-dtos": {
+      "tags": ["scope:trans", "type:shell"]
+    },
+    "trans-shell-angular": {
+      "tags": ["scope:trans", "type:shell"]
+    },
+    "trans-shell-app-services": {
+      "tags": ["scope:trans", "type:shell"]
+    },
+    "trans-shell-nestjs": {
+      "tags": ["scope:trans", "type:shell"]
+    },
     "shared-users": {
       "tags": ["scope:shared", "type:util"]
     },
@@ -62,6 +77,9 @@
     "shared-mongo": {
       "tags": ["scope:shared", "type:util"]
     },
+    "shared-payu": {
+      "tags": ["scope:shared", "type:util"]
+    },
     "shared-angular-e2e": {
       "tags": [],
       "implicitDependencies": ["shared-angular"]
@@ -74,6 +92,9 @@
       "tags": []
     },
     "api-crud": {
+      "tags": []
+    },
+    "api-trans": {
       "tags": []
     }
   }

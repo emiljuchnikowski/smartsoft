@@ -1,0 +1,8 @@
+<smart-page [options]='{ title: "Form" }'>
+    <smart-form *ngIf="formOptions" [options]="formOptions"
+                (valueChange)="item = $event">
+
+    </smart-form>
+
+    <smart-button [options]="buttonOptions">Wyślij</smart-button>
+</smart-page>
