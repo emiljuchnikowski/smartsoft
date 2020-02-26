@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import { IAppProvider } from "../providers/interfaces";
 import { IFieldOptions } from "@smartsoft001/models";
 import { IEntity } from "@smartsoft001/domain-core";
-import { ComponentFactory } from "@angular/core";
+import {ComponentFactory, PipeTransform} from "@angular/core";
 
 export interface IAppOptions {
   provider: IAppProvider;
@@ -111,6 +111,8 @@ export interface IListOptions<T> {
     totalPages$: Observable<number>
   };
 
+  cellPipe?: IListCellPipe<T>;
+
   sort?: boolean | {
     default?: string;
     defaultDesc?: boolean;
@@ -134,6 +136,10 @@ export interface IListOptions<T> {
     | {
         provider?: IRemoveProvider<T>;
       };
+}
+
+export interface IListCellPipe<T> extends PipeTransform {
+  transform(value: T, columnName: string): string;
 }
 
 export interface IEditOptionsForPage {

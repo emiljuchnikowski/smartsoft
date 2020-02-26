@@ -22,11 +22,13 @@ export class PayuService implements ITransPaymentSingleService {
 
     const data = {
       "customerIp": obj.clientIp,
+      "extOrderId": obj.id,
       "merchantPosId": this.config.posId,
       "description": obj.name,
       "currencyCode": "PLN",
       "totalAmount": obj.amount,
       "notifyUrl": this.config.notifyUrl,
+      "continueUrl": this.config.continueUrl,
       "products": [
         {
           "name": obj.name,

@@ -12,8 +12,8 @@
                 (click)='unselect && unselect()'>
             <ion-label>
                 <ng-container *ngFor="let key of keys; let first = first">
-                    <h2 *ngIf='first'>{{ item[key] }}</h2>
-                    <p *ngIf='!first'>{{ item[key] }}</p>
+                    <h2 *ngIf='first'  [innerHTML]="item | smartListCell : key : cellPipe">{{ item[key] }}</h2>
+                    <p *ngIf='!first'  [innerHTML]="item | smartListCell : key : cellPipe"></p>
                 </ng-container>
             </ion-label>
         </ion-item>

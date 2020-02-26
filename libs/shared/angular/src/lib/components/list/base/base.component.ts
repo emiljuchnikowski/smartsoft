@@ -7,7 +7,7 @@ import {map} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
 
 import {DetailsPage} from "../../../pages/details/details.page";
-import { IDetailsOptions, IListProvider, IButtonOptions } from '../../../models/interfaces';
+import {IDetailsOptions, IListProvider, IButtonOptions, IListCellPipe} from '../../../models/interfaces';
 import { IListInternalOptions } from '../list.component';
 import {ToastService} from "../../../services/toast/toast.service";
 
@@ -24,6 +24,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
   detailsButtonOptions: IButtonOptions;
   removed: Set<string> = new Set<string>();
   keys: Array<string>;
+  cellPipe: IListCellPipe<T>;
   loadPrevPage: (event) => void;
   loadNextPage: (event) => void;
 
@@ -40,6 +41,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
     this._fields = val.fields;
     this.provider = val.provider;
     this.sort = val.sort;
+    this.cellPipe = val.cellPipe;
     this.initKeys();
     this.initList();
     this.initLoading();

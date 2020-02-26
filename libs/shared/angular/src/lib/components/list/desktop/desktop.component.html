@@ -50,7 +50,7 @@
           {{ "MODEL." + key | translate }}
           <ng-container *ngTemplateOutlet="pagination"></ng-container>
         </th>
-        <td mat-cell *matCellDef="let element">{{ element[key] }}</td>
+        <td mat-cell *matCellDef="let element" [innerHTML]="element | smartListCell : key : cellPipe"></td>
       </ng-container>
     </div>
 

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {IIconButtonOptions} from "@smartsoft001/angular";
+import {IIconButtonOptions, IListCellPipe} from "@smartsoft001/angular";
 
 @Injectable()
 export class CrudConfig<T> {
@@ -25,6 +25,9 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     sort?: boolean | {
         default?: string;
         defaultDesc?: boolean;
+    };
+    list?: {
+        cellPipe: IListCellPipe<T>;
     };
     buttons?: Array<IIconButtonOptions>;
 }

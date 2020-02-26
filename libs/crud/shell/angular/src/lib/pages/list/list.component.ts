@@ -120,6 +120,7 @@ export class ListComponent<T extends IEntity<string>>
         list$: this.facade.list$,
         loading$: this.facade.loaded$.pipe(map(l => !l))
       },
+      cellPipe: this.config.list ? this.config.list.cellPipe : null,
       type: this.config.type,
       details: this.config.details
         ? {
