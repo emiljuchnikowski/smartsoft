@@ -1,0 +1,7 @@
+<ion-segment #group [tabIndex]="0" (ionChange)="onSelectTab($event.detail.value)">
+    <ion-segment-button *ngFor="let tab of tabs; let index = i" [value]="tab">
+        <ion-label>{{ tab.title }}</ion-label>
+    </ion-segment-button>
+</ion-segment>
+
+<ng-content></ng-content>
