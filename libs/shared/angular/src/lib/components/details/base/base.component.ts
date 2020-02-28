@@ -1,11 +1,17 @@
-import {AfterViewInit, Input, ViewChild, ViewContainerRef} from "@angular/core";
+import {
+  AfterViewInit,
+  Input,
+  ViewChild,
+  ViewContainerRef
+} from "@angular/core";
 import { Observable } from "rxjs";
 
-import {IDetailsComponentFactories, IDetailsOptions} from "../../../models";
+import { IDetailsComponentFactories, IDetailsOptions } from "../../../models";
 import { getModelFieldsWithOptions, IFieldOptions } from "@smartsoft001/models";
 import { IEntity } from "@smartsoft001/domain-core";
 
-export abstract class DetailsBaseComponent<T extends IEntity<string>> implements AfterViewInit {
+export abstract class DetailsBaseComponent<T extends IEntity<string>>
+  implements AfterViewInit {
   private _fields: Array<{ key: string; options: IFieldOptions }>;
   private _type: any;
 
@@ -38,15 +44,16 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>> implements
   }
 
   ngAfterViewInit(): void {
-      this.generateDynamicComponents();
+    this.generateDynamicComponents();
   }
 
-    protected generateDynamicComponents(): void {
-      if (!this.componentFactories) return;
+  protected generateDynamicComponents(): void {
+    if (!this.componentFactories) return;
 
-      if (this.componentFactories.top && this.topTpl) {
-          if (this.topTpl.get(0)) this.topTpl.clear();
-          this.topTpl.createComponent(this.componentFactories.top);
+    if (this.componentFactories.top && this.topTpl) {
+      if (!this.topTpl.get(0)) {
+        this.topTpl.createComponent(this.componentFactories.top);
       }
+    }
   }
 }
