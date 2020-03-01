@@ -46,6 +46,12 @@ export class CrudService<T extends IEntity<string>> {
       query += `&sort=${ (filter.sortDesc ? '-' : '') + filter.sortBy}`;
     }
 
+    if (filter && filter.query) {
+      filter.query.forEach(q => {
+        query += '&' + q.key + q.type + q.value;
+      });
+    }
+
     return this.http.get<{ data: T[]; totalCount: number; links }>(
       this.config.apiUrl + (query ? "?" + query.replace('&', '') : "")
     );
