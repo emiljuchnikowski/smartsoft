@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/crud-shell-angular",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"

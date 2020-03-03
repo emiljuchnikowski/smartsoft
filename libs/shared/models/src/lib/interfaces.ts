@@ -1,14 +1,15 @@
 export enum FieldType {
-    text = "text",
-    password = "password",
-    email = "email",
-    flag = "flag",
-    enum = "enum",
     currency = "currency",
     date = "date",
-    object = "object",
+    email = "email",
+    enum = "enum",
     file = "file",
-    radio = "radio"
+    flag = "flag",
+    int = "int",
+    object = "object",
+    password = "password",
+    radio = "radio",
+    text = "text",
 }
 
 export interface IModelMetadata {

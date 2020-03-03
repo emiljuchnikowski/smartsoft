@@ -18,6 +18,7 @@ import {InputFlagComponent} from "./input/flag/flag.component";
 import {InputEnumComponent} from "./input/enum/enum.component";
 import {InputEmailComponent} from "./input/email/email.component";
 import {InputCurrencyComponent} from "./input/currency/currency.component";
+import {InputIntComponent} from "./input/int/int.component";
 import {InputDateComponent} from "./input/date/date.component";
 import {AppSplitPanelComponent} from './app/split-panel/split-panel.component';
 import { ButtonComponent } from './button/button.component';
@@ -65,6 +66,7 @@ export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];
 
 export const INPUT_COMPONENTS = [
     InputComponent,
+    InputIntComponent,
     InputErrorComponent,
     InputTextComponent,
     InputPasswordComponent,

@@ -91,6 +91,14 @@ export class User implements IEntity<string> {
     @Field({
         create: modifyMetdata,
         update: modifyMetdata,
+        details: true,
+        type: FieldType.int
+    })
+    year: number;
+
+    @Field({
+        create: modifyMetdata,
+        update: modifyMetdata,
         type: FieldType.file
     })
     file: File;

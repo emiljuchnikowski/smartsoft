@@ -44,6 +44,12 @@
                           [options]="options"
                           [fieldOptions]="fieldOptions"
         ></smart-input-radio>
+
+        <smart-input-int class="input-type" *ngSwitchCase="FieldType.int"
+                          [options]="options"
+                          [fieldOptions]="fieldOptions"
+        ></smart-input-int>
+
     </ng-container>
 </ion-item>
 
