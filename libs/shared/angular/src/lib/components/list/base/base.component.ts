@@ -43,7 +43,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
     this.sort = val.sort;
     this.cellPipe = val.cellPipe;
     this.initKeys();
-    this.initList();
+    this.initList(val);
     this.initLoading();
 
     if (val.remove) {
@@ -56,7 +56,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
         }
 
         this.removed.add(obj.id);
-        this.initList();
+        this.initList(val);
         this.cd.detectChanges();
         this.toastService.info({
           message: this.translateService.instant('OBJECT.deleted'),
@@ -68,7 +68,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
               handler: () => {
                 if (timeoutId) clearTimeout(timeoutId);
                 this.removed.delete(obj.id);
-                this.initList();
+                this.initList(val);
                 this.cd.detectChanges();
               }
             }
@@ -146,7 +146,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
     this.keys = this._fields.map(field => field.key);
   }
 
-  protected initList(): void {
+  protected initList(val: IListInternalOptions<T>): void {
     this.list$ = this.provider.list$.pipe(
         map(list => {
           if (!list) return list;

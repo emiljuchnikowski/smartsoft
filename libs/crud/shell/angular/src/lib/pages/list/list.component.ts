@@ -60,8 +60,8 @@ export class ListComponent<T extends IEntity<string>>
     this.facade.read({
       limit: this.config.pagination ? this.config.pagination.limit : null,
       offset: this.config.pagination ? 0 : null,
-      sortBy: this.config.sort ? this.config.sort['default'] : null,
-      sortDesc: this.config.sort ? this.config.sort['defaultDesc'] : null
+      sortBy: this.config.sort ? this.config.sort["default"] : null,
+      sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null
     });
 
     this.pageOptions = {
@@ -98,12 +98,18 @@ export class ListComponent<T extends IEntity<string>>
 
     const compiledComponents = await this.dynamicComponentLoader.getComponentsWithFactories(
       {
-        components:
-          this.config.details &&
+        components: [
+          ...(this.config.details &&
           this.config.details["components"] &&
           this.config.details["components"].top
             ? [this.config.details["components"].top]
-            : [],
+            : []),
+          ...(this.config.list &&
+          this.config.list["components"] &&
+          this.config.list["components"].top
+            ? [this.config.list["components"].top]
+            : [])
+        ],
         imports: [SharedModule, CommonModule]
       }
     );
@@ -121,6 +127,17 @@ export class ListComponent<T extends IEntity<string>>
         loading$: this.facade.loaded$.pipe(map(l => !l))
       },
       cellPipe: this.config.list ? this.config.list.cellPipe : null,
+      componentFactories: {
+        top:
+            this.config.list &&
+            this.config.list["components"] &&
+            this.config.list["components"].top
+                ? compiledComponents.find(
+                cc =>
+                    cc.component === this.config.list["components"].top
+                ).factory
+                : null
+      },
       type: this.config.type,
       details: this.config.details
         ? {

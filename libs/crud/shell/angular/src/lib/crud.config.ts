@@ -27,7 +27,10 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
         defaultDesc?: boolean;
     };
     list?: {
-        cellPipe: IListCellPipe<T>;
+        cellPipe?: IListCellPipe<T>;
+        components?: {
+            top: any
+        }
     };
     buttons?: Array<IIconButtonOptions>;
 }

@@ -1,3 +1,5 @@
+<div #topTpl></div>
+
 <table mat-table matSort [dataSource]="list$ | async" style="width: 100%">
   <ng-container
     *ngFor="let key of desktopKeys; let last = last"

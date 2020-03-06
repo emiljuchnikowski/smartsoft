@@ -112,7 +112,7 @@ export interface IListOptions<T> {
   };
 
   cellPipe?: IListCellPipe<T>;
-
+  componentFactories?: IListComponentFactories<T>,
   sort?: boolean | {
     default?: string;
     defaultDesc?: boolean;
@@ -140,6 +140,10 @@ export interface IListOptions<T> {
 
 export interface IListCellPipe<T> extends PipeTransform {
   transform(value: T, columnName: string): string;
+}
+
+export interface IListComponentFactories<T> {
+  top?: ComponentFactory<any>;
 }
 
 export interface IEditOptionsForPage {

@@ -48,9 +48,6 @@ export class TestComponent {}
         },
         edit: true,
         add: true,
-        list: {
-          cellPipe: null
-        },
         remove: true,
         search: true,
         pagination: { limit: 10 },
