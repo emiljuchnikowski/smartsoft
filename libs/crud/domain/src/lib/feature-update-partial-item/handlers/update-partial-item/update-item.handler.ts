@@ -15,6 +15,9 @@ export class UpdatePartialItemHandler<T extends IEntity<string>>
         event.item["password"]
       );
     }
+    if(event.item['passwordConfirm']) {
+      delete event.item['passwordConfirm'];
+    }
     return this.repository.updatePartial(event.item, event.user);
   }
 }

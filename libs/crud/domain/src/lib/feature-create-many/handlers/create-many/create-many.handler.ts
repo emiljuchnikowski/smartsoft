@@ -16,6 +16,10 @@ export class CreateManyHandler<T extends IEntity<string>>
       if (item['password']) {
         item['password'] = await PasswordService.hash(item['password']);
       }
+
+      if(item['passwordConfirm']) {
+        delete item['passwordConfirm'];
+      }
     }
 
     return this.repository.createMany(event.list, event.user);

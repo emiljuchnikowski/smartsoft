@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/angular",
-  "version": "1.0.50",
+  "version": "1.0.51",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
