@@ -1,52 +1,44 @@
-<ion-split-pane contentId="menu-content">
-  <!--  our side menu  -->
-  <ion-menu contentId="menu-content" [hidden]="!(showMenu$ | async)">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
+<!-- *ngIf="loadingPage" -->
+<ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar>
+<ion-split-pane contentId="menu-content" [ngStyle]="{'margin-top': loadingPage ? '4px' : '0'}">
 
-    <ion-content>
-      <ion-list *ngIf="menuItems$">
-        <ion-menu-toggle
-          auto-hide="false"
-          *ngFor="let item of menuItems$ | async"
-        >
-          <ion-item
-            [routerDirection]="'root'"
-            [routerLink]="[item.route]"
-            [class.active-item]="selectedPath == item.route"
-          >
-            <ion-icon
-              *ngIf="item.icon"
-              [name]="item.icon"
-              slot="start"
-            ></ion-icon>
-            {{ item.caption }}
-          </ion-item>
-        </ion-menu-toggle>
-      </ion-list>
-    </ion-content>
 
-    <ion-footer>
-      <ion-list *ngIf="logged$ | async">
-        <ion-item-divider>
-          {{ "APP.logged" | translate }}: &nbsp;&nbsp;
-          <b>{{ username$ | async }}</b>
-        </ion-item-divider>
-        <ion-item button (click)="logout()">
-          <ion-icon name="log-out" slot="start"></ion-icon>
-          {{ "APP.logout" | translate }}
-        </ion-item>
-      </ion-list>
-    </ion-footer>
-  </ion-menu>
 
-  <div *ngIf="loadingPage">
-    <ion-progress-bar type="indeterminate"></ion-progress-bar>
-  </div>
+    <!--  our side menu  -->
+    <ion-menu contentId="menu-content" [hidden]="!(showMenu$ | async)">
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>Menu</ion-title>
+            </ion-toolbar>
+        </ion-header>
 
-  <!-- the main content -->
-  <ion-router-outlet id="menu-content"></ion-router-outlet>
+        <ion-content>
+            <ion-list *ngIf="menuItems$">
+                <ion-menu-toggle auto-hide="false" *ngFor="let item of menuItems$ | async">
+                    <ion-item [routerDirection]="'root'" [routerLink]="[item.route]" [class.active-item]="selectedPath == item.route">
+                        <ion-icon *ngIf="item.icon" [name]="item.icon" slot="start"></ion-icon>
+                        {{ item.caption }}
+                    </ion-item>
+                </ion-menu-toggle>
+            </ion-list>
+        </ion-content>
+
+        <ion-footer>
+            <ion-list *ngIf="logged$ | async">
+                <ion-item-divider>
+                    {{ "APP.logged" | translate }}: &nbsp;&nbsp;
+                    <b>{{ username$ | async }}</b>
+                </ion-item-divider>
+                <ion-item button (click)="logout()">
+                    <ion-icon name="log-out" slot="start"></ion-icon>
+                    {{ "APP.logout" | translate }}
+                </ion-item>
+            </ion-list>
+        </ion-footer>
+    </ion-menu>
+
+
+    <!-- the main content -->
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
+
 </ion-split-pane>
