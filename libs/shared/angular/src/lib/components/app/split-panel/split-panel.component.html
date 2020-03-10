@@ -1,6 +1,6 @@
-<!-- *ngIf="loadingPage" -->
-<ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar>
-<ion-split-pane contentId="menu-content" [ngStyle]="{'margin-top': loadingPage ? '4px' : '0'}">
+<!-- <ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar> -->
+<!-- <ion-split-pane contentId="menu-content" [ngStyle]="{'margin-top': loadingPage ? '4px' : '0'}"> -->
+<ion-split-pane contentId="menu-content">
 
 
 
@@ -42,3 +42,4 @@
     <ion-router-outlet id="menu-content"></ion-router-outlet>
 
 </ion-split-pane>
+<ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar>

@@ -1,4 +1,9 @@
 .active-item {
-  --border-width: 0.5px;
-  --border-color: var(--ion-text-color)
+    --border-width: 0.5px;
+    --border-color: var(--ion-text-color)
+}
+
+ion-progress-bar {
+    position: absolute;
+    top: 0;
 }
