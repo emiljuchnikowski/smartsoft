@@ -49,6 +49,18 @@ export class CrudEffects<T extends IEntity<string>> {
                     ).subscribe();
                     break;
 
+                case `[${this.config.entity}] Export`:
+                    this.service.exportList(action.filter).pipe(
+                        tap(result =>
+                            this.store.dispatch(CrudActions.exportListSuccess(this.config.entity, action.filter))
+                        ),
+                        catchError(error => {
+                            this.store.dispatch(CrudActions.exportListFailure(this.config.entity, action.filter, error));
+                            return of();
+                        })
+                    ).subscribe();
+                    break;
+
                 case `[${this.config.entity}] Select`:
                     this.service.getById(action.id).pipe(
                         tap(result =>

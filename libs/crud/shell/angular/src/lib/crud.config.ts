@@ -21,6 +21,7 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     add?: boolean;
     remove?: boolean;
     search?: boolean;
+    export?: boolean;
     pagination?: { limit: number };
     sort?: boolean | {
         default?: string;

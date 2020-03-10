@@ -57,6 +57,33 @@ export const readFailure = function <F>(entity: string, filter: F, error): Actio
 };
 
 /*
+ * Export
+ */
+export const exportList = function (entity: string, filter: ICrudFilter = null): Action & { filter: ICrudFilter } {
+    return {
+        type: `[${entity}] Export`,
+        filter
+    };
+};
+
+export const exportListSuccess = function <T extends IEntity<string>, F>(
+    entity: string,
+    filter: F): Action & { filter: F } {
+    return {
+        type: `[${entity}] Export Success`,
+        filter
+    };
+};
+
+export const exportListFailure = function <F>(entity: string, filter: F, error): Action & { filter: F, error } {
+    return {
+        type: `[${entity}] Export Failure`,
+        filter,
+        error
+    };
+};
+
+/*
  * Select
  */
 export const select = function (entity: string, id: string): Action & { id: string } {

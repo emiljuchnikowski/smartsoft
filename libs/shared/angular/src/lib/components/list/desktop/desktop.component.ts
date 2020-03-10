@@ -78,6 +78,7 @@ export class ListDesktopComponent<T extends IEntity<string>>
       this._subscriptions.add(
         this.sortObj.sortChange.subscribe(sort => {
           this.provider.getData({
+            offset: 0,
             sortBy: sort.active ? sort.active : "",
             sortDesc: this.sortObj.direction === "desc"
           });

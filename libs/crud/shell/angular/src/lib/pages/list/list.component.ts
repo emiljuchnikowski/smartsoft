@@ -92,6 +92,20 @@ export class ListComponent<T extends IEntity<string>>
               }
             ]
           : []),
+        ...(this.config.export
+            ? [
+              {
+                icon: "download-outline",
+                handler: () => {
+                  this.facade.export({
+                    ...this.facade.filter,
+                    offset: null,
+                    limit: null
+                  });
+                }
+              }
+            ]
+            : []),
         ...(this.config.buttons ? this.config.buttons : [])
       ]
     };
