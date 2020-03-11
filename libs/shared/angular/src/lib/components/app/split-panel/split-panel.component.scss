@@ -3,6 +3,11 @@
     --border-color: var(--ion-text-color)
 }
 
+smart-app-split-panel,
+ion-progress-bar {
+    width: 100% !important;
+}
+
 ion-progress-bar {
     position: absolute;
     top: 0;
