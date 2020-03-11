@@ -7,13 +7,13 @@ import {Todo} from "./todo.dto";
 import {CrudModule} from "@smartsoft001/crud-shell-angular";
 import {environment} from "../../environments/environment";
 
-class CellPipe<T> implements IListCellPipe<T> {
-  transform(value: T, columnName): string {
-    if (columnName === 'body') return '<b>test</b>';
-
-    return value[columnName];
-  }
-}
+// export class CellPipe<T> implements IListCellPipe<T> {
+//   transform(value: T, columnName): string {
+//     if (columnName === 'body') return '<b>test</b>';
+//
+//     return value[columnName];
+//   }
+// }
 
 @NgModule({
   imports: [
@@ -31,7 +31,13 @@ class CellPipe<T> implements IListCellPipe<T> {
         edit: true,
         add: true,
         list: {
-          cellPipe: new CellPipe()
+          cellPipe: {
+            transform(value, columnName): string {
+              if (columnName === 'body') return '<b>test</b>';
+
+              return value[columnName];
+            }
+          }
         },
         search: true,
         pagination: { limit: 25 },
