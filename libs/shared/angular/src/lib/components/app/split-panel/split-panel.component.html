@@ -41,5 +41,5 @@
     <!-- the main content -->
     <ion-router-outlet id="menu-content"></ion-router-outlet>
 
+    <ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar>
 </ion-split-pane>
-<ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar>
