@@ -25,6 +25,7 @@ export interface IFieldModifyMetadata {
     required?: boolean;
     focused?: boolean;
     confirm?: boolean;
+    defaltValue?: () => any;
 }
 
 export interface IFieldListMetadata {
