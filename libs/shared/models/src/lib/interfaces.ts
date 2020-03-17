@@ -1,6 +1,7 @@
 export enum FieldType {
     currency = "currency",
     date = "date",
+    dateWithEdit = "dateWithEdit",
     email = "email",
     enum = "enum",
     file = "file",

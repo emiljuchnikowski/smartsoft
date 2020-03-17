@@ -14,12 +14,21 @@
 
         <ion-content>
             <ion-list *ngIf="menuItems$">
-                <ion-menu-toggle auto-hide="false" *ngFor="let item of menuItems$ | async">
-                    <ion-item [routerDirection]="'root'" [routerLink]="[item.route]" [class.active-item]="selectedPath == item.route">
-                        <ion-icon *ngIf="item.icon" [name]="item.icon" slot="start"></ion-icon>
-                        {{ item.caption }}
-                    </ion-item>
-                </ion-menu-toggle>
+                <ng-container *ngFor="let item of menuItems$ | async">
+                    <ion-menu-toggle auto-hide="false" *ngIf="item.mode !== 'divider'">
+                        <ion-item [routerDirection]="'root'" [routerLink]="[item.route]" [class.active-item]="selectedPath == item.route">
+                            <ion-icon *ngIf="item.icon" [name]="item.icon" slot="start"></ion-icon>
+                            {{ item.caption }}
+                        </ion-item>
+                    </ion-menu-toggle>
+
+                    <ion-item-divider *ngIf="item.mode === 'divider'">
+                        <ion-label>
+                            {{ item.caption }}
+                        </ion-label>
+                    </ion-item-divider>
+                </ng-container>
+
             </ion-list>
         </ion-content>
 

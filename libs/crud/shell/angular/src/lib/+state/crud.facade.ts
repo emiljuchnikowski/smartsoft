@@ -54,7 +54,17 @@ export class CrudFacade<T extends IEntity<string>> {
   }
 
   read(filter: ICrudFilter = null): void {
-    this.store.dispatch(CrudActions.read(this.config.entity, filter));
+    let baseQuery = [];
+    if (this.config.baseQuery) {
+      baseQuery = this.config.baseQuery;
+    }
+
+    const fullFilter = {
+      ...(filter ? filter : {}),
+      query: filter && filter.query ? [...baseQuery, ...filter.query] : baseQuery
+    };
+
+    this.store.dispatch(CrudActions.read(this.config.entity, fullFilter));
   }
 
   select(id: string): void {

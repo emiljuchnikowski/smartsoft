@@ -1,11 +1,13 @@
 import {Injectable} from "@angular/core";
 import {IIconButtonOptions, IListCellPipe} from "@smartsoft001/angular";
+import {ICrudFilterQueryItem} from "./models";
 
 @Injectable()
 export class CrudConfig<T> {
     apiUrl: string;
     entity: string;
     type?: any;
+    baseQuery?: Array<ICrudFilterQueryItem>;
 }
 
 @Injectable()

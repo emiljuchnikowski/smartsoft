@@ -45,6 +45,7 @@ import { TabComponent } from "./tabs/tab/tab.component";
 import { AccordionComponent } from "./accordion/accordion.component";
 import { AccordionHeaderComponent } from "./accordion/header/header.component";
 import { AccordionBodyComponent } from "./accordion/body/body.component";
+import {InputDateWithEditComponent} from "./input/date-with-edit/date-with-edit.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -81,6 +82,7 @@ export const INPUT_COMPONENTS = [
   InputEmailComponent,
   InputCurrencyComponent,
   InputDateComponent,
+  InputDateWithEditComponent,
   InputFileComponent,
   InputRadioComponent
 ];
