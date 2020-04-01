@@ -79,6 +79,7 @@ export class CrudController<T extends IEntity<string>> {
     @Res() res: Response
   ): Promise<void> {
     const object = this.getQueryObject(req.query);
+
     const { data, totalCount } = await this.service.read(
       object.criteria,
       object.options,
@@ -128,8 +129,13 @@ export class CrudController<T extends IEntity<string>> {
     await this.service.delete(params.id, user);
   }
 
-  private getQueryObject(q: string): { criteria, options, links} {
+  private getQueryObject(queryObject: any): { criteria, options, links} {
     let customCriteria = {} as any;
+    let q = '';
+
+    Object.keys(queryObject).forEach(key => {
+      q += `&${key}=${queryObject[key]}`;
+    });
 
     const result = q2m(q);
 
