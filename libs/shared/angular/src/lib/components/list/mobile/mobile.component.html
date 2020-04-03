@@ -26,7 +26,7 @@
     </ion-item-sliding>
 </ion-list>
 
-<ion-infinite-scroll threshold="100px" *ngIf="loadNextPage" (ionInfinite)="loadNextPage($event)">
+<ion-infinite-scroll threshold="100px" *ngIf="loadNextPage && (list$ | async)?.length" (ionInfinite)="loadNextPage($event)">
     <ion-infinite-scroll-content loadingSpinner="circles">
     </ion-infinite-scroll-content>
 </ion-infinite-scroll>

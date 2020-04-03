@@ -70,7 +70,7 @@
 
 <ion-infinite-scroll
   threshold="100px"
-  *ngIf="loadNextPage"
+  *ngIf="loadNextPage && (list$ | async)?.length"
   (ionInfinite)="loadNextPage($event)"
 >
   <ion-infinite-scroll-content loadingSpinner="circles">

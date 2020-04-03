@@ -93,7 +93,7 @@ export class ListComponent<T extends IEntity<string>>
             ]
           : []),
         ...(this.config.export
-            ? [
+          ? [
               {
                 icon: "download-outline",
                 handler: () => {
@@ -105,7 +105,7 @@ export class ListComponent<T extends IEntity<string>>
                 }
               }
             ]
-            : []),
+          : []),
         ...(this.config.buttons ? this.config.buttons : [])
       ]
     };
@@ -143,14 +143,13 @@ export class ListComponent<T extends IEntity<string>>
       cellPipe: this.config.list ? this.config.list.cellPipe : null,
       componentFactories: {
         top:
-            this.config.list &&
-            this.config.list["components"] &&
-            this.config.list["components"].top
-                ? compiledComponents.find(
-                cc =>
-                    cc.component === this.config.list["components"].top
-                ).factory
-                : null
+          this.config.list &&
+          this.config.list["components"] &&
+          this.config.list["components"].top
+            ? compiledComponents.find(
+                cc => cc.component === this.config.list["components"].top
+              ).factory
+            : null
       },
       type: this.config.type,
       details: this.config.details
