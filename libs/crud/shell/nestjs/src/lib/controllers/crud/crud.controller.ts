@@ -14,6 +14,8 @@ import {
 } from "@nestjs/common";
 import * as q2m from "query-to-mongo";
 import { Response, Request } from "express";
+import { Parser } from 'json2csv';
+import * as _ from 'lodash';
 
 import { CrudService } from "@smartsoft001/crud-shell-app-services";
 import { IUser } from "@smartsoft001/users";
@@ -73,24 +75,29 @@ export class CrudController<T extends IEntity<string>> {
   @Get()
   async read(
     @User() user: IUser,
-    @Req() req: Request
-  ): Promise<{
-    data: T[];
-    totalCount: number;
-    links: { prev: string; first: string; next: string; last: string };
-  }> {
+    @Req() req: Request,
+    @Res() res: Response
+  ): Promise<void> {
     const object = this.getQueryObject(req.query);
+
     const { data, totalCount } = await this.service.read(
       object.criteria,
       object.options,
       user
     );
 
-    return {
+    if (req.headers['content-type'] === 'text/csv') {
+      res.set({
+        'Content-Type': 'text/csv'
+      });
+      res.send(this.parseToCsv(data));
+    }
+
+    res.send({
       data,
       totalCount,
       links: object.links(CrudController.getLink(req).split('?')[0], totalCount)
-    };
+    });
   }
 
   @UseGuards(AuthJwtGuard)
@@ -122,8 +129,13 @@ export class CrudController<T extends IEntity<string>> {
     await this.service.delete(params.id, user);
   }
 
-  private getQueryObject(q: string): { criteria, options, links} {
+  private getQueryObject(queryObject: any): { criteria, options, links} {
     let customCriteria = {} as any;
+    let q = '';
+
+    Object.keys(queryObject).forEach(key => {
+      q += `&${key}=${queryObject[key]}`;
+    });
 
     const result = q2m(q);
 
@@ -139,5 +151,46 @@ export class CrudController<T extends IEntity<string>> {
     }
 
     return result;
+  }
+
+  private parseToCsv(data: T[]): string {
+    if (!data || !data.length) {
+      return ''
+    }
+
+    const fields = [];
+
+    const execute = (item, baseKey, baseItem) => {
+      Object.keys(item).forEach(key => {
+        if (fields.some(f => f === baseKey + key)) return;
+
+        const val = item[key];
+
+        if (_.isArray(val)) {
+          return;
+        } else if (_.isObject(val) && Object.keys(val).length) {
+          execute(val, baseKey + key + '_', baseItem);
+        } else if (baseKey) {
+          baseItem[baseKey + key] = val;
+          fields.push(baseKey + key);
+        } else {
+          fields.push(key);
+        }
+      });
+    };
+
+    data.forEach(item => {
+      execute(item, '', item);
+    });
+
+    data.forEach(item => {
+      Object.keys(item).forEach(key => {
+        if (!fields.some(f => f === key)) {
+          delete item[key];
+        }
+      })
+    });
+
+    return new Parser(fields).parse(data);
   }
 }

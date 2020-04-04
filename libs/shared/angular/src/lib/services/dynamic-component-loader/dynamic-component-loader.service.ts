@@ -22,7 +22,7 @@ export class DynamicComponentLoader<T> {
   > {
     const components = options.components.filter(
       comp =>
-        !DynamicComponentLoader.declaredComponents.some(dec => dec === comp)
+        !DynamicComponentLoader.declaredComponents.some(dec => dec.component === comp)
     );
 
     @NgModule({
@@ -35,17 +35,25 @@ export class DynamicComponentLoader<T> {
     return await this.compiler
       .compileModuleAndAllComponentsAsync(DynamicModule)
       .then(res => {
-        DynamicComponentLoader.declaredComponents = [
-          ...DynamicComponentLoader.declaredComponents,
-          ...components
-        ];
+        const result = options.components.map(c => {
+          let factory = res.componentFactories.find(x => x.componentType === c);
 
-        return options.components.map(c => {
+          if (!factory) {
+            factory = DynamicComponentLoader.declaredComponents.find(x => x.component === c).factory;
+          }
+
           return {
             component: c,
-            factory: res.componentFactories.find(x => x.componentType === c)
+            factory
           };
         });
+
+        DynamicComponentLoader.declaredComponents = [
+          ...DynamicComponentLoader.declaredComponents,
+          ...result
+        ];
+
+        return result;
       })
       .catch(error => {
         console.error(error);

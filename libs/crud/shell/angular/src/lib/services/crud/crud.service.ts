@@ -32,6 +32,42 @@ export class CrudService<T extends IEntity<string>> {
   getList(
     filter: ICrudFilter = null
   ): Observable<{ data: T[]; totalCount: number; links }> {
+    return this.http.get<{ data: T[]; totalCount: number; links }>(
+      this.config.apiUrl + this.getQuery(filter)
+    );
+  }
+
+  exportList(
+      filter: ICrudFilter = null
+  ): Observable<void> {
+    return this.http.get<string>(
+        this.config.apiUrl + this.getQuery(filter),
+        {
+          headers: {
+            'Content-Type': 'text/csv'
+          },
+          responseType: 'text' as 'json'
+        }
+    ).pipe(
+        map(res => {
+          window.open("data:text/csv;charset=utf-8," + escape(res));
+        })
+    );
+  }
+
+  update(item: T): Observable<void> {
+    return this.http.put<void>(this.config.apiUrl + "/" + item.id, item);
+  }
+
+  updatePartial(item: Partial<T> & { id: string }): Observable<void> {
+    return this.http.patch<void>(this.config.apiUrl + "/" + item.id, item);
+  }
+
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(this.config.apiUrl + "/" + id);
+  }
+
+  private getQuery(filter: ICrudFilter): string {
     let query = '';
 
     if (filter && filter.searchText) {
@@ -46,20 +82,12 @@ export class CrudService<T extends IEntity<string>> {
       query += `&sort=${ (filter.sortDesc ? '-' : '') + filter.sortBy}`;
     }
 
-    return this.http.get<{ data: T[]; totalCount: number; links }>(
-      this.config.apiUrl + (query ? "?" + query.replace('&', '') : "")
-    );
-  }
+    if (filter && filter.query) {
+      filter.query.forEach(q => {
+        query += '&' + q.key + q.type + q.value;
+      });
+    }
 
-  update(item: T): Observable<void> {
-    return this.http.put<void>(this.config.apiUrl + "/" + item.id, item);
-  }
-
-  updatePartial(item: Partial<T> & { id: string }): Observable<void> {
-    return this.http.patch<void>(this.config.apiUrl + "/" + item.id, item);
-  }
-
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(this.config.apiUrl + "/" + id);
+    return (query ? "?" + query.replace('&', '') : "");
   }
 }

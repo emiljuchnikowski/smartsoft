@@ -13,12 +13,14 @@ export class GetByIdHandler<T extends IEntity<string>>
   ) {}
 
   async execute(query: GetByIdQuery): Promise<T> {
-    this.permissionService.valid("read", query.user);
-    const result = await this.repository.getById(query.id);
-    delete result['password'];
+    try {
+      this.permissionService.valid("read", query.user);
+      const result = await this.repository.getById(query.id);
+      delete result['password'];
 
-    console.log(result);
-
-    return result;
+      return result;
+    } catch (e) {
+      console.error(e);
+    }
   }
 }

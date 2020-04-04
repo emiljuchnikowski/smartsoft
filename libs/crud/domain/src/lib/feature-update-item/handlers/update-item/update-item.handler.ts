@@ -13,6 +13,9 @@ export class UpdateItemHandler<T extends IEntity<string>>
     if (event.item['password']) {
       event.item['password'] = await PasswordService.hash(event.item['password']);
     }
+    if(event.item['passwordConfirm']) {
+      delete event.item['passwordConfirm'];
+    }
     return this.repository.update(event.item, event.user);
   }
 }

@@ -84,9 +84,17 @@ export class User implements IEntity<string> {
         create: modifyMetdata,
         update: modifyMetdata,
         details: true,
-        type: FieldType.date
+        type: FieldType.dateWithEdit
     })
     date: string;
+
+    @Field({
+        create: modifyMetdata,
+        update: modifyMetdata,
+        details: true,
+        type: FieldType.int
+    })
+    year: number;
 
     @Field({
         create: modifyMetdata,

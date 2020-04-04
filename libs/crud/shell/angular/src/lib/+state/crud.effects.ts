@@ -1,12 +1,13 @@
 import {Injectable} from "@angular/core";
-import {catchError, tap} from "rxjs/operators";
+import {catchError, first, tap} from "rxjs/operators";
 import {of} from "rxjs";
-import {Action, ActionsSubject, Store} from "@ngrx/store";
+import {Action, ActionsSubject, select, Store} from "@ngrx/store";
 
 import {CrudService} from "../services/crud/crud.service";
 import {IEntity} from "@smartsoft001/domain-core";
 import * as CrudActions from './crud.actions';
 import {CrudConfig} from "../crud.config";
+import { getCrudFilter } from './crud.selectors';
 
 @Injectable()
 export class CrudEffects<T extends IEntity<string>> {
@@ -48,6 +49,18 @@ export class CrudEffects<T extends IEntity<string>> {
                     ).subscribe();
                     break;
 
+                case `[${this.config.entity}] Export`:
+                    this.service.exportList(action.filter).pipe(
+                        tap(result =>
+                            this.store.dispatch(CrudActions.exportListSuccess(this.config.entity, action.filter))
+                        ),
+                        catchError(error => {
+                            this.store.dispatch(CrudActions.exportListFailure(this.config.entity, action.filter, error));
+                            return of();
+                        })
+                    ).subscribe();
+                    break;
+
                 case `[${this.config.entity}] Select`:
                     this.service.getById(action.id).pipe(
                         tap(result =>
@@ -74,7 +87,15 @@ export class CrudEffects<T extends IEntity<string>> {
                     break;
 
                 case `[${this.config.entity}] Update Success`:
-                    this.store.dispatch(CrudActions.read(this.config.entity));
+                    this.store.pipe(
+                        select(getCrudFilter(this.config.entity)),
+                        first()
+                    ).subscribe(filter => {
+                        this.store.dispatch(CrudActions.read(this.config.entity, {
+                            ...filter,
+                            offset: 0
+                        }));
+                    });
                     break;
 
                 case `[${this.config.entity}] Update partial`:
@@ -91,7 +112,15 @@ export class CrudEffects<T extends IEntity<string>> {
                     break;
 
                 case `[${this.config.entity}] Update partial Success`:
-                    this.store.dispatch(CrudActions.read(this.config.entity));
+                    this.store.pipe(
+                        select(getCrudFilter(this.config.entity)),
+                        first()
+                    ).subscribe(filter => {
+                        this.store.dispatch(CrudActions.read(this.config.entity, {
+                            ...filter,
+                            offset: 0
+                        }));
+                    });
                     break;
 
                 case `[${this.config.entity}] Delete`:

@@ -50,6 +50,7 @@ export class TestComponent {}
         add: true,
         remove: true,
         search: true,
+        export: true,
         pagination: { limit: 10 },
         sort: {
           default: 'firstName'

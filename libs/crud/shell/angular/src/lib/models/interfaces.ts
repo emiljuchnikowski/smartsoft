@@ -4,4 +4,11 @@ export interface ICrudFilter {
     sortDesc?: boolean;
     offset?: number;
     limit?: number;
+    query?: Array<ICrudFilterQueryItem>
+}
+
+export interface ICrudFilterQueryItem {
+    key: string;
+    value: any;
+    type: '=' | '!=' | '>=' | '<=' | '<' | '>';
 }

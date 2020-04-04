@@ -3,5 +3,6 @@ export class PayuConfig {
     clientId: string;
     clientSecret: string;
     notifyUrl: string;
+    continueUrl: string;
     posId: string;
 }

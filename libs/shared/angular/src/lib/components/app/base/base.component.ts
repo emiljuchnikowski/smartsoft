@@ -1,11 +1,12 @@
-import {ChangeDetectorRef, Input, OnDestroy} from "@angular/core";
+import {AfterViewInit, ChangeDetectorRef, Input, OnDestroy} from "@angular/core";
 import {Observable, Subscription} from "rxjs";
-import {filter, map} from "rxjs/operators";
-import {NavigationEnd, Router} from "@angular/router";
+import {debounceTime, filter, map} from "rxjs/operators";
+import {LoadingController} from "@ionic/angular";
+import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from "@angular/router";
 
 import {IAppOptions, IMenuItem} from "../../../models/interfaces";
 
-export abstract class AppBaseComponent implements OnDestroy {
+export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
     private _options: IAppOptions;
     private _subscriptions = new Subscription();
 
@@ -14,6 +15,7 @@ export abstract class AppBaseComponent implements OnDestroy {
     menuItems$: Observable<IMenuItem[]>;
     logged$: Observable<boolean>;
     username$: Observable<string>;
+    loadingPage: boolean;
 
     @Input() set options(val: IAppOptions) {
         this._options = val;
@@ -29,6 +31,10 @@ export abstract class AppBaseComponent implements OnDestroy {
 
     logout(): void {
         this._options.provider.logout();
+    }
+
+    ngAfterViewInit(): void {
+        this.initLoader();
     }
 
     ngOnDestroy(): void {
@@ -58,5 +64,23 @@ export abstract class AppBaseComponent implements OnDestroy {
                 this.cd.detectChanges();
             })
         );
+    }
+
+    private initLoader() {
+        this._subscriptions.add(this.router.events.pipe(
+            //debounceTime(500)
+        ).subscribe(async routerEvent => {
+            if (routerEvent instanceof NavigationStart) {
+                this.loadingPage = true;
+                this.cd.detectChanges();
+            }
+
+            else if (routerEvent instanceof NavigationEnd ||
+                routerEvent instanceof NavigationCancel ||
+                routerEvent instanceof NavigationError) {
+                this.loadingPage = false;
+                this.cd.detectChanges();
+            }
+        }));
     }
 }

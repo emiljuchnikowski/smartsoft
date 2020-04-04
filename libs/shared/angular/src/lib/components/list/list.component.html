@@ -1,5 +1,12 @@
 <ng-container *ngIf="mobile; then mobileTpl; else desktopTpl"></ng-container>
 
+<ion-row>
+    <ion-col></ion-col>
+    <ion-col size="auto">
+        <smart-loader [show]="internalOptions?.provider?.loading$ | async"></smart-loader>
+    </ion-col>
+    <ion-col></ion-col>
+</ion-row>
 
 <ng-template #desktopTpl>
     <smart-list-desktop [options]="internalOptions"></smart-list-desktop>

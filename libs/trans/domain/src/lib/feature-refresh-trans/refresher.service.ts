@@ -24,13 +24,13 @@ export class RefresherService<T> extends TransBaseService<T> {
     // hack : bad map id
     return this.repository
       .findOne({
-        _id: transId
-      } as any)
+        externalId: transId
+      })
       .then(res => {
         trans = res;
 
         if (!trans) {
-          throw new NotFoundException("Nie ma takiej transakcji");
+          throw new NotFoundException("Transaction not found: " + transId);
         }
 
         return paymentService[trans.system].getStatus(trans);

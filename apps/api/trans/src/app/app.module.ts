@@ -39,6 +39,7 @@ if (process.env.DB_USERNAME) {
  * - PAYU_CLIENT_SECRET
  * - PAYU_POST_ID
  * - PAYU_NOTIFY_URL
+ * - PAYU_CONTINUE_URL
  * - PAYU_TEST
  */
 
@@ -55,6 +56,7 @@ if (process.env.DB_USERNAME) {
         clientSecret: process.env.PAYU_CLIENT_SECRET,
         posId: process.env.PAYU_POST_ID,
         notifyUrl: process.env.PAYU_NOTIFY_URL,
+        continueUrl: process.env.PAYU_CONTINUE_URL,
         test: !!process.env.PAYU_TEST,
       } : null
     }),
