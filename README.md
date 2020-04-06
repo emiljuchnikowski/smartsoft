@@ -1,6 +1,16 @@
 # Smartsoft Project
 Many tools to any angular, nest, ionic projects
 
+# Getting Started
+1. Install packages:
+```
+npm install
+```
+2. Run test app:
+```
+npm run ui-test:serve 
+```
+
 # NPM
 
 Models to projects:
