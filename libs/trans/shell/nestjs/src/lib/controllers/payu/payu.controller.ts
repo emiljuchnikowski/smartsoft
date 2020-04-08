@@ -10,7 +10,12 @@ export class PayUController {
     @Post()
     @HttpCode(200)
     async refreshStatus(@Body() obj: { order: { orderId: string } }): Promise<string> {
-        await this.service.refresh(obj.order.orderId);
-        return 'ok';
+        try {
+            await this.service.refresh(obj.order.orderId);
+            return 'ok';
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
     }
 }
