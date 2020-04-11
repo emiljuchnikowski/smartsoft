@@ -14,7 +14,10 @@
               "libs/auth/domain/tsconfig.lib.json",
               "libs/auth/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/auth/domain/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/auth/domain/**"
+            ]
           }
         },
         "test": {
@@ -67,7 +70,10 @@
               "libs/auth/shell/nestjs/tsconfig.lib.json",
               "libs/auth/shell/nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/auth/shell/nestjs/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/auth/shell/nestjs/**"
+            ]
           }
         },
         "test": {
@@ -92,7 +98,9 @@
             "outputPath": "dist/apps/api/auth",
             "main": "apps/api/auth/src/main.ts",
             "tsConfig": "apps/api/auth/tsconfig.app.json",
-            "assets": ["apps/api/auth/src/assets"]
+            "assets": [
+              "apps/api/auth/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -121,7 +129,10 @@
               "apps/api/auth/tsconfig.app.json",
               "apps/api/auth/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/auth/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/auth/**"
+            ]
           }
         },
         "test": {
@@ -146,7 +157,10 @@
               "libs/shared/users/tsconfig.lib.json",
               "libs/shared/users/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/users/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/users/**"
+            ]
           }
         },
         "test": {
@@ -171,7 +185,10 @@
               "libs/shared/domain-core/tsconfig.lib.json",
               "libs/shared/domain-core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/domain-core/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/domain-core/**"
+            ]
           }
         },
         "test": {
@@ -196,7 +213,10 @@
               "libs/shared/utils/tsconfig.lib.json",
               "libs/shared/utils/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/utils/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/utils/**"
+            ]
           }
         },
         "test": {
@@ -221,7 +241,10 @@
               "libs/shared/nestjs/tsconfig.lib.json",
               "libs/shared/nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/nestjs/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/nestjs/**"
+            ]
           }
         },
         "test": {
@@ -246,7 +269,10 @@
               "libs/auth/shell/angular/tsconfig.lib.json",
               "libs/auth/shell/angular/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/auth/shell/angular/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/auth/shell/angular/**"
+            ]
           }
         },
         "test": {
@@ -381,7 +407,10 @@
               "apps/ui/test/tsconfig.app.json",
               "apps/ui/test/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/ui/test/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/ui/test/**"
+            ]
           }
         },
         "test": {
@@ -439,8 +468,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/ui/test-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/ui/test-e2e/**"]
+            "tsConfig": [
+              "apps/ui/test-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/ui/test-e2e/**"
+            ]
           }
         }
       }
@@ -458,7 +492,10 @@
               "libs/shared/angular/tsconfig.lib.json",
               "libs/shared/angular/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/angular/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/angular/**"
+            ]
           }
         },
         "test": {
@@ -498,7 +535,10 @@
               "libs/shared/models/tsconfig.lib.json",
               "libs/shared/models/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/models/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/models/**"
+            ]
           }
         },
         "test": {
@@ -531,8 +571,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/shared-angular-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/shared-angular-e2e/**"]
+            "tsConfig": [
+              "apps/shared-angular-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/shared-angular-e2e/**"
+            ]
           }
         }
       }
@@ -550,7 +595,10 @@
               "libs/auth/shell/dtos/tsconfig.lib.json",
               "libs/auth/shell/dtos/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/auth/shell/dtos/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/auth/shell/dtos/**"
+            ]
           }
         },
         "test": {
@@ -575,7 +623,10 @@
               "libs/crud/domain/tsconfig.lib.json",
               "libs/crud/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/crud/domain/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/crud/domain/**"
+            ]
           }
         },
         "test": {
@@ -600,7 +651,10 @@
               "libs/crud/shell/angular/tsconfig.lib.json",
               "libs/crud/shell/angular/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/crud/shell/angular/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/crud/shell/angular/**"
+            ]
           }
         },
         "test": {
@@ -653,7 +707,10 @@
               "libs/crud/shell/dtos/tsconfig.lib.json",
               "libs/crud/shell/dtos/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/crud/shell/dtos/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/crud/shell/dtos/**"
+            ]
           }
         },
         "test": {
@@ -678,7 +735,10 @@
               "libs/crud/shell/nestjs/tsconfig.lib.json",
               "libs/crud/shell/nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/crud/shell/nestjs/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/crud/shell/nestjs/**"
+            ]
           }
         },
         "test": {
@@ -703,7 +763,9 @@
             "outputPath": "dist/apps/api/crud",
             "main": "apps/api/crud/src/main.ts",
             "tsConfig": "apps/api/crud/tsconfig.app.json",
-            "assets": ["apps/api/crud/src/assets"]
+            "assets": [
+              "apps/api/crud/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -732,7 +794,10 @@
               "apps/api/crud/tsconfig.app.json",
               "apps/api/crud/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/crud/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/crud/**"
+            ]
           }
         },
         "test": {
@@ -757,7 +822,10 @@
               "libs/shared/mongo/tsconfig.lib.json",
               "libs/shared/mongo/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/mongo/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/mongo/**"
+            ]
           }
         },
         "test": {
@@ -782,7 +850,10 @@
               "libs/trans/domain/tsconfig.lib.json",
               "libs/trans/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/trans/domain/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/trans/domain/**"
+            ]
           }
         },
         "test": {
@@ -807,7 +878,10 @@
               "libs/trans/shell/dtos/tsconfig.lib.json",
               "libs/trans/shell/dtos/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/trans/shell/dtos/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/trans/shell/dtos/**"
+            ]
           }
         },
         "test": {
@@ -832,7 +906,10 @@
               "libs/trans/shell/angular/tsconfig.lib.json",
               "libs/trans/shell/angular/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/trans/shell/angular/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/trans/shell/angular/**"
+            ]
           }
         },
         "test": {
@@ -885,7 +962,10 @@
               "libs/trans/shell/nestjs/tsconfig.lib.json",
               "libs/trans/shell/nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/trans/shell/nestjs/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/trans/shell/nestjs/**"
+            ]
           }
         },
         "test": {
@@ -910,7 +990,9 @@
             "outputPath": "dist/apps/api/trans",
             "main": "apps/api/trans/src/main.ts",
             "tsConfig": "apps/api/trans/tsconfig.app.json",
-            "assets": ["apps/api/trans/src/assets"]
+            "assets": [
+              "apps/api/trans/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -939,7 +1021,10 @@
               "apps/api/trans/tsconfig.app.json",
               "apps/api/trans/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/trans/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/trans/**"
+            ]
           }
         },
         "test": {
@@ -964,7 +1049,10 @@
               "libs/shared/payu/tsconfig.lib.json",
               "libs/shared/payu/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/payu/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/payu/**"
+            ]
           }
         },
         "test": {
@@ -972,6 +1060,93 @@
           "options": {
             "jestConfig": "libs/shared/payu/jest.config.js",
             "tsConfig": "libs/shared/payu/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "shared-files-nestjs": {
+      "root": "libs/shared/files/nestjs",
+      "sourceRoot": "libs/shared/files/nestjs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/files/nestjs/tsconfig.lib.json",
+              "libs/shared/files/nestjs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/files/nestjs/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/files/nestjs/jest.config.js",
+            "tsConfig": "libs/shared/files/nestjs/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "api-files": {
+      "root": "apps/api/files",
+      "sourceRoot": "apps/api/files/src",
+      "projectType": "application",
+      "prefix": "api-files",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/api/files",
+            "main": "apps/api/files/src/main.ts",
+            "tsConfig": "apps/api/files/tsconfig.app.json",
+            "assets": [
+              "apps/api/files/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/files/src/environments/environment.ts",
+                  "with": "apps/api/files/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-files:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api/files/tsconfig.app.json",
+              "apps/api/files/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/files/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/files/jest.config.js",
+            "tsConfig": "apps/api/files/tsconfig.spec.json"
           }
         }
       }

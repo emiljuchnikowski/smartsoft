@@ -1,0 +1,31 @@
+
+###############################################################################
+# Step 1 : Builder image
+#
+FROM node:12-alpine AS builder
+
+# Define working directory and copy source
+WORKDIR /home/node/app
+COPY . .
+# Install dependencies and build whatever you have to build
+RUN npm install && npm run build api-files --prod
+
+###############################################################################
+# Step 2 : Run image
+#
+FROM node:12-alpine
+ENV NODE_ENV=production
+WORKDIR /home/node/app
+
+# Install deps for production only
+COPY ./package* ./
+RUN npm install && \
+    npm cache clean --force
+# Copy builded source from the upper builder stage
+COPY --from=builder /home/node/app/dist/apps/api/files .
+
+# Expose ports (for orchestrators and dynamic reverse proxies)
+EXPOSE 3334
+
+# Start the app
+CMD node main.js

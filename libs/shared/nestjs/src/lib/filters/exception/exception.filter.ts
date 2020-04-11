@@ -26,14 +26,19 @@ export class AppExceptionFilter implements ExceptionFilter {
       message = exception.message;
     }
 
-    if (message) {
-      // this.logger.warn(message, "AppExceptionsFilter");
-      response.status(status).json({
+    const result = response.status(status);
+    if (message && result.json) {
+      result.json({
+        details: message
+      });
+    } else if (!message && result.json) {
+      result.json();
+    } else if (message && !result.json) {
+      result.send({
         details: message
       });
     } else {
-      // this.logger.error((exception as HttpException).message, (exception as any).trace, "AppExceptionsFilter");
-      response.status(status).json();
+      result.send();
     }
   }
 }

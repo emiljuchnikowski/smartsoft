@@ -56,7 +56,10 @@
       "@smartsoft001/angular": ["libs/shared/angular/src/index.ts"],
       "@smartsoft001/models": ["libs/shared/models/src/index.ts"],
       "@smartsoft001/mongo": ["libs/shared/mongo/src/index.ts"],
-      "@smartsoft001/payu": ["libs/shared/payu/src/index.ts"]
+      "@smartsoft001/payu": ["libs/shared/payu/src/index.ts"],
+      "@smartsoft001/files-nestjs": [
+        "libs/shared/files/nestjs/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
