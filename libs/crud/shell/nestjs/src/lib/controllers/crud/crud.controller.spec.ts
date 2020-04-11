@@ -107,31 +107,6 @@ describe("crud-shell-nestjs: CrudController", () => {
     });
   });
 
-  describe("read()", () => {
-    it("should set correct user", async done => {
-      const user = {} as IUser;
-      const spy = jest.spyOn(service, "read");
-      const response = [{}, {}] as IUser[];
-      jest.spyOn(service, "read").mockReturnValue(Promise.resolve({ data: response, totalCount: 20 }));
-
-      await controller.read(user, { headers: {} });
-
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(expect.anything(), expect.anything(), user);
-      done();
-    });
-
-    it("should return correct value", async done => {
-      const response = [{}, {}] as IUser[];
-      jest.spyOn(service, "read").mockReturnValue(Promise.resolve({ data: response, totalCount: 20 }));
-
-      const result = await controller.read({} as IUser, { headers: {} });
-
-      expect(result).toStrictEqual({ data: response, totalCount: 20, links: null });
-      done();
-    });
-  });
-
   describe("update()", () => {
     it("should set correct id, data and user", async done => {
       const user = {} as IUser;

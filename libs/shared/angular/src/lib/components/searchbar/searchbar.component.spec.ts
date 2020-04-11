@@ -1,6 +1,9 @@
 import 'jest-preset-angular';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {TranslateModule} from "@ngx-translate/core";
+import {ReactiveFormsModule} from "@angular/forms";
+import {IonicModule} from "@ionic/angular";
 
 import { SearchbarComponent } from './searchbar.component';
 
@@ -10,7 +13,8 @@ describe('SearchbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchbarComponent ]
+      declarations: [ SearchbarComponent ],
+      imports: [ TranslateModule.forRoot(), ReactiveFormsModule, IonicModule.forRoot() ]
     })
     .compileComponents();
   }));

@@ -1,6 +1,7 @@
 import "jest-preset-angular";
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ReactiveFormsModule} from "@angular/forms";
 
 import { InputRadioComponent } from './radio.component';
 
@@ -10,7 +11,8 @@ describe('InputRadioComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InputRadioComponent ]
+      declarations: [ InputRadioComponent ],
+      imports: [ReactiveFormsModule]
     })
     .compileComponents();
   }));
