@@ -1,0 +1,7 @@
+<ng-container *ngIf="control">
+    <ion-label position="floating">
+        {{ translateKey | translate }}
+        <span *ngIf="fieldOptions?.required">*</span>
+    </ion-label>
+    <ion-input [formControl]="control" type="number" step="1" [attr.autofocus]="fieldOptions?.focused"></ion-input>
+</ng-container>

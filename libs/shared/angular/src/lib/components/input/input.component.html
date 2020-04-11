@@ -40,10 +40,21 @@
                               [fieldOptions]="fieldOptions"
         ></smart-input-date>
 
+        <smart-input-date-with-edit class="input-type" *ngSwitchCase="FieldType.dateWithEdit"
+                          [options]="options"
+                          [fieldOptions]="fieldOptions"
+        ></smart-input-date-with-edit>
+
         <smart-input-radio class="input-type" *ngSwitchCase="FieldType.radio"
                           [options]="options"
                           [fieldOptions]="fieldOptions"
         ></smart-input-radio>
+
+        <smart-input-int class="input-type" *ngSwitchCase="FieldType.int"
+                          [options]="options"
+                          [fieldOptions]="fieldOptions"
+        ></smart-input-int>
+
     </ng-container>
 </ion-item>
 

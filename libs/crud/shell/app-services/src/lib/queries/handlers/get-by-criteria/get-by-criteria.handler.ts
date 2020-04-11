@@ -13,10 +13,14 @@ export class GetByCriteriaHandler<T extends IEntity<string>>
     ) {}
 
     async execute(query: GetByCriteriaQuery): Promise<{ data: T[], totalCount: number }> {
-        this.permissionService.valid("read", query.user);
-        const result = await this.repository.getByCriteria(query.criteria, query.options);
-        result.data.forEach(item => delete item['password']);
+        try {
+            this.permissionService.valid("read", query.user);
+            const result = await this.repository.getByCriteria(query.criteria, query.options);
+            result.data.forEach(item => delete item['password']);
 
-        return result;
+            return result;
+        } catch (e) {
+            console.error(e);
+        }
     }
 }

@@ -1,11 +1,13 @@
 import {Injectable} from "@angular/core";
-import {IIconButtonOptions} from "@smartsoft001/angular";
+import {IIconButtonOptions, IListCellPipe} from "@smartsoft001/angular";
+import {ICrudFilterQueryItem} from "./models";
 
 @Injectable()
 export class CrudConfig<T> {
     apiUrl: string;
     entity: string;
     type?: any;
+    baseQuery?: Array<ICrudFilterQueryItem>;
 }
 
 @Injectable()
@@ -21,10 +23,17 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     add?: boolean;
     remove?: boolean;
     search?: boolean;
+    export?: boolean;
     pagination?: { limit: number };
     sort?: boolean | {
         default?: string;
         defaultDesc?: boolean;
+    };
+    list?: {
+        cellPipe?: IListCellPipe<T>;
+        components?: {
+            top: any
+        }
     };
     buttons?: Array<IIconButtonOptions>;
 }

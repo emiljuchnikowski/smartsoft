@@ -47,7 +47,8 @@ export class AuthFacade {
     }
 
     this._intervalId = setInterval(() => {
+      console.log('AUTH:refreshToken', new Date());
       this.store.dispatch(AuthActions.refreshToken());
-    }, token.expired_in * 0.75 * 1000);
+    }, token.expired_in * 100);
   }
 }

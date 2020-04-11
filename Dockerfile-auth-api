@@ -2,7 +2,7 @@
 ###############################################################################
 # Step 1 : Builder image
 #
-FROM node:12-alpine AS builder
+FROM localhost:5000/node:12-alpine AS builder
 
 # Define working directory and copy source
 WORKDIR /home/node/app

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable, Optional} from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable} from "rxjs";
 import decode from "jwt-decode";
@@ -13,6 +13,7 @@ export const AUTH_TOKEN = "AUTH_TOKEN";
 
 @Injectable()
 export class AuthService {
+
   get token(): IAuthToken {
     const str = sessionStorage.getItem(AUTH_TOKEN);
 
@@ -29,7 +30,7 @@ export class AuthService {
     return tokenPayload.sub;
   }
 
-  constructor(private config: AuthConfig, private http: HttpClient) {}
+  constructor(@Optional() private config: AuthConfig, private http: HttpClient) {}
 
   static getToken(): IAuthToken {
     const token = sessionStorage.getItem(AUTH_TOKEN);

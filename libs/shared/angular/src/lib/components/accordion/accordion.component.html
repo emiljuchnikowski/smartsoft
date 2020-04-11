@@ -1,0 +1,9 @@
+<ion-item (click)="show = !show">
+    <ng-content select="smart-accordion-header"></ng-content>
+    <ion-icon *ngIf="show" name="caret-up-outline" slot="end"></ion-icon>
+    <ion-icon *ngIf="!show" name="caret-down-outline" slot="end"></ion-icon>
+</ion-item>
+
+<ng-container *ngIf="show">
+    <ng-content select="smart-accordion-body"></ng-content>
+</ng-container>

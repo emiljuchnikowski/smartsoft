@@ -22,11 +22,13 @@ export class PayuService implements ITransPaymentSingleService {
 
     const data = {
       "customerIp": obj.clientIp,
+      "extOrderId": obj.id,
       "merchantPosId": this.config.posId,
       "description": obj.name,
       "currencyCode": "PLN",
       "totalAmount": obj.amount,
       "notifyUrl": this.config.notifyUrl,
+      "continueUrl": this.config.continueUrl,
       "products": [
         {
           "name": obj.name,
@@ -100,16 +102,26 @@ export class PayuService implements ITransPaymentSingleService {
   }
 
   private async  getToken(): Promise<string> {
-    const response = await this.httpService.post(
-        this.getBaseUrl() + '/pl/standard/user/oauth/authorize',
-        `grant_type=client_credentials&client_id=${this.config.clientId}&client_secret=${this.config.clientSecret}`
-    ).toPromise();
+    try {
+      const response = await this.httpService.post(
+          this.getBaseUrl() + '/pl/standard/user/oauth/authorize',
+          `grant_type=client_credentials&client_id=${this.config.clientId}&client_secret=${this.config.clientSecret}`
+      ).toPromise();
 
-    return response.data['access_token'];
+      return response.data['access_token'];
+    } catch (e) {
+      console.error({
+        url: this.getBaseUrl() + '/pl/standard/user/oauth/authorize',
+        data: `grant_type=client_credentials&client_id=${this.config.clientId}&client_secret=${this.config.clientSecret}`,
+        ex: e
+      });
+
+      throw e;
+    }
   }
 
   private getBaseUrl(): string {
-    if (this.config.test) return 'https://secure.snd.payu.com';
+    //if (this.config.test) return 'https://secure.snd.payu.com';
 
     return 'https://secure.payu.com'
   }

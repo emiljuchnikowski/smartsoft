@@ -8,6 +8,9 @@ export class Trans<T> implements IEntity<string> {
   id: string;
 
   @Column()
+  externalId: string;
+
+  @Column()
   name: string;
 
   @Column()

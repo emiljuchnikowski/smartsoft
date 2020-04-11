@@ -7,7 +7,7 @@ import {map} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
 
 import {DetailsPage} from "../../../pages/details/details.page";
-import { IDetailsOptions, IListProvider, IButtonOptions } from '../../../models/interfaces';
+import {IDetailsOptions, IListProvider, IButtonOptions, IListCellPipe} from '../../../models/interfaces';
 import { IListInternalOptions } from '../list.component';
 import {ToastService} from "../../../services/toast/toast.service";
 
@@ -24,6 +24,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
   detailsButtonOptions: IButtonOptions;
   removed: Set<string> = new Set<string>();
   keys: Array<string>;
+  cellPipe: IListCellPipe<T>;
   loadPrevPage: (event) => void;
   loadNextPage: (event) => void;
 
@@ -40,8 +41,9 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
     this._fields = val.fields;
     this.provider = val.provider;
     this.sort = val.sort;
+    this.cellPipe = val.cellPipe;
     this.initKeys();
-    this.initList();
+    this.initList(val);
     this.initLoading();
 
     if (val.remove) {
@@ -54,7 +56,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
         }
 
         this.removed.add(obj.id);
-        this.initList();
+        this.initList(val);
         this.cd.detectChanges();
         this.toastService.info({
           message: this.translateService.instant('OBJECT.deleted'),
@@ -66,7 +68,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
               handler: () => {
                 if (timeoutId) clearTimeout(timeoutId);
                 this.removed.delete(obj.id);
-                this.initList();
+                this.initList(val);
                 this.cd.detectChanges();
               }
             }
@@ -144,7 +146,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
     this.keys = this._fields.map(field => field.key);
   }
 
-  protected initList(): void {
+  protected initList(val: IListInternalOptions<T>): void {
     this.list$ = this.provider.list$.pipe(
         map(list => {
           if (!list) return list;

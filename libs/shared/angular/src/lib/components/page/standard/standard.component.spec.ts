@@ -6,6 +6,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {RouterTestingModule} from "@angular/router/testing";
 
 import { PageStandardComponent } from './standard.component';
+import {SharedModule} from "@smartsoft001/angular";
 
 describe('shared-angular: PageStandardComponent', () => {
   let component: PageStandardComponent;
@@ -13,9 +14,8 @@ describe('shared-angular: PageStandardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageStandardComponent ],
       imports: [
-          IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule
+          IonicModule.forRoot(), TranslateModule.forRoot(), RouterTestingModule, SharedModule
       ]
     })
     .compileComponents();

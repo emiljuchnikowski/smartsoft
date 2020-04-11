@@ -3,5 +3,5 @@
 .storybook
 coverage
 dist
-node_modules
 tools
+node_modules

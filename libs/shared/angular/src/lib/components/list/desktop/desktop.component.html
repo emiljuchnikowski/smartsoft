@@ -1,3 +1,5 @@
+<div #topTpl></div>
+
 <table mat-table matSort [dataSource]="list$ | async" style="width: 100%">
   <ng-container
     *ngFor="let key of desktopKeys; let last = last"
@@ -50,7 +52,7 @@
           {{ "MODEL." + key | translate }}
           <ng-container *ngTemplateOutlet="pagination"></ng-container>
         </th>
-        <td mat-cell *matCellDef="let element">{{ element[key] }}</td>
+        <td mat-cell *matCellDef="let element" [innerHTML]="element | smartListCell : key : cellPipe"></td>
       </ng-container>
     </div>
 
@@ -68,7 +70,7 @@
 
 <ion-infinite-scroll
   threshold="100px"
-  *ngIf="loadNextPage"
+  *ngIf="loadNextPage && (list$ | async)?.length"
   (ionInfinite)="loadNextPage($event)"
 >
   <ion-infinite-scroll-content loadingSpinner="circles">
