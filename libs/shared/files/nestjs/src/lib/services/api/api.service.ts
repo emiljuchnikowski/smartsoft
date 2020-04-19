@@ -35,10 +35,12 @@ export class ApiService {
 
             file.on("end", () => {
               response.header(
-                "Location",
+                "location",
                 this.getLink(request) + "/" + uploadStream.id
               );
-              res();
+              res({
+                location: this.getLink(request) + "/" + uploadStream.id
+              });
             });
 
             file.pipe(uploadStream);
@@ -149,7 +151,7 @@ export class ApiService {
               fileInfo.length
           }`,
           'Content-Length': (end ? end : fileInfo.length) - start,
-          'Content-Disposition': `attachment; filename="${fileInfo.filename}"`,
+          'Content-Disposition': `attachment; filename="${encodeURI(fileInfo.filename)}"`,
         })
 
         response.res.on('close', () => {
@@ -169,7 +171,7 @@ export class ApiService {
           'Accept-Range': 'bytes',
           'Content-Type': fileInfo.contentType,
           'Content-Length': fileInfo.length,
-          'Content-Disposition': `attachment; filename="${fileInfo.filename}"`,
+          'Content-Disposition': `attachment; filename="${ encodeURI(fileInfo.filename) }"`,
         })
 
         response.send(readstream)

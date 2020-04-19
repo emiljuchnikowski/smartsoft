@@ -5,6 +5,7 @@ import {
 } from "@nestjs/platform-fastify";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import * as fastifyMulipart from "fastify-multipart";
+import * as bodyParser from 'body-parser';
 
 import { AppModule } from "./app/app.module";
 
@@ -21,8 +22,11 @@ async function bootstrap() {
   app.enableCors({
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-    allowedHeaders: ["Location", "authorization", "content-type"]
+    allowedHeaders: ["location", "authorization", "content-type"]
   });
+
+  app.use(bodyParser.json({limit: '50gb'}));
+  app.use(bodyParser.urlencoded({limit: '50gb', extended: true}));
 
   app.enableShutdownHooks();
 

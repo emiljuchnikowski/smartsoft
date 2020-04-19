@@ -34,8 +34,8 @@ export class FilesController {
     @ApiConsumes('multipart/form-data')
     @Post("")
     async create(@Req() request: Request, @Res() response: Response): Promise<void> {
-        await this.service.create(request, response);
-        response.code(201).send();
+        const result = await this.service.create(request, response);
+        response.code(200).send(result);
     }
 
     @ApiOperation({
