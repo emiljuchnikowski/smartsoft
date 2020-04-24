@@ -6,6 +6,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
 import { MatSortModule, MatTableModule } from "@angular/material";
 import { RouterModule } from "@angular/router";
+import {ChartsModule} from "ng2-charts";
 
 import { DetailTextComponent } from "./detail/text/text.component";
 import { DetailFlagComponent } from "./detail/flag/flag.component";
@@ -45,7 +46,9 @@ import { TabComponent } from "./tabs/tab/tab.component";
 import { AccordionComponent } from "./accordion/accordion.component";
 import { AccordionHeaderComponent } from "./accordion/header/header.component";
 import { AccordionBodyComponent } from "./accordion/body/body.component";
-import {InputDateWithEditComponent} from "./input/date-with-edit/date-with-edit.component";
+import { InputDateWithEditComponent } from "./input/date-with-edit/date-with-edit.component";
+import { ChartComponent } from "./chart/chart.component";
+import {ChartLineComponent} from "./chart/line/line.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -58,6 +61,11 @@ export const ACCORDION_COMPONENTS = [
 export const BUTTON_COMPONENTS = [ButtonComponent];
 
 export const CARD_COMPONENTS = [CardComponent];
+
+export const CHART_COMPONENTS = [
+    ChartComponent,
+    ChartLineComponent
+];
 
 export const DETAILS_COMPONENTS = [DetailsComponent, DetailsStandardComponent];
 
@@ -114,7 +122,8 @@ export const COMPONENTS = [
   ...DETAILS_COMPONENTS,
   ...SEARCHBAR_COMPONENTS,
   ...TABS_COMPONENTS,
-  ...ACCORDION_COMPONENTS
+  ...ACCORDION_COMPONENTS,
+  ...CHART_COMPONENTS
 ];
 
 @NgModule({
@@ -131,7 +140,8 @@ export const COMPONENTS = [
     SharedDirectivesModule,
     HttpClientModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    ChartsModule
   ]
 })
 export class SharedComponentsModule {}

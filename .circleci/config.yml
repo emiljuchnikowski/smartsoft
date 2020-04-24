@@ -16,4 +16,4 @@ jobs:
       - run:
           name: Unit test
           command:
-            jest
+            node node_modules/.bin/jest --runInBand

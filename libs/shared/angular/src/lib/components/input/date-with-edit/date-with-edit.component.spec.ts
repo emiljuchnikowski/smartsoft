@@ -1,20 +1,26 @@
+import 'jest-preset-angular';
+
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {IonicModule} from "@ionic/angular";
+import {TranslateModule} from "@ngx-translate/core";
+import {ReactiveFormsModule} from "@angular/forms";
 
-import { DateWithEditComponent } from './date-with-edit.component';
+import { InputDateWithEditComponent } from './date-with-edit.component';
 
-describe('DateWithEditComponent', () => {
-  let component: DateWithEditComponent;
-  let fixture: ComponentFixture<DateWithEditComponent>;
+describe('InputDateWithEditComponent', () => {
+  let component: InputDateWithEditComponent<any>;
+  let fixture: ComponentFixture<InputDateWithEditComponent<any>>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DateWithEditComponent ]
+      declarations: [ InputDateWithEditComponent ],
+      imports: [ IonicModule, TranslateModule, ReactiveFormsModule ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DateWithEditComponent);
+    fixture = TestBed.createComponent(InputDateWithEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

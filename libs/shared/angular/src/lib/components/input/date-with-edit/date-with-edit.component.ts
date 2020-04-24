@@ -26,9 +26,13 @@ export class InputDateWithEditComponent<T> extends InputBaseComponent<T> impleme
   }
 
   ngOnInit(): void {
-    this._subscriptions.add(this.dateTimePicker.ionChange.subscribe((val: CustomEvent) => {
-      this.control.setValue(moment(val.detail.value).format('YYYY-MM-DD'));
-    }));
+    if (this.dateTimePicker) {
+      this._subscriptions.add(this.dateTimePicker.ionChange.subscribe((val: CustomEvent) => {
+        this.control.setValue(moment(val.detail.value).format('YYYY-MM-DD'));
+      }));
+    } else {
+      console.error('dateTimePicker not found!');
+    }
   }
 
   ngOnDestroy(): void {

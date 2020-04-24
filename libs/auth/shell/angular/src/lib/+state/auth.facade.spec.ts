@@ -3,7 +3,6 @@ import "jest-preset-angular";
 import { NgModule } from "@angular/core";
 import { TestBed } from "@angular/core/testing";
 import { readFirst } from "@nrwl/angular/testing";
-
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule, Store } from "@ngrx/store";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
@@ -11,10 +10,9 @@ import { NxModule } from "@nrwl/angular";
 
 import { AuthEffects } from "./auth.effects";
 import { AuthFacade } from "./auth.facade";
-
 import * as AuthActions from "../+state/auth.actions";
 import { AUTH_FEATURE_KEY, State, reducer } from "./auth.reducer";
-import {AuthService} from "../services";
+import {AuthService} from "../services/auth/auth.service";
 import {AuthConfig} from "../auth.config";
 import {RouterTestingModule} from "@angular/router/testing";
 

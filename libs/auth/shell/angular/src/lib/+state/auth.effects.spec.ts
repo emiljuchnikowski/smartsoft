@@ -11,8 +11,8 @@ import { RouterTestingModule } from "@angular/router/testing";
 
 import { AuthEffects } from "./auth.effects";
 import * as AuthActions from "./auth.actions";
-import {AUTH_TOKEN, AuthService} from "../services";
 import { AuthConfig } from "../auth.config";
+import {AUTH_TOKEN, AuthService} from "../services/auth/auth.service";
 
 describe("auth-shell-angular: AuthEffects", () => {
   let actions: Observable<any>;

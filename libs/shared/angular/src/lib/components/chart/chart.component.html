@@ -1,0 +1,6 @@
+<ng-container [ngSwitch]="options?.type">
+  <smart-chart-line
+    *ngSwitchCase="ChartType.line"
+    [options]="options"
+  ></smart-chart-line>
+</ng-container>

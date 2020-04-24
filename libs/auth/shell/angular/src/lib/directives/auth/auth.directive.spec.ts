@@ -5,7 +5,7 @@ import { Component } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 import { AuthDirective } from "./auth.directive";
-import { AuthService } from "../../services";
+import { AuthService } from "../../services/auth/auth.service";
 
 describe("auth-angular: AuthDirective", () => {
   @Component({
