@@ -69,7 +69,7 @@ describe("shared-angular: ChartLineComponent", () => {
     });
   });
 
-  describe("coors", () => {
+  describe("colors", () => {
     it("should correct set colors", () => {
       const options = {
         type: ChartType.line,
