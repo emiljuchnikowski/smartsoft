@@ -15,6 +15,9 @@ describe("crud-domain: CreateItemHandler", () => {
       create(): Promise<void> {
         return Promise.resolve();
       },
+      createMany(): Promise<void> {
+        return Promise.resolve()
+      },
       update(): Promise<void> {
         return Promise.resolve();
       },

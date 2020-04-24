@@ -1,4 +1,7 @@
+import 'jest-preset-angular';
+
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {IonicModule} from "@ionic/angular";
 
 import { TabComponent } from './tab.component';
 
@@ -8,7 +11,10 @@ describe('TabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabComponent ]
+      declarations: [ TabComponent ],
+      imports: [
+          IonicModule
+      ]
     })
     .compileComponents();
   }));

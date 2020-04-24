@@ -1,20 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import 'jest-preset-angular';
 
-import { BodyComponent } from './body.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {IonicModule} from "@ionic/angular";
+
+import { AccordionBodyComponent } from './body.component';
 
 describe('BodyComponent', () => {
-  let component: BodyComponent;
-  let fixture: ComponentFixture<BodyComponent>;
+  let component: AccordionBodyComponent;
+  let fixture: ComponentFixture<AccordionBodyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BodyComponent ]
+      declarations: [ AccordionBodyComponent ],
+      imports: [
+          IonicModule
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BodyComponent);
+    fixture = TestBed.createComponent(AccordionBodyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
