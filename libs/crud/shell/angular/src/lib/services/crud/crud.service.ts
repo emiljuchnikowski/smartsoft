@@ -50,7 +50,15 @@ export class CrudService<T extends IEntity<string>> {
         }
     ).pipe(
         map(res => {
-          window.open("data:text/csv;charset=utf-8," + escape(res));
+          const downloadLink = document.createElement("a");
+          const blob = new Blob(["\ufeff", res]);
+          const url = URL.createObjectURL(blob);
+          downloadLink.href = url;
+          downloadLink.download = "data.csv";
+
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
         })
     );
   }
