@@ -8,3 +8,4 @@ export * from './list';
 export * from './loader';
 export * from './detail';
 export * from './searchbar';
+export * from './chart';
