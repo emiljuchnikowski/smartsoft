@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import {Injectable} from "@angular/core";
 import {catchError, first, tap} from "rxjs/operators";
 import {of} from "rxjs";
@@ -19,6 +21,12 @@ export class CrudEffects<T extends IEntity<string>> {
     ) { }
 
     init(): void {
+        const metadata = Reflect.getMetadata(this.config.entity, CrudEffects);
+
+        if (metadata) return;
+
+        Reflect.defineMetadata(this.config.entity, true, CrudEffects);
+
         this.actions$.subscribe((action: Action & any) => {
             switch (action.type) {
                 case `[${this.config.entity}] Create`:
