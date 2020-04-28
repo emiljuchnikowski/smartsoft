@@ -23,4 +23,4 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: Dockerfile-auth-api.ci
+        dockerfile: Dockerfile-auth-api
