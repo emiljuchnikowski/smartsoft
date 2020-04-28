@@ -48,7 +48,8 @@
     "crud-shell-angular:build": "ng-packagr -p libs/crud/shell/angular/package.json",
     "crud-shell-angular:publish": "npm run crud-shell-angular:build && npm publish libs/crud/shell/angular/dist --access public",
     "docker-crud:publish": "docker push smartsoft001/crud_api:latest",
-    "docker-files:publish": "docker push smartsoft001/crud_files:latest"
+    "docker-files:publish": "docker push smartsoft001/crud_files:latest",
+    "build-storybook": "build-storybook -c .storybook -o .out"
   },
   "private": true,
   "dependencies": {
