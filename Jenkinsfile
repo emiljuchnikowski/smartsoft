@@ -13,7 +13,7 @@ pipeline {
             }
         }
 
-        stage('Units test') {
+        stage('Unit tests') {
             steps {
                 sh 'node node_modules/.bin/jest --runInBand'
             }
