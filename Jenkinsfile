@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Install Jest') {
             steps {
-                sh 'npm install jest -g'
+                sh 'npm install jest'
             }
         }
 
