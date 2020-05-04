@@ -14,14 +14,14 @@ import {
 } from "@nestjs/common";
 import * as q2m from "query-to-mongo";
 import { Response, Request } from "express";
-import { Parser } from 'json2csv';
-import * as _ from 'lodash';
+import { Parser } from "json2csv";
+import * as _ from "lodash";
 
 import { CrudService } from "@smartsoft001/crud-shell-app-services";
 import { IUser } from "@smartsoft001/users";
 import { User } from "@smartsoft001/nestjs";
 import { IEntity } from "@smartsoft001/domain-core";
-import {AuthJwtGuard} from "../../guards/auth/auth.guard";
+import { AuthJwtGuard } from "../../guards/auth/auth.guard";
 
 @Controller("")
 export class CrudController<T extends IEntity<string>> {
@@ -39,16 +39,16 @@ export class CrudController<T extends IEntity<string>> {
     @Res() res: Response
   ): Promise<Response> {
     const id = await this.service.create(data, user);
-    res.set("Location", CrudController.getLink(res.req) + '/' + id);
+    res.set("Location", CrudController.getLink(res.req) + "/" + id);
     return res.send();
   }
 
   @UseGuards(AuthJwtGuard)
-  @Post('bulk')
+  @Post("bulk")
   async createMany(
-      @Body() data: T[],
-      @User() user: IUser,
-      @Res() res: Response
+    @Body() data: T[],
+    @User() user: IUser,
+    @Res() res: Response
   ): Promise<Response> {
     const result = await this.service.createMany(data, user);
     return res.send(result);
@@ -86,9 +86,9 @@ export class CrudController<T extends IEntity<string>> {
       user
     );
 
-    if (req.headers['content-type'] === 'text/csv') {
+    if (req.headers["content-type"] === "text/csv") {
       res.set({
-        'Content-Type': 'text/csv'
+        "Content-Type": "text/csv"
       });
       res.send(this.parseToCsv(data));
     }
@@ -96,7 +96,7 @@ export class CrudController<T extends IEntity<string>> {
     res.send({
       data,
       totalCount,
-      links: object.links(CrudController.getLink(req).split('?')[0], totalCount)
+      links: object.links(CrudController.getLink(req).split("?")[0], totalCount)
     });
   }
 
@@ -129,9 +129,9 @@ export class CrudController<T extends IEntity<string>> {
     await this.service.delete(params.id, user);
   }
 
-  private getQueryObject(queryObject: any): { criteria, options, links} {
+  private getQueryObject(queryObject: any): { criteria; options; links } {
     let customCriteria = {} as any;
-    let q = '';
+    let q = "";
 
     Object.keys(queryObject).forEach(key => {
       q += `&${key}=${queryObject[key]}`;
@@ -139,15 +139,17 @@ export class CrudController<T extends IEntity<string>> {
 
     const result = q2m(q);
 
-    if (result.criteria['$search']) {
-      customCriteria = { $text: { $search: ' \"' + result.criteria['$search'].toString() + '\" ' } };
+    if (result.criteria["$search"]) {
+      customCriteria = {
+        $text: { $search: ' "' + result.criteria["$search"].toString() + '" ' }
+      };
 
-      delete result.criteria['$search'];
+      delete result.criteria["$search"];
 
       result.criteria = {
         ...result.criteria,
         ...customCriteria
-      }
+      };
     }
 
     return result;
@@ -155,32 +157,31 @@ export class CrudController<T extends IEntity<string>> {
 
   private parseToCsv(data: T[]): string {
     if (!data || !data.length) {
-      return ''
+      return "";
     }
 
     const fields = [];
 
     const execute = (item, baseKey, baseItem) => {
       Object.keys(item).forEach(key => {
-        if (fields.some(f => f === baseKey + key)) return;
-
         const val = item[key];
 
         if (_.isArray(val)) {
           return;
         } else if (_.isObject(val) && Object.keys(val).length) {
-          execute(val, baseKey + key + '_', baseItem);
+          execute(val, baseKey + key + "_", baseItem);
         } else if (baseKey) {
           baseItem[baseKey + key] = val;
-          fields.push(baseKey + key);
+          if (!fields.some(f => f === baseKey + key))
+            fields.push(baseKey + key);
         } else {
-          fields.push(key);
+          if (!fields.some(f => f === key)) fields.push(key);
         }
       });
     };
 
     data.forEach(item => {
-      execute(item, '', item);
+      execute(item, "", item);
     });
 
     data.forEach(item => {
@@ -188,7 +189,7 @@ export class CrudController<T extends IEntity<string>> {
         if (!fields.some(f => f === key)) {
           delete item[key];
         }
-      })
+      });
     });
 
     return new Parser(fields).parse(data);
