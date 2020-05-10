@@ -17,7 +17,8 @@ export class RefresherService<T> extends TransBaseService<T> {
   refresh(
     transId: string,
     internalService: ITransInternalService<T>,
-    paymentService: ITransPaymentService
+    paymentService: ITransPaymentService,
+    customData = {}
   ) {
     let trans: Trans<any>;
 
@@ -37,6 +38,7 @@ export class RefresherService<T> extends TransBaseService<T> {
       })
         .then(({ status, data }) => {
           trans.status = status;
+          data['customData'] = customData;
           this.addHistory(trans, data);
 
           return internalService.refresh(trans);

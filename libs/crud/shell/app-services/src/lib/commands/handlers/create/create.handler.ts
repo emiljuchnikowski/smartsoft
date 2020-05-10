@@ -19,7 +19,7 @@ export class CreateHandler<T extends IEntity<string>> implements ICommandHandler
 
             if (Array.isArray(itemOrList)) {
                 const entity = new itemModel(null);
-                entity.createMany(itemOrList as any[], command.user);
+                entity.createMany(itemOrList as any[], command.user, command.options);
                 entity.commit();
             } else {
                 const entity = new itemModel(itemOrList);

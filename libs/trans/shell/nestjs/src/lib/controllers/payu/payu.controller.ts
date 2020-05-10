@@ -11,7 +11,7 @@ export class PayUController {
     @HttpCode(200)
     async refreshStatus(@Body() obj: { order: { orderId: string } }): Promise<string> {
         try {
-            await this.service.refresh(obj.order.orderId);
+            await this.service.refresh(obj.order.orderId, obj);
             return 'ok';
         } catch (e) {
             console.error(e);

@@ -8,6 +8,7 @@ import { UpdateItemEvent } from "../../feature-update-item/update-item.event";
 import { UpdatePartialItemEvent } from "../../feature-update-partial-item/update-partial-item.event";
 import { DeleteItemEvent } from "../../feature-delete-item/delete-item.event";
 import { CreateManyEvent } from "../../feature-create-many/create-many.event";
+import {ICreateManyOptions} from "../../interfaces";
 
 export class Item extends AggregateRoot implements IEntity<string> {
   id: string;
@@ -28,8 +29,8 @@ export class Item extends AggregateRoot implements IEntity<string> {
     this.apply(new CreateItemEvent(this, user));
   }
 
-  createMany(list: Array<Item>, user: IUser): void {
-    this.apply(new CreateManyEvent(list, user));
+  createMany(list: Array<Item>, user: IUser, options: ICreateManyOptions): void {
+    this.apply(new CreateManyEvent(list, user, options));
   }
 
   update(user: IUser): void {

@@ -5,7 +5,7 @@ import { map } from "rxjs/operators";
 
 import { IEntity } from "@smartsoft001/domain-core";
 import { CrudConfig } from "../../crud.config";
-import { ICrudFilter } from "../../models/interfaces";
+import { ICrudCreateManyOptions, ICrudFilter } from "../../models/interfaces";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
@@ -25,6 +25,16 @@ export class CrudService<T extends IEntity<string>> {
       );
   }
 
+  createMany(
+    items: Array<T>,
+    options: ICrudCreateManyOptions
+  ): Observable<void> {
+    return this.http.post<void>(
+      this.config.apiUrl + "/bulk?mode=" + options.mode,
+      items
+    );
+  }
+
   getById(id: string): Observable<T> {
     return this.http.get<T>(this.config.apiUrl + "/" + id);
   }
@@ -37,18 +47,15 @@ export class CrudService<T extends IEntity<string>> {
     );
   }
 
-  exportList(
-      filter: ICrudFilter = null
-  ): Observable<void> {
-    return this.http.get<string>(
-        this.config.apiUrl + this.getQuery(filter),
-        {
-          headers: {
-            'Content-Type': 'text/csv'
-          },
-          responseType: 'text' as 'json'
-        }
-    ).pipe(
+  exportList(filter: ICrudFilter = null): Observable<void> {
+    return this.http
+      .get<string>(this.config.apiUrl + this.getQuery(filter), {
+        headers: {
+          "Content-Type": "text/csv"
+        },
+        responseType: "text" as "json"
+      })
+      .pipe(
         map(res => {
           const downloadLink = document.createElement("a");
           const blob = new Blob(["\ufeff", res]);
@@ -60,7 +67,7 @@ export class CrudService<T extends IEntity<string>> {
           downloadLink.click();
           document.body.removeChild(downloadLink);
         })
-    );
+      );
   }
 
   update(item: T): Observable<void> {
@@ -76,26 +83,28 @@ export class CrudService<T extends IEntity<string>> {
   }
 
   private getQuery(filter: ICrudFilter): string {
-    let query = '';
+    let query = "";
 
     if (filter && filter.searchText) {
-      query += '&$search=' + filter.searchText;
+      query += "&$search=" + filter.searchText;
     }
 
     if (filter && filter.limit) {
-      query += `&limit=${filter.limit}&offset=${filter.offset ? filter.offset : 0}`;
+      query += `&limit=${filter.limit}&offset=${
+        filter.offset ? filter.offset : 0
+      }`;
     }
 
     if (filter && filter.sortBy) {
-      query += `&sort=${ (filter.sortDesc ? '-' : '') + filter.sortBy}`;
+      query += `&sort=${(filter.sortDesc ? "-" : "") + filter.sortBy}`;
     }
 
     if (filter && filter.query) {
       filter.query.forEach(q => {
-        query += '&' + q.key + q.type + q.value;
+        query += "&" + q.key + q.type + q.value;
       });
     }
 
-    return (query ? "?" + query.replace('&', '') : "");
+    return query ? "?" + query.replace("&", "") : "";
   }
 }

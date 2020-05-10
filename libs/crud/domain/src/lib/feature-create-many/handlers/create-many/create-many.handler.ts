@@ -10,6 +10,10 @@ export class CreateManyHandler<T extends IEntity<string>>
   constructor(private readonly repository: IItemRepository<T>) {}
 
   async handle(event: CreateManyEvent<T>): Promise<any> {
+    if (event.options && event.options.mode === 'replace') {
+      await this.repository.clear(event.user);
+    }
+
     for (let index = 0; index < event.list.length; index++) {
       const item = event.list[index];
 
@@ -22,6 +26,6 @@ export class CreateManyHandler<T extends IEntity<string>>
       }
     }
 
-    return this.repository.createMany(event.list, event.user);
+    return await this.repository.createMany(event.list, event.user);
   }
 }

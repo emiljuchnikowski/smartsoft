@@ -9,6 +9,7 @@ import { IUser } from "@smartsoft001/users";
 export class MongoItemRepository<
   T extends IEntity<string>
 > extends IItemRepository<T> {
+
   constructor(private config: MongoConfig) {
     super();
   }
@@ -35,6 +36,29 @@ export class MongoItemRepository<
             res();
           }
         );
+      });
+    });
+  }
+
+  clear(user: IUser): Promise<void> {
+    return new Promise<void>((res, rej) => {
+      MongoClient.connect(this.getUrl(), (err, client) => {
+        if (err) {
+          rej(err);
+          return;
+        }
+
+        const db = client.db(this.config.database);
+
+        db.collection(this.config.collection).deleteMany({}, (err2) => {
+          if (err2) {
+            rej(err2);
+            return;
+          }
+
+          client.close();
+          res();
+        });
       });
     });
   }

@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Put,
+  Query,
   Req,
   Res,
   UseGuards
@@ -22,6 +23,7 @@ import { IUser } from "@smartsoft001/users";
 import { User } from "@smartsoft001/nestjs";
 import { IEntity } from "@smartsoft001/domain-core";
 import { AuthJwtGuard } from "../../guards/auth/auth.guard";
+import { CreateManyMode } from "@smartsoft001/crud-domain";
 
 @Controller("")
 export class CrudController<T extends IEntity<string>> {
@@ -48,9 +50,10 @@ export class CrudController<T extends IEntity<string>> {
   async createMany(
     @Body() data: T[],
     @User() user: IUser,
-    @Res() res: Response
+    @Res() res: Response,
+    @Query("mode") mode: CreateManyMode
   ): Promise<Response> {
-    const result = await this.service.createMany(data, user);
+    const result = await this.service.createMany(data, user, { mode });
     return res.send(result);
   }
 

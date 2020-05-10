@@ -10,6 +10,7 @@ import {DeleteCommand} from "../../commands/delete.command";
 import {UpdatePartialCommand} from "../../commands/update-partial.command";
 import {GetByIdQuery} from "../../queries/get-by-id.query";
 import {GetByCriteriaQuery} from "../../queries/get-by-criteria.query";
+import {ICreateManyOptions} from "@smartsoft001/crud-domain";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
@@ -23,12 +24,12 @@ export class CrudService<T extends IEntity<string>> {
         return data.id;
     }
 
-    async createMany(data: T[], user: IUser): Promise<T[]> {
+    async createMany(data: T[], user: IUser, options: ICreateManyOptions): Promise<T[]> {
         data.forEach(item => {
            item.id = Guid.raw()
         });
 
-        await this.commandBus.execute(new CreateCommand(data, user));
+        await this.commandBus.execute(new CreateCommand(data, user, options));
 
         return data;
     }

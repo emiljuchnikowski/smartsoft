@@ -40,6 +40,27 @@ const crudReducer = (state = initialState, action, entity) => {
                 error: action.error
             };
 
+        case `[${entity}] Create Many`:
+            return {
+                ...state,
+                loaded: false,
+                error: null
+            };
+
+        case `[${entity}] Create Many Success`:
+            return {
+                ...state,
+                loaded: true,
+                error: null
+            };
+
+        case `[${entity}] Create Many Failure`:
+            return {
+                ...state,
+                loaded: true,
+                error: action.error
+            };
+
         case `[${entity}] Read`:
             return {
                 ...state,

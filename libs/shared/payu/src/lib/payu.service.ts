@@ -126,7 +126,7 @@ export class PayuService implements ITransPaymentSingleService {
     return 'https://secure.payu.com'
   }
 
-  private getStatusFromExternal(status: string) {
+  private getStatusFromExternal(status: string): any {
     switch (status) {
       case 'COMPLETED':
         return 'completed';
@@ -135,7 +135,7 @@ export class PayuService implements ITransPaymentSingleService {
       case 'PENDING':
         return 'pending';
       default:
-        throw new Error('Status not supported');
+        return status;
     }
   }
 }

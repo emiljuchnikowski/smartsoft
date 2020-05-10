@@ -6,7 +6,7 @@ import { CrudConfig } from "../crud.config";
 import * as CrudActions from "./crud.actions";
 import * as CrudSelectors from "./crud.selectors";
 import { IEntity } from "@smartsoft001/domain-core";
-import { ICrudFilter } from "../models/interfaces";
+import {ICrudCreateManyOptions, ICrudFilter} from "../models/interfaces";
 import { map, tap } from "rxjs/operators";
 
 @Injectable()
@@ -51,6 +51,10 @@ export class CrudFacade<T extends IEntity<string>> {
 
   create(item: T): void {
     this.store.dispatch(CrudActions.create(this.config.entity, item));
+  }
+
+  createMany(items: Array<T>, options: ICrudCreateManyOptions): void {
+    this.store.dispatch(CrudActions.createMany(this.config.entity, { items, options }));
   }
 
   read(filter: ICrudFilter = null): void {

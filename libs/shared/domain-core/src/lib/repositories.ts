@@ -15,4 +15,6 @@ export abstract class IItemRepository<T extends IEntity<string>> {
     abstract getById(id: string): Promise<T>;
 
     abstract getByCriteria(criteria: any, options: any): Promise<{ data: T[], totalCount: number }>;
+
+    abstract async clear(user: IUser): Promise<void>;
 }

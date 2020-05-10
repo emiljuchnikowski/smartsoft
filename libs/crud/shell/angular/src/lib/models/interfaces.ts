@@ -12,3 +12,9 @@ export interface ICrudFilterQueryItem {
     value: any;
     type: '=' | '!=' | '>=' | '<=' | '<' | '>';
 }
+
+export interface ICrudCreateManyOptions {
+    mode: CrudCreateManyMode
+}
+
+export type CrudCreateManyMode = 'default' | 'replace';

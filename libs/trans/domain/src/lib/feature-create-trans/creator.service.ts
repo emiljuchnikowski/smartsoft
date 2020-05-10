@@ -60,12 +60,6 @@ export class CreatorService<T> extends TransBaseService<T> {
     trans.modifyDate = new Date();
     trans.externalId = paymentResult.orderId;
 
-    try {
-      paymentResult['details'] = await paymentService[trans.system].getStatus(trans);
-    } catch (e) {
-      console.error(e);
-    }
-
     this.addHistory(trans, paymentResult);
 
     await this.repository.save(trans as any);

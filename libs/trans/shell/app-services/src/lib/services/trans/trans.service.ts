@@ -32,7 +32,7 @@ export class TransService {
         return this.creatorService.create(ops, this._internalService, this._paymentService);
     }
 
-    async refresh(transId: string): Promise<void> {
-        await this.refresherService.refresh(transId, this._internalService, this._paymentService);
+    async refresh(transId: string, data = {}): Promise<void> {
+        await this.refresherService.refresh(transId, this._internalService, this._paymentService, data);
     }
 }

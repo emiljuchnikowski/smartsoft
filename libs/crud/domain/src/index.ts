@@ -5,6 +5,7 @@ import { UpdatePartialItemHandler } from "./lib/feature-update-partial-item";
 import { CreateManyHandler } from "./lib/feature-create-many";
 
 export * from "./lib/entities";
+export * from './lib/interfaces';
 
 export const DOMAIN_HANDLERS = [
   CreateItemHandler,
