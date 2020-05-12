@@ -16,7 +16,7 @@ describe("crud-domain: CreateItemHandler", () => {
         return Promise.resolve();
       },
       createMany(): Promise<void> {
-        return Promise.resolve()
+        return Promise.resolve();
       },
       update(): Promise<void> {
         return Promise.resolve();
@@ -28,10 +28,13 @@ describe("crud-domain: CreateItemHandler", () => {
         return Promise.resolve();
       },
       getById(): Promise<any> {
-        return Promise.resolve(null);
+        return Promise.resolve(null)
       },
       getByCriteria(): Promise<{ data: any[]; totalCount: number }> {
         return Promise.resolve(null);
+      },
+      clear(user: IUser): Promise<void> {
+        return Promise.resolve();
       }
     };
 
