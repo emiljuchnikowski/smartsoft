@@ -57,9 +57,8 @@
       "@smartsoft001/models": ["libs/shared/models/src/index.ts"],
       "@smartsoft001/mongo": ["libs/shared/mongo/src/index.ts"],
       "@smartsoft001/payu": ["libs/shared/payu/src/index.ts"],
-      "@smartsoft001/files-nestjs": [
-        "libs/shared/files/nestjs/src/index.ts"
-      ]
+      "@smartsoft001/files-nestjs": ["libs/shared/files/nestjs/src/index.ts"],
+      "@smartsoft001/ionic-v3": ["libs/shared/ionic-v3/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
