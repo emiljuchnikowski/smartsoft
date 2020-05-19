@@ -9,11 +9,12 @@ import {
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
-import { MatSort } from "@angular/material";
 import { Subscription } from "rxjs";
+import {MatSort} from "@angular/material/sort";
+
+import { IEntity } from "@smartsoft001/domain-core";
 
 import { ListBaseComponent } from "../base/base.component";
-import { IEntity } from "@smartsoft001/domain-core";
 import { ToastService } from "../../../services/toast/toast.service";
 import { IListComponentFactories} from "../../../models";
 import {IListInternalOptions} from "../list.component";

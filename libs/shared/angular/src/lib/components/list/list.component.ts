@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import * as _ from 'lodash';
 
-import {getModelFieldsWithOptions, IFieldOptions} from "@smartsoft001/models";
+import {getModelFieldsWithOptions, IFieldListMetadata, IFieldOptions} from "@smartsoft001/models";
 import {IListOptions} from "../../models/interfaces";
 import {HardwareService} from "../../services/hardware/hardware.service";
 
@@ -35,7 +35,7 @@ export class ListComponent<T> implements OnInit {
   private initFields(): void {
     this._options.fields = _.sortBy(
         getModelFieldsWithOptions(new this._options.type()).filter(item => item.options.list),
-        item => item.options.list.order
+        item => (item.options.list as IFieldListMetadata).order
     );
   }
 }

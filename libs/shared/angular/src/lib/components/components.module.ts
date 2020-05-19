@@ -4,7 +4,6 @@ import { IonicModule } from "@ionic/angular";
 import { ReactiveFormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
-import { MatSortModule, MatTableModule } from "@angular/material";
 import { RouterModule } from "@angular/router";
 import {ChartsModule} from "ng2-charts";
 
@@ -49,6 +48,8 @@ import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { InputDateWithEditComponent } from "./input/date-with-edit/date-with-edit.component";
 import { ChartComponent } from "./chart/chart.component";
 import {ChartLineComponent} from "./chart/line/line.component";
+import {MatTable, MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
