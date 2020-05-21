@@ -237,7 +237,7 @@ export class MongoItemRepository<
   }
 
   changesByCriteria(criteria: any): Observable<ItemChangedData> {
-    return new Observable((observer: Observer<ItemChangedData>) => {
+    const observable: Observable<ItemChangedData> =  new Observable((observer: Observer<ItemChangedData>) => {
       MongoClient.connect(this.getUrl(), async (err, client) => {
         if (err) {
           observer.error(err);
@@ -247,7 +247,7 @@ export class MongoItemRepository<
         const db = client.db(this.config.database);
         const collection = db.collection(this.config.collection);
 
-        collection.watch([
+        const stream = collection.watch([
           {
             $match: criteria
           }
@@ -259,8 +259,17 @@ export class MongoItemRepository<
                 ? result['updateDescription'] : this.getModelToResult(result['fullDocument'])
           } as any);
         });
+
+        observable.subscribe(_ => {}, _ => {}, async () => {
+          await stream.close();
+          await client.close();
+
+          console.log('close')
+        });
       });
     });
+
+    return observable;
   }
 
   private getCount(criteria: any, collection): Promise<any> {
