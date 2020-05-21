@@ -1,17 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import {CommandBus, QueryBus} from "@nestjs/cqrs";
 import {Guid} from "guid-typescript";
+import {Observable} from "rxjs";
 
 import {IUser} from "@smartsoft001/users";
 import {IEntity, IItemRepository} from "@smartsoft001/domain-core";
+import {ICreateManyOptions} from "@smartsoft001/crud-domain";
+import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
+
 import {CreateCommand} from "../../commands/create.command";
 import {UpdateCommand} from "../../commands/update.command";
 import {DeleteCommand} from "../../commands/delete.command";
 import {UpdatePartialCommand} from "../../commands/update-partial.command";
 import {GetByIdQuery} from "../../queries/get-by-id.query";
 import {GetByCriteriaQuery} from "../../queries/get-by-criteria.query";
-import {ICreateManyOptions} from "@smartsoft001/crud-domain";
-import {Observable} from "rxjs";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
@@ -59,7 +61,7 @@ export class CrudService<T extends IEntity<string>> {
         await this.commandBus.execute(new DeleteCommand(id, user));
     }
 
-    changes(criteria: any): Observable<{ data: T[] }> {
+    changes(criteria: any): Observable<ItemChangedData> {
         return this.repository.changesByCriteria(criteria);
     }
 }

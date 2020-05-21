@@ -1,6 +1,9 @@
-import {IUser} from "@smartsoft001/users";
-import { IEntity } from './interfaces';
 import {Observable} from "rxjs";
+
+import {IUser} from "@smartsoft001/users";
+import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
+
+import { IEntity } from './interfaces';
 
 export abstract class IItemRepository<T extends IEntity<string>> {
     abstract create(item: T, user: IUser): Promise<void>;
@@ -19,5 +22,5 @@ export abstract class IItemRepository<T extends IEntity<string>> {
 
     abstract async clear(user: IUser): Promise<void>;
 
-    abstract changesByCriteria(criteria: any): Observable<{ data: T[] }>;
+    abstract changesByCriteria(criteria: any): Observable<ItemChangedData>;
 }

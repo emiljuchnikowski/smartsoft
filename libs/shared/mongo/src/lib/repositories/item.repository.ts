@@ -1,10 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { MongoClient } from "mongodb";
+import {Observable, Observer} from "rxjs";
 
 import { IEntity, IItemRepository } from "@smartsoft001/domain-core";
-import { MongoConfig } from "../mongo.config";
 import { IUser } from "@smartsoft001/users";
-import {Observable, Observer} from "rxjs";
+import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
+
+import { MongoConfig } from "../mongo.config";
 
 @Injectable()
 export class MongoItemRepository<
@@ -234,8 +236,8 @@ export class MongoItemRepository<
     });
   }
 
-  changesByCriteria(criteria: any): Observable<{ data: T[] }> {
-    return new Observable((observer: Observer<{ data: T[] }>) => {
+  changesByCriteria(criteria: any): Observable<ItemChangedData> {
+    return new Observable((observer: Observer<ItemChangedData>) => {
       MongoClient.connect(this.getUrl(), async (err, client) => {
         if (err) {
           observer.error(err);
