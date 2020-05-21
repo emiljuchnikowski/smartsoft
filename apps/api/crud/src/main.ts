@@ -1,4 +1,6 @@
 import { NestFactory } from '@nestjs/core';
+import { WsAdapter } from '@nestjs/platform-ws';
+
 
 import { AppModule } from './app/app.module';
 
@@ -8,6 +10,8 @@ async function bootstrap() {
   if (process.env.URL_PREFIX) {
     app.setGlobalPrefix(process.env.URL_PREFIX)
   }
+
+  // app.useWebSocketAdapter(new WsAdapter(app));
 
   app.enableCors({
     origin: '*',

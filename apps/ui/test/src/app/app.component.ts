@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {of} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -27,7 +27,7 @@ const MENU_ITEMS: Array<IMenuItem> = [
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   appOptions: IAppOptions = {
     provider: {
       logged$: this.authFacade.token$.pipe(map(token => !!token)),
@@ -41,5 +41,9 @@ export class AppComponent {
 
   constructor(translateService: TranslateService, private authFacade: AuthFacade) {
     //translateService.use('eng');
+  }
+
+  ngOnInit(): void {
+
   }
 }

@@ -4,12 +4,16 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
 import { IEntity } from "@smartsoft001/domain-core";
+
 import { CrudConfig } from "../../crud.config";
 import { ICrudCreateManyOptions, ICrudFilter } from "../../models/interfaces";
+import {SocketService} from "../socket/socket.service";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
-  constructor(private config: CrudConfig<T>, private http: HttpClient) {}
+  constructor(private config: CrudConfig<T>, private http: HttpClient, private socket: SocketService<T>) {
+
+  }
 
   // TODO : Location is null
   create(item: T): Observable<string> {
