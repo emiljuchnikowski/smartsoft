@@ -251,7 +251,10 @@ export class MongoItemRepository<
           }
         ]).on('change', result => {
           observer.next({
-            data: result
+            id: result['documentKey']['_id'],
+            type: this.mapChangeType(result.operationType),
+            data: result.operationType === 'update'
+                ? result['updateDescription'] : this.getModelToResult(result['fullDocument'])
           } as any);
         });
       });
@@ -303,6 +306,16 @@ export class MongoItemRepository<
     };
 
     return result;
+  }
+
+  private mapChangeType(dbType: string) {
+    const map = {
+      insert: 'create',
+      update: 'update',
+      delete: 'delete'
+    };
+
+    return map[dbType];
   }
 
   private getModelToUpdate(
