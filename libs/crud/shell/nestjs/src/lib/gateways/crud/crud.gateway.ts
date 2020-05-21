@@ -1,30 +1,34 @@
 import {
   ConnectedSocket,
-  MessageBody, OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit,
+  MessageBody,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  OnGatewayInit,
   SubscribeMessage,
   WebSocketGateway
 } from "@nestjs/websockets";
-import { Socket } from 'socket.io';
+import { Socket } from "socket.io";
+import { CrudService } from "@smartsoft001/crud-shell-app-services";
+import { IEntity } from "@smartsoft001/domain-core";
 
 @WebSocketGateway({
-  transports: ['websocket'],
-  path: '/' + process.env.URL_PREFIX + '/_socket',
-  namespace: '/' + process.env.URL_PREFIX
+  transports: ["websocket"],
+  path: "/" + process.env.URL_PREFIX + "/_socket",
+  namespace: "/" + process.env.URL_PREFIX
 })
-export class CrudGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-  @SubscribeMessage("filter")
-  handleEvent(
-      @MessageBody() data,
-      @ConnectedSocket() client: Socket
-  ): void {
-    const event = 'read';
-    const response = [1, 2, 3];
+export class CrudGateway<T extends IEntity<string>>
+  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+  constructor(private service: CrudService<T>) {}
 
-    client.emit('read', response);
+  @SubscribeMessage("filter")
+  handleEvent(@MessageBody() data, @ConnectedSocket() client: Socket): void {
+    this.service.changes(data).subscribe(res => {
+      client.emit("changes", res);
+    });
   }
 
   afterInit(server: any) {
-    console.log('Init');
+    console.log("CrudGateway Init");
   }
 
   handleDisconnect(client: any) {
