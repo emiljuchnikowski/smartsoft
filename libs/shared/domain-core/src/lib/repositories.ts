@@ -1,5 +1,6 @@
 import {IUser} from "@smartsoft001/users";
 import { IEntity } from './interfaces';
+import {Observable} from "rxjs";
 
 export abstract class IItemRepository<T extends IEntity<string>> {
     abstract create(item: T, user: IUser): Promise<void>;
@@ -17,4 +18,6 @@ export abstract class IItemRepository<T extends IEntity<string>> {
     abstract getByCriteria(criteria: any, options: any): Promise<{ data: T[], totalCount: number }>;
 
     abstract async clear(user: IUser): Promise<void>;
+
+    abstract changesByCriteria(criteria: any): Observable<{ data: T[] }>;
 }

@@ -4,6 +4,7 @@ import { MongoClient } from "mongodb";
 import { IEntity, IItemRepository } from "@smartsoft001/domain-core";
 import { MongoConfig } from "../mongo.config";
 import { IUser } from "@smartsoft001/users";
+import {Observable, Observer} from "rxjs";
 
 @Injectable()
 export class MongoItemRepository<
@@ -233,6 +234,30 @@ export class MongoItemRepository<
     });
   }
 
+  changesByCriteria(criteria: any): Observable<{ data: T[] }> {
+    return new Observable((observer: Observer<{ data: T[] }>) => {
+      MongoClient.connect(this.getUrl(), async (err, client) => {
+        if (err) {
+          observer.error(err);
+          return;
+        }
+
+        const db = client.db(this.config.database);
+        const collection = db.collection(this.config.collection);
+
+        collection.watch([
+          {
+            $match: criteria
+          }
+        ]).on('change', result => {
+          observer.next({
+            data: result
+          } as any);
+        });
+      });
+    });
+  }
+
   private getCount(criteria: any, collection): Promise<any> {
     return new Promise<any>((res, rej) => {
       collection.countDocuments(criteria, (err, count) => {
@@ -297,6 +322,7 @@ export class MongoItemRepository<
       }
     };
 
+
     return result;
   }
 
@@ -313,8 +339,13 @@ export class MongoItemRepository<
   }
 
   private getUrl(): string {
+    let url
     if (this.config.username && this.config.password)
-      return `mongodb://${this.config.username}:${this.config.password}@${this.config.host}:${this.config.port}`;
-    else return `mongodb://${this.config.host}:${this.config.port}`;
+      url = `mongodb://${this.config.username}:${this.config.password}@${this.config.host}:${this.config.port}`;
+    else url = `mongodb://${this.config.host}:${this.config.port}`;
+
+    url += '/?replicaSet=rs1';
+
+    return url;
   }
 }
