@@ -3,7 +3,7 @@ import {CommandBus, QueryBus} from "@nestjs/cqrs";
 import {Guid} from "guid-typescript";
 
 import {IUser} from "@smartsoft001/users";
-import {IEntity} from "@smartsoft001/domain-core";
+import {IEntity, IItemRepository} from "@smartsoft001/domain-core";
 import {CreateCommand} from "../../commands/create.command";
 import {UpdateCommand} from "../../commands/update.command";
 import {DeleteCommand} from "../../commands/delete.command";
@@ -11,10 +11,15 @@ import {UpdatePartialCommand} from "../../commands/update-partial.command";
 import {GetByIdQuery} from "../../queries/get-by-id.query";
 import {GetByCriteriaQuery} from "../../queries/get-by-criteria.query";
 import {ICreateManyOptions} from "@smartsoft001/crud-domain";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
-    constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
+    constructor(
+        private readonly commandBus: CommandBus,
+        private readonly queryBus: QueryBus,
+        private readonly repository: IItemRepository<T>
+    ) {}
 
     async create(data: T, user: IUser): Promise<string> {
         data.id = Guid.raw();
@@ -52,5 +57,9 @@ export class CrudService<T extends IEntity<string>> {
 
     async delete(id: string, user: IUser): Promise<void> {
         await this.commandBus.execute(new DeleteCommand(id, user));
+    }
+
+    changes(criteria: any): Observable<{ data: T[] }> {
+        return this.repository.changesByCriteria(criteria);
     }
 }
