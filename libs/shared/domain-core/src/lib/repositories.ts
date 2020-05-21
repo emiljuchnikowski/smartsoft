@@ -22,5 +22,5 @@ export abstract class IItemRepository<T extends IEntity<string>> {
 
     abstract async clear(user: IUser): Promise<void>;
 
-    abstract changesByCriteria(criteria: any): Observable<ItemChangedData>;
+    abstract changesByCriteria(criteria: { id?: string }): Observable<ItemChangedData>;
 }

@@ -61,7 +61,7 @@ export class CrudService<T extends IEntity<string>> {
         await this.commandBus.execute(new DeleteCommand(id, user));
     }
 
-    changes(criteria: any): Observable<ItemChangedData> {
+    changes(criteria: { id?: string }): Observable<ItemChangedData> {
         return this.repository.changesByCriteria(criteria);
     }
 }

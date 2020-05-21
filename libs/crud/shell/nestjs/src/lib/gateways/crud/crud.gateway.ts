@@ -21,9 +21,10 @@ export class CrudGateway<T extends IEntity<string>>
   constructor(private service: CrudService<T>) {}
 
   @SubscribeMessage("filter")
-  handleEvent(@MessageBody() data, @ConnectedSocket() client: Socket): void {
-    this.service.changes(data).subscribe(res => {
+  handleEvent(@MessageBody() data: { id?: string }, @ConnectedSocket() client: Socket): void {
+    const sub = this.service.changes(data).subscribe(res => {
       client.emit("changes", res);
+
     });
   }
 

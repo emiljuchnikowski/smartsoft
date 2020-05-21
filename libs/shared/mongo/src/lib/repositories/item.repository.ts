@@ -236,7 +236,7 @@ export class MongoItemRepository<
     });
   }
 
-  changesByCriteria(criteria: any): Observable<ItemChangedData> {
+  changesByCriteria(criteria: { id?: string }): Observable<ItemChangedData> {
     const observable: Observable<ItemChangedData> =  new Observable((observer: Observer<ItemChangedData>) => {
       MongoClient.connect(this.getUrl(), async (err, client) => {
         if (err) {
@@ -247,11 +247,15 @@ export class MongoItemRepository<
         const db = client.db(this.config.database);
         const collection = db.collection(this.config.collection);
 
-        const stream = collection.watch([
+        const pipeline = criteria.id ? [
           {
-            $match: criteria
+            $match: {
+              "documentKey._id": criteria.id
+            }
           }
-        ]).on('change', result => {
+        ] : [];
+
+        const stream = collection.watch(pipeline).on('change', result => {
           observer.next({
             id: result['documentKey']['_id'],
             type: this.mapChangeType(result.operationType),
