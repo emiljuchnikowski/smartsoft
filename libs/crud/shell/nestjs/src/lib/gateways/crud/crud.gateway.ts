@@ -31,17 +31,13 @@ export class CrudGateway<T extends IEntity<string>>
       @MessageBody() data: { id?: string }, @ConnectedSocket() client: Socket
   ): Observable<WsResponse<ItemChangedData>> {
     const event = 'changes';
-    let sub: Subscription;
 
     return new Observable<WsResponse<ItemChangedData>>((observer => {
-      sub = this.service.changes(data).subscribe(res => {
-        observer.next({ event, data: res });
-        sub.unsubscribe();
-      }, error => observer.error(error));
-
       this.clearSubscription(client);
 
-      this._clientsSubscriptions.set(client.id, sub);
+      this._clientsSubscriptions.set(client.id, this.service.changes(data).subscribe(res => {
+        observer.next({ event, data: res });
+      }, error => observer.error(error)));
     }));
   }
 
