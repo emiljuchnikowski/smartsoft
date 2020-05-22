@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { MongoClient } from "mongodb";
+import {ChangeStream, MongoClient} from "mongodb";
 import {Observable, Observer} from "rxjs";
+import {finalize, share} from "rxjs/operators";
 
 import { IEntity, IItemRepository } from "@smartsoft001/domain-core";
 import { IUser } from "@smartsoft001/users";
@@ -237,8 +238,13 @@ export class MongoItemRepository<
   }
 
   changesByCriteria(criteria: { id?: string }): Observable<ItemChangedData> {
-    const observable: Observable<ItemChangedData> =  new Observable((observer: Observer<ItemChangedData>) => {
-      MongoClient.connect(this.getUrl(), async (err, client) => {
+    let stream: ChangeStream<any>;
+    let client: MongoClient;
+
+    return new Observable((observer: Observer<ItemChangedData>) => {
+      MongoClient.connect(this.getUrl(), async (err, c) => {
+        client = c;
+
         if (err) {
           observer.error(err);
           return;
@@ -255,7 +261,7 @@ export class MongoItemRepository<
           }
         ] : [];
 
-        const stream = collection.watch(pipeline).on('change', result => {
+        stream = collection.watch(pipeline).on('change', result => {
           observer.next({
             id: result['documentKey']['_id'],
             type: this.mapChangeType(result.operationType),
@@ -263,17 +269,16 @@ export class MongoItemRepository<
                 ? result['updateDescription'] : this.getModelToResult(result['fullDocument'])
           } as any);
         });
+      });
+    }).pipe(
+        finalize(async () => {
+          console.log('Stop watch');
 
-        observable.subscribe(_ => {}, _ => {}, async () => {
           await stream.close();
           await client.close();
-
-          console.log('close')
-        });
-      });
-    });
-
-    return observable;
+        }),
+        share()
+    );
   }
 
   private getCount(criteria: any, collection): Promise<any> {

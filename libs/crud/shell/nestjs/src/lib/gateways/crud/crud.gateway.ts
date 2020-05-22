@@ -5,13 +5,15 @@ import {
   OnGatewayDisconnect,
   OnGatewayInit,
   SubscribeMessage,
-  WebSocketGateway
+  WebSocketGateway, WsResponse
 } from "@nestjs/websockets";
 import { Socket } from "socket.io";
 import { CrudService } from "@smartsoft001/crud-shell-app-services";
 import { IEntity } from "@smartsoft001/domain-core";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {Guid} from "guid-typescript";
+import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
+import {map} from "rxjs/operators";
 
 @WebSocketGateway({
   transports: ["websocket"],
@@ -20,60 +22,45 @@ import {Guid} from "guid-typescript";
 })
 export class CrudGateway<T extends IEntity<string>>
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-  private _filters: Array<{
-    clientId: string,
-    filterId: string,
-    subscription: Subscription
-  }> = [];
+  private _clientsSubscriptions: Map<string, Subscription>;
 
   constructor(private service: CrudService<T>) {}
 
-  @SubscribeMessage("filter")
-  handleFilter(@MessageBody() data: { id?: string }, @ConnectedSocket() client: Socket): { filterId } {
-    const subscription = this.service.changes(data).subscribe(res => {
-      client.emit("changes", res);
-    });
+  @SubscribeMessage("changes")
+  handleFilter(
+      @MessageBody() data: { id?: string }, @ConnectedSocket() client: Socket
+  ): Observable<WsResponse<ItemChangedData>> {
+    const event = 'changes';
+    let sub: Subscription;
 
-    const filter = {
-      clientId: client.id,
-      filterId: Guid.raw(),
-      subscription
-    };
+    return new Observable<WsResponse<ItemChangedData>>((observer => {
+      sub = this.service.changes(data).subscribe(res => {
+        observer.next({ event, data: res });
+        sub.unsubscribe();
+      }, error => observer.error(error));
 
-    this._filters.push(filter);
+      this.clearSubscription(client);
 
-    return {
-      filterId: filter.filterId
-    };
-  }
-
-  @SubscribeMessage("unsubscribe")
-  handleUnsubscribe(@MessageBody() data: { filterId: string }): void {
-    const filtersToRemove = this._filters.filter(f => f.filterId === data.filterId);
-
-    filtersToRemove.forEach(f => {
-      if (f.subscription && !f.subscription.closed)
-        f.subscription.unsubscribe();
-    });
-
-    console.log("Unsubscribe filter: " + data.filterId);
+      this._clientsSubscriptions.set(client.id, sub);
+    }));
   }
 
   afterInit(server: any) {
+    this._clientsSubscriptions = new Map<string, Subscription>();
     console.log("CrudGateway Init");
-
-    this._filters = [];
   }
 
   handleDisconnect(client: any) {
-    const filtersToRemove = this._filters.filter(f => f.clientId === client.id);
+    this.clearSubscription(client);
 
-    filtersToRemove.forEach(f => {
-      if (f.subscription && !f.subscription.closed)
-        f.subscription.unsubscribe();
-    });
+    console.log(`Client disconnected: ${client.id}`);
+  }
 
-    console.log(`Client disconnected: ${client.id}, Removed filter: ${filtersToRemove.length}`);
+  private clearSubscription(client: any) {
+    if (this._clientsSubscriptions.has(client.id)) {
+      this._clientsSubscriptions.get(client.id).unsubscribe();
+      this._clientsSubscriptions.delete(client.id);
+    }
   }
 
   handleConnection(client: any, ...args: any[]) {
