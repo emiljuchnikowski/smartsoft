@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import {Observable} from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { map} from "rxjs/operators";
 
 import { IEntity } from "@smartsoft001/domain-core";
+import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
 
 import { CrudConfig } from "../../crud.config";
 import { ICrudCreateManyOptions, ICrudFilter } from "../../models/interfaces";
@@ -12,7 +13,15 @@ import {SocketService} from "../socket/socket.service";
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
   constructor(private config: CrudConfig<T>, private http: HttpClient, private socket: SocketService<T>) {
+      // TODO : test
+      const subs = this.changes().subscribe(data => {
+          console.log(data);
+      })
+  }
 
+  changes(criteria: { id?: string } = {}): Observable<ItemChangedData> {
+      this.socket.emit('changes', criteria);
+      return this.socket.fromEvent('changes');
   }
 
   // TODO : Location is null
