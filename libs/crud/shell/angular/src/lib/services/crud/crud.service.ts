@@ -12,12 +12,7 @@ import {SocketService} from "../socket/socket.service";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
-  constructor(private config: CrudConfig<T>, private http: HttpClient, private socket: SocketService<T>) {
-      // TODO : test
-      const subs = this.changes().subscribe(data => {
-          console.log(data);
-      })
-  }
+  constructor(private config: CrudConfig<T>, private http: HttpClient, private socket: SocketService<T>) { }
 
   changes(criteria: { id?: string } = {}): Observable<ItemChangedData> {
       this.socket.emit('changes', criteria);
