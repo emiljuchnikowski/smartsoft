@@ -1,0 +1,30 @@
+{
+  "name": "@smartsoft001/crud-shell-dtos",
+  "version": "1.0.1",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    },
+    "whitelistedNonPeerDependencies": [
+      "@smartsoft001/models"
+    ]
+  },
+  "description": "This library was generated with [Nx](https://nx.dev).",
+  "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "author": "Emil Juchnikowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
+  "scripts": {
+    "refresh": "npm version patch && npm i && npm i @smartsoft001/models@latest --save"
+  },
+  "dependencies": {
+    "@smartsoft001/models": "^1.0.11"
+  }
+}

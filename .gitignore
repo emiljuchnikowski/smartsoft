@@ -18,3 +18,6 @@
 /libs/shared/domain-core/dist/
 /libs/shared/domain-core/node_modules/
 /libs/shared/domain-core/package-lock.json
+/libs/crud/shell/dtos/node_modules/
+/libs/crud/shell/dtos/dist/
+/libs/crud/shell/dtos/package-lock.json
