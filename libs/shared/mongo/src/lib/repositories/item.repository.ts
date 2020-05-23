@@ -320,7 +320,7 @@ export class MongoItemRepository<
 
     result["__info"] = {
       create: {
-        username: user.username ? user.username : null,
+        username: user ? user.username : null,
         date: new Date()
       }
     };
@@ -350,7 +350,7 @@ export class MongoItemRepository<
     result["__info"] = {
       ...info,
       update: {
-        username: user.username ? user.username : null,
+        username: user ? user.username : null,
         date: new Date()
       }
     };
