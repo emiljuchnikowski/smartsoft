@@ -1,7 +1,7 @@
 import { Injectable, Optional } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { pessimisticUpdate } from "@nrwl/angular";
-import { map, tap } from "rxjs/operators";
+import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
 
@@ -13,15 +13,13 @@ export class AuthEffects {
   initToken$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.initToken.type),
-      pessimisticUpdate({
-        run: () => {
+      map(() => {
+        try {
           return AuthActions.initTokenSuccess({
             token: this.service.token,
             username: this.service.username
           });
-        },
-
-        onError: (action: ReturnType<typeof AuthActions.initToken>, error) => {
+        } catch (error) {
           console.error("Error", error);
           return AuthActions.initTokenFailure({ error });
         }
@@ -32,32 +30,23 @@ export class AuthEffects {
   createToken$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.createToken.type),
-      pessimisticUpdate({
-        run: (action: ReturnType<typeof AuthActions.createToken>) => {
-          return this.service
-            .createToken({
-              username: action.username,
-              password: action.password
-            })
-            .pipe(
-              map(
-                token =>
-                  AuthActions.createTokenSuccess({
-                    token,
-                    username: action.username
-                  }) as any
-              )
-            );
-        },
-
-        onError: (
-          action: ReturnType<typeof AuthActions.createToken>,
-          error
-        ) => {
-          console.error("Error", error);
-          return AuthActions.createTokenFailure({ error });
-        }
-      })
+      switchMap((action: ReturnType<typeof AuthActions.createToken>) =>
+        this.service
+          .createToken({
+            username: action.username,
+            password: action.password
+          })
+          .pipe(
+            map(
+              token =>
+                AuthActions.createTokenSuccess({
+                  token,
+                  username: action.username
+                }) as any
+            ),
+            catchError(error => of(AuthActions.createTokenFailure({ error })))
+          )
+      )
     )
   );
 
@@ -75,16 +64,11 @@ export class AuthEffects {
   removeToken$: Observable<any> = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.removeToken.type),
-      pessimisticUpdate({
-        run: () => {
+      map(() => {
+        try {
           this.service.removeToken();
-          return of(AuthActions.removeTokenSuccess());
-        },
-
-        onError: (
-          action: ReturnType<typeof AuthActions.removeToken>,
-          error
-        ) => {
+          return AuthActions.removeTokenSuccess();
+        } catch (error) {
           console.error("Error", error);
           return AuthActions.removeTokenFailure({ error });
         }
@@ -106,23 +90,14 @@ export class AuthEffects {
   refreshToken$: Observable<any> = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.refreshToken.type),
-      pessimisticUpdate({
-        run: () => {
-          return this.service.refreshToken().pipe(
-            map(() => {
-              return AuthActions.refreshTokenSuccess();
-            })
-          );
-        },
-
-        onError: (
-          action: ReturnType<typeof AuthActions.refreshToken>,
-          error
-        ) => {
-          console.error("Error", error);
-          return AuthActions.refreshTokenFailure({ error });
-        }
-      })
+      switchMap(() =>
+        this.service.refreshToken().pipe(
+          map(() => {
+            return AuthActions.refreshTokenSuccess();
+          }),
+          catchError(error => of(AuthActions.refreshTokenFailure({ error })))
+        )
+      )
     )
   );
 
