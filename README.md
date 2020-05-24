@@ -14,10 +14,29 @@ npm run ui-test:serve
 # NPM
 
 Models to projects:
+```
 npm i @smartsoft001/models
+```
 
 Domain core models to projects:
+```
 npm i @smartsoft001/domain-core
+```
+
+Angular shared :
+```
+npm i @smartsoft001/angular
+```
+
+Utils :
+```
+npm i @smartsoft001/utils
+```
+
+Models :
+```
+npm i @smartsoft001/models
+```
 
 ### Contributing
 
