@@ -1,1 +1,86 @@
+@import 'sass/smart-colors';
+@import 'sass/smart-typography';
+// Color palette for Ionic 
+:root {
+    // Color palette for Ionic
+    --ion-color-primary: #{$smart-color-primary};
+    --ion-color-primary-rgb: #{$smart-color-primary-rgb};
+    --ion-color-primary-contrast: #{$smart-color-primary-contrast};
+    --ion-color-primary-contrast-rgb: #{$smart-color-primary-contrast-rgb};
+    --ion-color-primary-shade: #{$smart-color-primary-shade};
+    --ion-color-primary-tint: #{$smart-color-primary-tint};
+    --ion-color-secondary: #{$smart-color-secondary};
+    --ion-color-secondary-rgb: #{$smart-color-secondary-rgb};
+    --ion-color-secondary-contrast: #{$smart-color-secondary-contrast};
+    --ion-color-secondary-contrast-rgb: #{$smart-color-secondary-contrast-rgb};
+    --ion-color-secondary-shade: #{$smart-color-secondary-shade};
+    --ion-color-secondary-tint: #{$smart-color-secondary-tint};
+    --ion-color-tertiary: #{$smart-color-tertiary};
+    --ion-color-tertiary-rgb: #{$smart-color-tertiary-rgb};
+    --ion-color-tertiary-contrast: #{$smart-color-tertiary-contrast};
+    --ion-color-tertiary-contrast-rgb: #{$smart-color-tertiary-contrast-rgb};
+    --ion-color-tertiary-shade: #{$smart-color-tertiary-shade};
+    --ion-color-tertiary-tint: #{$smart-color-tertiary-tint};
+    --ion-color-success: #{$smart-color-success};
+    --ion-color-success-rgb: #{$smart-color-success-rgb};
+    --ion-color-success-contrast: #{$smart-color-success-contrast};
+    --ion-color-success-contrast-rgb: #{$smart-color-success-contrast-rgb};
+    --ion-color-success-shade: #{$smart-color-success-shade};
+    --ion-color-success-tint: #{$smart-color-success-tint};
+    --ion-color-warning: #{$smart-color-warning};
+    --ion-color-warning-rgb: #{$smart-color-warning-rgb};
+    --ion-color-warning-contrast: #{$smart-color-warning-contrast};
+    --ion-color-warning-contrast-rgb: #{$smart-color-warning-rgb};
+    --ion-color-warning-shade: #{$smart-color-warning-shade};
+    --ion-color-warning-tint: #{$smart-color-warning-tint};
+    --ion-color-danger: #{$smart-color-danger};
+    --ion-color-danger-rgb: #{$smart-color-danger-rgb};
+    --ion-color-danger-contrast:#{$smart-color-danger-contrast};
+    --ion-color-danger-contrast-rgb: #{$smart-color-danger-contrast-rgb};
+    --ion-color-danger-shade: #{$smart-color-danger-shade};
+    --ion-color-danger-tint: #{$smart-color-danger-tint};
+    --ion-color-dark: #{$smart-color-dark};
+    --ion-color-dark-rgb: #{$smart-color-dark-rgb};
+    --ion-color-dark-contrast: #{$smart-color-dark-contrast};
+    --ion-color-dark-contrast-rgb: #{$smart-color-dark-contrast-rgb};
+    --ion-color-dark-shade: #{$smart-color-dark-shade};
+    --ion-color-dark-tint: #{$smart-color-dark-tint};
+    --ion-color-medium: #{$smart-color-medium};
+    --ion-color-medium-rgb: #{$smart-color-medium-rgb};
+    --ion-color-medium-contrast: #{$smart-color-medium-contrast};
+    --ion-color-medium-contrast-rgb: #{$smart-color-medium-contrast-rgb};
+    --ion-color-medium-shade: #{$smart-color-medium-shade};
+    --ion-color-medium-tint: #{$smart-color-medium-tint};
+    --ion-color-light: #{$smart-color-light};
+    --ion-color-light-rgb: #{$smart-color-light-rgb};
+    --ion-color-light-contrast: #{$smart-color-light-contrast};
+    --ion-color-light-contrast-rgb: #{$smart-color-light-contrast-rgb};
+    --ion-color-light-shade: #{$smart-color-light-shade};
+    --ion-color-light-tint: #{$smart-color-light-tint};
+    // Fonts
+    --ion-font-family: #{$default-smart-font};
+    --default-font-weight: #{$default-smart-font-weight};
+    --default-font-style: #{$default-smart-font-style};
+}
 
+:root[mode="md"] {
+    --ion-font-family: #{$default-md-smart-font};
+    --default-font-weight: #{$default-md-smart-font-weight};
+    --default-font-style: #{$default-md-smart-font-style};
+}
+
+:root[mode="ios"] {
+    --ion-font-family: #{$default-ios-smart-font};
+    --default-font-weight: #{$default-ios-smart-font-weight};
+    --default-font-style: #{$default-ios-smart-font-style};
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: var(--ion-font-family);
+    font-weight: var(--default-font-weight);
+    font-style: var(--default-font-style);
+}
