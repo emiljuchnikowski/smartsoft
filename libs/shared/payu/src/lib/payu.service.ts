@@ -121,7 +121,7 @@ export class PayuService implements ITransPaymentSingleService {
   }
 
   private getBaseUrl(): string {
-    //if (this.config.test) return 'https://secure.snd.payu.com';
+    if (this.config.test) return 'https://secure.snd.payu.com';
 
     return 'https://secure.payu.com'
   }

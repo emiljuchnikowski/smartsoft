@@ -57,7 +57,7 @@ if (process.env.DB_USERNAME) {
         posId: process.env.PAYU_POST_ID,
         notifyUrl: process.env.PAYU_NOTIFY_URL,
         continueUrl: process.env.PAYU_CONTINUE_URL,
-        test: !!process.env.PAYU_TEST,
+        test: process.env.PAYU_TEST === "1",
       } : null
     }),
     TypeOrmModule.forRoot(dbOptions)
