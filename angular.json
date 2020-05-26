@@ -1291,21 +1291,21 @@
         }
       }
     },
-    "api-steam": {
-      "root": "apps/api/steam",
-      "sourceRoot": "apps/api/steam/src",
+    "api-stream": {
+      "root": "apps/api/stream",
+      "sourceRoot": "apps/api/stream/src",
       "projectType": "application",
-      "prefix": "api-steam",
+      "prefix": "api-stream",
       "schematics": {},
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
           "options": {
-            "outputPath": "dist/apps/api/steam",
-            "main": "apps/api/steam/src/main.ts",
-            "tsConfig": "apps/api/steam/tsconfig.app.json",
+            "outputPath": "dist/apps/api/stream",
+            "main": "apps/api/stream/src/main.ts",
+            "tsConfig": "apps/api/stream/tsconfig.app.json",
             "assets": [
-              "apps/api/steam/src/assets"
+              "apps/api/stream/src/assets"
             ]
           },
           "configurations": {
@@ -1315,8 +1315,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/api/steam/src/environments/environment.ts",
-                  "with": "apps/api/steam/src/environments/environment.prod.ts"
+                  "replace": "apps/api/stream/src/environments/environment.ts",
+                  "with": "apps/api/stream/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -1325,27 +1325,27 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "api-steam:build"
+            "buildTarget": "api-stream:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/api/steam/tsconfig.app.json",
-              "apps/api/steam/tsconfig.spec.json"
+              "apps/api/stream/tsconfig.app.json",
+              "apps/api/stream/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**",
-              "!apps/api/steam/**"
+              "!apps/api/stream/**"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/api/steam/jest.config.js",
-            "tsConfig": "apps/api/steam/tsconfig.spec.json"
+            "jestConfig": "apps/api/stream/jest.config.js",
+            "tsConfig": "apps/api/stream/tsconfig.spec.json"
           }
         }
       }
