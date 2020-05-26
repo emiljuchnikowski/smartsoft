@@ -49,6 +49,17 @@
       "@smartsoft001-trans/shell-nestjs": [
         "libs/trans/shell/nestjs/src/index.ts"
       ],
+      "@smartsoft001/stream/domain": ["libs/stream/domain/src/index.ts"],
+      "@smartsoft001/stream-shell-angular": [
+        "libs/stream/shell/angular/src/index.ts"
+      ],
+      "@smartsoft001/stream-shell-app-services": [
+        "libs/stream/shell/app-services/src/index.ts"
+      ],
+      "@smartsoft001/stream-shell-dtos": ["libs/stream/shell/dtos/src/index.ts"],
+      "@smartsoft001/stream-shell-nestjs": [
+        "libs/stream/shell/nestjs/src/index.ts"
+      ],
       "@smartsoft001/users": ["libs/shared/users/src/index.ts"],
       "@smartsoft001/domain-core": ["libs/shared/domain-core/src/index.ts"],
       "@smartsoft001/utils": ["libs/shared/utils/src/index.ts"],
@@ -57,9 +68,7 @@
       "@smartsoft001/models": ["libs/shared/models/src/index.ts"],
       "@smartsoft001/mongo": ["libs/shared/mongo/src/index.ts"],
       "@smartsoft001/payu": ["libs/shared/payu/src/index.ts"],
-      "@smartsoft001/files-nestjs": [
-        "libs/shared/files/nestjs/src/index.ts"
-      ]
+      "@smartsoft001/files-nestjs": ["libs/shared/files/nestjs/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

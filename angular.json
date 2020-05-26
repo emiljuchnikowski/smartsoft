@@ -1150,6 +1150,205 @@
           }
         }
       }
+    },
+    "stream-domain": {
+      "root": "libs/stream/domain",
+      "sourceRoot": "libs/stream/domain/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/stream/domain/tsconfig.lib.json",
+              "libs/stream/domain/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/stream/domain/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/stream/domain/jest.config.js",
+            "tsConfig": "libs/stream/domain/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "stream-shell-angular": {
+      "root": "libs/stream/shell/angular",
+      "sourceRoot": "libs/stream/shell/angular/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/stream/shell/angular/tsconfig.lib.json",
+              "libs/stream/shell/angular/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/stream/shell/angular/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/stream/shell/angular/jest.config.js",
+            "tsConfig": "libs/stream/shell/angular/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "stream-shell-app-services": {
+      "root": "libs/stream/shell/app-services",
+      "sourceRoot": "libs/stream/shell/app-services/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/stream/shell/app-services/tsconfig.lib.json",
+              "libs/stream/shell/app-services/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/stream/shell/app-services/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/stream/shell/app-services/jest.config.js",
+            "tsConfig": "libs/stream/shell/app-services/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "stream-shell-dtos": {
+      "root": "libs/stream/shell/dtos",
+      "sourceRoot": "libs/stream/shell/dtos/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/stream/shell/dtos/tsconfig.lib.json",
+              "libs/stream/shell/dtos/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/stream/shell/dtos/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/stream/shell/dtos/jest.config.js",
+            "tsConfig": "libs/stream/shell/dtos/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "stream-shell-nestjs": {
+      "root": "libs/stream/shell/nestjs",
+      "sourceRoot": "libs/stream/shell/nestjs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/stream/shell/nestjs/tsconfig.lib.json",
+              "libs/stream/shell/nestjs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/stream/shell/nestjs/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/stream/shell/nestjs/jest.config.js",
+            "tsConfig": "libs/stream/shell/nestjs/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "api-steam": {
+      "root": "apps/api/steam",
+      "sourceRoot": "apps/api/steam/src",
+      "projectType": "application",
+      "prefix": "api-steam",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/api/steam",
+            "main": "apps/api/steam/src/main.ts",
+            "tsConfig": "apps/api/steam/tsconfig.app.json",
+            "assets": [
+              "apps/api/steam/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/steam/src/environments/environment.ts",
+                  "with": "apps/api/steam/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-steam:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api/steam/tsconfig.app.json",
+              "apps/api/steam/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/steam/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/steam/jest.config.js",
+            "tsConfig": "apps/api/steam/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

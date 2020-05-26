@@ -103,6 +103,36 @@
         "type:shell"
       ]
     },
+    "stream-domain": {
+      "tags": [
+        "scope:stream",
+        "type:domain"
+      ]
+    },
+    "stream-shell-angular": {
+      "tags": [
+        "scope:stream",
+        "type:shell"
+      ]
+    },
+    "stream-shell-app-services": {
+      "tags": [
+        "scope:stream",
+        "type:shell"
+      ]
+    },
+    "stream-shell-dtos": {
+      "tags": [
+        "scope:stream",
+        "type:shell"
+      ]
+    },
+    "stream-shell-nestjs": {
+      "tags": [
+        "scope:stream",
+        "type:shell"
+      ]
+    },
     "shared-users": {
       "tags": [
         "scope:shared",
@@ -176,6 +206,9 @@
       "tags": []
     },
     "api-trans": {
+      "tags": []
+    },
+    "api-steam": {
       "tags": []
     },
     "api-files": {
