@@ -1,1 +1,2 @@
-export * from "./lib/stream-shell-angular";
+export * from "./lib/stream.module";
+export * from "./lib/components";
