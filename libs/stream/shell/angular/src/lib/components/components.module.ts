@@ -1,9 +1,13 @@
 import {NgModule} from "@angular/core";
 
 import {SenderComponent} from "./sender/sender.component";
+import {ClientComponent} from "./client/client.component";
+import {ChatComponent} from "./chat/chat.component";
 
 const COMPONENTS = [
-    SenderComponent
+    SenderComponent,
+    ClientComponent,
+    ChatComponent
 ];
 
 @NgModule({
