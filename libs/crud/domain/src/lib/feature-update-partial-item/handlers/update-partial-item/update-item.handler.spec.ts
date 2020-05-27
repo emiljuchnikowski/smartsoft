@@ -5,6 +5,8 @@ import { IUser } from "@smartsoft001/users";
 import { UpdatePartialItemHandler } from "./update-item.handler";
 import { UpdatePartialItemEvent } from "../../update-partial-item.event";
 import { PasswordService } from "@smartsoft001/utils";
+import {Observable, of} from "rxjs";
+import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
 
 describe("crud-domain: UpdatePartialItemHandler", () => {
   let handler: UpdatePartialItemHandler<any>;
@@ -35,6 +37,9 @@ describe("crud-domain: UpdatePartialItemHandler", () => {
       },
       clear(user: IUser): Promise<void> {
         return Promise.resolve();
+      },
+      changesByCriteria(criteria: { id?: string }): Observable<ItemChangedData> {
+        return of(null)
       }
     };
 

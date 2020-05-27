@@ -1,13 +1,12 @@
-import 'jest-preset-angular';
-
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {TranslateModule} from "@ngx-translate/core";
 import {of} from "rxjs";
 
-import { LoginComponent } from './login.component';
 import {IFormOptions, SharedModule} from "@smartsoft001/angular";
 import {LoginDto} from "@smartsoft001/auth-shell-dtos";
 import {AuthFacade} from "@smartsoft001/auth-shell-angular";
+
+import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

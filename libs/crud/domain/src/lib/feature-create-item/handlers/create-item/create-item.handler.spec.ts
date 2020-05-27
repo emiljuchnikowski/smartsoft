@@ -5,6 +5,8 @@ import { IItemRepository } from "@smartsoft001/domain-core";
 import { IUser } from "@smartsoft001/users";
 import { CreateItemEvent } from "../../create-item.event";
 import { PasswordService } from "@smartsoft001/utils";
+import {Observable, of} from "rxjs";
+import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
 
 describe("crud-domain: CreateItemHandler", () => {
   let handler: CreateItemHandler<any>;
@@ -35,6 +37,9 @@ describe("crud-domain: CreateItemHandler", () => {
       },
       clear(user: IUser): Promise<void> {
         return Promise.resolve();
+      },
+      changesByCriteria(criteria: { id?: string }): Observable<ItemChangedData> {
+        return of(null)
       }
     };
 

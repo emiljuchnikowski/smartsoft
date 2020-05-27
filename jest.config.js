@@ -10,6 +10,10 @@ module.exports = {
   setupFiles: [
     "mock-local-storage"
   ],
+  "setupFilesAfterEnv": [  "<rootDir>/test-setup.ts" ],
+  "moduleNameMapper": {
+    "^lodash-es$": "lodash"
+  },
   "globals": {
     "ts-jest": {
       "stringifyContentPathRegex": "\\.html$",

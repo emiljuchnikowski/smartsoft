@@ -4,6 +4,8 @@ import {IItemRepository} from "@smartsoft001/domain-core";
 import {IUser} from "@smartsoft001/users";
 import {DeleteItemHandler} from "./delete-item.handler";
 import {DeleteItemEvent} from "../../delete-item.event";
+import {Observable, of} from "rxjs";
+import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
 
 describe('crud-domain: DeleteItemHandler', () => {
     let handler: DeleteItemHandler;
@@ -34,6 +36,9 @@ describe('crud-domain: DeleteItemHandler', () => {
             },
             clear(user: IUser): Promise<void> {
                 return Promise.resolve();
+            },
+            changesByCriteria(criteria: { id?: string }): Observable<ItemChangedData> {
+                return of(null)
             }
         };
 

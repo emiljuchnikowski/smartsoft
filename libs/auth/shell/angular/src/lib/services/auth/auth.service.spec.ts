@@ -1,5 +1,3 @@
-import "jest-preset-angular";
-
 import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import {HttpClient} from "@angular/common/http";

@@ -1,5 +1,3 @@
-import "jest-preset-angular";
-
 import { NgModule } from "@angular/core";
 import { TestBed } from "@angular/core/testing";
 import { readFirst } from "@nrwl/angular/testing";
@@ -48,6 +46,7 @@ describe("auth-shell-angular: AuthFacade", () => {
         ]
       })
       class RootModule {}
+      TestBed.resetTestingModule();
       TestBed.configureTestingModule({ imports: [RootModule] });
 
       store = TestBed.get(Store);
