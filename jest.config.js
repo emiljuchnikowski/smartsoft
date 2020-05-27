@@ -16,6 +16,7 @@ module.exports = {
   },
   "globals": {
     "ts-jest": {
+      diagnostics: false,
       "stringifyContentPathRegex": "\\.html$",
       "astTransformers": [
         "jest-preset-angular/build/InlineFilesTransformer",
