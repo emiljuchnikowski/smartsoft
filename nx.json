@@ -213,6 +213,9 @@
     },
     "api-files": {
       "tags": []
+    },
+    "stream-shell-angular-e2e": {
+      "tags": []
     }
   }
 }
