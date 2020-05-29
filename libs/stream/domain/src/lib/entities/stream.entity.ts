@@ -13,7 +13,7 @@ export class Stream implements IEntity<string> {
     title: string;
 
     @Column()
-    desciption: number;
+    description: number;
 
     @Column({
         type: "datetime"
