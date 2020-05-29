@@ -1,8 +1,11 @@
-import { Module } from '@nestjs/common';
-import {ConnectionOptions} from "typeorm";
-import {TypeOrmModule} from "@nestjs/typeorm";
+import { Module } from "@nestjs/common";
+import { ConnectionOptions } from "typeorm";
+import { TypeOrmModule } from "@nestjs/typeorm";
 
-import {ENTITIES} from "@smartsoft001/stream-domain";
+import { ENTITIES } from "@smartsoft001/stream-domain";
+import { APP_FILTER } from "@nestjs/core";
+import { AppExceptionFilter } from "@smartsoft001/nestjs";
+import { StreamShellNestjsModule } from "@smartsoft001/stream-shell-nestjs";
 
 const dbOptions: Partial<ConnectionOptions> = {
   type: "mongodb",
@@ -33,7 +36,19 @@ if (process.env.DB_USERNAME) {
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(dbOptions)
+    TypeOrmModule.forRoot(dbOptions),
+    StreamShellNestjsModule.forRoot({
+      tokenConfig: {
+        secretOrPrivateKey: process.env.TOKEN_CONFIG_SECRET_OR_PRIVATE_KEY,
+        expiredIn: Number(process.env.TOKEN_CONFIG_EXPIRED_IN_SECONDS)
+      }
+    })
+  ],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: AppExceptionFilter
+    }
   ]
 })
 export class AppModule {}

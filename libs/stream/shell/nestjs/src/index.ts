@@ -1,1 +1,1 @@
-export * from "./lib/stream-shell-nestjs";
+export * from "./lib/nestjs.module";
