@@ -2,6 +2,8 @@ import {Column, Entity, ObjectIdColumn} from "typeorm";
 
 import {IEntity} from "@smartsoft001/domain-core";
 
+import {StreamComment} from "../value-objects";
+
 @Entity("streams")
 export class Stream implements IEntity<string> {
     @ObjectIdColumn({ generated: false })
@@ -22,29 +24,7 @@ export class Stream implements IEntity<string> {
         type: "datetime"
     })
     modifyDate: Date;
-}
-
-@Entity("streamComments")
-export class StreamComment implements IEntity<string> {
-    @ObjectIdColumn({ generated: false })
-    id: string;
 
     @Column()
-    body: string;
-
-    @Column()
-    streamId: string;
-
-    @Column()
-    username: string;
-
-    @Column({
-        type: 'boolean'
-    })
-    annonymus: boolean;
-
-    @Column({
-        type: "datetime"
-    })
-    createDate: Date;
+    comments: Array<StreamComment>;
 }
