@@ -100,7 +100,9 @@
             "tsConfig": "apps/api/auth/tsconfig.app.json",
             "assets": [
               "apps/api/auth/src/assets"
-            ]
+            ],
+            "styles": [],
+            "scripts": []
           },
           "configurations": {
             "production": {
