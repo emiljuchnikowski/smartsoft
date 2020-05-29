@@ -1,10 +1,10 @@
-import {NgModule} from "@angular/core";
+import {ModuleWithProviders, NgModule} from "@angular/core";
 import {SharedModule} from "@smartsoft001/angular";
 
 import {SenderComponent} from "./sender/sender.component";
 import {ClientComponent} from "./client/client.component";
 import {ChatComponent} from "./chat/chat.component";
-import {TranslateModule} from "@ngx-translate/core";
+import {StreamConfig} from "../stream.config";
 
 const COMPONENTS = [
     SenderComponent,
@@ -21,5 +21,12 @@ const COMPONENTS = [
     ]
 })
 export class StreamComponentsModule {
-
+    static forRoot(config: StreamConfig): ModuleWithProviders {
+        return {
+            ngModule: StreamComponentsModule,
+            providers: [
+                { provide: StreamConfig, useValue: config }
+            ]
+        }
+    }
 }
