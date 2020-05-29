@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import {ConnectionOptions} from "typeorm";
-
-import {ENTITIES} from "@smartsoft001/trans-domain";
 import {TypeOrmModule} from "@nestjs/typeorm";
+
+import {ENTITIES} from "@smartsoft001/stream-domain";
 
 const dbOptions: Partial<ConnectionOptions> = {
   type: "mongodb",

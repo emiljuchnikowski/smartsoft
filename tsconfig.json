@@ -49,7 +49,7 @@
       "@smartsoft001-trans/shell-nestjs": [
         "libs/trans/shell/nestjs/src/index.ts"
       ],
-      "@smartsoft001/stream/domain": ["libs/stream/domain/src/index.ts"],
+      "@smartsoft001/stream-domain": ["libs/stream/domain/src/index.ts"],
       "@smartsoft001/stream-shell-angular": [
         "libs/stream/shell/angular/src/index.ts"
       ],
