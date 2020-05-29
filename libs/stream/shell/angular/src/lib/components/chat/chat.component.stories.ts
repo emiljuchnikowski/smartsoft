@@ -1,12 +1,15 @@
 import {storiesOf} from "@storybook/angular";
+import {TranslateModule} from "@ngx-translate/core";
 
 import {StreamComponentsModule} from "../components.module";
-import {ChatComponent} from "./chat.component";
 
 storiesOf("smart-stream-chat", module)
     .add("basic", () => ({
         moduleMetadata: {
-            imports: [ StreamComponentsModule ]
+            imports: [
+                TranslateModule.forRoot(),
+                StreamComponentsModule
+            ]
         },
-        component: ChatComponent
+        template: `<smart-stream-chat></smart-stream-chat>`
     }))

@@ -1,0 +1,38 @@
+{
+  "name": "@smartsoft001/stream-shell-angular",
+  "version": "1.0.2",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    },
+    "whitelistedNonPeerDependencies": [
+      "@smartsoft001/angular",
+      "@smartsoft001/domain-core",
+      "@smartsoft001/models",
+      "@smartsoft001/crud-shell-dtos",
+      "moment"
+    ]
+  },
+  "description": "This library was generated with [Nx](https://nx.dev).",
+  "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "author": "Emil Juchnikowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
+  "scripts": {
+    "refresh": "npm version patch && npm i && npm i @smartsoft001/angular@latest --save && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/models@latest --save && npm i @smartsoft001/crud-shell-dtos --save"
+  },
+  "dependencies": {
+    "@smartsoft001/angular": "^1.1.4",
+    "@smartsoft001/crud-shell-dtos": "^1.0.1",
+    "@smartsoft001/domain-core": "^1.0.5",
+    "@smartsoft001/models": "^1.0.11",
+    "moment": "^2.26.0"
+  }
+}

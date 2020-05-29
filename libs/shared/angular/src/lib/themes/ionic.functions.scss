@@ -261,7 +261,7 @@
       $color-value: color-inverse(map-get($color-value, base));
     }
 
-  } @elseif ($custom-contrast-mode) {
+  } @else if ($custom-contrast-mode) {
     // If a mode was passed we need to call
     // the custom inverse function to get the inverse
     // color based on the mode
