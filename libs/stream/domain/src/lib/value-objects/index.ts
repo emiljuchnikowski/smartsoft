@@ -1,1 +1,1 @@
-export * from './comment.values-object';
+export * from './comment.value-object';
