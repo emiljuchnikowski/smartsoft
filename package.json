@@ -30,6 +30,7 @@
     "api-crud:serve": "ng serve api-crud",
     "api-files:serve": "ng serve api-files",
     "api-trans:serve": "ng serve api-trans",
+    "api-stream:serve": "ng serve api-stream",
     "ui-test:serve": "ng serve ui-test",
     "shared-angular:build": "ng-packagr -p libs/shared/angular/package.json",
     "shared-angular:publish": "npm run shared-angular:build && npm publish libs/shared/angular/dist --access public",

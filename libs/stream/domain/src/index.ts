@@ -1,1 +1,1 @@
-export * from "./lib/stream-domain";
+export * from "./lib/entities";
