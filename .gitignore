@@ -21,3 +21,5 @@
 /libs/crud/shell/dtos/node_modules/
 /libs/crud/shell/dtos/dist/
 /libs/crud/shell/dtos/package-lock.json
+/libs/stream/shell/angular/node_modules/
+/libs/stream/shell/angular/dist/
