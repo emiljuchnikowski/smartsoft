@@ -1,1 +1,1 @@
-export * from "./lib/stream-shell-app-services";
+export * from "./lib/services";
