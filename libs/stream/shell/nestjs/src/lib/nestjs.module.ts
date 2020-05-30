@@ -11,6 +11,7 @@ import {
 import { SERVICES } from "@smartsoft001/stream-shell-app-services";
 
 import { CONTROLLERS } from "./controllers";
+import { GATEWAYS } from "./gateways";
 
 @Module({})
 export class StreamShellNestjsModule {
@@ -21,6 +22,7 @@ export class StreamShellNestjsModule {
       providers: [
         ...SERVICES,
         ...DOMAIN_SERVICES,
+        ...GATEWAYS,
         { provide: StreamConfig, useValue: config }
       ],
       imports: [
