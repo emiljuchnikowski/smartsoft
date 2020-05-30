@@ -1,1 +1,7 @@
-<p>chat works!</p>
+<ng-container *ngIf="comments">
+    <ng-container *ngFor="let comment of comments">
+        <smart-card [options]="{ title: getTitle(comment) }">
+            <div style="margin: 15px">{{ comment.body }}</div>
+        </smart-card>
+    </ng-container>
+</ng-container>

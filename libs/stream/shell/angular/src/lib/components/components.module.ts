@@ -1,5 +1,6 @@
 import {NgModule} from "@angular/core";
 import {HttpClientModule} from "@angular/common/http";
+import {RouterModule} from "@angular/router";
 
 import {SharedModule} from "@smartsoft001/angular";
 import {StreamProvider} from "@smartsoft001/stream-shell-angular";

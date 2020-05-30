@@ -1,4 +1,5 @@
 import { ModuleWithProviders, NgModule, Provider } from "@angular/core";
+import {RouterModule} from "@angular/router";
 
 import { StreamConfig } from "./stream.config";
 import { StreamComponentsModule } from "./components/components.module";
@@ -7,7 +8,7 @@ import { SocketService } from "./services/socket/socket.service";
 
 @NgModule({
   exports: [StreamComponentsModule],
-  imports: [StreamComponentsModule],
+  imports: [StreamComponentsModule, RouterModule],
   declarations: [],
   providers: [SocketService]
 })

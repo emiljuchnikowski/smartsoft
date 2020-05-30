@@ -1,6 +1,8 @@
 import {storiesOf} from "@storybook/angular";
 import {TranslateModule} from "@ngx-translate/core";
+import * as moment from "moment";
 
+import {ChatComponent} from "./chat.component";
 import {StreamModule} from "../../stream.module";
 import {config} from "../../test";
 
@@ -12,5 +14,19 @@ storiesOf("smart-stream-chat", module)
                 StreamModule.forFeature(config)
             ]
         },
-        template: `<smart-stream-chat></smart-stream-chat>`
+        component: ChatComponent,
+        props: {
+            comments: [
+                {
+                    body: "test 2",
+                    createDate: moment('2020-01-01 12:01:00').toDate(),
+                    username: 'user 2'
+                },
+                {
+                    body: "test 1",
+                    createDate: moment('2020-01-01 12:00:00').toDate(),
+                    username: 'user 1'
+                }
+            ]
+        }
     }))
