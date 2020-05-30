@@ -30,6 +30,6 @@ export class StreamController {
 
     @Delete(":id")
     async delete(@Param() params: { id: string }): Promise<void> {
-        await this.service.delete(id);
+        await this.service.delete(params.id);
     }
 }
