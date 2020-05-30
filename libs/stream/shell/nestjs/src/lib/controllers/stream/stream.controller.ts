@@ -1,4 +1,4 @@
-import {Body, Controller, Param, Patch, Post, Res} from "@nestjs/common";
+import {Body, Controller, Delete, Param, Patch, Post, Res} from "@nestjs/common";
 import { Response, Request } from "express";
 
 import {StreamService} from "@smartsoft001/stream-shell-app-services";
@@ -26,5 +26,10 @@ export class StreamController {
     async update(@Param() params: { id: string }, @Body() data: IStreamUpdate): Promise<void> {
         data.id = params.id;
         await this.service.update(data);
+    }
+
+    @Delete(":id")
+    async delete(@Param() params: { id: string }): Promise<void> {
+        await this.service.delete(id);
     }
 }
