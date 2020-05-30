@@ -1,1 +1,1 @@
-export * from "./lib/stream-shell-dtos";
+export * from "./lib/interfaces";
