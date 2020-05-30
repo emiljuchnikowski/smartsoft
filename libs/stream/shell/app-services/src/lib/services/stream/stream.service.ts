@@ -28,6 +28,6 @@ export class StreamService {
     }
 
     getById(id: string): Promise<Stream> {
-        return this.repository.findOne({ id });
+        return this.repository.findOne({ _id: id } as any);
     }
 }
