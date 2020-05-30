@@ -1,10 +1,12 @@
-<smart-grid>
-    <smart-grid-row>
-        <smart-grid-column>
-            <video autoplay playsinline #videoRef></video>
-        </smart-grid-column>
-        <smart-grid-column>
-            <smart-stream-chat></smart-stream-chat>
-        </smart-grid-column>
-    </smart-grid-row>
-</smart-grid>
+<ng-container *ngIf="item$ | async; let item">
+    <smart-grid>
+        <smart-grid-row>
+            <smart-grid-column>
+                <video autoplay playsinline #videoRef></video>
+            </smart-grid-column>
+            <smart-grid-column>
+                <smart-stream-chat></smart-stream-chat>
+            </smart-grid-column>
+        </smart-grid-row>
+    </smart-grid>
+</ng-container>

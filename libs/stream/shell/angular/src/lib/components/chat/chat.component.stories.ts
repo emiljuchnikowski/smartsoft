@@ -1,7 +1,7 @@
 import {storiesOf} from "@storybook/angular";
 import {TranslateModule} from "@ngx-translate/core";
 
-import {StreamComponentsModule} from "../components.module";
+import {StreamModule} from "../../stream.module";
 import {config} from "../../test";
 
 storiesOf("smart-stream-chat", module)
@@ -9,7 +9,7 @@ storiesOf("smart-stream-chat", module)
         moduleMetadata: {
             imports: [
                 TranslateModule.forRoot(),
-                StreamComponentsModule.forRoot(config)
+                StreamModule.forFeature(config)
             ]
         },
         template: `<smart-stream-chat></smart-stream-chat>`

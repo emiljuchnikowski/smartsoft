@@ -1,9 +1,14 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import { Observable } from "rxjs";
+
+import { IStream } from "@smartsoft001/stream-shell-dtos";
+
+import { StreamProvider } from "../../providers";
 
 @Component({
-  selector: 'smart-stream-sender',
-  templateUrl: './sender.component.html',
-  styleUrls: ['./sender.component.scss']
+  selector: "smart-stream-sender",
+  templateUrl: "./sender.component.html",
+  styleUrls: ["./sender.component.scss"]
 })
 export class SenderComponent implements OnInit {
   mediaStreamConstraints: MediaStreamConstraints = {
@@ -12,20 +17,26 @@ export class SenderComponent implements OnInit {
   };
   mediaStream: MediaStream;
 
-  @ViewChild('videoRef', { static: false }) videoRef: ElementRef;
+  item$: Observable<IStream>;
 
-  constructor() { }
-
-  ngOnInit() {
-    navigator.mediaDevices.getUserMedia(this.mediaStreamConstraints)
-        .then(mediaStream => {
-          this.mediaStream = mediaStream;
-          this.videoRef.nativeElement.srcObject = mediaStream;
-          this.videoRef.nativeElement.muted = true;
-        })
-        .catch(error => {
-          console.log('Getting user media failed', error);
-        });
+  @Input() set id(val: string) {
+    this.item$ = this.provider.getById(val);
   }
 
+  @ViewChild("videoRef", { static: false }) videoRef: ElementRef;
+
+  constructor(private provider: StreamProvider) {}
+
+  ngOnInit() {
+    navigator.mediaDevices
+      .getUserMedia(this.mediaStreamConstraints)
+      .then(mediaStream => {
+        this.mediaStream = mediaStream;
+        this.videoRef.nativeElement.srcObject = mediaStream;
+        this.videoRef.nativeElement.muted = true;
+      })
+      .catch(error => {
+        console.log("Getting user media failed", error);
+      });
+  }
 }
