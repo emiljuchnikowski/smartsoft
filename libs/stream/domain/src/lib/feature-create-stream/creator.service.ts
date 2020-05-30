@@ -18,13 +18,18 @@ export class CreatorService {
         this.valid(item);
 
         const entity = new Stream();
+
+        Object.keys(item).forEach(key => {
+            entity[key] = item[key];
+        });
+
         // hack: generate id
         entity['_id']  = Guid.raw();
         entity.createDate = new Date();
         entity.modifyDate = entity.createDate;
         entity.comments = [];
 
-        await this.repository.save(entity);
+        await this.repository.save(entity as any);
 
         return entity.id;
     }

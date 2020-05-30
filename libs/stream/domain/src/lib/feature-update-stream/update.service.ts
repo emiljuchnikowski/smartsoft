@@ -2,9 +2,10 @@ import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 
-import {Stream} from "@smartsoft001/stream-domain";
-import {IStreamUpdate} from "./interfaces";
 import {DomainValidationError} from "@smartsoft001/domain-core";
+
+import {Stream} from "../entities/stream.entity";
+import {IStreamUpdate} from "./interfaces";
 
 @Injectable()
 export class UpdateService {
@@ -19,7 +20,7 @@ export class UpdateService {
         delete item.id;
 
         await this.repository.update({
-            id: item.id
+            id: id
         }, item as any);
     }
 

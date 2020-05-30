@@ -2,7 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 
-import {Stream} from "@smartsoft001/stream-domain";
+import {Stream} from "../entities/stream.entity";
 
 @Injectable()
 export class DeleteService {
@@ -11,6 +11,8 @@ export class DeleteService {
     ) { }
 
     async delete(id: string): Promise<void> {
-        await this.repository.delete(id);
+        await this.repository.delete({
+            id: id
+        });
     }
 }
