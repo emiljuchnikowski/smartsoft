@@ -15,6 +15,9 @@ export class Stream implements IEntity<string> {
     @Column()
     description: number;
 
+    @Column()
+    senders: Array<string>;
+
     @Column({
         type: "datetime"
     })

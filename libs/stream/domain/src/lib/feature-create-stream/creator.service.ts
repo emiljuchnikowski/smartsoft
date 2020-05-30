@@ -37,5 +37,6 @@ export class CreatorService {
     private valid(req: IStreamCreate) {
         if (!req) throw new DomainValidationError("item is empty");
         if (!req.title) throw new DomainValidationError("title is empty");
+        if (!req.senders || !req.senders.length) throw new DomainValidationError("senders are empty");
     }
 }
