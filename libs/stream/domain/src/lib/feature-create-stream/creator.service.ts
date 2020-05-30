@@ -18,7 +18,8 @@ export class CreatorService {
         this.valid(item);
 
         const entity = new Stream();
-        entity.id = Guid.raw();
+        // hack: generate id
+        entity['_id']  = Guid.raw();
         entity.createDate = new Date();
         entity.modifyDate = entity.createDate;
         entity.comments = [];
