@@ -3,12 +3,13 @@ import {TranslateModule} from "@ngx-translate/core";
 
 import {StreamComponentsModule} from "../components.module";
 import {ClientComponent} from "./client.component";
+import {config} from "../../test";
 
 storiesOf("smart-stream-client", module)
     .add("basic", () => ({
         moduleMetadata: {
             imports: [
-                StreamComponentsModule,
+                StreamComponentsModule.forRoot(config),
                 TranslateModule.forRoot()
             ]
         },

@@ -2,12 +2,13 @@ import {storiesOf} from "@storybook/angular";
 import {TranslateModule} from "@ngx-translate/core";
 
 import {StreamComponentsModule} from "../components.module";
+import {config} from "../../test";
 
 storiesOf('smart-stream-sender', module)
     .add('basic', () => ({
         moduleMetadata: {
             imports: [
-                StreamComponentsModule,
+                StreamComponentsModule.forRoot(config),
                 TranslateModule.forRoot()
             ]
         },
