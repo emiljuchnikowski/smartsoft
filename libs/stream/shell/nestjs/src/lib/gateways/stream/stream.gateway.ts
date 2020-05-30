@@ -11,10 +11,11 @@ export class StreamGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     }
 
     handleConnection(client: any, ...args: any[]): void {
-        console.log(`Client disconnected: ${client.id}`);
+        console.log(args)
+        console.log(`Client connected: ${client.id}`);
     }
 
     handleDisconnect(client: any): void {
-        console.log(`Client connected: ${client.id}`);
+        console.log(`Client disconnected: ${client.id}`);
     }
 }

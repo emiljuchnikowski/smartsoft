@@ -27,7 +27,8 @@ export class SenderComponent implements OnInit {
 
   constructor(private provider: StreamProvider) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.provider.init();
     navigator.mediaDevices
       .getUserMedia(this.mediaStreamConstraints)
       .then(mediaStream => {

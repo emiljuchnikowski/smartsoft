@@ -22,6 +22,6 @@ export class ClientComponent implements OnInit {
   constructor(private provider: StreamProvider) { }
 
   ngOnInit() {
-
+    this.provider.init();
   }
 }
