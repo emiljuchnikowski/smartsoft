@@ -1,15 +1,23 @@
 import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
 
 import {
-    CreatorService, DeleteService, IStreamCreate, IStreamUpdate, UpdateService, Stream
+    CreatorService,
+    DeleteService,
+    IStreamCreate,
+    IStreamUpdate,
+    UpdateService,
+    Stream,
+    CreateCommentService,
+    IStreamCommentCreate
 } from "@smartsoft001/stream-domain";
-import {Repository} from "typeorm";
 
 @Injectable()
 export class StreamService {
     constructor(
         private readonly creatorService: CreatorService,
+        private readonly createCommentService: CreateCommentService,
         private readonly updateService: UpdateService,
         private readonly deleteService: DeleteService,
         @InjectRepository(Stream) private readonly repository: Repository<Stream>
@@ -17,6 +25,10 @@ export class StreamService {
 
     create(item: IStreamCreate): Promise<string> {
         return this.creatorService.create(item);
+    }
+
+    createComment(id: string, item: IStreamCommentCreate): Promise<void> {
+        return this.createCommentService.create(id, item);
     }
 
     update(item: IStreamUpdate): Promise<any> {
