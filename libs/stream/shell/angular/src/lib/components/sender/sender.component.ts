@@ -15,7 +15,8 @@ export class SenderComponent implements OnInit, OnDestroy {
 
   mediaStreamConstraints: MediaStreamConstraints = {
     video: true,
-    audio: true
+    // TODO: test
+    //audio: true
   };
   mediaStream: MediaStream;
 
@@ -42,15 +43,17 @@ export class SenderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     navigator.mediaDevices
-      .getUserMedia(this.mediaStreamConstraints)
-      .then(mediaStream => {
-        this.mediaStream = mediaStream;
-        this.videoRef.nativeElement.srcObject = mediaStream;
-        this.videoRef.nativeElement.muted = true;
-      })
-      .catch(error => {
-        console.log("Getting user media failed", error);
-      });
+        .getUserMedia(this.mediaStreamConstraints)
+        .then(mediaStream => {
+          this.mediaStream = mediaStream;
+          this.videoRef.nativeElement.srcObject = mediaStream;
+          this.videoRef.nativeElement.muted = true;
+
+          return this.provider.addStream(this._id, mediaStream);
+        })
+        .catch(error => {
+          console.log("Getting user media failed", error);
+        });
   }
 
   ngOnDestroy(): void {

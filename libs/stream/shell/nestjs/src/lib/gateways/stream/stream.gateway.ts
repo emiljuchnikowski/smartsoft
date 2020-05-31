@@ -27,14 +27,48 @@ export class StreamGateway
   handleRegister(
     @MessageBody() data: { streamId: string; mode: "sender" | "client" },
     @ConnectedSocket() user: Socket
-  ): void {
+  ) {
     if (data.mode === "client") {
       this.addClient(user.id, data.streamId);
+      this.server.emit(data.streamId + '_watcher', user.id);
     }
 
     if (data.mode === "sender") {
       this.addSender(user.id, data.streamId);
+      this.server.emit(data.streamId + '_sender', user.id);
     }
+
+    return this.senders[data.streamId];
+  }
+
+  @SubscribeMessage("offer_create")
+  handleOfferCreate(
+      @MessageBody() data: { streamId: string; offer: RTCSessionDescriptionInit, clientId: string },
+      @ConnectedSocket() user: Socket
+  ): void {
+    this.server.to(data.clientId).emit(data.streamId + "_offer", data.offer);
+  }
+
+  @SubscribeMessage("answer_create")
+  handleAnswerCreate(
+      @MessageBody() data: { streamId: string; answer: RTCSessionDescriptionInit },
+      @ConnectedSocket() user: Socket
+  ): void {
+    this.server.emit(data.streamId + "_answer", {
+      clientId: user.id,
+      answer: data.answer
+    });
+  }
+
+  @SubscribeMessage("candidate_create")
+  handleCandidateCreate(
+      @MessageBody() data: { streamId: string; candidate: RTCIceCandidate },
+      @ConnectedSocket() user: Socket
+  ): void {
+    this.server.emit(data.streamId + "_candidate", {
+      clientId: user.id,
+      candidate: data.candidate
+    });
   }
 
   @SubscribeMessage("unregister")
@@ -95,6 +129,8 @@ export class StreamGateway
     if (!this.senders[streamId]) return;
 
     delete this.senders[streamId][senderId];
+
+    this.server.emit(streamId + "_disconnect");
 
     if (!Object.keys(this.senders[streamId]).length) {
       delete this.senders[streamId];
