@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
+import {map, tap} from "rxjs/operators";
 
 import {IStream, IStreamComment} from "@smartsoft001/stream-shell-dtos";
 
 import {StreamProvider} from "../../providers";
-import {map, tap} from "rxjs/operators";
 
 @Component({
   selector: 'smart-stream-client',
@@ -39,7 +39,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     this.provider.init(this._id, 'client');
   }
 
-  constructor(private provider: StreamProvider, private cd: ChangeDetectorRef) { }
+  constructor(public provider: StreamProvider, private cd: ChangeDetectorRef) { }
 
   addComment(item: IStreamComment): void {
     this.provider.addComment(this._id , item);

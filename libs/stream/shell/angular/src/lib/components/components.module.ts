@@ -1,10 +1,9 @@
 import {NgModule} from "@angular/core";
 import {HttpClientModule} from "@angular/common/http";
-import {RouterModule} from "@angular/router";
 
 import {SharedModule} from "@smartsoft001/angular";
-import {StreamProvider} from "@smartsoft001/stream-shell-angular";
 
+import {StreamProvider} from "../providers/stream/stream.provider";
 import {SenderComponent} from "./sender/sender.component";
 import {ClientComponent} from "./client/client.component";
 import {ChatComponent} from "./chat/chat.component";

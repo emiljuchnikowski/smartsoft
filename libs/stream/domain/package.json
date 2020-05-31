@@ -1,0 +1,38 @@
+{
+  "name": "@smartsoft001/stream-domain",
+  "version": "1.0.1",
+  "description": "Utils to stream media",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    },
+    "whitelistedNonPeerDependencies": [
+      "@smartsoft001/domain-core",
+      "@smartsoft001/utils"
+    ]
+  },
+  "scripts": {
+    "refresh": "npm version patch && npm i && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/utils@latest --save"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "keywords": [
+    "smartsoft",
+    "oauth",
+    "angular",
+    "nestjs"
+  ],
+  "main": "src/index.ts",
+  "author": "Emil Juchnikowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
+  "dependencies": {
+    "@smartsoft001/domain-core": "^1.0.5",
+    "@smartsoft001/utils": "^1.0.4"
+  }
+}

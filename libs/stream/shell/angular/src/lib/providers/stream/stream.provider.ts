@@ -1,12 +1,12 @@
 import {Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {tap} from "rxjs/operators";
 
 import {IStream, IStreamComment} from "@smartsoft001/stream-shell-dtos";
 
 import {StreamConfig} from "../../stream.config";
 import {SocketService} from "../../services/socket/socket.service";
-import {tap} from "rxjs/operators";
 
 @Injectable()
 export class StreamProvider {

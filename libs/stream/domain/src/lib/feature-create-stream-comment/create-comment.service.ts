@@ -4,9 +4,9 @@ import {MongoRepository, Repository} from "typeorm";
 
 import {DomainValidationError} from "@smartsoft001/domain-core";
 
-import {Stream} from "../entities";
+import {Stream} from "../entities/stream.entity";
 import {IStreamCommentCreate} from "./interfaces";
-import {StreamComment} from "../value-objects";
+import {StreamComment} from "../value-objects/comment.value-object";
 
 @Injectable()
 export class CreateCommentService {

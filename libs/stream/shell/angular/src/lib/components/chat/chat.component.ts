@@ -1,9 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {memoize} from "lodash-decorators";
-import * as moment from "moment";
+import {Memoize} from "lodash-decorators";
+import * as momentObj from "moment";
 
 import {IStreamComment, StreamComment} from "@smartsoft001/stream-shell-dtos";
 import {IButtonOptions, IFormOptions} from "@smartsoft001/angular";
+
+const moment = momentObj;
 
 @Component({
   selector: 'smart-stream-chat',
@@ -34,7 +36,7 @@ export class ChatComponent implements OnInit {
 
   constructor() { }
 
-  @memoize
+  @Memoize
   getTitle(comment: IStreamComment): string {
     if (!comment) return '';
     return `${ comment.username } (${ moment(comment.createDate).format('YYYY-MM-DD HH:mm:ss') })`;

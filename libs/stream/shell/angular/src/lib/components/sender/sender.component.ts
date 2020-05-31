@@ -15,8 +15,7 @@ export class SenderComponent implements OnInit, OnDestroy {
 
   mediaStreamConstraints: MediaStreamConstraints = {
     video: true,
-    // TODO: test
-    //audio: true
+    audio: true
   };
   mediaStream: MediaStream;
 
@@ -35,7 +34,7 @@ export class SenderComponent implements OnInit, OnDestroy {
 
   @ViewChild("videoRef", { static: false }) videoRef: ElementRef;
 
-  constructor(private provider: StreamProvider) {}
+  constructor(public provider: StreamProvider) {}
 
   addComment(item: IStreamComment): void {
     this.provider.addComment(this._id , item);
