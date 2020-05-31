@@ -24,6 +24,8 @@ export class SenderComponent implements OnInit {
   @Input() set id(val: string) {
     this._id = val;
     this.item$ = this.provider.getById(this._id);
+
+    this.provider.init(this._id, 'sender');
   }
 
   @ViewChild("videoRef", { static: false }) videoRef: ElementRef;
@@ -35,7 +37,6 @@ export class SenderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.provider.init();
     navigator.mediaDevices
       .getUserMedia(this.mediaStreamConstraints)
       .then(mediaStream => {

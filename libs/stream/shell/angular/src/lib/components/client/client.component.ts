@@ -20,6 +20,8 @@ export class ClientComponent implements OnInit {
   @Input() set id(val: string) {
     this._id = val;
     this.item$ = this.provider.getById(this._id);
+
+    this.provider.init(this._id, 'client');
   }
 
   constructor(private provider: StreamProvider) { }
@@ -29,6 +31,6 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.provider.init();
+
   }
 }

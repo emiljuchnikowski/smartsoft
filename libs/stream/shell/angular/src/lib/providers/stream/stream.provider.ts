@@ -18,7 +18,10 @@ export class StreamProvider {
         private socketService: SocketService
     ) { }
 
-    init(): void {
+    init(id: string, mode: 'client' | 'sender'): void {
+        this.socketService.emit('register', {
+            mode, streamId: id
+        })
     }
 
     addComment(id: string, item: IStreamComment): Promise<void> {
