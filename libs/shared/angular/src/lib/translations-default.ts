@@ -36,17 +36,18 @@ export interface ITranslateData {
         logged: string
     };
     MODEL: {
+        body: string
+        date: string,
+        disabled: string,
+        email: string,
+        file: string,
         firstName: string,
         lastName: string,
         password: string,
         passwordConfirm: string,
-        username: string,
-        disabled: string,
         permissions: string,
-        email: string,
         price: string,
-        date: string,
-        file: string
+        username: string,
     };
     INPUT: {
         ERRORS: {
@@ -80,17 +81,18 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
         logged: 'logged'
     },
     MODEL: {
+        body: 'body',
+        date: 'date',
+        disabled: 'disabled',
+        email: 'email',
+        file: 'file',
         firstName: 'first name',
         lastName: 'last name',
         password: 'password',
         passwordConfirm: 'confirm password',
-        username: 'user name',
-        disabled: 'disabled',
         permissions: 'permissions',
-        email: 'email',
         price: 'price',
-        date: 'date',
-        file: 'file'
+        username: 'user name'
     },
     INPUT: {
         ERRORS: {
@@ -124,17 +126,18 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
         logged: 'zalogowany'
     },
     MODEL: {
+        body: 'treść',
+        date: 'data',
+        disabled: 'nieaktywny',
+        email: 'email',
+        file: 'plik',
         firstName: 'imię',
         lastName: 'nazwisko',
         password: 'hasło',
         passwordConfirm: 'powtórz hasło',
-        username: 'nazwa użytkownika',
-        disabled: 'nieaktywny',
         permissions: 'uprawnienia',
-        email: 'email',
         price: 'cena',
-        date: 'data',
-        file: 'plik'
+        username: 'nazwa użytkownika'
     },
     INPUT: {
         ERRORS: {

@@ -1,3 +1,18 @@
+<smart-card *ngIf="newItem">
+    <smart-form
+            [options]="formOptions"
+            (validChange)="onChangeValid($event)"
+            (valueChange)="item = $event"
+    ></smart-form>
+    <smart-button
+            style="float: right"
+            [options]="buttonOptions"
+            [disabled]="!validForm"
+    >
+        {{ 'add' | translate }}
+    </smart-button>
+</smart-card>
+
 <ng-container *ngIf="comments">
     <ng-container *ngFor="let comment of comments">
         <smart-card [options]="{ title: getTitle(comment) }">
