@@ -24,16 +24,30 @@ export class StreamGateway
   server!: Server;
 
   @SubscribeMessage("register")
-  handleEvent(
+  handleRegister(
     @MessageBody() data: { streamId: string; mode: "sender" | "client" },
-    @ConnectedSocket() client: Socket
+    @ConnectedSocket() user: Socket
   ): void {
     if (data.mode === "client") {
-      this.addClient(client.id, data.streamId);
+      this.addClient(user.id, data.streamId);
     }
 
     if (data.mode === "sender") {
-      this.addSender(client.id, data.streamId);
+      this.addSender(user.id, data.streamId);
+    }
+  }
+
+  @SubscribeMessage("unregister")
+  handleUnregister(
+      @MessageBody() data: { streamId: string; mode: "sender" | "client" },
+      @ConnectedSocket() user: Socket
+  ): void {
+    if (data.mode === "client") {
+      this.removeClient(user.id, data.streamId);
+    }
+
+    if (data.mode === "sender") {
+      this.removeSender(user.id, data.streamId);
     }
   }
 
@@ -41,12 +55,14 @@ export class StreamGateway
     console.log("StreamGateway Init");
   }
 
-  handleConnection(client: any, ...args: any[]): void {
-    console.log(`Client connected: ${client.id}`);
+  handleConnection(user: any, ...args: any[]): void {
+    console.log(`User connected: ${user.id}`);
   }
 
-  handleDisconnect(client: any): void {
-    console.log(`Client disconnected: ${client.id}`);
+  handleDisconnect(user: any): void {
+    console.log(`User disconnected: ${user.id}`);
+
+    this.clearClientsAndSenders(user.id);
   }
 
   private addClient(clientId: string, streamId: string): void {
@@ -63,5 +79,39 @@ export class StreamGateway
     }
 
     this.senders[streamId][senderId] = {};
+  }
+
+  private removeClient(clientId: string, streamId: string): void {
+    if (!this.clients[streamId]) return;
+
+    delete this.clients[streamId][clientId];
+
+    if (!Object.keys(this.clients[streamId]).length) {
+      delete this.clients[streamId];
+    }
+  }
+
+  private removeSender(senderId: string, streamId: string) {
+    if (!this.senders[streamId]) return;
+
+    delete this.senders[streamId][senderId];
+
+    if (!Object.keys(this.senders[streamId]).length) {
+      delete this.senders[streamId];
+    }
+  }
+
+  private clearClientsAndSenders(userId: any): void {
+    Object.keys(this.clients).forEach(streamId => {
+      if (this.clients[streamId] && this.clients[streamId][userId]) {
+        this.removeClient(userId, streamId);
+      }
+    });
+
+    Object.keys(this.senders).forEach(streamId => {
+      if (this.senders[streamId] && this.senders[streamId][userId]) {
+        this.removeSender(userId, streamId);
+      }
+    });
   }
 }

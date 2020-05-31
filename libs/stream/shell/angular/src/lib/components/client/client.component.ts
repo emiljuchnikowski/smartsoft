@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 
 import {IStream, IStreamComment} from "@smartsoft001/stream-shell-dtos";
@@ -10,7 +10,7 @@ import {StreamProvider} from "../../providers";
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.scss']
 })
-export class ClientComponent implements OnInit {
+export class ClientComponent implements OnInit, OnDestroy {
   private _id: string;
 
   source = "http://techslides.com/demos/sample-videos/small.mp4";
@@ -18,6 +18,10 @@ export class ClientComponent implements OnInit {
   item$: Observable<IStream>
 
   @Input() set id(val: string) {
+    if (this._id) {
+      this.provider.destroy(this._id, 'client');
+    }
+
     this._id = val;
     this.item$ = this.provider.getById(this._id);
 
@@ -32,5 +36,11 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  ngOnDestroy(): void {
+    if (this._id) {
+      this.provider.destroy(this._id, 'client');
+    }
   }
 }

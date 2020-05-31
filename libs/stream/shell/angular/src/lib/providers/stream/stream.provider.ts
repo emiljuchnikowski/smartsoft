@@ -24,6 +24,12 @@ export class StreamProvider {
         })
     }
 
+    destroy(id: string, mode: 'client' | 'sender'): void {
+        this.socketService.emit('unregister', {
+            mode, streamId: id
+        })
+    }
+
     addComment(id: string, item: IStreamComment): Promise<void> {
         return this.http.post<void>(this.config.apiUrl + '/' + id + '/comments', item).toPromise();
     }

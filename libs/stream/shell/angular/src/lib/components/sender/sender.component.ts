@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import { Observable } from "rxjs";
 
 import {IStream, IStreamComment} from "@smartsoft001/stream-shell-dtos";
@@ -10,7 +10,7 @@ import { StreamProvider } from "../../providers";
   templateUrl: "./sender.component.html",
   styleUrls: ["./sender.component.scss"]
 })
-export class SenderComponent implements OnInit {
+export class SenderComponent implements OnInit, OnDestroy {
   private _id: string;
 
   mediaStreamConstraints: MediaStreamConstraints = {
@@ -22,6 +22,10 @@ export class SenderComponent implements OnInit {
   item$: Observable<IStream>;
 
   @Input() set id(val: string) {
+    if (this._id) {
+      this.provider.destroy(this._id, 'sender');
+    }
+
     this._id = val;
     this.item$ = this.provider.getById(this._id);
 
@@ -47,5 +51,11 @@ export class SenderComponent implements OnInit {
       .catch(error => {
         console.log("Getting user media failed", error);
       });
+  }
+
+  ngOnDestroy(): void {
+    if (this._id) {
+      this.provider.destroy(this._id, 'sender');
+    }
   }
 }
