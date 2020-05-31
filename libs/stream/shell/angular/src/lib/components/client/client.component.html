@@ -6,7 +6,10 @@
             </smart-grid-column>
 
             <smart-grid-column>
-                <smart-stream-chat></smart-stream-chat>
+                <smart-stream-chat
+                        [comments]="provider.comments"
+                        (invokeSubmit)="addComment($event)"
+                ></smart-stream-chat>
             </smart-grid-column>
         </smart-grid-row>
     </smart-grid>

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 
-import {IStream} from "@smartsoft001/stream-shell-dtos";
+import {IStream, IStreamComment} from "@smartsoft001/stream-shell-dtos";
 
 import {StreamProvider} from "../../providers";
 
@@ -11,15 +11,22 @@ import {StreamProvider} from "../../providers";
   styleUrls: ['./client.component.scss']
 })
 export class ClientComponent implements OnInit {
+  private _id: string;
+
   source = "http://techslides.com/demos/sample-videos/small.mp4";
 
   item$: Observable<IStream>
 
   @Input() set id(val: string) {
-    this.item$ = this.provider.getById(val);
+    this._id = val;
+    this.item$ = this.provider.getById(this._id);
   }
 
   constructor(private provider: StreamProvider) { }
+
+  addComment(item: IStreamComment): void {
+    this.provider.addComment(this._id , item);
+  }
 
   ngOnInit() {
     this.provider.init();

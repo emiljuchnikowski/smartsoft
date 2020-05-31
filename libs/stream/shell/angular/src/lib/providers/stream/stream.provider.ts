@@ -21,6 +21,10 @@ export class StreamProvider {
     init(): void {
     }
 
+    addComment(id: string, item: IStreamComment): Promise<void> {
+        return this.http.post<void>(this.config.apiUrl + '/' + id + '/comments', item).toPromise();
+    }
+
     getById(id: string): Observable<IStream> {
         return this.http.get<IStream>(this.config.apiUrl + '/' + id).pipe(
             tap(item => {
