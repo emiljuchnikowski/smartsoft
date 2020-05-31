@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
+  Get, HttpCode,
   NotFoundException,
   Param,
   Patch,
@@ -35,6 +35,7 @@ export class CrudController<T extends IEntity<string>> {
 
   @UseGuards(AuthJwtGuard)
   @Post()
+  @HttpCode(200)
   async create(
     @Body() data: T,
     @User() user: IUser,
@@ -42,7 +43,9 @@ export class CrudController<T extends IEntity<string>> {
   ): Promise<Response> {
     const id = await this.service.create(data, user);
     res.set("Location", CrudController.getLink(res.req) + "/" + id);
-    return res.send();
+    return res.send({
+      id
+    });
   }
 
   @UseGuards(AuthJwtGuard)
