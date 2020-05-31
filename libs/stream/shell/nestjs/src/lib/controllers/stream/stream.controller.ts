@@ -17,13 +17,17 @@ import {
   IStreamUpdate,
   Stream
 } from "@smartsoft001/stream-domain";
-import {AuthJwtGuard} from "@smartsoft001/crud-shell-nestjs";
 import {User} from "@smartsoft001/nestjs";
 import {IUser} from "@smartsoft001/users";
 
+import {StreamGateway} from "../../gateways/stream/stream.gateway";
+
 @Controller("")
 export class StreamController {
-  constructor(private service: StreamService) {}
+  constructor(
+      private service: StreamService,
+      private gateway: StreamGateway
+  ) {}
 
   static getLink(req: Request): string {
     return req.protocol + "://" + req.headers.host + req.url;
@@ -58,7 +62,8 @@ export class StreamController {
     }
     data.annonimus = !user;
 
-    await this.service.createComment(params.id, data);
+    const comment = await this.service.createComment(params.id, data);
+    this.gateway.server.emit(params.id + '/comments/create', comment);
   }
 
   @Patch(":id")

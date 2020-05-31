@@ -15,7 +15,7 @@ export class CreateCommentService {
         @InjectRepository(Stream) private repository: MongoRepository<Stream>
     ) { }
 
-    async create(id: string, item: IStreamCommentCreate): Promise<void> {
+    async create(id: string, item: IStreamCommentCreate): Promise<StreamComment> {
         this.valid(id, item);
 
         const comment = new StreamComment(item.body, new Date(), item.username, item.annonimus);
@@ -30,6 +30,8 @@ export class CreateCommentService {
                 }
             }
         } as any);
+
+        return comment;
     }
 
     private valid(id, req: IStreamCommentCreate) {

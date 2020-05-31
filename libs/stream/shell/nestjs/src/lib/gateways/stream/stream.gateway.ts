@@ -1,4 +1,11 @@
-import {OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, WebSocketGateway} from "@nestjs/websockets";
+import {
+    OnGatewayConnection,
+    OnGatewayDisconnect,
+    OnGatewayInit,
+    WebSocketGateway,
+    WebSocketServer
+} from "@nestjs/websockets";
+import { Server } from 'socket.io';
 
 @WebSocketGateway({
     transports: ["websocket"],
@@ -6,6 +13,9 @@ import {OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, WebSocketGatewa
     namespace: "/" + process.env.URL_PREFIX
 })
 export class StreamGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+    @WebSocketServer()
+    server!: Server
+
     afterInit(server: any): void {
         console.log("StreamGateway Init");
     }

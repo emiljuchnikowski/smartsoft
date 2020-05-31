@@ -10,7 +10,7 @@ import {
     UpdateService,
     Stream,
     CreateCommentService,
-    IStreamCommentCreate
+    IStreamCommentCreate, StreamComment
 } from "@smartsoft001/stream-domain";
 
 @Injectable()
@@ -27,7 +27,7 @@ export class StreamService {
         return this.creatorService.create(item);
     }
 
-    createComment(id: string, item: IStreamCommentCreate): Promise<void> {
+    createComment(id: string, item: IStreamCommentCreate): Promise<StreamComment> {
         return this.createCommentService.create(id, item);
     }
 

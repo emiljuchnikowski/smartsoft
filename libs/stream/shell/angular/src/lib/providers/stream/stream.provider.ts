@@ -26,6 +26,13 @@ export class StreamProvider {
     }
 
     getById(id: string): Observable<IStream> {
+        this.socketService.on(id + '/comments/create', res => {
+           this.comments = [
+               res,
+               ...this.comments
+           ]
+        });
+
         return this.http.get<IStream>(this.config.apiUrl + '/' + id).pipe(
             tap(item => {
                 this.comments = item.comments;
