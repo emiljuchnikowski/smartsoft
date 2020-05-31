@@ -6,16 +6,20 @@ import {
   Param,
   Patch,
   Post,
-  Res
+  Res, UseGuards
 } from "@nestjs/common";
 import { Response, Request } from "express";
 
 import { StreamService } from "@smartsoft001/stream-shell-app-services";
 import {
+  IStreamCommentCreate,
   IStreamCreate,
   IStreamUpdate,
   Stream
 } from "@smartsoft001/stream-domain";
+import {AuthJwtGuard} from "@smartsoft001/crud-shell-nestjs";
+import {User} from "@smartsoft001/nestjs";
+import {IUser} from "@smartsoft001/users";
 
 @Controller("")
 export class StreamController {
@@ -32,14 +36,29 @@ export class StreamController {
 
   @Post()
   async create(
-    @Body() data: IStreamCreate,
-    @Res() res: Response
+      @Body() data: IStreamCreate,
+      @Res() res: Response
   ): Promise<{ id: string }> {
     const id = await this.service.create(data);
     res.set("Location", StreamController.getLink(res.req) + "/" + id);
     return res.send({
       id
     });
+  }
+
+  @Post(":id/comments")
+  async createComment(
+      @Body() data: IStreamCommentCreate,
+      @User() user: IUser,
+      @Param() params: { id: string }
+  ): Promise<void> {
+    // TODO : get user
+    if (user) {
+      data.username = user.username;
+    }
+    data.annonimus = !user;
+
+    await this.service.createComment(params.id, data);
   }
 
   @Patch(":id")

@@ -1,6 +1,6 @@
 import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {MongoRepository, Repository} from "typeorm";
 
 import {DomainValidationError} from "@smartsoft001/domain-core";
 
@@ -11,7 +11,8 @@ import {StreamComment} from "../value-objects";
 @Injectable()
 export class CreateCommentService {
     constructor(
-        @InjectRepository(Stream) private repository: Repository<Stream>
+        // fix: for update one
+        @InjectRepository(Stream) private repository: MongoRepository<Stream>
     ) { }
 
     async create(id: string, item: IStreamCommentCreate): Promise<void> {
@@ -19,14 +20,13 @@ export class CreateCommentService {
 
         const comment = new StreamComment(item.body, new Date(), item.username, item.annonimus);
 
-        await this.repository.update({
-            id: id
+        await this.repository.updateOne({
+            _id: id
         }, {
             $push: {
                 comments: {
                     $each: [ comment ],
-                    $sort: { createDate: -1 },
-                    $slice: 1
+                    $sort: { createDate: -1 }
                 }
             }
         } as any);
