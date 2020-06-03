@@ -50,14 +50,12 @@
     "crud-shell-angular:publish": "npm run crud-shell-angular:build && npm publish libs/crud/shell/angular/dist --access public",
     "crud-shell-dtos:build": "ng-packagr -p libs/crud/shell/dtos/package.json",
     "crud-shell-dtos:publish": "npm run crud-shell-dtos:build && npm publish libs/crud/shell/dtos/dist --access public",
-
     "stream-shell-angular:build": "ng-packagr -p libs/stream/shell/angular/package.json",
     "stream-shell-angular:publish": "npm run stream-shell-angular:build && npm publish libs/stream/shell/angular/dist --access public",
     "stream-shell-dtos:build": "ng-packagr -p libs/stream/shell/dtos/package.json",
     "stream-shell-dtos:publish": "npm run stream-shell-dtos:build && npm publish libs/stream/shell/dtos/dist --access public",
     "stream-domain:build": "ng-packagr -p libs/stream/domain/package.json",
     "stream-domain:publish": "npm run stream-domain:build && npm publish libs/stream/domain/dist --access public",
-
     "docker-crud:publish": "docker push smartsoft001/crud_api:latest",
     "docker-files:publish": "docker push smartsoft001/crud_files:latest",
     "build-storybook": "build-storybook -c .storybook -o .out"
@@ -165,7 +163,6 @@
     "prettier": "1.18.2",
     "ts-jest": "24.0.0",
     "ts-node": "7.0.1",
-    "tsickle": "0.37.1",
     "tslint": "5.11.0",
     "typescript": "3.5.3",
     "webpack-merge": "4.2.2"
