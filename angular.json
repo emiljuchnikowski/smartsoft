@@ -305,7 +305,7 @@
             "main": "apps/ui/test/src/main.ts",
             "polyfills": "apps/ui/test/src/polyfills.ts",
             "tsConfig": "apps/ui/test/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "apps/ui/test/src/favicon.ico",
               "apps/ui/test/src/assets",
@@ -366,7 +366,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,

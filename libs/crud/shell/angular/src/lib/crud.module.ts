@@ -31,7 +31,7 @@ export class CrudModule<T extends IEntity<string>> {
       | ICrudModuleOptionsWithoutRoutng<T>
   ): ModuleWithProviders {
     return {
-      ngModule: options.routing ? CrudFullModule : CrudModule,
+      ngModule: /* TODO: The following node requires a generic type for `ModuleWithProviders */ options.routing ? CrudFullModule : CrudModule,
       providers: [
         { provide: CrudConfig, useValue: options.config },
         { provide: CrudFullConfig, useValue: options.config }

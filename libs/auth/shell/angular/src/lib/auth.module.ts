@@ -40,7 +40,7 @@ export const initializer = (
   exports: [LoginComponent, AuthDirective]
 })
 export class AuthModule {
-  static forRoot(config: AuthConfig): ModuleWithProviders {
+  static forRoot(config: AuthConfig): ModuleWithProviders<AuthModule> {
     return {
       ngModule: AuthModule,
       providers: [
