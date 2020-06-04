@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { StoreRouterConnectingModule } from "@ngrx/router-store";
+import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from "@ngrx/router-store";
 import { RouterModule } from "@angular/router";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
@@ -59,11 +59,7 @@ import {Todo} from "./todos/todo.dto";
     StoreModule.forRoot(
       {},
       {
-        metaReducers: !environment.production ? [] : [],
-        runtimeChecks: {
-          strictActionImmutability: true,
-          strictStateImmutability: true
-        }
+        metaReducers: !environment.production ? [] : []
       }
     ),
       // CrudModule.forFeature({
@@ -99,7 +95,7 @@ import {Todo} from "./todos/todo.dto";
       clientId: "admin"
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
     SharedModule,
     NgrxSharedModule
   ],
