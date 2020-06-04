@@ -18,7 +18,6 @@ import { AuthGuard } from './guards/auth/auth.guard';
 import {PermissionsGuard} from "./guards/permissions/permissions.guard";
 import {AuthService} from "./services/auth/auth.service";
 
-
 export const initializer = (
   facade: AuthFacade,
   translateService: TranslateService
