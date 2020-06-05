@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/stream-shell-angular",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "scripts": {
-    "refresh": "npm version patch && npm i && npm i @smartsoft001/angular@latest --save && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/models@latest --save && npm i @smartsoft001/crud-shell-dtos --save"
+    "refresh": "npm version patch && npm i && npm i @smartsoft001/angular@latest --save && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/models@latest --save"
   },
   "dependencies": {
-    "@smartsoft001/angular": "^1.1.5",
+    "@smartsoft001/angular": "^1.1.6",
     "@smartsoft001/domain-core": "^1.0.5",
     "@smartsoft001/models": "^1.0.11",
     "@smartsoft001/stream-shell-dtos": "^1.0.1",
