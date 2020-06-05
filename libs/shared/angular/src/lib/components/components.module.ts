@@ -6,8 +6,6 @@ import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import {ChartsModule} from "ng2-charts";
-import {MatTableModule} from "@angular/material/table";
-import {MatSortModule} from "@angular/material/sort";
 
 import { DetailTextComponent } from "./detail/text/text.component";
 import { DetailFlagComponent } from "./detail/flag/flag.component";
@@ -53,6 +51,8 @@ import {ChartLineComponent} from "./chart/line/line.component";
 import {GridComponent} from "./grid/grid.component";
 import {GridRowComponent} from "./grid/row/row.component";
 import {GridColumnComponent} from "./grid/column/column.component";
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
