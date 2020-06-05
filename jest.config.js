@@ -1,27 +1,24 @@
 module.exports = {
   testMatch: ["**/+(*.)+(spec|test).+(ts|js)?(x)"],
   transform: {
-    "^.+\\.(ts|js|html)$": "ts-jest"
+    "^.+\\.(ts|js|html)$": "ts-jest",
   },
   resolver: "@nrwl/jest/plugins/resolver",
   moduleFileExtensions: ["ts", "js", "html"],
   coverageReporters: ["html"],
-  passWithNoTests: true,
-  setupFiles: [
-    "mock-local-storage"
-  ],
-  "setupFilesAfterEnv": [  "<rootDir>/test-setup.ts" ],
-  "moduleNameMapper": {
-    "^lodash-es$": "lodash"
+  setupFiles: ["mock-local-storage"],
+  setupFilesAfterEnv: ["<rootDir>/test-setup.ts"],
+  moduleNameMapper: {
+    "^lodash-es$": "lodash",
   },
-  "globals": {
+  globals: {
     "ts-jest": {
       diagnostics: false,
-      "stringifyContentPathRegex": "\\.html$",
-      "astTransformers": [
+      stringifyContentPathRegex: "\\.html$",
+      astTransformers: [
         "jest-preset-angular/build/InlineFilesTransformer",
-        "jest-preset-angular/build/StripStylesTransformer"
-      ]
-    }
-  }
+        "jest-preset-angular/build/StripStylesTransformer",
+      ],
+    },
+  },
 };

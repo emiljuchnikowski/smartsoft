@@ -9,195 +9,102 @@
   },
   "projects": {
     "api-auth": {
-      "tags": [
-        "scope:app"
-      ]
+      "tags": ["scope:app"]
     },
     "auth-domain": {
-      "tags": [
-        "scope:auth",
-        "type:domain"
-      ]
+      "tags": ["scope:auth", "type:domain"]
     },
     "auth-shell-app-services": {
-      "tags": [
-        "scope:auth",
-        "type:shell"
-      ]
+      "tags": ["scope:auth", "type:shell"]
     },
     "auth-shell-nestjs": {
-      "tags": [
-        "scope:auth",
-        "type:shell"
-      ]
+      "tags": ["scope:auth", "type:shell"]
     },
     "auth-shell-angular": {
-      "tags": [
-        "scope:auth",
-        "type:shell"
-      ]
+      "tags": ["scope:auth", "type:shell"]
     },
     "auth-shell-dtos": {
-      "tags": [
-        "scope:auth",
-        "type:shell"
-      ]
+      "tags": ["scope:auth", "type:shell"]
     },
     "crud-domain": {
-      "tags": [
-        "scope:crud",
-        "type:domain"
-      ]
+      "tags": ["scope:crud", "type:domain"]
     },
     "crud-shell-angular": {
-      "tags": [
-        "scope:crud",
-        "type:shell"
-      ]
+      "tags": ["scope:crud", "type:shell"]
     },
     "crud-shell-app-services": {
-      "tags": [
-        "scope:crud",
-        "type:shell"
-      ]
+      "tags": ["scope:crud", "type:shell"]
     },
     "crud-shell-dtos": {
-      "tags": [
-        "scope:crud",
-        "type:shell"
-      ]
+      "tags": ["scope:crud", "type:shell"]
     },
     "crud-shell-nestjs": {
-      "tags": [
-        "scope:crud",
-        "type:shell"
-      ]
+      "tags": ["scope:crud", "type:shell"]
     },
     "trans-domain": {
-      "tags": [
-        "scope:trans",
-        "type:domain"
-      ]
+      "tags": ["scope:trans", "type:domain"]
     },
     "trans-shell-dtos": {
-      "tags": [
-        "scope:trans",
-        "type:shell"
-      ]
+      "tags": ["scope:trans", "type:shell"]
     },
     "trans-shell-angular": {
-      "tags": [
-        "scope:trans",
-        "type:shell"
-      ]
+      "tags": ["scope:trans", "type:shell"]
     },
     "trans-shell-app-services": {
-      "tags": [
-        "scope:trans",
-        "type:shell"
-      ]
+      "tags": ["scope:trans", "type:shell"]
     },
     "trans-shell-nestjs": {
-      "tags": [
-        "scope:trans",
-        "type:shell"
-      ]
+      "tags": ["scope:trans", "type:shell"]
     },
     "stream-domain": {
-      "tags": [
-        "scope:stream",
-        "type:domain"
-      ]
+      "tags": ["scope:stream", "type:domain"]
     },
     "stream-shell-angular": {
-      "tags": [
-        "scope:stream",
-        "type:shell"
-      ]
+      "tags": ["scope:stream", "type:shell"]
     },
     "stream-shell-app-services": {
-      "tags": [
-        "scope:stream",
-        "type:shell"
-      ]
+      "tags": ["scope:stream", "type:shell"]
     },
     "stream-shell-dtos": {
-      "tags": [
-        "scope:stream",
-        "type:shell"
-      ]
+      "tags": ["scope:stream", "type:shell"]
     },
     "stream-shell-nestjs": {
-      "tags": [
-        "scope:stream",
-        "type:shell"
-      ]
+      "tags": ["scope:stream", "type:shell"]
     },
     "shared-users": {
-      "tags": [
-        "scope:shared",
-        "type:util"
-      ]
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-domain-core": {
-      "tags": [
-        "scope:shared",
-        "type:domain"
-      ]
+      "tags": ["scope:shared", "type:domain"]
     },
     "shared-utils": {
-      "tags": [
-        "scope:shared",
-        "type:util"
-      ]
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-nestjs": {
-      "tags": [
-        "scope:shared",
-        "type:shell"
-      ]
+      "tags": ["scope:shared", "type:shell"]
     },
     "shared-angular": {
-      "tags": [
-        "scope:shared",
-        "type:shell"
-      ]
+      "tags": ["scope:shared", "type:shell"]
     },
     "shared-models": {
-      "tags": [
-        "scope:shared",
-        "type:util"
-      ]
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-mongo": {
-      "tags": [
-        "scope:shared",
-        "type:util"
-      ]
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-payu": {
-      "tags": [
-        "scope:shared",
-        "type:util"
-      ]
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-files-nestjs": {
-      "tags": [
-        "scope:shared",
-        "type:util"
-      ]
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-angular-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "shared-angular"
-      ]
+      "implicitDependencies": ["shared-angular"]
     },
     "ui-test-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "ui-test"
-      ]
+      "implicitDependencies": ["ui-test"]
     },
     "ui-test": {
       "tags": []
@@ -215,7 +122,16 @@
       "tags": []
     },
     "stream-shell-angular-e2e": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["stream-shell-angular"]
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
     }
   }
 }
