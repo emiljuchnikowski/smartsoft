@@ -21,16 +21,16 @@ export class DynamicComponentLoader<T> {
     }[]
   > {
     const components = options.components.filter(
-      comp =>
-        !DynamicComponentLoader.declaredComponents.some(dec => dec.component === comp)
+        comp =>
+            !DynamicComponentLoader.declaredComponents.some(dec => dec.component === comp)
     );
 
-    @NgModule({
-      imports: options.imports,
-      declarations: components,
-      entryComponents: components
-    })
+    @NgModule({ })
     class DynamicModule {}
+
+    (DynamicModule as any)['decorators'][0]['args'][0].imports = options.imports;
+    (DynamicModule as any)['decorators'][0]['args'][0].declarations = components;
+    (DynamicModule as any)['decorators'][0]['args'][0].entryComponents = components;
 
     return await this.compiler
       .compileModuleAndAllComponentsAsync(DynamicModule)

@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import { NgModule } from "@angular/core";
 import {HttpClientModule} from "@angular/common/http";
 
 import {SharedModule} from "@smartsoft001/angular";

@@ -4,6 +4,7 @@ import {JwtStrategy} from "./auth/jwt.strategy";
 import {SharedConfig} from "./shared.config";
 import {PermissionService} from "./auth/permission.service";
 
+
 export class SharedModule {
     static forRoot(config: SharedConfig): DynamicModule {
         return {

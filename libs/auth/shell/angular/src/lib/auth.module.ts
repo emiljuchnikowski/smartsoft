@@ -1,9 +1,9 @@
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from "@angular/core";
-import { StoreModule } from "@ngrx/store";
-import { EffectsModule } from "@ngrx/effects";
 import { DataPersistence } from "@nrwl/angular";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
+import {StoreFeatureModule, StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
 
 import { AuthConfig } from "./auth.config";
 import * as fromAuth from "./+state/auth.reducer";
@@ -26,12 +26,16 @@ export const initializer = (
   setDefaultTranslationsAndLang(translateService);
 };
 
+const ngrxImports = [
+  StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer) as ModuleWithProviders<StoreFeatureModule>,
+  EffectsModule.forFeature([AuthEffects]) as ModuleWithProviders<EffectsModule>
+];
+
 // @dynamic
 @NgModule({
   imports: [
     SharedModule,
-    StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer),
-    EffectsModule.forFeature([AuthEffects])
+    ...ngrxImports
   ],
   providers: [AuthEffects, AuthFacade, AuthService],
   declarations: [LoginComponent, AuthDirective],

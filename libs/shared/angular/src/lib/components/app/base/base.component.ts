@@ -42,6 +42,7 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
             this._subscriptions.unsubscribe();
     }
 
+
     private initMenu(): void {
         this.showMenu$ = this._options.provider.logged$.pipe(
             map(logged => {

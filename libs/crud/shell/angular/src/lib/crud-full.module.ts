@@ -26,7 +26,6 @@ import {SocketService} from "./services/socket/socket.service";
         ListComponent
     ],
     imports: [
-      // AuthSharedModule,
         StoreModule,
         SharedModule,
         CrudPipesModule,

@@ -59,32 +59,36 @@ import {Todo} from "./todos/todo.dto";
     StoreModule.forRoot(
       {},
       {
-        metaReducers: !environment.production ? [] : []
+        metaReducers: !environment.production ? [] : [],
+        runtimeChecks: {
+          strictActionImmutability: false,
+          strictStateImmutability: false
+        }
       }
     ),
-      // CrudModule.forFeature({
-      //     routing: true,
-      //     config: {
-      //         type: Todo,
-      //         title: 'Zadania',
-      //         entity: "todos",
-      //         apiUrl: "http://localhost:3334/api/trans",
-      //         details: true,
-      //         edit: true,
-      //         add: true,
-      //         list: {
-      //             cellPipe: {
-      //                 transform(value, columnName): string {
-      //                     if (columnName === 'body') return '<b>test</b>';
-      //
-      //                     return value[columnName];
-      //                 }
-      //             }
-      //         },
-      //         search: true,
-      //         pagination: { limit: 25 },
-      //     }
-      // }),
+      CrudModule.forFeature({
+          routing: true,
+          config: {
+              type: Todo,
+              title: 'Zadania',
+              entity: "todos",
+              apiUrl: "http://localhost:3334/api/trans",
+              details: true,
+              edit: true,
+              add: true,
+              list: {
+                  cellPipe: {
+                      transform(value, columnName): string {
+                          if (columnName === 'body') return '<b>test</b>';
+
+                          return value[columnName];
+                      }
+                  }
+              },
+              search: true,
+              pagination: { limit: 25 },
+          }
+      }),
     HttpClientModule,
     TranslateModule.forRoot(),
     IonicModule.forRoot(),
