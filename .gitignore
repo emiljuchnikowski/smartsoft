@@ -26,3 +26,5 @@
 /libs/stream/domain/node_modules/
 /libs/stream/shell/dtos/node_modules/
 /libs/stream/shell/dtos/dist/
+/libs/auth/domain/node_modules/
+/libs/auth/domain/dist/

@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/auth-domain",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Utils to authorization",
   "ngPackage": {
     "lib": {
