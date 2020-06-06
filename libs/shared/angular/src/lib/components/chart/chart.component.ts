@@ -5,7 +5,7 @@ import {
   OnInit
 } from "@angular/core";
 
-import {ChartType, IChartOptions} from "../../models/chart";
+import { ChartType, IChartOptions } from "../../models/chart";
 
 @Component({
   selector: "smart-chart",
