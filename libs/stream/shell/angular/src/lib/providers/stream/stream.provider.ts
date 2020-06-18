@@ -7,7 +7,7 @@ import {IStream, IStreamComment} from "@smartsoft001/stream-shell-dtos";
 
 import {StreamConfig} from "../../stream.config";
 import {SocketService} from "../../services/socket/socket.service";
-import {StreamClientFacade} from "../../facades";
+import {StreamClientFacade, StreamSenderFacade} from "../../facades";
 
 @Injectable()
 export class StreamProvider {
@@ -27,7 +27,8 @@ export class StreamProvider {
         private http: HttpClient,
         private config: StreamConfig,
         private socketService: SocketService,
-        private clientFacade: StreamClientFacade
+        private clientFacade: StreamClientFacade,
+        private senderFacade: StreamSenderFacade
     ) { }
 
     async addStream(streamId: string, stream: MediaStream): Promise<void> {
@@ -35,7 +36,10 @@ export class StreamProvider {
             const peerConnection = new RTCPeerConnection(this._peerConnectionConfig);
             this.peerConnections[id] = peerConnection;
 
-            stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+            stream.getTracks().forEach(track => {
+                peerConnection.addTrack(track, stream);
+                this.senderFacade.logSendTrack();
+            });
 
             peerConnection.onicecandidate = event => {
                 if (event.candidate) {
@@ -46,10 +50,10 @@ export class StreamProvider {
                 }
             };
 
-            console.log('3. watch', {
+            this.senderFacade.logWatch({
                 streamId,
                 clientId: id
-            });
+            })
 
             peerConnection
                 .createOffer()
@@ -61,29 +65,27 @@ export class StreamProvider {
                         offer: peerConnection.localDescription
                     };
 
-                    this.socketService.emit("offer_create", data);
-
-                    console.log('4. offer create', data);
+                    this.senderFacade.createOffer(data);
                 });
         });
 
         this.socketService.on(streamId + '_answer', ({ clientId, answer }) => {
             this.peerConnections[clientId].setRemoteDescription(answer)
                 .then(() => {
-                    console.log('5. answer get', answer);
+                    this.senderFacade.logAnswerGet(answer);
                 })
                 .catch(error => {
-                    console.log('5. answer get (error)', answer, error);
+                    this.senderFacade.logAnswerGetError(answer, error);
                 });
         });
 
         this.socketService.on(streamId + '_candidate', ({ clientId, candidate }) => {
             this.peerConnections[clientId].addIceCandidate(new RTCIceCandidate(candidate))
                 .then(() => {
-                    console.log('6. candidate get', { clientId, candidate });
+                    this.senderFacade.logCandidateGet({ clientId, candidate });
                 })
                 .catch(error => {
-                    console.log('6. candidate get (error)', { clientId, candidate }, error);
+                    this.senderFacade.logCandidateGetError({ clientId, candidate }, error)
                 });
         });
     }
@@ -136,7 +138,7 @@ export class StreamProvider {
 
             peerConnection.ontrack = event => {
                 this._clientStreamSource.next(event.streams[0]);
-                this.clientFacade.logGetTrace();
+                this.clientFacade.logGetTrack();
             };
             peerConnection.onicecandidate = event => {
                 if (event.candidate) {

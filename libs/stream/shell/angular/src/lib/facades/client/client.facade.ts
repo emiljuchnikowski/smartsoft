@@ -35,7 +35,8 @@ export class StreamClientFacade {
         this.watch(streamId);
     }
 
-    logGetTrace(): void {
-        console.log('*. trace get', new Date());
+    @Debounce(2000)
+    logGetTrack(): void {
+        console.log('*. track get', new Date());
     }
 }

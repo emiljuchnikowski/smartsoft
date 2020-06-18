@@ -7,13 +7,13 @@ import { StreamComponentsModule } from "./components/components.module";
 import { StreamProvider } from "./providers";
 import { SocketService } from "./services/socket/socket.service";
 import {setDefaultTranslationsAndLang} from "./translations-default";
-import {StreamClientFacade} from "./facades";
+import {StreamClientFacade, StreamSenderFacade} from "./facades";
 
 @NgModule({
   exports: [StreamComponentsModule],
   imports: [StreamComponentsModule, RouterModule, TranslateModule],
   declarations: [],
-  providers: [SocketService, StreamClientFacade]
+  providers: [SocketService, StreamClientFacade, StreamSenderFacade]
 })
 export class StreamModule {
   static forFeature(config: StreamConfig): ModuleWithProviders {
