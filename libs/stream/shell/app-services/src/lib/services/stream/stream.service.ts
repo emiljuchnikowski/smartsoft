@@ -39,7 +39,12 @@ export class StreamService {
         return this.deleteService.delete(id);
     }
 
-    getById(id: string): Promise<Stream> {
-        return this.repository.findOne({ _id: id } as any);
+    async getById(id: string): Promise<Stream> {
+        try {
+            return await this.repository.findOne({ _id: id } as any);
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
     }
 }

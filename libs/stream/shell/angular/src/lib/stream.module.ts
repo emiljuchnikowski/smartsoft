@@ -1,16 +1,19 @@
 import { ModuleWithProviders, NgModule, Provider } from "@angular/core";
 import {RouterModule} from "@angular/router";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 import { StreamConfig } from "./stream.config";
 import { StreamComponentsModule } from "./components/components.module";
 import { StreamProvider } from "./providers";
 import { SocketService } from "./services/socket/socket.service";
+import {setDefaultTranslationsAndLang} from "./translations-default";
+import {StreamClientFacade} from "./facades";
 
 @NgModule({
   exports: [StreamComponentsModule],
-  imports: [StreamComponentsModule, RouterModule],
+  imports: [StreamComponentsModule, RouterModule, TranslateModule],
   declarations: [],
-  providers: [SocketService]
+  providers: [SocketService, StreamClientFacade]
 })
 export class StreamModule {
   static forFeature(config: StreamConfig): ModuleWithProviders {
@@ -29,5 +32,9 @@ export class StreamModule {
       ngModule: StreamModule,
       providers: providers
     };
+  }
+
+  constructor(translateService: TranslateService) {
+    setDefaultTranslationsAndLang(translateService);
   }
 }

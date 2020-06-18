@@ -1,7 +1,7 @@
 export interface IStream {
     id: string;
     title: string;
-    descriptions: string;
+    description: string;
     comments: Array<IStreamComment>;
 }
 

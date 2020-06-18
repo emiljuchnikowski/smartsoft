@@ -2,14 +2,27 @@
     <smart-grid>
         <smart-grid-row>
             <smart-grid-column>
-                <video autoplay playsinline #videoRef></video>
+                <video autoplay controls playsinline #videoRef></video>
             </smart-grid-column>
             <smart-grid-column>
-                <smart-stream-chat
-                        [comments]="provider.comments"
-                        (invokeSubmit)="addComment($event)"
-                ></smart-stream-chat>
+                <smart-accordion [show]="true">
+                    <smart-accordion-header>{{ 'comments' | translate }}</smart-accordion-header>
+                    <smart-accordion-body>
+                        <smart-stream-chat
+                                [comments]="provider.comments"
+                                (invokeSubmit)="addComment($event)"
+                        ></smart-stream-chat>
+                        <br/><br/>
+                    </smart-accordion-body>
+                </smart-accordion>
+                <smart-accordion [show]="true">
+                    <smart-accordion-header>{{ 'description' | translate }}</smart-accordion-header>
+                    <smart-accordion-body>
+                        <div [innerHTML]="item.description"></div>
+                    </smart-accordion-body>
+                </smart-accordion>
             </smart-grid-column>
         </smart-grid-row>
     </smart-grid>
 </ng-container>
+

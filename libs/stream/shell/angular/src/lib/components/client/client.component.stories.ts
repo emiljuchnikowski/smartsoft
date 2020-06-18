@@ -16,6 +16,6 @@ storiesOf("smart-stream-client", module)
         },
         component: ClientComponent,
         props: {
-            id: text('id', '14cfebc9-0fea-d7d0-5b5f-0c4f8e75ea69')
+            id: text('id', 'f7d80183-6553-ebf3-6d15-e11a4504a5a7')
         }
     }))

@@ -7,6 +7,7 @@ import {IStream, IStreamComment} from "@smartsoft001/stream-shell-dtos";
 
 import {StreamConfig} from "../../stream.config";
 import {SocketService} from "../../services/socket/socket.service";
+import {StreamClientFacade} from "../../facades";
 
 @Injectable()
 export class StreamProvider {
@@ -25,7 +26,8 @@ export class StreamProvider {
     constructor(
         private http: HttpClient,
         private config: StreamConfig,
-        private socketService: SocketService
+        private socketService: SocketService,
+        private clientFacade: StreamClientFacade
     ) { }
 
     async addStream(streamId: string, stream: MediaStream): Promise<void> {
@@ -44,35 +46,67 @@ export class StreamProvider {
                 }
             };
 
+            console.log('3. watch', {
+                streamId,
+                clientId: id
+            });
+
             peerConnection
                 .createOffer()
                 .then(sdp => peerConnection.setLocalDescription(sdp))
                 .then(() => {
-                    this.socketService.emit("offer_create", {
+                    const data = {
                         clientId: id,
                         streamId: streamId,
                         offer: peerConnection.localDescription
-                    });
+                    };
+
+                    this.socketService.emit("offer_create", data);
+
+                    console.log('4. offer create', data);
                 });
         });
 
         this.socketService.on(streamId + '_answer', ({ clientId, answer }) => {
-            this.peerConnections[clientId].setRemoteDescription(answer);
+            this.peerConnections[clientId].setRemoteDescription(answer)
+                .then(() => {
+                    console.log('5. answer get', answer);
+                })
+                .catch(error => {
+                    console.log('5. answer get (error)', answer, error);
+                });
         });
 
         this.socketService.on(streamId + '_candidate', ({ clientId, candidate }) => {
-            this.peerConnections[clientId].addIceCandidate(new RTCIceCandidate(candidate));
+            this.peerConnections[clientId].addIceCandidate(new RTCIceCandidate(candidate))
+                .then(() => {
+                    console.log('6. candidate get', { clientId, candidate });
+                })
+                .catch(error => {
+                    console.log('6. candidate get (error)', { clientId, candidate }, error);
+                });
         });
     }
 
     init(streamId: string, mode: 'client' | 'sender'): void {
-        this.socketService.emit('register', {
+        const data = {
             mode, streamId: streamId
-        }, async done => {
+        };
+
+        this.socketService.emit('register', data, async done => {
+            console.log('2. register done', done);
+
             if (mode === "client") {
                 this.registerClient(streamId);
             }
         });
+        console.log('1. register', data);
+
+        // this.socketService.on(streamId + '_watcher', () => {
+        //     if (mode === "client") {
+        //         this.registerClient(streamId);
+        //     }
+        // });
 
         if (mode === "client") {
             this.socketService.on(streamId + "_sender", _ => {
@@ -82,17 +116,19 @@ export class StreamProvider {
     }
 
     private registerClient(streamId: string) {
-        this.socketService.emit('watcher_begin');
+        this.clientFacade.watch(streamId);
 
         this.socketService.on(streamId + "_offer", description => {
             const peerConnection = new RTCPeerConnection(this._peerConnectionConfig);
+
+            this.clientFacade.logGetOffer(description);
 
             peerConnection
                 .setRemoteDescription(description)
                 .then(() => peerConnection.createAnswer())
                 .then(sdp => peerConnection.setLocalDescription(sdp))
                 .then(() => {
-                    this.socketService.emit("answer_create", {
+                    this.clientFacade.sendAnswer({
                         answer: peerConnection.localDescription,
                         streamId: streamId
                     });
@@ -100,15 +136,22 @@ export class StreamProvider {
 
             peerConnection.ontrack = event => {
                 this._clientStreamSource.next(event.streams[0]);
+                this.clientFacade.logGetTrace();
             };
             peerConnection.onicecandidate = event => {
                 if (event.candidate) {
-                    this.socketService.emit("candidate_create", {
+                    const data = {
                         streamId: streamId,
                         candidate: event.candidate
-                    });
+                    };
+
+                    this.clientFacade.sendCandidate(data);
                 }
             };
+
+            peerConnection.onicecandidateerror = error => {
+                this.clientFacade.logCandidateError(streamId, error);
+            }
 
             this.socketService.on(streamId + "_disconnect", () => {
                this._clientStreamSource.next(null);

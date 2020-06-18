@@ -28,17 +28,20 @@ export class StreamGateway
     @MessageBody() data: { streamId: string; mode: "sender" | "client" },
     @ConnectedSocket() user: Socket
   ) {
-    if (data.mode === "client") {
-      this.addClient(user.id, data.streamId);
-      this.server.emit(data.streamId + '_watcher', user.id);
-    }
-
     if (data.mode === "sender") {
       this.addSender(user.id, data.streamId);
       this.server.emit(data.streamId + '_sender', user.id);
     }
 
     return this.senders[data.streamId];
+  }
+
+  @SubscribeMessage("watcher_begin")
+  handleWatcherBegin(
+      @MessageBody() data: { streamId },
+      @ConnectedSocket() user: Socket
+  ) {
+    this.server.emit(data.streamId + '_watcher', user.id);
   }
 
   @SubscribeMessage("offer_create")
