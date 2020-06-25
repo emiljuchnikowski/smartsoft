@@ -64,7 +64,7 @@ export class TransHistory<T> {
   modifyDate: Date;
 }
 
-export type TransSystem = "payu";
+export type TransSystem = "payu" | "paypal";
 export type TransStatus =
   | "prepare"
   | "new"
@@ -74,4 +74,4 @@ export type TransStatus =
   | "canceled"
   | "pending";
 
-export const TRANS_SYSTEMS = ["payu"];
+export const TRANS_SYSTEMS = ["payu", "paypal"];
