@@ -1153,6 +1153,21 @@
               "quiet": true
             }
           }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/stream-shell-angular",
+            "config": {
+              "configFolder": "libs/stream/shell/angular/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         }
       }
     },
