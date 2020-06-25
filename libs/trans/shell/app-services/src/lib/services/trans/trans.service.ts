@@ -9,6 +9,7 @@ import {
   ITransPaymentSingleService,
 } from "@smartsoft001/trans-domain";
 import { PayuService } from "@smartsoft001/payu";
+import { PaypalService } from "@smartsoft001/paypal";
 
 @Injectable()
 export class TransService {
@@ -16,6 +17,7 @@ export class TransService {
     [key: string]: ITransPaymentSingleService;
   } = {
     payu: this.payuService,
+    paypal: this.paypalService
   };
 
   private _internalService = {
@@ -39,7 +41,8 @@ export class TransService {
     private refresherService: RefresherService<any>,
     private httpService: HttpService,
     private config: TransConfig,
-    @Optional() private payuService: PayuService
+    @Optional() private payuService: PayuService,
+    @Optional() private paypalService: PaypalService
   ) {}
 
   create<T>(ops: ITransCreate<T>): Promise<string> {
