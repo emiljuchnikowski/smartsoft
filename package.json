@@ -94,7 +94,7 @@
     "@ngrx/router-store": "9.2.0",
     "@ngrx/store": "9.2.0",
     "@ngx-translate/core": "11.0.1",
-    "angular": "1.7.9",
+    "angular": "1.8.0",
     "body-parser": "1.19.0",
     "chart.js": "^2.9.3",
     "class-transformer": "0.2.3",
