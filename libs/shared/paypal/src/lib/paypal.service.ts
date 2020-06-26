@@ -5,6 +5,7 @@ import {
   Trans,
   TransStatus,
 } from "@smartsoft001/trans-domain";
+
 import {PaypalConfig} from "./paypal.config";
 
 @Injectable()
