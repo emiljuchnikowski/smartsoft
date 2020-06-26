@@ -44,8 +44,7 @@ export class PaypalService implements ITransPaymentSingleService {
     if (obj.contactPhone || obj.email || obj.firstName || obj.lastName) {
       data['payer'] = {
         email_address: obj.email,
-        phone: obj.contactPhone,
-        name: obj.firstName + ' ' + obj.lastName
+        phone: obj.contactPhone
       }
     }
 
@@ -54,7 +53,10 @@ export class PaypalService implements ITransPaymentSingleService {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + token
       }
-    }).toPromise();
+    }).toPromise()
+        .catch(error => {
+          throw error;
+        });
 
     return {
       redirectUrl: e.data.links.find(l => l.rel === 'approve').href,
