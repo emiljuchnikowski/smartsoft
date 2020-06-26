@@ -44,6 +44,8 @@ if (process.env.DB_USERNAME) {
  * - PAYPAL_CLIENT_ID
  * - PAYPAL_CLIENT_SECRET
  * - PAYPAL_CURRENCY_CODE
+ * - PAYPAL_RETURN_URL
+ * - PAYPAL_CANCEL_URL
  * - PAYPAL_TEST
  * - TEST
  */
@@ -68,6 +70,8 @@ if (process.env.DB_USERNAME) {
         clientId: process.env.PAYPAL_CLIENT_ID,
         clientSecret: process.env.PAYPAL_CLIENT_SECRET,
         currencyCode: process.env.PAYPAL_CURRENCY_CODE,
+        returnUrl: process.env.PAYPAL_RETURN_URL,
+        cancelUrl: process.env.PAYPAL_CANCEL_URL,
         test: process.env.PAYPAL_TEST === "1" || process.env.TEST === "1"
       } : null
     }),

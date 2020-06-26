@@ -36,7 +36,9 @@ export class PaypalService implements ITransPaymentSingleService {
           },
           soft_descriptor: obj.name
         }
-      ]
+      ],
+      return_url: this.config.returnUrl,
+      cancel_url: this.config.cancelUrl
     };
 
     if (obj.contactPhone || obj.email || obj.firstName || obj.lastName) {
