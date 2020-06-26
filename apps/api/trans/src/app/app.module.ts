@@ -41,6 +41,11 @@ if (process.env.DB_USERNAME) {
  * - PAYU_NOTIFY_URL
  * - PAYU_CONTINUE_URL
  * - PAYU_TEST
+ * - PAYPAL_CLIENT_ID
+ * - PAYPAL_CLIENT_SECRET
+ * - PAYPAL_CURRENCY_CODE
+ * - PAYPAL_TEST
+ * - TEST
  */
 
 @Module({
@@ -57,7 +62,13 @@ if (process.env.DB_USERNAME) {
         posId: process.env.PAYU_POST_ID,
         notifyUrl: process.env.PAYU_NOTIFY_URL,
         continueUrl: process.env.PAYU_CONTINUE_URL,
-        test: process.env.PAYU_TEST === "1",
+        test: process.env.PAYU_TEST === "1" || process.env.TEST === "1",
+      } : null,
+      paypalConfig: process.env.PAYPAL_CLIENT_ID ? {
+        clientId: process.env.PAYPAL_CLIENT_ID,
+        clientSecret: process.env.PAYPAL_CLIENT_SECRET,
+        currencyCode: process.env.PAYPAL_CURRENCY_CODE,
+        test: process.env.PAYPAL_TEST === "1" || process.env.TEST === "1"
       } : null
     }),
     TypeOrmModule.forRoot(dbOptions)
