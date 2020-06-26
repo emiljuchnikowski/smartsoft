@@ -59,8 +59,30 @@ export class PaypalService implements ITransPaymentSingleService {
     }
   }
 
-  getStatus<T>(trans: Trans<T>): Promise<{ status: TransStatus; data: any }> {
-    return Promise.resolve({ data: undefined, status: undefined });
+  async getStatus<T>(trans: Trans<T>): Promise<{ status: TransStatus; data: any }> {
+    const historyItem = trans.history.find(x => x.status === 'started');
+
+    if (!historyItem) {
+      console.warn('Transaction without start status');
+      return null;
+    }
+
+    const orderId = historyItem.data.orderId;
+
+    const token = await this.getToken();
+
+    const response = await this.httpService.get(this.getBaseUrl() + '/v2/checkout/orders/' + orderId, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        'X-Requested-With': "XMLHttpRequest"
+      }
+    }).toPromise();
+
+    return {
+      status: this.getStatusFromExternal(response.data.status),
+      data: response.data
+    }
   }
 
   private async  getToken(): Promise<string> {
@@ -93,5 +115,22 @@ export class PaypalService implements ITransPaymentSingleService {
     else url += 'api.paypal.com';
 
     return url;
+  }
+
+  private getStatusFromExternal(status: string): any {
+    switch (status) {
+      case 'COMPLETED':
+        return 'completed';
+      case 'VOIDED':
+        return 'canceled';
+      case 'CREATED':
+        return 'pending';
+      case 'SAVED':
+        return 'pending';
+      case 'APPROVED':
+        return 'pending';
+      default:
+        return status;
+    }
   }
 }
