@@ -9,12 +9,13 @@ export class PaypalController {
   @Post()
   @HttpCode(200)
   async refreshStatus(
-    @Body() obj: { transaction: Array<{ id: string }> }
+    @Body() obj: { txn_id: string }
   ): Promise<string> {
     try {
-      await this.service.refresh(obj.transaction[0].id, obj);
+      await this.service.refresh(obj.txn_id, obj);
       return "ok";
     } catch (e) {
+      console.error('ERROR ---> ', obj);
       console.error(e);
       throw e;
     }
