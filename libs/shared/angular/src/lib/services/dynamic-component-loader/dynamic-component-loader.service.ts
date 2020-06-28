@@ -28,9 +28,11 @@ export class DynamicComponentLoader<T> {
     @NgModule({ })
     class DynamicModule {}
 
-    (DynamicModule as any)['decorators'][0]['args'][0].imports = options.imports;
-    (DynamicModule as any)['decorators'][0]['args'][0].declarations = components;
-    (DynamicModule as any)['decorators'][0]['args'][0].entryComponents = components;
+    if ((DynamicModule as any)['decorators']) {
+      (DynamicModule as any)['decorators'][0]['args'][0].imports = options.imports;
+      (DynamicModule as any)['decorators'][0]['args'][0].declarations = components;
+      (DynamicModule as any)['decorators'][0]['args'][0].entryComponents = components;
+    }
 
     return await this.compiler
       .compileModuleAndAllComponentsAsync(DynamicModule)
