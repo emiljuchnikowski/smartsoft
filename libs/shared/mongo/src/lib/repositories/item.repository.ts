@@ -377,6 +377,6 @@ export class MongoItemRepository<
       url = `mongodb://${this.config.username}:${this.config.password}@${this.config.host}:${this.config.port}`;
     else url = `mongodb://${this.config.host}:${this.config.port}`;
 
-    return url;
+    return url + '?authSource=' + this.config.database;
   }
 }
