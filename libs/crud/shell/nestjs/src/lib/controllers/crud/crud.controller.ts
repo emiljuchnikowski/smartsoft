@@ -17,6 +17,7 @@ import * as q2m from "query-to-mongo";
 import { Response, Request } from "express";
 import { Parser } from "json2csv";
 import * as _ from "lodash";
+import * as XLSX from 'xlsx';
 
 import { CrudService } from "@smartsoft001/crud-shell-app-services";
 import { IUser } from "@smartsoft001/users";
@@ -99,6 +100,13 @@ export class CrudController<T extends IEntity<string>> {
       res.send(this.parseToCsv(data));
     }
 
+    if (req.headers["content-type"] === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+      res.set({
+        "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      });
+      res.send(this.parseToXlsx(data));
+    }
+
     res.send({
       data,
       totalCount,
@@ -161,11 +169,32 @@ export class CrudController<T extends IEntity<string>> {
     return result;
   }
 
+  private parseToXlsx(data: T[]) {
+    if (!data || !data.length) {
+      return "";
+    }
+
+    const { res } = this.getDataWithFields(data);
+
+    const ws = XLSX.utils.json_to_sheet(res);
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "data");
+
+    return XLSX.write(wb, { bookType: "xlsx", type: "buffer" });
+  }
+
   private parseToCsv(data: T[]): string {
     if (!data || !data.length) {
       return "";
     }
 
+    const { res, fields } = this.getDataWithFields(data);
+
+    return new Parser(fields).parse(data);
+  }
+
+  private getDataWithFields(data: Array<T>): { res, fields } {
     const fields = [];
 
     const execute = (item, baseKey, baseItem) => {
@@ -198,6 +227,6 @@ export class CrudController<T extends IEntity<string>> {
       });
     });
 
-    return new Parser(fields).parse(data);
+    return { res: data, fields };
   }
 }
