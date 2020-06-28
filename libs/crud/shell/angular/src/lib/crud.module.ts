@@ -2,16 +2,22 @@ import { ModuleWithProviders, NgModule } from "@angular/core";
 import { Store, StoreModule } from "@ngrx/store";
 import { SocketIoModule } from "ngx-socket-io";
 
+import { IEntity } from "@smartsoft001/domain-core";
+import { SharedModule } from "@smartsoft001/angular";
+
 import { CrudConfig, CrudFullConfig } from "./crud.config";
 import { CrudEffects } from "./+state/crud.effects";
 import { getReducer } from "./+state/crud.reducer";
-import { IEntity } from "@smartsoft001/domain-core";
-import { SharedModule } from "@smartsoft001/angular";
 import { CrudService } from "./services/crud/crud.service";
 import { CrudFacade } from "./+state/crud.facade";
 import { CrudPipesModule } from "./pipes/pipes.module";
 import { CrudFullModule } from "./crud-full.module";
 import { SocketService } from "./services/socket/socket.service";
+import {ExportComponent} from "./components/export/export.component";
+
+export const COMPONENTS = [
+  ExportComponent
+];
 
 @NgModule({
   imports: [
@@ -20,6 +26,12 @@ import { SocketService } from "./services/socket/socket.service";
     SharedModule,
     CrudPipesModule,
     SocketIoModule
+  ],
+  declarations: [
+    COMPONENTS
+  ],
+  entryComponents: [
+    COMPONENTS
   ],
   exports: [CrudPipesModule],
   providers: [CrudService, CrudEffects, CrudFacade, SocketService]

@@ -15,15 +15,22 @@ import {CrudPipesModule} from "./pipes/pipes.module";
 import { CrudService } from './services/crud/crud.service';
 import { CrudFacade } from './+state/crud.facade';
 import {SocketService} from "./services/socket/socket.service";
+import {ExportComponent} from "./components/export/export.component";
+
+export const COMPONENTS = [
+    ExportComponent
+];
 
 @NgModule({
     declarations: [
         EditComponent,
-        ListComponent
+        ListComponent,
+        ...COMPONENTS
     ],
     entryComponents: [
         EditComponent,
-        ListComponent
+        ListComponent,
+        ...COMPONENTS
     ],
     imports: [
         StoreModule,

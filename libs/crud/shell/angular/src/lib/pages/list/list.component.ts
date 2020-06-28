@@ -16,10 +16,12 @@ import {
   IPageOptions,
   SharedModule
 } from "@smartsoft001/angular";
-import { CrudFacade } from "../../+state/crud.facade";
 import { IEntity } from "@smartsoft001/domain-core";
+
+import { CrudFacade } from "../../+state/crud.facade";
 import { CrudFullConfig } from "../../crud.config";
 import { ICrudFilter } from "../../models/interfaces";
+import {ExportComponent} from "../../components/export/export.component";
 
 @Component({
   selector: "smart-crud-list-page",
@@ -96,13 +98,15 @@ export class ListComponent<T extends IEntity<string>>
           ? [
               {
                 icon: "download-outline",
-                handler: () => {
-                  this.facade.export({
-                    ...this.facade.filter,
-                    offset: null,
-                    limit: null
-                  });
-                }
+                type: 'popover' as 'popover',
+                component: ExportComponent
+                // handler: () => {
+                //   this.facade.export({
+                //     ...this.facade.filter,
+                //     offset: null,
+                //     limit: null
+                //   });
+                // }
               }
             ]
           : []),
