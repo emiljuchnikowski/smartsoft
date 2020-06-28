@@ -1,9 +1,10 @@
-import {EventEmitter, Input, Output} from '@angular/core';
+import { EventEmitter, Input, Output, Directive } from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 
 import {IFormOptions} from "../../../models";
 
+@Directive()
 export abstract class FormBaseComponent<T> {
   private _fields: Array<string>;
   private _model: any;

@@ -1,15 +1,11 @@
-import {
-  AfterViewInit,
-  Input,
-  ViewChild,
-  ViewContainerRef
-} from "@angular/core";
+import { AfterViewInit, Input, ViewChild, ViewContainerRef, Directive } from "@angular/core";
 import { Observable } from "rxjs";
 
 import { IDetailsComponentFactories, IDetailsOptions } from "../../../models";
 import { getModelFieldsWithOptions, IFieldOptions } from "@smartsoft001/models";
 import { IEntity } from "@smartsoft001/domain-core";
 
+@Directive()
 export abstract class DetailsBaseComponent<T extends IEntity<string>>
   implements AfterViewInit {
   private _fields: Array<{ key: string; options: IFieldOptions }>;

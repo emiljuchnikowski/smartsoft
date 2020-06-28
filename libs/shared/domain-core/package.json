@@ -27,5 +27,6 @@
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "dependencies": {
     "@smartsoft001/users": "^1.0.3"
-  }
+  ,    "tslib": "^2.0.0"
+}
 }

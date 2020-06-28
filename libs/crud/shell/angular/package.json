@@ -72,5 +72,6 @@
     "ngx-device-detector": "^1.3.20",
     "ngx-socket-io": "^3.0.1",
     "reflect-metadata": "^0.1.13"
-  }
+  ,    "tslib": "^2.0.0"
+}
 }

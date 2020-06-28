@@ -1,10 +1,11 @@
-import {ElementRef, Input, OnDestroy, OnInit, Renderer2} from "@angular/core";
+import { ElementRef, Input, OnDestroy, OnInit, Renderer2, Directive } from "@angular/core";
 import { Location } from '@angular/common';
 import {PopoverController} from "@ionic/angular";
 import { Subscription} from "rxjs";
 
 import {IIconButtonOptions, IPageOptions} from "../../../models/interfaces";
 
+@Directive()
 export abstract class PageBaseComponent implements OnInit, OnDestroy {
     private _options: IPageOptions;
     private _subscriptions = new Subscription();

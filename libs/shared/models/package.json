@@ -24,5 +24,8 @@
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "peerDependencies": {
     "reflect-metadata": "^0.1.13"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }

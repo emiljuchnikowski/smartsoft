@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Input, OnInit} from '@angular/core';
+import { ChangeDetectorRef, Input, OnInit, Directive } from '@angular/core';
 import {IFieldOptions} from "@smartsoft001/models";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
@@ -11,6 +11,7 @@ import {IDetailsOptions, IListProvider, IButtonOptions, IListCellPipe} from '../
 import { IListInternalOptions } from '../list.component';
 import {ToastService} from "../../../services/toast/toast.service";
 
+@Directive()
 export abstract class ListBaseComponent<T extends IEntity<string>> implements OnInit {
   protected provider: IListProvider<T>;
   private _fields: Array<{ key: string, options: IFieldOptions }>;

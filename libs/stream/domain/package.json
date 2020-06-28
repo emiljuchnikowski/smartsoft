@@ -34,5 +34,6 @@
   "dependencies": {
     "@smartsoft001/domain-core": "^1.0.5",
     "@smartsoft001/utils": "^1.0.4"
-  }
+  ,    "tslib": "^2.0.0"
+}
 }

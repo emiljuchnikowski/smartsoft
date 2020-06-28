@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Input, OnDestroy} from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Input, OnDestroy, Directive } from "@angular/core";
 import {Observable, Subscription} from "rxjs";
 import {debounceTime, filter, map} from "rxjs/operators";
 import {LoadingController} from "@ionic/angular";
@@ -6,6 +6,7 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
 
 import {IAppOptions, IMenuItem} from "../../../models/interfaces";
 
+@Directive()
 export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
     private _options: IAppOptions;
     private _subscriptions = new Subscription();

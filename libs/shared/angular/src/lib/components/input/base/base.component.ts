@@ -1,10 +1,11 @@
-import {ChangeDetectorRef, Input} from "@angular/core";
+import { ChangeDetectorRef, Input, Directive } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
 
 import { InputOptions } from "../../../models";
 import {  IFieldOptions } from "@smartsoft001/models";
 import {Observable} from "rxjs";
 
+@Directive()
 export abstract class InputBaseComponent<T> {
   protected internalOptions: InputOptions<T>;
 
