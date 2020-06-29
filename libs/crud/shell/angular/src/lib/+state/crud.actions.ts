@@ -115,11 +115,13 @@ export const readFailure = function<F>(
  */
 export const exportList = function(
   entity: string,
-  filter: ICrudFilter = null
-): Action & { filter: ICrudFilter } {
+  filter: ICrudFilter = null,
+  format
+): Action & { filter: ICrudFilter, format } {
   return {
     type: `[${entity}] Export`,
-    filter
+    filter,
+    format
   };
 };
 

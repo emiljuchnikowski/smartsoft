@@ -100,13 +100,6 @@ export class ListComponent<T extends IEntity<string>>
                 icon: "download-outline",
                 type: 'popover' as 'popover',
                 component: ExportComponent
-                // handler: () => {
-                //   this.facade.export({
-                //     ...this.facade.filter,
-                //     offset: null,
-                //     limit: null
-                //   });
-                // }
               }
             ]
           : []),

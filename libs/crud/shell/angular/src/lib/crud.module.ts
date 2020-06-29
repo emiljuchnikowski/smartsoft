@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from "@angular/core";
+import {ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
 import { Store, StoreModule } from "@ngrx/store";
 import { SocketIoModule } from "ngx-socket-io";
 
@@ -13,11 +13,6 @@ import { CrudFacade } from "./+state/crud.facade";
 import { CrudPipesModule } from "./pipes/pipes.module";
 import { CrudFullModule } from "./crud-full.module";
 import { SocketService } from "./services/socket/socket.service";
-import {ExportComponent} from "./components/export/export.component";
-
-export const COMPONENTS = [
-  ExportComponent
-];
 
 @NgModule({
   imports: [
@@ -26,12 +21,6 @@ export const COMPONENTS = [
     SharedModule,
     CrudPipesModule,
     SocketIoModule
-  ],
-  declarations: [
-    COMPONENTS
-  ],
-  entryComponents: [
-    COMPONENTS
   ],
   exports: [CrudPipesModule],
   providers: [CrudService, CrudEffects, CrudFacade, SocketService]

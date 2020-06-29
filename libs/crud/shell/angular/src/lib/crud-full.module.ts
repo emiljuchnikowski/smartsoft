@@ -17,20 +17,16 @@ import { CrudFacade } from './+state/crud.facade';
 import {SocketService} from "./services/socket/socket.service";
 import {ExportComponent} from "./components/export/export.component";
 
-export const COMPONENTS = [
-    ExportComponent
-];
-
 @NgModule({
     declarations: [
         EditComponent,
         ListComponent,
-        ...COMPONENTS
+        ExportComponent
     ],
     entryComponents: [
         EditComponent,
         ListComponent,
-        ...COMPONENTS
+        ExportComponent
     ],
     imports: [
         StoreModule,
@@ -46,6 +42,7 @@ export const COMPONENTS = [
     exports: [
         EditComponent,
         ListComponent,
+        ExportComponent,
         CrudPipesModule
     ],
     providers: [CrudService, CrudEffects, CrudFacade, SocketService]

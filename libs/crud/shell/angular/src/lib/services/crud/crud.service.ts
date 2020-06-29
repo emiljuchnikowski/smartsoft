@@ -1,22 +1,31 @@
 import { Injectable } from "@angular/core";
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { map} from "rxjs/operators";
+import { map } from "rxjs/operators";
 
 import { IEntity } from "@smartsoft001/domain-core";
-import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
+import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 
 import { CrudConfig } from "../../crud.config";
 import { ICrudCreateManyOptions, ICrudFilter } from "../../models/interfaces";
-import {SocketService} from "../socket/socket.service";
+import { SocketService } from "../socket/socket.service";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
-  constructor(private config: CrudConfig<T>, private http: HttpClient, private socket: SocketService<T>) { }
+  private _formatMap = {
+    csv: "text/csv",
+    xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  };
+
+  constructor(
+    private config: CrudConfig<T>,
+    private http: HttpClient,
+    private socket: SocketService<T>
+  ) {}
 
   changes(criteria: { id?: string } = {}): Observable<ItemChangedData> {
-      this.socket.emit('changes', criteria);
-      return this.socket.fromEvent('changes');
+    this.socket.emit("changes", criteria);
+    return this.socket.fromEvent("changes");
   }
 
   // TODO : Location is null
@@ -24,7 +33,7 @@ export class CrudService<T extends IEntity<string>> {
     return this.http
       .post<void>(this.config.apiUrl, item, { observe: "response" })
       .pipe(
-        map(response => {
+        map((response) => {
           const location = response.headers["Location"];
           if (!location) return null;
           const array = location.split("/");
@@ -55,21 +64,52 @@ export class CrudService<T extends IEntity<string>> {
     );
   }
 
-  exportList(filter: ICrudFilter = null): Observable<void> {
+  exportList(filter: ICrudFilter = null, format): Observable<void> {
+    if (!format) {
+      format = "csv";
+    }
+
+    if (format === "xlsx") {
+        return this.http
+            .get(this.config.apiUrl + this.getQuery(filter), {
+                headers: {
+                    "Content-Type": this._formatMap[format],
+                },
+                observe: 'response',
+                reportProgress: false,
+                responseType: 'blob'
+            })
+            .pipe(
+                map((res) => {
+                    const downloadLink = document.createElement("a");
+                    const blob = res.body;
+
+                    const url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    downloadLink.download = "data." + format;
+
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                })
+            );
+    }
+
     return this.http
       .get<string>(this.config.apiUrl + this.getQuery(filter), {
         headers: {
-          "Content-Type": "text/csv"
+          "Content-Type": this._formatMap[format],
         },
-        responseType: "text" as "json"
+        responseType: "text" as "json",
       })
       .pipe(
-        map(res => {
+        map((res) => {
           const downloadLink = document.createElement("a");
           const blob = new Blob(["\ufeff", res]);
+
           const url = URL.createObjectURL(blob);
           downloadLink.href = url;
-          downloadLink.download = "data.csv";
+          downloadLink.download = "data." + format;
 
           document.body.appendChild(downloadLink);
           downloadLink.click();
@@ -108,7 +148,7 @@ export class CrudService<T extends IEntity<string>> {
     }
 
     if (filter && filter.query) {
-      filter.query.forEach(q => {
+      filter.query.forEach((q) => {
         query += "&" + q.key + q.type + q.value;
       });
     }

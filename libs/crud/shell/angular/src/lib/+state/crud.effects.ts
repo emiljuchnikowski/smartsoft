@@ -131,7 +131,7 @@ export class CrudEffects<T extends IEntity<string>> {
 
         case `[${this.config.entity}] Export`:
           this.service
-            .exportList(action.filter)
+            .exportList(action.filter, action.format)
             .pipe(
               tap(result =>
                 this.store.dispatch(

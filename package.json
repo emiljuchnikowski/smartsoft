@@ -162,7 +162,7 @@
     "jest-junit": "10.0.0",
     "jest-preset-angular": "^8.2.0",
     "mock-local-storage": "1.1.11",
-    "ng-packagr": "^10.0.0",
+    "ng-packagr": "9.0.0",
     "prettier": "2.0.5",
     "ts-jest": "25.2.1",
     "ts-node": "7.0.1",

@@ -83,8 +83,8 @@ export class CrudFacade<T extends IEntity<string>> {
     this.store.dispatch(CrudActions.update(this.config.entity, item));
   }
 
-  export(filter: ICrudFilter = null): void {
-    this.store.dispatch(CrudActions.exportList(this.config.entity, filter));
+  export(filter: ICrudFilter = null, format = null): void {
+    this.store.dispatch(CrudActions.exportList(this.config.entity, filter, format));
   }
 
   updatePartial(item: Partial<T> & { id: string }): void {
