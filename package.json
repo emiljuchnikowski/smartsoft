@@ -55,7 +55,7 @@
     "stream-shell-dtos:build": "ng-packagr -p libs/stream/shell/dtos/package.json",
     "stream-shell-dtos:publish": "npm run stream-shell-dtos:build && npm publish libs/stream/shell/dtos/dist --access public",
     "stream-domain:build": "ng-packagr -p libs/stream/domain/package.json",
-    "stream-domain:publish": "npm run stream-domain:build && npm publish libs/stream/domain/dist --access public",
+    "stream-domain:publish": "npm run stream-domain:bui       ld && npm publish libs/stream/domain/dist --access public",
     "docker-crud:publish": "docker push smartsoft001/crud_api:latest",
     "docker-files:publish": "docker push smartsoft001/crud_files:latest",
     "build-storybook": "build-storybook -c lisbs/shared/angular/.storybook -o dist/libs/shared/storybook && build-storybook -c lisbs/stream/shell/angular/.storybook -o dist/libs/stream/storybook",

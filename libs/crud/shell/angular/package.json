@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/crud-shell-angular",
-  "version": "1.1.13",
+  "version": "1.1.16",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
@@ -48,23 +48,23 @@
     "refresh": "npm version patch && npm i && npm i @smartsoft001/angular@latest --save && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/models@latest --save && npm i @smartsoft001/crud-shell-dtos --save"
   },
   "dependencies": {
-    "@angular/animations": "9.1.0",
+    "@angular/animations": "10.0.1",
     "@angular/cdk": "9.2.4",
-    "@angular/common": "9.1.0",
-    "@angular/compiler": "9.1.0",
-    "@angular/core": "9.1.0",
-    "@angular/forms": "9.1.0",
+    "@angular/common": "10.0.1",
+    "@angular/compiler": "10.0.1",
+    "@angular/core": "10.0.1",
+    "@angular/forms": "10.0.1",
     "@angular/material": "9.2.4",
     "@angular/platform-browser": "9.1.9",
     "@angular/platform-browser-dynamic": "9.1.9",
-    "@angular/router": "9.1.0",
+    "@angular/router": "10.0.1",
     "@ionic/angular": "^5.0.0",
     "@ngrx/effects": "9.2.0",
     "@ngrx/entity": "9.2.0",
     "@ngrx/router-store": "9.2.0",
     "@ngrx/store": "9.2.0",
     "@ngx-translate/core": "^11.0.1",
-    "@smartsoft001/angular": "^1.1.6",
+    "@smartsoft001/angular": "^1.1.8",
     "@smartsoft001/crud-shell-dtos": "^1.0.1",
     "@smartsoft001/domain-core": "^1.0.5",
     "@smartsoft001/models": "^1.0.11",
