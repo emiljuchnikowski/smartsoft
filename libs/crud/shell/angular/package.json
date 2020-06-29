@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/crud-shell-angular",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
@@ -47,7 +47,7 @@
   "scripts": {
     "refresh": "npm version patch && npm i && npm i @smartsoft001/angular@latest --save && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/models@latest --save && npm i @smartsoft001/crud-shell-dtos --save"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@angular/animations": "10.0.1",
     "@angular/cdk": "9.2.4",
     "@angular/common": "10.0.1",
@@ -73,5 +73,11 @@
     "ngx-socket-io": "^3.0.1",
     "reflect-metadata": "^0.1.13",
     "tslib": "^2.0.0"
+  },
+  "dependencies": {
+    "@smartsoft001/angular": "^1.1.9",
+    "@smartsoft001/crud-shell-dtos": "^1.0.1",
+    "@smartsoft001/domain-core": "^1.0.5",
+    "@smartsoft001/models": "^1.0.11"
   }
 }
