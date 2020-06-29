@@ -1,6 +1,6 @@
 export * from "./lib/factories";
-export * from './lib/shared.module';
-export * from './lib/ngrx-shared.module';
+export { SharedModule } from './lib/shared.module';
+export { NgrxSharedModule } from './lib/ngrx-shared.module';
 export * from './lib/utils-shared.module';
 export * from './lib/providers';
 export * from './lib/models';
