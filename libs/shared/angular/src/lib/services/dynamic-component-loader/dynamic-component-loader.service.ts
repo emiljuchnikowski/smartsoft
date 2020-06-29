@@ -2,7 +2,7 @@ import {
   Compiler,
   ComponentFactory,
   Injectable,
-  NgModule
+  NgModule,
 } from "@angular/core";
 
 @Injectable()
@@ -21,43 +21,54 @@ export class DynamicComponentLoader<T> {
     }[]
   > {
     const components = options.components.filter(
-        comp =>
-            !DynamicComponentLoader.declaredComponents.some(dec => dec.component === comp)
+      (comp) =>
+        !DynamicComponentLoader.declaredComponents.some(
+          (dec) => dec.component === comp
+        )
     );
 
-    @NgModule({ })
     class DynamicModule {}
-
-    if ((DynamicModule as any)['decorators']) {
-      (DynamicModule as any)['decorators'][0]['args'][0].imports = options.imports;
-      (DynamicModule as any)['decorators'][0]['args'][0].declarations = components;
-      (DynamicModule as any)['decorators'][0]['args'][0].entryComponents = components;
-    }
+    DynamicModule["decorators"] = [
+      {
+        type: NgModule,
+        args: [
+          {
+            imports: options.imports,
+            declarations: components,
+            entryComponents: components,
+          },
+        ],
+      },
+    ];
 
     return await this.compiler
       .compileModuleAndAllComponentsAsync(DynamicModule)
-      .then(res => {
-        const result = options.components.map(c => {
-          let factory = res.componentFactories.find(x => x.componentType === c);
+      .then((res) => {
+        const result = options.components.map((c) => {
+          let factory = res.componentFactories.find(
+            (x) => x.componentType === c
+          );
 
           if (!factory) {
-            factory = DynamicComponentLoader.declaredComponents.find(x => x.component === c).factory;
+            factory = DynamicComponentLoader.declaredComponents.find(
+              (x) => x.component === c
+            ).factory;
           }
 
           return {
             component: c,
-            factory
+            factory,
           };
         });
 
         DynamicComponentLoader.declaredComponents = [
           ...DynamicComponentLoader.declaredComponents,
-          ...result
+          ...result,
         ];
 
         return result;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         throw error;
       });
