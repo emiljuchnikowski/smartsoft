@@ -27,50 +27,38 @@ export class DynamicComponentLoader<T> {
         )
     );
 
+    @NgModule({
+      imports: options.imports,
+      declarations: components,
+      entryComponents: components
+    })
     class DynamicModule {}
-    DynamicModule["decorators"] = [
-      {
-        type: NgModule,
-        args: [
-          {
-            imports: options.imports,
-            declarations: components,
-            entryComponents: components,
-          },
-        ],
-      },
+
+    const res = this.compiler
+      .compileModuleAndAllComponentsSync(DynamicModule);
+
+    const result = options.components.map((c) => {
+      let factory = res.componentFactories.find(
+          (x) => x.componentType === c
+      );
+
+      if (!factory) {
+        factory = DynamicComponentLoader.declaredComponents.find(
+            (x) => x.component === c
+        ).factory;
+      }
+
+      return {
+        component: c,
+        factory,
+      };
+    });
+
+    DynamicComponentLoader.declaredComponents = [
+      ...DynamicComponentLoader.declaredComponents,
+      ...result,
     ];
 
-    return await this.compiler
-      .compileModuleAndAllComponentsAsync(DynamicModule)
-      .then((res) => {
-        const result = options.components.map((c) => {
-          let factory = res.componentFactories.find(
-            (x) => x.componentType === c
-          );
-
-          if (!factory) {
-            factory = DynamicComponentLoader.declaredComponents.find(
-              (x) => x.component === c
-            ).factory;
-          }
-
-          return {
-            component: c,
-            factory,
-          };
-        });
-
-        DynamicComponentLoader.declaredComponents = [
-          ...DynamicComponentLoader.declaredComponents,
-          ...result,
-        ];
-
-        return result;
-      })
-      .catch((error) => {
-        console.error(error);
-        throw error;
-      });
+    return result;
   }
 }
