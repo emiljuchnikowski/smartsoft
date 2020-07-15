@@ -1,0 +1,200 @@
+$FontPath: "~/app/fonts" !default;
+$FontName: "Roboto" !default;
+$FontVersion: "2.137" !default;
+@import "font-mixins";
+
+/* BEGIN Black */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Black", $woff2: true, $woff: true);
+    font-weight: 900;
+    font-style: normal;
+}
+
+
+/* END Black */
+
+
+/* BEGIN Black Italic */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "BlackItalic", $woff2: true, $woff: true);
+    font-weight: 900;
+    font-style: italic;
+}
+
+
+/* END Black Italic */
+
+
+/* BEGIN Bold */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Bold", $woff2: true, $woff: true);
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Bold", $woff2: true, $woff: true);
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+/* END Bold */
+
+
+/* BEGIN Bold Italic */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "BoldItalic", $woff2: true, $woff: true);
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "BoldItalic", $woff2: true, $woff: true);
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+/* END Bold Italic */
+
+
+/* BEGIN Italic */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Italic", $woff2: true, $woff: true);
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Italic", $woff2: true, $woff: true);
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+/* END Italic */
+
+
+/* BEGIN Light */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Light", $woff2: true, $woff: true);
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+/* END Light */
+
+
+/* BEGIN Light Italic */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "LightItalic", $woff2: true, $woff: true);
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+/* END Light Italic */
+
+
+/* BEGIN Medium */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Medium", $woff2: true, $woff: true);
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+/* END Medium */
+
+
+/* BEGIN Medium Italic */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "MediumItalic", $woff2: true, $woff: true);
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+/* END Medium Italic */
+
+
+/* BEGIN Thin Italic */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "ThinItalic", $woff2: true, $woff: true);
+    font-weight: 100;
+    font-style: italic;
+}
+
+
+/* END Thin Italic */
+
+
+/* BEGIN Regular */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Regular", $woff2: true, $woff: true);
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Regular", $woff2: true, $woff: true);
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* END Regular */
+
+
+/* BEGIN Thin */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "Thin", $woff2: true, $woff: true);
+    font-weight: 100;
+    font-style: normal;
+}
+
+
+/* END Thin */
+
+
+/* BEGIN Thin Italic */
+
+@font-face {
+    font-family: $FontName;
+    @include fonts-def($FontPath, $FontName, $FontVersion, "ThinItalic", $woff2: true, $woff: true);
+    font-weight: 100;
+    font-style: italic;
+}
+
+
+/* END Thin Italic */
