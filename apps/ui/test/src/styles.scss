@@ -84,3 +84,31 @@ html {
     font-weight: var(--default-font-weight);
     font-style: var(--default-font-style);
 }
+
+// Customization ion-button
+@import 'sass/smart-buttons';
+ion-button {
+    --background: var(--ion-color-primary);
+    --background-activated: var(--ion-color-secondary);
+    --background-activated-opacity: 1;
+    --background-focused: var(--ion-color-secondary);
+    --background-focused-opacity: 1;
+    --background-hover: var(--ion-color-primary-tint);
+    --background-hover-opacity: 1;
+    --border-color: ;
+    --border-radius: ;
+    --border-style: ;
+    --border-width: ;
+    --box-shadow: ;
+    --color: ;
+    --color-activated: ;
+    --color-focused: ;
+    --color-hover: ;
+    --opacity: ;
+    --padding-bottom: ;
+    --padding-end: ;
+    --padding-start: ;
+    --padding-top: #{$smart-button-padding-top};
+    --ripple-color: ;
+    --transition: ;
+}
