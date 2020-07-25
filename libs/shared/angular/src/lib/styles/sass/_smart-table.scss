@@ -1,0 +1,25 @@
+tr {
+    &.mat-row {
+        &:nth-child(even) {
+            background: #fdfdfd;
+        }
+    }
+}
+
+td {
+    &.mat-cell {
+        padding: 0 12px;
+        border-right: 1px solid #f6f6f6;
+        text-overflow: unset;
+    }
+}
+
+th {
+    &.mat-header-cell {
+        color: var(--ion-color-secondary) !important;
+    }
+    .mat-sort-header-button {
+        padding: 0 12px;
+        color: var(--ion-color-secondary);
+    }
+}
