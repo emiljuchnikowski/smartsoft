@@ -10,6 +10,8 @@ import {
 } from "@smartsoft001/trans-domain";
 import { PayuService } from "@smartsoft001/payu";
 import { PaypalService } from "@smartsoft001/paypal";
+import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
 
 @Injectable()
 export class TransService {
@@ -41,6 +43,7 @@ export class TransService {
     private refresherService: RefresherService<any>,
     private httpService: HttpService,
     private config: TransConfig,
+    @InjectRepository(Trans) private repository: Repository<Trans<any>>,
     @Optional() private payuService: PayuService,
     @Optional() private paypalService: PaypalService
   ) {}
@@ -60,5 +63,11 @@ export class TransService {
       this._paymentService,
       data
     );
+  }
+
+  async getById(id: any): Promise<Trans<any>> {
+    return await this.repository.findOne({
+      _id: id
+    } as any);
   }
 }

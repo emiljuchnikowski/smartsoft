@@ -30,6 +30,7 @@ if (process.env.DB_USERNAME) {
  * - DB_PORT
  * - DB_NAME
  * - INTERNAL_API_URL
+ * - API_URL (required for paypal)
  *
  * Optional node.js environment variables:
  * - DB_USERNAME
@@ -67,6 +68,7 @@ if (process.env.DB_USERNAME) {
         test: process.env.PAYU_TEST === "1" || process.env.TEST === "1",
       } : null,
       paypalConfig: process.env.PAYPAL_CLIENT_ID ? {
+        apiUrl: process.env.API_URL,
         clientId: process.env.PAYPAL_CLIENT_ID,
         clientSecret: process.env.PAYPAL_CLIENT_SECRET,
         currencyCode: process.env.PAYPAL_CURRENCY_CODE,

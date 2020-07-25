@@ -4,6 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {IonicModule} from "@ionic/angular";
 import {TranslateModule} from "@ngx-translate/core";
 import {CommonModule} from "@angular/common";
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 
 import { InputComponent } from './input.component';
 import {Field, FieldType, IFieldOptions, Model} from "@smartsoft001/models";
@@ -20,8 +21,17 @@ describe('shared-angular: InputComponent', () => {
     @Field(fieldOptions) test: any;
   }
 
-  let component: InputComponent<any>;
-  let fixture: ComponentFixture<InputComponent<any>>;
+  let spectator: Spectator<InputComponent<any>>;
+  const createComponent = createComponentFactory({
+    component: InputComponent,
+    declarations: [ INPUT_COMPONENTS, PIPES],
+    imports: [
+      IonicModule.forRoot(),
+      TranslateModule.forRoot(),
+      ReactiveFormsModule,
+      CommonModule
+    ]
+  });
 
   const options: InputOptions<any> = {
     fieldKey: 'test',
@@ -29,34 +39,19 @@ describe('shared-angular: InputComponent', () => {
     control: new FormControl()
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ INPUT_COMPONENTS, PIPES],
-      imports: [
-          IonicModule.forRoot(),
-          TranslateModule.forRoot(),
-          ReactiveFormsModule,
-          CommonModule
-      ]
-    })
-    .compileComponents();
-  }));
-
   beforeEach(() => {
-    fixture = TestBed.createComponent(InputComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   describe('fieldOptions', () => {
     it('should set options', () => {
-      component.options = options;
+      spectator.setInput('options', options);
 
-      expect(component.fieldOptions).toStrictEqual(fieldOptions);
+      expect(spectator.component.fieldOptions).toStrictEqual(fieldOptions);
     });
   });
 });
