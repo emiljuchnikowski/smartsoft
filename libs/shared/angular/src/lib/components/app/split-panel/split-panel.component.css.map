@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,YAAY,CAAC;EACT,cAAc,CAAA,MAAC;EACf,cAAc,CAAA;AAAC;CAClB;;AAED,AAAA,qBAAqB;AACrB,gBAAgB,CAAC;EACb,KAAK,EAAE,eAAe;CACzB;;AAED,AAAA,gBAAgB,CAAC;EACb,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,CAAC;CACT",
-    "sources": [
-        "split-panel.component.scss"
-    ],
-    "names": [],
-    "file": "split-panel.component.css"
-}
