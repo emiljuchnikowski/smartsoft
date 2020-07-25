@@ -9,15 +9,17 @@ import {map} from "rxjs/operators";
 const MENU_ITEMS: Array<IMenuItem> = [
   {
     caption: 'Users',
-    icon: 'person',
+    icon: 'person-outline',
     route: '/users'
   },
   {
     caption: 'Zadania',
+    icon: 'list-outline',
     route: '/todos'
   },
   {
     caption: 'Transakcje',
+    icon: 'cash-outline',
     route: '/trans'
   }
 ];

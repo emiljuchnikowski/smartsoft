@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 
 import {AuthFacade} from "../../+state/auth.facade";
 import {FormComponent, IButtonOptions, IFormOptions} from "@smartsoft001/angular";
@@ -8,6 +8,7 @@ import {map} from "rxjs/operators";
 @Component({
   selector: 'smart-auth-login',
   templateUrl: './login.component.html',
+  //encapsulation: ViewEncapsulation.ShadowDom,
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {

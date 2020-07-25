@@ -19,3 +19,8 @@
         src: url('#{$FontPath}/#{$FontName}/#{$FontType}/#{$FontName}-#{$FontType}.otf') format('opentype');
     }
 }
+
+@mixin fontsize($size) {
+    font-size: $size * 1px;
+    font-size: $size * 0.1rem;
+}
