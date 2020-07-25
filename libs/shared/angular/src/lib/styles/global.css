@@ -1,0 +1,10 @@
+span {
+  --error-color: #f04141;
+}
+
+.smart-modal-bottom .modal-wrapper {
+  position: fixed;
+  height: 75%;
+  bottom: 0;
+}
+/*# sourceMappingURL=global.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CAAC;EACH,aAAa,CAAA,QAAC;CACf;;AAED,AACE,mBADiB,CACjB,cAAc,CAAC;EACb,QAAQ,EAAE,KAAK;EACf,MAAM,EAAE,GAAG;EAEX,MAAM,EAAE,CAAC;CACV",
+    "sources": [
+        "global.scss"
+    ],
+    "names": [],
+    "file": "global.css"
+}
