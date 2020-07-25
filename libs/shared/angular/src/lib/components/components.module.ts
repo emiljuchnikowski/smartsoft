@@ -50,6 +50,7 @@ import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { InputDateWithEditComponent } from "./input/date-with-edit/date-with-edit.component";
 import { ChartComponent } from "./chart/chart.component";
 import {ChartLineComponent} from "./chart/line/line.component";
+import {ChartBarComponent} from "./chart/bar/bar.component";
 import {GridComponent} from "./grid/grid.component";
 import {GridRowComponent} from "./grid/row/row.component";
 import {GridColumnComponent} from "./grid/column/column.component";
@@ -68,7 +69,8 @@ export const CARD_COMPONENTS = [CardComponent];
 
 export const CHART_COMPONENTS = [
     ChartComponent,
-    ChartLineComponent
+    ChartLineComponent,
+    ChartBarComponent
 ];
 
 export const DETAILS_COMPONENTS = [DetailsComponent, DetailsStandardComponent];

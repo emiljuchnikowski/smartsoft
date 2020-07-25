@@ -1,5 +1,5 @@
 export interface IChartOptions<T> {
-    type: ChartType.line;
+    type: ChartType;
     data: IChartDataItem<T>[];
     labels: Array<string>;
     colors?: Array<IChartColor>;
@@ -16,5 +16,6 @@ export interface IChartColor {
 }
 
 export enum ChartType {
-    line = 'line'
+    line = 'line',
+    bar = 'bar'
 }

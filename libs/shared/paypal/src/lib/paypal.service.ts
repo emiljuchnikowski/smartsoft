@@ -1,4 +1,5 @@
 import {HttpService, Injectable} from "@nestjs/common";
+import * as paypal from 'paypal-rest-sdk';
 
 import {
   ITransPaymentSingleService,
@@ -10,7 +11,13 @@ import {PaypalConfig} from "./paypal.config";
 
 @Injectable()
 export class PaypalService implements ITransPaymentSingleService {
-  constructor(private readonly httpService: HttpService, private config: PaypalConfig) {}
+  constructor(private readonly httpService: HttpService, private config: PaypalConfig) {
+    paypal.configure({
+      'mode': this.config.test ? 'sandbox' : 'live',
+      'client_id': this.config.clientId,
+      'client_secret': this.config.clientSecret
+    });
+  }
 
   async create(obj: {
     id: string;
@@ -23,45 +30,71 @@ export class PaypalService implements ITransPaymentSingleService {
     clientIp: string;
   }): Promise<{ orderId: string; redirectUrl: string }> {
 
-    const token = await this.getToken();
-
     const data = {
-      intent: "CAPTURE",
-      purchase_units: [
-        {
-          reference_id: obj.id,
-          amount: {
-            value: obj.amount / 100,
-            currency_code: this.config.currencyCode
-          },
-          soft_descriptor: obj.name
-        }
-      ],
-      return_url: this.config.returnUrl,
-      cancel_url: this.config.cancelUrl
-    };
-
-    if (obj.contactPhone || obj.email || obj.firstName || obj.lastName) {
-      data['payer'] = {
-        email_address: obj.email,
-        phone: obj.contactPhone
-      }
+      "intent": "sale",
+      "payer": {
+        "payment_method": "paypal"
+      },
+      "redirect_urls": {
+        "return_url": this.config.apiUrl + 'paypal/' + obj.id + '/confirm',
+        "cancel_url": this.config.cancelUrl
+      },
+      "transactions": [{
+        "item_list": {
+          "items": [{
+            "name": obj.name,
+            "sku": obj.id,
+            "price": obj.amount / 100,
+            "currency": this.config.currencyCode,
+            "quantity": 1
+          }]
+        },
+        "amount": {
+          "currency": this.config.currencyCode,
+          "total": obj.amount / 100
+        },
+        "description": obj.name
+      }]
     }
 
-    const e = await this.httpService.post(this.getBaseUrl() + '/v2/checkout/orders', data, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
-      }
-    }).toPromise()
-        .catch(error => {
-          throw error;
-        });
+    const result: { id, links } = await new Promise((res, rej) => {
+      paypal.payment.create(data, function (error, payment) {
+        if (error) {
+          rej(error);
+        } else {
+          res(payment);
+        }
+      });
+    });
 
     return {
-      redirectUrl: e.data.links.find(l => l.rel === 'approve').href,
-      orderId: e.data.id
+      redirectUrl: result.links.find(l => l.rel === 'approval_url').href,
+      orderId: result.id
     }
+  }
+
+  async confirm(payerId: any, paymentId: any, amount: number): Promise<any> {
+    const data = {
+      "payer_id": payerId,
+      "transactions": [
+        {
+          "amount": {
+            "currency": this.config.currencyCode,
+            "total": amount
+          }
+        }
+      ]
+    };
+
+    return await new Promise<void>((res, rej) => {
+      paypal.payment.execute(paymentId, data, (error, payment) => {
+        if (error) {
+          rej(error);
+        } else {
+          res(payment);
+        }
+      });
+    });
   }
 
   async getStatus<T>(trans: Trans<T>): Promise<{ status: TransStatus; data: any }> {
@@ -74,55 +107,25 @@ export class PaypalService implements ITransPaymentSingleService {
 
     const orderId = historyItem.data.orderId;
 
-    const token = await this.getToken();
-
-    const response = await this.httpService.get(this.getBaseUrl() + '/v2/checkout/orders/' + orderId, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        'X-Requested-With': "XMLHttpRequest"
-      }
-    }).toPromise();
+    const payment: { state } = await new Promise((res, rej) => {
+      paypal.payment.get(orderId, (error, result) => {
+        if (error) {
+          rej(error);
+        } else {
+          res(result);
+        }
+      });
+    });
 
     return {
-      status: this.getStatusFromExternal(response.data.status),
-      data: response.data
+      status: this.getStatusFromExternal(payment.state),
+      data: payment
     }
-  }
-
-  private async  getToken(): Promise<string> {
-    try {
-      const response = await this.httpService.post(
-          this.getBaseUrl(true) + '/v1/oauth2/token',
-          `grant_type=client_credentials`
-      ).toPromise();
-
-      return response.data['access_token'];
-    } catch (e) {
-      console.error({
-        url: this.getBaseUrl(true) + '/v1/oauth2/token',
-        data: `grant_type=client_credentials`,
-        ex: e
-      });
-
-      throw e;
-    }
-  }
-
-  private getBaseUrl(auth?: boolean): string {
-    let url = "https://";
-
-    if (auth) {
-      url += this.config.clientId + ':' + this.config.clientSecret + '@';
-    }
-
-    if (this.config.test) url += 'api.sandbox.paypal.com';
-    else url += 'api.paypal.com';
-
-    return url;
   }
 
   private getStatusFromExternal(status: string): any {
+    status = status.toUpperCase();
+
     switch (status) {
       case 'COMPLETED':
         return 'completed';
@@ -133,7 +136,7 @@ export class PaypalService implements ITransPaymentSingleService {
       case 'SAVED':
         return 'pending';
       case 'APPROVED':
-        return 'pending';
+        return 'completed';
       default:
         return status;
     }
