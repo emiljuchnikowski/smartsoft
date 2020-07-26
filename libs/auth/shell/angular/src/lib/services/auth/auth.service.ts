@@ -76,11 +76,7 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = AuthService.getToken();
-    const helper = new JwtHelperService();
-
-    if (!token) return false;
-
-    return !helper.isTokenExpired(token.access_token);
+    return !!token;
   }
 
   expectPermissions(permissions: Array<string>): boolean {
