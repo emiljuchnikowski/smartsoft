@@ -46,15 +46,3 @@ export const removeTokenFailure = createAction(
     "[Auth] Remove Token Failure",
     props<{ error: any }>()
 );
-
-/*
- * Refresh token
- */
-export const refreshToken = createAction("[Auth] Refres token");
-
-export const refreshTokenSuccess = createAction("[Auth] Refresh Token Success");
-
-export const refreshTokenFailure = createAction(
-    "[Auth] Refresh Token Failure",
-    props<{ error: any }>()
-);
