@@ -87,33 +87,6 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  refreshToken$: Observable<any> = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.refreshToken.type),
-      switchMap(() =>
-        this.service.refreshToken().pipe(
-          map(() => {
-            return AuthActions.refreshTokenSuccess();
-          }),
-          catchError(error => of(AuthActions.refreshTokenFailure({ error })))
-        )
-      )
-    )
-  );
-
-  // refreshTokenInterval$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AuthActions.createTokenSuccess),
-  //     switchMap(action =>
-  //       interval(((action.token.expired_in * 3) / 4) * 1000).pipe(
-  //         map(() => {
-  //           return AuthActions.refreshToken();
-  //         })
-  //       )
-  //     )
-  //   )
-  // );
-
   constructor(
     private actions$: Actions,
     @Optional() private service: AuthService,

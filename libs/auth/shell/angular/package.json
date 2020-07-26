@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/auth-shell-angular",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
@@ -30,12 +30,12 @@
   },
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "dependencies": {
-    "@smartsoft001/angular": "^1.1.6",
+    "@smartsoft001/angular": "^1.1.13",
     "@smartsoft001/auth-domain": "^1.0.5",
     "@smartsoft001/auth-shell-dtos": "^1.0.3",
     "@smartsoft001/domain-core": "^1.0.5",
     "@smartsoft001/models": "^1.0.11",
-    "@smartsoft001/users": "^1.0.3"
-  ,    "tslib": "^2.0.0"
-}
+    "@smartsoft001/users": "^1.0.3",
+    "tslib": "^2.0.0"
+  }
 }
