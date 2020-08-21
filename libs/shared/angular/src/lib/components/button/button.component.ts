@@ -5,7 +5,8 @@ import {IButtonOptions} from "../../models/interfaces";
 @Component({
   selector: 'smart-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],  
+  styleUrls: ['./button.component.scss'],
+  //encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnInit {

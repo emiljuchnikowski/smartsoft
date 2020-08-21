@@ -1,5 +1,6 @@
 @import 'sass/smart-colors';
-// @import 'sass/telegrosik-colors';
+@import '~/variables';
+//@import 'sass/telegrosik-colors';
 @import 'sass/smart-typography';
 // Color palette for Ionic 
 :root {
@@ -63,6 +64,12 @@
     --default-font-weight: #{$default-smart-font-weight};
     --default-font-style: #{$default-smart-font-style};
     @include fontsize($default-font-size);
+    // Application Variables
+    --ion-statusbar-padding: 0;
+    --ion-safe-area-top: 0;
+    --ion-safe-area-right: 0;
+    --ion-safe-area-bottom: 0;
+    --ion-safe-area-left: 0;
     // Media queries breakpoints
     --mobile-breakpoint: 420px;
 }
@@ -96,12 +103,5 @@ body {
 
 // Customization ion-button
 @import 'sass/smart-buttons';
-ion-button {
-    --border-radius: 0;
-    ion-icon {
-        @include fontsize($smart-button-icon-size);
-    }
-}
-
 // Table styles
 @import 'sass/smart-table';
