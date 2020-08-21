@@ -8,18 +8,18 @@ tr {
 
 td {
     &.mat-cell {
-        padding: 0 12px;
-        border-right: 1px solid #f6f6f6;
+        padding-left: 6px !important;
+        border-right: .1rem solid #f6f6f6;
         text-overflow: unset;
     }
 }
 
 th {
+    padding-left: 6px !important;
     &.mat-header-cell {
         color: var(--ion-color-secondary) !important;
     }
     .mat-sort-header-button {
-        padding: 0 12px;
         color: var(--ion-color-secondary);
     }
 }
