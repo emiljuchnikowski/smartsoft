@@ -20,15 +20,20 @@ export class DynamicComponentLoader<T> {
       factory: ComponentFactory<any>;
     }[]
   > {
-    const components = options.components.filter(
+    console.log('dupa---->',options)
+
+    let components: Array<any> = [];
+    components = options.components ? options.components.filter(
       (comp) =>
         !DynamicComponentLoader.declaredComponents.some(
           (dec) => dec.component === comp
         )
-    );
+    ) : [];
+    let imports = [];
+    imports = options.imports ? options.imports : [];
 
     @NgModule({
-      imports: options.imports,
+      imports: imports,
       declarations: components,
       entryComponents: components
     })

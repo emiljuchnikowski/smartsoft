@@ -1,0 +1,26 @@
+//@mixin fonts-def($FontPath, $FontName, $FontVersion:"1.0.0", $FontType:"Regular", $eot:false, $woff2:false, $woff:false, $ttf:false, $svg:false, $otf:false) {
+//    @if $eot {
+//        src: url('#{$FontPath}/#{$FontName}/#{$FontType}/#{$FontName}-#{$FontType}.eot');
+//        src: url('#{$FontPath}/#{$FontName}/#{$FontType}/#{$FontName}-#{$FontType}.eot?#iefix') format('embedded-opentype');
+//    }
+//    @if $woff2 {
+//        src: url('#{$FontPath}/#{$FontName}/#{$FontType}/#{$FontName}-#{$FontType}.woff2?v=#{$FontVersion}') format('woff2');
+//    }
+//    @if $woff {
+//        src: url('#{$FontPath}/#{$FontName}/#{$FontType}/#{$FontName}-#{$FontType}.woff?v=#{$FontVersion}') format('woff');
+//    }
+//    @if $ttf {
+//        src: url('#{$FontPath}/#{$FontName}/#{$FontType}/#{$FontName}-#{$FontType}.ttf') format('truetype');
+//    }
+//    @if $svg {
+//        src: url('#{$FontPath}/#{$FontName}/#{$FontType}/#{$FontName}-#{$FontType}.svg##{$FontName}') format('svg');
+//    }
+//    @if $otf {
+//        src: url('#{$FontPath}/#{$FontName}/#{$FontType}/#{$FontName}-#{$FontType}.otf') format('opentype');
+//    }
+//}
+//
+//@mixin fontsize($size) {
+//    font-size: $size * 1px;
+//    font-size: $size * 0.1rem;
+//}

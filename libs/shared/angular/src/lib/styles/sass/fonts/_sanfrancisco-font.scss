@@ -16,7 +16,7 @@ $FontVersion: "2.137" !default;
     src: url("https://sf.abarba.me/SF-UI-Display-Black.otf");
 
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Black", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Black", $woff2: true, $woff: true);
     font-weight: 900;
     font-style: normal;
 }

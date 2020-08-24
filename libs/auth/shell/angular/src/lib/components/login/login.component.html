@@ -1,9 +1,8 @@
 <smart-card>
-  <ng-content></ng-content>
+    <ng-content></ng-content>
 
-  <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
+    <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
 
-  <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{
-    "FORM.login" | translate
-  }}</smart-button>
+    <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
+    </smart-button>
 </smart-card>
