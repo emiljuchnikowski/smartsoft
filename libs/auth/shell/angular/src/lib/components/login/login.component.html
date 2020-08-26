@@ -1,8 +1,23 @@
-<smart-card>
-    <ng-content></ng-content>
+<div class="smart-bg-container">
+    <ion-item lines="none" class="login-header">
 
-    <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
 
-    <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
-    </smart-button>
-</smart-card>
+        <ion-label class="ion-text-wrap">
+            <ion-icon name="bulb-outline" color="light"></ion-icon>
+
+            <ion-text color="primary">
+                <h3><strong>Smart</strong>Admin</h3>
+            </ion-text>
+            <p><small>panel administracyjny smartsoft</small></p>
+
+        </ion-label>
+    </ion-item>
+    <smart-card>
+        <ng-content></ng-content>
+
+        <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
+
+        <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
+        </smart-button>
+    </smart-card>
+</div>

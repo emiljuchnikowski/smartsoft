@@ -359,7 +359,15 @@
                                 "input": "src/theme/variables.css"
                             }
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "extractCss": true,
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "libs/shared/angular/src/lib/styles",
+                                "apps/ui/test/src/theme"
+
+                            ]
+                        }
                     },
                     "configurations": {
                         "production": {

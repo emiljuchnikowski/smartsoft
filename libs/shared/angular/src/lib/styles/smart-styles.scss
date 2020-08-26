@@ -1,5 +1,5 @@
 @import 'sass/smart-colors';
-@import '~/variables';
+@import 'variables';
 //@import 'sass/telegrosik-colors';
 @import 'sass/smart-typography';
 // Color palette for Ionic 
@@ -105,3 +105,6 @@ body {
 @import 'sass/smart-buttons';
 // Table styles
 @import 'sass/smart-table';
+.smart-bg-container {
+    background: url() no-repeat center 10%;
+}

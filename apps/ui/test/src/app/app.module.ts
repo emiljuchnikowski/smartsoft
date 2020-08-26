@@ -39,15 +39,6 @@ import {Todo} from "./todos/todo.dto";
             import("./users/users.module").then(m => m.UsersModule)
         },
         {
-          path: "todos",
-          canActivate: [PermissionsGuard],
-          data: {
-            expectedPermissions: ["admin"]
-          },
-          loadChildren: () =>
-            import("./todos/todos.module").then(m => m.TodosModule)
-        },
-        {
           path: "login",
           loadChildren: () =>
             import("./login/login.module").then(m => m.LoginModule)
@@ -66,29 +57,7 @@ import {Todo} from "./todos/todo.dto";
         }
       }
     ),
-      CrudModule.forFeature({
-          routing: true,
-          config: {
-              type: Todo,
-              title: 'Zadania',
-              entity: "todos",
-              apiUrl: "http://localhost:3334/api/trans",
-              details: true,
-              edit: true,
-              add: true,
-              list: {
-                  cellPipe: {
-                      transform(value, columnName): string {
-                          if (columnName === 'body') return '<b>test</b>';
 
-                          return value[columnName];
-                      }
-                  }
-              },
-              search: true,
-              pagination: { limit: 25 },
-          }
-      }),
     HttpClientModule,
     TranslateModule.forRoot(),
     IonicModule.forRoot(),
