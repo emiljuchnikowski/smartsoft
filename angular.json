@@ -24,8 +24,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "libs/auth/domain/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "libs/auth/domain/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "libs/auth/domain/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
@@ -53,8 +57,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "libs/auth/shell/app-services/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "libs/auth/shell/app-services/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "libs/auth/shell/app-services/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
@@ -82,8 +90,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "libs/auth/shell/nestjs/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "libs/auth/shell/nestjs/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "libs/auth/shell/nestjs/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
@@ -103,10 +115,14 @@
                         "tsConfig": "apps/api/auth/tsconfig.app.json",
                         "assets": [
                             "apps/api/auth/src/assets"
+<<<<<<< HEAD
                         ],
                         "styles": [],
                         "scripts": [],
                         "buildLibsFromSource": true
+=======
+                        ]
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     },
                     "configurations": {
                         "production": {
@@ -143,8 +159,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "apps/api/auth/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "apps/api/auth/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "apps/api/auth/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
@@ -172,8 +192,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "libs/shared/users/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "libs/shared/users/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "libs/shared/users/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
@@ -201,8 +225,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "libs/shared/domain-core/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "libs/shared/domain-core/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "libs/shared/domain-core/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
@@ -230,8 +258,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "libs/shared/utils/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "libs/shared/utils/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "libs/shared/utils/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
@@ -259,8 +291,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "libs/shared/nestjs/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "libs/shared/nestjs/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "libs/shared/nestjs/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
@@ -288,8 +324,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "libs/auth/shell/angular/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "libs/auth/shell/angular/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "libs/auth/shell/angular/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
@@ -313,7 +353,11 @@
                         "main": "apps/ui/test/src/main.ts",
                         "polyfills": "apps/ui/test/src/polyfills.ts",
                         "tsConfig": "apps/ui/test/tsconfig.app.json",
+<<<<<<< HEAD
                         "aot": true,
+=======
+                        "aot": false,
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         "assets": [
                             "apps/ui/test/src/favicon.ico",
                             "apps/ui/test/src/assets",
@@ -356,16 +400,27 @@
                                 "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
                             },
                             {
+<<<<<<< HEAD
                                 "input": "src/theme/variables.css"
                             }
+=======
+                                "input": "src/theme/variables.scss"
+                            }
+
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ],
                         "scripts": [],
                         "extractCss": true,
                         "stylePreprocessorOptions": {
                             "includePaths": [
+<<<<<<< HEAD
                                 "libs/shared/angular/src/lib/styles",
                                 "apps/ui/test/src/theme"
 
+=======
+                                "src/themes",
+                                "libs/shared/angular/src/lib/styles"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                             ]
                         }
                     },
@@ -380,6 +435,10 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
+<<<<<<< HEAD
+=======
+                            "aot": true,
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
@@ -432,8 +491,12 @@
                     "options": {
                         "jestConfig": "apps/ui/test/jest.config.js",
                         "tsConfig": "apps/ui/test/tsconfig.spec.json",
+<<<<<<< HEAD
                         "setupFile": "apps/ui/test/src/test-setup.ts",
                         "passWithNoTests": true
+=======
+                        "setupFile": "apps/ui/test/src/test-setup.ts"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 },
                 "ionic-cordova-serve": {
@@ -517,8 +580,12 @@
                     "builder": "@nrwl/jest:jest",
                     "options": {
                         "jestConfig": "libs/shared/angular/jest.config.js",
+<<<<<<< HEAD
                         "tsConfig": "libs/shared/angular/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "tsConfig": "libs/shared/angular/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 },
                 "storybook": {
@@ -535,6 +602,7 @@
                             "quiet": true
                         }
                     }
+<<<<<<< HEAD
                 },
                 "build-storybook": {
                     "builder": "@nrwl/storybook:build",
@@ -617,6 +685,14 @@
         "auth-shell-dtos": {
             "root": "libs/auth/shell/dtos",
             "sourceRoot": "libs/auth/shell/dtos/src",
+=======
+                }
+            }
+        },
+        "shared-models": {
+            "root": "libs/shared/models",
+            "sourceRoot": "libs/shared/models/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -624,18 +700,28 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/auth/shell/dtos/tsconfig.lib.json",
                             "libs/auth/shell/dtos/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/auth/shell/dtos/**"
+=======
+                            "libs/shared/models/tsconfig.lib.json",
+                            "libs/shared/models/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/shared/models/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/auth/shell/dtos/jest.config.js",
                         "tsConfig": "libs/auth/shell/dtos/tsconfig.spec.json",
                         "passWithNoTests": true
@@ -766,10 +852,37 @@
             "projectType": "library",
             "schematics": {},
             "architect": {
+=======
+                        "jestConfig": "libs/shared/models/jest.config.js",
+                        "tsConfig": "libs/shared/models/tsconfig.spec.json"
+                    }
+                }
+            }
+        },
+        "shared-angular-e2e": {
+            "root": "apps/shared-angular-e2e",
+            "sourceRoot": "apps/shared-angular-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/shared-angular-e2e/cypress.json",
+                        "tsConfig": "apps/shared-angular-e2e/tsconfig.e2e.json",
+                        "devServerTarget": "shared-angular:storybook"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "shared-angular:serve:production"
+                        }
+                    }
+                },
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/crud/shell/dtos/tsconfig.lib.json",
                             "libs/crud/shell/dtos/tsconfig.spec.json"
                         ],
@@ -792,6 +905,21 @@
         "crud-shell-nestjs": {
             "root": "libs/crud/shell/nestjs",
             "sourceRoot": "libs/crud/shell/nestjs/src",
+=======
+                            "apps/shared-angular-e2e/tsconfig.e2e.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!apps/shared-angular-e2e/**"
+                        ]
+                    }
+                }
+            }
+        },
+        "auth-shell-dtos": {
+            "root": "libs/auth/shell/dtos",
+            "sourceRoot": "libs/auth/shell/dtos/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -799,18 +927,28 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/crud/shell/nestjs/tsconfig.lib.json",
                             "libs/crud/shell/nestjs/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/crud/shell/nestjs/**"
+=======
+                            "libs/auth/shell/dtos/tsconfig.lib.json",
+                            "libs/auth/shell/dtos/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/auth/shell/dtos/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/crud/shell/nestjs/jest.config.js",
                         "tsConfig": "libs/crud/shell/nestjs/tsconfig.spec.json",
                         "passWithNoTests": true
@@ -880,6 +1018,17 @@
         "shared-mongo": {
             "root": "libs/shared/mongo",
             "sourceRoot": "libs/shared/mongo/src",
+=======
+                        "jestConfig": "libs/auth/shell/dtos/jest.config.js",
+                        "tsConfig": "libs/auth/shell/dtos/tsconfig.spec.json"
+                    }
+                }
+            }
+        },
+        "crud-domain": {
+            "root": "libs/crud/domain",
+            "sourceRoot": "libs/crud/domain/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -887,18 +1036,28 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/shared/mongo/tsconfig.lib.json",
                             "libs/shared/mongo/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/shared/mongo/**"
+=======
+                            "libs/crud/domain/tsconfig.lib.json",
+                            "libs/crud/domain/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/crud/domain/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/shared/mongo/jest.config.js",
                         "tsConfig": "libs/shared/mongo/tsconfig.spec.json",
                         "passWithNoTests": true
@@ -989,13 +1148,23 @@
                         "jestConfig": "libs/trans/shell/angular/jest.config.js",
                         "tsConfig": "libs/trans/shell/angular/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/crud/domain/jest.config.js",
+                        "tsConfig": "libs/crud/domain/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "trans-shell-app-services": {
             "root": "libs/trans/shell/app-services",
             "sourceRoot": "libs/trans/shell/app-services/src",
+=======
+        "crud-shell-angular": {
+            "root": "libs/crud/shell/angular",
+            "sourceRoot": "libs/crud/shell/angular/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -1003,28 +1172,48 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/trans/shell/app-services/tsconfig.lib.json",
                             "libs/trans/shell/app-services/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/trans/shell/app-services/**"
+=======
+                            "libs/crud/shell/angular/tsconfig.lib.json",
+                            "libs/crud/shell/angular/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/crud/shell/angular/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/trans/shell/app-services/jest.config.js",
                         "tsConfig": "libs/trans/shell/app-services/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/crud/shell/angular/jest.config.js",
+                        "tsConfig": "libs/crud/shell/angular/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "trans-shell-nestjs": {
             "root": "libs/trans/shell/nestjs",
             "sourceRoot": "libs/trans/shell/nestjs/src",
+=======
+        "crud-shell-app-services": {
+            "root": "libs/crud/shell/app-services",
+            "sourceRoot": "libs/crud/shell/app-services/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -1032,25 +1221,40 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/trans/shell/nestjs/tsconfig.lib.json",
                             "libs/trans/shell/nestjs/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/trans/shell/nestjs/**"
+=======
+                            "libs/crud/shell/app-services/tsconfig.lib.json",
+                            "libs/crud/shell/app-services/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/crud/shell/app-services/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/trans/shell/nestjs/jest.config.js",
                         "tsConfig": "libs/trans/shell/nestjs/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/crud/shell/app-services/jest.config.js",
+                        "tsConfig": "libs/crud/shell/app-services/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "api-trans": {
             "root": "apps/api/trans",
             "sourceRoot": "apps/api/trans/src",
@@ -1087,32 +1291,60 @@
                         "buildTarget": "api-trans:build"
                     }
                 },
+=======
+        "crud-shell-dtos": {
+            "root": "libs/crud/shell/dtos",
+            "sourceRoot": "libs/crud/shell/dtos/src",
+            "projectType": "library",
+            "schematics": {},
+            "architect": {
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "apps/api/trans/tsconfig.app.json",
                             "apps/api/trans/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!apps/api/trans/**"
+=======
+                            "libs/crud/shell/dtos/tsconfig.lib.json",
+                            "libs/crud/shell/dtos/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/crud/shell/dtos/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "apps/api/trans/jest.config.js",
                         "tsConfig": "apps/api/trans/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/crud/shell/dtos/jest.config.js",
+                        "tsConfig": "libs/crud/shell/dtos/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "shared-payu": {
             "root": "libs/shared/payu",
             "sourceRoot": "libs/shared/payu/src",
+=======
+        "crud-shell-nestjs": {
+            "root": "libs/crud/shell/nestjs",
+            "sourceRoot": "libs/crud/shell/nestjs/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -1120,54 +1352,121 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/shared/payu/tsconfig.lib.json",
                             "libs/shared/payu/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/shared/payu/**"
+=======
+                            "libs/crud/shell/nestjs/tsconfig.lib.json",
+                            "libs/crud/shell/nestjs/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/crud/shell/nestjs/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/shared/payu/jest.config.js",
                         "tsConfig": "libs/shared/payu/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/crud/shell/nestjs/jest.config.js",
+                        "tsConfig": "libs/crud/shell/nestjs/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "shared-files-nestjs": {
             "root": "libs/shared/files/nestjs",
             "sourceRoot": "libs/shared/files/nestjs/src",
             "projectType": "library",
             "schematics": {},
             "architect": {
+=======
+        "api-crud": {
+            "root": "apps/api/crud",
+            "sourceRoot": "apps/api/crud/src",
+            "projectType": "application",
+            "prefix": "api-crud",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api/crud",
+                        "main": "apps/api/crud/src/main.ts",
+                        "tsConfig": "apps/api/crud/tsconfig.app.json",
+                        "assets": [
+                            "apps/api/crud/src/assets"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [{
+                                "replace": "apps/api/crud/src/environments/environment.ts",
+                                "with": "apps/api/crud/src/environments/environment.prod.ts"
+                            }]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "options": {
+                        "buildTarget": "api-crud:build"
+                    }
+                },
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/shared/files/nestjs/tsconfig.lib.json",
                             "libs/shared/files/nestjs/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/shared/files/nestjs/**"
+=======
+                            "apps/api/crud/tsconfig.app.json",
+                            "apps/api/crud/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!apps/api/crud/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/shared/files/nestjs/jest.config.js",
                         "tsConfig": "libs/shared/files/nestjs/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "apps/api/crud/jest.config.js",
+                        "tsConfig": "apps/api/crud/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "api-files": {
             "root": "apps/api/files",
             "sourceRoot": "apps/api/files/src",
@@ -1204,32 +1503,60 @@
                         "buildTarget": "api-files:build"
                     }
                 },
+=======
+        "shared-mongo": {
+            "root": "libs/shared/mongo",
+            "sourceRoot": "libs/shared/mongo/src",
+            "projectType": "library",
+            "schematics": {},
+            "architect": {
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "apps/api/files/tsconfig.app.json",
                             "apps/api/files/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!apps/api/files/**"
+=======
+                            "libs/shared/mongo/tsconfig.lib.json",
+                            "libs/shared/mongo/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/shared/mongo/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "apps/api/files/jest.config.js",
                         "tsConfig": "apps/api/files/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/shared/mongo/jest.config.js",
+                        "tsConfig": "libs/shared/mongo/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "stream-domain": {
             "root": "libs/stream/domain",
             "sourceRoot": "libs/stream/domain/src",
+=======
+        "trans-domain": {
+            "root": "libs/trans/domain",
+            "sourceRoot": "libs/trans/domain/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -1237,28 +1564,48 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/stream/domain/tsconfig.lib.json",
                             "libs/stream/domain/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/stream/domain/**"
+=======
+                            "libs/trans/domain/tsconfig.lib.json",
+                            "libs/trans/domain/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/trans/domain/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/stream/domain/jest.config.js",
                         "tsConfig": "libs/stream/domain/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/trans/domain/jest.config.js",
+                        "tsConfig": "libs/trans/domain/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "stream-shell-angular": {
             "root": "libs/stream/shell/angular",
             "sourceRoot": "libs/stream/shell/angular/src",
+=======
+        "trans-shell-dtos": {
+            "root": "libs/trans/shell/dtos",
+            "sourceRoot": "libs/trans/shell/dtos/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -1266,18 +1613,28 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/stream/shell/angular/tsconfig.lib.json",
                             "libs/stream/shell/angular/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/stream/shell/angular/**"
+=======
+                            "libs/trans/shell/dtos/tsconfig.lib.json",
+                            "libs/trans/shell/dtos/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/trans/shell/dtos/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/stream/shell/angular/jest.config.js",
                         "tsConfig": "libs/stream/shell/angular/tsconfig.spec.json",
                         "passWithNoTests": true
@@ -1311,13 +1668,23 @@
                         "ci": {
                             "quiet": true
                         }
+=======
+                        "jestConfig": "libs/trans/shell/dtos/jest.config.js",
+                        "tsConfig": "libs/trans/shell/dtos/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "stream-shell-app-services": {
             "root": "libs/stream/shell/app-services",
             "sourceRoot": "libs/stream/shell/app-services/src",
+=======
+        "trans-shell-angular": {
+            "root": "libs/trans/shell/angular",
+            "sourceRoot": "libs/trans/shell/angular/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -1325,28 +1692,48 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/stream/shell/app-services/tsconfig.lib.json",
                             "libs/stream/shell/app-services/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/stream/shell/app-services/**"
+=======
+                            "libs/trans/shell/angular/tsconfig.lib.json",
+                            "libs/trans/shell/angular/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/trans/shell/angular/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/stream/shell/app-services/jest.config.js",
                         "tsConfig": "libs/stream/shell/app-services/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/trans/shell/angular/jest.config.js",
+                        "tsConfig": "libs/trans/shell/angular/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "stream-shell-dtos": {
             "root": "libs/stream/shell/dtos",
             "sourceRoot": "libs/stream/shell/dtos/src",
+=======
+        "trans-shell-app-services": {
+            "root": "libs/trans/shell/app-services",
+            "sourceRoot": "libs/trans/shell/app-services/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -1354,28 +1741,48 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/stream/shell/dtos/tsconfig.lib.json",
                             "libs/stream/shell/dtos/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/stream/shell/dtos/**"
+=======
+                            "libs/trans/shell/app-services/tsconfig.lib.json",
+                            "libs/trans/shell/app-services/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/trans/shell/app-services/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/stream/shell/dtos/jest.config.js",
                         "tsConfig": "libs/stream/shell/dtos/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/trans/shell/app-services/jest.config.js",
+                        "tsConfig": "libs/trans/shell/app-services/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "stream-shell-nestjs": {
             "root": "libs/stream/shell/nestjs",
             "sourceRoot": "libs/stream/shell/nestjs/src",
+=======
+        "trans-shell-nestjs": {
+            "root": "libs/trans/shell/nestjs",
+            "sourceRoot": "libs/trans/shell/nestjs/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -1383,35 +1790,58 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/stream/shell/nestjs/tsconfig.lib.json",
                             "libs/stream/shell/nestjs/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/stream/shell/nestjs/**"
+=======
+                            "libs/trans/shell/nestjs/tsconfig.lib.json",
+                            "libs/trans/shell/nestjs/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/trans/shell/nestjs/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/stream/shell/nestjs/jest.config.js",
                         "tsConfig": "libs/stream/shell/nestjs/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/trans/shell/nestjs/jest.config.js",
+                        "tsConfig": "libs/trans/shell/nestjs/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "api-stream": {
             "root": "apps/api/stream",
             "sourceRoot": "apps/api/stream/src",
             "projectType": "application",
             "prefix": "api-stream",
+=======
+        "api-trans": {
+            "root": "apps/api/trans",
+            "sourceRoot": "apps/api/trans/src",
+            "projectType": "application",
+            "prefix": "api-trans",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "schematics": {},
             "architect": {
                 "build": {
                     "builder": "@nrwl/node:build",
                     "options": {
+<<<<<<< HEAD
                         "outputPath": "dist/apps/api/stream",
                         "main": "apps/api/stream/src/main.ts",
                         "tsConfig": "apps/api/stream/tsconfig.app.json",
@@ -1419,6 +1849,14 @@
                             "apps/api/stream/src/assets"
                         ],
                         "buildLibsFromSource": true
+=======
+                        "outputPath": "dist/apps/api/trans",
+                        "main": "apps/api/trans/src/main.ts",
+                        "tsConfig": "apps/api/trans/tsconfig.app.json",
+                        "assets": [
+                            "apps/api/trans/src/assets"
+                        ]
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     },
                     "configurations": {
                         "production": {
@@ -1426,8 +1864,13 @@
                             "extractLicenses": true,
                             "inspect": false,
                             "fileReplacements": [{
+<<<<<<< HEAD
                                 "replace": "apps/api/stream/src/environments/environment.ts",
                                 "with": "apps/api/stream/src/environments/environment.prod.ts"
+=======
+                                "replace": "apps/api/trans/src/environments/environment.ts",
+                                "with": "apps/api/trans/src/environments/environment.prod.ts"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                             }]
                         }
                     }
@@ -1435,32 +1878,51 @@
                 "serve": {
                     "builder": "@nrwl/node:execute",
                     "options": {
+<<<<<<< HEAD
                         "buildTarget": "api-stream:build"
+=======
+                        "buildTarget": "api-trans:build"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "apps/api/stream/tsconfig.app.json",
                             "apps/api/stream/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!apps/api/stream/**"
+=======
+                            "apps/api/trans/tsconfig.app.json",
+                            "apps/api/trans/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!apps/api/trans/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "apps/api/stream/jest.config.js",
                         "tsConfig": "apps/api/stream/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "apps/api/trans/jest.config.js",
+                        "tsConfig": "apps/api/trans/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "stream-shell-angular-e2e": {
             "root": "apps/stream-shell-angular-e2e",
             "sourceRoot": "apps/stream-shell-angular-e2e/src",
@@ -1479,10 +1941,19 @@
                         }
                     }
                 },
+=======
+        "shared-payu": {
+            "root": "libs/shared/payu",
+            "sourceRoot": "libs/shared/payu/src",
+            "projectType": "library",
+            "schematics": {},
+            "architect": {
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "apps/stream-shell-angular-e2e/tsconfig.e2e.json"
                         ],
                         "exclude": [
@@ -1496,6 +1967,29 @@
         "shared-paypal": {
             "root": "libs/shared/paypal",
             "sourceRoot": "libs/shared/paypal/src",
+=======
+                            "libs/shared/payu/tsconfig.lib.json",
+                            "libs/shared/payu/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/shared/payu/**"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/shared/payu/jest.config.js",
+                        "tsConfig": "libs/shared/payu/tsconfig.spec.json"
+                    }
+                }
+            }
+        },
+        "shared-files-nestjs": {
+            "root": "libs/shared/files/nestjs",
+            "sourceRoot": "libs/shared/files/nestjs/src",
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
             "projectType": "library",
             "schematics": {},
             "architect": {
@@ -1503,25 +1997,40 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "libs/shared/paypal/tsconfig.lib.json",
                             "libs/shared/paypal/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
                             "!libs/shared/paypal/**"
+=======
+                            "libs/shared/files/nestjs/tsconfig.lib.json",
+                            "libs/shared/files/nestjs/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!libs/shared/files/nestjs/**"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                         ]
                     }
                 },
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
+<<<<<<< HEAD
                         "jestConfig": "libs/shared/paypal/jest.config.js",
                         "tsConfig": "libs/shared/paypal/tsconfig.spec.json",
                         "passWithNoTests": true
+=======
+                        "jestConfig": "libs/shared/files/nestjs/jest.config.js",
+                        "tsConfig": "libs/shared/files/nestjs/tsconfig.spec.json"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                     }
                 }
             }
         },
+<<<<<<< HEAD
         "crud-shell-angular-e2e": {
             "root": "apps/crud-shell-angular-e2e",
             "sourceRoot": "apps/crud-shell-angular-e2e/src",
@@ -1540,10 +2049,48 @@
                         }
                     }
                 },
+=======
+        "api-files": {
+            "root": "apps/api/files",
+            "sourceRoot": "apps/api/files/src",
+            "projectType": "application",
+            "prefix": "api-files",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api/files",
+                        "main": "apps/api/files/src/main.ts",
+                        "tsConfig": "apps/api/files/tsconfig.app.json",
+                        "assets": [
+                            "apps/api/files/src/assets"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [{
+                                "replace": "apps/api/files/src/environments/environment.ts",
+                                "with": "apps/api/files/src/environments/environment.prod.ts"
+                            }]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "options": {
+                        "buildTarget": "api-files:build"
+                    }
+                },
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
+<<<<<<< HEAD
                             "apps/crud-shell-angular-e2e/tsconfig.e2e.json"
                         ],
                         "exclude": [
@@ -1551,13 +2098,34 @@
                             "!apps/crud-shell-angular-e2e/**"
                         ]
                     }
+=======
+                            "apps/api/files/tsconfig.app.json",
+                            "apps/api/files/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!apps/api/files/**"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/api/files/jest.config.js",
+                        "tsConfig": "apps/api/files/tsconfig.spec.json"
+                    }
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
                 }
             }
         }
     },
     "cli": {
+<<<<<<< HEAD
         "defaultCollection": "@nrwl/nest",
         "analytics": false
+=======
+        "defaultCollection": "@nrwl/nest"
+>>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
     },
     "defaultProject": "api-auth",
     "schematics": {
