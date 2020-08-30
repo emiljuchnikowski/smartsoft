@@ -14,17 +14,23 @@ ion-progress-bar {
 }
 
 ion-menu {
-    width: 20rem;
     --ion-background-color: #FFF;
     ion-toolbar {
         // --ion-background-color: var(--ion-color-primary);
         --ion-background-color: linear-gradient(33deg, var(--ion-color-primary), var(--ion-color-tertiary));
         color: #FFF;
     }
+    ion-list {
+        padding: 0;
+    }
     ion-item {
         --background-hover: linear-gradient(90deg, transparent, var(--ion-color-light));
         --background-focused: linear-gradient(90deg, transparent, var(--ion-color-light-shade));
         --border-color: var(--ion-color-light-shade);
+        ion-icon {
+            margin-left: 16px;
+            margin-right: 24px;
+        }
         &.active-item {
             --border-width: 0;
             --border-color: var(--ion-color-light-shade);
@@ -33,6 +39,17 @@ ion-menu {
             ion-icon {
                 --ion-text-color: var(--ion-color-primary);
             }
+        }
+    }
+    ion-item-divider {
+        font-weight: 300;
+        font-size: 12px;
+        --ion-background-color: linear-gradient(90deg, transparent, var(--ion-color-light));
+        ion-icon {
+            margin-left: 16px;
+            margin-right: 32px;
+            font-size: 16px;
+            --ion-text-color: var(--ion-color-primary);
         }
     }
 }

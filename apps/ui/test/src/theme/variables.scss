@@ -98,3 +98,7 @@ $smart-color-light-contrast-rgb: 0,
 0;
 $smart-color-light-shade: #d7d8da;
 $smart-color-light-tint: #f5f6f9;
+//Custom bacground for login page
+.smart-bg-container {
+    background: url('../assets/smart-bg.png') no-repeat center center;
+}

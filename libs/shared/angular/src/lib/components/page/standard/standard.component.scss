@@ -5,3 +5,10 @@
 ion-toolbar {
     --ion-background-color: linear-gradient(33deg, var(--ion-color-light), var(--ion-color-light-shade));
 }
+
+ion-content {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --padding-top: 6px;
+    --padding-bottom: 6px;
+}

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="smart-bg-container">
     <ion-item lines="none" class="login-header">
 
@@ -16,19 +15,9 @@
     <smart-card>
         <ng-content></ng-content>
 
-        <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
+        <smart-form (invokeSubmit)="login()" [options]="formOptions" autocomplete="off"></smart-form>
 
         <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
         </smart-button>
     </smart-card>
 </div>
-=======
-<smart-card>
-    <ng-content></ng-content>
-
-    <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
-
-    <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
-    </smart-button>
-</smart-card>
->>>>>>> 3cead51adee86bdb4077770f5e9403abbeccd132
