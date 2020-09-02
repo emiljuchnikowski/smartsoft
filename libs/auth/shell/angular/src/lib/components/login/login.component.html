@@ -3,8 +3,10 @@
 
 
         <ion-label class="ion-text-wrap">
+            <!-- to powinno być logo -->
             <ion-icon name="bulb-outline" color="light"></ion-icon>
 
+            <!-- nazwa i tekst też powinien być indywidualny -->
             <ion-text color="primary">
                 <h3><strong>Smart</strong>Admin</h3>
             </ion-text>
@@ -19,5 +21,7 @@
 
         <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
         </smart-button>
+        <a href="#" title="Resetowanie hasła">
+            <ion-icon name="help-circle-outline"></ion-icon> Nie pamiętam hasła</a>
     </smart-card>
 </div>

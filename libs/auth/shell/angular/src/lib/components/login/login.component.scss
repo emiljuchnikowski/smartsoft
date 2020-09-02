@@ -34,11 +34,6 @@
                 margin-right: 12px;
             }
         }
-        ion-card {
-            p {
-                text-align: center;
-            }
-        }
         //
         @media (max-width: 420px) {
             padding: 20% 5%;
@@ -55,5 +50,19 @@
 smart-input-error {
     span {
         font-size: 10px;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: $smart-color-dark;
+    font-size: 12px;
+    ion-icon {
+        font-size: 16px;
+        vertical-align: middle;
+    }
+    &:hover {
+        color: $smart-color-primary;
+        transition: .3s all ease-in-out;
     }
 }
