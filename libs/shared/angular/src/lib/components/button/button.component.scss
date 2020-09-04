@@ -1,0 +1,9 @@
+@import "variables";
+
+ion-button {
+  --background: #{$smart-color-primary};;
+}
+
+ion-button[color=light] {
+  --background: #{$smart-color-light};;
+}

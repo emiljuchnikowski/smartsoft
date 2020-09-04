@@ -16,7 +16,9 @@ export class ButtonComponent implements OnInit {
   @Input() options: IButtonOptions;
   @Input() disabled: boolean;
 
-  constructor() { }
+  constructor(
+
+  ) { }
 
   ngOnInit() {
   }

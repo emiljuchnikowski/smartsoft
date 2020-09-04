@@ -13,10 +13,10 @@ const routes: Routes = [{ path: "", component: LoginComponent }];
   declarations: [LoginComponent],
   imports: [
     CommonModule,
+    SharedModule,
+    AuthModule,
     LoginRoutingModule,
     RouterModule.forChild(routes),
-    SharedModule,
-    AuthModule
   ]
 })
 export class LoginModule {}

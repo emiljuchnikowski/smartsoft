@@ -1,5 +1,8 @@
 import { NgModule } from "@angular/core";
-import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from "@ngrx/router-store";
+import {
+  StoreRouterConnectingModule,
+  DefaultRouterStateSerializer,
+} from "@ngrx/router-store";
 import { RouterModule } from "@angular/router";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
@@ -15,35 +18,45 @@ import { environment } from "../environments/environment";
 import { NgrxSharedModule, SharedModule } from "@smartsoft001/angular";
 import { AuthModule, PermissionsGuard } from "@smartsoft001/auth-shell-angular";
 import { HttpClientModule } from "@angular/common/http";
-import {CrudModule} from "@smartsoft001/crud-shell-angular";
-import {Todo} from "./todos/todo.dto";
+import { CrudModule } from "@smartsoft001/crud-shell-angular";
+import { Todo } from "./todos/todo.dto";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    SharedModule,
+    AuthModule.forRoot({
+      apiUrl: environment.apiUrl + "auth",
+      clientId: "admin",
+    }),
     BrowserAnimationsModule,
     RouterModule.forRoot(
       [
         {
           path: "trans",
           loadChildren: () =>
-            import("./trans/trans.module").then(m => m.TransModule)
+            import("./trans/trans.module").then((m) => m.TransModule),
         },
+          {
+              path: "todos",
+              loadChildren: () =>
+                  import("./todos/todos.module").then((m) => m.TodosModule),
+          },
         {
           path: "users",
           canActivate: [PermissionsGuard],
           data: {
-            expectedPermissions: ["admin"]
+            expectedPermissions: ["admin"],
           },
           loadChildren: () =>
-            import("./users/users.module").then(m => m.UsersModule)
+            import("./users/users.module").then((m) => m.UsersModule),
         },
         {
           path: "login",
           loadChildren: () =>
-            import("./login/login.module").then(m => m.LoginModule)
+            import("./login/login.module").then((m) => m.LoginModule),
         },
-        { path: "", redirectTo: "/users", pathMatch: "full" }
+        { path: "", redirectTo: "/users", pathMatch: "full" },
       ],
       { initialNavigation: "enabled", useHash: true }
     ),
@@ -53,8 +66,8 @@ import {Todo} from "./todos/todo.dto";
         metaReducers: !environment.production ? [] : [],
         runtimeChecks: {
           strictActionImmutability: false,
-          strictStateImmutability: false
-        }
+          strictStateImmutability: false,
+        },
       }
     ),
 
@@ -62,17 +75,13 @@ import {Todo} from "./todos/todo.dto";
     TranslateModule.forRoot(),
     IonicModule.forRoot(),
     EffectsModule.forRoot([]),
-    SharedModule,
-    AuthModule.forRoot({
-      apiUrl: environment.apiUrl + "auth",
-      clientId: "admin"
-    }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
-    SharedModule,
-    NgrxSharedModule
+    StoreRouterConnectingModule.forRoot({
+      serializer: DefaultRouterStateSerializer,
+    }),
+    NgrxSharedModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

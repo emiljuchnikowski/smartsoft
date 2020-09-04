@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 
 import {AuthFacade} from "../../+state/auth.facade";
 import {FormComponent, IButtonOptions, IFormOptions} from "@smartsoft001/angular";
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   @ViewChild(FormComponent, { read: FormComponent, static: false })
   formComponent: FormComponent<LoginDto>;
 
-  constructor(private facade: AuthFacade) { }
+  constructor(private facade: AuthFacade, private cd: ChangeDetectorRef) { }
 
   login(): void {
     if (this.formComponent.form.valid) {
@@ -37,6 +37,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cd.detectChanges();
   }
-
 }
