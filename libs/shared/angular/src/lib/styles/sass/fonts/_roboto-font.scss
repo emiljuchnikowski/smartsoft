@@ -1,14 +1,13 @@
-$FontPath: "../../fonts/";
-$FontName: "Roboto";
-$FontVersion: "2.137";
+$FontPath: "~/app/fonts" !default;
+$FontName: "Roboto" !default;
+$FontVersion: "2.137" !default;
 @import "font-mixins";
 
 /* BEGIN Black */
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Black", $woff2: true, $woff: true);
-    // src: url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Black", $woff2: true, $woff: true);
     font-weight: 900;
     font-style: normal;
 }
@@ -21,7 +20,7 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "BlackItalic", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "BlackItalic", $woff2: true, $woff: true);
     font-weight: 900;
     font-style: italic;
 }
@@ -34,14 +33,14 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Bold", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Bold", $woff2: true, $woff: true);
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Bold", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Bold", $woff2: true, $woff: true);
     font-weight: bold;
     font-style: normal;
 }
@@ -54,14 +53,14 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "BoldItalic", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "BoldItalic", $woff2: true, $woff: true);
     font-weight: 700;
     font-style: italic;
 }
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "BoldItalic", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "BoldItalic", $woff2: true, $woff: true);
     font-weight: bold;
     font-style: italic;
 }
@@ -74,14 +73,14 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Italic", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Italic", $woff2: true, $woff: true);
     font-weight: 400;
     font-style: italic;
 }
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Italic", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Italic", $woff2: true, $woff: true);
     font-weight: normal;
     font-style: italic;
 }
@@ -94,7 +93,7 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Light", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Light", $woff2: true, $woff: true);
     font-weight: 300;
     font-style: normal;
 }
@@ -107,7 +106,7 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "LightItalic", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "LightItalic", $woff2: true, $woff: true);
     font-weight: 300;
     font-style: italic;
 }
@@ -120,7 +119,7 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Medium", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Medium", $woff2: true, $woff: true);
     font-weight: 500;
     font-style: normal;
 }
@@ -133,7 +132,7 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "MediumItalic", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "MediumItalic", $woff2: true, $woff: true);
     font-weight: 500;
     font-style: italic;
 }
@@ -146,7 +145,7 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "ThinItalic", $woff2: true, $woff: true);
+    //($FontPath, $FontName, $FontVersion, "ThinItalic", $woff2: true, $woff: true);
     font-weight: 100;
     font-style: italic;
 }
@@ -159,14 +158,14 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Regular", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Regular", $woff2: true, $woff: true);
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Regular", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Regular", $woff2: true, $woff: true);
     font-weight: normal;
     font-style: normal;
 }
@@ -175,11 +174,12 @@ $FontVersion: "2.137";
 /* END Regular */
 
 
+
 /* BEGIN Thin */
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "Thin", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "Thin", $woff2: true, $woff: true);
     font-weight: 100;
     font-style: normal;
 }
@@ -192,7 +192,7 @@ $FontVersion: "2.137";
 
 @font-face {
     font-family: $FontName;
-    @include fonts-def($FontPath, $FontName, $FontVersion, "ThinItalic", $woff2: true, $woff: true);
+    //@include fonts-def($FontPath, $FontName, $FontVersion, "ThinItalic", $woff2: true, $woff: true);
     font-weight: 100;
     font-style: italic;
 }

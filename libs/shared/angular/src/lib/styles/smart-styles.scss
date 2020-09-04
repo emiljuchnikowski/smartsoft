@@ -63,7 +63,7 @@
     --ion-font-family: #{$default-smart-font};
     --default-font-weight: #{$default-smart-font-weight};
     --default-font-style: #{$default-smart-font-style};
-    @include fontsize($default-font-size);
+    //@include fontsize($default-font-size);
     // Application Variables
     --ion-statusbar-padding: 0;
     --ion-safe-area-top: 0;
@@ -98,7 +98,7 @@ html {
 }
 
 body {
-    @include fontsize($default-font-size);
+    //@include fontsize($default-font-size);
 }
 
 // Customization ion-button
