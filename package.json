@@ -120,7 +120,7 @@
     "paypal-rest-sdk": "^1.8.1",
     "query-to-mongo": "0.10.1",
     "reflect-metadata": "0.1.13",
-    "rxjs": "6.5.5",
+    "rxjs": "6.6.2",
     "tsickle": "^0.38.1",
     "tslib": "^2.0.1",
     "typeorm": "0.2.22",
