@@ -20,15 +20,19 @@ export class DynamicComponentLoader<T> {
       factory: ComponentFactory<any>;
     }[]
   > {
-    const components = options.components.filter(
+    let components: Array<any> = [];
+    let imports: Array<any> = [];
+
+    components = options.components.filter(
       (comp) =>
         !DynamicComponentLoader.declaredComponents.some(
           (dec) => dec.component === comp
         )
-    );
+    ) || [];
+    imports = options.imports;
 
     @NgModule({
-      imports: options.imports,
+      imports: imports,
       declarations: components,
       entryComponents: components
     })
