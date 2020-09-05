@@ -2,8 +2,9 @@ module.exports = {
   name: "stream-shell-nestjs",
   preset: "../../../../jest.config.js",
   transform: {
-    "^.+\\.[tj]sx?$": "ts-jest"
+    "^.+\\.[tj]sx?$": "ts-jest",
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "html"],
-  coverageDirectory: "../../../../coverage/libs/stream/shell/nestjs"
+  coverageDirectory: "../../../../coverage/libs/stream/shell/nestjs",
+  globals: { "ts-jest": { tsConfig: "<rootDir>/tsconfig.spec.json" } },
 };

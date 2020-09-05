@@ -2,8 +2,9 @@ module.exports = {
   name: "shared-payu",
   preset: "../../../jest.config.js",
   transform: {
-    "^.+\\.[tj]sx?$": "ts-jest"
+    "^.+\\.[tj]sx?$": "ts-jest",
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "html"],
-  coverageDirectory: "../../../coverage/libs/shared/payu"
+  coverageDirectory: "../../../coverage/libs/shared/payu",
+  globals: { "ts-jest": { tsConfig: "<rootDir>/tsconfig.spec.json" } },
 };
