@@ -11,6 +11,9 @@ td {
         padding-left: 6px !important;
         border-right: .1rem solid #f6f6f6;
         text-overflow: unset;
+        &:last-child {
+            border-right: 0;
+        }
     }
 }
 

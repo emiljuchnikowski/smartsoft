@@ -1,23 +1,8 @@
+// Buttons variables
 $smart-button-height: 3.6rem;
 $smart-button-min-width: 3.6rem;
 $smart-button-padding-right: 1.6rem;
 $smart-button-padding-left: 1.6rem;
 $smart-button-padding-top: .9rem;
 $smart-button-padding-bottom: .9rem;
-$smart-button-icon-size: 8;
-ion-button {
-    border-radius: 0;
-    --border-radius: 0;
-    ion-icon {
-        font-size: 1rem;
-        @include fontsize($smart-button-icon-size);
-    }
-}
-
-// button {
-//     display: block;
-//     min-width: 32px;
-//     height: 32px;
-//     background-color: $smart-color-primary !important;
-//     &[type="submit"] {}
-// }
+$smart-button-icon-size: 1.8rem;

@@ -1,0 +1,17 @@
+//@import "variables";
+@import "smart-styles.scss";
+ion-button {
+    border-radius: 0;
+    --border-radius: 0;
+    --background: var(--ion-color-primary);
+    --padding-bottom: var(--smart-button-padding-bottom);
+    --padding-end: var(--smart-button-padding-right);
+    --padding-start: var(--smart-button-padding-left);
+    --padding-top: var(--smart-button-padding-top);
+    &[color=light] {
+        --background: var(--ion-color-light);
+    }
+    ion-icon {
+        font-size: var(--smart-button-icon-size) !important;
+    }
+}

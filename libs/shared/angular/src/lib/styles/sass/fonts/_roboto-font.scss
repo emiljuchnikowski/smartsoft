@@ -8,7 +8,6 @@ $FontVersion: "2.137";
 @font-face {
     font-family: $FontName;
     @include fonts-def($FontPath, $FontName, $FontVersion, "Black", $woff2: true, $woff: true);
-    // src: url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
     font-weight: 900;
     font-style: normal;
 }
