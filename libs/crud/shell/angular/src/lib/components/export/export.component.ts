@@ -15,6 +15,7 @@ export class ExportComponent<T extends IEntity<string>> {
   buttonExportCsvOptions: IButtonOptions = {
     click: () => {
       this.facade.export({
+        ...this.facade.filter,
         offset: null,
         limit: null
       }, 'csv');
@@ -24,6 +25,7 @@ export class ExportComponent<T extends IEntity<string>> {
   buttonExportXlsxOptions: IButtonOptions = {
     click: () => {
       this.facade.export({
+        ...this.facade.filter,
         offset: null,
         limit: null
       }, 'xlsx');

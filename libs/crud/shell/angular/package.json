@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/crud-shell-angular",
-  "version": "1.1.17",
+  "version": "1.1.18",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
@@ -75,7 +75,7 @@
     "tslib": "^2.0.0"
   },
   "dependencies": {
-    "@smartsoft001/angular": "^1.1.9",
+    "@smartsoft001/angular": "^1.1.13",
     "@smartsoft001/crud-shell-dtos": "^1.0.1",
     "@smartsoft001/domain-core": "^1.0.5",
     "@smartsoft001/models": "^1.0.11"

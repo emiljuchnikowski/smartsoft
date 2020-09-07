@@ -30,6 +30,7 @@ import {environment} from "../../environments/environment";
         details: true,
         edit: true,
         add: true,
+        export: true,
         list: {
           cellPipe: {
             transform(value, columnName): string {
