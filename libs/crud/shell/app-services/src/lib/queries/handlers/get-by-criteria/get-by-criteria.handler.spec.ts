@@ -45,7 +45,7 @@ describe("crud-shared-app-services: GetByCriteriaHandler", () => {
       expect(spy).toHaveBeenCalledWith("read", query.user);
     });
 
-    it("should get item from repository", async done => {
+    it("should get item from repository", async () => {
       const query = new GetByCriteriaQuery({}, {}, {} as IUser);
       const item = {};
       const spy = jest
@@ -58,8 +58,6 @@ describe("crud-shared-app-services: GetByCriteriaHandler", () => {
       expect(spy).toHaveBeenCalledWith({}, {});
 
       expect(result).toStrictEqual({ data: [item], totalCount: 1 });
-
-      done();
     });
   });
 });

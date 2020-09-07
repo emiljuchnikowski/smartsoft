@@ -55,7 +55,7 @@ describe("crud-shell-nestjs: CrudController", () => {
       expect(spy).toHaveBeenCalledWith(data, user);
     });
 
-    it("should set Location header", async done => {
+    it("should set Location header", async () => {
       const user = {} as IUser;
       const data = {} as any;
       const res = {
@@ -76,13 +76,11 @@ describe("crud-shell-nestjs: CrudController", () => {
 
       expect(spec).toHaveBeenCalledTimes(1);
       expect(spec).toHaveBeenCalledWith("Location", "http://test//123");
-
-      done();
     });
   });
 
   describe("readById()", () => {
-    it("should set correct id and user", async done => {
+    it("should set correct id and user", async () => {
       const user = {} as IUser;
       const id = "123";
       const spy = jest.spyOn(service, "readById");
@@ -91,10 +89,9 @@ describe("crud-shell-nestjs: CrudController", () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(id, user);
-      done();
     });
 
-    it("should return correct value", async done => {
+    it("should return correct value", async () => {
       const response = {} as IUser;
       jest
         .spyOn(service, "readById")
@@ -103,12 +100,11 @@ describe("crud-shell-nestjs: CrudController", () => {
       const result = await controller.readById({ id: "123" }, {} as IUser);
 
       expect(result).toBe(response);
-      done();
     });
   });
 
   describe("update()", () => {
-    it("should set correct id, data and user", async done => {
+    it("should set correct id, data and user", async () => {
       const user = {} as IUser;
       const id = "123";
       const data = {};
@@ -118,12 +114,11 @@ describe("crud-shell-nestjs: CrudController", () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(id, data, user);
-      done();
     });
   });
 
   describe("updatePartial()", () => {
-    it("should set correct id, data and user", async done => {
+    it("should set correct id, data and user", async () => {
       const user = {} as IUser;
       const id = "123";
       const data = {};
@@ -133,12 +128,11 @@ describe("crud-shell-nestjs: CrudController", () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(id, data, user);
-      done();
     });
   });
 
   describe("delete()", () => {
-    it("should set correct id  and user", async done => {
+    it("should set correct id  and user", async () => {
       const user = {} as IUser;
       const id = "123";
       const spy = jest.spyOn(service, "delete");
@@ -147,7 +141,6 @@ describe("crud-shell-nestjs: CrudController", () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(id, user);
-      done();
     });
   });
 });

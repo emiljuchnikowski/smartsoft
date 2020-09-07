@@ -200,7 +200,10 @@
       ]
     },
     "shared-paypal": {
-      "tags": []
+      "tags": [
+        "scope:shared",
+        "type:util"
+      ]
     },
     "ui-test-e2e": {
       "tags": [],
@@ -212,16 +215,24 @@
       "tags": []
     },
     "api-crud": {
-      "tags": []
+      "tags": [
+        "scope:app"
+      ]
     },
     "api-trans": {
-      "tags": []
+      "tags": [
+        "scope:app"
+      ]
     },
     "api-stream": {
-      "tags": []
+      "tags": [
+        "scope:app"
+      ]
     },
     "api-files": {
-      "tags": []
+      "tags": [
+        "scope:app"
+      ]
     },
     "crud-shell-angular-e2e": {
       "tags": [],
@@ -232,15 +243,10 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/workspace/src/tasks-runner/tasks-runner-v2",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e",
-          "build-storybook"
-        ]
+        "cacheableOperations": ["build", "test", "lint"],
+        "cacheDirectory": "/tmp/nx"
       }
     }
   },

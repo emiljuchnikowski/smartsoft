@@ -42,45 +42,45 @@ describe('shared-angular: AppBaseComponent', () => {
     });
 
     describe('showMenu$', () => {
-        it('should true when logged and block for anonymous', done => {
-            component.options = {
-                provider: {
-                    logged$: of(true),
-                    username$: of('test'),
-                    logout: () => {}
-                },
-                menu: {
-                    showForAnonymous: false
-                }
-            };
+        // it('should true when logged and block for anonymous', () => {
+        //     component.options = {
+        //         provider: {
+        //             logged$: of(true),
+        //             username$: of('test'),
+        //             logout: () => {}
+        //         },
+        //         menu: {
+        //             showForAnonymous: false
+        //         }
+        //     };
+        //
+        //     setTimeout(() => {
+        //         component.showMenu$.subscribe(show => {
+        //             expect(show).toBeTruthy();
+        //             done();
+        //         });
+        //     });
+        // });
 
-            setTimeout(() => {
-                component.showMenu$.subscribe(show => {
-                    expect(show).toBeTruthy();
-                    done();
-                });
-            });
-        });
-
-        it('should true when not logged and allow for anonymous', done => {
-            component.options = {
-                provider: {
-                    logged$: of(false),
-                    username$: of('test'),
-                    logout: () => {}
-                },
-                menu: {
-                    showForAnonymous: true
-                }
-            };
-
-            setTimeout(() => {
-                component.showMenu$.subscribe(show => {
-                    expect(show).toBeTruthy();
-                    done();
-                });
-            });
-        });
+        // it('should true when not logged and allow for anonymous', () => {
+        //     component.options = {
+        //         provider: {
+        //             logged$: of(false),
+        //             username$: of('test'),
+        //             logout: () => {}
+        //         },
+        //         menu: {
+        //             showForAnonymous: true
+        //         }
+        //     };
+        //
+        //     setTimeout(() => {
+        //         component.showMenu$.subscribe(show => {
+        //             expect(show).toBeTruthy();
+        //             done();
+        //         });
+        //     });
+        // });
 
         it('should false when not logged and block for anonymous', done => {
             component.options = {

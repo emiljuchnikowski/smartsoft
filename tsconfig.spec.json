@@ -2,9 +2,9 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist/out-tsc",
-    "module": "commonjs",
     "types": ["jest", "node"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
     "lib/**/*.spec.ts",

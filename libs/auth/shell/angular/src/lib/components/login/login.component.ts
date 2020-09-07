@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {map} from "rxjs/operators";
 
-import {AuthFacade} from "../../+state/auth.facade";
 import {FormComponent, IButtonOptions, IFormOptions} from "@smartsoft001/angular";
 import {LoginDto} from "@smartsoft001/auth-shell-dtos";
-import {map} from "rxjs/operators";
+
+import {AuthFacade} from "../../+state/auth.facade";
 
 @Component({
   selector: 'smart-auth-login',

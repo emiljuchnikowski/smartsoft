@@ -41,7 +41,7 @@ describe('crud-shared-app-services: CrudService', () => {
     });
 
     describe('create()', () => {
-        it('should create id', async done => {
+        it('should create id', async () => {
             const model = { id: null };
             const spy = jest.spyOn(Guid, 'raw').mockReturnValue('test');
 
@@ -49,11 +49,9 @@ describe('crud-shared-app-services: CrudService', () => {
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(id).toBe('test');
-
-            done();
         });
 
-        it('should invoke command', async done => {
+        it('should invoke command', async () => {
             const model = { id: null };
             const user = {} as IUser;
             const spy = jest.spyOn(commandBus, 'execute');
@@ -62,13 +60,11 @@ describe('crud-shared-app-services: CrudService', () => {
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(new CreateCommand(model, user));
-
-            done();
         });
     });
 
     describe('delete()', () => {
-        it('should invoke command', async done => {
+        it('should invoke command', async () => {
             const id = Guid.raw();
             const user = {} as IUser;
             const spy = jest.spyOn(commandBus, 'execute');
@@ -77,13 +73,11 @@ describe('crud-shared-app-services: CrudService', () => {
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(new DeleteCommand(id, user));
-
-            done();
         });
     });
 
     describe('update()', () => {
-        it('should invoke command', async done => {
+        it('should invoke command', async () => {
             const id = Guid.raw();
             const model = { id: 'test', test: 123 };
             const user = {} as IUser;
@@ -93,13 +87,11 @@ describe('crud-shared-app-services: CrudService', () => {
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(new UpdateCommand({ ...model, id: id }, user));
-
-            done();
         });
     });
 
     describe('updatePartial()', () => {
-        it('should invoke command', async done => {
+        it('should invoke command', async () => {
             const id = Guid.raw();
             const model = { id: 'test', test: 123 };
             const user = {} as IUser;
@@ -109,13 +101,11 @@ describe('crud-shared-app-services: CrudService', () => {
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(new UpdatePartialCommand(id, model, user));
-
-            done();
         });
     });
 
     describe('readById()', () => {
-        it('should invoke query', async done => {
+        it('should invoke query', async () => {
             const item = {};
             const spy = jest.spyOn(queryBus, 'execute').mockReturnValue(Promise.resolve(item));
 
@@ -124,13 +114,11 @@ describe('crud-shared-app-services: CrudService', () => {
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(new GetByIdQuery('test', {} as IUser));
             expect(result).toBe(item);
-
-            done();
         });
     });
 
     describe('readByCriteria()', () => {
-        it('should invoke query', async done => {
+        it('should invoke query', async () => {
             const item = {};
             const spy = jest.spyOn(queryBus, 'execute').mockReturnValue(Promise.resolve({ data: [ item ], totalCount: 1 }));
 
@@ -139,8 +127,6 @@ describe('crud-shared-app-services: CrudService', () => {
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(new GetByCriteriaQuery({ test: 2 }, { test: 1 }, {} as IUser));
             expect(result).toStrictEqual({ data: [ item ], totalCount: 1 });
-
-            done();
         });
     });
 });

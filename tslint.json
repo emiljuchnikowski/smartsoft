@@ -93,6 +93,7 @@
           {
             "sourceTag": "type:shell",
             "onlyDependOnLibsWithTags": [
+              "type:shell",
               "type:domain",
               "type:util"
             ]

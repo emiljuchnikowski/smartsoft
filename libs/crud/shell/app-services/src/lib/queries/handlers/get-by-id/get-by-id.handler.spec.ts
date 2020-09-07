@@ -46,7 +46,7 @@ describe("crud-shared-app-services: GetByIdHandler", () => {
             expect(spy).toHaveBeenCalledWith("read", query.user);
         });
 
-        it("should get item from repository", async done => {
+        it("should get item from repository", async () => {
             const query = new GetByIdQuery("test", {} as IUser);
             const item = {};
             const spy = jest.spyOn(repository, "getById").mockReturnValue(Promise.resolve(item));
@@ -57,8 +57,6 @@ describe("crud-shared-app-services: GetByIdHandler", () => {
             expect(spy).toHaveBeenCalledWith("test");
 
             expect(result).toBe(item);
-
-            done();
         });
     });
 });

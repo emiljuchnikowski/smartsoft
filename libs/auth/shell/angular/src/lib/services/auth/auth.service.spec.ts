@@ -32,7 +32,7 @@ describe("auth-shell-angular: AuthService", () => {
 
   describe("createToken()", () => {
 
-    it('should invoke sessionStorage', async done => {
+    it('should invoke sessionStorage', async () => {
       const username = "testUser";
       const password = "testPassword";
       const mockToken = {} as any;
@@ -42,10 +42,9 @@ describe("auth-shell-angular: AuthService", () => {
       const result = JSON.parse(sessionStorage.getItem(AUTH_TOKEN));
 
       expect(result).toStrictEqual(mockToken);
-      done()
     });
 
-    it('should return token', async done => {
+    it('should return token', async () => {
       const username = "testUser";
       const password = "testPassword";
       const mockToken = {} as any;
@@ -54,14 +53,13 @@ describe("auth-shell-angular: AuthService", () => {
       const result = await service.createToken({ username, password }).toPromise();
 
       expect(result).toBe(mockToken);
-      done()
     });
 
   });
 
   describe("refreshToken()", () => {
 
-    it('should invoke sessionStorage', async done => {
+    it('should invoke sessionStorage', async () => {
       const mockToken = {} as any;
       sessionStorage.setItem(AUTH_TOKEN, '{}');
       jest.spyOn(http, "post").mockReturnValue(of(mockToken));
@@ -70,10 +68,9 @@ describe("auth-shell-angular: AuthService", () => {
       const result = JSON.parse(sessionStorage.getItem(AUTH_TOKEN));
 
       expect(result).toStrictEqual(mockToken);
-      done()
     });
 
-    it('should pass form data and url', async done => {
+    it('should pass form data and url', async () => {
       const refreshToken = "testToken";
       const mockToken = {} as any;
       const spy = jest.spyOn(http, "post").mockReturnValue(of(mockToken));
@@ -84,17 +81,15 @@ describe("auth-shell-angular: AuthService", () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(url, { grant_type: 'refresh_token', refresh_token: refreshToken  });
-      done()
     });
 
-    it('should return token', async done => {
+    it('should return token', async () => {
       const mockToken = {} as any;
       jest.spyOn(http, "post").mockReturnValue(of(mockToken));
 
       const result = await service.refreshToken().toPromise();
 
       expect(result).toBe(mockToken);
-      done()
     });
 
   });
@@ -114,13 +109,12 @@ describe("auth-shell-angular: AuthService", () => {
 
   describe("token", () => {
 
-    it('should return from storage', async done => {
+    it('should return from storage', async () => {
       sessionStorage.setItem(AUTH_TOKEN, "{}");
 
       const result = service.token;
 
       expect(result).toStrictEqual({});
-      done()
     });
 
   });

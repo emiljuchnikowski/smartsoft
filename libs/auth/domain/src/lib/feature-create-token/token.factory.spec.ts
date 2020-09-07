@@ -60,16 +60,16 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
   });
 
   describe("create()", () => {
-    it("should throw errror when config is empty", async done => {
+    it("should throw errror when config is empty", async () => {
       try {
         await factory.create(null);
+        throw Error();
       } catch (e) {
         expect(e).toBeInstanceOf(DomainValidationError);
-        done();
       }
     });
 
-    it("should throw errror when grant type is empty", async done => {
+    it("should throw errror when grant type is empty", async () => {
       let error: Error;
 
       try {
@@ -81,10 +81,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should throw errror when grant type is incorrect", async done => {
+    it("should throw errror when grant type is incorrect", async () => {
       let error: Error;
 
       try {
@@ -96,10 +95,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should throw errror when username is empty", async done => {
+    it("should throw errror when username is empty", async () => {
       let error: Error;
       baseReqPassword.username = null;
 
@@ -110,10 +108,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should throw errror when password is empty", async done => {
+    it("should throw errror when password is empty", async () => {
       let error: Error;
       baseReqPassword.password = null;
 
@@ -124,10 +121,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should throw errror when client_id is empty", async done => {
+    it("should throw errror when client_id is empty", async () => {
       let error: Error;
       baseReqPassword.client_id = null;
 
@@ -138,10 +134,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should throw errror when client_id is incorrect", async done => {
+    it("should throw errror when client_id is incorrect", async () => {
       let error: Error;
 
       config.clients = ["test1", "test2"];
@@ -153,10 +148,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should throw errror when refresh_token is incorrect", async done => {
+    it("should throw errror when refresh_token is incorrect", async () => {
       let error: Error;
 
       config.clients = ["test1", "test2"];
@@ -171,20 +165,18 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should use user query for password", async done => {
+    it("should use user query for password", async () => {
       const spy = jest.spyOn(repository, "findOne");
 
       await factory.create(baseReqPassword);
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith({ username: baseReqPassword.username });
-      done();
     });
 
-    it("should use user query for refresh token", async done => {
+    it("should use user query for refresh token", async () => {
       const spy = jest.spyOn(repository, "findOne");
       const req = {
         grant_type: "refresh_token" as "refresh_token",
@@ -195,10 +187,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith({ authRefreshToken: req.refresh_token });
-      done();
     });
 
-    it("should throw error when user not found", async done => {
+    it("should throw error when user not found", async () => {
       jest
         .spyOn(repository, "findOne")
         .mockReturnValueOnce(Promise.resolve(null));
@@ -215,10 +206,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should throw error when incorrectt password", async done => {
+    it("should throw error when incorrectt password", async () => {
       const hash = await PasswordService.hash("test321");
       jest.spyOn(repository, "findOne").mockReturnValueOnce(
         Promise.resolve({
@@ -235,10 +225,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should create refresh token", async done => {
+    it("should create refresh token", async () => {
       const testToken = "testToken";
       jest.spyOn(Guid, "raw").mockReturnValueOnce(testToken);
       const spy = jest.spyOn(repository, "update");
@@ -250,34 +239,30 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
         { username: baseReqPassword.username },
         { authRefreshToken: testToken }
       );
-      done();
     });
 
-    it("should create refresh token with expiredIn", async done => {
+    it("should create refresh token with expiredIn", async () => {
       const result = await factory.create(baseReqPassword);
 
       expect(result.expired_in).toBe(config.expiredIn);
-      done();
     });
 
-    it("should create refresh token with correct type", async done => {
+    it("should create refresh token with correct type", async () => {
       const result = await factory.create(baseReqPassword);
 
       expect(result.token_type).toBe("bearer");
-      done();
     });
 
-    it("should create correct refresh token", async done => {
+    it("should create correct refresh token", async () => {
       const testToken = "testToken";
       jest.spyOn(Guid, "raw").mockReturnValueOnce(testToken);
 
       const result = await factory.create(baseReqPassword);
 
       expect(result.refresh_token).toBe(testToken);
-      done();
     });
 
-    it("should throw error when user disabled", async done => {
+    it("should throw error when user disabled", async () => {
       user.disabled = true;
 
       let error;
@@ -289,10 +274,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       }
 
       expect(error).toBeInstanceOf(DomainValidationError);
-      done();
     });
 
-    it("should create correct access token", async done => {
+    it("should create correct access token", async () => {
       const testToken = "testToken";
       const spy = jest.spyOn(jwtService, "sign").mockReturnValueOnce(testToken);
 
@@ -309,7 +293,6 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
           subject: user.username
         }
       );
-      done();
     });
   });
 });

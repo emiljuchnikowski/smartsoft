@@ -37,7 +37,7 @@ describe("ErrorService", () => {
   });
 
   describe("log()", () => {
-    it("should invoke specific error when invalid user name or password", async done => {
+    it("should invoke specific error when invalid user name or password", async () => {
       const data = {
         ERRORS: {
           invalidUsernameOrPassword: "test error"
@@ -57,10 +57,9 @@ describe("ErrorService", () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith({ message: data.ERRORS.invalidUsernameOrPassword });
-      done();
     });
 
-    it("should invoke other error when custom error", async done => {
+    it("should invoke other error when custom error", async () => {
       const data = {
         ERRORS: {
           other: "test error"
@@ -75,7 +74,6 @@ describe("ErrorService", () => {
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith({ message: data.ERRORS.other });
-      done();
     });
   });
 });

@@ -68,7 +68,7 @@ describe('crud-domain: UpdateItemHandler', () => {
             expect(spy).toHaveBeenCalledWith(event.item, event.user);
         });
 
-        it("should hash password", async done => {
+        it("should hash password", async () => {
             const event = new UpdateItemEvent(
                 { id: "test", password: "123" },
                 {} as IUser
@@ -82,8 +82,6 @@ describe('crud-domain: UpdateItemHandler', () => {
                 { ...event.item, password: await PasswordService.hash("123") },
                 event.user
             );
-
-            done();
         });
     })
 });

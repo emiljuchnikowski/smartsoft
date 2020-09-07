@@ -6,6 +6,7 @@ import { PermissionService } from "@smartsoft001/nestjs";
 import { Item } from "@smartsoft001/crud-domain";
 import { IUser } from "@smartsoft001/users";
 import {UpdateCommand} from "../../update.command";
+import {service} from "@nrwl/nest/src/schematics/nestjs-schematics/nestjs-schematics";
 
 describe("crud-shared-app-services: UpdateHandler", () => {
   let handler: UpdateHandler<any>;
@@ -29,10 +30,12 @@ describe("crud-shared-app-services: UpdateHandler", () => {
     }).compile();
 
     handler = module.get<UpdateHandler<any>>(UpdateHandler);
+    permissionService = module.get<PermissionService>(PermissionService);
   });
 
   it("should be defined", () => {
     expect(handler).toBeDefined();
+    expect(permissionService).toBeDefined();
   });
 
   describe("execute()", () => {

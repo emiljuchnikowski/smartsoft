@@ -27,25 +27,26 @@ describe("shared-angular: FormFactory", () => {
 
     describe("create()", () => {
 
-        it('should throw error when not mark class', async done => {
+        it('should throw error when not mark class', async () => {
             class Test {}
 
             try {
                 await factory.create(new Test());
+
+                throw Error();
             } catch (e) {
-                done();
+
             }
         });
 
-        it('should not throw error when not mark class', async done => {
+        it('should not throw error when not mark class', async () => {
             @Model({})
             class Test {}
 
             await factory.create(new Test());
-            done();
         });
 
-        it('should create controls for all fields', async done => {
+        it('should create controls for all fields', async () => {
             @Model({})
             class Test {
                 @Field({})
@@ -59,10 +60,9 @@ describe("shared-angular: FormFactory", () => {
 
             expect(form.controls['firstName']).toBeInstanceOf(FormControl);
             expect(form.controls['lastName']).toBeInstanceOf(FormControl);
-            done();
         });
 
-        it('should set required validator', async done => {
+        it('should set required validator', async () => {
             @Model({})
             class Test {
                 @Field({})
@@ -82,8 +82,6 @@ describe("shared-angular: FormFactory", () => {
             form.controls['lastName'].updateValueAndValidity();
 
             expect(form.valid).toBeTruthy();
-
-            done();
         });
 
     });

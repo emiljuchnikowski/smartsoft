@@ -70,7 +70,7 @@ describe("crud-domain: UpdatePartialItemHandler", () => {
       expect(spy).toHaveBeenCalledWith(event.item, event.user);
     });
 
-    it("should hash password", async done => {
+    it("should hash password", async () => {
       const event = new UpdatePartialItemEvent(
         { id: "test", password: "123" },
         {} as IUser
@@ -84,8 +84,6 @@ describe("crud-domain: UpdatePartialItemHandler", () => {
         { ...event.item, password: await PasswordService.hash("123") },
         event.user
       );
-
-      done();
     });
   });
 });

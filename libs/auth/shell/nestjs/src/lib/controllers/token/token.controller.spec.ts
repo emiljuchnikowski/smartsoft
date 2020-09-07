@@ -48,7 +48,7 @@ describe('auth-shell-nestjs: TokenController', () => {
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
-    it('get token', async done => {
+    it('get token', async () => {
       const model: IAuthTokenRequest = {
         grant_type: "refresh_token",
         refresh_token: "123"
@@ -64,8 +64,6 @@ describe('auth-shell-nestjs: TokenController', () => {
       const result = await controller.create(model);
 
       expect(result).toBe(token);
-
-      done();
     });
 
   });
