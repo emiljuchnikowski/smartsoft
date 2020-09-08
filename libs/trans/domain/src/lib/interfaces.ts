@@ -1,4 +1,4 @@
-import {Trans, TransStatus} from "@smartsoft001/trans-domain";
+import {Trans, TransStatus} from "./entities";
 
 export interface ITransInternalService<T> {
     create(trans: Trans<T>): Promise<any>;

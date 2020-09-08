@@ -1,0 +1,25 @@
+{
+  "name": "@smartsoft001/payu",
+  "version": "1.0.1",
+  "description": "This library was generated with [Nx](https://nx.dev).",
+  "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "author": "Emil Juchnikowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
+  "scripts": {
+    "refresh": "npm version patch && npm i && npm i @smartsoft001/trans-domain --save"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^7.4.4"
+  },
+  "dependencies": {
+    "@smartsoft001/trans-domain": "^1.0.1"
+  }
+}

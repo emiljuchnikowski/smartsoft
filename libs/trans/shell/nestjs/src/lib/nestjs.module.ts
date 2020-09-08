@@ -48,3 +48,40 @@ export class TransShellNestjsModule {
     };
   }
 }
+
+@Module({
+  imports: [HttpModule],
+})
+export class TransShellNestjsCoreModule {
+  static forRoot(
+      config: TransConfig & {
+        payuConfig?: PayuConfig;
+        paypalConfig?: PaypalConfig;
+      }
+  ): DynamicModule {
+    return {
+      module: TransShellNestjsModule,
+      providers: [
+        ...SERVICES,
+        ...DOMAIN_SERVICES,
+        { provide: TransConfig, useValue: config },
+        ...(config.payuConfig
+            ? [{ provide: PayuConfig, useValue: config.payuConfig }, PayuService]
+            : []),
+        ...(config.paypalConfig
+            ? [{ provide: PaypalConfig, useValue: config.paypalConfig }, PaypalService]
+            : []),
+      ],
+      imports: [
+        TypeOrmModule.forFeature(ENTITIES),
+        PassportModule.register({ defaultStrategy: "jwt", session: false }),
+        JwtModule.register({
+          secret: config.tokenConfig.secretOrPrivateKey,
+          signOptions: {
+            expiresIn: config.tokenConfig.expiredIn,
+          },
+        }),
+      ],
+    };
+  }
+}

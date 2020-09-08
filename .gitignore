@@ -28,3 +28,13 @@
 /libs/stream/shell/dtos/dist/
 /libs/auth/domain/node_modules/
 /libs/auth/domain/dist/
+/libs/trans/domain/node_modules/
+/libs/shared/payu/node_modules/
+/libs/shared/paypal/node_modules/
+/libs/trans/shell/app-services/node_modules/
+/libs/trans/shell/nestjs/node_modules/
+/libs/shared/paypal/package-lock.json
+/libs/shared/payu/package-lock.json
+/libs/trans/domain/package-lock.json
+/libs/trans/shell/app-services/package-lock.json
+/libs/trans/shell/nestjs/package-lock.json
