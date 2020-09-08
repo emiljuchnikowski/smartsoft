@@ -11,9 +11,7 @@ import { Socket } from "socket.io";
 import { CrudService } from "@smartsoft001/crud-shell-app-services";
 import { IEntity } from "@smartsoft001/domain-core";
 import {Observable, Subscription} from "rxjs";
-import {Guid} from "guid-typescript";
 import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
-import {map} from "rxjs/operators";
 
 @WebSocketGateway({
   transports: ["websocket"],

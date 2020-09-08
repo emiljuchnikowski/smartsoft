@@ -42,3 +42,11 @@
 /libs/auth/shell/app-services/package-lock.json
 /libs/auth/shell/nestjs/node_modules/
 /libs/auth/shell/nestjs/package-lock.json
+/libs/crud/domain/node_modules/
+/libs/crud/domain/package-lock.json
+/libs/shared/nestjs/node_modules/
+/libs/shared/nestjs/package-lock.json
+/libs/crud/shell/app-services/node_modules/
+/libs/crud/shell/app-services/package-lock.json
+/libs/shared/mongo/node_modules/
+/libs/shared/mongo/package-lock.json

@@ -1,0 +1,48 @@
+{
+  "name": "@smartsoft001/crud-shell-nestjs",
+  "version": "1.0.1",
+  "description": "Utils to crud",
+  "scripts": {
+    "refresh": "npm version patch && npm i && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/users@latest --save && npm i @smartsoft001/utils@latest --save && npm i @smartsoft001/crud-shell-app-services@latest --save && npm i @smartsoft001/nestjs@latest --save && npm i @smartsoft001/crud-domain@latest --save && npm i @smartsoft001/crud-shell-dtos@latest --save && npm i @smartsoft001/mongo@latest --save"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "keywords": [
+    "smartsoft",
+    "oauth",
+    "nestjs"
+  ],
+  "main": "src/index.ts",
+  "author": "Emil Juchnikowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
+  "peerDependencies": {
+    "@nestjs/common": "^7.4.4",
+    "@nestjs/passport": "^7.1.0",
+    "@nestjs/jwt": "^7.1.0",
+    "@nestjs/cqrs": "^7.0.1",
+    "query-to-mongo": "^0.10.1",
+    "express": "^4.17.1",
+    "json2csv": "^5.0.1",
+    "lodash": "^4.17.20",
+    "xlsx": "^0.16.6",
+    "@nestjs/websockets": "^7.4.4",
+    "socket.io": "^2.3.0",
+    "rxjs": "^6.6.3"
+  },
+  "dependencies": {
+    "@smartsoft001/crud-domain": "^1.0.1",
+    "@smartsoft001/crud-shell-app-services": "^1.0.1",
+    "@smartsoft001/crud-shell-dtos": "^1.0.1",
+    "@smartsoft001/domain-core": "^1.0.5",
+    "@smartsoft001/mongo": "^1.0.2",
+    "@smartsoft001/nestjs": "^1.0.1",
+    "@smartsoft001/users": "^1.0.3",
+    "@smartsoft001/utils": "^1.0.4"
+  }
+}

@@ -56,3 +56,43 @@ export class CrudShellNestjsModule {
     };
   }
 }
+
+@Module({})
+export class CrudShellNestjsCoreModule {
+  static forRoot(
+      options: SharedConfig & {
+        db: {
+          host: string;
+          port: number;
+          database: string;
+          username?: string;
+          password?: string;
+          collection?: string;
+        };
+      }
+  ): DynamicModule {
+    return {
+      module: CrudShellNestjsModule,
+      providers: [
+        ...SERVICES,
+        ...COMMAND_HANDLERS,
+        ...DOMAIN_HANDLERS,
+        ...QUERY_HANDLERS,
+        ...GATEWAYS,
+        AuthJwtGuard
+      ],
+      imports: [
+        PassportModule.register({ defaultStrategy: "jwt", session: false }),
+        JwtModule.register({
+          secret: options.tokenConfig.secretOrPrivateKey,
+          signOptions: {
+            expiresIn: options.tokenConfig.expiredIn
+          }
+        }),
+        SharedModule.forRoot(options),
+        MongoModule.forRoot(options.db),
+        CqrsModule
+      ]
+    };
+  }
+}

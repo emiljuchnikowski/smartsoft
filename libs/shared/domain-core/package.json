@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/domain-core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "dependencies": {
-    "@smartsoft001/users": "^1.0.3"
-  ,    "tslib": "^2.0.0"
-}
+    "@smartsoft001/users": "^1.0.3",
+    "tslib": "^2.0.0"
+  }
 }
