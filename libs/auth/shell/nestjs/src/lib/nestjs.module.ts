@@ -33,3 +33,29 @@ export class AuthShellNestjsModule {
         }
     }
 }
+
+@Module({ })
+export class AuthShellNestjsCoreModule {
+    static forRoot(options: {
+        tokenConfig: TokenConfig
+    }): DynamicModule {
+        return {
+            module: AuthShellNestjsModule,
+            providers: [
+                ...SERVICES,
+                ...DOMAIN_SERVICES,
+                { provide: TokenConfig, useValue: options.tokenConfig },
+            ],
+            imports: [
+                TypeOrmModule.forFeature(ENTITIES),
+                PassportModule.register({ defaultStrategy: 'jwt', session: false }),
+                JwtModule.register({
+                    secret: options.tokenConfig.secretOrPrivateKey,
+                    signOptions: {
+                        expiresIn: options.tokenConfig.expiredIn
+                    }
+                })
+            ]
+        }
+    }
+}

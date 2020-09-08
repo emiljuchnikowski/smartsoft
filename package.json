@@ -44,6 +44,8 @@
     "auth-shell-angular:publish": "npm run auth-shell-angular:build && npm publish libs/auth/shell/angular/dist --access public",
     "auth-shell-dtos:build": "ng-packagr -p libs/auth/shell/dtos/package.json",
     "auth-shell-dtos:publish": "npm run auth-shell-dtos:build && npm publish libs/auth/shell/dtos/dist --access public",
+    "auth-shell-app-services:publish": "npm publish libs/auth/shell/app-services --access public",
+    "auth-shell-nestjs:publish": "npm publish libs/auth/shell/nestjs --access public",
     "auth-domain:build": "ng-packagr -p libs/auth/domain/package.json",
     "auth-domain:publish": "npm run auth-domain:build && npm publish libs/auth/domain/dist --access public",
     "crud-shell-angular:build": "ng-packagr -p libs/crud/shell/angular/package.json",

@@ -38,3 +38,7 @@
 /libs/trans/domain/package-lock.json
 /libs/trans/shell/app-services/package-lock.json
 /libs/trans/shell/nestjs/package-lock.json
+/libs/auth/shell/app-services/node_modules/
+/libs/auth/shell/app-services/package-lock.json
+/libs/auth/shell/nestjs/node_modules/
+/libs/auth/shell/nestjs/package-lock.json
