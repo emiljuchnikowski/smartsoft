@@ -14,47 +14,46 @@ export class RefresherService<T> extends TransBaseService<T> {
     super(repository);
   }
 
-  refresh(
+  async refresh(
     transId: string,
     internalService: ITransInternalService<T>,
     paymentService: ITransPaymentService,
     customData = {}
-  ) {
-    let trans: Trans<any>;
+  ) : Promise<void> {
 
     // hack : bad map id
-    return this.repository
-      .findOne({
-        externalId: transId
-      })
-      .then(res => {
-        trans = res;
+    const trans: Trans<any> = await this.repository
+        .findOne({
+          externalId: transId
+        });
 
-        if (!trans) {
-          throw new NotFoundException("Transaction not found: " + transId);
-        }
+    if (!trans) {
+      throw new NotFoundException("Transaction not found: " + transId);
+    }
 
-        return paymentService[trans.system].getStatus(trans);
-      })
-        .then(({ status, data }) => {
-          trans.status = status;
-          data['customData'] = customData;
-          this.addHistory(trans, data);
+    try {
+      const { status, data } = await paymentService[trans.system].getStatus(trans);
 
-          return internalService.refresh(trans);
-        })
-        .then(res => {
-          if (!res) return;
+      if (status === trans.status) return;
 
-          this.addHistory(trans, res);
+      trans.modifyDate = new Date();
+      trans.status = status;
+      data['customData'] = customData;
+      this.addHistory(trans, data);
 
-          return this.repository.save(trans);
-        })
-      .catch(err => {
-        this.setError(trans, err);
-        console.error(err);
+      const internalRes = await internalService.refresh(trans);
 
-        throw err;
-      });
+      if (!internalRes) return;
+
+      this.addHistory(trans, internalRes);
+
+      await this.repository.save(trans);
+    } catch (err) {
+      console.error(err);
+
+      await this.setError(trans, err);
+
+      throw err;
+    }
   }
 }
