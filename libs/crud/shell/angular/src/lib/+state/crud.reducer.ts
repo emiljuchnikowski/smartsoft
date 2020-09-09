@@ -61,6 +61,24 @@ const crudReducer = (state = initialState, action, entity) => {
                 error: action.error
             };
 
+        case `[${entity}] Export`:
+            return {
+                ...state,
+                loaded: false
+            };
+
+        case `[${entity}] Export Success`:
+            return {
+                ...state,
+                loaded: true
+            };
+
+        case `[${entity}] Export Failure`:
+            return {
+                ...state,
+                loaded: true
+            };
+
         case `[${entity}] Read`:
             return {
                 ...state,

@@ -50,3 +50,4 @@
 /libs/crud/shell/app-services/package-lock.json
 /libs/shared/mongo/node_modules/
 /libs/shared/mongo/package-lock.json
+/libs/crud/shell/nestjs/package-lock.json
