@@ -17,13 +17,13 @@ export class AppExceptionFilter implements ExceptionFilter {
     let message = null;
     if (exception instanceof HttpException) {
       status = exception.getStatus();
-      message = exception.message;
+      message = exception['message'];
     } else if (exception instanceof DomainValidationError) {
       status = HttpStatus.BAD_REQUEST;
-      message = exception.message;
+      message = exception['message'];
     } else if (exception instanceof DomainForbiddenError) {
       status = HttpStatus.FORBIDDEN;
-      message = exception.message;
+      message = exception['message'];
     }
 
     const result = response.status(status);

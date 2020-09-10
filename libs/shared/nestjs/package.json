@@ -1,7 +1,17 @@
 {
   "name": "@smartsoft001/nestjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Utils to nestjs",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    },
+    "whitelistedNonPeerDependencies": [
+      "@smartsoft001/domain-core",
+      "@smartsoft001/users",
+      "@smartsoft001/utils"
+    ]
+  },
   "scripts": {
     "refresh": "npm version patch && npm i && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/users@latest --save && npm i @smartsoft001/utils@latest --save"
   },
@@ -27,7 +37,7 @@
     "passport-jwt": "^4.0.0"
   },
   "dependencies": {
-    "@smartsoft001/domain-core": "^1.0.5",
+    "@smartsoft001/domain-core": "^1.0.7",
     "@smartsoft001/users": "^1.0.3",
     "@smartsoft001/utils": "^1.0.4"
   }
