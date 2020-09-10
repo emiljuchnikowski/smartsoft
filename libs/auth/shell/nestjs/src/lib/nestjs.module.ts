@@ -3,9 +3,9 @@ import {PassportModule} from "@nestjs/passport";
 import {JwtModule} from "@nestjs/jwt";
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import {CONTROLLERS} from "./controllers";
+import {TokenController} from "./controllers/token/token.controller";
 import {DOMAIN_SERVICES, ENTITIES, TokenConfig} from "@smartsoft001/auth-domain";
-import {SERVICES} from "@smartsoft001/auth-shell-app-services";
+import {AuthService} from "@smartsoft001/auth-shell-app-services";
 
 @Module({ })
 export class AuthShellNestjsModule {
@@ -14,9 +14,9 @@ export class AuthShellNestjsModule {
     }): DynamicModule {
         return {
             module: AuthShellNestjsModule,
-            controllers: CONTROLLERS,
+            controllers: [ TokenController ],
             providers: [
-                ...SERVICES,
+                AuthService,
                 ...DOMAIN_SERVICES,
                 { provide: TokenConfig, useValue: options.tokenConfig },
             ],
@@ -42,7 +42,7 @@ export class AuthShellNestjsCoreModule {
         return {
             module: AuthShellNestjsModule,
             providers: [
-                ...SERVICES,
+                AuthService,
                 ...DOMAIN_SERVICES,
                 { provide: TokenConfig, useValue: options.tokenConfig },
             ],

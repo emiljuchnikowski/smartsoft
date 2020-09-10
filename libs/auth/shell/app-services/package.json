@@ -1,7 +1,15 @@
 {
   "name": "@smartsoft001/auth-shell-app-services",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Utils to authorization",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    },
+    "whitelistedNonPeerDependencies": [
+      "@smartsoft001/auth-domain"
+    ]
+  },
   "scripts": {
     "refresh": "npm version patch && npm i && npm i @smartsoft001/auth-domain@latest --save"
   },

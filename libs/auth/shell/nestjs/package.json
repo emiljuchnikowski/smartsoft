@@ -1,7 +1,16 @@
 {
   "name": "@smartsoft001/auth-shell-nestjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Utils to authorization",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    },
+    "whitelistedNonPeerDependencies": [
+      "@smartsoft001/auth-domain",
+      "@smartsoft001/auth-shell-app-services"
+    ]
+  },
   "scripts": {
     "refresh": "npm version patch && npm i && npm i @smartsoft001/auth-shell-app-services@latest --save && npm i @smartsoft001/auth-domain --save"
   },
@@ -29,6 +38,6 @@
   },
   "dependencies": {
     "@smartsoft001/auth-domain": "^1.0.5",
-    "@smartsoft001/auth-shell-app-services": "^1.0.1"
+    "@smartsoft001/auth-shell-app-services": "^1.0.2"
   }
 }

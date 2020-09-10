@@ -51,3 +51,5 @@
 /libs/shared/mongo/node_modules/
 /libs/shared/mongo/package-lock.json
 /libs/crud/shell/nestjs/package-lock.json
+/libs/auth/shell/nestjs/dist/
+/libs/auth/shell/app-services/dist/
