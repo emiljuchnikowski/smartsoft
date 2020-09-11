@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/domain-core",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"
