@@ -46,6 +46,11 @@ export class AuthShellNestjsCoreModule {
                 ...DOMAIN_SERVICES,
                 { provide: TokenConfig, useValue: options.tokenConfig },
             ],
+            exports: [
+                AuthService,
+                ...DOMAIN_SERVICES,
+                { provide: TokenConfig, useValue: options.tokenConfig },
+            ],
             imports: [
                 TypeOrmModule.forFeature(ENTITIES),
                 PassportModule.register({ defaultStrategy: 'jwt', session: false }),
