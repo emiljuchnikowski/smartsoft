@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/nestjs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Utils to nestjs",
   "ngPackage": {
     "lib": {
@@ -37,7 +37,7 @@
     "passport-jwt": "^4.0.0"
   },
   "dependencies": {
-    "@smartsoft001/domain-core": "^1.0.7",
+    "@smartsoft001/domain-core": "^1.0.8",
     "@smartsoft001/users": "^1.0.3",
     "@smartsoft001/utils": "^1.0.4"
   }
