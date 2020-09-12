@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/nestjs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Utils to nestjs",
   "ngPackage": {
     "lib": {
