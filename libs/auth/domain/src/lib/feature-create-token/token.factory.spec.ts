@@ -157,8 +157,10 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
 
       try {
         await factory.create({
-          grant_type: "refresh_token",
-          refresh_token: null
+          request: {
+            grant_type: "refresh_token",
+            refresh_token: null
+          }
         });
       } catch (e) {
         error = e;
@@ -183,7 +185,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
         refresh_token: "test123"
       };
 
-      await factory.create(req);
+      await factory.create({
+        request: req
+      });
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith({ authRefreshToken: req.refresh_token });
@@ -200,7 +204,9 @@ describe("auth-domain-feature-create-token: TokenFactory", () => {
       let error;
 
       try {
-        await factory.create(req);
+        await factory.create({
+          request: req
+        });
       } catch (e) {
         error = e;
       }

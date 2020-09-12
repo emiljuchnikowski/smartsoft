@@ -22,7 +22,7 @@ describe('auth-shell-nestjs: TokenController', () => {
         }),
       ],
       controllers: [TokenController],
-      providers: [ { provide: AuthService, useValue: new AuthService(null) } ]
+      providers: [ { provide: AuthService, useValue: new AuthService(null, null) } ]
     }).compile();
 
     controller = module.get<TokenController>(TokenController);

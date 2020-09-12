@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import {Inject, Injectable, Optional} from "@nestjs/common";
 import { Repository } from "typeorm";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,9 +12,14 @@ import { User } from "../entities";
 import { TokenConfig } from "./token.config";
 import { PasswordService } from "@smartsoft001/utils";
 import {IAuthToken, IAuthTokenRequest} from "./interfaces";
+import {ITokenPayloadProvider} from "./token-payload.provider";
+import {ITokenValidationProvider} from "./token-validation.provider";
 
 @Injectable()
-export class TokenFactory implements IFactory<IAuthToken, IAuthTokenRequest> {
+export class TokenFactory implements IFactory<IAuthToken, {
+  request: IAuthTokenRequest,
+  payloadProvider?: ITokenPayloadProvider
+} > {
   private _invalidUsernameOrPasswordMessage = "Invalid username or password";
 
   constructor(
@@ -34,28 +39,50 @@ export class TokenFactory implements IFactory<IAuthToken, IAuthTokenRequest> {
       throw new DomainValidationError("user disabled");
   }
 
-  async create(config: NonNullable<IAuthTokenRequest>): Promise<IAuthToken> {
-    this.valid(config);
+  async create(options: {
+    request: IAuthTokenRequest,
+    payloadProvider?: ITokenPayloadProvider,
+    validationProvider?: ITokenValidationProvider
+  }): Promise<IAuthToken> {
+    let user = null;
 
-    const query = TokenFactory.getQuery(config);
-    const user = await this.repository.findOne(query);
+    this.valid(options.request);
 
-    this.checkUser(config, user);
-    TokenFactory.checkDisabled(user);
-    await this.checkPassword(config, user);
+    const query = TokenFactory.getQuery(options.request);
+    user = await this.repository.findOne(query);
+
+    if (!options.validationProvider || !options.validationProvider.replace) {
+      this.checkUser(options.request, user);
+      TokenFactory.checkDisabled(user);
+      await this.checkPassword(options.request, user);
+    }
+
+    if (options.validationProvider) {
+      await options.validationProvider.check({
+        request: options.request,
+        user
+      })
+    }
 
     const refreshToken = Guid.raw();
     await this.repository.update(query, {
       authRefreshToken: refreshToken
     });
 
+    const payload = {
+      permissions: user.permissions,
+      scope: options.request.scope
+    };
+
+    if (options.payloadProvider) {
+      await options.payloadProvider.change(payload, { user, request: options.request });
+    }
+
     return {
       expired_in: this.config.expiredIn,
       token_type: "bearer",
       access_token: this.jwtService.sign(
-        {
-          permissions: user.permissions
-        },
+          payload,
         {
           expiresIn: this.config.expiredIn,
           subject: user.username

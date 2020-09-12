@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/auth-domain",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Utils to authorization",
   "ngPackage": {
     "lib": {
@@ -33,9 +33,9 @@
   },
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "dependencies": {
-    "@smartsoft001/domain-core": "^1.0.5",
+    "@smartsoft001/domain-core": "^1.0.8",
     "@smartsoft001/users": "^1.0.3",
-    "@smartsoft001/utils": "^1.0.4"
-  ,    "tslib": "^2.0.0"
-}
+    "@smartsoft001/utils": "^1.0.4",
+    "tslib": "^2.0.0"
+  }
 }

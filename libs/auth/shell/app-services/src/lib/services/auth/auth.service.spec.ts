@@ -35,7 +35,7 @@ describe("auth-shell-app-services: AuthService", () => {
     }).compile();
 
     factory = module.get<TokenFactory>(TokenFactory);
-    service = new AuthService(factory);
+    service = new AuthService(factory, null);
   });
 
   it("should be defined", () => {

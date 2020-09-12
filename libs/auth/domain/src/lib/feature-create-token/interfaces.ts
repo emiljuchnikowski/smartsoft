@@ -6,12 +6,14 @@ export interface IAuthTokenRequestPassword extends IUserCredentials {
     grant_type: "password";
     username: string;
     password: string;
+    scope?: string;
     client_id: string;
 }
 
 export interface IAuthTokenRequestRefreshToken {
     grant_type: "refresh_token";
     refresh_token: string;
+    scope?: string;
 }
 
 export interface IAuthToken {

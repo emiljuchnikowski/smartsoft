@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/auth-shell-app-services",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Utils to authorization",
   "ngPackage": {
     "lib": {
@@ -33,6 +33,6 @@
     "@nestjs/common": "^7.4.4"
   },
   "dependencies": {
-    "@smartsoft001/auth-domain": "^1.0.5"
+    "@smartsoft001/auth-domain": "^1.0.6"
   }
 }
