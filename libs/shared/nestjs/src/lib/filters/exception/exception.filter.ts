@@ -31,7 +31,7 @@ export class AppExceptionFilter implements ExceptionFilter {
     }
 
     Logger.error(
-      exception["message"] ? exception["message"] : exception,
+      exception["stack"] || exception["message"] || exception,
       AppExceptionFilter.name
     );
 

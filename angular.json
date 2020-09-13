@@ -8,8 +8,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/auth/domain/tsconfig.lib.json",
               "libs/auth/domain/tsconfig.spec.json"
@@ -21,7 +22,17 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/auth/domain/jest.config.js",
+            "tsConfig": "libs/auth/domain/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "libs/auth/domain/dist",
+            "tsConfig": "libs/auth/domain/tsconfig.lib.json",
+            "packageJson": "libs/auth/domain/package.json",
+            "main": "libs/auth/domain/src/index.ts"
           }
         }
       }
@@ -33,8 +44,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/auth/shell/app-services/tsconfig.lib.json",
               "libs/auth/shell/app-services/tsconfig.spec.json"
@@ -49,7 +61,18 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/auth/shell/app-services/jest.config.js",
+            "tsConfig": "libs/auth/shell/app-services/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "libs/auth/shell/app-services/dist",
+            "tsConfig": "libs/auth/shell/app-services/tsconfig.lib.json",
+            "packageJson": "libs/auth/shell/app-services/package.json",
+            "main": "libs/auth/shell/app-services/src/index.ts",
+            "assets": ["libs/auth/shell/app-services/*.md"]
           }
         }
       }
@@ -61,8 +84,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/auth/shell/nestjs/tsconfig.lib.json",
               "libs/auth/shell/nestjs/tsconfig.spec.json"
@@ -74,7 +98,18 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/auth/shell/nestjs/jest.config.js",
+            "tsConfig": "libs/auth/shell/nestjs/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "libs/auth/shell/nestjs/dist",
+            "tsConfig": "libs/auth/shell/nestjs/tsconfig.lib.json",
+            "packageJson": "libs/auth/shell/nestjs/package.json",
+            "main": "libs/auth/shell/nestjs/src/index.ts",
+            "assets": ["libs/auth/shell/nestjs/*.md"]
           }
         }
       }

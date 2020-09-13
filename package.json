@@ -32,15 +32,14 @@
     "api-trans:serve": "ng serve api-trans",
     "api-stream:serve": "ng serve api-stream",
     "ui-test:serve": "ng serve ui-test",
-    "auth-domain:build": "ng-packagr -p libs/auth/domain/package.json",
-    "auth-domain:publish": "npm run auth-domain:build && npm publish libs/auth/domain/dist --access public",
+    "auth-domain:publish": "npm publish libs/auth/domain/dist --access public",
     "auth-shell-angular:build": "ng-packagr -p libs/auth/shell/angular/package.json",
     "auth-shell-angular:publish": "npm run auth-shell-angular:build && npm publish libs/auth/shell/angular/dist --access public",
-    "auth-shell-app-services:build": "ng-packagr -p libs/auth/shell/app-services/package.json",
+    "auth-shell-app-services:build": "nx run auth-shell-app-services:build --with-deps",
     "auth-shell-app-services:publish": "npm run auth-shell-app-services:build && npm publish libs/auth/shell/app-services/dist --access public",
     "auth-shell-dtos:build": "ng-packagr -p libs/auth/shell/dtos/package.json",
     "auth-shell-dtos:publish": "npm run auth-shell-dtos:build && npm publish libs/auth/shell/dtos/dist --access public",
-    "auth-shell-nestjs:build": "ng-packagr -p libs/auth/shell/nestjs/package.json",
+    "auth-shell-nestjs:build": "nx run auth-shell-nestjs:build --with-deps",
     "auth-shell-nestjs:publish": "npm run auth-shell-nestjs:build && npm publish libs/auth/shell/nestjs/dist --access public",
     "crud-domain:publish": "npm publish libs/crud/domain --access public",
     "crud-shell-angular:build": "ng-packagr -p libs/crud/shell/angular/package.json",
@@ -187,6 +186,10 @@
     "ts-node": "7.0.1",
     "tslint": "^6.1.3",
     "typescript": "3.9.5",
-    "webpack-merge": "4.2.2"
+    "webpack-merge": "4.2.2",
+    "@nrwl/eslint-plugin-nx": "10.1.0",
+    "@typescript-eslint/parser": "2.19.2",
+    "@typescript-eslint/eslint-plugin": "2.19.2",
+    "eslint-config-prettier": "6.0.0"
   }
 }

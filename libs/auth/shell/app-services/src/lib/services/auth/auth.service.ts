@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import {Injectable, Logger} from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 
 import {
@@ -13,7 +13,10 @@ import {
 
 @Injectable()
 export class AuthService {
-  constructor(private factory: TokenFactory, private moduleRef: ModuleRef) {}
+  constructor(
+      private factory: TokenFactory,
+      private moduleRef: ModuleRef
+  ) {}
 
   create(req: IAuthTokenRequest): Promise<IAuthToken> {
     return this.factory.create({

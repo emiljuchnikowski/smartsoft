@@ -1,4 +1,4 @@
-import {Inject, Injectable, Optional} from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
 import { Repository } from "typeorm";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,9 +8,10 @@ import {
   DomainValidationError,
   IFactory
 } from "@smartsoft001/domain-core";
-import { User } from "../entities";
-import { TokenConfig } from "./token.config";
 import { PasswordService } from "@smartsoft001/utils";
+
+import { User } from "../entities/user.entity";
+import { TokenConfig } from "./token.config";
 import {IAuthToken, IAuthTokenRequest} from "./interfaces";
 import {ITokenPayloadProvider} from "./token-payload.provider";
 import {ITokenValidationProvider} from "./token-validation.provider";
@@ -18,7 +19,8 @@ import {ITokenValidationProvider} from "./token-validation.provider";
 @Injectable()
 export class TokenFactory implements IFactory<IAuthToken, {
   request: IAuthTokenRequest,
-  payloadProvider?: ITokenPayloadProvider
+  payloadProvider?: ITokenPayloadProvider,
+  validationProvider?: ITokenValidationProvider
 } > {
   private _invalidUsernameOrPasswordMessage = "Invalid username or password";
 
@@ -44,12 +46,10 @@ export class TokenFactory implements IFactory<IAuthToken, {
     payloadProvider?: ITokenPayloadProvider,
     validationProvider?: ITokenValidationProvider
   }): Promise<IAuthToken> {
-    let user = null;
-
     this.valid(options.request);
 
     const query = TokenFactory.getQuery(options.request);
-    user = await this.repository.findOne(query);
+    const user = await this.repository.findOne(query);
 
     if (!options.validationProvider || !options.validationProvider.replace) {
       this.checkUser(options.request, user);

@@ -16,9 +16,9 @@ export class AuthShellNestjsModule {
             module: AuthShellNestjsModule,
             controllers: [ TokenController ],
             providers: [
+                { provide: TokenConfig, useValue: options.tokenConfig },
                 AuthService,
                 ...DOMAIN_SERVICES,
-                { provide: TokenConfig, useValue: options.tokenConfig }
             ],
             imports: [
                 TypeOrmModule.forFeature(ENTITIES),
@@ -42,9 +42,9 @@ export class AuthShellNestjsCoreModule {
         return {
             module: AuthShellNestjsModule,
             providers: [
+                { provide: TokenConfig, useValue: options.tokenConfig },
                 AuthService,
                 ...DOMAIN_SERVICES,
-                { provide: TokenConfig, useValue: options.tokenConfig }
             ],
             exports: [
                 AuthService,
