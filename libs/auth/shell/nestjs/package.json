@@ -1,0 +1,28 @@
+{
+  "name": "@smartsoft001/auth-shell-nestjs",
+  "version": "1.0.18",
+  "description": "Utils to authorization",
+  "scripts": {
+    "refresh": "npm version patch && npm i && npm i @smartsoft001/auth-shell-app-services@latest --save && npm i @smartsoft001/auth-domain --save"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "keywords": [
+    "smartsoft",
+    "oauth",
+    "nestjs"
+  ],
+  "main": "src/index.ts",
+  "author": "Emil Juchnikowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
+  "dependencies": {
+    "@smartsoft001/auth-domain": "^1.0.11",
+    "@smartsoft001/auth-shell-app-services": "^1.0.13"
+  }
+}
