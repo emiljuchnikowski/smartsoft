@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/auth-shell-app-services",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Utils to authorization",
   "scripts": {
     "refresh": "npm version patch && npm i && npm i @smartsoft001/auth-domain@latest --save"
@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "dependencies": {
-    "@smartsoft001/auth-domain": "^1.0.11"
+    "@smartsoft001/auth-domain": "^1.0.12"
   }
 }

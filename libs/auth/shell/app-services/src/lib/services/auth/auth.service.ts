@@ -2,11 +2,11 @@ import {Injectable, Logger} from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 
 import {
-  AUTH_TOKEN_PAYLOAD_PROVIDER,
+  AUTH_TOKEN_PAYLOAD_PROVIDER, AUTH_TOKEN_USER_PROVIDER,
   AUTH_TOKEN_VALIDATION_PROVIDER,
   IAuthToken,
   IAuthTokenRequest,
-  ITokenPayloadProvider,
+  ITokenPayloadProvider, ITokenUserProvider,
   ITokenValidationProvider,
   TokenFactory,
 } from "@smartsoft001/auth-domain";
@@ -23,6 +23,7 @@ export class AuthService {
       request: req,
       payloadProvider: this.getPayloadProvider(),
       validationProvider: this.getValidationProvider(),
+      userProvider: this.getUserProvider()
     }) as Promise<IAuthToken>;
   }
 
@@ -40,6 +41,17 @@ export class AuthService {
   private getValidationProvider(): ITokenValidationProvider {
     try {
       return this.moduleRef.get(AUTH_TOKEN_VALIDATION_PROVIDER, {
+        strict: false,
+      });
+    } catch (e) {
+      Logger.debug(e.message, AuthService.name);
+    }
+    return null;
+  }
+
+  private getUserProvider(): ITokenUserProvider {
+    try {
+      return this.moduleRef.get(AUTH_TOKEN_USER_PROVIDER, {
         strict: false,
       });
     } catch (e) {
