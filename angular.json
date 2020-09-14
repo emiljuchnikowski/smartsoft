@@ -22,7 +22,6 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/auth/domain/jest.config.js",
-            "tsConfig": "libs/auth/domain/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },
@@ -61,7 +60,6 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/auth/shell/app-services/jest.config.js",
-            "tsConfig": "libs/auth/shell/app-services/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },
@@ -98,7 +96,6 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/auth/shell/nestjs/jest.config.js",
-            "tsConfig": "libs/auth/shell/nestjs/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },
