@@ -11,12 +11,7 @@ import { DynamicComponentLoader } from "./dynamic-component-loader/dynamic-compo
 import {PopoverService} from "./popover/popover.service";
 
 @NgModule({
-  imports: [
-    IonicModule,
-    DeviceDetectorModule,
-    TranslateModule.forChild(),
-    DeviceDetectorModule.forRoot()
-  ],
+  imports: [ IonicModule, TranslateModule.forChild(), DeviceDetectorModule.forRoot() ],
   providers: [
     ToastService,
     ErrorService,

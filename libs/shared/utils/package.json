@@ -1,32 +1,8 @@
 {
   "name": "@smartsoft001/utils",
   "version": "1.0.4",
-  "ngPackage": {
-    "lib": {
-      "entryFile": "src/index.ts"
-    },
-    "whitelistedNonPeerDependencies": [
-      "md5"
-    ]
-  },
-  "description": "This library was generated with [Nx](https://nx.dev).",
-  "main": "src/index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "refresh": "npm version patch && npm i"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
-  },
-  "author": "Emil Juchnikowski",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
-  },
-  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
-  "dependencies": {
-    "md5": "^2.2.1"
-  ,    "tslib": "^2.0.0"
-}
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14"
+  }
 }

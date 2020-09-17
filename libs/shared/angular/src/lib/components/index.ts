@@ -9,3 +9,11 @@ export * from './loader';
 export * from './detail';
 export * from './searchbar';
 export * from './chart';
+export * from './grid';
+export * from './accordion';
+export * from './tabs';
+export * from './details';
+export * from './detail';
+export * from './input';
+
+export * from './components.module';

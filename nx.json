@@ -72,22 +72,22 @@
       "tags": ["scope:stream", "type:shell"]
     },
     "shared-users": {
-      "tags": ["scope:shared", "type:util"]
+      "tags": []
     },
     "shared-domain-core": {
-      "tags": ["scope:shared", "type:domain"]
+      "tags": []
     },
     "shared-utils": {
-      "tags": ["scope:shared", "type:util"]
+      "tags": []
     },
     "shared-nestjs": {
       "tags": ["scope:shared", "type:shell"]
     },
     "shared-angular": {
-      "tags": ["scope:shared", "type:shell"]
+      "tags": []
     },
     "shared-models": {
-      "tags": ["scope:shared", "type:util"]
+      "tags": []
     },
     "shared-mongo": {
       "tags": ["scope:shared", "type:util"]
@@ -131,6 +131,9 @@
     "crud-shell-angular-e2e": {
       "tags": [],
       "implicitDependencies": ["crud-shell-angular"]
+    },
+    "test": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

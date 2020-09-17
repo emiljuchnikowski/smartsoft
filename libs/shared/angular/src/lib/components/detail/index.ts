@@ -1,1 +1,6 @@
 export * from './detail.component';
+export * from './text/text.component';
+export * from './base/base.component';
+export * from './email/email.component';
+export * from './enum/enum.component';
+export * from './flag/flag.component';

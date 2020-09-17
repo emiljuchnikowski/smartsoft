@@ -1,10 +1,21 @@
 module.exports = {
   name: "shared-utils",
   preset: "../../../jest.config.js",
-  transform: {
-    "^.+\\.[tj]sx?$": "ts-jest",
+  setupFilesAfterEnv: ["<rootDir>/src/test-setup.ts"],
+  globals: {
+    "ts-jest": {
+      tsConfig: "<rootDir>/tsconfig.spec.json",
+      stringifyContentPathRegex: "\\.(html|svg)$",
+      astTransformers: [
+        "jest-preset-angular/build/InlineFilesTransformer",
+        "jest-preset-angular/build/StripStylesTransformer",
+      ],
+    },
   },
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "html"],
   coverageDirectory: "../../../coverage/libs/shared/utils",
-  globals: { "ts-jest": { tsConfig: "<rootDir>/tsconfig.spec.json" } },
+  snapshotSerializers: [
+    "jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js",
+    "jest-preset-angular/build/AngularSnapshotSerializer.js",
+    "jest-preset-angular/build/HTMLCommentSerializer.js",
+  ],
 };

@@ -8,3 +8,6 @@ export * from './lib/components';
 export * from './lib/services';
 export * from './lib/shared.animations';
 export * from './lib/decorators';
+export * from './lib/directives';
+export * from "./lib/pages";
+export * from "./lib/pipes";

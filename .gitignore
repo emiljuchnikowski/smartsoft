@@ -53,3 +53,4 @@
 /libs/crud/shell/nestjs/package-lock.json
 /libs/auth/shell/nestjs/dist/
 /libs/auth/shell/app-services/dist/
+/libs/shared/users/dist/

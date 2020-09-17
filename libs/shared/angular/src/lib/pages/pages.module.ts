@@ -6,7 +6,7 @@ import {DetailsPage} from "./details/details.page";
 import {SharedComponentsModule} from "../components/components.module";
 import {SharedDirectivesModule} from "../directives/directives.module";
 
-export const COMPONENTS = [
+const COMPONENTS = [
     DetailsPage
 ];
 
