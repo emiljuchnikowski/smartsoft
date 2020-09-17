@@ -21,10 +21,10 @@
       "tags": []
     },
     "auth-shell-angular": {
-      "tags": ["scope:auth", "type:shell"]
+      "tags": []
     },
     "auth-shell-dtos": {
-      "tags": ["scope:auth", "type:shell"]
+      "tags": []
     },
     "crud-domain": {
       "tags": ["scope:crud", "type:domain"]
@@ -84,10 +84,10 @@
       "tags": ["scope:shared", "type:shell"]
     },
     "shared-angular": {
-      "tags": []
+      "tags": ["scope:shared", "type:shell"]
     },
     "shared-models": {
-      "tags": []
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-mongo": {
       "tags": ["scope:shared", "type:util"]

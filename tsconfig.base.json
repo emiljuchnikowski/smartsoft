@@ -71,8 +71,7 @@
       "@smartsoft001/mongo": ["libs/shared/mongo/src/index.ts"],
       "@smartsoft001/payu": ["libs/shared/payu/src/index.ts"],
       "@smartsoft001/files-nestjs": ["libs/shared/files/nestjs/src/index.ts"],
-      "@smartsoft001/paypal": ["libs/shared/paypal/src/index.ts"],
-      "@smartsoft001/test": ["libs/test/src/index.ts"]
+      "@smartsoft001/paypal": ["libs/shared/paypal/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

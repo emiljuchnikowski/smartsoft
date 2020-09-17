@@ -26,16 +26,12 @@ export const initializer = (
   setDefaultTranslationsAndLang(translateService);
 };
 
-const ngrxImports = [
-  StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer) as ModuleWithProviders<StoreFeatureModule>,
-  EffectsModule.forFeature([AuthEffects]) as ModuleWithProviders<EffectsModule>
-];
-
 // @dynamic
 @NgModule({
   imports: [
     SharedModule,
-    ...ngrxImports
+    StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer) as ModuleWithProviders<StoreFeatureModule>,
+    EffectsModule.forFeature([AuthEffects]) as ModuleWithProviders<EffectsModule>
   ],
   providers: [AuthEffects, AuthFacade, AuthService],
   declarations: [LoginComponent, AuthDirective],
