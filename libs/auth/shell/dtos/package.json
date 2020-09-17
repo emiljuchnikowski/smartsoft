@@ -1,37 +1,12 @@
 {
-  "name": "@smartsoft001/auth-shared-dtos",
-  "version": "1.0.4",
+  "name": "@smartsoft001/auth-shell-dtos",
+  "version": "1.0.7",
   "description": "Utils to authorization",
-  "ngPackage": {
-    "lib": {
-      "entryFile": "src/index.ts"
-    },
-    "whitelistedNonPeerDependencies": [
-      "@smartsoft001/models"
-    ]
+  "peerDependencies": {
+    "@angular/common": "^10.1.2",
+    "@angular/core": "^10.1.2"
   },
-  "scripts": {
-    "refresh": "npm version patch && npm i && npm i @smartsoft001/models@latest --save"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
-  },
-  "keywords": [
-    "smartsoft",
-    "oauth",
-    "angular",
-    "nestjs"
-  ],
-  "main": "src/index.ts",
-  "author": "Emil Juchnikowski",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
-  },
-  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
   "dependencies": {
-    "@smartsoft001/models": "^1.0.8"
-  ,    "tslib": "^2.0.0"
-}
+    "tslib": "^2.0.0"
+  }
 }
