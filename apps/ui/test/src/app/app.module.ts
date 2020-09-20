@@ -1,5 +1,8 @@
 import { NgModule } from "@angular/core";
-import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from "@ngrx/router-store";
+import {
+  StoreRouterConnectingModule,
+  DefaultRouterStateSerializer,
+} from "@ngrx/router-store";
 import { RouterModule } from "@angular/router";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
@@ -13,10 +16,14 @@ import { IonicModule } from "@ionic/angular";
 import { AppComponent } from "./app.component";
 import { environment } from "../environments/environment";
 import { NgrxSharedModule, SharedModule } from "@smartsoft001/angular";
-import { AuthModule, PermissionsGuard } from "@smartsoft001/auth-shell-angular";
+import {
+  AUTH_REQUEST_BODY_PROVIDER,
+  AuthModule,
+  PermissionsGuard,
+} from "@smartsoft001/auth-shell-angular";
 import { HttpClientModule } from "@angular/common/http";
-import {CrudModule} from "@smartsoft001/crud-shell-angular";
-import {Todo} from "./todos/todo.dto";
+import { CrudModule } from "@smartsoft001/crud-shell-angular";
+import { Todo } from "./todos/todo.dto";
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,32 +34,32 @@ import {Todo} from "./todos/todo.dto";
         {
           path: "trans",
           loadChildren: () =>
-            import("./trans/trans.module").then(m => m.TransModule)
+            import("./trans/trans.module").then((m) => m.TransModule),
         },
         {
           path: "users",
           canActivate: [PermissionsGuard],
           data: {
-            expectedPermissions: ["admin"]
+            expectedPermissions: ["admin"],
           },
           loadChildren: () =>
-            import("./users/users.module").then(m => m.UsersModule)
+            import("./users/users.module").then((m) => m.UsersModule),
         },
         {
           path: "todos",
           canActivate: [PermissionsGuard],
           data: {
-            expectedPermissions: ["admin"]
+            expectedPermissions: ["admin"],
           },
           loadChildren: () =>
-            import("./todos/todos.module").then(m => m.TodosModule)
+            import("./todos/todos.module").then((m) => m.TodosModule),
         },
         {
           path: "login",
           loadChildren: () =>
-            import("./login/login.module").then(m => m.LoginModule)
+            import("./login/login.module").then((m) => m.LoginModule),
         },
-        { path: "", redirectTo: "/users", pathMatch: "full" }
+        { path: "", redirectTo: "/users", pathMatch: "full" },
       ],
       { initialNavigation: "enabled", useHash: true }
     ),
@@ -62,8 +69,8 @@ import {Todo} from "./todos/todo.dto";
         metaReducers: !environment.production ? [] : [],
         runtimeChecks: {
           strictActionImmutability: false,
-          strictStateImmutability: false
-        }
+          strictStateImmutability: false,
+        },
       }
     ),
     HttpClientModule,
@@ -73,14 +80,29 @@ import {Todo} from "./todos/todo.dto";
     SharedModule,
     AuthModule.forRoot({
       apiUrl: environment.apiUrl + "auth",
-      clientId: "admin"
+      clientId: "admin",
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
+    StoreRouterConnectingModule.forRoot({
+      serializer: DefaultRouterStateSerializer,
+    }),
     SharedModule,
-    NgrxSharedModule
+    NgrxSharedModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+
+  providers: [
+    {
+      provide: AUTH_REQUEST_BODY_PROVIDER,
+      useValue: {
+        get: async (baseBody) => {
+          return {
+            ...baseBody,
+            test: "test",
+          };
+        },
+      },
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

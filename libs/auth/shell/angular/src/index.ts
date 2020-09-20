@@ -3,6 +3,7 @@ export * from "./lib/auth.module";
 export * from "./lib/auth-shared.module";
 export * from "./lib/guards";
 export * from "./lib/services/auth/auth.service";
+export * from './lib/providers/request-body/request-body.provider';
 export * from "./lib/interceptors/auth/auth.interceptor";
 export * from "./lib/directives";
 export * from "./lib/components";
