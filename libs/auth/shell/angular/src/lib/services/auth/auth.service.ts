@@ -8,14 +8,14 @@ import {first, tap} from "rxjs/operators";
 import { AuthConfig } from "../../auth.config";
 import { IAuthToken } from "@smartsoft001/auth-domain";
 import { IUserCredentials } from "@smartsoft001/users";
+import {StorageService} from "@smartsoft001/angular";
 
 export const AUTH_TOKEN = "AUTH_TOKEN";
 
 @Injectable()
 export class AuthService {
-
   get token(): IAuthToken {
-    const str = sessionStorage.getItem(AUTH_TOKEN);
+    const str = this.storageService.getItem(AUTH_TOKEN);
 
     if (!str) return null;
 
@@ -30,14 +30,12 @@ export class AuthService {
     return tokenPayload.sub;
   }
 
-  constructor(@Optional() private config: AuthConfig, private http: HttpClient) {}
+  constructor(
+      @Optional() private config: AuthConfig,
+      private http: HttpClient,
+      private storageService: StorageService
+  ) {
 
-  static getToken(): IAuthToken {
-    const token = sessionStorage.getItem(AUTH_TOKEN);
-
-    if (!token) return null;
-
-    return JSON.parse(token) as IAuthToken;
   }
 
   createToken(userCreds: IUserCredentials): Observable<IAuthToken> {
@@ -50,7 +48,7 @@ export class AuthService {
       })
       .pipe(
         tap(token => {
-          sessionStorage.setItem(AUTH_TOKEN, JSON.stringify(token));
+          this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
         }),
         // TODO : fix
         first()
@@ -58,7 +56,7 @@ export class AuthService {
   }
 
   removeToken(): void {
-    sessionStorage.removeItem(AUTH_TOKEN);
+    this.storageService.removeItem(AUTH_TOKEN);
   }
 
   refreshToken(): Observable<IAuthToken> {
@@ -69,18 +67,18 @@ export class AuthService {
       })
       .pipe(
         tap(token => {
-          sessionStorage.setItem(AUTH_TOKEN, JSON.stringify(token));
+          this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
         })
       );
   }
 
   isAuthenticated(): boolean {
-    const token = AuthService.getToken();
+    const token = this.getToken();
     return !!token;
   }
 
   expectPermissions(permissions: Array<string>): boolean {
-    const token = AuthService.getToken();
+    const token = this.getToken();
 
     if (!token) return false;
 
@@ -93,5 +91,13 @@ export class AuthService {
         (tokenPayload.permissions as Array<string>).some(tp => p === tp)
       )
     );
+  }
+
+  private getToken(): IAuthToken {
+    const token = this.storageService.getItem(AUTH_TOKEN);
+
+    if (!token) return null;
+
+    return JSON.parse(token) as IAuthToken;
   }
 }

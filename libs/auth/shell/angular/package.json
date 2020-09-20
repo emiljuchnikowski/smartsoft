@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/auth-shell-angular",
-  "version": "1.0.36",
+  "version": "1.0.38",
   "peerDependencies": {
     "@angular/common": "^10.1.2",
     "@angular/core": "^10.1.2"

@@ -1,7 +1,7 @@
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from "@angular/core";
 import { DataPersistence } from "@nrwl/angular";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { TranslateService } from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {StoreFeatureModule, StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 
@@ -20,7 +20,7 @@ import {AuthService} from "./services/auth/auth.service";
 
 export const initializer = (
   facade: AuthFacade,
-  translateService: TranslateService
+   translateService: TranslateService
 ) => () => {
   facade.init();
   setDefaultTranslationsAndLang(translateService);
@@ -29,6 +29,7 @@ export const initializer = (
 // @dynamic
 @NgModule({
   imports: [
+      TranslateModule,
     SharedModule,
     StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer) as ModuleWithProviders<StoreFeatureModule>,
     EffectsModule.forFeature([AuthEffects]) as ModuleWithProviders<EffectsModule>
