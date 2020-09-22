@@ -45,9 +45,11 @@ export interface ITranslateData {
         lastName: string,
         password: string,
         passwordConfirm: string,
+        passwordReset: string,
         permissions: string,
         price: string,
         username: string,
+        send: string,
     };
     INPUT: {
         ERRORS: {
@@ -71,7 +73,7 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     delete: 'delete',
     undo: 'undo',
     search: 'search',
-    page: 'page',
+    page: 'page',    
 
     OBJECT: {
         deleted: 'object deleted'
@@ -90,9 +92,11 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
         lastName: 'last name',
         password: 'password',
         passwordConfirm: 'confirm password',
+        passwordReset: 'reset password',
         permissions: 'permissions',
         price: 'price',
-        username: 'user name'
+        username: 'user name',
+        send: 'send'
     },
     INPUT: {
         ERRORS: {
@@ -135,9 +139,11 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
         lastName: 'nazwisko',
         password: 'hasło',
         passwordConfirm: 'powtórz hasło',
+        passwordReset: 'Nie pamiętam hasła',
         permissions: 'uprawnienia',
         price: 'cena',
-        username: 'nazwa użytkownika'
+        username: 'nazwa użytkownika',
+        send: 'wyślij',
     },
     INPUT: {
         ERRORS: {

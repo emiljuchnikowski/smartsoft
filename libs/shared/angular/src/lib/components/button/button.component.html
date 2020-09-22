@@ -1,14 +1,13 @@
 <ng-container *ngIf="mode != 'confirm'; else confirmTpl">
-    <ion-button class="invoke-button" [type]="options?.type" (click)="invoke()" [disabled]="disabled || (options?.loading$ | async)">
+    <ion-button [expand]="options?.expand" [type]="options?.type" (click)="invoke()" [disabled]="disabled || (options?.loading$ | async)">
         <ion-spinner *ngIf="options?.loading$ | async; else content"></ion-spinner>
         <ng-template #content>
-            <ng-content ></ng-content>
+            <ng-content></ng-content>
         </ng-template>
     </ion-button>
-
 </ng-container>
 
 <ng-template #confirmTpl>
-    <ion-button color="light" (click)="confirmCancel()">{{'cancel' | translate}}</ion-button>
-    <ion-button (click)="confirmInvoke()">{{'confirm' | translate}}</ion-button>
+    <ion-button [expand]="options?.expand" color="light" (click)="confirmCancel()">{{'cancel' | translate}}</ion-button>
+    <ion-button [expand]="options?.expand" color="primary" (click)="confirmInvoke()">{{'confirm' | translate}}</ion-button>
 </ng-template>

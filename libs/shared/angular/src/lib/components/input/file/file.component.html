@@ -1,13 +1,9 @@
 <ng-container *ngIf="control">
-  <ion-label>
-    {{ translateKey | translate }}
-    <span *ngIf="fieldOptions?.required">*</span>
-  </ion-label>
-  <ion-input
-    type="file"
-    (change)="changeListener($event)"
-    [formControl]="control"
-    [attr.accept]="fieldOptions?.possibilities"
-    [attr.autofocus]="fieldOptions?.focused"
-  ></ion-input>
+    <ion-label position="stacked">
+        {{ translateKey | translate }}
+        <ion-text color="danger">
+            <span *ngIf="fieldOptions?.required">*</span>
+        </ion-text>
+    </ion-label>
+    <ion-input type="file" (change)="changeListener($event)" [formControl]="control" [attr.accept]="fieldOptions?.possibilities" [attr.autofocus]="fieldOptions?.focused"></ion-input>
 </ng-container>

@@ -5,7 +5,7 @@
         </ion-list-header>
 
         <ion-item *ngFor="let item of possibilities$ | async">
-            <ion-label>{{ item.text  | translate }}</ion-label>
+            <ion-label>{{ item.text | translate }}</ion-label>
             <ion-radio [value]="item.id"></ion-radio>
         </ion-item>
     </ion-radio-group>
