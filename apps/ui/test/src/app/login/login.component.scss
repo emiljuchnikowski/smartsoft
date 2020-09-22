@@ -1,5 +1,31 @@
+@import "smart-styles.scss";
 :host {
-    p {
+    .header-container {
+        --background: transparent !important;
+        text-align: center;
+        width: 100%;
+        h3 {
+            font-family: var(--ion-font);
+            color: var(--smart-color-primary-contrast);
+            font-size: 24px;
+            margin-top: 4px;
+            margin-bottom: 0px;
+            strong {
+                font-family: 'Roboto';
+            }
+        }
+        p {
+            text-align: center;
+            font-weight: 400;
+            margin-top: -4px;
+            color: $smart-color-primary-contrast;
+        }
+        ion-icon {
+            font-size: 42px;
+            text-align: center;
+        }
+    }
+    .card-title {
         text-align: center;
     }
 }

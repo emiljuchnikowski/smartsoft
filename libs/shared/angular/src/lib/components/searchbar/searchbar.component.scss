@@ -3,3 +3,9 @@
     --border-radius: 2.1rem;
     --background: var(--ion-color-light);
 }
+
+ion-searchbar {
+    &.ios {
+        display: inline;
+    }
+}

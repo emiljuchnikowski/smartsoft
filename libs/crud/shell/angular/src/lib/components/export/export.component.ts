@@ -19,7 +19,8 @@ export class ExportComponent<T extends IEntity<string>> {
         limit: null
       }, 'csv');
       this.popoverService.close();
-    }
+    },
+    expand: 'block'
   };
   buttonExportXlsxOptions: IButtonOptions = {
     click: () => {
@@ -28,7 +29,8 @@ export class ExportComponent<T extends IEntity<string>> {
         limit: null
       }, 'xlsx');
       this.popoverService.close();
-    }
+    },
+    expand: "block"
   };
 
   constructor(

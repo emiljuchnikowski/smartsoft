@@ -1,7 +1,12 @@
 <ng-container *ngIf="control">
-    <ion-label position="floating">
-        {{ translateKey | translate }}
-        <span *ngIf="fieldOptions?.required">*</span>
-    </ion-label>
-    <ion-checkbox [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-checkbox>
+    <ion-item lines="none">
+        <ion-label class="checkbox-label">
+            {{ translateKey | translate }}
+            <ion-text color="danger">
+                <span *ngIf="fieldOptions?.required">*</span>
+            </ion-text>
+        </ion-label>
+        <ion-checkbox [formControl]="control" [attr.autofocus]="fieldOptions?.focused" slot="end"></ion-checkbox>
+    </ion-item>
+
 </ng-container>

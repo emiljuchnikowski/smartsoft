@@ -1,59 +1,26 @@
 <ion-item>
     <ng-container [ngSwitch]="fieldOptions?.type">
-        <smart-input-text class="input-type" *ngSwitchCase="FieldType.text"
-                            [options]="options"
-                            [fieldOptions]="fieldOptions"
-        ></smart-input-text>
+        <smart-input-text class="input-type" *ngSwitchCase="FieldType.text" [options]="options" [fieldOptions]="fieldOptions"></smart-input-text>
 
-        <smart-input-password class="input-type" *ngSwitchCase="FieldType.password"
-                          [options]="options"
-                          [fieldOptions]="fieldOptions"
-        ></smart-input-password>
+        <smart-input-password class="input-type" *ngSwitchCase="FieldType.password" [options]="options" [fieldOptions]="fieldOptions"></smart-input-password>
 
-        <smart-input-flag class="input-type" *ngSwitchCase="FieldType.flag"
-                              [options]="options"
-                              [fieldOptions]="fieldOptions"
-        ></smart-input-flag>
+        <smart-input-flag class="input-type" *ngSwitchCase="FieldType.flag" [options]="options" [fieldOptions]="fieldOptions"></smart-input-flag>
 
-        <smart-input-file class="input-type" *ngSwitchCase="FieldType.file"
-                          [options]="options"
-                          [fieldOptions]="fieldOptions"
-        ></smart-input-file>
+        <smart-input-file class="input-type" *ngSwitchCase="FieldType.file" [options]="options" [fieldOptions]="fieldOptions"></smart-input-file>
 
-        <smart-input-enum class="input-type" *ngSwitchCase="FieldType.enum"
-                          [options]="options"
-                          [fieldOptions]="fieldOptions"
-        ></smart-input-enum>
+        <smart-input-enum class="input-type" *ngSwitchCase="FieldType.enum" [options]="options" [fieldOptions]="fieldOptions"></smart-input-enum>
 
-        <smart-input-email class="input-type" *ngSwitchCase="FieldType.email"
-                          [options]="options"
-                          [fieldOptions]="fieldOptions"
-        ></smart-input-email>
+        <smart-input-email class="input-type" *ngSwitchCase="FieldType.email" [options]="options" [fieldOptions]="fieldOptions"></smart-input-email>
 
-        <smart-input-currency class="input-type" *ngSwitchCase="FieldType.currency"
-                           [options]="options"
-                           [fieldOptions]="fieldOptions"
-        ></smart-input-currency>
+        <smart-input-currency class="input-type" *ngSwitchCase="FieldType.currency" [options]="options" [fieldOptions]="fieldOptions"></smart-input-currency>
 
-        <smart-input-date class="input-type" *ngSwitchCase="FieldType.date"
-                              [options]="options"
-                              [fieldOptions]="fieldOptions"
-        ></smart-input-date>
+        <smart-input-date class="input-type" *ngSwitchCase="FieldType.date" [options]="options" [fieldOptions]="fieldOptions"></smart-input-date>
 
-        <smart-input-date-with-edit class="input-type" *ngSwitchCase="FieldType.dateWithEdit"
-                          [options]="options"
-                          [fieldOptions]="fieldOptions"
-        ></smart-input-date-with-edit>
+        <smart-input-date-with-edit class="input-type" *ngSwitchCase="FieldType.dateWithEdit" [options]="options" [fieldOptions]="fieldOptions"></smart-input-date-with-edit>
 
-        <smart-input-radio class="input-type" *ngSwitchCase="FieldType.radio"
-                          [options]="options"
-                          [fieldOptions]="fieldOptions"
-        ></smart-input-radio>
+        <smart-input-radio class="input-type" *ngSwitchCase="FieldType.radio" [options]="options" [fieldOptions]="fieldOptions"></smart-input-radio>
 
-        <smart-input-int class="input-type" *ngSwitchCase="FieldType.int"
-                          [options]="options"
-                          [fieldOptions]="fieldOptions"
-        ></smart-input-int>
+        <smart-input-int class="input-type" *ngSwitchCase="FieldType.int" [options]="options" [fieldOptions]="fieldOptions"></smart-input-int>
 
     </ng-container>
 </ion-item>

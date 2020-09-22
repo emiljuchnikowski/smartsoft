@@ -8,19 +8,25 @@ tr {
 
 td {
     &.mat-cell {
-        padding-left: 6px !important;
+        padding-left: .6rem !important;
         border-right: .1rem solid #f6f6f6;
         text-overflow: unset;
         &:last-child {
             border-right: 0;
         }
+        &:first-child {
+            padding-left: 1.2rem !important;
+        }
     }
 }
 
 th {
-    padding-left: 6px !important;
+    padding-left: .6rem !important;
     &.mat-header-cell {
         color: var(--ion-color-secondary) !important;
+    }
+    &:first-child {
+        padding-left: 1.2rem !important;
     }
     .mat-sort-header-button {
         color: var(--ion-color-secondary);

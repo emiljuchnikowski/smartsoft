@@ -30,6 +30,11 @@ import {Todo} from "./todos/todo.dto";
             import("./trans/trans.module").then(m => m.TransModule)
         },
         {
+          path: "todos",
+          loadChildren: () =>
+            import("./todos/todos.module").then(m => m.TodosModule)
+        },
+        {
           path: "users",
           canActivate: [PermissionsGuard],
           data: {

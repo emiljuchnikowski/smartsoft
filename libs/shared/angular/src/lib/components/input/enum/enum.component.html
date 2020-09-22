@@ -1,10 +1,12 @@
-<ion-label>
+<ion-label class="main-label">
     {{ translateKey | translate }}
-    <span *ngIf="fieldOptions?.required">*</span>:
+    <ion-text color="danger">
+        <span *ngIf="fieldOptions?.required">*</span>
+    </ion-text>
 </ion-label>
 
 <ion-item lines="none" *ngFor="let item of fieldOptions?.possibilities | smartEnumToList">
-    <ion-label>{{item | translate}}</ion-label>
+    <ion-label class="checkbox-label">{{item | translate}}</ion-label>
 
     <ion-checkbox slot="end" *ngIf="checked(item); else noChecned" [checked]="true" (ionChange)="change(item)"></ion-checkbox>
     <ng-template #noChecned>

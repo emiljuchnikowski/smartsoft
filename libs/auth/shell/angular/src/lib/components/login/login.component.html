@@ -1,27 +1,14 @@
 <div class="smart-bg-container">
-    <ion-item lines="none" class="login-header">
-
-
-        <ion-label class="ion-text-wrap">
-            <!-- to powinno być logo -->
-            <ion-icon name="bulb-outline" color="light"></ion-icon>
-
-            <!-- nazwa i tekst też powinien być indywidualny -->
-            <ion-text color="primary">
-                <h3><strong>Smart</strong>Admin</h3>
-            </ion-text>
-            <p><small>panel administracyjny smartsoft</small></p>
-
-        </ion-label>
-    </ion-item>
+    <ng-content select='.header-container'></ng-content>
     <smart-card>
-        <ng-content></ng-content>
+        <ng-content select='.card-title'></ng-content>
 
-        <smart-form (invokeSubmit)="login()" [options]="formOptions" autocomplete="off"></smart-form>
+        <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
 
         <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
         </smart-button>
-        <a href="#" title="Resetowanie hasła">
-            <ion-icon name="help-circle-outline"></ion-icon> Nie pamiętam hasła</a>
+        <!-- TODO:reset password option -->
+        <!-- <a href="#">
+            <ion-icon name="help-circle-outline"></ion-icon> {{ 'passwordReset' | translate }}</a> -->
     </smart-card>
 </div>

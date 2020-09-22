@@ -1,3 +1,4 @@
+$smart-mobile-breakpoint: 420px;
 @import 'sass/smart-colors';
 @import 'sass/smart-buttons';
 // Client customization
@@ -142,7 +143,7 @@
     --ion-safe-area-left: 0;
     //
     // Media queries breakpoints
-    --mobile-breakpoint: 420px;
+    --mobile-breakpoint: #{$smart-mobile-breakpoint};
 }
 
 :root[mode="md"] {
