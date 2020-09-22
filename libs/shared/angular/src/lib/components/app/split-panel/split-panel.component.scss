@@ -12,3 +12,48 @@ ion-progress-bar {
     position: absolute;
     top: 0;
 }
+
+ion-menu {
+    --ion-background-color: #FFF;
+    ion-toolbar {
+        // --ion-background-color: var(--ion-color-primary);
+        --ion-background-color: linear-gradient(33deg, var(--ion-color-primary), var(--ion-color-tertiary));
+        --color: var(--ion-color-light);
+        &.ios {
+            --background: linear-gradient(33deg, var(--ion-color-primary), var(--ion-color-tertiary));
+            --color: var(--ion-color-light);
+        }
+    }
+    ion-list {
+        padding: 0;
+    }
+    ion-item {
+        --background-hover: linear-gradient(90deg, transparent, var(--ion-color-light));
+        --background-focused: linear-gradient(90deg, transparent, var(--ion-color-light-shade));
+        --border-color: var(--ion-color-light-shade);
+        ion-icon {
+            margin-left: 1.6rem;
+            margin-right: 1.6rem;
+        }
+        &.active-item {
+            --border-width: 0;
+            --border-color: var(--ion-color-light-shade);
+            --ion-background-color: linear-gradient(90deg, transparent, var(--ion-color-light));
+            --color: var(--ion-color-primary);
+            ion-icon {
+                --ion-text-color: var(--ion-color-primary);
+            }
+        }
+    }
+    ion-item-divider {
+        font-weight: 300;
+        font-size: 1.2rem;
+        --ion-background-color: linear-gradient(90deg, transparent, var(--ion-color-light));
+        ion-icon {
+            margin-left: 1.6rem;
+            margin-right: 1.6rem;
+            font-size: 1.6rem;
+            --ion-text-color: var(--ion-color-primary);
+        }
+    }
+}

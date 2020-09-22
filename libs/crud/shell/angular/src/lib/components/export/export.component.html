@@ -1,9 +1,8 @@
-<smart-button [disabled]="loading$ | async" [options]="buttonExportCsvOptions">CSV</smart-button>
-<br/>
-<smart-button [disabled]="loading$ | async" [options]="buttonExportXlsxOptions">XLSX</smart-button>
-<br/>
-<br/>
-<div *ngIf="loading$ | async" style="height: 50px; horiz-align: center">
-    <smart-loader style="margin-left: 45%" [show]="true"></smart-loader>
+<div class="smart-content">
+    <p>
+        <smart-button [options]="buttonExportCsvOptions">CSV</smart-button>
+    </p>
+    <p>
+        <smart-button [options]="buttonExportXlsxOptions">XLSX</smart-button>
+    </p>
 </div>
-

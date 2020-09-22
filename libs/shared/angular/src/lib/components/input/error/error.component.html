@@ -1,10 +1,9 @@
 <span *ngIf="errors?.required; else checkConfirm">
-    {{ 'INPUT.ERRORS.required' | translate }}
+    <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.required' | translate }}
 </span>
 
 <ng-template #checkConfirm>
     <span *ngIf="errors?.confirm">
-        {{ 'INPUT.ERRORS.confirm' | translate }}
+        <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.confirm' | translate }}
     </span>
 </ng-template>
-

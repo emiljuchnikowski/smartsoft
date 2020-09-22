@@ -37,7 +37,8 @@ export class ExportComponent<T extends IEntity<string>> {
           this.popoverService.close();
           subscription.unsubscribe();
         });
-      }
+      },
+      expand: 'block'
     }
   }
 }

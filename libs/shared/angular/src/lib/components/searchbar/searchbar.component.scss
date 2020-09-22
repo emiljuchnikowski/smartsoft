@@ -1,0 +1,11 @@
+.searchbar-input {
+    border-radius: 2.1rem;
+    --border-radius: 2.1rem;
+    --background: var(--ion-color-light);
+}
+
+ion-searchbar {
+    &.ios {
+        display: inline;
+    }
+}

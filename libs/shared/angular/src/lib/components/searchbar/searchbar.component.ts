@@ -6,7 +6,8 @@ import {
   Input,
   OnDestroy,
   Output,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Subscription } from "rxjs";
@@ -17,6 +18,7 @@ import {debounceTime} from "rxjs/operators";
   selector: "smart-searchbar",
   templateUrl: "./searchbar.component.html",
   styleUrls: ["./searchbar.component.scss"],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchbarComponent implements OnDestroy, AfterViewInit {

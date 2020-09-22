@@ -1,9 +1,14 @@
-<smart-card>
-  <ng-content></ng-content>
+<div class="smart-bg-container">
+    <ng-content select='.header-container'></ng-content>
+    <smart-card>
+        <ng-content select='.card-title'></ng-content>
 
-  <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
+        <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
 
-  <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{
-    "FORM.login" | translate
-  }}</smart-button>
-</smart-card>
+        <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
+        </smart-button>
+        <!-- TODO:reset password option -->
+        <!-- <a href="#">
+            <ion-icon name="help-circle-outline"></ion-icon> {{ 'passwordReset' | translate }}</a> -->
+    </smart-card>
+</div>

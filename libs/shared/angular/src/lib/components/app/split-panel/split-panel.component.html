@@ -35,8 +35,8 @@
         <ion-footer>
             <ion-list *ngIf="logged$ | async">
                 <ion-item-divider>
-                    {{ "APP.logged" | translate }}: &nbsp;&nbsp;
-                    <b>{{ username$ | async }}</b>
+                    <ion-icon name="person" slot="start"></ion-icon>
+                    {{ "APP.logged" | translate }}:&nbsp;<b>{{ username$ | async }}</b>
                 </ion-item-divider>
                 <ion-item button (click)="logout()">
                     <ion-icon name="log-out" slot="start"></ion-icon>
