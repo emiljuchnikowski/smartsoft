@@ -1,10 +1,11 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, ElementRef, OnInit} from "@angular/core";
 import {of} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
-
-import {IAppOptions, IMenuItem} from "@smartsoft001/angular";
-import {AuthFacade} from "@smartsoft001/auth-shell-angular";
 import {map} from "rxjs/operators";
+
+import {IAppOptions, IMenuItem, IStyle} from "@smartsoft001/angular";
+import {AuthFacade} from "@smartsoft001/auth-shell-angular";
+import { variables } from "../theme/variables";
 
 const MENU_ITEMS: Array<IMenuItem> = [
   {
@@ -38,7 +39,8 @@ export class AppComponent implements OnInit {
     },
     menu: {
       items$: of(MENU_ITEMS)
-    }
+    },
+    style: variables
   };
 
   constructor(translateService: TranslateService, private authFacade: AuthFacade) {

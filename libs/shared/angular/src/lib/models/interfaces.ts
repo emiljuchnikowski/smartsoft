@@ -5,6 +5,7 @@ import { IAppProvider } from "../providers/interfaces";
 import { IFieldOptions } from "@smartsoft001/models";
 import { IEntity } from "@smartsoft001/domain-core";
 import {ComponentFactory, PipeTransform} from "@angular/core";
+import {IStyle} from "./style";
 
 export interface IAppOptions {
   provider: IAppProvider;
@@ -12,6 +13,7 @@ export interface IAppOptions {
     showForAnonymous?: boolean;
     items$?: Observable<IMenuItem[]>;
   };
+  style?: IStyle;
 }
 
 export interface IButtonOptions {

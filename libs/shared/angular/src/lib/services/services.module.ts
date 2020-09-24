@@ -11,6 +11,7 @@ import { ModalService } from "./modal/modal.service";
 import { DynamicComponentLoader } from "./dynamic-component-loader/dynamic-component-loader.service";
 import { PopoverService } from "./popover/popover.service";
 import { StorageService } from "./storage/storage.service";
+import { StyleService } from "./style/style.service";
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { StorageService } from "./storage/storage.service";
     DynamicComponentLoader,
     PopoverService,
     StorageService,
+    StyleService,
   ],
 })
 export class SharedServicesModule {}

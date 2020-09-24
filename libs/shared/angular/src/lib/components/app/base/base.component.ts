@@ -1,10 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Input, OnDestroy, Directive } from "@angular/core";
+import {AfterViewInit, ChangeDetectorRef, Input, OnDestroy, Directive, ElementRef} from "@angular/core";
 import {Observable, Subscription} from "rxjs";
 import {debounceTime, filter, map} from "rxjs/operators";
 import {LoadingController} from "@ionic/angular";
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from "@angular/router";
 
 import {IAppOptions, IMenuItem} from "../../../models/interfaces";
+import {StyleService} from "../../../services/style/style.service";
 
 @Directive()
 export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
@@ -24,10 +25,18 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
 
         this.logged$ = this._options.provider.logged$;
         this.username$ = this._options.provider.username$;
+
+        this.styleService.set(this._options.style);
     }
 
-    protected constructor(private router: Router, private cd: ChangeDetectorRef) {
+    protected constructor(
+        private router: Router,
+        private cd: ChangeDetectorRef,
+        private elementRef: ElementRef,
+        private styleService: StyleService
+    ) {
         this.initSelectedPath();
+        this.styleService.init(elementRef);
     }
 
     logout(): void {

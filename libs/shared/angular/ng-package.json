@@ -2,6 +2,10 @@
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/libs/shared/angular",
   "lib": {
-    "entryFile": "src/index.ts"
+    "entryFile": "src/index.ts",
+    "styleIncludePaths": [
+      "../../../libs/shared/angular/src/lib/styles",
+      "../../../apps/ui/test/src/theme"
+    ]
   }
 }
