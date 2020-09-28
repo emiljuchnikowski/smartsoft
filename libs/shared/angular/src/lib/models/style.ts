@@ -55,4 +55,14 @@ export type StyleType =
     | "color-light-contrast-rgb"
     | "color-light-shade"
     | "color-light-tint"
+    // font
+    | "font"
+    | "font-weight"
+    | "font-style"
+    | "ios-font"
+    | "ios-font-weight"
+    | "ios-font-style"
+    | "md-font"
+    | "md-font-weight"
+    | "md-font-style"
 

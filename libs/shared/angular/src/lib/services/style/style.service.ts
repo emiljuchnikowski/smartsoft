@@ -1,4 +1,5 @@
 import {ElementRef, Injectable} from "@angular/core";
+import { Platform } from '@ionic/angular';
 
 import {IStyle, StyleType} from "../../models/style";
 
@@ -7,12 +8,15 @@ export class StyleService {
     private _elementRef: ElementRef;
     private _style: IStyle;
 
-    static create(el: ElementRef, style?: Partial<IStyle>): StyleService {
-        const result = new StyleService();
+    static create(platform: Platform, el: ElementRef, style?: Partial<IStyle>): StyleService {
+        const result = new StyleService(platform);
 
         result.init(el, style);
 
         return result;
+    }
+
+    constructor(private platform: Platform) {
     }
 
     init(el: ElementRef, style?: Partial<IStyle>): void {
@@ -45,6 +49,8 @@ export class StyleService {
         this.setColor('dark');
         this.setColor('medium');
         this.setColor('light');
+
+        this.setFont();
     }
 
     private setColor(name: string): void {
@@ -68,5 +74,21 @@ export class StyleService {
 
         const native: HTMLElement = this._elementRef.nativeElement;
         native.style.setProperty(property, this._style[type]);
+    }
+
+    private setFont(): void {
+        if (this.platform.is('ios')) {
+            this.setProperty('--ion-font-family', 'ios-font');
+            this.setProperty('--default-font-weight', 'ios-font-weight');
+            this.setProperty('--default-font-style', 'ios-font-style');
+        } else if (this.platform.is("android")) {
+            this.setProperty('--ion-font-family', 'md-font');
+            this.setProperty('--default-font-weight', 'md-font-weight');
+            this.setProperty('--default-font-style', 'md-font-style');
+        } else {
+            this.setProperty('--ion-font-family', 'font');
+            this.setProperty('--default-font-weight', 'font-weight');
+            this.setProperty('--default-font-style', 'font-style');
+        }
     }
 }
