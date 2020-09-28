@@ -1,5 +1,6 @@
-import {ElementRef, Injectable} from "@angular/core";
+import {ElementRef, Inject, Injectable, PLATFORM_ID} from "@angular/core";
 import { Platform } from '@ionic/angular';
+import {isPlatformBrowser} from "@angular/common";
 
 import {IStyle, StyleType} from "../../models/style";
 
@@ -8,15 +9,15 @@ export class StyleService {
     private _elementRef: ElementRef;
     private _style: IStyle;
 
-    static create(platform: Platform, el: ElementRef, style?: Partial<IStyle>): StyleService {
-        const result = new StyleService(platform);
+    static create(platform: Platform, platformId: Object, el: ElementRef, style?: Partial<IStyle>): StyleService {
+        const result = new StyleService(platform, platformId);
 
         result.init(el, style);
 
         return result;
     }
 
-    constructor(private platform: Platform) {
+    constructor(private platform: Platform, @Inject(PLATFORM_ID) private platformId: Object) {
     }
 
     init(el: ElementRef, style?: Partial<IStyle>): void {
@@ -79,11 +80,11 @@ export class StyleService {
     }
 
     private setFont(): void {
-        if (this.platform.is('ios')) {
+        if (isPlatformBrowser(this.platformId) && this.platform.is('ios')) {
             this.setProperty('--ion-font-family', 'ios-font');
             this.setProperty('--default-font-weight', 'ios-font-weight');
             this.setProperty('--default-font-style', 'ios-font-style');
-        } else if (this.platform.is("android")) {
+        } else if (isPlatformBrowser(this.platformId) && this.platform.is("android")) {
             this.setProperty('--ion-font-family', 'md-font');
             this.setProperty('--default-font-weight', 'md-font-weight');
             this.setProperty('--default-font-style', 'md-font-style');
