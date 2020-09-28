@@ -73,4 +73,6 @@ export type StyleType =
     | "button-padding-top"
     | "button-padding-bottom"
     | "button-icon-size"
+    // media queries breakpoints
+    | "mobile-breakpoint"
 

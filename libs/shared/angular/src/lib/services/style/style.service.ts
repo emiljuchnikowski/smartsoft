@@ -52,6 +52,7 @@ export class StyleService {
 
         this.setFont();
         this.setButton();
+        this.setMobileBreakpoint();
     }
 
     private setColor(name: string): void {
@@ -101,5 +102,9 @@ export class StyleService {
         this.setProperty('--smart-button-padding-top', 'button-padding-top');
         this.setProperty('--smart-button-padding-bottom', 'button-padding-bottom');
         this.setProperty('--smart-button-icon-size', 'button-icon-size');
+    }
+
+    private setMobileBreakpoint(): void {
+        this.setProperty('--mobile-breakpoint', 'mobile-breakpoint');
     }
 }
