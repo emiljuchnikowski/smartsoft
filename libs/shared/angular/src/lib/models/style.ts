@@ -65,4 +65,12 @@ export type StyleType =
     | "md-font"
     | "md-font-weight"
     | "md-font-style"
+    // button
+    | "button-height"
+    | "button-min-width"
+    | "button-padding-right"
+    | "button-padding-left"
+    | "button-padding-top"
+    | "button-padding-bottom"
+    | "button-icon-size"
 

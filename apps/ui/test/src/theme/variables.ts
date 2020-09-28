@@ -7,5 +7,5 @@ export const variables = {
   "color-secondary": "red",
   "color-secondary-rgb": "15, 76, 129",
 
-  "font": "Times"
+  "font": "Times",
 } as IStyle;

@@ -51,6 +51,7 @@ export class StyleService {
         this.setColor('light');
 
         this.setFont();
+        this.setButton();
     }
 
     private setColor(name: string): void {
@@ -90,5 +91,15 @@ export class StyleService {
             this.setProperty('--default-font-weight', 'font-weight');
             this.setProperty('--default-font-style', 'font-style');
         }
+    }
+
+    private setButton(): void {
+        this.setProperty('--smart-button-height', 'button-height');
+        this.setProperty('--smart-button-min-width', 'button-min-width');
+        this.setProperty('--smart-button-padding-right', 'button-padding-right');
+        this.setProperty('--smart-button-padding-left', 'button-padding-left');
+        this.setProperty('--smart-button-padding-top', 'button-padding-top');
+        this.setProperty('--smart-button-padding-bottom', 'button-padding-bottom');
+        this.setProperty('--smart-button-icon-size', 'button-icon-size');
     }
 }
