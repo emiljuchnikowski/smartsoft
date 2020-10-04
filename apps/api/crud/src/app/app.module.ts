@@ -47,7 +47,9 @@ if (process.env.DB_USERNAME) {
         update: process.env.PERMISSION_UPDATE ? process.env.PERMISSION_UPDATE.split(',') : null,
         delete: process.env.PERMISSION_DELETE ? process.env.PERMISSION_DELETE.split(',') : null
       },
-      db: dbOptions
+      db: dbOptions,
+      restApi: true,
+      socket: true
     })
   ],
   providers: [

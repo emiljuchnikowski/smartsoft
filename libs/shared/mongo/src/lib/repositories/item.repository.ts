@@ -3,17 +3,14 @@ import {ChangeStream, MongoClient} from "mongodb";
 import {Observable, Observer} from "rxjs";
 import {finalize, share} from "rxjs/operators";
 
-import { IEntity, IItemRepository } from "@smartsoft001/domain-core";
-import { IUser } from "@smartsoft001/users";
+import { IEntity, IItemRepository, ISpecification} from "@smartsoft001/domain-core";
+import {IUser} from "@smartsoft001/users";
 import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
 
-import { MongoConfig } from "../mongo.config";
+import {MongoConfig} from "../mongo.config";
 
 @Injectable()
-export class MongoItemRepository<
-  T extends IEntity<string>
-> extends IItemRepository<T> {
-
+export class MongoItemRepository<T extends IEntity<string>> extends IItemRepository<T> {
   constructor(private config: MongoConfig) {
     super();
   }
@@ -207,7 +204,7 @@ export class MongoItemRepository<
 
   getByCriteria(
     criteria: any,
-    options: any
+    options: any = {}
   ): Promise<{ data: T[]; totalCount: number }> {
     return new Promise<{ data: T[]; totalCount: number }>((res, rej) => {
       MongoClient.connect(this.getUrl(), async (err, client) => {
@@ -235,6 +232,10 @@ export class MongoItemRepository<
         });
       });
     });
+  }
+
+  getBySpecification(spec: ISpecification, options: any = {}): Promise<{ data: T[]; totalCount: number; }> {
+    return this.getByCriteria(spec.criteria, options);
   }
 
   changesByCriteria(criteria: { id?: string }): Observable<ItemChangedData> {

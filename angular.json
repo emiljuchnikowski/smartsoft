@@ -264,7 +264,6 @@
               "includePaths": [
                 "libs/shared/angular/src/lib/styles",
                 "apps/ui/test/src/theme"
-
               ]
             },
             "allowedCommonJsDependencies": [
@@ -426,8 +425,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/crud/domain/tsconfig.lib.json",
               "libs/crud/domain/tsconfig.spec.json"
@@ -440,6 +440,16 @@
           "options": {
             "jestConfig": "libs/crud/domain/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/crud/domain",
+            "tsConfig": "libs/crud/domain/tsconfig.lib.json",
+            "packageJson": "libs/crud/domain/package.json",
+            "main": "libs/crud/domain/src/index.ts",
+            "assets": ["libs/crud/domain/*.md"]
           }
         }
       }
@@ -506,8 +516,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/crud/shell/app-services/tsconfig.lib.json",
               "libs/crud/shell/app-services/tsconfig.spec.json"
@@ -523,6 +534,16 @@
           "options": {
             "jestConfig": "libs/crud/shell/app-services/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/crud/shell/app-services",
+            "tsConfig": "libs/crud/shell/app-services/tsconfig.lib.json",
+            "packageJson": "libs/crud/shell/app-services/package.json",
+            "main": "libs/crud/shell/app-services/src/index.ts",
+            "assets": ["libs/crud/shell/app-services/*.md"]
           }
         }
       }
@@ -559,8 +580,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/crud/shell/nestjs/tsconfig.lib.json",
               "libs/crud/shell/nestjs/tsconfig.spec.json"
@@ -573,6 +595,16 @@
           "options": {
             "jestConfig": "libs/crud/shell/nestjs/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/crud/shell/nestjs",
+            "tsConfig": "libs/crud/shell/nestjs/tsconfig.lib.json",
+            "packageJson": "libs/crud/shell/nestjs/package.json",
+            "main": "libs/crud/shell/nestjs/src/index.ts",
+            "assets": ["libs/crud/shell/nestjs/*.md"]
           }
         }
       }

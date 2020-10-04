@@ -1,10 +1,14 @@
 module.exports = {
-  name: "auth-shell-nestjs",
+  name: "crud-shell-nestjs",
   preset: "../../../../jest.config.js",
+  globals: {
+    "ts-jest": {
+      tsConfig: "<rootDir>/tsconfig.spec.json",
+    },
+  },
   transform: {
     "^.+\\.[tj]sx?$": "ts-jest",
   },
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "html"],
-  coverageDirectory: "../../../../coverage/libs/auth/shell/nestjs",
-  globals: { "ts-jest": { tsConfig: "<rootDir>/tsconfig.spec.json" } },
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
+  coverageDirectory: "../../../../coverage/libs/crud/shell/nestjs",
 };

@@ -6,7 +6,7 @@ import { CqrsModule } from "@nestjs/cqrs";
 import {
   COMMAND_HANDLERS,
   QUERY_HANDLERS,
-  SERVICES
+  SERVICES,
 } from "@smartsoft001/crud-shell-app-services";
 import { SharedConfig, SharedModule } from "@smartsoft001/nestjs";
 import { DOMAIN_HANDLERS } from "@smartsoft001/crud-domain";
@@ -28,31 +28,41 @@ export class CrudShellNestjsModule {
         password?: string;
         collection?: string;
       };
+    } & {
+      restApi: boolean;
+      socket: boolean;
     }
   ): DynamicModule {
     return {
       module: CrudShellNestjsModule,
-      controllers: CONTROLLERS,
+      controllers: options.restApi ? CONTROLLERS : [],
       providers: [
         ...SERVICES,
         ...COMMAND_HANDLERS,
         ...DOMAIN_HANDLERS,
         ...QUERY_HANDLERS,
-        ...GATEWAYS,
-        AuthJwtGuard
+        ...(options.socket ? GATEWAYS : []),
+        AuthJwtGuard,
       ],
       imports: [
-        PassportModule.register({ defaultStrategy: "jwt", session: false }),
-        JwtModule.register({
-          secret: options.tokenConfig.secretOrPrivateKey,
-          signOptions: {
-            expiresIn: options.tokenConfig.expiredIn
-          }
-        }),
+        ...(options.restApi
+          ? [
+              PassportModule.register({
+                defaultStrategy: "jwt",
+                session: false,
+              }),
+              JwtModule.register({
+                secret: options.tokenConfig.secretOrPrivateKey,
+                signOptions: {
+                  expiresIn: options.tokenConfig.expiredIn,
+                },
+              }),
+            ]
+          : []),
         SharedModule.forRoot(options),
         MongoModule.forRoot(options.db),
-        CqrsModule
-      ]
+        CqrsModule,
+      ],
     };
   }
 }
@@ -60,16 +70,16 @@ export class CrudShellNestjsModule {
 @Module({})
 export class CrudShellNestjsCoreModule {
   static forRoot(
-      options: SharedConfig & {
-        db: {
-          host: string;
-          port: number;
-          database: string;
-          username?: string;
-          password?: string;
-          collection?: string;
-        };
-      }
+    options: SharedConfig & {
+      db: {
+        host: string;
+        port: number;
+        database: string;
+        username?: string;
+        password?: string;
+        collection?: string;
+      };
+    }
   ): DynamicModule {
     return {
       module: CrudShellNestjsModule,
@@ -79,20 +89,20 @@ export class CrudShellNestjsCoreModule {
         ...DOMAIN_HANDLERS,
         ...QUERY_HANDLERS,
         ...GATEWAYS,
-        AuthJwtGuard
+        AuthJwtGuard,
       ],
       imports: [
         PassportModule.register({ defaultStrategy: "jwt", session: false }),
         JwtModule.register({
           secret: options.tokenConfig.secretOrPrivateKey,
           signOptions: {
-            expiresIn: options.tokenConfig.expiredIn
-          }
+            expiresIn: options.tokenConfig.expiredIn,
+          },
         }),
         SharedModule.forRoot(options),
         MongoModule.forRoot(options.db),
-        CqrsModule
-      ]
+        CqrsModule,
+      ],
     };
   }
 }

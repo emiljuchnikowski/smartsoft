@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {IUser} from "@smartsoft001/users";
 //import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
 
-import { IEntity } from './interfaces';
+import {IEntity, ISpecification} from './interfaces';
 
 export abstract class IItemRepository<T extends IEntity<string>> {
     abstract create(item: T, user: IUser): Promise<void>;
@@ -18,7 +18,9 @@ export abstract class IItemRepository<T extends IEntity<string>> {
 
     abstract getById(id: string): Promise<T>;
 
-    abstract getByCriteria(criteria: any, options: any): Promise<{ data: T[], totalCount: number }>;
+    abstract getByCriteria(criteria: any, options?: any): Promise<{ data: T[], totalCount: number }>;
+
+    abstract getBySpecification(spec: ISpecification, options?: any): Promise<{ data: T[], totalCount: number }>;
 
     abstract async clear(user: IUser): Promise<void>;
 

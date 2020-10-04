@@ -1,10 +1,7 @@
 {
   "name": "@smartsoft001/crud-domain",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Utils to crud",
-  "scripts": {
-    "refresh": "npm version patch && npm i && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/users@latest --save && npm i @smartsoft001/utils@latest --save"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
@@ -20,14 +17,5 @@
   "bugs": {
     "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
   },
-  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
-  "peerDependencies": {
-    "@nestjs/cqrs": "^7.0.1",
-    "lodash": "^4.17.20"
-  },
-  "dependencies": {
-    "@smartsoft001/domain-core": "^1.0.5",
-    "@smartsoft001/users": "^1.0.3",
-    "@smartsoft001/utils": "^1.0.4"
-  }
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme"
 }

@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class SharedConfig {
-  tokenConfig: {
+  tokenConfig?: {
     secretOrPrivateKey: string;
     expiredIn: number;
   };
