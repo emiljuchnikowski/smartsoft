@@ -175,8 +175,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/shared/nestjs/tsconfig.lib.json",
               "libs/shared/nestjs/tsconfig.spec.json"
@@ -189,6 +190,16 @@
           "options": {
             "jestConfig": "libs/shared/nestjs/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/shared/nestjs",
+            "tsConfig": "libs/shared/nestjs/tsconfig.lib.json",
+            "packageJson": "libs/shared/nestjs/package.json",
+            "main": "libs/shared/nestjs/src/index.ts",
+            "assets": ["libs/shared/nestjs/*.md"]
           }
         }
       }
@@ -555,8 +566,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/crud/shell/dtos/tsconfig.lib.json",
               "libs/crud/shell/dtos/tsconfig.spec.json"
@@ -569,6 +581,16 @@
           "options": {
             "jestConfig": "libs/crud/shell/dtos/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/crud/shell/dtos",
+            "tsConfig": "libs/crud/shell/dtos/tsconfig.lib.json",
+            "packageJson": "libs/crud/shell/dtos/package.json",
+            "main": "libs/crud/shell/dtos/src/index.ts",
+            "assets": ["libs/crud/shell/dtos/*.md"]
           }
         }
       }
@@ -671,8 +693,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/shared/mongo/tsconfig.lib.json",
               "libs/shared/mongo/tsconfig.spec.json"
@@ -685,6 +708,16 @@
           "options": {
             "jestConfig": "libs/shared/mongo/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/shared/mongo",
+            "tsConfig": "libs/shared/mongo/tsconfig.lib.json",
+            "packageJson": "libs/shared/mongo/package.json",
+            "main": "libs/shared/mongo/src/index.ts",
+            "assets": ["libs/shared/mongo/*.md"]
           }
         }
       }

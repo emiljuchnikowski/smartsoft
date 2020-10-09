@@ -63,6 +63,14 @@ export class CrudShellNestjsModule {
         MongoModule.forRoot(options.db),
         CqrsModule,
       ],
+      exports: [
+        ...SERVICES,
+        ...COMMAND_HANDLERS,
+        ...DOMAIN_HANDLERS,
+        ...QUERY_HANDLERS,
+        AuthJwtGuard,
+        MongoModule.forRoot(options.db)
+      ],
     };
   }
 }
@@ -103,6 +111,7 @@ export class CrudShellNestjsCoreModule {
         MongoModule.forRoot(options.db),
         CqrsModule,
       ],
+      exports: [],
     };
   }
 }

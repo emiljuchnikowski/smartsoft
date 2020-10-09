@@ -39,8 +39,6 @@ export class StyleService {
     }
 
     private execute(): void {
-        console.log(this._style);
-
         this.setColor('primary');
         this.setColor('secondary');
         this.setColor('tertiary');

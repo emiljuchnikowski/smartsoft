@@ -72,13 +72,13 @@
       "tags": ["scope:stream", "type:shell"]
     },
     "shared-users": {
-      "tags": []
+      "tags": ["scope:shared", "type:shell"]
     },
     "shared-domain-core": {
-      "tags": []
+      "tags": ["scope:shared", "type:shell"]
     },
     "shared-utils": {
-      "tags": []
+      "tags": ["scope:shared", "type:shell"]
     },
     "shared-nestjs": {
       "tags": ["scope:shared", "type:shell"]

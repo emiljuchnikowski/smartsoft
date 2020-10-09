@@ -1,10 +1,7 @@
 {
   "name": "@smartsoft001/mongo",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Utils to mongo",
-  "scripts": {
-    "refresh": "npm version patch && npm i && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/users@latest --save && npm i @smartsoft001/utils@latest --save && npm i @smartsoft001/crud-shell-dtos@latest --save"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
@@ -20,16 +17,5 @@
   "bugs": {
     "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
   },
-  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
-  "peerDependencies": {
-    "@nestjs/common": "^7.4.4",
-    "mongodb": "^3.6.1",
-    "rxjs": "^6.6.3"
-  },
-  "dependencies": {
-    "@smartsoft001/crud-shell-dtos": "^1.0.1",
-    "@smartsoft001/domain-core": "^1.0.5",
-    "@smartsoft001/users": "^1.0.3",
-    "@smartsoft001/utils": "^1.0.4"
-  }
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme"
 }
