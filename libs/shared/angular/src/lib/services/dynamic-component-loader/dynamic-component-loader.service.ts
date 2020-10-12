@@ -1,7 +1,7 @@
 import {
   Compiler,
-  ComponentFactory,
-  Injectable,
+  ComponentFactory, ComponentFactoryResolver,
+  Injectable, Injector,
   NgModule,
 } from "@angular/core";
 
@@ -9,11 +9,10 @@ import {
 export class DynamicComponentLoader<T> {
   static declaredComponents = [];
 
-  constructor(private compiler: Compiler) {}
+  constructor(private resolver: ComponentFactoryResolver, private injector: Injector) {}
 
   async getComponentsWithFactories<C>(options: {
     components: Array<any>;
-    imports: Array<any>;
   }): Promise<
     {
       component: any;
@@ -21,7 +20,6 @@ export class DynamicComponentLoader<T> {
     }[]
   > {
     let components: Array<any> = [];
-    let imports: Array<any> = [];
 
     components = options.components.filter(
       (comp) =>
@@ -29,22 +27,9 @@ export class DynamicComponentLoader<T> {
           (dec) => dec.component === comp
         )
     ) || [];
-    imports = options.imports;
-
-    @NgModule({
-      imports: imports,
-      declarations: components,
-      entryComponents: components
-    })
-    class DynamicModule {}
-
-    const res = this.compiler
-      .compileModuleAndAllComponentsSync(DynamicModule);
 
     const result = options.components.map((c) => {
-      let factory = res.componentFactories.find(
-          (x) => x.componentType === c
-      );
+      let factory = this.resolver.resolveComponentFactory(c);
 
       if (!factory) {
         factory = DynamicComponentLoader.declaredComponents.find(

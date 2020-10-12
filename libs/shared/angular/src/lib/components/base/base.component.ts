@@ -1,7 +1,8 @@
 import { MonoTypeOperatorFunction, Subject } from "rxjs";
-import { OnDestroy } from "@angular/core";
+import {Directive, OnDestroy} from "@angular/core";
 import { takeUntil } from "rxjs/operators";
 
+@Directive()
 export abstract class BaseComponent implements OnDestroy {
   protected get takeUntilDestroy(): MonoTypeOperatorFunction<any> {
     return takeUntil(this.destroy$);
