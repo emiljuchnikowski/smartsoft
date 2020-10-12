@@ -213,7 +213,7 @@
       },
       "root": "apps/ui/test",
       "sourceRoot": "apps/ui/test/src",
-      "prefix": "smartsoft",
+      "prefix": "smart",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -461,61 +461,6 @@
             "packageJson": "libs/crud/domain/package.json",
             "main": "libs/crud/domain/src/index.ts",
             "assets": ["libs/crud/domain/*.md"]
-          }
-        }
-      }
-    },
-    "crud-shell-angular": {
-      "root": "libs/crud/shell/angular",
-      "sourceRoot": "libs/crud/shell/angular/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/crud/shell/angular/tsconfig.lib.json",
-              "libs/crud/shell/angular/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/crud/shell/angular/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/crud/shell/angular/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/crud/shell/angular/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/crud-shell-angular",
-            "config": {
-              "configFolder": "libs/crud/shell/angular/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
           }
         }
       }
@@ -1312,7 +1257,7 @@
       "projectType": "library",
       "root": "libs/test",
       "sourceRoot": "libs/test/src",
-      "prefix": "smartsoft",
+      "prefix": "smart",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -1349,7 +1294,7 @@
       "projectType": "library",
       "root": "libs/shared/users",
       "sourceRoot": "libs/shared/users/src",
-      "prefix": "smartsoft",
+      "prefix": "smart",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -1386,7 +1331,7 @@
       "projectType": "library",
       "root": "libs/shared/utils",
       "sourceRoot": "libs/shared/utils/src",
-      "prefix": "smartsoft",
+      "prefix": "smart",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -1423,7 +1368,7 @@
       "projectType": "library",
       "root": "libs/shared/models",
       "sourceRoot": "libs/shared/models/src",
-      "prefix": "smartsoft",
+      "prefix": "smart",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -1460,7 +1405,7 @@
       "projectType": "library",
       "root": "libs/shared/angular",
       "sourceRoot": "libs/shared/angular/src",
-      "prefix": "smartsoft",
+      "prefix": "smart",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -1497,7 +1442,7 @@
       "projectType": "library",
       "root": "libs/shared/domain-core",
       "sourceRoot": "libs/shared/domain-core/src",
-      "prefix": "smartsoft",
+      "prefix": "smart",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -1534,7 +1479,7 @@
       "projectType": "library",
       "root": "libs/auth/shell/dtos",
       "sourceRoot": "libs/auth/shell/dtos/src",
-      "prefix": "smartsoft",
+      "prefix": "smart",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -1576,7 +1521,7 @@
       "projectType": "library",
       "root": "libs/auth/shell/angular",
       "sourceRoot": "libs/auth/shell/angular/src",
-      "prefix": "smartsoft",
+      "prefix": "smart",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -1604,6 +1549,48 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/auth/shell/angular/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "crud-shell-angular": {
+      "projectType": "library",
+      "root": "libs/crud/shell/angular",
+      "sourceRoot": "libs/crud/shell/angular/src",
+      "prefix": "smart",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/crud/shell/angular/tsconfig.lib.json",
+            "project": "libs/crud/shell/angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/crud/shell/angular/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/crud/shell/angular/tsconfig.lib.json",
+              "libs/crud/shell/angular/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/crud/shell/angular/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/crud/shell/angular/jest.config.js",
             "passWithNoTests": true
           }
         }

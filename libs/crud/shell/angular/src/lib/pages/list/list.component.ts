@@ -120,8 +120,7 @@ export class ListComponent<T extends IEntity<string>>
           this.config.list["components"].top
             ? [this.config.list["components"].top]
             : [])
-        ],
-        imports: [SharedModule, CommonModule]
+        ]
       }
     );
 
