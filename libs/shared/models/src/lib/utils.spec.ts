@@ -1,4 +1,13 @@
-import {Field, FieldType, getModelFieldKeys, getModelFieldOptions, Model} from "@smartsoft001/models";
+import {
+    castModel,
+    Field,
+    FieldType,
+    getInvalidFields,
+    getModelFieldKeys,
+    getModelFieldOptions,
+    isModel,
+    Model
+} from "@smartsoft001/models";
 
 describe('shared-models: utils', () => {
     describe('getModelFieldKeys()', () => {
@@ -37,5 +46,98 @@ describe('shared-models: utils', () => {
 
            expect(getModelFieldOptions(new Test(), 'test')).toStrictEqual(options);
        });
+    });
+
+    describe('isModel', () => {
+        it('should return true when model type', () => {
+            @Model({})
+            class Test {
+                @Field({}) test: string;
+            }
+
+            expect(isModel(new Test())).toBe(true);
+        });
+
+        it('should return false when other type', () => {
+            expect(isModel(new Date())).toBe(false);
+        });
+    });
+
+    describe('getInvalidFields', () => {
+        it('should return empty array when correct', () => {
+            @Model({})
+            class Test {
+                @Field({}) test: string;
+                @Field({
+                    required: true
+                }) test2: string;
+                @Field({
+                    create: {
+                        required: true
+                    }
+                }) test3: string;
+                @Field({
+                    create: {
+                        required: false
+                    }
+                }) test4: string;
+            }
+
+            const instance = new Test();
+            instance.test2 = "12";
+            instance.test3 = "21";
+
+            expect(getInvalidFields(instance, 'create').length).toBe(0);
+        });
+
+        it('should return array when incorrect', () => {
+            @Model({})
+            class Test {
+                @Field({}) test: string;
+                @Field({
+                    required: true
+                }) test2: string;
+                @Field({
+                    create: {
+                        required: true
+                    }
+                }) test3: string;
+                @Field({
+                    create: {
+                        required: false
+                    }
+                }) test4: string;
+            }
+
+            const instance = new Test();
+            instance.test2 = "12";
+
+            expect(getInvalidFields(instance, 'create').length).toBe(1);
+        });
+
+        it('should return empty array when not model', () => {
+            expect(getInvalidFields(new Date(), 'create').length).toBe(0);
+        });
+    });
+
+    describe('castModel', () => {
+        it('should remove unused fields', () => {
+            @Model({})
+            class Test {
+                @Field({}) test: string;
+                @Field({
+                    create: true
+                }) test2: string;
+            }
+
+            const instance = new Test();
+            instance.test = "asd";
+            instance.test2 = "aaa";
+
+            castModel(instance, 'create');
+
+            expect(instance.test).not.toBeDefined();
+            expect(instance.test2).toBeDefined();
+        });
     });
 });
