@@ -1,4 +1,5 @@
 export enum FieldType {
+    address = "address",
     currency = "currency",
     date = "date",
     dateWithEdit = "dateWithEdit",
@@ -7,7 +8,7 @@ export enum FieldType {
     file = "file",
     flag = "flag",
     int = "int",
-    nip = "nip",
+    nip = "nip", 
     object = "object",
     password = "password",
     radio = "radio",

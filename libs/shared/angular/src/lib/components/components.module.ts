@@ -57,6 +57,7 @@ import { TabComponent } from "./tabs/tab/tab.component";
 import { TabsComponent } from "./tabs/tabs.component";
 import { InputStringsComponent } from "./input/strings/strings.component";
 import { InputLongTextComponent } from "./input/long-text/long-text.component";
+import { InputAddressComponent } from "./input/address/address.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -105,6 +106,7 @@ export const INPUT_COMPONENTS = [
   InputNipComponent,
   InputStringsComponent,
   InputLongTextComponent,
+  InputAddressComponent,
 ];
 
 export const LIST_COMPONENTS = [

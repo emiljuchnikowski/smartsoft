@@ -1,6 +1,8 @@
 import { storiesOf } from "@storybook/angular";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
+import {IAddress} from "@smartsoft001/domain-core";
+
 import {
   COMPONENTS,
   FormComponent,
@@ -29,7 +31,24 @@ class TestModel {
     required: true,
     type: FieldType.longText,
   })
-    desc: string;
+  desc: string;
+
+  @Field({
+    required: true,
+    type: FieldType.address,
+  })
+  address: IAddress = {
+    city: 'Test city',
+    street: 'Test street',
+    zipCode: '00-000',
+    flatNumber: '',
+    buildingNumber: '1A'
+  };
+
+  // @Field({
+  //   type: FieldType.address,
+  // })
+  // address2: string;
 }
 
 storiesOf("smart-form", module).add("inputs", () => ({

@@ -5,7 +5,7 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators
+  Validators,
 } from "@angular/forms";
 import * as _ from "lodash";
 
@@ -15,8 +15,10 @@ import {
   IFieldModifyMetadata,
   IFieldOptions,
   SYMBOL_FIELD,
-  SYMBOL_MODEL
+  SYMBOL_MODEL,
 } from "@smartsoft001/models";
+import { ZipCodeService } from "@smartsoft001/utils";
+import { boolean } from "@storybook/addon-knobs";
 
 @Injectable()
 export class FormFactory {
@@ -54,12 +56,12 @@ export class FormFactory {
     if (mode === "create" && _.isObject(options.create)) {
       result = {
         ...options,
-        ...(options.create as IFieldModifyMetadata)
+        ...(options.create as IFieldModifyMetadata),
       };
     } else if (mode === "update" && _.isObject(options.update)) {
       result = {
         ...options,
-        ...(options.update as IFieldModifyMetadata)
+        ...(options.update as IFieldModifyMetadata),
       };
     }
 
@@ -74,7 +76,7 @@ export class FormFactory {
 
     const result = this.fb.group({});
 
-    const fields = getModelFieldsWithOptions(obj).filter(field => {
+    const fields = getModelFieldsWithOptions(obj).filter((field) => {
       return (
         !ops.mode ||
         (ops.mode === "create" && field.options.create) ||
@@ -82,7 +84,7 @@ export class FormFactory {
         (ops.mode !== "create" &&
           ops.mode !== "update" &&
           field.options.customs &&
-          field.options.customs.some(custom => custom.mode === ops.mode))
+          field.options.customs.some((custom) => custom.mode === ops.mode))
       );
     });
 
@@ -95,13 +97,7 @@ export class FormFactory {
       if (field.options.type === FieldType.object) {
         control = await this.create(obj[field.key], ops);
       } else {
-        control = this.fb.control(
-          obj[field.key]
-            ? obj[field.key]
-            : options.defaltValue
-            ? options.defaltValue()
-            : null
-        );
+        control = this.createControl(obj, field, options.required);
       }
 
       FormFactory.setValidators(control, options);
@@ -118,17 +114,68 @@ export class FormFactory {
           (a: AbstractControl) => {
             if (a.value !== result.controls[field.key].value) {
               return {
-                confirm: true
+                confirm: true,
               };
             }
 
             return null;
-          }
+          },
         ]);
 
         result.addControl(field.key + "Confirm", confirmControl);
       }
     }
+
+    return result;
+  }
+
+  private createControl<T>(
+    obj: T,
+    field: { key: string; options: IFieldOptions },
+    required: boolean
+  ) {
+    let result: AbstractControl;
+
+    const zipCodeValidator = (c) => {
+      if (c.value && ZipCodeService.isInvalid(c.value)) {
+        return {
+          invalidZipCode: true,
+        };
+      }
+
+      return null;
+    };
+
+    switch (field.options.type) {
+      case FieldType.address:
+        result = this.fb.group({
+          city: ["", required ? [ Validators.required ] : null],
+          street: ["", required ? [ Validators.required ] : null],
+          buildingNumber: ["", required ? [ Validators.required ] : null],
+          flatNumber: [""],
+          zipCode: [
+            "",
+            required ? [
+              Validators.required,
+              zipCodeValidator,
+            ] : [ zipCodeValidator ],
+          ],
+        });
+        break;
+      default:
+        result = this.fb.control(null);
+        break;
+    }
+
+    const value = obj[field.key]
+        ? obj[field.key]
+        : field.options.defaltValue
+            ? field.options.defaltValue()
+            : null;
+
+    if (value) result.setValue(value);
+
+    result.updateValueAndValidity();
 
     return result;
   }

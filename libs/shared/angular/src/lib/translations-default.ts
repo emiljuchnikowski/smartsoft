@@ -37,19 +37,24 @@ export interface ITranslateData {
     };
     MODEL: {
         body: string
+        buildingNumber: string,
+        city: string,
         date: string,
         disabled: string,
         email: string,
         file: string,
         firstName: string,
+        flatNumber:string,
         lastName: string,
         password: string,
         passwordConfirm: string,
         passwordReset: string,
         permissions: string,
         price: string,
-        username: string,
         send: string,
+        street: string,
+        username: string,
+        zipCode: string,
     };
     INPUT: {
         ERRORS: {
@@ -85,19 +90,24 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     },
     MODEL: {
         body: 'body',
+        buildingNumber: 'building number',
+        city: 'city',
         date: 'date',
         disabled: 'disabled',
         email: 'email',
         file: 'file',
         firstName: 'first name',
+        flatNumber: 'flat number',
         lastName: 'last name',
         password: 'password',
         passwordConfirm: 'confirm password',
         passwordReset: 'reset password',
         permissions: 'permissions',
         price: 'price',
+        send: 'send',
+        street: 'street',
         username: 'user name',
-        send: 'send'
+        zipCode: 'zip code',
     },
     INPUT: {
         ERRORS: {
@@ -133,19 +143,24 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     },
     MODEL: {
         body: 'treść',
+        buildingNumber: 'numer budynku',
+        city: 'miasto',
         date: 'data',
         disabled: 'nieaktywny',
         email: 'email',
         file: 'plik',
         firstName: 'imię',
+        flatNumber: 'numer lokalu',
         lastName: 'nazwisko',
         password: 'hasło',
         passwordConfirm: 'powtórz hasło',
         passwordReset: 'Nie pamiętam hasła',
         permissions: 'uprawnienia',
         price: 'cena',
-        username: 'nazwa użytkownika',
         send: 'wyślij',
+        street: 'ulica',
+        username: 'nazwa użytkownika',
+        zipCode: 'kod pocztowy',
     },
     INPUT: {
         ERRORS: {
