@@ -1,4 +1,5 @@
 <ng-container *ngIf="control">
+    <br/>
     <ion-label>
         {{ translateKey | translate }}
         <ion-text color="danger">
@@ -6,9 +7,11 @@
         </ion-text>
     </ion-label>
     <ion-list>
-        <ion-item *ngFor="let item of list; let last = last">
+        <ion-item *ngFor="let item of list; let last = last" lines="none">
             <ion-icon slot="start" name="ellipse-outline"></ion-icon>
-            <ion-input [formControl]="item" [attr.autofocus]="fieldOptions?.focused"
+            <ion-input [placeholder]="(last ? ('add' | translate) : '') + '...'"
+                       [formControl]="item"
+                       [attr.autofocus]="fieldOptions?.focused"
                        (ionChange)="onItemChange($event.data)"
             ></ion-input>
             <ion-button slot="end" color="danger" *ngIf="!last" (click)="removeItem(item)">
