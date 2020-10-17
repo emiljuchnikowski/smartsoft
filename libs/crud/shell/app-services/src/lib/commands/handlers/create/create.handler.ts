@@ -42,6 +42,8 @@ export class CreateHandler<T extends IEntity<string>>
       }
     } catch (e) {
       console.error(e);
+
+      throw e;
     }
   }
 

@@ -29,6 +29,8 @@ export class UpdatePartialHandler<T extends IEntity<string>>
       entity.commit();
     } catch (e) {
       console.error(e);
+
+      throw e;
     }
   }
 

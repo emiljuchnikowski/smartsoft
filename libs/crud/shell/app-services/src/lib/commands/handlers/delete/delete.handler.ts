@@ -23,6 +23,8 @@ export class DeleteHandler implements ICommandHandler<DeleteCommand> {
       entity.commit();
     } catch (e) {
       console.error(e);
+
+      throw e;
     }
   }
 }
