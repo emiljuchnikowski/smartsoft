@@ -10,38 +10,96 @@ import {COMPONENTS, IMPORTS} from "../components.module";
 import {IDetailsOptions} from "../../models";
 import {DetailsComponent} from "./details.component";
 
-@Model({})
-class TestModel {
-    @Field({
-        details: true,
-        type: FieldType.strings
-    })
-    strings = [ "test1", "test2" ];
-
-    @Field({
-        details: true,
-        type: FieldType.address
-    })
-    address: IAddress = {
-        city: 'Test city',
-        street: 'Test street',
-        zipCode: '00-000',
-        flatNumber: '2',
-        buildingNumber: '1A'
-    };
-}
+const moduleMetadata = {
+    imports: [...IMPORTS, SharedFactoriesModule, TranslateModule.forRoot()],
+    declarations: COMPONENTS
+};
 
 storiesOf('smart-details', module)
-    .add('all', () => ({
-        moduleMetadata: {
-            imports: [...IMPORTS, SharedFactoriesModule, TranslateModule.forRoot()],
-            declarations: COMPONENTS
-        },
+    .add('address', () => ({
+        moduleMetadata: moduleMetadata,
         component: DetailsComponent,
         props: {
-            options: {
-                type: TestModel,
-                item$: of(new TestModel())
-            } as IDetailsOptions<any>
+            options: (() => {
+                @Model({})
+                class TestModel {
+                    @Field({
+                        details: true,
+                        type: FieldType.address
+                    })
+                    address: IAddress = {
+                        city: 'Test city',
+                        street: 'Test street',
+                        zipCode: '00-000',
+                        flatNumber: '2',
+                        buildingNumber: '1A'
+                    };
+                }
+
+                return {
+                    type: TestModel,
+                    item$: of(new TestModel())
+                }
+            })() as IDetailsOptions<any>
+        }
+    }))
+    .add('string', () => ({
+        moduleMetadata: moduleMetadata,
+        component: DetailsComponent,
+        props: {
+            options: (() => {
+                @Model({})
+                class TestModel {
+                    @Field({
+                        details: true,
+                        type: FieldType.strings
+                    })
+                    strings = [ "test1", "test2" ];
+                }
+
+                return {
+                    type: TestModel,
+                    item$: of(new TestModel())
+                }
+            })() as IDetailsOptions<any>
+        }
+    }))
+    .add('object', () => ({
+        moduleMetadata: moduleMetadata,
+        component: DetailsComponent,
+        props: {
+            options: (() => {
+                @Model({})
+                class TestUserModel {
+                    @Field({
+                        details: true
+                    })
+                    firstName = 'Test first name';
+
+                    @Field({
+                        details: true
+                    })
+                    lastName = 'Test last name';
+                }
+
+                @Model({})
+                class TestModel {
+                    @Field({
+                        details: true
+                    })
+                    test = 'Test data';
+
+                    @Field({
+                        details: true,
+                        type: FieldType.object,
+                    })
+                    user = new TestUserModel();
+                }
+
+                return {
+                    type: TestModel,
+                    item$: of(new TestModel())
+                }
+            })() as IDetailsOptions<any>
         }
     }))

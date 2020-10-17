@@ -60,6 +60,7 @@ import { InputLongTextComponent } from "./input/long-text/long-text.component";
 import { InputAddressComponent } from "./input/address/address.component";
 import { DetailAddressComponent } from "./detail/address/address.component";
 import { InputObjectComponent } from "./input/object/object.component";
+import { DetailObjectComponent } from "./detail/object/object.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -88,6 +89,7 @@ export const DETAIL_COMPONENTS = [
   DetailEnumComponent,
   DetailEmailComponent,
   DetailAddressComponent,
+  DetailObjectComponent,
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];
