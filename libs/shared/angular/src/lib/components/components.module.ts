@@ -58,6 +58,7 @@ import { TabsComponent } from "./tabs/tabs.component";
 import { InputStringsComponent } from "./input/strings/strings.component";
 import { InputLongTextComponent } from "./input/long-text/long-text.component";
 import { InputAddressComponent } from "./input/address/address.component";
+import { DetailAddressComponent } from "./detail/address/address.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -85,6 +86,7 @@ export const DETAIL_COMPONENTS = [
   DetailFlagComponent,
   DetailEnumComponent,
   DetailEmailComponent,
+  DetailAddressComponent,
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];

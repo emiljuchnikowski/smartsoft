@@ -3,6 +3,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {of} from "rxjs";
 
 import {FieldType, Field, Model} from "@smartsoft001/models";
+import {IAddress} from "@smartsoft001/domain-core";
 
 import {SharedFactoriesModule} from "../../factories";
 import {COMPONENTS, IMPORTS} from "../components.module";
@@ -16,6 +17,18 @@ class TestModel {
         type: FieldType.strings
     })
     strings = [ "test1", "test2" ];
+
+    @Field({
+        details: true,
+        type: FieldType.address
+    })
+    address: IAddress = {
+        city: 'Test city',
+        street: 'Test street',
+        zipCode: '00-000',
+        flatNumber: '2',
+        buildingNumber: '1A'
+    };
 }
 
 storiesOf('smart-details', module)
