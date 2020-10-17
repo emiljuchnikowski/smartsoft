@@ -14,7 +14,8 @@ export class SharedModule {
                 JwtStrategy, PermissionService
             ],
             exports: [
-                PermissionService
+                { provide: SharedConfig, useValue: config },
+                PermissionService, JwtStrategy
             ]
         }
     }
