@@ -1,0 +1,9 @@
+<ng-container *ngIf="control">
+    <ion-label position="floating">
+        {{ translateKey | translate }}
+        <ion-text color="danger">
+            <span *ngIf="fieldOptions?.required">*</span>
+        </ion-text>
+    </ion-label>
+    <ion-textarea [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-textarea>
+</ng-container>

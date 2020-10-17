@@ -13,6 +13,7 @@ export enum FieldType {
     radio = "radio",
     text = "text",
     strings = "strings",
+    longText = "longText"
 }
 
 export interface IModelMetadata {

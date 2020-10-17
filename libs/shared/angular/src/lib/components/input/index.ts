@@ -14,3 +14,4 @@ export * from './password/password.component';
 export * from './radio/radio.component';
 export * from './text/text.component'
 export * from './strings/strings.component';
+export * from './long-text/long-text.component';

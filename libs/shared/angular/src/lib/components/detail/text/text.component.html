@@ -1,1 +1,1 @@
-<p *ngIf='options?.item$ | async; let item'>{{ item[options?.key] }}</p>
+<p *ngIf='options?.item$ | async; let item' [innerHTML]="item[options?.key]"></p>

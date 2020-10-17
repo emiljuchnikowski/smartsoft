@@ -1,22 +1,11 @@
 import {storiesOf} from "@storybook/angular";
-import {CommonModule} from "@angular/common";
-import {IonicModule} from "@ionic/angular";
-import {ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
-import {RouterModule} from "@angular/router";
-import {HttpClientModule} from "@angular/common/http";
-import {MatTableModule} from "@angular/material/table";
-import {MatSortModule} from "@angular/material/sort";
-import {ChartsModule} from "ng2-charts";
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {of} from "rxjs";
 
 import {FieldType, Field, Model} from "@smartsoft001/models";
 
-import {SharedPipesModule} from "../../pipes";
-import {SharedDirectivesModule} from "../../directives";
 import {SharedFactoriesModule} from "../../factories";
-import {COMPONENTS} from "../components.module";
+import {COMPONENTS, IMPORTS} from "../components.module";
 import {IDetailsOptions} from "../../models";
 import {DetailsComponent} from "./details.component";
 
@@ -32,26 +21,8 @@ class TestModel {
 storiesOf('smart-details', module)
     .add('all', () => ({
         moduleMetadata: {
-            imports: [
-                CommonModule,
-                IonicModule,
-                ReactiveFormsModule,
-                TranslateModule.forRoot(),
-                RouterModule,
-                SharedPipesModule,
-                SharedDirectivesModule,
-                HttpClientModule,
-                MatTableModule,
-                MatSortModule,
-                ChartsModule,
-                SharedFactoriesModule
-            ],
-            declarations: [
-                ...COMPONENTS
-            ],
-            schemas: [
-                CUSTOM_ELEMENTS_SCHEMA
-            ]
+            imports: [...IMPORTS, SharedFactoriesModule, TranslateModule.forRoot()],
+            declarations: COMPONENTS
         },
         component: DetailsComponent,
         props: {

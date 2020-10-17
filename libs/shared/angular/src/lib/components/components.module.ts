@@ -55,7 +55,8 @@ import { SharedDirectivesModule } from "../directives/directives.module";
 import { SharedPipesModule } from "../pipes/pipes.module";
 import { TabComponent } from "./tabs/tab/tab.component";
 import { TabsComponent } from "./tabs/tabs.component";
-import {InputStringsComponent} from "./input/strings/strings.component";
+import { InputStringsComponent } from "./input/strings/strings.component";
+import { InputLongTextComponent } from "./input/long-text/long-text.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -103,6 +104,7 @@ export const INPUT_COMPONENTS = [
   InputRadioComponent,
   InputNipComponent,
   InputStringsComponent,
+  InputLongTextComponent,
 ];
 
 export const LIST_COMPONENTS = [
@@ -143,22 +145,24 @@ export const COMPONENTS = [
   ...GRID_COMPONENTS,
 ];
 
+export const IMPORTS = [
+  CommonModule,
+  IonicModule,
+  ReactiveFormsModule,
+  TranslateModule,
+  RouterModule,
+  SharedPipesModule,
+  SharedDirectivesModule,
+  HttpClientModule,
+  MatTableModule,
+  MatSortModule,
+  ChartsModule,
+];
+
 @NgModule({
   declarations: [...COMPONENTS],
   entryComponents: [...COMPONENTS],
   exports: [...COMPONENTS],
-  imports: [
-    CommonModule,
-    IonicModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    RouterModule,
-    SharedPipesModule,
-    SharedDirectivesModule,
-    HttpClientModule,
-    MatTableModule,
-    MatSortModule,
-    ChartsModule,
-  ],
+  imports: IMPORTS,
 })
 export class SharedComponentsModule {}
