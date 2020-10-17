@@ -7,6 +7,7 @@ export enum FieldType {
     file = "file",
     flag = "flag",
     int = "int",
+    nip = "nip",
     object = "object",
     password = "password",
     radio = "radio",
