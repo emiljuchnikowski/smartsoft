@@ -10,11 +10,17 @@ import { Injectable } from "@angular/core";
 import { catchError, switchMap } from "rxjs/operators";
 import { Router } from "@angular/router";
 
+import {StorageService} from "@smartsoft001/angular";
+
 import { AuthService } from "../../services/auth/auth.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+      private authService: AuthService,
+      private storageService: StorageService,
+      private router: Router
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -38,7 +44,7 @@ export class AuthInterceptor implements HttpInterceptor {
       headerSettings[key] = req.headers.getAll(key);
     }
 
-    const tokenString = sessionStorage.getItem("AUTH_TOKEN");
+    const tokenString = this.storageService.getItem("AUTH_TOKEN");
     let token;
 
     if (tokenString) {
