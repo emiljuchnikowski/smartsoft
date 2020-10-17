@@ -1,0 +1,27 @@
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+
+import {InputBaseComponent} from "../base/base.component";
+import {IFormOptions} from "../../../models";
+
+@Component({
+  selector: 'smart-input-object',
+  templateUrl: './object.component.html',
+  styleUrls: ['./object.component.scss'],
+})
+export class InputObjectComponent<T, TChild> extends InputBaseComponent<T> implements OnInit {
+  childOptions: IFormOptions<TChild>;
+
+  constructor(cd: ChangeDetectorRef) {
+    super(cd);
+  }
+
+  protected afterSetOptionsHandler() {
+    this.childOptions = {
+      mode: this.internalOptions.mode,
+      model: (this.internalOptions.model[this.internalOptions.fieldKey] as TChild)
+    }
+  }
+
+  ngOnInit() {}
+
+}

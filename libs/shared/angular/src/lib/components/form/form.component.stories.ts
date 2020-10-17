@@ -13,54 +13,144 @@ import {
 import { Field, FieldType, Model } from "@smartsoft001/models";
 import {TranslateModule} from "@ngx-translate/core";
 
-@Model({})
-class TestModel {
-  @Field({
-    required: true,
-    type: FieldType.nip,
-  })
-  nip: string;
-
-  @Field({
-    required: true,
-    type: FieldType.strings,
-  })
-  strings = ["test1", "test2"];
-
-  @Field({
-    required: true,
-    type: FieldType.longText,
-  })
-  desc: string;
-
-  @Field({
-    required: true,
-    type: FieldType.address,
-  })
-  address: IAddress = {
-    city: 'Test city',
-    street: 'Test street',
-    zipCode: '00-000',
-    flatNumber: '',
-    buildingNumber: '1A'
-  };
-
-  // @Field({
-  //   type: FieldType.address,
-  // })
-  // address2: string;
+const moduleMetadate = {
+  imports: [...IMPORTS, SharedFactoriesModule, TranslateModule.forRoot()],
+  declarations: [...COMPONENTS],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 }
 
-storiesOf("smart-form", module).add("inputs", () => ({
-  moduleMetadata: {
-    imports: [...IMPORTS, SharedFactoriesModule, TranslateModule.forRoot()],
-    declarations: [...COMPONENTS],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  },
-  component: FormComponent,
-  props: {
-    options: {
-      model: new TestModel(),
-    } as IFormOptions<any>,
-  },
-}));
+storiesOf("smart-form/inputs", module)
+    .add("address", () => ({
+      moduleMetadata: moduleMetadate,
+      component: FormComponent,
+      props: {
+        options: {
+          model: (() => {
+            @Model({})
+            class TestModel {
+              @Field({
+                required: true,
+                type: FieldType.address,
+              })
+              address: IAddress
+            }
+
+            return new TestModel();
+          })(),
+        } as IFormOptions<any>,
+      },
+    }))
+    .add("nip", () => ({
+      moduleMetadata: moduleMetadate,
+      component: FormComponent,
+      props: {
+        options: {
+          model: (() => {
+            @Model({})
+            class TestModel {
+              @Field({
+                required: true,
+                type: FieldType.nip,
+              })
+              nip: string;
+            }
+
+            return new TestModel();
+          })(),
+        } as IFormOptions<any>,
+      },
+    }))
+    .add("strings", () => ({
+      moduleMetadata: moduleMetadate,
+      component: FormComponent,
+      props: {
+        options: {
+          model: (() => {
+            @Model({})
+            class TestModel {
+              @Field({
+                required: true,
+                type: FieldType.strings,
+              })
+              strings = ["test1", "test2"];
+            }
+
+            return new TestModel();
+          })(),
+        } as IFormOptions<any>,
+      },
+    }))
+    .add("desc", () => ({
+      moduleMetadata: moduleMetadate,
+      component: FormComponent,
+      props: {
+        options: {
+          model: (() => {
+            @Model({})
+            class TestModel {
+              @Field({
+                required: true,
+                type: FieldType.longText,
+              })
+              desc: string;
+            }
+
+            return new TestModel();
+          })(),
+        } as IFormOptions<any>,
+      },
+    }))
+    .add("longText", () => ({
+      moduleMetadata: moduleMetadate,
+      component: FormComponent,
+      props: {
+        options: {
+          model: (() => {
+            @Model({})
+            class TestModel {
+              @Field({
+                required: true,
+                type: FieldType.longText,
+              })
+              desc: string;
+            }
+
+            return new TestModel();
+          })(),
+        } as IFormOptions<any>,
+      },
+    }))
+    .add("object", () => ({
+      moduleMetadata: moduleMetadate,
+      component: FormComponent,
+      props: {
+        options: {
+          model: (() => {
+            @Model({})
+            class TestUserModel {
+              @Field({ })
+              firstName: string;
+
+              @Field({
+                required: true
+              })
+              lastName: string
+            }
+
+            @Model({})
+            class TestModel {
+              @Field({ })
+              test: string;
+
+              @Field({
+                required: true,
+                type: FieldType.object,
+              })
+              user = new TestUserModel();
+            }
+
+            return new TestModel();
+          })(),
+        } as IFormOptions<any>,
+      },
+    }));

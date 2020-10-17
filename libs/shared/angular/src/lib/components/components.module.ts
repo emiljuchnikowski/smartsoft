@@ -59,6 +59,7 @@ import { InputStringsComponent } from "./input/strings/strings.component";
 import { InputLongTextComponent } from "./input/long-text/long-text.component";
 import { InputAddressComponent } from "./input/address/address.component";
 import { DetailAddressComponent } from "./detail/address/address.component";
+import { InputObjectComponent } from "./input/object/object.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -109,6 +110,7 @@ export const INPUT_COMPONENTS = [
   InputStringsComponent,
   InputLongTextComponent,
   InputAddressComponent,
+  InputObjectComponent,
 ];
 
 export const LIST_COMPONENTS = [

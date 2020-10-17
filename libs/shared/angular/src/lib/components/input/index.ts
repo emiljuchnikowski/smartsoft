@@ -16,3 +16,4 @@ export * from './text/text.component'
 export * from './strings/strings.component';
 export * from './long-text/long-text.component';
 export * from './address/address.component';
+export * from './object/object.component';

@@ -1,0 +1,10 @@
+<ng-container *ngIf="control">
+    <ion-label position="floating">
+        {{ translateKey | translate }}
+        <ion-text color="danger">
+            <span *ngIf="fieldOptions?.required">*</span>
+        </ion-text>
+    </ion-label>
+    <br/>
+    <smart-form [options]="childOptions"></smart-form>
+</ng-container>
