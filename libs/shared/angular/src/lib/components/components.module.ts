@@ -55,6 +55,7 @@ import { SharedDirectivesModule } from "../directives/directives.module";
 import { SharedPipesModule } from "../pipes/pipes.module";
 import { TabComponent } from "./tabs/tab/tab.component";
 import { TabsComponent } from "./tabs/tabs.component";
+import {InputStringsComponent} from "./input/strings/strings.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -101,6 +102,7 @@ export const INPUT_COMPONENTS = [
   InputFileComponent,
   InputRadioComponent,
   InputNipComponent,
+  InputStringsComponent,
 ];
 
 export const LIST_COMPONENTS = [

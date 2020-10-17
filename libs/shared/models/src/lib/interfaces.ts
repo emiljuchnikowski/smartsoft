@@ -12,6 +12,7 @@ export enum FieldType {
     password = "password",
     radio = "radio",
     text = "text",
+    strings = "strings",
 }
 
 export interface IModelMetadata {

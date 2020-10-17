@@ -27,10 +27,16 @@ class TestModel {
         type: FieldType.nip
     })
     nip: string;
+
+    @Field({
+        required: true,
+        type: FieldType.strings
+    })
+    strings = [ "test1", "test2" ];
 }
 
-storiesOf('smart-form/input', module)
-    .add('nip', () => ({
+storiesOf('smart-form', module)
+    .add('inputs', () => ({
         moduleMetadata: {
             imports: [
                 CommonModule,
