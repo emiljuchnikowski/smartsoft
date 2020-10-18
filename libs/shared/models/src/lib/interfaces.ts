@@ -15,7 +15,8 @@ export enum FieldType {
     text = "text",
     strings = "strings",
     longText = "longText",
-    color = "color"
+    color = "color",
+    logo = "logo"
 }
 
 export interface IModelMetadata {

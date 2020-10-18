@@ -167,4 +167,24 @@ storiesOf("smart-form/inputs", module)
           })(),
         } as IFormOptions<any>,
       },
+    }))
+    .add("logo", () => ({
+      moduleMetadata: moduleMetadate,
+      component: FormComponent,
+      props: {
+        options: {
+          model: (() => {
+            @Model({})
+            class TestModel {
+              @Field({
+                type: FieldType.logo,
+                required: true
+              })
+              logo = 'https://picsum.photos/200/300';
+            }
+
+            return new TestModel();
+          })(),
+        } as IFormOptions<any>,
+      },
     }));
