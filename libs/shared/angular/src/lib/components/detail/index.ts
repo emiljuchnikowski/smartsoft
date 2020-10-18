@@ -6,3 +6,4 @@ export * from './enum/enum.component';
 export * from './flag/flag.component';
 export * from './address/address.component';
 export * from './object/object.component';
+export * from './color/color.component';

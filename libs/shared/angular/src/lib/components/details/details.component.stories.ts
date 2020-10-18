@@ -103,3 +103,24 @@ storiesOf('smart-details', module)
             })() as IDetailsOptions<any>
         }
     }))
+    .add('color', () => ({
+        moduleMetadata: moduleMetadata,
+        component: DetailsComponent,
+        props: {
+            options: (() => {
+                @Model({})
+                class TestModel {
+                    @Field({
+                        details: true,
+                        type: FieldType.color
+                    })
+                    color = 'red';
+                }
+
+                return {
+                    type: TestModel,
+                    item$: of(new TestModel())
+                }
+            })() as IDetailsOptions<any>
+        }
+    }))

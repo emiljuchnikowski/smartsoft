@@ -63,6 +63,7 @@ import { DetailAddressComponent } from "./detail/address/address.component";
 import { InputObjectComponent } from "./input/object/object.component";
 import { DetailObjectComponent } from "./detail/object/object.component";
 import { InputColorComponent } from "./input/color/color.component";
+import { DetailColorComponent } from "./detail/color/color.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -92,6 +93,7 @@ export const DETAIL_COMPONENTS = [
   DetailEmailComponent,
   DetailAddressComponent,
   DetailObjectComponent,
+  DetailColorComponent,
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];
