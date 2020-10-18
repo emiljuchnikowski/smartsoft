@@ -36,12 +36,19 @@ export class FormComponent<T> implements OnDestroy {
     this._options = val;
 
     this.initLoading();
-    this.formFactory.create(this._options.model, { mode: val.mode })
-        .then(res => {
-          this.form = res;
-          this.registerChanges();
-          this.cd.detectChanges();
-        });
+
+    if (val.control) {
+      this.form = val.control as FormGroup;
+      this.registerChanges();
+      this.cd.detectChanges();
+    } else {
+      this.formFactory.create(this._options.model, { mode: val.mode })
+          .then(res => {
+            this.form = res;
+            this.registerChanges();
+            this.cd.detectChanges();
+          });
+    }
   }
   get options(): IFormOptions<T> {
     return this._options;

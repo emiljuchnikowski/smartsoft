@@ -12,7 +12,7 @@
             <ion-input [placeholder]="(last ? ('add' | translate) : '') + '...'"
                        [formControl]="item"
                        [attr.autofocus]="fieldOptions?.focused"
-                       (ionChange)="onItemChange($event.data)"
+                       (ionChange)="onItemChange()"
             ></ion-input>
             <ion-button slot="end" color="danger" *ngIf="!last" (click)="removeItem(item)">
                 <ion-icon name="close-outline"></ion-icon>

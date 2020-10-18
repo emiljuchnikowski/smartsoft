@@ -17,20 +17,25 @@ export class InputStringsComponent<T> extends InputBaseComponent<T> implements O
 
   afterSetOptionsHandler() {
     if (this.control.value) {
+      this.list = [];
       this.control.value.forEach(i => this.add(i));
+    } else {
+      this.list = [];
     }
 
     this.refresh();
   }
 
-  onItemChange(data: string) {
+  onItemChange() {
     this.refresh();
-    this.control.markAsTouched();
   }
 
   ngOnInit() {}
 
   private refresh(): void {
+    this.control.markAsTouched();
+    this.control.markAsDirty();
+
     this.control.setValue(this.list
         .filter(i => i && i.value)
         .map(i => i.value)
@@ -42,6 +47,8 @@ export class InputStringsComponent<T> extends InputBaseComponent<T> implements O
     ) {
       this.add('');
     }
+
+    this.cd.detectChanges();
   }
 
   private add(val: ''): void {

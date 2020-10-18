@@ -22,14 +22,16 @@ export class InputColorComponent<T> extends InputBaseComponent<T> implements OnI
   }
 
   selectColor(color: string) {
-    this.control.setValue(color);
+    this.control.markAsDirty();
     this.control.markAllAsTouched();
+    this.control.setValue(color);
   }
 
   clear() {
     this.color = null
-    this.control.setValue(null);
+    this.control.markAsDirty();
     this.control.markAllAsTouched();
+    this.control.setValue(null);
   }
 
   ngOnInit() {}

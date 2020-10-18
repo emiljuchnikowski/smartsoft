@@ -129,6 +129,23 @@ storiesOf("smart-form/inputs", module)
                 required: true
               })
               lastName: string
+
+              @Field({
+                type: FieldType.color
+              })
+              color: string
+
+              @Field({
+                type: FieldType.logo
+              })
+              logo: string
+
+              @Field({
+                required: true,
+                type: FieldType.password,
+                confirm: true
+              })
+              password: string
             }
 
             @Model({})
@@ -139,6 +156,7 @@ storiesOf("smart-form/inputs", module)
               @Field({
                 required: true,
                 type: FieldType.object,
+                classType: TestUserModel
               })
               user = new TestUserModel();
             }

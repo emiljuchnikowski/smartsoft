@@ -30,8 +30,9 @@ export class InputLogoComponent<T> extends InputBaseComponent<T> implements OnIn
           const binaryData = e.target.result;
           const base64String = window.btoa(binaryData);
 
-          this.control.setValue('data:image/jpeg;base64, ' + base64String);
+          this.control.markAsDirty();
           this.control.markAsTouched();
+          this.control.setValue('data:image/jpeg;base64, ' + base64String);
 
           this.cd.detectChanges();
         };
@@ -44,8 +45,9 @@ export class InputLogoComponent<T> extends InputBaseComponent<T> implements OnIn
   }
 
   clear() {
-    this.control.setValue(null);
+    this.control.markAsDirty();
     this.control.markAsTouched();
+    this.control.setValue(null);
   }
 
   ngOnInit() {}

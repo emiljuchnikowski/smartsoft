@@ -6,6 +6,7 @@ import { PermissionService } from "@smartsoft001/nestjs";
 import {castModel, getInvalidFields} from "@smartsoft001/models";
 
 import { UpdatePartialCommand } from "../../update-partial.command";
+import {ObjectService} from "@smartsoft001/utils";
 
 @CommandHandler(UpdatePartialCommand)
 export class UpdatePartialHandler<T extends IEntity<string>>
@@ -25,7 +26,7 @@ export class UpdatePartialHandler<T extends IEntity<string>>
       this.checkValid(item);
       const itemModel = this.publisher.mergeClassContext(Item);
       const entity = new itemModel(id);
-      entity.updatePartial(item, command.user);
+      entity.updatePartial(ObjectService.removeTypes(item), command.user);
       entity.commit();
     } catch (e) {
       console.error(e);

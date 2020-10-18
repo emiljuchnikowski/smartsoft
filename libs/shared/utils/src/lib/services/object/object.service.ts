@@ -12,4 +12,12 @@ export class ObjectService {
 
         return result;
     }
+
+    static removeTypes(obj: any): Object {
+        if (!obj) return obj;
+
+        const stringObj = JSON.stringify(obj);
+
+        return JSON.parse(stringObj);
+    }
 }

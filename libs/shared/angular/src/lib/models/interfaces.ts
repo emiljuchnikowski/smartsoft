@@ -59,6 +59,7 @@ export interface IDetailsProvider<T> {
 
 export interface IFormOptions<T> {
   model: T;
+  control?: AbstractControl;
   mode?: "create" | "update" | string;
   loading$?: Observable<boolean>;
   possibilities?: {

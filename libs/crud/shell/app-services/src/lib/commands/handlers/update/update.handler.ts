@@ -3,8 +3,10 @@ import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import { Item } from "@smartsoft001/crud-domain";
 import {DomainValidationError, IEntity} from "@smartsoft001/domain-core";
 import { PermissionService } from "@smartsoft001/nestjs";
-import { UpdateCommand } from "../../update.command";
 import {castModel, getInvalidFields} from "@smartsoft001/models";
+import {ObjectService} from "@smartsoft001/utils";
+
+import { UpdateCommand } from "../../update.command";
 
 @CommandHandler(UpdateCommand)
 export class UpdateHandler<T extends IEntity<string>>
@@ -23,7 +25,7 @@ export class UpdateHandler<T extends IEntity<string>>
       castModel(item, 'update');
       this.checkValid(item);
       const itemModel = this.publisher.mergeClassContext(Item);
-      const entity = new itemModel(item);
+      const entity = new itemModel(ObjectService.removeTypes(item) as IEntity<string>);
       entity.update(command.user);
       entity.commit();
     } catch (e) {

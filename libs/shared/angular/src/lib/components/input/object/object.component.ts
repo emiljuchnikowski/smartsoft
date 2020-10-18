@@ -18,6 +18,7 @@ export class InputObjectComponent<T, TChild> extends InputBaseComponent<T> imple
   protected afterSetOptionsHandler() {
     this.childOptions = {
       mode: this.internalOptions.mode,
+      control: this.control,
       model: (this.internalOptions.model[this.internalOptions.fieldKey] as TChild)
     }
   }

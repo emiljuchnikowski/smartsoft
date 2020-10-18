@@ -36,6 +36,12 @@ export function FieldDecorator(options: IFieldOptions) {
                 enumerable: true,
                 configurable: true
             });
+
+            if (!target.constructor['__properties']) {
+                target.constructor['__properties'] = {};
+            }
+
+            target.constructor['__properties'][key] = true;
         }
 
         Reflect.defineMetadata(symbols.SYMBOL_FIELD, options, target, key);
