@@ -9,12 +9,14 @@
   <br />
   <ion-row>
     <ion-col size="auto">
-      <ion-img
-        style="width: 150px; height: 150px;"
-        *ngIf="control?.value"
-        [src]="control?.value"
-        (click)="set(inputFile)">
-      ></ion-img>
+      <ion-card>
+        <ion-img
+                style="padding: 10px; width: 150px; height: 150px;"
+                *ngIf="control?.value"
+                [src]="control?.value"
+                (click)="set(inputFile)">
+          ></ion-img>
+      </ion-card>
     </ion-col>
 
     <ion-col size="auto" *ngIf="!control?.value">
