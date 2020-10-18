@@ -1,0 +1,26 @@
+<ng-container *ngIf="control">
+    <ion-label>
+        {{ translateKey | translate }}
+        <ion-text color="danger">
+            <span *ngIf="fieldOptions?.required">*</span>
+        </ion-text>
+    </ion-label>
+
+    <br/>
+    <ion-row class="testcolor">
+        <ion-col  [style.background]="color">&nbsp;</ion-col>
+
+        <ion-col size="auto">
+            <ion-button [(colorPicker)]="color" (colorPickerChange)="selectColor($event)">
+                <ion-icon name="settings"></ion-icon>
+            </ion-button>
+        </ion-col>
+
+        <ion-col size="auto">
+            <ion-button color="danger" (click)="clear()">
+                <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <br/>
+</ng-container>

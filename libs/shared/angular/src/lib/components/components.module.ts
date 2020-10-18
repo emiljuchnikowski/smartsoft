@@ -8,6 +8,7 @@ import { RouterModule } from "@angular/router";
 import { ChartsModule } from "ng2-charts";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
+import { ColorPickerModule } from "ngx-color-picker";
 
 import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { AccordionComponent } from "./accordion/accordion.component";
@@ -61,6 +62,7 @@ import { InputAddressComponent } from "./input/address/address.component";
 import { DetailAddressComponent } from "./detail/address/address.component";
 import { InputObjectComponent } from "./input/object/object.component";
 import { DetailObjectComponent } from "./detail/object/object.component";
+import { InputColorComponent } from "./input/color/color.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -113,6 +115,7 @@ export const INPUT_COMPONENTS = [
   InputLongTextComponent,
   InputAddressComponent,
   InputObjectComponent,
+  InputColorComponent,
 ];
 
 export const LIST_COMPONENTS = [
@@ -165,6 +168,7 @@ export const IMPORTS = [
   MatTableModule,
   MatSortModule,
   ChartsModule,
+  ColorPickerModule,
 ];
 
 @NgModule({

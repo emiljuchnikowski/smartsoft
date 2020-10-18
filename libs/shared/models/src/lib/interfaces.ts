@@ -8,13 +8,14 @@ export enum FieldType {
     file = "file",
     flag = "flag",
     int = "int",
-    nip = "nip", 
+    nip = "nip",
     object = "object",
     password = "password",
     radio = "radio",
     text = "text",
     strings = "strings",
-    longText = "longText"
+    longText = "longText",
+    color = "color"
 }
 
 export interface IModelMetadata {

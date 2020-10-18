@@ -1,16 +1,10 @@
-import { storiesOf } from "@storybook/angular";
-import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {storiesOf} from "@storybook/angular";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 import {IAddress} from "@smartsoft001/domain-core";
 
-import {
-  COMPONENTS,
-  FormComponent,
-  IFormOptions,
-  IMPORTS,
-  SharedFactoriesModule,
-} from "@smartsoft001/angular";
-import { Field, FieldType, Model } from "@smartsoft001/models";
+import {COMPONENTS, FormComponent, IFormOptions, IMPORTS, SharedFactoriesModule,} from "@smartsoft001/angular";
+import {Field, FieldType, Model} from "@smartsoft001/models";
 import {TranslateModule} from "@ngx-translate/core";
 
 const moduleMetadate = {
@@ -147,6 +141,26 @@ storiesOf("smart-form/inputs", module)
                 type: FieldType.object,
               })
               user = new TestUserModel();
+            }
+
+            return new TestModel();
+          })(),
+        } as IFormOptions<any>,
+      },
+    }))
+    .add("color", () => ({
+      moduleMetadata: moduleMetadate,
+      component: FormComponent,
+      props: {
+        options: {
+          model: (() => {
+            @Model({})
+            class TestModel {
+              @Field({
+                type: FieldType.color,
+                required: true
+              })
+              color = 'red';
             }
 
             return new TestModel();
