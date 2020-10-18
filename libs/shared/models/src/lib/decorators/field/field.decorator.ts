@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import * as symbols from "../../symbols";
 import {FieldType, IFieldOptions} from "../../interfaces";
+import {ObjectService} from "@smartsoft001/utils";
 
 export const Field = FieldDecorator;
 export function FieldDecorator(options: IFieldOptions) {
@@ -19,6 +20,22 @@ export function FieldDecorator(options: IFieldOptions) {
             options.type = FieldType.password;
         } else if (!options.type) {
             options.type = FieldType.text;
+        }
+
+        if (options.classType) {
+            target['_' + key] = target[key];
+            delete target[key];
+
+            Object.defineProperty(target, key, {
+               get(): any {
+                   return target['_' + key];
+               },
+                set(v: any) {
+                    target['_' + key] = ObjectService.createByType(v, options.classType);
+                },
+                enumerable: true,
+                configurable: true
+            });
         }
 
         Reflect.defineMetadata(symbols.SYMBOL_FIELD, options, target, key);

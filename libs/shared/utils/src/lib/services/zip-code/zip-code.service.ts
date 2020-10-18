@@ -1,9 +1,10 @@
 export class ZipCodeService {
     static isValid(code: string): boolean {
-        return !!code.match(/^\d\d-\d\d\d$/);
+        const re = new RegExp('^\\d\\d-\\d\\d\\d$');
+        return !!code.match(re);
     }
 
     static isInvalid(code: string): boolean {
-        return !this.isValid(code);
+        return !ZipCodeService.isValid(code);
     }
 }

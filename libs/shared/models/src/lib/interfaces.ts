@@ -25,6 +25,7 @@ export interface IModelMetadata {
 
 export interface IFieldMetadata extends IFieldModifyMetadata {
     type?: FieldType;
+    classType?: any;
     possibilities?: Array<any> | any;
 }
 

@@ -19,6 +19,6 @@ export class NipService {
     }
 
     static isInvalid(nip: string): boolean {
-        return !this.isValid(nip);
+        return !NipService.isValid(nip);
     }
 }
