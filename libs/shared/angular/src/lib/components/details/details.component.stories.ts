@@ -124,3 +124,24 @@ storiesOf('smart-details', module)
             })() as IDetailsOptions<any>
         }
     }))
+    .add('logo', () => ({
+        moduleMetadata: moduleMetadata,
+        component: DetailsComponent,
+        props: {
+            options: (() => {
+                @Model({})
+                class TestModel {
+                    @Field({
+                        details: true,
+                        type: FieldType.logo
+                    })
+                    logo = 'https://picsum.photos/200/300';
+                }
+
+                return {
+                    type: TestModel,
+                    item$: of(new TestModel())
+                }
+            })() as IDetailsOptions<any>
+        }
+    }))

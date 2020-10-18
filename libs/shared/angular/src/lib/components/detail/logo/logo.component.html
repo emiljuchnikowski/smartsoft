@@ -1,0 +1,3 @@
+<ion-card>
+    <ion-img style="margin: 10px; height: 150px; width: 150px" *ngIf='options?.item$ | async; let item' [src]="item[options?.key]"></ion-img>
+</ion-card>

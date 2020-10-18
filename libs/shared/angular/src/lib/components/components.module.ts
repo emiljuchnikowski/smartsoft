@@ -65,6 +65,7 @@ import { DetailObjectComponent } from "./detail/object/object.component";
 import { InputColorComponent } from "./input/color/color.component";
 import { DetailColorComponent } from "./detail/color/color.component";
 import { InputLogoComponent } from "./input/logo/logo.component";
+import { DetailLogoComponent } from "./detail/logo/logo.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -95,6 +96,7 @@ export const DETAIL_COMPONENTS = [
   DetailAddressComponent,
   DetailObjectComponent,
   DetailColorComponent,
+  DetailLogoComponent,
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];

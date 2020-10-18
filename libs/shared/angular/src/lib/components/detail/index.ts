@@ -7,3 +7,4 @@ export * from './flag/flag.component';
 export * from './address/address.component';
 export * from './object/object.component';
 export * from './color/color.component';
+export * from './logo/logo.component';
