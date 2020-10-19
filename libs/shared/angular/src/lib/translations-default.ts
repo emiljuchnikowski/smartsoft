@@ -60,6 +60,7 @@ export interface ITranslateData {
         ERRORS: {
             required: string,
             invalidNip: string,
+            invalidUnique: string,
             confirm: string
         }
     };
@@ -113,6 +114,7 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
         ERRORS: {
             required: 'field is required',
             invalidNip: 'Invalid nip format',
+            invalidUnique: 'Invalid unique value',
             confirm: 'bad confirmed'
         }
     },
@@ -166,6 +168,7 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
         ERRORS: {
             required: 'to pole jest wymagane',
             invalidNip: 'niepoprawny format nip',
+            invalidUnique: 'wartość jest już w systemie',
             confirm: 'źle powtórzone'
         }
     },

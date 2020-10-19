@@ -6,6 +6,10 @@
     <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidNip' | translate }}
 </span>
 
+<span *ngIf="errors?.invalidUnique">
+    <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidUnique' | translate }}
+</span>
+
 <ng-template #checkConfirm>
     <span *ngIf="errors?.confirm">
         <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.confirm' | translate }}

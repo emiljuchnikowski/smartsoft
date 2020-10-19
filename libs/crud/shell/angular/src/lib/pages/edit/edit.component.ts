@@ -1,12 +1,15 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
+import {Location} from "@angular/common";
 
 import {IPageOptions} from "@smartsoft001/angular";
-import {CrudFacade} from "../../+state/crud.facade";
 import {IEntity} from "@smartsoft001/domain-core";
+
+import {CrudFacade} from "../../+state/crud.facade";
 import {CrudFullConfig} from "../../crud.config";
-import {Location} from "@angular/common";
+import {CrudService} from "../../services/crud/crud.service";
+import {ICrudFilter} from "../../models/interfaces";
 
 @Component({
   selector: "smart-crud-edit-page",
@@ -25,12 +28,14 @@ export class EditComponent<T extends IEntity<string>> implements OnInit, OnDestr
   id: string;
   formValue: T;
   formPartialValue: Partial<T>;
+  uniqueProvider: (values: Record<keyof T, any>) => Promise<boolean>;
 
   selected$: Observable<T>;
 
   constructor(
     private router: Router,
     private facade: CrudFacade<T>,
+    private service: CrudService<T>,
     private route: ActivatedRoute,
     public config: CrudFullConfig<T>,
     private location: Location
@@ -43,6 +48,24 @@ export class EditComponent<T extends IEntity<string>> implements OnInit, OnDestr
       this.mode = "create";
     } else {
       this.mode = "update";
+    }
+
+    this.uniqueProvider = async values => {
+      const filter: ICrudFilter = {
+        query: []
+      };
+
+      Object.keys(values).forEach(key => {
+        filter.query.push({
+          key: key,
+          value: values[key],
+          type: "="
+        });
+      });
+
+      const { totalCount } = await this.service.getList(filter).toPromise();
+
+      return !totalCount;
     }
 
     this.pageOptions = {

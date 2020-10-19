@@ -62,6 +62,7 @@ export interface IFormOptions<T> {
   control?: AbstractControl;
   mode?: "create" | "update" | string;
   loading$?: Observable<boolean>;
+  uniqueProvider?: (values: Record<keyof T, any>) => Promise<boolean>,
   possibilities?: {
     [key: string]: Observable<{ id: any, text: string }[]>;
   }

@@ -33,6 +33,7 @@ export interface IFieldModifyMetadata {
     required?: boolean;
     focused?: boolean;
     confirm?: boolean;
+    unique?: boolean | IFieldUniqueMetadata;
     defaltValue?: () => any;
 }
 
@@ -62,6 +63,10 @@ export interface IFieldOptions extends IFieldMetadata {
 
 export interface IModelMetadataCustom extends IModelMetadata {
     mode: string
+}
+
+export interface IFieldUniqueMetadata {
+    withFields?: Array<string>;
 }
 
 export interface IFieldCustomMetadata extends IFieldModifyMetadata, IFieldListMetadata {

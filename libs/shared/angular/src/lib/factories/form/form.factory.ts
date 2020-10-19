@@ -1,12 +1,7 @@
 import "reflect-metadata";
 
-import { Injectable } from "@angular/core";
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
+import {Injectable} from "@angular/core";
+import {AbstractControl, FormBuilder, FormGroup, Validators,} from "@angular/forms";
 import * as _ from "lodash";
 
 import {
@@ -14,11 +9,11 @@ import {
   getModelFieldsWithOptions,
   IFieldModifyMetadata,
   IFieldOptions,
+  IFieldUniqueMetadata,
   SYMBOL_FIELD,
   SYMBOL_MODEL,
 } from "@smartsoft001/models";
-import { ZipCodeService } from "@smartsoft001/utils";
-import { boolean } from "@storybook/addon-knobs";
+import {ZipCodeService} from "@smartsoft001/utils";
 
 @Injectable()
 export class FormFactory {
@@ -29,16 +24,6 @@ export class FormFactory {
 
     if (!Reflect.hasMetadata(SYMBOL_MODEL, obj.constructor))
       throw new Error("You should mark class with @Model decorator");
-  }
-
-  static setValidators(control: AbstractControl, options: IFieldOptions): void {
-    const result = [];
-
-    if (options.required) {
-      result.push(Validators.required);
-    }
-
-    control.setValidators(result);
   }
 
   static getOptions<T>(obj: T, key: string): IFieldOptions {
@@ -70,7 +55,10 @@ export class FormFactory {
 
   async create<T>(
     obj: T,
-    ops: { mode?: "create" | "update" | string } = {}
+    ops: {
+      mode?: "create" | "update" | string;
+      uniqueProvider?: (values: Record<string, any>) => Promise<boolean>;
+    } = {}
   ): Promise<FormGroup> {
     FormFactory.checkModelMeta(obj);
 
@@ -100,7 +88,13 @@ export class FormFactory {
         control = this.createControl(obj, field, options.required);
       }
 
-      FormFactory.setValidators(control, options);
+      this.setValidators(
+        field.key,
+        control,
+        options,
+        result,
+        ops.uniqueProvider
+      );
 
       result.addControl(field.key, control);
 
@@ -129,6 +123,46 @@ export class FormFactory {
     return result;
   }
 
+  private setValidators(
+    key: string,
+    control: AbstractControl,
+    options: IFieldOptions,
+    form: FormGroup,
+    uniqueProvider: (values: Record<string, any>) => Promise<boolean>
+  ): void {
+    const result = [];
+    const asyncResult = [];
+
+    if (options.required) {
+      result.push(Validators.required);
+    }
+
+    if (options.unique) {
+      if (!uniqueProvider) throw Error("Required uniqueProvider");
+
+      asyncResult.push(async (c: AbstractControl) => {
+        const record: Record<string, any> = {
+          [key]: options.type === FieldType.int ? c.value : `'${ c.value }'`
+        };
+
+        if (form.value && (options.unique as IFieldUniqueMetadata).withFields) {
+          (options.unique as IFieldUniqueMetadata).withFields.forEach(fieldKey => {
+            record[fieldKey] = form.value[fieldKey];
+          });
+        }
+
+        if (await uniqueProvider(record)) return null;
+
+        return {
+          invalidUnique: true
+        }
+      });
+    }
+
+    control.setValidators(result);
+    control.setAsyncValidators(asyncResult);
+  }
+
   private createControl<T>(
     obj: T,
     field: { key: string; options: IFieldOptions },
@@ -149,16 +183,15 @@ export class FormFactory {
     switch (field.options.type) {
       case FieldType.address:
         result = this.fb.group({
-          city: ["", required ? [ Validators.required ] : null],
-          street: ["", required ? [ Validators.required ] : null],
-          buildingNumber: ["", required ? [ Validators.required ] : null],
+          city: ["", required ? [Validators.required] : null],
+          street: ["", required ? [Validators.required] : null],
+          buildingNumber: ["", required ? [Validators.required] : null],
           flatNumber: [""],
           zipCode: [
             "",
-            required ? [
-              Validators.required,
-              zipCodeValidator,
-            ] : [ zipCodeValidator ],
+            required
+              ? [Validators.required, zipCodeValidator]
+              : [zipCodeValidator],
           ],
         });
         break;
@@ -168,10 +201,10 @@ export class FormFactory {
     }
 
     const value = obj[field.key]
-        ? obj[field.key]
-        : field.options.defaltValue
-            ? field.options.defaltValue()
-            : null;
+      ? obj[field.key]
+      : field.options.defaltValue
+      ? field.options.defaltValue()
+      : null;
 
     if (value) result.setValue(value);
 

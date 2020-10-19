@@ -42,7 +42,10 @@ export class FormComponent<T> implements OnDestroy {
       this.registerChanges();
       this.cd.detectChanges();
     } else {
-      this.formFactory.create(this._options.model, { mode: val.mode })
+      this.formFactory.create(this._options.model, {
+        mode: val.mode,
+        uniqueProvider: val.uniqueProvider
+      })
           .then(res => {
             this.form = res;
             this.registerChanges();

@@ -35,6 +35,7 @@ export class User implements IEntity<string> {
     @Field({
         create: modifyMetdata,
         details: true,
+        unique: true,
         list: { order: 1 }
     })
     username: string;
