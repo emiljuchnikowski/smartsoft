@@ -55,7 +55,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.createTokenSuccess.type),
         tap(_ => {
-          this.router.navigateByUrl("");
+            window.location.href = '';
         })
       ),
     { dispatch: false }

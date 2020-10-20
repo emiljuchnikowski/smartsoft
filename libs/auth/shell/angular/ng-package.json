@@ -4,8 +4,8 @@
   "lib": {
     "entryFile": "src/index.ts",
     "styleIncludePaths": [
-      "../../../../libs/shared/angular/src/lib/styles",
-      "../../../../apps/ui/test/src/theme"
+      "../../../../libs/shared/angular/src/lib",
+      "../../../../apps/ui/test/src"
     ]
   }
 }
