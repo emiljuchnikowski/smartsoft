@@ -1,8 +1,14 @@
 @import "styles/smart-styles.scss";
-ion-item {
-    //padding-left: 1.2rem;
-    //padding-right: 1.2rem;
-    @media (max-width: $smart-mobile-breakpoint) {
-        padding-left: 1.2rem;
+:host {
+    ion-item {
+        //padding-left: 1.2rem;
+        //padding-right: 1.2rem;
+        // @media (max-width: var(--smart-phone-breakpoint)) {
+        //     padding-left: 1.2rem;
+        // }
+        @media (max-width: var(--smart-tablet-breakpoint)) {
+            padding-left: 1.2rem !important;
+            margin-left: 1.2rem !important;
+        }
     }
 }

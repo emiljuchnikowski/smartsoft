@@ -8,7 +8,15 @@
             --background: linear-gradient(33deg, var(--ion-color-light), var(--ion-color-light-shade));
             --color: var(--ion-color-dark);
         }
-        @media (max-width: $smart-mobile-breakpoint) {
+        @media (max-width: var(--smart-phone-breakpoint)) {
+            --background: linear-gradient(33deg, var(--ion-color-primary), var(--ion-color-tertiary));
+            --color: var(--ion-color-light);
+            ion-modal & {
+                --background: linear-gradient(33deg, var(--ion-color-light), var(--ion-color-light-shade));
+                color: var(--ion-color-dark);
+            }
+        }
+        @media (max-width: var(--smart-tablet-breakpoint)) {
             --background: linear-gradient(33deg, var(--ion-color-primary), var(--ion-color-tertiary));
             --color: var(--ion-color-light);
             ion-modal & {
@@ -20,7 +28,18 @@
             height: 4.6rem;
             --background: linear-gradient(33deg, var(--ion-color-light), var(--ion-color-light-shade));
             --color: var(--ion-color-dark);
-            @media (max-width: $smart-mobile-breakpoint) {
+            @media (max-width: var(--smart-phone-breakpoint)) {
+                --background: linear-gradient(33deg, var(--ion-color-primary), var(--ion-color-tertiary));
+                --color: var(--ion-color-light);
+                ion-title {
+                    text-align: left;
+                    padding-left: 5.2rem;
+                }
+                ion-icon {
+                    color: var(--ion-color-light);
+                }
+            }
+            @media (max-width: var(--smart-tablet-breakpoint)) {
                 --background: linear-gradient(33deg, var(--ion-color-primary), var(--ion-color-tertiary));
                 --color: var(--ion-color-light);
                 ion-title {
@@ -34,7 +53,21 @@
             .modal-wrapper & {
                 --background: linear-gradient(33deg, var(--ion-color-light), var(--ion-color-light-shade));
                 --color: var(--ion-color-dark);
-                @media (max-width: $smart-mobile-breakpoint) {
+                @media (max-width: var(--smart-phone-breakpoint)) {
+                    --background: linear-gradient(33deg, var(--ion-color-light), var(--ion-color-light-shade));
+                    color: var(--ion-color-dark);
+                    ion-title {
+                        text-align: left;
+                        padding-left: 1.2rem;
+                    }
+                    ion-icon {
+                        color: var(--ion-color-dark);
+                    }
+                    ion-buttons {
+                        margin: 0;
+                    }
+                }
+                @media (max-width: var(--smart-tablet-breakpoint)) {
                     --background: linear-gradient(33deg, var(--ion-color-light), var(--ion-color-light-shade));
                     color: var(--ion-color-dark);
                     ion-title {
