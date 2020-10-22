@@ -23,12 +23,12 @@ td {
 th {
     padding-left: .6rem !important;
     &.mat-header-cell {
-        color: var(--ion-color-secondary) !important;
+        color: var(--smart-color-secondary) !important;
     }
     &:first-child {
         padding-left: 1.2rem !important;
     }
     .mat-sort-header-button {
-        color: var(--ion-color-secondary);
+        color: var(--smart-color-secondary);
     }
 }
