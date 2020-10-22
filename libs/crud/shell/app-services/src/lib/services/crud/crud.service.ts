@@ -1,38 +1,51 @@
-import { Injectable } from "@nestjs/common";
-import { CommandBus, QueryBus } from "@nestjs/cqrs";
+import {Injectable, Logger} from "@nestjs/common";
 import { Guid } from "guid-typescript";
 import { Observable } from "rxjs";
 
 import { IUser } from "@smartsoft001/users";
 import {
+  DomainValidationError,
   IEntity,
   IItemRepository,
   ISpecification,
 } from "@smartsoft001/domain-core";
-import { ICreateManyOptions } from "@smartsoft001/crud-domain";
+import {ICreateManyOptions} from "@smartsoft001/crud-domain";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
-
-import { CreateCommand } from "../../commands/create.command";
-import { UpdateCommand } from "../../commands/update.command";
-import { DeleteCommand } from "../../commands/delete.command";
-import { UpdatePartialCommand } from "../../commands/update-partial.command";
-import { GetByIdQuery } from "../../queries/get-by-id.query";
-import { GetByCriteriaQuery } from "../../queries/get-by-criteria.query";
+import {PermissionService} from "@smartsoft001/nestjs";
+import {castModel, getInvalidFields} from "@smartsoft001/models";
+import {PasswordService} from "@smartsoft001/utils";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
+  private _logger = new Logger(CrudService.name, true);
+
   constructor(
-    private readonly commandBus: CommandBus,
-    private readonly queryBus: QueryBus,
-    private readonly repository: IItemRepository<T>
+      private readonly permissionService: PermissionService,
+      private readonly repository: IItemRepository<T>
   ) {}
 
   async create(data: T, user: IUser): Promise<string> {
     data.id = Guid.raw();
 
-    await this.commandBus.execute(new CreateCommand(data, user));
+    try {
+      this.permissionService.valid("create", user);
 
-    return data.id;
+      castModel(data, "create");
+      this.checkValidCreate(data);
+
+      if (data['password']) {
+        data['password'] = await PasswordService.hash(data['password']);
+      }
+      if(data['passwordConfirm']) {
+        delete data['passwordConfirm'];
+      }
+      await this.repository.create(data, user);
+
+      return data.id;
+    } catch (e) {
+      this._logger.error(e);
+      throw e;
+    }
   }
 
   async createMany(
@@ -44,23 +57,67 @@ export class CrudService<T extends IEntity<string>> {
       item.id = Guid.raw();
     });
 
-    await this.commandBus.execute(new CreateCommand(data, user, options));
+    try {
+      this.permissionService.valid("create", user);
+
+      data.forEach((item) => {
+        castModel(item, "create");
+        this.checkValidCreate(item);
+      });
+
+      if (options && options.mode === 'replace') {
+        await this.repository.clear(user);
+      }
+
+      for (let index = 0; index < data.length; index++) {
+        const item = data[index];
+
+        if (item['password']) {
+          item['password'] = await PasswordService.hash(item['password']);
+        }
+
+        if(item['passwordConfirm']) {
+          delete item['passwordConfirm'];
+        }
+      }
+
+      await this.repository.createMany(data, user);
+    } catch (e) {
+      this._logger.error(e);
+      throw e;
+    }
 
     return data;
   }
 
-  readById(id: string, user: IUser): Promise<T> {
-    return this.queryBus.execute(new GetByIdQuery(id, user));
+  async readById(id: string, user: IUser): Promise<T> {
+    try {
+      this.permissionService.valid("read", user);
+      const result = await this.repository.getById(id);
+      delete result['password'];
+
+      return result;
+    } catch (e) {
+      this._logger.error(e);
+      throw e;
+    }
   }
 
-  read(
+  async read(
     criteria: any,
     options: any,
     user: IUser
   ): Promise<{ data: T[]; totalCount: number }> {
-    return this.queryBus.execute(
-      new GetByCriteriaQuery(criteria, options, user)
-    );
+    try {
+      this.permissionService.valid("read", user);
+      const result = await this.repository.getByCriteria(criteria, options);
+      result.data.forEach(item => delete item['password']);
+
+      return result;
+    } catch (e) {
+      this._logger.error(e);
+      throw e;
+    }
   }
 
   readBySpec(
@@ -68,13 +125,28 @@ export class CrudService<T extends IEntity<string>> {
     options: any,
     user: IUser
   ): Promise<{ data: T[]; totalCount: number }> {
-    return this.queryBus.execute(
-      new GetByCriteriaQuery(spec.criteria, options, user)
-    );
+    return this.read(spec.criteria, options, user);
   }
 
   async update(id: string, data: T, user: IUser): Promise<void> {
-    await this.commandBus.execute(new UpdateCommand({ ...data, id }, user));
+    try {
+      data.id = id;
+      this.permissionService.valid("update", user);
+
+      castModel(data, 'update');
+      this.checkValidUpdate(data);
+
+      if (data['password']) {
+        data['password'] = await PasswordService.hash(data['password']);
+      }
+      if(data['passwordConfirm']) {
+        delete data['passwordConfirm'];
+      }
+      await this.repository.update(data, user);
+    } catch (e) {
+      this._logger.error(e);
+      throw e;
+    }
   }
 
   async updatePartial(
@@ -82,14 +154,68 @@ export class CrudService<T extends IEntity<string>> {
     data: Partial<T>,
     user: IUser
   ): Promise<void> {
-    await this.commandBus.execute(new UpdatePartialCommand(id, data, user));
+    try {
+      data.id = id;
+
+      this.permissionService.valid("update", user);
+
+      castModel(data, 'update');
+      this.checkValidUpdatePartial(data);
+
+      if (data["password"]) {
+        data["password"] = await PasswordService.hash(
+            data["password"]
+        );
+      }
+      if(data['passwordConfirm']) {
+        delete data['passwordConfirm'];
+      }
+      await this.repository.updatePartial(data as Partial<T> & { id }, user);
+    } catch (e) {
+      this._logger.error(e);
+      throw e;
+    }
   }
 
   async delete(id: string, user: IUser): Promise<void> {
-    await this.commandBus.execute(new DeleteCommand(id, user));
+    try {
+      this.permissionService.valid("delete", user);
+
+      await this.repository.delete(id, user);
+    } catch (e) {
+      this._logger.error(e);
+      throw e;
+    }
   }
 
   changes(criteria: { id?: string }): Observable<ItemChangedData> {
     return this.repository.changesByCriteria(criteria);
+  }
+
+  private checkValidCreate(item: T): void {
+    const array = getInvalidFields(item, "create");
+
+    if (array.length) {
+      throw new DomainValidationError("Required fields: " + array.join(", "));
+    }
+  }
+
+  private checkValidUpdate(item: T): void {
+    const array = getInvalidFields(item, "update");
+
+    if (array.length) {
+      throw new DomainValidationError("Required fields: " + array.join(", "));
+    }
+  }
+
+  private checkValidUpdatePartial(item: Partial<T>): void {
+    const keys = Object.keys(item);
+    const array = getInvalidFields(item, "update").filter((invalidField) =>
+        keys.some((key) => key === invalidField)
+    );
+
+    if (array.length) {
+      throw new DomainValidationError("Required fields: " + array.join(", "));
+    }
   }
 }

@@ -1,15 +1,11 @@
 import { DynamicModule, Module } from "@nestjs/common";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
-import { CqrsModule } from "@nestjs/cqrs";
 
 import {
-  COMMAND_HANDLERS,
-  QUERY_HANDLERS,
   SERVICES,
 } from "@smartsoft001/crud-shell-app-services";
 import { SharedConfig, SharedModule } from "@smartsoft001/nestjs";
-import { DOMAIN_HANDLERS } from "@smartsoft001/crud-domain";
 import { MongoModule } from "@smartsoft001/mongo";
 
 import { CONTROLLERS } from "./controllers";
@@ -38,9 +34,6 @@ export class CrudShellNestjsModule {
       controllers: options.restApi ? CONTROLLERS : [],
       providers: [
         ...SERVICES,
-        ...COMMAND_HANDLERS,
-        ...DOMAIN_HANDLERS,
-        ...QUERY_HANDLERS,
         ...(options.socket ? GATEWAYS : []),
         AuthJwtGuard,
       ],
@@ -60,14 +53,10 @@ export class CrudShellNestjsModule {
             ]
           : []),
         SharedModule.forRoot(options),
-        MongoModule.forRoot(options.db),
-        CqrsModule,
+        MongoModule.forRoot(options.db)
       ],
       exports: [
         ...SERVICES,
-        ...COMMAND_HANDLERS,
-        ...DOMAIN_HANDLERS,
-        ...QUERY_HANDLERS,
         AuthJwtGuard,
         MongoModule.forRoot(options.db)
       ],
@@ -93,9 +82,6 @@ export class CrudShellNestjsCoreModule {
       module: CrudShellNestjsModule,
       providers: [
         ...SERVICES,
-        ...COMMAND_HANDLERS,
-        ...DOMAIN_HANDLERS,
-        ...QUERY_HANDLERS,
         ...GATEWAYS,
         AuthJwtGuard,
       ],
@@ -108,8 +94,7 @@ export class CrudShellNestjsCoreModule {
           },
         }),
         SharedModule.forRoot(options),
-        MongoModule.forRoot(options.db),
-        CqrsModule,
+        MongoModule.forRoot(options.db)
       ],
       exports: [],
     };
