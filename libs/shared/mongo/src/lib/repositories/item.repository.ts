@@ -1,16 +1,23 @@
 import { Injectable } from "@nestjs/common";
-import {ChangeStream, MongoClient} from "mongodb";
-import {Observable, Observer} from "rxjs";
-import {finalize, share} from "rxjs/operators";
+import { ChangeStream, MongoClient } from "mongodb";
+import { Observable, Observer } from "rxjs";
+import { finalize, share } from "rxjs/operators";
 
-import { IEntity, IItemRepository, ISpecification} from "@smartsoft001/domain-core";
-import {IUser} from "@smartsoft001/users";
-import {ItemChangedData} from "@smartsoft001/crud-shell-dtos";
+import {
+  IEntity,
+  IItemRepository,
+  ISpecification,
+} from "@smartsoft001/domain-core";
+import { IUser } from "@smartsoft001/users";
+import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 
-import {MongoConfig} from "../mongo.config";
+import { MongoConfig } from "../mongo.config";
+import { ObjectService } from "@smartsoft001/utils";
 
 @Injectable()
-export class MongoItemRepository<T extends IEntity<string>> extends IItemRepository<T> {
+export class MongoItemRepository<
+  T extends IEntity<string>
+> extends IItemRepository<T> {
   constructor(private config: MongoConfig) {
     super();
   }
@@ -26,8 +33,8 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
         const db = client.db(this.config.database);
 
         db.collection(this.config.collection).insertOne(
-          this.getModelToCreate(item, user),
-          errInsert => {
+          this.getModelToCreate(ObjectService.removeTypes(item) as T, user),
+          (errInsert) => {
             if (errInsert) {
               rej(errInsert);
               return;
@@ -75,16 +82,18 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
         const db = client.db(this.config.database);
 
         db.collection(this.config.collection).insertMany(
-            list.map(item => this.getModelToCreate(item, user)),
-            errInsert => {
-              if (errInsert) {
-                rej(errInsert);
-                return;
-              }
-
-              client.close();
-              res();
+          list.map((item) =>
+            this.getModelToCreate(ObjectService.removeTypes(item) as T, user)
+          ),
+          (errInsert) => {
+            if (errInsert) {
+              rej(errInsert);
+              return;
             }
+
+            client.close();
+            res();
+          }
         );
       });
     });
@@ -105,8 +114,12 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
 
         db.collection(this.config.collection).replaceOne(
           { _id: item.id },
-          this.getModelToUpdate(item, user, info),
-          errUpdate => {
+          this.getModelToUpdate(
+            ObjectService.removeTypes(item) as T,
+            user,
+            info
+          ),
+          (errUpdate) => {
             if (errUpdate) {
               rej(errUpdate);
               return;
@@ -135,8 +148,14 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
 
         db.collection(this.config.collection).updateOne(
           { _id: item.id },
-          { $set: this.getModelToUpdate(item, user, info) },
-          errUpdate => {
+          {
+            $set: this.getModelToUpdate(
+              ObjectService.removeTypes(item) as T,
+              user,
+              info
+            ),
+          },
+          (errUpdate) => {
             if (errUpdate) {
               rej(errUpdate);
               return;
@@ -162,7 +181,7 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
 
         db.collection(this.config.collection).deleteOne(
           { _id: id },
-          errDelete => {
+          (errDelete) => {
             if (errDelete) {
               rej(errDelete);
               return;
@@ -219,22 +238,25 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
         const totalCount = await this.getCount(criteria, collection);
 
         collection.find(criteria, options).toArray((errDelete, list) => {
-            if (errDelete) {
-                rej(errDelete);
-                return;
-            }
+          if (errDelete) {
+            rej(errDelete);
+            return;
+          }
 
-            client.close();
-            res({
-                data: list.map(item => this.getModelToResult(item)),
-                totalCount
-            });
+          client.close();
+          res({
+            data: list.map((item) => this.getModelToResult(item)),
+            totalCount,
+          });
         });
       });
     });
   }
 
-  getBySpecification(spec: ISpecification, options: any = {}): Promise<{ data: T[]; totalCount: number; }> {
+  getBySpecification(
+    spec: ISpecification,
+    options: any = {}
+  ): Promise<{ data: T[]; totalCount: number }> {
     return this.getByCriteria(spec.criteria, options);
   }
 
@@ -254,31 +276,35 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
         const db = client.db(this.config.database);
         const collection = db.collection(this.config.collection);
 
-        const pipeline = criteria.id ? [
-          {
-            $match: {
-              "documentKey._id": criteria.id
-            }
-          }
-        ] : [];
+        const pipeline = criteria.id
+          ? [
+              {
+                $match: {
+                  "documentKey._id": criteria.id,
+                },
+              },
+            ]
+          : [];
 
-        stream = collection.watch(pipeline).on('change', result => {
+        stream = collection.watch(pipeline).on("change", (result) => {
           observer.next({
-            id: result['documentKey']['_id'],
+            id: result["documentKey"]["_id"],
             type: this.mapChangeType(result.operationType),
-            data: result.operationType === 'update'
-                ? result['updateDescription'] : this.getModelToResult(result['fullDocument'])
+            data:
+              result.operationType === "update"
+                ? result["updateDescription"]
+                : this.getModelToResult(result["fullDocument"]),
           } as any);
         });
       });
     }).pipe(
-        finalize(async () => {
-          console.log('Stop watch');
+      finalize(async () => {
+        console.log("Stop watch");
 
-          await stream.close();
-          await client.close();
-        }),
-        share()
+        await stream.close();
+        await client.close();
+      }),
+      share()
     );
   }
 
@@ -322,8 +348,8 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
     result["__info"] = {
       create: {
         username: user ? user.username : null,
-        date: new Date()
-      }
+        date: new Date(),
+      },
     };
 
     return result;
@@ -331,9 +357,9 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
 
   private mapChangeType(dbType: string) {
     const map = {
-      insert: 'create',
-      update: 'update',
-      delete: 'delete'
+      insert: "create",
+      update: "update",
+      delete: "delete",
     };
 
     return map[dbType];
@@ -352,10 +378,9 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
       ...info,
       update: {
         username: user ? user.username : null,
-        date: new Date()
-      }
+        date: new Date(),
+      },
     };
-
 
     return result;
   }
@@ -373,11 +398,11 @@ export class MongoItemRepository<T extends IEntity<string>> extends IItemReposit
   }
 
   private getUrl(): string {
-    let url
+    let url;
     if (this.config.username && this.config.password)
       url = `mongodb://${this.config.username}:${this.config.password}@${this.config.host}:${this.config.port}`;
     else url = `mongodb://${this.config.host}:${this.config.port}`;
 
-    return url + '?authSource=' + this.config.database;
+    return url + "?authSource=" + this.config.database;
   }
 }

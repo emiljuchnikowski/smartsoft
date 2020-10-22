@@ -962,8 +962,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/stream/domain/tsconfig.lib.json",
               "libs/stream/domain/tsconfig.spec.json"
@@ -976,6 +977,16 @@
           "options": {
             "jestConfig": "libs/stream/domain/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/stream/domain",
+            "tsConfig": "libs/stream/domain/tsconfig.lib.json",
+            "packageJson": "libs/stream/domain/package.json",
+            "main": "libs/stream/domain/src/index.ts",
+            "assets": ["libs/stream/domain/*.md"]
           }
         }
       }
@@ -1042,8 +1053,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/stream/shell/app-services/tsconfig.lib.json",
               "libs/stream/shell/app-services/tsconfig.spec.json"
@@ -1059,6 +1071,16 @@
           "options": {
             "jestConfig": "libs/stream/shell/app-services/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/stream/shell/app-services",
+            "tsConfig": "libs/stream/shell/app-services/tsconfig.lib.json",
+            "packageJson": "libs/stream/shell/app-services/package.json",
+            "main": "libs/stream/shell/app-services/src/index.ts",
+            "assets": ["libs/stream/shell/app-services/*.md"]
           }
         }
       }
@@ -1328,21 +1350,15 @@
       }
     },
     "shared-utils": {
-      "projectType": "library",
       "root": "libs/shared/utils",
       "sourceRoot": "libs/shared/utils/src",
-      "prefix": "smart",
+      "projectType": "library",
+      "schematics": {},
       "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/shared/utils/tsconfig.lib.json",
-            "project": "libs/shared/utils/ng-package.json"
-          }
-        },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
+            "linter": "eslint",
             "tsConfig": [
               "libs/shared/utils/tsconfig.lib.json",
               "libs/shared/utils/tsconfig.spec.json"
@@ -1356,11 +1372,16 @@
             "jestConfig": "libs/shared/utils/jest.config.js",
             "passWithNoTests": true
           }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/shared/utils",
+            "tsConfig": "libs/shared/utils/tsconfig.lib.json",
+            "packageJson": "libs/shared/utils/package.json",
+            "main": "libs/shared/utils/src/index.ts",
+            "assets": ["libs/shared/utils/*.md"]
+          }
         }
       }
     },
