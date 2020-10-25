@@ -48,5 +48,4 @@ export abstract class FormBaseComponent<T> {
   submit(): void {
     this.invokeSubmit.emit(this.form.value);
   }
-
 }

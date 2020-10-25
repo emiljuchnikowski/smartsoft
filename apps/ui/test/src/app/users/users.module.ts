@@ -4,11 +4,16 @@ import { CommonModule } from "@angular/common";
 import { SharedModule } from "@smartsoft001/angular";
 import { AuthModule } from "@smartsoft001/auth-shell-angular";
 import {User} from "./user.dto";
-import {CrudModule} from "@smartsoft001/crud-shell-angular";
+import {
+  CRUD_MODEL_POSSIBILITIES_PROVIDER,
+  CrudModule,
+  ICrudModelPossibilitiesProvider
+} from "@smartsoft001/crud-shell-angular";
 import {ChangePasswordComponent} from "./component";
 import {environment} from "../../environments/environment";
 import {IonicModule} from "@ionic/angular";
 import {SERVICES} from "./services";
+import {Observable, of} from "rxjs";
 
 @NgModule({
   declarations: [ChangePasswordComponent],
@@ -28,7 +33,22 @@ export class TestComponent {}
   declarations: [TestComponent],
   entryComponents: [TestComponent],
   providers: [
-      ...SERVICES
+      ...SERVICES,
+    {
+      provide: CRUD_MODEL_POSSIBILITIES_PROVIDER,
+      useValue: {
+        get<T>(type: any): { [key: string]: Observable<{ id: any; text: string }[]> } {
+          console.log(type);
+
+          return {
+            "permissions2": of([
+              {id: 'test1', text: 'wartość 1'},
+              {id: 'test2', text: 'wartość 3'}
+            ])
+          };
+        }
+      } as ICrudModelPossibilitiesProvider
+    }
   ],
   imports: [
     CommonModule,

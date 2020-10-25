@@ -19,3 +19,4 @@ export * from './radio/radio.component';
 export * from './strings/strings.component';
 export * from './text/text.component'
 export * from './logo/logo.component';
+export * from './check/check.component';

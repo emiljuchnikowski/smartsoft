@@ -3,5 +3,6 @@ export * from "./lib/crud.module";
 export * from "./lib/services/crud/crud.service";
 export * from "./lib/crud.config";
 export * from "./lib/+state/crud.selectors";
+export * from "./lib/providers/model-possibilities/model-possibilities.provider";
 export * from './lib/models';
 export * from "./lib/pipes";

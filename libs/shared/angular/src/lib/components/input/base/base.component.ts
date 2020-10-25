@@ -1,12 +1,14 @@
 import { ChangeDetectorRef, Input, Directive } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
-
-import { InputOptions } from "../../../models";
-import {  IFieldOptions } from "@smartsoft001/models";
 import {Observable} from "rxjs";
 
+import {  IFieldOptions } from "@smartsoft001/models";
+
+import { InputOptions } from "../../../models";
+import {BaseComponent} from "../../base";
+
 @Directive()
-export abstract class InputBaseComponent<T> {
+export abstract class InputBaseComponent<T> extends BaseComponent {
   protected internalOptions: InputOptions<T>;
 
   translateKey: string;
@@ -29,7 +31,9 @@ export abstract class InputBaseComponent<T> {
     this.cd.detectChanges();
   }
 
-  constructor(protected cd: ChangeDetectorRef) { }
+  constructor(protected cd: ChangeDetectorRef) {
+    super();
+  }
 
   protected afterSetOptionsHandler(): void {
 

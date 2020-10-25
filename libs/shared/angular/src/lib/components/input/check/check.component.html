@@ -1,0 +1,12 @@
+<ng-container *ngIf="control">
+    <ion-item-group [formControl]="control" [attr.autofocus]="fieldOptions?.focused">
+        <ion-list-header>
+            {{ translateKey | translate }}
+        </ion-list-header>
+
+        <ion-item *ngFor="let item of possibilities">
+            <ion-label>{{ item.text | translate }}</ion-label>
+            <ion-checkbox [checked]="item.checked" (ionChange)="refresh(item)"></ion-checkbox>
+        </ion-item>
+    </ion-item-group>
+</ng-container>

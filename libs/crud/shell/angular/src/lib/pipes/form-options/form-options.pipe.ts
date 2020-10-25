@@ -1,14 +1,24 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Inject, Optional, Pipe, PipeTransform } from "@angular/core";
 
 import { IEntity } from "@smartsoft001/domain-core";
 import { IFormOptions } from "@smartsoft001/angular";
-import { Observable } from "rxjs";
+
+import {
+  CRUD_MODEL_POSSIBILITIES_PROVIDER,
+  ICrudModelPossibilitiesProvider,
+} from "../../providers/model-possibilities/model-possibilities.provider";
 
 @Pipe({
   name: "smartFormOptions",
 })
 export class FormOptionsPipe<T extends IEntity<string>>
   implements PipeTransform {
+  constructor(
+    @Optional()
+    @Inject(CRUD_MODEL_POSSIBILITIES_PROVIDER)
+    private modelPossibilitiesProvider: ICrudModelPossibilitiesProvider
+  ) {}
+
   transform(
     item: T,
     mode: string,
@@ -32,9 +42,16 @@ export class FormOptionsPipe<T extends IEntity<string>>
         });
       }
 
+      let possibilities = {};
+
+      if (type && this.modelPossibilitiesProvider) {
+        possibilities = this.modelPossibilitiesProvider.get(type);
+      }
+
       return {
         mode: "update",
         uniqueProvider,
+        possibilities: possibilities,
         model: model,
       };
     }

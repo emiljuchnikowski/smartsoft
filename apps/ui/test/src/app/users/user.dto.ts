@@ -74,6 +74,20 @@ export class User implements IEntity<string> {
     permissions: Array<UserPermission>;
 
     @Field({
+        create: {
+            ...modifyMetdata,
+            required: false
+        },
+        update: {
+            ...modifyMetdata,
+            required: false
+        },
+        details: true,
+        type: FieldType.check
+    })
+    permissions2: Array<UserPermission>;
+
+    @Field({
         create: modifyMetdata,
         update: modifyMetdata,
         details: true,

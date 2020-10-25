@@ -66,6 +66,7 @@ import { InputColorComponent } from "./input/color/color.component";
 import { DetailColorComponent } from "./detail/color/color.component";
 import { InputLogoComponent } from "./input/logo/logo.component";
 import { DetailLogoComponent } from "./detail/logo/logo.component";
+import {InputCheckComponent} from "./input/check/check.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -122,6 +123,7 @@ export const INPUT_COMPONENTS = [
   InputObjectComponent,
   InputColorComponent,
   InputLogoComponent,
+  InputCheckComponent
 ];
 
 export const LIST_COMPONENTS = [
