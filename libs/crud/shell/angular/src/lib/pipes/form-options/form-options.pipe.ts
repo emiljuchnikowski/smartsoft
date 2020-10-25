@@ -27,9 +27,16 @@ export class FormOptionsPipe<T extends IEntity<string>>
   ): IFormOptions<T> {
     if (!mode || !type) return null;
 
+    let possibilities = {};
+
+    if (type && this.modelPossibilitiesProvider) {
+      possibilities = this.modelPossibilitiesProvider.get(type);
+    }
+
     if (mode === "create") {
       return {
         mode: "create",
+        possibilities,
         uniqueProvider,
         model: new type(),
       };
@@ -40,12 +47,6 @@ export class FormOptionsPipe<T extends IEntity<string>>
         Object.keys(item).forEach((key) => {
           model[key] = item[key];
         });
-      }
-
-      let possibilities = {};
-
-      if (type && this.modelPossibilitiesProvider) {
-        possibilities = this.modelPossibilitiesProvider.get(type);
       }
 
       return {
