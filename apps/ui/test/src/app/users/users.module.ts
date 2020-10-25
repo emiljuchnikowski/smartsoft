@@ -63,7 +63,7 @@ export class TestComponent {}
         apiUrl: environment.apiUrl + "users",
         details: {
           components: {
-            top: ChangePasswordComponent
+            bottom: ChangePasswordComponent
           }
         },
         edit: true,

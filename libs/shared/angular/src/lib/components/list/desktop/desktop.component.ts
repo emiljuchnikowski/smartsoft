@@ -36,8 +36,8 @@ export class ListDesktopComponent<T extends IEntity<string>>
       return [
         ...this.keys,
         ...(this.removeHandler ? ["removeAction"] : []),
-        ...(this.editHandler ? ["editAction"] : []),
-        ...(this.detailsComponent ? ["detailsAction"] : [])
+        ...(this.detailsComponent ? ["detailsAction"] : []),
+        ...(this.itemHandler ? ["itemAction"] : []),
       ];
     }
 

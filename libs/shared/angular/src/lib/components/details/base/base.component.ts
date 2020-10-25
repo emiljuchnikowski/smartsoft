@@ -27,6 +27,9 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
   @ViewChild("topTpl", { read: ViewContainerRef, static: true })
   topTpl: ViewContainerRef;
 
+  @ViewChild("bottomTpl", { read: ViewContainerRef, static: true })
+  bottomTpl: ViewContainerRef;
+
   @Input() set options(obj: IDetailsOptions<T>) {
     this._type = obj.type;
     this._fields = getModelFieldsWithOptions(new this._type()).filter(
@@ -49,6 +52,12 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
     if (this.componentFactories.top && this.topTpl) {
       if (!this.topTpl.get(0)) {
         this.topTpl.createComponent(this.componentFactories.top);
+      }
+    }
+
+    if (this.componentFactories.bottom && this.bottomTpl) {
+      if (!this.bottomTpl.get(0)) {
+        this.bottomTpl.createComponent(this.componentFactories.bottom);
       }
     }
   }

@@ -20,7 +20,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
   detailsComponentProps: IDetailsOptions<T>;
   select: (id: string) => void;
   unselect: () => void;
-  editHandler: (id: string) => void;
+  itemHandler: (id: string) => void;
   removeHandler: (item: T) => void;
   detailsButtonOptions: IButtonOptions;
   removed: Set<string> = new Set<string>();
@@ -78,12 +78,12 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
       };
     }
 
-    if (val.edit) {
-      if (!val.edit['options'])
+    if (val.item) {
+      if (!val.item['options'])
         throw Error('Must set edit options');
 
-      this.editHandler = id => {
-        this.router.navigate([ val.edit['options'].routingPrefix, id ]);
+      this.itemHandler = id => {
+        this.router.navigate([ val.item['options'].routingPrefix, id ]);
       };
     }
 
@@ -96,7 +96,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>> implements On
         item$: val.details['provider'].item$,
         type: val.type,
         loading$: val.details['provider'].loading$,
-        editHandler: this.editHandler,
+        itemHandler: this.itemHandler,
         removeHandler: this.removeHandler,
         componentFactories: val.details['componentFactories']
       };

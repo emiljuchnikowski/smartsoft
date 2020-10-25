@@ -16,7 +16,8 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     title: string;
     details?: boolean | {
         components: {
-            top: any
+            top?: any,
+            bottom?: any
         }
     };
     edit?: boolean;

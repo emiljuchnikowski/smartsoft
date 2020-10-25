@@ -1,13 +1,17 @@
-<div #topTpl></div>
-
 <ion-list>
-  <smart-detail
-    *ngFor="let field of fields"
-    [options]="{
+  <div #topTpl></div>
+
+  <smart-card>
+    <smart-detail
+            *ngFor="let field of fields"
+            [options]="{
       key: field.key,
       options: field.options,
       item$: item$,
       loading$: loading$
     }"
-  ></smart-detail>
+    ></smart-detail>
+  </smart-card>
+
+  <div #bottomTpl></div>
 </ion-list>

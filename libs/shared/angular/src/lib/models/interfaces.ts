@@ -31,6 +31,7 @@ export interface ICardOptions {
 
 export interface IDetailsComponentFactories<T> {
   top?: ComponentFactory<any>;
+  bottom?: ComponentFactory<any>;
 }
 
 export interface IDetailsOptions<T extends IEntity<string>> {
@@ -38,7 +39,7 @@ export interface IDetailsOptions<T extends IEntity<string>> {
   type: T;
   item$: Observable<T>;
   loading$?: Observable<boolean>;
-  editHandler?: (id: string) => void;
+  itemHandler?: (id: string) => void;
   removeHandler?: (item: T) => void;
   componentFactories?: IDetailsComponentFactories<T>;
 }
@@ -131,10 +132,10 @@ export interface IListOptions<T> {
         componentFactories?: IDetailsComponentFactories<T>;
       };
 
-  edit?:
+  item?:
     | boolean
     | {
-        options?: EditOptions;
+        options?: ItemOptions;
       };
 
   remove?:
@@ -152,11 +153,12 @@ export interface IListComponentFactories<T> {
   top?: ComponentFactory<any>;
 }
 
-export interface IEditOptionsForPage {
+export interface IItemOptionsForPage {
   routingPrefix: string;
+  edit: boolean;
 }
 
-export type EditOptions = IEditOptionsForPage;
+export type ItemOptions = IItemOptionsForPage;
 
 export interface IListProvider<T> {
   getData: (filter) => void;

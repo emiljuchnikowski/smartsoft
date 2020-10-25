@@ -43,14 +43,14 @@ export class DetailsPage<T extends IEntity<string>> {
       });
     }
 
-    if (this.detailsOptions.editHandler) {
+    if (this.detailsOptions.itemHandler) {
       buttons.push({
         handler: () => {
           this.detailsOptions.item$.pipe(first()).subscribe(item => {
-            this.detailsOptions.editHandler(item.id);
+            this.detailsOptions.itemHandler(item.id);
             this.modalService.dismiss();
           });
-        }, icon: 'create'
+        }, icon: 'arrow-forward-outline'
       });
     }
 

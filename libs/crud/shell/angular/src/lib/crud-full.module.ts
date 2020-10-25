@@ -10,7 +10,7 @@ import {CrudConfig} from "./crud.config";
 import {CrudEffects} from "./+state/crud.effects";
 import {getReducer} from "./+state/crud.reducer";
 import {ListComponent} from "./pages/list/list.component";
-import {EditComponent} from "./pages/edit/edit.component";
+import {ItemComponent} from "./pages/item/item.component";
 import {CrudPipesModule} from "./pipes/pipes.module";
 import { CrudService } from './services/crud/crud.service';
 import { CrudFacade } from './+state/crud.facade';
@@ -19,12 +19,12 @@ import {ExportComponent} from "./components/export/export.component";
 
 @NgModule({
     declarations: [
-        EditComponent,
+        ItemComponent,
         ListComponent,
         ExportComponent
     ],
     entryComponents: [
-        EditComponent,
+        ItemComponent,
         ListComponent,
         ExportComponent
     ],
@@ -35,12 +35,12 @@ import {ExportComponent} from "./components/export/export.component";
         SocketIoModule,
         RouterModule.forChild([
             {path: '', component: ListComponent}
-            , {path: 'add', component: EditComponent}
-            , {path: ':id', component: EditComponent}
+            , {path: 'add', component: ItemComponent}
+            , {path: ':id', component: ItemComponent}
         ])
     ],
     exports: [
-        EditComponent,
+        ItemComponent,
         ListComponent,
         ExportComponent,
         CrudPipesModule

@@ -115,6 +115,11 @@ export class ListComponent<T extends IEntity<string>>
           this.config.details["components"].top
             ? [this.config.details["components"].top]
             : []),
+          ...(this.config.details &&
+          this.config.details["components"] &&
+          this.config.details["components"].bottom
+              ? [this.config.details["components"].bottom]
+              : []),
           ...(this.config.list &&
           this.config.list["components"] &&
           this.config.list["components"].top
@@ -169,14 +174,24 @@ export class ListComponent<T extends IEntity<string>>
                       cc =>
                         cc.component === this.config.details["components"].top
                     ).factory
-                  : null
+                  : null,
+              bottom:
+                  this.config.details &&
+                  this.config.details["components"] &&
+                  this.config.details["components"].bottom
+                      ? compiledComponents.find(
+                      cc =>
+                          cc.component === this.config.details["components"].bottom
+                      ).factory
+                      : null
             }
           }
         : null,
-      edit: this.config.edit
+      item: this.config.edit || this.config.details
         ? {
             options: {
-              routingPrefix: "/" + this.router.routerState.snapshot.url + "/"
+              routingPrefix: "/" + this.router.routerState.snapshot.url + "/",
+              edit: this.config.edit
             }
           }
         : null,
