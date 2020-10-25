@@ -63,8 +63,6 @@
     "trans-shell-nestjs:publish": "npm publish libs/trans/shell/nestjs --access public",
     "payu:publish": "npm publish libs/shared/payu --access public",
     "paypal:publish": "npm publish libs/shared/paypal --access public",
-    "nestjs:build": "ng-packagr -p libs/shared/nestjs/package.json",
-    "nestjs:publish": "npm run nestjs:build && npm publish libs/shared/nestjs/dist --access public",
     "mongo:publish": "npm publish libs/shared/mongo --access public",
     "docker-crud:publish": "docker push smartsoft001/crud_api:latest",
     "docker-files:publish": "docker push smartsoft001/crud_files:latest",

@@ -1,4 +1,5 @@
 export interface IUser {
+    scope?: string;
     username: string;
     permissions: Array<string>;
 }
