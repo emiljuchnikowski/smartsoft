@@ -104,6 +104,7 @@ export class StyleService {
     }
 
     private setMobileBreakpoint(): void {
-        this.setProperty('--mobile-breakpoint', 'mobile-breakpoint');
+        this.setProperty('--phone-breakpoint', 'phone-breakpoint');
+        this.setProperty('--tablet-breakpoint', 'tablet-breakpoint');
     }
 }

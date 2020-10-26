@@ -1,14 +1,24 @@
 @import "styles/smart-styles.scss";
 :host {
     ion-item {
-        //padding-left: 1.2rem;
-        //padding-right: 1.2rem;
-        // @media (max-width: var(--smart-phone-breakpoint)) {
+        padding-left: 0;
+        padding-right: 0;
+        //
+        // @media (max-width: var(--tablet-breakpoint)) {
         //     padding-left: 1.2rem;
         // }
-        @media (max-width: var(--smart-tablet-breakpoint)) {
-            padding-left: 1.2rem !important;
-            margin-left: 1.2rem !important;
+        // //
+        // @media (max-width: var(--phone-breakpoint)) {
+        //     padding-left: 1.2rem;
+        //     margin-left: 1.2rem;
+        // }
+        @media only screen and (max-width: 992px) {
+            padding-left: 1.2rem;
+        }
+        //
+        @media only screen and (max-width: 420px) {
+            padding-left: 1.2rem;
+            // /margin-left: 1.2rem;
         }
     }
 }
