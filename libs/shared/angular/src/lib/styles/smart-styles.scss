@@ -84,6 +84,7 @@
     //
     // Media queries breakpoints
     --phone-breakpoint: var(--smart-phone-breakpoint);
+    --tablet-breakpoint: var(--smart-tablet-breakpoint);
 }
 
 @media (prefers-color-scheme: dark) {

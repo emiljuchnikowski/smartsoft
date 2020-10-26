@@ -16,7 +16,7 @@ export const variables = {
   "color-secondary-shade": "#125c9b",
   "color-secondary-tint": "#2c77b8",
 
-"color-tertiary": "#0c2949",
+  "color-tertiary": "#0c2949",
   "color-tertiary-rgb": "12,41,73",
   "color-tertiary-contrast": "#ffffff",
   "color-tertiary-contrast-rgb": "255,255,255",
@@ -24,4 +24,12 @@ export const variables = {
   "color-tertiary-tint": "#243e5b", 
 
   "font": "Roboto",
+
+  "button-height": "3.6rem",
+  "button-min-width": "3.6rem",
+  "button-padding-right": "1.6rem",                                                                
+  "button-padding-left": "1.6rem",
+  "button-padding-top": ".9rem",
+  "button-padding-bottom": ".9rem",
+  "button-icon-size": "1.8rem",
 } as IStyle;
