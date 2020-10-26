@@ -10,11 +10,17 @@
         margin: 0;
         padding: 12% 33%;
         //
-        @media (max-width: 420px) {
-            padding: 20% 5%;
+        // @media (max-width: var(--tablet-breakpoint)) {
+        //     padding: 20% 20%;
+        // }
+        // @media (max-width: var(--phone-breakpoint)) {
+        //     padding: 20% 5%;
+        // }
+        @media only screen and (max-width: 992px) {
+            padding: 20% 16%;
         }
-        @media (max-width: 920px) {
-            padding: 20% 20%;
+        @media only screen and (max-width: 420px) {
+            padding: 20% 5%;
         }
     }
     smart-button {

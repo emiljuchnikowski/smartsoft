@@ -1,7 +1,7 @@
 export interface IStyle extends Record<string, string> {}
 
 export type StyleType =
-    "color-primary"
+    | "color-primary"
     | "color-primary-rgb"
     | "color-primary-contrast"
     | "color-primary-contrast-rgb"
@@ -74,5 +74,6 @@ export type StyleType =
     | "button-padding-bottom"
     | "button-icon-size"
     // media queries breakpoints
-    | "mobile-breakpoint"
+    | "phone-breakpoint"
+    | "tablet-breakpoint"
 
