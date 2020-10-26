@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { Location } from "@angular/common";
+import {TranslateService} from "@ngx-translate/core";
 
 import {
   AuthService,
@@ -12,6 +13,7 @@ import {
   IPageOptions,
 } from "@smartsoft001/angular";
 import { IEntity } from "@smartsoft001/domain-core";
+import {getModelOptions} from "@smartsoft001/models";
 
 import { CrudFacade } from "../../+state/crud.facade";
 import { CrudFullConfig } from "../../crud.config";
@@ -35,6 +37,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   mode: string;
   id: string;
   formValue: T;
+  item: T;
   formPartialValue: Partial<T>;
   uniqueProvider: (values: Record<keyof T, any>) => Promise<boolean>;
 
@@ -47,6 +50,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
     private service: CrudService<T>,
     private route: ActivatedRoute,
     private dynamicComponentLoader: DynamicComponentLoader<T>,
+    private translateService: TranslateService,
     config: CrudFullConfig<T>,
     private location: Location,
     private cd: ChangeDetectorRef,
@@ -135,7 +139,9 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
 
     this.initPageOptions();
 
-    this.facade.selected$.pipe(this.takeUntilDestroy).subscribe(() => {
+    this.facade.selected$.pipe(this.takeUntilDestroy).subscribe(item => {
+      this.item = item;
+      this.initPageOptions();
       this.cd.detectChanges();
     });
   }
@@ -217,13 +223,17 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   }
 
   private getTitle(): string {
+    const options = getModelOptions(this.config.type);
+
+    const prefix = options.titleKey && this.item ? this.item[options.titleKey] + ' - ' : '';
+
     switch (this.mode) {
       case "create":
         return "add";
       case "update":
-        return "save";
+        return prefix + this.translateService.instant("change");
       case "details":
-        return "details";
+        return prefix + this.translateService.instant("details");
     }
   }
 }

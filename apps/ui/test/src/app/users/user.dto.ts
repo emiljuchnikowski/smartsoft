@@ -13,7 +13,7 @@ export enum UserPermission {
 }
 
 @Model({
-
+    titleKey: 'username'
 })
 export class User implements IEntity<string> {
     id: string;

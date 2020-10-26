@@ -21,6 +21,7 @@ export enum FieldType {
 }
 
 export interface IModelMetadata {
+    titleKey?: string;
     permissions?: Array<string>;
 }
 
@@ -50,6 +51,7 @@ export interface IFieldDetailsMetadata {
 }
 
 export interface IModelOptions {
+    titleKey?: string;
     create?: IModelModeOptions;
     update?: IModelModeOptions;
     list?: IModelModeOptions;

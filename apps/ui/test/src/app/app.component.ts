@@ -32,6 +32,7 @@ const MENU_ITEMS: Array<IMenuItem> = [
 })
 export class AppComponent implements OnInit {
   appOptions: IAppOptions = {
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Patern_test.jpg',
     provider: {
       logged$: this.authFacade.token$.pipe(map(token => !!token)),
       username$: this.authFacade.username$,
