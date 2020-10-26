@@ -2,11 +2,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
-  OnInit,
-  ViewEncapsulation,
+  ElementRef, Inject,
+  OnInit
 } from "@angular/core";
 import { Router } from "@angular/router";
+import {DOCUMENT} from "@angular/common";
 
 import { AppBaseComponent } from "../base/base.component";
 import { StyleService } from "../../../services/style/style.service";
@@ -23,9 +23,10 @@ export class AppSplitPanelComponent extends AppBaseComponent implements OnInit {
     router: Router,
     cd: ChangeDetectorRef,
     elementRef: ElementRef,
-    styleService: StyleService
+    styleService: StyleService,
+    @Inject(DOCUMENT) document: HTMLDocument
   ) {
-    super(router, cd, elementRef, styleService);
+    super(router, cd, elementRef, styleService, document);
   }
 
   ngOnInit() {}

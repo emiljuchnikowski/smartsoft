@@ -1,7 +1,16 @@
-import {AfterViewInit, ChangeDetectorRef, Input, OnDestroy, Directive, ElementRef} from "@angular/core";
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Input,
+    OnDestroy,
+    Directive,
+    ElementRef,
+    Renderer2,
+    Inject
+} from "@angular/core";
 import {Observable, Subscription} from "rxjs";
-import {debounceTime, filter, map} from "rxjs/operators";
-import {LoadingController} from "@ionic/angular";
+import {filter, map} from "rxjs/operators";
+import {DOCUMENT} from "@angular/common";
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from "@angular/router";
 
 import {IAppOptions, IMenuItem} from "../../../models/interfaces";
@@ -18,6 +27,7 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
     logged$: Observable<boolean>;
     username$: Observable<string>;
     loadingPage: boolean;
+    logo: string;
 
     @Input() set options(val: IAppOptions) {
         this._options = val;
@@ -25,15 +35,21 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
 
         this.logged$ = this._options.provider.logged$;
         this.username$ = this._options.provider.username$;
+        this.logo = val.logo;
 
         this.styleService.set(this._options.style);
+
+        if (this.logo) {
+            this.document.getElementById('app-favicon').setAttribute('href', this.logo);
+        }
     }
 
     protected constructor(
         private router: Router,
         private cd: ChangeDetectorRef,
         private elementRef: ElementRef,
-        private styleService: StyleService
+        private styleService: StyleService,
+        @Inject(DOCUMENT) private document: HTMLDocument
     ) {
         this.initSelectedPath();
         this.styleService.init(elementRef);

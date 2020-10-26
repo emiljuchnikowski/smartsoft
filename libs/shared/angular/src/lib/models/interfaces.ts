@@ -9,6 +9,7 @@ import {IStyle} from "./style";
 
 export interface IAppOptions {
   provider: IAppProvider;
+  logo?: string;
   menu?: {
     showForAnonymous?: boolean;
     items$?: Observable<IMenuItem[]>;
