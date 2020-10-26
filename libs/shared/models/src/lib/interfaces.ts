@@ -34,24 +34,36 @@ export interface IFieldModifyMetadata {
     required?: boolean;
     focused?: boolean;
     confirm?: boolean;
+    permissions?: Array<string>;
     unique?: boolean | IFieldUniqueMetadata;
     defaltValue?: () => any;
 }
 
 export interface IFieldListMetadata {
     order?: number;
+    permissions?: Array<string>;
 }
 
 export interface IFieldDetailsMetadata {
     order?: number;
+    permissions?: Array<string>;
 }
 
 export interface IModelOptions {
-    create?: any;
-    update?: any;
-    list?: any;
-    details?: any;
-    customs?: Array<any>;
+    create?: IModelModeOptions;
+    update?: IModelModeOptions;
+    list?: IModelModeOptions;
+    details?: IModelModeOptions;
+    remove?: IModelModeOptions;
+    customs?: Array<IModelModeOptionsCustom>;
+}
+
+export interface IModelModeOptions {
+    permissions?: Array<string>;
+}
+
+export interface IModelModeOptionsCustom extends IModelModeOptions {
+    mode: string;
 }
 
 export interface IFieldOptions extends IFieldMetadata {

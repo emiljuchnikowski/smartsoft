@@ -1,9 +1,21 @@
-import { AfterViewInit, Input, ViewChild, ViewContainerRef, Directive } from "@angular/core";
+import {
+  AfterViewInit,
+  Input,
+  ViewChild,
+  ViewContainerRef,
+  Directive,
+} from "@angular/core";
 import { Observable } from "rxjs";
 
-import { IDetailsComponentFactories, IDetailsOptions } from "../../../models";
-import { getModelFieldsWithOptions, IFieldOptions } from "@smartsoft001/models";
+import {
+  getModelFieldsWithOptions,
+  IFieldDetailsMetadata,
+  IFieldOptions,
+} from "@smartsoft001/models";
 import { IEntity } from "@smartsoft001/domain-core";
+
+import { IDetailsComponentFactories, IDetailsOptions } from "../../../models";
+import { AuthService } from "../../../services/auth/auth.service";
 
 @Directive()
 export abstract class DetailsBaseComponent<T extends IEntity<string>>
@@ -32,15 +44,28 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
 
   @Input() set options(obj: IDetailsOptions<T>) {
     this._type = obj.type;
-    this._fields = getModelFieldsWithOptions(new this._type()).filter(
-      f => f.options.details
-    );
+    this._fields = getModelFieldsWithOptions(new this._type())
+      .filter((f) => f.options.details)
+      .filter((field) => {
+        if (
+          (field.options.details as IFieldDetailsMetadata).permissions &&
+          !this.authService.expectPermissions(
+            (field.options.details as IFieldDetailsMetadata).permissions
+          )
+        ) {
+          return false;
+        }
+
+        return true;
+      });
     this.item$ = obj.item$;
     this.loading$ = obj.loading$;
     this.componentFactories = obj.componentFactories;
 
     this.generateDynamicComponents();
   }
+
+  constructor(private authService: AuthService) {}
 
   ngAfterViewInit(): void {
     this.generateDynamicComponents();

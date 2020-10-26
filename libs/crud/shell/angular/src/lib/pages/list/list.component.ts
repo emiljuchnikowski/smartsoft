@@ -11,7 +11,8 @@ import { CommonModule } from "@angular/common";
 import { combineLatest, Observable, Subscription } from "rxjs";
 
 import {
-  DynamicComponentLoader,
+  AuthService,
+  DynamicComponentLoader, IListInternalOptions,
   IListOptions,
   IPageOptions,
   SharedModule
@@ -19,9 +20,11 @@ import {
 import { IEntity } from "@smartsoft001/domain-core";
 
 import { CrudFacade } from "../../+state/crud.facade";
-import { CrudFullConfig } from "../../crud.config";
+import {CrudFullConfig} from "../../crud.config";
 import { ICrudFilter } from "../../models/interfaces";
 import {ExportComponent} from "../../components/export/export.component";
+import {getModelOptions} from "@smartsoft001/models";
+import {PageBaseComponent} from "../base/base.component";
 
 @Component({
   selector: "smart-crud-list-page",
@@ -29,8 +32,7 @@ import {ExportComponent} from "../../components/export/export.component";
   styleUrls: ["./list.component.scss"]
 })
 export class ListComponent<T extends IEntity<string>>
-  implements OnInit, OnDestroy {
-  private _subscriptions = new Subscription();
+  extends PageBaseComponent<T> implements OnInit {
 
   pageOptions: IPageOptions;
   listOptions: IListOptions<T>;
@@ -46,19 +48,22 @@ export class ListComponent<T extends IEntity<string>>
   constructor(
     private facade: CrudFacade<T>,
     private router: Router,
-    private config: CrudFullConfig<T>,
+    config: CrudFullConfig<T>,
     private dynamicComponentLoader: DynamicComponentLoader<T>,
     private injector: Injector,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    authService: AuthService
   ) {
-    this._subscriptions.add(
-      this.facade.links$.subscribe(links => {
-        this.links = links;
-      })
-    );
+    super(authService, config);
+
+    this.facade.links$.pipe(this.takeUntilDestroy).subscribe(links => {
+      this.links = links;
+    })
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
+    await super.ngOnInit();
+
     this.facade.read({
       limit: this.config.pagination ? this.config.pagination.limit : null,
       offset: this.config.pagination ? 0 : null,
@@ -260,11 +265,5 @@ export class ListComponent<T extends IEntity<string>>
     };
 
     this.cd.detectChanges();
-  }
-
-  ngOnDestroy(): void {
-    if (this._subscriptions) {
-      this._subscriptions.unsubscribe();
-    }
   }
 }

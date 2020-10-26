@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { Location } from "@angular/common";
 
 import {
+  AuthService,
   BaseComponent,
   DynamicComponentLoader,
   IDetailsOptions,
@@ -16,13 +17,14 @@ import { CrudFacade } from "../../+state/crud.facade";
 import { CrudFullConfig } from "../../crud.config";
 import { CrudService } from "../../services/crud/crud.service";
 import { ICrudFilter } from "../../models/interfaces";
+import {PageBaseComponent} from "../base/base.component";
 
 @Component({
   selector: "smart-crud-item-page",
   templateUrl: "./item.component.html",
   styleUrls: ["./item.component.scss"],
 })
-export class ItemComponent<T extends IEntity<string>> extends BaseComponent
+export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<T>
   implements OnInit, OnDestroy {
   pageOptions: IPageOptions = {
     title: "",
@@ -45,16 +47,19 @@ export class ItemComponent<T extends IEntity<string>> extends BaseComponent
     private service: CrudService<T>,
     private route: ActivatedRoute,
     private dynamicComponentLoader: DynamicComponentLoader<T>,
-    public config: CrudFullConfig<T>,
+    config: CrudFullConfig<T>,
     private location: Location,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    authService: AuthService
   ) {
-    super();
+    super(authService, config);
 
     this.selected$ = this.facade.selected$;
   }
 
   async ngOnInit() {
+    await super.ngOnInit();
+
     if (this.router.routerState.snapshot.url.endsWith("/add")) {
       this.mode = "create";
     } else {

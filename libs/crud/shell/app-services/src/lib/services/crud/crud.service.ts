@@ -30,8 +30,8 @@ export class CrudService<T extends IEntity<string>> {
     try {
       this.permissionService.valid("create", user);
 
-      castModel(data, "create");
-      this.checkValidCreate(data);
+      castModel(data, "create", user.permissions);
+      this.checkValidCreate(data, user.permissions);
 
       if (data['password']) {
         data['password'] = await PasswordService.hash(data['password']);
@@ -61,8 +61,8 @@ export class CrudService<T extends IEntity<string>> {
       this.permissionService.valid("create", user);
 
       data.forEach((item) => {
-        castModel(item, "create");
-        this.checkValidCreate(item);
+        castModel(item, "create", user.permissions);
+        this.checkValidCreate(item, user.permissions);
       });
 
       if (options && options.mode === 'replace') {
@@ -133,8 +133,8 @@ export class CrudService<T extends IEntity<string>> {
       data.id = id;
       this.permissionService.valid("update", user);
 
-      castModel(data, 'update');
-      this.checkValidUpdate(data);
+      castModel(data, 'update', user.permissions);
+      this.checkValidUpdate(data, user.permissions);
 
       if (data['password']) {
         data['password'] = await PasswordService.hash(data['password']);
@@ -159,8 +159,8 @@ export class CrudService<T extends IEntity<string>> {
 
       this.permissionService.valid("update", user);
 
-      castModel(data, 'update');
-      this.checkValidUpdatePartial(data);
+      castModel(data, 'update', user.permissions);
+      this.checkValidUpdatePartial(data, user.permissions);
 
       if (data["password"]) {
         data["password"] = await PasswordService.hash(
@@ -192,25 +192,25 @@ export class CrudService<T extends IEntity<string>> {
     return this.repository.changesByCriteria(criteria);
   }
 
-  private checkValidCreate(item: T): void {
-    const array = getInvalidFields(item, "create");
+  private checkValidCreate(item: T, permissions: Array<string>): void {
+    const array = getInvalidFields(item, "create", permissions);
 
     if (array.length) {
       throw new DomainValidationError("Required fields: " + array.join(", "));
     }
   }
 
-  private checkValidUpdate(item: T): void {
-    const array = getInvalidFields(item, "update");
+  private checkValidUpdate(item: T, permissions: Array<string>): void {
+    const array = getInvalidFields(item, "update", permissions);
 
     if (array.length) {
       throw new DomainValidationError("Required fields: " + array.join(", "));
     }
   }
 
-  private checkValidUpdatePartial(item: Partial<T>): void {
+  private checkValidUpdatePartial(item: Partial<T>, permissions: Array<string>): void {
     const keys = Object.keys(item);
-    const array = getInvalidFields(item, "update").filter((invalidField) =>
+    const array = getInvalidFields(item, "update", permissions).filter((invalidField) =>
         keys.some((key) => key === invalidField)
     );
 

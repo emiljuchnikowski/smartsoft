@@ -1,20 +1,25 @@
-import {Inject, Injectable, Optional} from "@angular/core";
+import { Inject, Injectable, Optional } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import {from, Observable, of} from "rxjs";
+import { from, Observable, of } from "rxjs";
 import decode from "jwt-decode";
-import { JwtHelperService } from "@auth0/angular-jwt";
-import {first, switchMap, tap} from "rxjs/operators";
+import { first, switchMap, tap } from "rxjs/operators";
 
-import { AuthConfig } from "../../auth.config";
 import { IAuthToken } from "@smartsoft001/auth-domain";
 import { IUserCredentials } from "@smartsoft001/users";
-import {StorageService} from "@smartsoft001/angular";
-import {AUTH_REQUEST_BODY_PROVIDER, IAuthRequestBodyProvider} from "../../providers/request-body/request-body.provider";
+import {
+  StorageService,
+  AuthService as SharedAuthService,
+  AUTH_TOKEN,
+} from "@smartsoft001/angular";
 
-export const AUTH_TOKEN = "AUTH_TOKEN";
+import { AuthConfig } from "../../auth.config";
+import {
+  AUTH_REQUEST_BODY_PROVIDER,
+  IAuthRequestBodyProvider,
+} from "../../providers/request-body/request-body.provider";
 
 @Injectable()
-export class AuthService {
+export class AuthService extends SharedAuthService {
   get token(): IAuthToken {
     const str = this.storageService.getItem(AUTH_TOKEN);
 
@@ -32,12 +37,14 @@ export class AuthService {
   }
 
   constructor(
-      @Optional() private config: AuthConfig,
-      private http: HttpClient,
-      private storageService: StorageService,
-      @Optional() @Inject(AUTH_REQUEST_BODY_PROVIDER) private bodyProvider: IAuthRequestBodyProvider
+    @Optional() private config: AuthConfig,
+    private http: HttpClient,
+    storageService: StorageService,
+    @Optional()
+    @Inject(AUTH_REQUEST_BODY_PROVIDER)
+    private bodyProvider: IAuthRequestBodyProvider
   ) {
-
+    super(storageService);
   }
 
   createToken(userCreds: IUserCredentials): Observable<IAuthToken> {
@@ -45,23 +52,23 @@ export class AuthService {
       grant_type: "password",
       username: userCreds.username,
       password: userCreds.password,
-      client_id: this.config.clientId
+      client_id: this.config.clientId,
     };
 
-    const obsBody$ = this.bodyProvider ? from(this.bodyProvider.get(baseBody)) : of(baseBody);
+    const obsBody$ = this.bodyProvider
+      ? from(this.bodyProvider.get(baseBody))
+      : of(baseBody);
 
     return obsBody$.pipe(
-        switchMap((body: string) =>
-            this.http
-                .post<IAuthToken>(this.config.apiUrl + "/token", body)
-                .pipe(
-                    tap(token => {
-                      this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
-                    }),
-                    // TODO : fix
-                    first()
-                )
+      switchMap((body: string) =>
+        this.http.post<IAuthToken>(this.config.apiUrl + "/token", body).pipe(
+          tap((token) => {
+            this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
+          }),
+          // TODO : fix
+          first()
         )
+      )
     ) as Observable<IAuthToken>;
   }
 
@@ -72,42 +79,13 @@ export class AuthService {
   refreshToken(): Observable<IAuthToken> {
     return this.http
       .post<IAuthToken>(this.config.apiUrl + "/token", {
-        grant_type: 'refresh_token',
-        refresh_token: this.token.refresh_token
+        grant_type: "refresh_token",
+        refresh_token: this.token.refresh_token,
       })
       .pipe(
-        tap(token => {
+        tap((token) => {
           this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
         })
       );
-  }
-
-  isAuthenticated(): boolean {
-    const token = this.getToken();
-    return !!token;
-  }
-
-  expectPermissions(permissions: Array<string>): boolean {
-    const token = this.getToken();
-
-    if (!token) return false;
-
-    const tokenPayload = decode(token.access_token);
-
-    return (
-      this.isAuthenticated() &&
-      tokenPayload.permissions &&
-      permissions.some(p =>
-        (tokenPayload.permissions as Array<string>).some(tp => p === tp)
-      )
-    );
-  }
-
-  private getToken(): IAuthToken {
-    const token = this.storageService.getItem(AUTH_TOKEN);
-
-    if (!token) return null;
-
-    return JSON.parse(token) as IAuthToken;
   }
 }

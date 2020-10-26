@@ -5,24 +5,25 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
-import {MatSort} from "@angular/material/sort";
+import { MatSort } from "@angular/material/sort";
 
 import { IEntity } from "@smartsoft001/domain-core";
 
 import { ListBaseComponent } from "../base/base.component";
 import { ToastService } from "../../../services/toast/toast.service";
-import { IListComponentFactories} from "../../../models";
-import {IListInternalOptions} from "../list.component";
+import { IListComponentFactories } from "../../../models";
+import { IListInternalOptions } from "../list.component";
+import { AuthService } from "../../../services/auth/auth.service";
 
 @Component({
   selector: "smart-list-desktop",
   templateUrl: "./desktop.component.html",
-  styleUrls: ["./desktop.component.scss", "../../../styles/desktop.scss"]
+  styleUrls: ["./desktop.component.scss", "../../../styles/desktop.scss"],
 })
 export class ListDesktopComponent<T extends IEntity<string>>
   extends ListBaseComponent<T>
@@ -49,12 +50,13 @@ export class ListDesktopComponent<T extends IEntity<string>>
   topTpl: ViewContainerRef;
 
   constructor(
+    authService: AuthService,
     router: Router,
     toastService: ToastService,
     cd: ChangeDetectorRef,
     translateService: TranslateService
   ) {
-    super(router, toastService, cd, translateService);
+    super(authService, router, toastService, cd, translateService);
   }
 
   protected initList(val: IListInternalOptions<T>): void {
@@ -77,11 +79,11 @@ export class ListDesktopComponent<T extends IEntity<string>>
       this.sortObj.direction = this.sort["defaultDesc"] ? "desc" : "asc";
 
       this._subscriptions.add(
-        this.sortObj.sortChange.subscribe(sort => {
+        this.sortObj.sortChange.subscribe((sort) => {
           this.provider.getData({
             offset: 0,
             sortBy: sort.active ? sort.active : "",
-            sortDesc: this.sortObj.direction === "desc"
+            sortDesc: this.sortObj.direction === "desc",
           });
         })
       );

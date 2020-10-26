@@ -1,4 +1,4 @@
-import { IFieldOptions } from "./interfaces";
+import {IFieldOptions, IModelMetadata, IModelOptions} from "./interfaces";
 import { SYMBOL_FIELD, SYMBOL_MODEL } from "./symbols";
 
 export function getModelFieldKeys<T>(type: T): Array<string> {
@@ -26,13 +26,18 @@ export function getModelFieldsWithOptions<T>(
   });
 }
 
+export function getModelOptions(type: any): IModelOptions {
+    return Reflect.getMetadata(SYMBOL_MODEL, type);
+}
+
 export function isModel<T>(instance: T): boolean {
   return Reflect.hasMetadata(SYMBOL_MODEL, instance.constructor);
 }
 
 export function getInvalidFields<T>(
   instance: T,
-  mode: "create" | "update" | string
+  mode: "create" | "update" | string,
+  permissions: Array<string>
 ): Array<string> {
   const result = [];
 
@@ -45,6 +50,10 @@ export function getInvalidFields<T>(
       options[mode].constructor
     ) {
       required = (options[mode] as IFieldOptions).required;
+
+      if (required && permissions && (options[mode] as IFieldOptions).permissions) {
+          required = (options[mode] as IFieldOptions).permissions.some(op => permissions.some(p => p === op));
+      }
     }
 
     if (required && !instance[key]) result.push(key);
@@ -55,7 +64,8 @@ export function getInvalidFields<T>(
 
 export function castModel<T>(
   instance: T,
-  mode: "create" | "update" | string
+  mode: "create" | "update" | string,
+  permissions: Array<string>
 ): void {
   if (!isModel(instance)) return;
 
@@ -73,7 +83,14 @@ export function castModel<T>(
 
       if (
         (mode === "create" || mode === "update") &&
-        !fieldWidthOptions.options[mode]
+          (
+              !fieldWidthOptions.options[mode]
+              || (
+                  permissions
+                  && (fieldWidthOptions.options[mode] as IFieldOptions).permissions
+                  && !((fieldWidthOptions.options[mode] as IFieldOptions).permissions.some(op => permissions.some(p => op === p)))
+              )
+          )
       ) {
         delete instance[key];
         return;

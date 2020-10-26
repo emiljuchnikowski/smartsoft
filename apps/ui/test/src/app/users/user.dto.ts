@@ -2,7 +2,7 @@ import {Field, FieldType, IFieldModifyMetadata, Model} from "@smartsoft001/model
 import {IEntity} from "@smartsoft001/domain-core";
 
 const modifyMetdata : IFieldModifyMetadata = {
-    required: true
+    required: true,
 };
 
 export enum UserPermission {
@@ -12,21 +12,29 @@ export enum UserPermission {
     test3 = "test3"
 }
 
-@Model({})
+@Model({
+
+})
 export class User implements IEntity<string> {
     id: string;
 
     @Field({
-        create: modifyMetdata,
+        create: {
+            required: true,
+            permissions: [ 'admin2' ]
+        },
         update: modifyMetdata,
         details: true,
-        list: { order: 3 }
+        list: { order: 3, permissions: [ 'admin' ] }
     })
     firstName: string;
 
     @Field({
         create: modifyMetdata,
-        update: modifyMetdata,
+        update: {
+            required: true,
+            permissions: [ 'admin2' ]
+        },
         details: true,
         list: { order: 2 }
     })
@@ -34,7 +42,9 @@ export class User implements IEntity<string> {
 
     @Field({
         create: modifyMetdata,
-        details: true,
+        details: {
+            permissions: [ 'admin2' ]
+        },
         unique: true,
         list: { order: 1 }
     })

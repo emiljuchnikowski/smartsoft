@@ -7,7 +7,7 @@ import {ChangeDetectorRef, Component} from "@angular/core";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 import { ListBaseComponent } from './base.component';
-import {ToastService} from "@smartsoft001/angular";
+import {AuthService, ToastService} from "@smartsoft001/angular";
 import {IonicModule} from "@ionic/angular";
 
 describe('BaseComponent', () => {
@@ -15,8 +15,8 @@ describe('BaseComponent', () => {
     template: ''
   })
   class TestComponent extends ListBaseComponent<any> {
-    constructor(router: Router, translateService: TranslateService, cd: ChangeDetectorRef, toastService: ToastService) {
-      super(router, toastService, cd, translateService);
+    constructor(authService: AuthService, router: Router, translateService: TranslateService, cd: ChangeDetectorRef, toastService: ToastService) {
+      super(authService, router, toastService, cd, translateService);
     }
 
     afterSetProvider(): void {

@@ -8,3 +8,4 @@ export * from './popover/popover.service';
 export * from './storage/storage.service';
 export * from "./style/style.service";
 export * from './services.module';
+export * from './auth/auth.service';

@@ -14,10 +14,11 @@ import {
   SYMBOL_MODEL,
 } from "@smartsoft001/models";
 import {ZipCodeService} from "@smartsoft001/utils";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Injectable()
 export class FormFactory {
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   static checkModelMeta<T>(obj: T) {
     if (!obj) throw new Error("You should set object as param");
@@ -81,6 +82,10 @@ export class FormFactory {
       let control: AbstractControl = null;
 
       const options = FormFactory.getOptionsFromMode(field.options, ops.mode);
+
+      if (options.permissions && !this.authService.expectPermissions(options.permissions)) {
+        continue;
+      }
 
       if (field.options.type === FieldType.object) {
         control = await this.create(obj[field.key], ops);

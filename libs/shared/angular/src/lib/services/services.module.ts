@@ -12,6 +12,7 @@ import { DynamicComponentLoader } from "./dynamic-component-loader/dynamic-compo
 import { PopoverService } from "./popover/popover.service";
 import { StorageService } from "./storage/storage.service";
 import { StyleService } from "./style/style.service";
+import { AuthService } from "./auth/auth.service";
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { StyleService } from "./style/style.service";
     PopoverService,
     StorageService,
     StyleService,
+    AuthService,
   ],
 })
 export class SharedServicesModule {}
