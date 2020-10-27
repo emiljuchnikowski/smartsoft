@@ -37,7 +37,7 @@ export interface IDetailsComponentFactories<T> {
 
 export interface IDetailsOptions<T extends IEntity<string>> {
   title?: string;
-  type: T;
+  type: any;
   item$: Observable<T>;
   loading$?: Observable<boolean>;
   itemHandler?: (id: string) => void;

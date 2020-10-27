@@ -49,7 +49,7 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
         private cd: ChangeDetectorRef,
         private elementRef: ElementRef,
         private styleService: StyleService,
-        @Inject(DOCUMENT) private document: HTMLDocument
+        @Inject(DOCUMENT) private document: any
     ) {
         this.initSelectedPath();
         this.styleService.init(elementRef);

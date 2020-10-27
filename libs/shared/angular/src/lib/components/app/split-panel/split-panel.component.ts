@@ -24,7 +24,7 @@ export class AppSplitPanelComponent extends AppBaseComponent implements OnInit {
     cd: ChangeDetectorRef,
     elementRef: ElementRef,
     styleService: StyleService,
-    @Inject(DOCUMENT) document: HTMLDocument
+    @Inject(DOCUMENT) document: any
   ) {
     super(router, cd, elementRef, styleService, document);
   }

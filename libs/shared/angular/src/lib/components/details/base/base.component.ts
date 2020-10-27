@@ -16,6 +16,8 @@ import { IEntity } from "@smartsoft001/domain-core";
 
 import { IDetailsComponentFactories, IDetailsOptions } from "../../../models";
 import { AuthService } from "../../../services/auth/auth.service";
+import {map} from "rxjs/operators";
+import {ObjectService} from "@smartsoft001/utils";
 
 @Directive()
 export abstract class DetailsBaseComponent<T extends IEntity<string>>
@@ -58,7 +60,15 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
 
         return true;
       });
-    this.item$ = obj.item$;
+    this.item$ = obj.item$.pipe(
+        map(item => {
+          if (!item) return item;
+
+          if (item instanceof obj.type) return item;
+
+          return ObjectService.createByType(item, obj.type);
+        })
+    );
     this.loading$ = obj.loading$;
     this.componentFactories = obj.componentFactories;
 

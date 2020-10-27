@@ -12,6 +12,12 @@ export enum UserPermission {
     test3 = "test3"
 }
 
+@Model({})
+export class UserInfo {
+    @Field({ details: true }) info1 = 'Test info 1';
+    @Field({ details: true }) info2 = 'Test info 2';
+}
+
 @Model({
     titleKey: 'username'
 })
@@ -49,6 +55,13 @@ export class User implements IEntity<string> {
         list: { order: 1 }
     })
     username: string;
+
+    @Field({
+        details: true,
+        type: FieldType.object,
+        classType: UserInfo
+    })
+    info: UserInfo;
 
     @Field({
         create: {
@@ -135,4 +148,8 @@ export class User implements IEntity<string> {
         type: FieldType.radio
     })
     mode: string;
+
+    constructor() {
+        this.info = new UserInfo();
+    }
 }
