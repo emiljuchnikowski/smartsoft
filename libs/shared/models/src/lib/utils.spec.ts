@@ -87,7 +87,7 @@ describe('shared-models: utils', () => {
             instance.test2 = "12";
             instance.test3 = "21";
 
-            expect(getInvalidFields(instance, 'create').length).toBe(0);
+            expect(getInvalidFields(instance, 'create', null).length).toBe(0);
         });
 
         it('should return array when incorrect', () => {
@@ -112,11 +112,11 @@ describe('shared-models: utils', () => {
             const instance = new Test();
             instance.test2 = "12";
 
-            expect(getInvalidFields(instance, 'create').length).toBe(1);
+            expect(getInvalidFields(instance, 'create', null).length).toBe(1);
         });
 
         it('should return empty array when not model', () => {
-            expect(getInvalidFields(new Date(), 'create').length).toBe(0);
+            expect(getInvalidFields(new Date(), 'create', null).length).toBe(0);
         });
     });
 
@@ -134,7 +134,7 @@ describe('shared-models: utils', () => {
             instance.test = "asd";
             instance.test2 = "aaa";
 
-            castModel(instance, 'create');
+            castModel(instance, 'create', null);
 
             expect(instance.test).not.toBeDefined();
             expect(instance.test2).toBeDefined();
