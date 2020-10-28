@@ -57,7 +57,7 @@ export function ReduxActionDecorator(options: any = {}) {
 
             let result;
             try {
-                result = baseAction(...params);
+                result = baseAction.apply(this, params);
             } catch (error) {
                 errorAction(executionId, names, params, error);
 
