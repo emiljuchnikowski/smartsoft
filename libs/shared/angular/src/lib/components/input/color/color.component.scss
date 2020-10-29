@@ -1,8 +1,24 @@
 @import "styles/smart-styles.scss";
-.label-floating {
-    --color: var(--smart-color-medium);
-    &.ios {
+:host {
+    ion-label {
         --color: var(--smart-color-medium);
-        margin-top: .6rem !important;
+        &.ios {
+            --color: var(--smart-color-medium);
+            margin-top: .6rem !important;
+        }
+    }
+    .testcolor {
+        ion-card {
+            height: var(--smart-button-height);
+            margin: 0;
+        }
+        ion-card-header {
+            height: var(--smart-button-height);
+            margin: 0;
+        }
+    }
+    .smart-list {
+        height: auto;
+        margin: 0;
     }
 }
