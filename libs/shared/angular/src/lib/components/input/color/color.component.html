@@ -6,21 +6,26 @@
         </ion-text>
     </ion-label>
 
-    <br/>
+
     <ion-row class="testcolor">
-        <ion-col  [style.background]="color">&nbsp;</ion-col>
+        <ion-col>
+            <ion-card [style.background]="color">
+                <ion-card-header>
+                </ion-card-header>
+            </ion-card>
+        </ion-col>
 
         <ion-col size="auto">
-            <ion-button [(colorPicker)]="color" (colorPickerChange)="selectColor($event)">
-                <ion-icon name="settings"></ion-icon>
+            <ion-button [(colorPicker)]="color" class="squere-button" (colorPickerChange)="selectColor($event)">
+                <ion-icon name="settings-outline"></ion-icon>
             </ion-button>
         </ion-col>
 
         <ion-col size="auto">
-            <ion-button color="danger" (click)="clear()">
+            <ion-button color="danger" class="squere-button" (click)="clear()">
                 <ion-icon name="close-outline"></ion-icon>
             </ion-button>
         </ion-col>
     </ion-row>
-    <br/>
+
 </ng-container>

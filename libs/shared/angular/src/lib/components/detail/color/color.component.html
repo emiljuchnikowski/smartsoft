@@ -1,9 +1,12 @@
 <ng-container *ngIf='options?.item$ | async; let item'>
-    <br/>
+
     <ion-row>
-        <ion-col  [style.background]="item[options?.key]">
-            <div style="width: 200px">&nbsp;</div>
+        <ion-col>
+            <ion-card [style.background]="item[options?.key]">
+                <ion-card-header>
+                </ion-card-header>
+            </ion-card>
         </ion-col>
     </ion-row>
-    <br/>
+
 </ng-container>
