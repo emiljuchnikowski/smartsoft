@@ -1,4 +1,7 @@
 export * from './lib/+state/crud.facade';
+export * from './lib/+state/crud.actions';
+export * from './lib/+state/crud.effects';
+export * from './lib/+state/crud.reducer';
 export * from "./lib/crud.module";
 export * from "./lib/services/crud/crud.service";
 export * from "./lib/crud.config";

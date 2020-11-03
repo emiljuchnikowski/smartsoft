@@ -5,13 +5,14 @@ import {
     OnDestroy,
     Directive,
     ElementRef,
-    Renderer2,
+    PLATFORM_ID,
     Inject
 } from "@angular/core";
 import {Observable, Subscription} from "rxjs";
 import {filter, map} from "rxjs/operators";
 import {DOCUMENT} from "@angular/common";
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from "@angular/router";
+import { isPlatformBrowser } from "@angular/common";
 
 import {IAppOptions, IMenuItem} from "../../../models/interfaces";
 import {StyleService} from "../../../services/style/style.service";
@@ -37,10 +38,12 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
         this.username$ = this._options.provider.username$;
         this.logo = val.logo;
 
-        this.styleService.set(this._options.style);
+        if (isPlatformBrowser(this.platformId)) {
+            this.styleService.set(this._options.style);
 
-        if (this.logo) {
-            this.document.getElementById('app-favicon').setAttribute('href', this.logo);
+            if (this.logo) {
+                this.document.getElementById('app-favicon').setAttribute('href', this.logo);
+            }
         }
     }
 
@@ -49,10 +52,14 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
         private cd: ChangeDetectorRef,
         private elementRef: ElementRef,
         private styleService: StyleService,
+        @Inject(PLATFORM_ID) private readonly platformId,
         @Inject(DOCUMENT) private document: any
     ) {
         this.initSelectedPath();
-        this.styleService.init(elementRef);
+        
+        if (isPlatformBrowser(this.platformId)) {
+            this.styleService.init(elementRef);
+        }
     }
 
     logout(): void {

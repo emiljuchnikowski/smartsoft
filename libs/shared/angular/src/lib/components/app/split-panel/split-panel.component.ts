@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef, Inject,
+  PLATFORM_ID,
   OnInit
 } from "@angular/core";
 import { Router } from "@angular/router";
@@ -24,9 +25,10 @@ export class AppSplitPanelComponent extends AppBaseComponent implements OnInit {
     cd: ChangeDetectorRef,
     elementRef: ElementRef,
     styleService: StyleService,
+    @Inject(PLATFORM_ID) readonly platform,
     @Inject(DOCUMENT) document: any
   ) {
-    super(router, cd, elementRef, styleService, document);
+    super(router, cd, elementRef, styleService, platform, document);
   }
 
   ngOnInit() {}
