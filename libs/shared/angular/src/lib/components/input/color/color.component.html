@@ -9,14 +9,12 @@
 
     <ion-row class="smart-color">
         <ion-col>
-            <ion-card [style.background]="color">
+            <ion-card [style.background]="color" style="width: calc(100% -  52px); display: inline-block; margin-right: 6px; vertical-align: middle;">
                 <ion-card-header>
                 </ion-card-header>
             </ion-card>
-        </ion-col>
 
-        <ion-col size="auto">
-            <ion-button [(colorPicker)]="color" class="squere-button" (colorPickerChange)="selectColor($event)">
+            <ion-button [(colorPicker)]="color" cpDialogDisplay="inline" cpCloseClickOutside="true" class="squere-button" (colorPickerChange)="selectColor($event)" style="margin-top: -2px;">
                 <ion-icon name="settings-outline"></ion-icon>
             </ion-button>
         </ion-col>
