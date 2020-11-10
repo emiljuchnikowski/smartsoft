@@ -15,11 +15,13 @@ export class AuthService {
   }
 
   expectPermissions(permissions: Array<string>): boolean {
-    const token = this.getToken();
+    const token: { access_token: string } = this.getToken();
 
     if (!token) return false;
 
-    const tokenPayload = decode(token.access_token);
+    const tokenPayload: { permissions: Array<string> } = decode(
+      token.access_token
+    ) as any;
 
     return (
       this.isAuthenticated() &&

@@ -31,7 +31,7 @@ export class AuthService extends SharedAuthService {
   get username(): string {
     if (!this.token) return null;
 
-    const tokenPayload = decode(this.token.access_token);
+    const tokenPayload: { sub: string } = decode(this.token.access_token) as any;
 
     return tokenPayload.sub;
   }

@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { IonicModule } from "@ionic/angular";
-import { DeviceDetectorModule } from "ngx-device-detector";
 import { TranslateModule } from "@ngx-translate/core";
 import { CookieModule, TransferHttpModule } from "@gorniv/ngx-universal";
 
@@ -18,7 +17,6 @@ import { AuthService } from "./auth/auth.service";
   imports: [
     IonicModule,
     TranslateModule.forChild(),
-    DeviceDetectorModule.forRoot(),
     CookieModule.forRoot(),
     TransferHttpModule,
   ],
