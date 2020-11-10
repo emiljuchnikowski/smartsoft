@@ -166,7 +166,7 @@
     "@storybook/angular": "5.3.9",
     "@storybook/client-api": "^5.3.21",
     "@types/jest": "26.0.8",
-    "@types/mongoose": "^5.7.36",
+    "@types/mongoose": "^5.10.0",
     "@types/node": "^12.12.55",
     "@types/webpack": "4.41.21",
     "@typescript-eslint/eslint-plugin": "2.19.2",
