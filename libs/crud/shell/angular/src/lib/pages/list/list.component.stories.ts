@@ -29,7 +29,7 @@ storiesOf("smart-crud-list-page", module)
                     }
                 }
             ),
-            RouterModule.forRoot([], { useHash: true }),
+            RouterModule.forRoot([], { useHash: true, relativeLinkResolution: 'legacy' }),
             CrudModule.forFeature({
             routing: true,
             config: {
@@ -67,7 +67,7 @@ storiesOf("smart-crud-list-page", module)
                         }
                     }
                 ),
-                RouterModule.forRoot([], { useHash: true }),
+                RouterModule.forRoot([], { useHash: true, relativeLinkResolution: 'legacy' }),
                 CrudModule.forFeature({
                     routing: true,
                     config: {

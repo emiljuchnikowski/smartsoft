@@ -61,7 +61,7 @@ import { Todo } from "./todos/todo.dto";
         },
         { path: "", redirectTo: "/users", pathMatch: "full" },
       ],
-      { initialNavigation: "enabled", useHash: true }
+      { initialNavigation: "enabled", useHash: true, relativeLinkResolution: 'legacy' }
     ),
     StoreModule.forRoot(
       {},
