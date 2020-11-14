@@ -13,7 +13,7 @@ import { TranslateModule } from "@ngx-translate/core";
 // required
 import { IonicModule } from "@ionic/angular";
 
-import { AppComponent } from "./app.component";
+import {AppComponent, TestComponent} from "./app.component";
 import { environment } from "../environments/environment";
 import { NgrxSharedModule, SharedModule } from "@smartsoft001/angular";
 import {
@@ -26,7 +26,7 @@ import { CrudModule } from "@smartsoft001/crud-shell-angular";
 import { Todo } from "./todos/todo.dto";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TestComponent],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(

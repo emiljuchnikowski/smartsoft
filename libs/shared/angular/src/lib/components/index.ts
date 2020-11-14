@@ -16,5 +16,6 @@ export * from './loader';
 export * from './page';
 export * from './searchbar';
 export * from './tabs';
+export * from './dynamic';
 
 export * from './components.module';

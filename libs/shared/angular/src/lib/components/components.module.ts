@@ -66,7 +66,8 @@ import { InputColorComponent } from "./input/color/color.component";
 import { DetailColorComponent } from "./detail/color/color.component";
 import { InputLogoComponent } from "./input/logo/logo.component";
 import { DetailLogoComponent } from "./detail/logo/logo.component";
-import {InputCheckComponent} from "./input/check/check.component";
+import { InputCheckComponent } from "./input/check/check.component";
+import { DynamicComponent } from "./dynamic/dynamic.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -123,7 +124,7 @@ export const INPUT_COMPONENTS = [
   InputObjectComponent,
   InputColorComponent,
   InputLogoComponent,
-  InputCheckComponent
+  InputCheckComponent,
 ];
 
 export const LIST_COMPONENTS = [
@@ -146,6 +147,8 @@ export const GRID_COMPONENTS = [
   GridColumnComponent,
 ];
 
+export const DYNAMIC_COMPONENTS = [DynamicComponent];
+
 export const COMPONENTS = [
   ...FORM_COMPONENTS,
   ...APP_COMPONENTS,
@@ -162,6 +165,7 @@ export const COMPONENTS = [
   ...ACCORDION_COMPONENTS,
   ...CHART_COMPONENTS,
   ...GRID_COMPONENTS,
+  ...DYNAMIC_COMPONENTS,
 ];
 
 export const IMPORTS = [

@@ -7,6 +7,11 @@ import {IAppOptions, IMenuItem, IStyle} from "@smartsoft001/angular";
 import {AuthFacade} from "@smartsoft001/auth-shell-angular";
 import { variables } from "../theme/variables";
 
+@Component({
+  template: 'test'
+})
+export class TestComponent {}
+
 const MENU_ITEMS: Array<IMenuItem> = [
   {
     caption: 'Users',
@@ -22,6 +27,9 @@ const MENU_ITEMS: Array<IMenuItem> = [
     caption: 'Transakcje',
     icon: 'cash-outline',
     route: '/trans'
+  },
+  {
+    component: TestComponent
   }
 ];
 

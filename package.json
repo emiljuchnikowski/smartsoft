@@ -67,7 +67,11 @@
     "docker-crud:publish": "docker push smartsoft001/crud_api:latest",
     "docker-files:publish": "docker push smartsoft001/crud_files:latest",
     "build-storybook": "build-storybook -c lisbs/shared/angular/.storybook -o dist/libs/shared/storybook && build-storybook -c lisbs/stream/shell/angular/.storybook -o dist/libs/stream/storybook",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js"
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js",
+    "shared:publish": "npm run shared-utils:publish && npm run shared-users:publish && npm run shared-models:publish && npm run shared-domain-core:publish && npm run shared-angular:publish && npm run shared-mongo:publish && npm run shared-nestjs:publish",
+    "auth:publish": "npm run auth-shell-angular:publish",
+    "crud:publish": "npm run crud-domain:publish && npm run crud-shell-dtos:publish && npm run crud-shell-app-services:publish && npm run crud-shell-nestjs:publish && npm run crud-shell-angular:publish",
+    "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish"
   },
   "private": true,
   "dependencies": {
