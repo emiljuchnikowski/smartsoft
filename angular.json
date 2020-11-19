@@ -674,13 +674,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/trans/domain/tsconfig.lib.json",
-              "libs/trans/domain/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/trans/domain/**/*"]
+            "lintFilePatterns": ["libs/trans/domain/**/*.ts"]
           }
         },
         "test": {
@@ -688,6 +684,16 @@
           "options": {
             "jestConfig": "libs/trans/domain/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/trans/domain",
+            "tsConfig": "libs/trans/domain/tsconfig.lib.json",
+            "packageJson": "libs/trans/domain/package.json",
+            "main": "libs/trans/domain/src/index.ts",
+            "assets": ["libs/trans/domain/*.md"]
           }
         }
       }
@@ -699,13 +705,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/trans/shell/dtos/tsconfig.lib.json",
-              "libs/trans/shell/dtos/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/trans/shell/dtos/**/*"]
+            "lintFilePatterns": ["libs/trans/shell/dtos/**/*.ts"]
           }
         },
         "test": {
@@ -713,6 +715,16 @@
           "options": {
             "jestConfig": "libs/trans/shell/dtos/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/trans/shell/dtos",
+            "tsConfig": "libs/trans/shell/dtos/tsconfig.lib.json",
+            "packageJson": "libs/trans/shell/dtos/package.json",
+            "main": "libs/trans/shell/dtos/src/index.ts",
+            "assets": ["libs/trans/shell/dtos/*.md"]
           }
         }
       }
@@ -749,16 +761,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/trans/shell/app-services/tsconfig.lib.json",
-              "libs/trans/shell/app-services/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/trans/shell/app-services/**/*"
-            ]
+            "lintFilePatterns": ["libs/trans/shell/app-services/**/*.ts"]
           }
         },
         "test": {
@@ -766,6 +771,16 @@
           "options": {
             "jestConfig": "libs/trans/shell/app-services/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/trans/shell/app-services",
+            "tsConfig": "libs/trans/shell/app-services/tsconfig.lib.json",
+            "packageJson": "libs/trans/shell/app-services/package.json",
+            "main": "libs/trans/shell/app-services/src/index.ts",
+            "assets": ["libs/trans/shell/app-services/*.md"]
           }
         }
       }
@@ -777,13 +792,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/trans/shell/nestjs/tsconfig.lib.json",
-              "libs/trans/shell/nestjs/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/trans/shell/nestjs/**/*"]
+            "lintFilePatterns": ["libs/trans/shell/nestjs/**/*.ts"]
           }
         },
         "test": {
@@ -791,6 +802,16 @@
           "options": {
             "jestConfig": "libs/trans/shell/nestjs/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/trans/shell/nestjs",
+            "tsConfig": "libs/trans/shell/nestjs/tsconfig.lib.json",
+            "packageJson": "libs/trans/shell/nestjs/package.json",
+            "main": "libs/trans/shell/nestjs/src/index.ts",
+            "assets": ["libs/trans/shell/nestjs/*.md"]
           }
         }
       }
@@ -857,13 +878,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/shared/payu/tsconfig.lib.json",
-              "libs/shared/payu/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/shared/payu/**/*"]
+            "lintFilePatterns": ["libs/shared/payu/**/*.ts"]
           }
         },
         "test": {
@@ -871,6 +888,16 @@
           "options": {
             "jestConfig": "libs/shared/payu/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/shared/payu",
+            "tsConfig": "libs/shared/payu/tsconfig.lib.json",
+            "packageJson": "libs/shared/payu/package.json",
+            "main": "libs/shared/payu/src/index.ts",
+            "assets": ["libs/shared/payu/*.md"]
           }
         }
       }
@@ -1228,13 +1255,9 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/shared/paypal/tsconfig.lib.json",
-              "libs/shared/paypal/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/shared/paypal/**/*"]
+            "lintFilePatterns": ["libs/shared/paypal/**/*.ts"]
           }
         },
         "test": {
@@ -1242,6 +1265,16 @@
           "options": {
             "jestConfig": "libs/shared/paypal/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/shared/paypal",
+            "tsConfig": "libs/shared/paypal/tsconfig.lib.json",
+            "packageJson": "libs/shared/paypal/package.json",
+            "main": "libs/shared/paypal/src/index.ts",
+            "assets": ["libs/shared/paypal/*.md"]
           }
         }
       }
