@@ -1,12 +1,16 @@
-import {HttpService, Injectable} from "@nestjs/common";
+import {HttpService, Inject, Injectable, Optional} from "@nestjs/common";
 
 import {ITransPaymentSingleService, Trans, TransStatus} from "@smartsoft001/trans-domain";
 
-import {PayuConfig} from "./payu.config";
+import {IPayuConfigProvider, PAYU_CONFIG_PROVIDER, PayuConfig} from "./payu.config";
 
 @Injectable()
 export class PayuService implements ITransPaymentSingleService {
-  constructor(private readonly httpService: HttpService, private config: PayuConfig) {}
+  constructor(
+      private readonly httpService: HttpService,
+      private config: PayuConfig,
+      @Optional() @Inject(PAYU_CONFIG_PROVIDER) private configProvider: IPayuConfigProvider
+  ) {}
 
   async create(obj: {
     id: string;
@@ -17,19 +21,21 @@ export class PayuService implements ITransPaymentSingleService {
     email?: string;
     contactPhone?: string;
     clientIp: string;
+    data: any
   }): Promise<{ orderId: string; redirectUrl: string }> {
 
-    const token = await this.getToken();
+    const config = await this.getConfig(obj.data);
+    const token = await this.getToken(config);
 
     const data = {
       "customerIp": obj.clientIp,
       "extOrderId": obj.id,
-      "merchantPosId": this.config.posId,
+      "merchantPosId": config.posId,
       "description": obj.name,
       "currencyCode": "PLN",
       "totalAmount": obj.amount,
-      "notifyUrl": this.config.notifyUrl,
-      "continueUrl": this.config.continueUrl,
+      "notifyUrl": config.notifyUrl,
+      "continueUrl": config.continueUrl,
       "products": [
         {
           "name": obj.name,
@@ -49,7 +55,7 @@ export class PayuService implements ITransPaymentSingleService {
     }
 
     try {
-      await this.httpService.post(this.getBaseUrl() + '/api/v2_1/orders', data, {
+      await this.httpService.post(this.getBaseUrl(config) + '/api/v2_1/orders', data, {
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + token,
@@ -80,10 +86,11 @@ export class PayuService implements ITransPaymentSingleService {
     }
 
     const orderId = historyItem.data.orderId;
+    const config = await this.getConfig(trans.data);
 
-    const token = await this.getToken();
+    const token = await this.getToken(config);
 
-    const response = await this.httpService.get(this.getBaseUrl() + '/api/v2_1/orders/' + orderId, {
+    const response = await this.httpService.get(this.getBaseUrl(config) + '/api/v2_1/orders/' + orderId, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + token,
@@ -102,18 +109,18 @@ export class PayuService implements ITransPaymentSingleService {
     }
   }
 
-  private async  getToken(): Promise<string> {
+  private async  getToken(config: PayuConfig): Promise<string> {
     try {
       const response = await this.httpService.post(
-          this.getBaseUrl() + '/pl/standard/user/oauth/authorize',
-          `grant_type=client_credentials&client_id=${this.config.clientId}&client_secret=${this.config.clientSecret}`
+          this.getBaseUrl(config) + '/pl/standard/user/oauth/authorize',
+          `grant_type=client_credentials&client_id=${config.clientId}&client_secret=${config.clientSecret}`
       ).toPromise();
 
       return response.data['access_token'];
     } catch (e) {
       console.error({
-        url: this.getBaseUrl() + '/pl/standard/user/oauth/authorize',
-        data: `grant_type=client_credentials&client_id=${this.config.clientId}&client_secret=${this.config.clientSecret}`,
+        url: this.getBaseUrl(config) + '/pl/standard/user/oauth/authorize',
+        data: `grant_type=client_credentials&client_id=${config.clientId}&client_secret=${config.clientSecret}`,
         ex: e
       });
 
@@ -121,8 +128,14 @@ export class PayuService implements ITransPaymentSingleService {
     }
   }
 
-  private getBaseUrl(): string {
-    if (this.config.test) return 'https://secure.snd.payu.com';
+  private async getConfig(data: any): Promise<PayuConfig> {
+    if (this.configProvider) return await this.configProvider.get(data);
+
+    return this.config;
+  }
+
+  private getBaseUrl(config: PayuConfig): string {
+    if (config.test) return 'https://secure.snd.payu.com';
 
     return 'https://secure.payu.com'
   }

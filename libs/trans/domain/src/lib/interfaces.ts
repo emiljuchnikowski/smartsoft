@@ -19,7 +19,8 @@ export interface ITransPaymentSingleService {
         lastName?: string,
         email?: string,
         contactPhone?: string,
-        clientIp: string
+        clientIp: string,
+        data: any
     }): Promise<{ orderId: string, redirectUrl: string }>;
 
     getStatus<T>(trans: Trans<T>): Promise<{ status: TransStatus, data: any }>;

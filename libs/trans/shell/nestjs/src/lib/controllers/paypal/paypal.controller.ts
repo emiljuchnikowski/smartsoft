@@ -41,7 +41,7 @@ export class PaypalController {
         throw new Error('Invalid externaId');
       }
 
-      const payment = await this.paypalService.confirm(payerId, paymentId, trans.amount / 100);
+      const payment = await this.paypalService.confirm(payerId, paymentId, trans.amount / 100, trans.data);
 
       await this.service.refresh(paymentId, payment);
 

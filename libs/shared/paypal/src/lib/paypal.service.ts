@@ -1,5 +1,5 @@
-import {HttpService, Injectable} from "@nestjs/common";
-import * as paypal from 'paypal-rest-sdk';
+import { HttpService, Inject, Injectable, Optional } from "@nestjs/common";
+import * as paypal from "paypal-rest-sdk";
 
 import {
   ITransPaymentSingleService,
@@ -7,17 +7,21 @@ import {
   TransStatus,
 } from "@smartsoft001/trans-domain";
 
-import {PaypalConfig} from "./paypal.config";
+import {
+  IPaypalConfigProvider,
+  PAYPAL_CONFIG_PROVIDER,
+  PaypalConfig,
+} from "./paypal.config";
 
 @Injectable()
 export class PaypalService implements ITransPaymentSingleService {
-  constructor(private readonly httpService: HttpService, private config: PaypalConfig) {
-    paypal.configure({
-      'mode': this.config.test ? 'sandbox' : 'live',
-      'client_id': this.config.clientId,
-      'client_secret': this.config.clientSecret
-    });
-  }
+  constructor(
+    private readonly httpService: HttpService,
+    private config: PaypalConfig,
+    @Optional()
+    @Inject(PAYPAL_CONFIG_PROVIDER)
+    private configProvider: IPaypalConfigProvider
+  ) { }
 
   async create(obj: {
     id: string;
@@ -28,37 +32,43 @@ export class PaypalService implements ITransPaymentSingleService {
     email?: string;
     contactPhone?: string;
     clientIp: string;
+    data: any;
   }): Promise<{ orderId: string; redirectUrl: string }> {
+    const config = await this.getConfig(obj.data);
 
     const data = {
-      "intent": "sale",
-      "payer": {
-        "payment_method": "paypal"
+      intent: "sale",
+      payer: {
+        payment_method: "paypal",
       },
-      "redirect_urls": {
-        "return_url": this.config.apiUrl + 'paypal/' + obj.id + '/confirm',
-        "cancel_url": this.config.cancelUrl
+      redirect_urls: {
+        return_url: config.apiUrl + "paypal/" + obj.id + "/confirm",
+        cancel_url: config.cancelUrl,
       },
-      "transactions": [{
-        "item_list": {
-          "items": [{
-            "name": obj.name,
-            "sku": obj.id,
-            "price": obj.amount / 100,
-            "currency": this.config.currencyCode,
-            "quantity": 1
-          }]
+      transactions: [
+        {
+          item_list: {
+            items: [
+              {
+                name: obj.name,
+                sku: obj.id,
+                price: obj.amount / 100,
+                currency: config.currencyCode,
+                quantity: 1,
+              },
+            ],
+          },
+          amount: {
+            currency: config.currencyCode,
+            total: obj.amount / 100,
+          },
+          description: obj.name,
         },
-        "amount": {
-          "currency": this.config.currencyCode,
-          "total": obj.amount / 100
-        },
-        "description": obj.name
-      }]
-    }
+      ],
+    };
 
-    const result: { id, links } = await new Promise((res, rej) => {
-      paypal.payment.create(data, function (error, payment) {
+    const result: { id; links } = await new Promise((res, rej) => {
+      paypal.payment.create(data, this.getEnv(config), function (error, payment) {
         if (error) {
           rej(error);
         } else {
@@ -68,26 +78,33 @@ export class PaypalService implements ITransPaymentSingleService {
     });
 
     return {
-      redirectUrl: result.links.find(l => l.rel === 'approval_url').href,
-      orderId: result.id
-    }
+      redirectUrl: result.links.find((l) => l.rel === "approval_url").href,
+      orderId: result.id,
+    };
   }
 
-  async confirm(payerId: any, paymentId: any, amount: number): Promise<any> {
+  async confirm(
+    payerId: any,
+    paymentId: any,
+    amount: number,
+    externalData: any
+  ): Promise<any> {
+    const config = await this.getConfig(externalData);
+
     const data = {
-      "payer_id": payerId,
-      "transactions": [
+      payer_id: payerId,
+      transactions: [
         {
-          "amount": {
-            "currency": this.config.currencyCode,
-            "total": amount
-          }
-        }
-      ]
+          amount: {
+            currency: config.currencyCode,
+            total: amount,
+          },
+        },
+      ],
     };
 
     return await new Promise<void>((res, rej) => {
-      paypal.payment.execute(paymentId, data, (error, payment) => {
+      paypal.payment.execute(paymentId, data, this.getEnv(config), (error, payment) => {
         if (error) {
           rej(error);
         } else {
@@ -97,18 +114,21 @@ export class PaypalService implements ITransPaymentSingleService {
     });
   }
 
-  async getStatus<T>(trans: Trans<T>): Promise<{ status: TransStatus; data: any }> {
-    const historyItem = trans.history.find(x => x.status === 'started');
+  async getStatus<T>(
+    trans: Trans<T>
+  ): Promise<{ status: TransStatus; data: any }> {
+    const historyItem = trans.history.find((x) => x.status === "started");
 
     if (!historyItem) {
-      console.warn('Transaction without start status');
+      console.warn("Transaction without start status");
       return null;
     }
 
     const orderId = historyItem.data.orderId;
+    const config = await this.getConfig(trans.data);
 
     const payment: { state } = await new Promise((res, rej) => {
-      paypal.payment.get(orderId, (error, result) => {
+      paypal.payment.get(orderId, this.getEnv(config), (error, result) => {
         if (error) {
           rej(error);
         } else {
@@ -119,26 +139,39 @@ export class PaypalService implements ITransPaymentSingleService {
 
     return {
       status: this.getStatusFromExternal(payment.state),
-      data: payment
-    }
+      data: payment,
+    };
   }
 
   private getStatusFromExternal(status: string): any {
     status = status.toUpperCase();
 
     switch (status) {
-      case 'COMPLETED':
-        return 'completed';
-      case 'VOIDED':
-        return 'canceled';
-      case 'CREATED':
-        return 'pending';
-      case 'SAVED':
-        return 'pending';
-      case 'APPROVED':
-        return 'completed';
+      case "COMPLETED":
+        return "completed";
+      case "VOIDED":
+        return "canceled";
+      case "CREATED":
+        return "pending";
+      case "SAVED":
+        return "pending";
+      case "APPROVED":
+        return "completed";
       default:
         return status;
     }
+  }
+
+  private async getConfig(data: any): Promise<PaypalConfig> {
+    if (this.configProvider) return await this.configProvider.get(data);
+    return this.config;
+  }
+
+  private getEnv(config: PaypalConfig): { mode, client_id, client_secret } {
+    return {
+      mode: config.test ? "sandbox" : "live",
+      client_id: config.clientId,
+      client_secret: config.clientSecret,
+    };
   }
 }
