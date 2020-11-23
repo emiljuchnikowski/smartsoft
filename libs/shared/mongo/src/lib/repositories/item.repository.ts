@@ -3,6 +3,7 @@ import { ChangeStream, MongoClient } from "mongodb";
 import { Observable, Observer } from "rxjs";
 import { finalize, share } from "rxjs/operators";
 
+import { ObjectService } from "@smartsoft001/utils";
 import {
   IEntity,
   IItemRepository,
@@ -12,7 +13,6 @@ import { IUser } from "@smartsoft001/users";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 
 import { MongoConfig } from "../mongo.config";
-import { ObjectService } from "@smartsoft001/utils";
 
 @Injectable()
 export class MongoItemRepository<
@@ -167,6 +167,46 @@ export class MongoItemRepository<
         );
       });
     });
+  }
+
+  updatePartialManyByCriteria(criteria: any, set: Partial<T>, user: IUser): Promise<void> {
+    return new Promise<void>((res, rej) => {
+      MongoClient.connect(this.getUrl(), async (err, client) => {
+        if (err) {
+          rej(err);
+          return;
+        }
+
+        const db = client.db(this.config.database);
+        const collection = db.collection(this.config.collection);
+
+        db.collection(this.config.collection).updateOne(
+            criteria,
+            {
+              $set: {
+                ...set,
+                "__info.update": {
+                  username: user?.username,
+                  date: new Date()
+                }
+              },
+            },
+            (errUpdate) => {
+              if (errUpdate) {
+                rej(errUpdate);
+                return;
+              }
+
+              client.close();
+              res();
+            }
+        );
+      });
+    });
+  }
+
+  updatePartialManyBySpecification(spec: ISpecification, set: Partial<T>, user: IUser): Promise<void> {
+    return this.updatePartialManyByCriteria(spec.criteria, set, user);
   }
 
   delete(id: string, user: IUser): Promise<void> {

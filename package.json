@@ -71,7 +71,7 @@
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js",
     "shared:publish": "npm run shared-utils:publish && npm run shared-users:publish && npm run shared-models:publish && npm run shared-domain-core:publish && npm run shared-angular:publish && npm run shared-mongo:publish && npm run shared-nestjs:publish",
     "auth:publish": "npm run auth-shell-angular:publish",
-    "crud:publish": "npm run crud-domain:publish && npm run crud-shell-dtos:publish && npm run crud-shell-app-services:publish && npm run crud-shell-nestjs:publish && npm run crud-shell-angular:publish && trans-shell-nestjs:publish",
+    "crud:publish": "npm run crud-domain:publish && npm run crud-shell-dtos:publish && npm run crud-shell-app-services:publish && npm run crud-shell-nestjs:publish && npm run crud-shell-angular:publish && npm run trans-shell-nestjs:publish",
     "trans:publish": "npm run trans-domain:publish && npm run paypal:publish && npm run payu:publish && npm run trans-shell-app-services:publish",
     "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish && npm run trans:publish"
   },
