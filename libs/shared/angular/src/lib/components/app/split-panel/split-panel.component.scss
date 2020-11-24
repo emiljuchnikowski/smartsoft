@@ -55,5 +55,8 @@ ion-menu {
             font-size: 1.6rem;
             --ion-text-color: var(--ion-color-primary);
         }
+        ion-label {
+            margin-left: 1.6rem;
+        }
     }
 }
