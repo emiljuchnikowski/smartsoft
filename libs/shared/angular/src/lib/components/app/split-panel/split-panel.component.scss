@@ -57,6 +57,7 @@ ion-menu {
         }
         ion-label {
             margin-left: 1.6rem;
+            --padding: var(--smart-button-padding-left)/2 var(--smart-button-padding-top)/2 var(--smart-button-padding-right)/2 var(--smart-button-padding-bottom)/2;
         }
     }
 }
