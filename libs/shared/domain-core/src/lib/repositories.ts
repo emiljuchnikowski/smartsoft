@@ -45,16 +45,16 @@ export abstract class IItemRepository<T extends IEntity<string>> {
 
   abstract delete(id: string, user: IUser, options?: IItemRepositoryOptions): Promise<void>;
 
-  abstract getById(id: string, options?: IItemRepositoryOptions): Promise<T>;
+  abstract getById(id: string): Promise<T>;
 
   abstract getByCriteria(
     criteria: any,
-    options?: any | IItemRepositoryOptions
+    options?: any
   ): Promise<{ data: T[]; totalCount: number }>;
 
   abstract getBySpecification(
     spec: ISpecification,
-    options?: any | IItemRepositoryOptions
+    options?: any
   ): Promise<{ data: T[]; totalCount: number }>;
 
   abstract async clear(user: IUser | IItemRepositoryOptions): Promise<void>;

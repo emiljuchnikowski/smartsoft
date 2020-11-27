@@ -6,13 +6,15 @@ import { finalize, share } from "rxjs/operators";
 import { ObjectService } from "@smartsoft001/utils";
 import {
   IEntity,
-  IItemRepository,
+  IItemRepository, IItemRepositoryOptions,
   ISpecification,
 } from "@smartsoft001/domain-core";
 import { IUser } from "@smartsoft001/users";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 
 import { MongoConfig } from "../mongo.config";
+import {getMongoUrl} from "../mongo.utils";
+import {IMongoTransaction} from "../mongo.unitofwork";
 
 @Injectable()
 export class MongoItemRepository<
@@ -22,7 +24,26 @@ export class MongoItemRepository<
     super();
   }
 
-  create(item: T, user: IUser): Promise<void> {
+  create(item: T, user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+    if (repoOptions && repoOptions.transaction) {
+      return new Promise<void>((res, rej) => {
+        const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+
+        db.collection(this.config.collection).insertOne(
+            this.getModelToCreate(ObjectService.removeTypes(item) as T, user),
+            { session: (repoOptions.transaction as IMongoTransaction).session },
+            (errInsert) => {
+              if (errInsert) {
+                rej(errInsert);
+                return;
+              }
+
+              res();
+            }
+        );
+      });
+    }
+
     return new Promise<void>((res, rej) => {
       MongoClient.connect(this.getUrl(), (err, client) => {
         if (err) {
@@ -48,7 +69,26 @@ export class MongoItemRepository<
     });
   }
 
-  clear(user: IUser): Promise<void> {
+  clear(user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+    if (repoOptions && repoOptions.transaction) {
+      return new Promise<void>((res, rej) => {
+        const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+
+        db.collection(this.config.collection).deleteMany(
+            { },
+            { session: (repoOptions.transaction as IMongoTransaction).session },
+            (errClear) => {
+              if (errClear) {
+                rej(errClear);
+                return;
+              }
+
+              res();
+            }
+        );
+      });
+    }
+
     return new Promise<void>((res, rej) => {
       MongoClient.connect(this.getUrl(), (err, client) => {
         if (err) {
@@ -71,7 +111,28 @@ export class MongoItemRepository<
     });
   }
 
-  createMany(list: T[], user: IUser): Promise<void> {
+  createMany(list: T[], user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+    if (repoOptions && repoOptions.transaction) {
+      return new Promise<void>((res, rej) => {
+        const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+
+        db.collection(this.config.collection).insertMany(
+            list.map((item) =>
+                this.getModelToCreate(ObjectService.removeTypes(item) as T, user)
+            ),
+            { session: (repoOptions.transaction as IMongoTransaction).session },
+            (errInsert) => {
+              if (errInsert) {
+                rej(errInsert);
+                return;
+              }
+
+              res();
+            }
+        );
+      });
+    }
+
     return new Promise<void>((res, rej) => {
       MongoClient.connect(this.getUrl(), (err, client) => {
         if (err) {
@@ -99,7 +160,36 @@ export class MongoItemRepository<
     });
   }
 
-  update(item: T, user: IUser): Promise<void> {
+  async update(item: T, user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+    if (repoOptions && repoOptions.transaction) {
+      return new Promise<void>((res, rej) => {
+        (async () => {
+          const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+          const collection = db.collection(this.config.collection);
+
+          const info = await this.getInfo(item.id, collection);
+
+          db.collection(this.config.collection).replaceOne(
+              { _id: item.id },
+              this.getModelToUpdate(
+                  ObjectService.removeTypes(item) as T,
+                  user,
+                  info
+              ),
+              { session: (repoOptions.transaction as IMongoTransaction).session },
+              (errInsert) => {
+                if (errInsert) {
+                  rej(errInsert);
+                  return;
+                }
+
+                res();
+              }
+          );
+        })()
+      });
+    }
+
     return new Promise<void>((res, rej) => {
       MongoClient.connect(this.getUrl(), async (err, client) => {
         if (err) {
@@ -133,7 +223,38 @@ export class MongoItemRepository<
     });
   }
 
-  updatePartial(item: Partial<T> & { id: string }, user: IUser): Promise<void> {
+  updatePartial(item: Partial<T> & { id: string }, user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+    if (repoOptions && repoOptions.transaction) {
+      return new Promise<void>((res, rej) => {
+        (async () => {
+          const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+          const collection = db.collection(this.config.collection);
+
+          const info = await this.getInfo(item.id, collection);
+
+          db.collection(this.config.collection).updateOne(
+              { _id: item.id },
+              {
+                $set: this.getModelToUpdate(
+                    ObjectService.removeTypes(item) as T,
+                    user,
+                    info
+                ),
+              },
+              { session: (repoOptions.transaction as IMongoTransaction).session },
+              (errUpdate) => {
+                if (errUpdate) {
+                  rej(errUpdate);
+                  return;
+                }
+
+                res();
+              }
+          );
+        })()
+      });
+    }
+
     return new Promise<void>((res, rej) => {
       MongoClient.connect(this.getUrl(), async (err, client) => {
         if (err) {
@@ -169,7 +290,39 @@ export class MongoItemRepository<
     });
   }
 
-  updatePartialManyByCriteria(criteria: any, set: Partial<T>, user: IUser): Promise<void> {
+  updatePartialManyByCriteria(
+      criteria: any, set: Partial<T>, user: IUser, repoOptions? : IItemRepositoryOptions
+  ): Promise<void> {
+    if (repoOptions && repoOptions.transaction) {
+      return new Promise<void>((res, rej) => {
+        (async () => {
+          const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+
+          db.collection(this.config.collection).updateOne(
+              criteria,
+              {
+                $set: {
+                  ...set,
+                  "__info.update": {
+                    username: user?.username,
+                    date: new Date()
+                  }
+                },
+              },
+              { session: (repoOptions.transaction as IMongoTransaction).session },
+              (errUpdate) => {
+                if (errUpdate) {
+                  rej(errUpdate);
+                  return;
+                }
+
+                res();
+              }
+          );
+        })()
+      });
+    }
+
     return new Promise<void>((res, rej) => {
       MongoClient.connect(this.getUrl(), async (err, client) => {
         if (err) {
@@ -205,11 +358,34 @@ export class MongoItemRepository<
     });
   }
 
-  updatePartialManyBySpecification(spec: ISpecification, set: Partial<T>, user: IUser): Promise<void> {
-    return this.updatePartialManyByCriteria(spec.criteria, set, user);
+  updatePartialManyBySpecification(
+      spec: ISpecification, set: Partial<T>, user: IUser, repoOptions? : IItemRepositoryOptions
+  ): Promise<void> {
+    return this.updatePartialManyByCriteria(spec.criteria, set, user, repoOptions);
   }
 
-  delete(id: string, user: IUser): Promise<void> {
+  delete(id: string, user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+    if (repoOptions && repoOptions.transaction) {
+      return new Promise<void>((res, rej) => {
+        (async () => {
+          const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+
+          db.collection(this.config.collection).deleteOne(
+              { _id: id },
+              { session: (repoOptions.transaction as IMongoTransaction).session },
+              (errDelete) => {
+                if (errDelete) {
+                  rej(errDelete);
+                  return;
+                }
+
+                res();
+              }
+          );
+        })()
+      });
+    }
+
     return new Promise<void>((res, rej) => {
       MongoClient.connect(this.getUrl(), (err, client) => {
         if (err) {
@@ -438,11 +614,6 @@ export class MongoItemRepository<
   }
 
   private getUrl(): string {
-    let url;
-    if (this.config.username && this.config.password)
-      url = `mongodb://${this.config.username}:${this.config.password}@${this.config.host}:${this.config.port}`;
-    else url = `mongodb://${this.config.host}:${this.config.port}`;
-
-    return url + "?authSource=" + this.config.database;
+    return getMongoUrl(this.config);
   }
 }
