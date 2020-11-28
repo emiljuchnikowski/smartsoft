@@ -1,13 +1,16 @@
 import {ClientSession, MongoClient, TransactionOptions} from "mongodb";
+import {Injectable} from "@nestjs/common";
 
 import {ITransaction, IUnitOfWork} from "@smartsoft001/domain-core";
-import {MongoConfig} from "@smartsoft001/mongo";
+
+import {MongoConfig} from "./mongo.config";
 import {getMongoUrl} from "./mongo.utils";
 
 export interface IMongoTransaction extends ITransaction {
     session: ClientSession
 }
 
+@Injectable()
 export class MongoUnitOfWork extends IUnitOfWork {
     constructor(private config: MongoConfig) {
         super();
