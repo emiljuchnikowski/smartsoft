@@ -23,6 +23,11 @@ ion-menu {
             --background: linear-gradient(33deg, var(--ion-color-primary), var(--ion-color-tertiary));
             --color: var(--ion-color-light);
         }
+        .smart-logo {
+            max-width: 100%;
+            height: .6rem;
+            width: auto;
+        }
     }
     ion-list {
         padding: 0;
