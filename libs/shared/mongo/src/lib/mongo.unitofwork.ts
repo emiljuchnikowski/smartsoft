@@ -36,6 +36,8 @@ export class MongoUnitOfWork extends IUnitOfWork {
 
                 // Step 3: Use withTransaction to start a transaction, execute the callback, and commit (or abort on error)
                 // Note: The callback for withTransaction MUST be async and/or return a Promise.
+
+                let error = null;
                 try {
                     await session.withTransaction(async () => {
                         await definition({
@@ -43,10 +45,15 @@ export class MongoUnitOfWork extends IUnitOfWork {
                             connection: client
                         } as IMongoTransaction);
                     }, transactionOptions);
-                } finally {
+                } catch (e) {
+                    error = e;
+                }  finally {
                     await session.endSession();
                     await client.close();
                 }
+
+                if (error) rej (error);
+                else res();
             });
         });
     }
