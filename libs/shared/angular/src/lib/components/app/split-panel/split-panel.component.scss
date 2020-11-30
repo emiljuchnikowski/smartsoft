@@ -30,8 +30,12 @@ ion-menu {
         .smart-logo {
             text-align: left;
             max-width: 100%;
-            height: .6rem;
+            height: 6rem;
             width: auto;
+            img {
+                height: 100%;
+                width: auto;
+            }
         }
     }
     ion-list {
