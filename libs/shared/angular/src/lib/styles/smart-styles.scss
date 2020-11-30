@@ -73,7 +73,7 @@
     --default-font-weight: var(--default-md-smart-font-weight);
     --default-font-style: var(--default-md-smart-font-style);
     //
-    @include fontsize(14);
+    font-size: var(--default-font-size);
     //
     // Application Variables
     --ion-statusbar-padding: 0;
@@ -228,7 +228,7 @@ html {
 }
 
 body {
-    @include fontsize(14);
+    font-size: var(--default-font-size);
 }
 
 // Table styles
