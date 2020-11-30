@@ -1,7 +1,7 @@
 $IconPath: "../../fonts/";
 $IconName: "fontawsome";
 $IconVersion: "4.7.0";
-@import "../fonts/font-mixins";
+@import "../font-mixins";
 @font-face {
     font-family: 'FontAwesome';
     @include icons-def($IconPath, $IconName, $IconVersion, $eot: true, $woff2: true, $woff: true, $ttf: true, $svg: true, $otf: false);
