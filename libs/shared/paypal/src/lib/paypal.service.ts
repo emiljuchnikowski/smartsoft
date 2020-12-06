@@ -1,5 +1,6 @@
-import { HttpService, Inject, Injectable, Optional } from "@nestjs/common";
+import { HttpService, Inject, Injectable, Logger, Optional } from "@nestjs/common";
 import * as paypal from "paypal-rest-sdk";
+import {ModuleRef} from "@nestjs/core";
 
 import {
   ITransPaymentSingleService,
@@ -12,15 +13,14 @@ import {
   PAYPAL_CONFIG_PROVIDER,
   PaypalConfig,
 } from "./paypal.config";
+import {PAYU_CONFIG_PROVIDER} from "@smartsoft001/payu";
 
 @Injectable()
 export class PaypalService implements ITransPaymentSingleService {
   constructor(
     private readonly httpService: HttpService,
     private config: PaypalConfig,
-    @Optional()
-    @Inject(PAYPAL_CONFIG_PROVIDER)
-    private configProvider: IPaypalConfigProvider
+    private moduleRef: ModuleRef
   ) { }
 
   async create(obj: {
@@ -163,7 +163,13 @@ export class PaypalService implements ITransPaymentSingleService {
   }
 
   private async getConfig(data: any): Promise<PaypalConfig> {
-    if (this.configProvider) return await this.configProvider.get(data);
+    try {
+      const provider: IPaypalConfigProvider = this.moduleRef.get(PAYPAL_CONFIG_PROVIDER, { strict: false });
+      return await provider.get(data);
+    } catch (e) {
+      Logger.warn('PayPal config provider not found', PaypalService.name);
+    }
+
     return this.config;
   }
 

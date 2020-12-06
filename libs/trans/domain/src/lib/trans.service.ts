@@ -2,6 +2,7 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 
 import {Trans, TransHistory} from "./entities/trans.entity";
+import {ObjectService} from "@smartsoft001/utils";
 
 export abstract class TransBaseService<T> {
     protected constructor(
@@ -13,7 +14,7 @@ export abstract class TransBaseService<T> {
         const historyItem = new TransHistory<T>();
         historyItem.amount = trans.amount;
         historyItem.modifyDate = trans.modifyDate;
-        historyItem.data = data;
+        historyItem.data = ObjectService.removeTypes(data);
         historyItem.system = trans.system;
         historyItem.status = trans.status;
         if (!trans.history) trans.history = [];
