@@ -134,6 +134,9 @@
     },
     "test": {
       "tags": []
+    },
+    "shared-revolut": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

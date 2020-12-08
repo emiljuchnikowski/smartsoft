@@ -12,7 +12,7 @@ import {
 import {ICreateManyOptions} from "@smartsoft001/crud-domain";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 import {PermissionService} from "@smartsoft001/nestjs";
-import {castModel, getInvalidFields} from "@smartsoft001/models";
+import {castModel, getInvalidFields, isModel} from "@smartsoft001/models";
 import {PasswordService} from "@smartsoft001/utils";
 
 @Injectable()
@@ -209,6 +209,8 @@ export class CrudService<T extends IEntity<string>> {
   }
 
   private checkValidUpdatePartial(item: Partial<T>, permissions: Array<string>): void {
+    if (!isModel(item)) return;
+
     const keys = Object.keys(item);
     const array = getInvalidFields(item, "update", permissions).filter((invalidField) =>
         keys.some((key) => key === invalidField)

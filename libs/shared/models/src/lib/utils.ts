@@ -1,4 +1,4 @@
-import {IFieldOptions, IModelMetadata, IModelOptions} from "./interfaces";
+import { IFieldOptions, IModelMetadata, IModelOptions } from "./interfaces";
 import { SYMBOL_FIELD, SYMBOL_MODEL } from "./symbols";
 
 export function getModelFieldKeys<T>(type: T): Array<string> {
@@ -27,10 +27,11 @@ export function getModelFieldsWithOptions<T>(
 }
 
 export function getModelOptions(type: any): IModelOptions {
-    return Reflect.getMetadata(SYMBOL_MODEL, type);
+  return Reflect.getMetadata(SYMBOL_MODEL, type);
 }
 
 export function isModel<T>(instance: T): boolean {
+  if (!instance || !instance.constructor) return false;
   return Reflect.hasMetadata(SYMBOL_MODEL, instance.constructor);
 }
 
@@ -51,8 +52,14 @@ export function getInvalidFields<T>(
     ) {
       required = (options[mode] as IFieldOptions).required;
 
-      if (required && permissions && (options[mode] as IFieldOptions).permissions) {
-          required = (options[mode] as IFieldOptions).permissions.some(op => permissions.some(p => p === op));
+      if (
+        required &&
+        permissions &&
+        (options[mode] as IFieldOptions).permissions
+      ) {
+        required = (options[mode] as IFieldOptions).permissions.some((op) =>
+          permissions.some((p) => p === op)
+        );
       }
     }
 
@@ -83,23 +90,22 @@ export function castModel<T>(
 
       if (
         (mode === "create" || mode === "update") &&
-          (
-              !fieldWidthOptions.options[mode]
-              || (
-                  permissions
-                  && (fieldWidthOptions.options[mode] as IFieldOptions).permissions
-                  && !((fieldWidthOptions.options[mode] as IFieldOptions).permissions.some(op => permissions.some(p => op === p)))
-              )
-          )
+        (!fieldWidthOptions.options[mode] ||
+          (permissions &&
+            (fieldWidthOptions.options[mode] as IFieldOptions).permissions &&
+            !(fieldWidthOptions.options[
+              mode
+            ] as IFieldOptions).permissions.some((op) =>
+              permissions.some((p) => op === p)
+            )))
       ) {
         delete instance[key];
         return;
       } else if (
-          mode !== "create" && mode !== "update" &&
-          (
-              !fieldWidthOptions.options.customs ||
-            !fieldWidthOptions.options.customs.some((c) => c.mode === mode)
-          )
+        mode !== "create" &&
+        mode !== "update" &&
+        (!fieldWidthOptions.options.customs ||
+          !fieldWidthOptions.options.customs.some((c) => c.mode === mode))
       ) {
         delete instance[key];
         return;
