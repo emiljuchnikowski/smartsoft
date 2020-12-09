@@ -25,7 +25,23 @@
             text-align: center;
         }
     }
+    .footer-container {
+        --background: transparent !important;
+        text-align: center;
+        width: 100%;
+    }
+    .login-button {
+        width: 100%;
+        float: none;
+        margin: auto;
+    }
     .card-title {
+        text-align: center;
+    }
+    .card-middle {
+        text-align: right;
+    }
+    .card-bottom {
         text-align: center;
     }
 }

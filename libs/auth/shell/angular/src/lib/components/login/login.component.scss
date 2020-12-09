@@ -23,11 +23,15 @@
             padding: 20% 5%;
         }
     }
-    smart-button {
-        float: right;
+}
+
+smart-button {
+    &.login-button {
+        display: block;
         background-color: transparent;
         padding: 0;
         outline: 0;
+        width: 100%;
     }
 }
 

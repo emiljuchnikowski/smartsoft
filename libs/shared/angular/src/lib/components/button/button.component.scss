@@ -51,4 +51,11 @@ ion-button {
     .button-container & {
         margin-left: 1.2rem;
     }
+    .login-button & {
+        margin-left: 50%;
+        margin-right: 50%;
+        transform-origin: center center;
+        transform: translateX(-50%);
+        width: 50%;
+    }
 }
