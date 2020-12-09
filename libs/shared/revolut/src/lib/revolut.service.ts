@@ -94,7 +94,7 @@ export class RevolutService implements ITransPaymentSingleService {
       );
       return await provider.get(data);
     } catch (e) {
-      Logger.warn("PayPal config provider not found", RevolutService.name);
+      Logger.warn("Revolut config provider not found", RevolutService.name);
     }
 
     return this.config;
