@@ -1694,6 +1694,37 @@
           "style": "scss"
         }
       }
+    },
+    "shared-revolut": {
+      "root": "libs/shared/revolut",
+      "sourceRoot": "libs/shared/revolut/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/revolut/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/revolut/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/shared/revolut",
+            "tsConfig": "libs/shared/revolut/tsconfig.lib.json",
+            "packageJson": "libs/shared/revolut/package.json",
+            "main": "libs/shared/revolut/src/index.ts",
+            "assets": ["libs/shared/revolut/*.md"]
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -37,5 +37,6 @@ module.exports = {
     "<rootDir>/libs/auth/shell/dtos",
     "<rootDir>/libs/crud/shell/angular",
     "<rootDir>/libs/auth/shell/angular",
+    "<rootDir>/libs/shared/revolut",
   ],
 };

@@ -64,6 +64,7 @@
     "trans-shell-dtos:publish": "npm version patch --prefix libs/trans/shell/dtos && nx run trans-shell-dtos:build --with-deps && npm publish dist/libs/trans/shell/dtos --access public",
     "payu:publish": "npm version patch --prefix libs/shared/payu && nx run shared-payu:build --with-deps && npm publish dist/libs/shared/payu --access public",
     "paypal:publish": "npm version patch --prefix libs/shared/paypal && nx run shared-paypal:build --with-deps && npm publish dist/libs/shared/paypal --access public",
+    "revolut:publish": "npm version patch --prefix libs/shared/revolut && nx run shared-revolut:build --with-deps && npm publish dist/libs/shared/revolut --access public",
     "mongo:publish": "npm publish libs/shared/mongo --access public",
     "docker-crud:publish": "docker push smartsoft001/crud_api:latest",
     "docker-files:publish": "docker push smartsoft001/crud_files:latest",
@@ -72,7 +73,7 @@
     "shared:publish": "npm run shared-utils:publish && npm run shared-users:publish && npm run shared-models:publish && npm run shared-domain-core:publish && npm run shared-angular:publish && npm run shared-mongo:publish && npm run shared-nestjs:publish",
     "auth:publish": "npm run auth-shell-angular:publish",
     "crud:publish": "npm run crud-domain:publish && npm run crud-shell-dtos:publish && npm run crud-shell-app-services:publish && npm run crud-shell-nestjs:publish && npm run crud-shell-angular:publish && npm run trans-shell-nestjs:publish",
-    "trans:publish": "npm run trans-domain:publish && npm run paypal:publish && npm run payu:publish && npm run trans-shell-app-services:publish && npm run trans-shell-nestjs:publish",
+    "trans:publish": "npm run trans-domain:publish && npm run paypal:publish && npm run revolut:publish && npm run payu:publish && npm run trans-shell-app-services:publish && npm run trans-shell-nestjs:publish",
     "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish && npm run trans:publish"
   },
   "private": true,
