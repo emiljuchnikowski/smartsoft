@@ -11,9 +11,10 @@ export class TransController {
     @Post()
     async create<T>(@Body() obj: ITransCreate<T>, @Req() req) {
         obj.clientIp = req.connection.remoteAddress;
-        const url = await this.service.create(obj);
+        const { redirectUrl, orderId } = await this.service.create(obj);
         return {
-            url
+            url: redirectUrl,
+            orderId
         }
     }
 }

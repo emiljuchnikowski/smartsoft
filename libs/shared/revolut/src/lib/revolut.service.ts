@@ -54,8 +54,8 @@ export class RevolutService implements ITransPaymentSingleService {
       .toPromise();
 
     return {
-      responseData: response,
-      orderId: response["public_id"],
+      responseData: response.data,
+      orderId: response.data["public_id"],
     };
   }
 
