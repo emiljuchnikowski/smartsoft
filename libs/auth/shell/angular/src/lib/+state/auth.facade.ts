@@ -12,7 +12,7 @@ export class AuthFacade {
   username$ = this.store.pipe(select(AuthSelectors.getAuthUsername));
 
   constructor(
-    private store: Store<fromAuth.AuthPartialState>
+    private store: Store<fromAuth.AuthPartialState>,
   ) {}
 
   init(): void {
