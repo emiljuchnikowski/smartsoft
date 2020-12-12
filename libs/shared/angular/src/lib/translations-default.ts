@@ -33,6 +33,7 @@ export interface ITranslateData {
     },
     APP: {
         logout: string,
+        signIn: string,
         logged: string
     };
     MODEL: {
@@ -87,6 +88,7 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     },
     APP: {
         logout: 'log out',
+        signIn: 'sign in',
         logged: 'logged'
     },
     MODEL: {
@@ -141,7 +143,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     },
     APP: {
         logout: 'wyloguj się',
-        logged: 'zalogowany'
+        logged: 'zalogowany',
+        signIn: 'zaloguj się'
     },
     MODEL: {
         body: 'treść',

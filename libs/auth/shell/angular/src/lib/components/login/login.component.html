@@ -5,6 +5,11 @@
 
         <smart-form (invokeSubmit)="login()" [options]="formOptions" class="login-form"></smart-form>
         <ng-content select='.card-middle'></ng-content>
+
+        <ion-button slot="icon-only" *ngIf="isSetFingerprint" (click)="onCheckFingerprint()">
+            <ion-icon name="finger-print-outline"></ion-icon>
+        </ion-button>
+
         <smart-button class="login-button" [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
         </smart-button>
         <ng-content select='.card-bottom'></ng-content>
