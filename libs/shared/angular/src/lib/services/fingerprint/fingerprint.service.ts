@@ -37,20 +37,20 @@ export class FingerprintService {
             return;
         }
 
-        // do testów
-        localStorage.setItem('TEST_FINGERPINT', JSON.stringify(data));
-        localStorage.setItem('FINGERPINT_SET', "1");
+        // // to tests
+        // localStorage.setItem('TEST_FINGERPINT', JSON.stringify(data));
+        // localStorage.setItem('FINGERPINT_SET', "1");
     }
 
     async getDate(): Promise<IFingerprintData> {
         if (!this.isSet()) return null;
 
-        // const data = await this.faio.loadBiometricSecret({
-        //     title: this.translateService.instant('APP.signIn')
-        // });
+        const data = await this.faio.loadBiometricSecret({
+            title: this.translateService.instant('APP.signIn')
+        });
 
-        // do testów
-        const data = localStorage.getItem('TEST_FINGERPINT');
+        // // to tests
+        // const data = localStorage.getItem('TEST_FINGERPINT');
 
         return JSON.parse(data);
     }
