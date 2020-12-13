@@ -35,6 +35,9 @@ export class Trans<T> implements IEntity<string> {
   system: TransSystem;
 
   @Column()
+  options: any;
+
+  @Column()
   status: TransStatus;
 
   @Column()

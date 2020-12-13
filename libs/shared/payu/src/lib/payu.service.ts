@@ -22,7 +22,8 @@ export class PayuService implements ITransPaymentSingleService {
     email?: string;
     contactPhone?: string;
     clientIp: string;
-    data: any
+    data: any,
+    options?: any,
   }): Promise<{ orderId: string; redirectUrl: string }> {
 
     const config = await this.getConfig(obj.data);
@@ -45,6 +46,12 @@ export class PayuService implements ITransPaymentSingleService {
         }
       ]
     };
+
+    if (obj.options['payMethod']) {
+      data['payMethods'] = {
+        payMethod: obj.options['payMethod']
+      }
+    }
 
     if (obj.contactPhone || obj.email || obj.firstName || obj.lastName) {
       data['buyer'] = {

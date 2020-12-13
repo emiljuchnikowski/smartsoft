@@ -9,5 +9,6 @@ export interface ITransCreate<T> {
     email: string;
     contactPhone: string;
     data: T;
+    options: any;
     clientIp: string;
 }

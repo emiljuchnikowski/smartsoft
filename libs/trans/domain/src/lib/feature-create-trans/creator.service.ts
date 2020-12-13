@@ -55,7 +55,8 @@ export class CreatorService<T> extends TransBaseService<T> {
       email: trans.email,
       contactPhone: trans.contactPhone,
       clientIp: trans.clientIp,
-      data: trans.data
+      data: trans.data,
+      options: trans.options
     });
     trans.status = "started";
     trans.modifyDate = new Date();
