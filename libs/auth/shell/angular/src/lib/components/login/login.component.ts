@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     model: new LoginDto(),
     loading$: this._loading$
   };
+  isSetFingerprint: boolean;
 
   @ViewChild(FormComponent, { read: FormComponent, static: false })
   formComponent: FormComponent<LoginDto>;
@@ -36,7 +37,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  async onCheckFingerprint(): Promise<void> {
+    await this.facade.checkFingerprint();
   }
 
+  async ngOnInit(): Promise<void> {
+    await this.onCheckFingerprint();
+
+    this.isSetFingerprint = this.facade.isSetFingerprint;
+  }
 }

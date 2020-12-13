@@ -3,14 +3,19 @@
     <smart-card>
         <ng-content select='.card-title'></ng-content>
 
-        <smart-form (invokeSubmit)="login()" [options]="formOptions"></smart-form>
+        <smart-form (invokeSubmit)="login()" [options]="formOptions" class="login-form"></smart-form>
+        <ng-content select='.card-middle'></ng-content>
 
-        <smart-button [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
+        <ion-button slot="icon-only" *ngIf="isSetFingerprint" (click)="onCheckFingerprint()">
+            <ion-icon name="finger-print-outline"></ion-icon>
+        </ion-button>
+
+        <smart-button class="login-button" [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
         </smart-button>
-
         <ng-content select='.card-bottom'></ng-content>
         <!-- TODO:reset password option -->
-<!--        <a href="#">-->
-<!--            <ion-icon name="help-circle-outline"></ion-icon> {{ 'passwordReset' | translate }}</a> -->
+        <!--        <a href="#">-->
+        <!--            <ion-icon name="help-circle-outline"></ion-icon> {{ 'passwordReset' | translate }}</a> -->
     </smart-card>
+    <ng-content select='.footer-container'></ng-content>
 </div>
