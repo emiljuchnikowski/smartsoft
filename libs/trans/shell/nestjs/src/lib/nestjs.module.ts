@@ -8,6 +8,7 @@ import { DOMAIN_SERVICES, TransConfig } from "@smartsoft001/trans-domain";
 import { ENTITIES } from "@smartsoft001/trans-domain";
 import { PayuConfig, PayuService } from "@smartsoft001/payu";
 import { PaypalConfig, PaypalService } from "@smartsoft001/paypal";
+import { RevolutConfig, RevolutService } from "@smartsoft001/revolut";
 
 import { CONTROLLERS } from "./controllers";
 
@@ -19,6 +20,7 @@ export class TransShellNestjsModule {
     config: TransConfig & {
       payuConfig?: PayuConfig;
       paypalConfig?: PaypalConfig;
+      revolutConfig?: RevolutConfig;
     }
   ): DynamicModule {
     return {
@@ -35,6 +37,12 @@ export class TransShellNestjsModule {
           ? [
               { provide: PaypalConfig, useValue: config.paypalConfig },
               PaypalService,
+            ]
+          : []),
+        ...(config.revolutConfig
+          ? [
+              { provide: RevolutConfig, useValue: config.revolutConfig },
+              RevolutService,
             ]
           : []),
       ],

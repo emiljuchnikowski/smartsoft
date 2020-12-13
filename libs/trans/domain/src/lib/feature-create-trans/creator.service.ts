@@ -23,7 +23,7 @@ export class CreatorService<T> extends TransBaseService<T> {
     config: ITransCreate<T>,
     internalService: ITransInternalService<T>,
     paymentService: ITransPaymentService
-  ): Promise<string> {
+  ): Promise<{ orderId: string, redirectUrl?: string, responseData?: any }> {
     this.valid(config);
     let trans = null;
 
@@ -45,7 +45,7 @@ export class CreatorService<T> extends TransBaseService<T> {
   private async setAsStarted(
     trans: Trans<T>,
     paymentService: ITransPaymentService
-  ): Promise<string> {
+  ): Promise<{ orderId: string, redirectUrl?: string, responseData?: any }> {
     const paymentResult = await paymentService[trans.system].create({
       id: trans.id,
       name: trans.name,
@@ -65,7 +65,7 @@ export class CreatorService<T> extends TransBaseService<T> {
 
     await this.repository.save(trans as any);
 
-    return paymentResult.redirectUrl;
+    return paymentResult;
   }
 
   private async setAsNew(

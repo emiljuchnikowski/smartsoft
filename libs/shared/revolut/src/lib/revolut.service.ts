@@ -54,8 +54,8 @@ export class RevolutService implements ITransPaymentSingleService {
       .toPromise();
 
     return {
-      responseData: response,
-      orderId: response["public_id"],
+      responseData: response.data,
+      orderId: response.data["public_id"],
     };
   }
 
@@ -64,8 +64,10 @@ export class RevolutService implements ITransPaymentSingleService {
   ): Promise<{ status: TransStatus; data: any }> {
     const config = await this.getConfig(trans.data);
 
+    const historyItem = trans.history.find(h => h.status === 'started');
+
     const response = await this.httpService
-      .get(this.getBaseUrl(config) + "/api/1.0/orders" + trans.externalId, {
+      .get(this.getBaseUrl(config) + "/api/1.0/orders/" + (historyItem.data as any).responseData.id, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + config.token
@@ -75,8 +77,8 @@ export class RevolutService implements ITransPaymentSingleService {
       .toPromise();
 
     return {
-      data: response,
-      status: this.getStatusFromExternal(response["state"]),
+      data: response.data,
+      status: this.getStatusFromExternal(response.data["state"]),
     };
   }
 

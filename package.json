@@ -112,6 +112,7 @@
     "@ngrx/router-store": "10.1.0",
     "@ngrx/store": "10.1.0",
     "@ngx-translate/core": "^13.0.0",
+    "@revolut/checkout": "^1.0.6",
     "angular": "1.8.2",
     "body-parser": "1.19.0",
     "chart.js": "^2.9.3",
