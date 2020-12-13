@@ -1,7 +1,7 @@
 import { HttpService, Injectable, Optional } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import {ModuleRef} from "@nestjs/core";
+import { ModuleRef } from "@nestjs/core";
 
 import {
   ITransCreate,
@@ -14,6 +14,7 @@ import {
 } from "@smartsoft001/trans-domain";
 import { PayuService } from "@smartsoft001/payu";
 import { PaypalService } from "@smartsoft001/paypal";
+import { RevolutService } from "@smartsoft001/revolut";
 
 import { TRANS_TOKEN_INTERNAL_SERVICE } from "../internal/internal.service";
 
@@ -24,6 +25,7 @@ export class TransService {
   } = {
     payu: this.payuService,
     paypal: this.paypalService,
+    revolut: this.revolutService,
   };
 
   private _internalService = {
@@ -50,10 +52,11 @@ export class TransService {
     private config: TransConfig,
     @InjectRepository(Trans) private repository: Repository<Trans<any>>,
     @Optional() private payuService: PayuService,
-    @Optional() private paypalService: PaypalService
+    @Optional() private paypalService: PaypalService,
+    @Optional() private revolutService: RevolutService
   ) {}
 
-  create<T>(ops: ITransCreate<T>): Promise<string> {
+  create<T>(ops: ITransCreate<T>): Promise<{ orderId: string, redirectUrl?: string, responseData?: any }> {
     return this.creatorService.create(
       ops,
       this.getInternalService(),
@@ -78,7 +81,9 @@ export class TransService {
 
   private getInternalService(): ITransInternalService<any> {
     try {
-      return this.moduleRef.get(TRANS_TOKEN_INTERNAL_SERVICE, { strict: false });
+      return this.moduleRef.get(TRANS_TOKEN_INTERNAL_SERVICE, {
+        strict: false,
+      });
     } catch (e) {
       return this._internalService;
     }

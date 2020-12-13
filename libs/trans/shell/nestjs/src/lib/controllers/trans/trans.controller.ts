@@ -1,4 +1,4 @@
-import {Body, Controller, Post, Req} from "@nestjs/common";
+import {Body, Controller, Param, Post, Req} from "@nestjs/common";
 
 import {ITransCreate} from "@smartsoft001/trans-domain";
 import {TransService} from "@smartsoft001/trans-shell-app-services";
@@ -11,9 +11,15 @@ export class TransController {
     @Post()
     async create<T>(@Body() obj: ITransCreate<T>, @Req() req) {
         obj.clientIp = req.connection.remoteAddress;
-        const url = await this.service.create(obj);
+        const { redirectUrl, orderId } = await this.service.create(obj);
         return {
-            url
+            url: redirectUrl,
+            orderId
         }
+    }
+
+    @Post(':id/refresh')
+    async refresh<T>( @Param('id') orderId, @Body() obj): Promise<void> {
+        await this.service.refresh(orderId, {});
     }
 }

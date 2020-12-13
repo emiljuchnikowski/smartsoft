@@ -136,7 +136,7 @@
       "tags": []
     },
     "shared-revolut": {
-      "tags": []
+      "tags": ["scope:shared", "type:util"]
     }
   },
   "tasksRunnerOptions": {
