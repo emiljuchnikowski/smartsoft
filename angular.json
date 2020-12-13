@@ -15,7 +15,10 @@
               "libs/auth/domain/tsconfig.lib.json",
               "libs/auth/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/auth/domain/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/auth/domain/**/*"
+            ]
           }
         },
         "test": {
@@ -23,7 +26,10 @@
           "options": {
             "jestConfig": "libs/auth/domain/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/auth/domain"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -32,7 +38,10 @@
             "tsConfig": "libs/auth/domain/tsconfig.lib.json",
             "packageJson": "libs/auth/domain/package.json",
             "main": "libs/auth/domain/src/index.ts"
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -61,7 +70,10 @@
           "options": {
             "jestConfig": "libs/auth/shell/app-services/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/auth/shell/app-services"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -70,8 +82,13 @@
             "tsConfig": "libs/auth/shell/app-services/tsconfig.lib.json",
             "packageJson": "libs/auth/shell/app-services/package.json",
             "main": "libs/auth/shell/app-services/src/index.ts",
-            "assets": ["libs/auth/shell/app-services/*.md"]
-          }
+            "assets": [
+              "libs/auth/shell/app-services/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -89,7 +106,10 @@
               "libs/auth/shell/nestjs/tsconfig.lib.json",
               "libs/auth/shell/nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/auth/shell/nestjs/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/auth/shell/nestjs/**/*"
+            ]
           }
         },
         "test": {
@@ -97,7 +117,10 @@
           "options": {
             "jestConfig": "libs/auth/shell/nestjs/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/auth/shell/nestjs"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -106,8 +129,13 @@
             "tsConfig": "libs/auth/shell/nestjs/tsconfig.lib.json",
             "packageJson": "libs/auth/shell/nestjs/package.json",
             "main": "libs/auth/shell/nestjs/src/index.ts",
-            "assets": ["libs/auth/shell/nestjs/*.md"]
-          }
+            "assets": [
+              "libs/auth/shell/nestjs/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -124,7 +152,9 @@
             "outputPath": "dist/apps/api/auth",
             "main": "apps/api/auth/src/main.ts",
             "tsConfig": "apps/api/auth/tsconfig.app.json",
-            "assets": ["apps/api/auth/src/assets"],
+            "assets": [
+              "apps/api/auth/src/assets"
+            ],
             "styles": [],
             "scripts": [],
             "buildLibsFromSource": true
@@ -141,7 +171,10 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@nrwl/node:execute",
@@ -156,7 +189,10 @@
               "apps/api/auth/tsconfig.app.json",
               "apps/api/auth/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/auth/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/auth/**/*"
+            ]
           }
         },
         "test": {
@@ -164,7 +200,10 @@
           "options": {
             "jestConfig": "apps/api/auth/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/apps/api/auth"
+          ]
         }
       }
     },
@@ -182,7 +221,10 @@
               "libs/shared/nestjs/tsconfig.lib.json",
               "libs/shared/nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/nestjs/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/nestjs/**/*"
+            ]
           }
         },
         "test": {
@@ -190,7 +232,10 @@
           "options": {
             "jestConfig": "libs/shared/nestjs/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/nestjs"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -199,8 +244,13 @@
             "tsConfig": "libs/shared/nestjs/tsconfig.lib.json",
             "packageJson": "libs/shared/nestjs/package.json",
             "main": "libs/shared/nestjs/src/index.ts",
-            "assets": ["libs/shared/nestjs/*.md"]
-          }
+            "assets": [
+              "libs/shared/nestjs/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -236,41 +286,51 @@
             "styles": [
               "apps/ui/test/src/styles.scss",
               {
-                "input": "node_modules/@ionic/angular/css/normalize.css"
+                "input": "node_modules/@ionic/angular/css/normalize.css",
+                "inject": true
               },
               {
-                "input": "node_modules/@ionic/angular/css/structure.css"
+                "input": "node_modules/@ionic/angular/css/structure.css",
+                "inject": true
               },
               {
-                "input": "node_modules/@ionic/angular/css/typography.css"
+                "input": "node_modules/@ionic/angular/css/typography.css",
+                "inject": true
               },
               {
-                "input": "node_modules/@ionic/angular/css/core.css"
+                "input": "node_modules/@ionic/angular/css/core.css",
+                "inject": true
               },
               {
-                "input": "node_modules/@ionic/angular/css/padding.css"
+                "input": "node_modules/@ionic/angular/css/padding.css",
+                "inject": true
               },
               {
-                "input": "node_modules/@ionic/angular/css/float-elements.css"
+                "input": "node_modules/@ionic/angular/css/float-elements.css",
+                "inject": true
               },
               {
-                "input": "node_modules/@ionic/angular/css/text-alignment.css"
+                "input": "node_modules/@ionic/angular/css/text-alignment.css",
+                "inject": true
               },
               {
-                "input": "node_modules/@ionic/angular/css/text-transformation.css"
+                "input": "node_modules/@ionic/angular/css/text-transformation.css",
+                "inject": true
               },
               {
-                "input": "node_modules/@ionic/angular/css/flex-utils.css"
+                "input": "node_modules/@ionic/angular/css/flex-utils.css",
+                "inject": true
               },
               {
-                "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+                "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+                "inject": true
               },
               {
-                "input": "src/theme/variables.css"
+                "input": "src/theme/variables.css",
+                "inject": true
               }
             ],
             "scripts": [],
-            "extractCss": true,
             "stylePreprocessorOptions": {
               "includePaths": [
                 "libs/shared/angular/src/lib",
@@ -295,7 +355,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -313,7 +372,10 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -339,7 +401,10 @@
               "apps/ui/test/tsconfig.app.json",
               "apps/ui/test/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/ui/test/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/ui/test/**/*"
+            ]
           }
         },
         "test": {
@@ -347,7 +412,10 @@
           "options": {
             "jestConfig": "apps/ui/test/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/apps/ui/test"
+          ]
         },
         "ionic-cordova-serve": {
           "builder": "@ionic/angular-toolkit:cordova-serve",
@@ -396,8 +464,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/ui/test-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/ui/test-e2e/**/*"]
+            "tsConfig": [
+              "apps/ui/test-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/ui/test-e2e/**/*"
+            ]
           }
         }
       }
@@ -423,8 +496,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/shared-angular-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/shared-angular-e2e/**/*"]
+            "tsConfig": [
+              "apps/shared-angular-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/shared-angular-e2e/**/*"
+            ]
           }
         }
       }
@@ -443,7 +521,10 @@
               "libs/crud/domain/tsconfig.lib.json",
               "libs/crud/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/crud/domain/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/crud/domain/**/*"
+            ]
           }
         },
         "test": {
@@ -451,7 +532,10 @@
           "options": {
             "jestConfig": "libs/crud/domain/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/crud/domain"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -460,8 +544,13 @@
             "tsConfig": "libs/crud/domain/tsconfig.lib.json",
             "packageJson": "libs/crud/domain/package.json",
             "main": "libs/crud/domain/src/index.ts",
-            "assets": ["libs/crud/domain/*.md"]
-          }
+            "assets": [
+              "libs/crud/domain/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -490,7 +579,10 @@
           "options": {
             "jestConfig": "libs/crud/shell/app-services/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/crud/shell/app-services"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -499,8 +591,13 @@
             "tsConfig": "libs/crud/shell/app-services/tsconfig.lib.json",
             "packageJson": "libs/crud/shell/app-services/package.json",
             "main": "libs/crud/shell/app-services/src/index.ts",
-            "assets": ["libs/crud/shell/app-services/*.md"]
-          }
+            "assets": [
+              "libs/crud/shell/app-services/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -518,7 +615,10 @@
               "libs/crud/shell/dtos/tsconfig.lib.json",
               "libs/crud/shell/dtos/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/crud/shell/dtos/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/crud/shell/dtos/**/*"
+            ]
           }
         },
         "test": {
@@ -526,7 +626,10 @@
           "options": {
             "jestConfig": "libs/crud/shell/dtos/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/crud/shell/dtos"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -535,8 +638,13 @@
             "tsConfig": "libs/crud/shell/dtos/tsconfig.lib.json",
             "packageJson": "libs/crud/shell/dtos/package.json",
             "main": "libs/crud/shell/dtos/src/index.ts",
-            "assets": ["libs/crud/shell/dtos/*.md"]
-          }
+            "assets": [
+              "libs/crud/shell/dtos/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -554,7 +662,10 @@
               "libs/crud/shell/nestjs/tsconfig.lib.json",
               "libs/crud/shell/nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/crud/shell/nestjs/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/crud/shell/nestjs/**/*"
+            ]
           }
         },
         "test": {
@@ -562,7 +673,10 @@
           "options": {
             "jestConfig": "libs/crud/shell/nestjs/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/crud/shell/nestjs"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -571,8 +685,13 @@
             "tsConfig": "libs/crud/shell/nestjs/tsconfig.lib.json",
             "packageJson": "libs/crud/shell/nestjs/package.json",
             "main": "libs/crud/shell/nestjs/src/index.ts",
-            "assets": ["libs/crud/shell/nestjs/*.md"]
-          }
+            "assets": [
+              "libs/crud/shell/nestjs/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -589,7 +708,9 @@
             "outputPath": "dist/apps/api/crud",
             "main": "apps/api/crud/src/main.ts",
             "tsConfig": "apps/api/crud/tsconfig.app.json",
-            "assets": ["apps/api/crud/src/assets"],
+            "assets": [
+              "apps/api/crud/src/assets"
+            ],
             "buildLibsFromSource": true
           },
           "configurations": {
@@ -604,7 +725,10 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@nrwl/node:execute",
@@ -619,7 +743,10 @@
               "apps/api/crud/tsconfig.app.json",
               "apps/api/crud/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/crud/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/crud/**/*"
+            ]
           }
         },
         "test": {
@@ -627,7 +754,10 @@
           "options": {
             "jestConfig": "apps/api/crud/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/apps/api/crud"
+          ]
         }
       }
     },
@@ -645,7 +775,10 @@
               "libs/shared/mongo/tsconfig.lib.json",
               "libs/shared/mongo/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/mongo/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/mongo/**/*"
+            ]
           }
         },
         "test": {
@@ -653,7 +786,10 @@
           "options": {
             "jestConfig": "libs/shared/mongo/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/mongo"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -662,8 +798,13 @@
             "tsConfig": "libs/shared/mongo/tsconfig.lib.json",
             "packageJson": "libs/shared/mongo/package.json",
             "main": "libs/shared/mongo/src/index.ts",
-            "assets": ["libs/shared/mongo/*.md"]
-          }
+            "assets": [
+              "libs/shared/mongo/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -676,7 +817,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/trans/domain/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/trans/domain/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -684,7 +827,10 @@
           "options": {
             "jestConfig": "libs/trans/domain/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/trans/domain"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -693,8 +839,13 @@
             "tsConfig": "libs/trans/domain/tsconfig.lib.json",
             "packageJson": "libs/trans/domain/package.json",
             "main": "libs/trans/domain/src/index.ts",
-            "assets": ["libs/trans/domain/*.md"]
-          }
+            "assets": [
+              "libs/trans/domain/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -707,7 +858,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/trans/shell/dtos/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/trans/shell/dtos/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -715,7 +868,10 @@
           "options": {
             "jestConfig": "libs/trans/shell/dtos/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/trans/shell/dtos"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -724,8 +880,13 @@
             "tsConfig": "libs/trans/shell/dtos/tsconfig.lib.json",
             "packageJson": "libs/trans/shell/dtos/package.json",
             "main": "libs/trans/shell/dtos/src/index.ts",
-            "assets": ["libs/trans/shell/dtos/*.md"]
-          }
+            "assets": [
+              "libs/trans/shell/dtos/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -742,7 +903,10 @@
               "libs/trans/shell/angular/tsconfig.lib.json",
               "libs/trans/shell/angular/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/trans/shell/angular/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/trans/shell/angular/**/*"
+            ]
           }
         },
         "test": {
@@ -750,7 +914,10 @@
           "options": {
             "jestConfig": "libs/trans/shell/angular/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/trans/shell/angular"
+          ]
         }
       }
     },
@@ -763,7 +930,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/trans/shell/app-services/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/trans/shell/app-services/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -771,7 +940,10 @@
           "options": {
             "jestConfig": "libs/trans/shell/app-services/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/trans/shell/app-services"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -780,8 +952,13 @@
             "tsConfig": "libs/trans/shell/app-services/tsconfig.lib.json",
             "packageJson": "libs/trans/shell/app-services/package.json",
             "main": "libs/trans/shell/app-services/src/index.ts",
-            "assets": ["libs/trans/shell/app-services/*.md"]
-          }
+            "assets": [
+              "libs/trans/shell/app-services/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -794,7 +971,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/trans/shell/nestjs/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/trans/shell/nestjs/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -802,7 +981,10 @@
           "options": {
             "jestConfig": "libs/trans/shell/nestjs/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/trans/shell/nestjs"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -811,8 +993,13 @@
             "tsConfig": "libs/trans/shell/nestjs/tsconfig.lib.json",
             "packageJson": "libs/trans/shell/nestjs/package.json",
             "main": "libs/trans/shell/nestjs/src/index.ts",
-            "assets": ["libs/trans/shell/nestjs/*.md"]
-          }
+            "assets": [
+              "libs/trans/shell/nestjs/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -829,7 +1016,9 @@
             "outputPath": "dist/apps/api/trans",
             "main": "apps/api/trans/src/main.ts",
             "tsConfig": "apps/api/trans/tsconfig.app.json",
-            "assets": ["apps/api/trans/src/assets"],
+            "assets": [
+              "apps/api/trans/src/assets"
+            ],
             "buildLibsFromSource": true
           },
           "configurations": {
@@ -844,7 +1033,10 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@nrwl/node:execute",
@@ -859,7 +1051,10 @@
               "apps/api/trans/tsconfig.app.json",
               "apps/api/trans/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/trans/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/trans/**/*"
+            ]
           }
         },
         "test": {
@@ -867,7 +1062,10 @@
           "options": {
             "jestConfig": "apps/api/trans/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/apps/api/trans"
+          ]
         }
       }
     },
@@ -880,7 +1078,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/shared/payu/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/shared/payu/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -888,7 +1088,10 @@
           "options": {
             "jestConfig": "libs/shared/payu/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/payu"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -897,8 +1100,13 @@
             "tsConfig": "libs/shared/payu/tsconfig.lib.json",
             "packageJson": "libs/shared/payu/package.json",
             "main": "libs/shared/payu/src/index.ts",
-            "assets": ["libs/shared/payu/*.md"]
-          }
+            "assets": [
+              "libs/shared/payu/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -915,7 +1123,10 @@
               "libs/shared/files/nestjs/tsconfig.lib.json",
               "libs/shared/files/nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/files/nestjs/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/files/nestjs/**/*"
+            ]
           }
         },
         "test": {
@@ -923,7 +1134,10 @@
           "options": {
             "jestConfig": "libs/shared/files/nestjs/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/files/nestjs"
+          ]
         }
       }
     },
@@ -940,7 +1154,9 @@
             "outputPath": "dist/apps/api/files",
             "main": "apps/api/files/src/main.ts",
             "tsConfig": "apps/api/files/tsconfig.app.json",
-            "assets": ["apps/api/files/src/assets"],
+            "assets": [
+              "apps/api/files/src/assets"
+            ],
             "buildLibsFromSource": true
           },
           "configurations": {
@@ -955,7 +1171,10 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@nrwl/node:execute",
@@ -970,7 +1189,10 @@
               "apps/api/files/tsconfig.app.json",
               "apps/api/files/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/files/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/files/**/*"
+            ]
           }
         },
         "test": {
@@ -978,7 +1200,10 @@
           "options": {
             "jestConfig": "apps/api/files/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/apps/api/files"
+          ]
         }
       }
     },
@@ -996,7 +1221,10 @@
               "libs/stream/domain/tsconfig.lib.json",
               "libs/stream/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/stream/domain/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/stream/domain/**/*"
+            ]
           }
         },
         "test": {
@@ -1004,7 +1232,10 @@
           "options": {
             "jestConfig": "libs/stream/domain/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/stream/domain"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -1013,8 +1244,13 @@
             "tsConfig": "libs/stream/domain/tsconfig.lib.json",
             "packageJson": "libs/stream/domain/package.json",
             "main": "libs/stream/domain/src/index.ts",
-            "assets": ["libs/stream/domain/*.md"]
-          }
+            "assets": [
+              "libs/stream/domain/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -1032,7 +1268,10 @@
               "libs/stream/shell/angular/tsconfig.spec.json",
               "libs/stream/shell/angular/.storybook/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/stream/shell/angular/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/stream/shell/angular/**/*"
+            ]
           }
         },
         "test": {
@@ -1040,7 +1279,10 @@
           "options": {
             "jestConfig": "libs/stream/shell/angular/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/stream/shell/angular"
+          ]
         },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
@@ -1070,7 +1312,10 @@
             "ci": {
               "quiet": true
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -1099,7 +1344,10 @@
           "options": {
             "jestConfig": "libs/stream/shell/app-services/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/stream/shell/app-services"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -1108,8 +1356,13 @@
             "tsConfig": "libs/stream/shell/app-services/tsconfig.lib.json",
             "packageJson": "libs/stream/shell/app-services/package.json",
             "main": "libs/stream/shell/app-services/src/index.ts",
-            "assets": ["libs/stream/shell/app-services/*.md"]
-          }
+            "assets": [
+              "libs/stream/shell/app-services/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -1126,7 +1379,10 @@
               "libs/stream/shell/dtos/tsconfig.lib.json",
               "libs/stream/shell/dtos/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/stream/shell/dtos/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/stream/shell/dtos/**/*"
+            ]
           }
         },
         "test": {
@@ -1134,7 +1390,10 @@
           "options": {
             "jestConfig": "libs/stream/shell/dtos/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/stream/shell/dtos"
+          ]
         }
       }
     },
@@ -1151,7 +1410,10 @@
               "libs/stream/shell/nestjs/tsconfig.lib.json",
               "libs/stream/shell/nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/stream/shell/nestjs/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/stream/shell/nestjs/**/*"
+            ]
           }
         },
         "test": {
@@ -1159,7 +1421,10 @@
           "options": {
             "jestConfig": "libs/stream/shell/nestjs/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/stream/shell/nestjs"
+          ]
         }
       }
     },
@@ -1176,7 +1441,9 @@
             "outputPath": "dist/apps/api/stream",
             "main": "apps/api/stream/src/main.ts",
             "tsConfig": "apps/api/stream/tsconfig.app.json",
-            "assets": ["apps/api/stream/src/assets"],
+            "assets": [
+              "apps/api/stream/src/assets"
+            ],
             "buildLibsFromSource": true
           },
           "configurations": {
@@ -1191,7 +1458,10 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@nrwl/node:execute",
@@ -1206,7 +1476,10 @@
               "apps/api/stream/tsconfig.app.json",
               "apps/api/stream/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/stream/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/stream/**/*"
+            ]
           }
         },
         "test": {
@@ -1214,7 +1487,10 @@
           "options": {
             "jestConfig": "apps/api/stream/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/apps/api/stream"
+          ]
         }
       }
     },
@@ -1239,7 +1515,9 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/stream-shell-angular-e2e/tsconfig.e2e.json"],
+            "tsConfig": [
+              "apps/stream-shell-angular-e2e/tsconfig.e2e.json"
+            ],
             "exclude": [
               "**/node_modules/**",
               "!apps/stream-shell-angular-e2e/**/*"
@@ -1257,7 +1535,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/shared/paypal/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/shared/paypal/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -1265,7 +1545,10 @@
           "options": {
             "jestConfig": "libs/shared/paypal/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/paypal"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -1274,8 +1557,13 @@
             "tsConfig": "libs/shared/paypal/tsconfig.lib.json",
             "packageJson": "libs/shared/paypal/package.json",
             "main": "libs/shared/paypal/src/index.ts",
-            "assets": ["libs/shared/paypal/*.md"]
-          }
+            "assets": [
+              "libs/shared/paypal/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -1300,7 +1588,9 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/crud-shell-angular-e2e/tsconfig.e2e.json"],
+            "tsConfig": [
+              "apps/crud-shell-angular-e2e/tsconfig.e2e.json"
+            ],
             "exclude": [
               "**/node_modules/**",
               "!apps/crud-shell-angular-e2e/**/*"
@@ -1330,7 +1620,10 @@
               "libs/test/tsconfig.lib.json",
               "libs/test/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/test/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/test/**/*"
+            ]
           }
         },
         "test": {
@@ -1338,7 +1631,10 @@
           "options": {
             "jestConfig": "libs/test/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/test"
+          ]
         }
       },
       "schematics": {
@@ -1368,7 +1664,10 @@
               "libs/shared/users/tsconfig.lib.json",
               "libs/shared/users/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/users/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/users/**/*"
+            ]
           }
         },
         "test": {
@@ -1376,7 +1675,10 @@
           "options": {
             "jestConfig": "libs/shared/users/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/users"
+          ]
         }
       },
       "schematics": {
@@ -1399,7 +1701,10 @@
               "libs/shared/utils/tsconfig.lib.json",
               "libs/shared/utils/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/utils/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/utils/**/*"
+            ]
           }
         },
         "test": {
@@ -1407,7 +1712,10 @@
           "options": {
             "jestConfig": "libs/shared/utils/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/utils"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -1416,8 +1724,13 @@
             "tsConfig": "libs/shared/utils/tsconfig.lib.json",
             "packageJson": "libs/shared/utils/package.json",
             "main": "libs/shared/utils/src/index.ts",
-            "assets": ["libs/shared/utils/*.md"]
-          }
+            "assets": [
+              "libs/shared/utils/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -1442,7 +1755,10 @@
               "libs/shared/models/tsconfig.lib.json",
               "libs/shared/models/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/models/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/models/**/*"
+            ]
           }
         },
         "test": {
@@ -1450,7 +1766,10 @@
           "options": {
             "jestConfig": "libs/shared/models/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/models"
+          ]
         }
       },
       "schematics": {
@@ -1481,7 +1800,10 @@
               "libs/shared/angular/tsconfig.spec.json",
               "libs/shared/angular/.storybook/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/angular/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/angular/**/*"
+            ]
           }
         },
         "test": {
@@ -1489,7 +1811,10 @@
           "options": {
             "jestConfig": "libs/shared/angular/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/angular"
+          ]
         },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
@@ -1519,7 +1844,10 @@
             "ci": {
               "quiet": true
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       },
       "schematics": {
@@ -1549,7 +1877,10 @@
               "libs/shared/domain-core/tsconfig.lib.json",
               "libs/shared/domain-core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/domain-core/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/domain-core/**/*"
+            ]
           }
         },
         "test": {
@@ -1557,7 +1888,10 @@
           "options": {
             "jestConfig": "libs/shared/domain-core/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/domain-core"
+          ]
         }
       },
       "schematics": {
@@ -1592,7 +1926,10 @@
               "libs/auth/shell/dtos/tsconfig.lib.json",
               "libs/auth/shell/dtos/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/auth/shell/dtos/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/auth/shell/dtos/**/*"
+            ]
           }
         },
         "test": {
@@ -1600,7 +1937,10 @@
           "options": {
             "jestConfig": "libs/auth/shell/dtos/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/auth/shell/dtos"
+          ]
         }
       },
       "schematics": {
@@ -1635,7 +1975,10 @@
               "libs/crud/shell/angular/tsconfig.lib.json",
               "libs/crud/shell/angular/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/crud/shell/angular/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/crud/shell/angular/**/*"
+            ]
           }
         },
         "test": {
@@ -1643,7 +1986,10 @@
           "options": {
             "jestConfig": "libs/crud/shell/angular/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/crud/shell/angular"
+          ]
         }
       },
       "schematics": {
@@ -1678,7 +2024,10 @@
               "libs/auth/shell/angular/tsconfig.lib.json",
               "libs/auth/shell/angular/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/auth/shell/angular/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/auth/shell/angular/**/*"
+            ]
           }
         },
         "test": {
@@ -1686,7 +2035,10 @@
           "options": {
             "jestConfig": "libs/auth/shell/angular/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/auth/shell/angular"
+          ]
         }
       },
       "schematics": {
@@ -1704,7 +2056,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/shared/revolut/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/shared/revolut/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -1712,7 +2066,10 @@
           "options": {
             "jestConfig": "libs/shared/revolut/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared/revolut"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -1721,8 +2078,13 @@
             "tsConfig": "libs/shared/revolut/tsconfig.lib.json",
             "packageJson": "libs/shared/revolut/package.json",
             "main": "libs/shared/revolut/src/index.ts",
-            "assets": ["libs/shared/revolut/*.md"]
-          }
+            "assets": [
+              "libs/shared/revolut/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     }
