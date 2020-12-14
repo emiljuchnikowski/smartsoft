@@ -61,7 +61,7 @@ export class StorageService implements Storage {
             this.cookieService.remove(key);
         }
 
-        delete this._storage['key'];
+        delete this._storage[key];
     }
 
     public setItem(key: string, data: string): void {
@@ -71,6 +71,6 @@ export class StorageService implements Storage {
             this.cookieService.put(key, data);
         }
 
-        this._storage['key'] = data;
+        this._storage[key] = data;
     }
 }

@@ -65,7 +65,12 @@ export class AuthService extends SharedAuthService {
         this.http.post<IAuthToken>(this.config.apiUrl + "/token", body).pipe(
           tap((token) => {
             this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
-            this.fingerprintService.setData(userCreds);
+
+            try {
+              this.fingerprintService.setData(userCreds);
+            } catch (e) {
+              console.warn(e);
+            }
           }),
           // TODO : fix
           first()

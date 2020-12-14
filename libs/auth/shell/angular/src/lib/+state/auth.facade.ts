@@ -22,7 +22,13 @@ export class AuthFacade {
   ) {}
 
   async checkFingerprint(): Promise<void> {
-    const data = await this.fingerprintService.getDate();
+    let data = null;
+
+    try {
+      data = await this.fingerprintService.getDate();
+    } catch (e) {
+      console.warn(e);
+    }
 
     if (data) {
       this.login(data);
