@@ -56,7 +56,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.createTokenSuccess.type),
         tap(_ => {
-            if (this.platform.is('ios') || this.platform.is('ipad')) {
+            if (this.platform.is('mobile')) {
                 this.navCtrl.navigateRoot('')
             } else {
                 window.location.href = '';
