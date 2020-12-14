@@ -31,8 +31,20 @@ smart-button {
         background-color: transparent;
         padding: 0;
         outline: 0;
-        width: 100%;
+        float: right;
     }
+}
+
+.smart-fingerprint {
+    background-color: transparent;
+    ion-icon {
+        color: var(--smart-color-primary);
+    }
+}
+
+.footer-container {
+    color: #FFF;
+    text-align: center;
 }
 
 smart-input-error {
