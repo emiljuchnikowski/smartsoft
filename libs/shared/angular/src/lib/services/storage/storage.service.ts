@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import { CookieService } from '@gorniv/ngx-universal';
+import {Platform} from "@ionic/angular";
+import { Storage as IonicStorage } from '@ionic/storage';
 
 @Injectable()
 export class StorageService implements Storage {
@@ -8,18 +10,42 @@ export class StorageService implements Storage {
     length: number;
     cookies: any;
 
-    constructor(private cookieService: CookieService) {}
+    private _storage = {};
+
+    constructor(private cookieService: CookieService, private platform: Platform,  private injector: Injector) {
+
+    }
+
+    public async init(): Promise<void> {
+        if (this.platform.is('mobile')) {
+            const keys = await this.injector.get(IonicStorage).keys();
+
+            for (let index = 0; index < keys.length; index++) {
+                const key = keys[index];
+
+                this._storage[key] = await this.injector.get(IonicStorage).get(key);
+            }
+        }
+
+        this._storage = this.cookieService.getAll();
+    }
 
     public clear(): void {
-        this.cookieService.removeAll();
+        if (this.platform.is('mobile')) {
+            this.injector.get(IonicStorage).clear();
+        } else {
+            this.cookieService.removeAll();
+        }
+
+        this._storage = {};
     }
 
     public getAll(): Object {
-        return this.cookieService.getAll();
+        return this._storage;
     }
 
     public getItem(key: string): string {
-        return this.cookieService.get(key);
+        return this._storage[key];
     }
 
     public key(index: number): string {
@@ -27,10 +53,24 @@ export class StorageService implements Storage {
     }
 
     public removeItem(key: string): void {
-        this.cookieService.remove(key);
+        delete this._storage['key'];
+
+        if (this.platform.is('mobile')) {
+            this.injector.get(IonicStorage).remove(key);
+        } else {
+            this.cookieService.remove(key);
+        }
+
+        delete this._storage['key'];
     }
 
     public setItem(key: string, data: string): void {
-        this.cookieService.put(key, data);
+        if (this.platform.is('mobile')) {
+            this.injector.get(IonicStorage).set(key, data);
+        } else {
+            this.cookieService.put(key, data);
+        }
+
+        this._storage['key'] = data;
     }
 }

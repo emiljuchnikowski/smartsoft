@@ -7,6 +7,7 @@ import { Observable, of } from "rxjs";
 
 import * as AuthActions from "./auth.actions";
 import { AuthService } from "../services/auth/auth.service";
+import {NavController, Platform} from "@ionic/angular";
 
 @Injectable()
 export class AuthEffects {
@@ -55,7 +56,11 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.createTokenSuccess.type),
         tap(_ => {
-            window.location.href = '';
+            if (this.platform.is('ios') || this.platform.is('ipad')) {
+                this.navCtrl.navigateRoot('')
+            } else {
+                window.location.href = '';
+            }
         })
       ),
     { dispatch: false }
@@ -81,6 +86,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.removeTokenSuccess.type),
         tap(_ => {
+            document.location.href = "";
           document.location.reload();
         })
       ),
@@ -90,6 +96,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     @Optional() private service: AuthService,
-    private router: Router
+    private navCtrl: NavController,
+    private platform: Platform
   ) {}
 }

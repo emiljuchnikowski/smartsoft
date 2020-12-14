@@ -12,6 +12,7 @@ import { SharedPipesModule } from "./pipes/pipes.module";
 import { SharedPagesModule } from "./pages/pages.module";
 import { SharedDirectivesModule } from "./directives/directives.module";
 import { SharedComponentsModule } from "./components/components.module";
+import {StorageService} from "./services/storage/storage.service";
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { SharedComponentsModule } from "./components/components.module";
   ]
 })
 export class SharedModule {
-  constructor(translateService: TranslateService) {
+  constructor(translateService: TranslateService, storageService: StorageService) {
     setDefaultTranslationsAndLang(translateService);
+    storageService.init();
   }
 }

@@ -47,7 +47,7 @@ export class PayuService implements ITransPaymentSingleService {
       ]
     };
 
-    if (obj.options['payMethod']) {
+    if (obj.options && obj.options['payMethod']) {
       data['payMethods'] = {
         payMethod: obj.options['payMethod']
       }

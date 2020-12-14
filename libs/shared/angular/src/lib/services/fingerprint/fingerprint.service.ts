@@ -4,6 +4,8 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import {Platforms} from "@ionic/core";
 import {TranslateService} from "@ngx-translate/core";
 
+import {StorageService} from "../storage/storage.service";
+
 export interface IFingerprintData {
     username: string;
     password: string;
@@ -17,13 +19,14 @@ export const FINGERPRINT_PLATFORMS: Platforms[] = [
 @Injectable()
 export class FingerprintService {
     isSet(): boolean {
-        return !!localStorage.getItem('FINGERPINT_SET');
+        return !!this.storageService.getItem('FINGERPINT_SET');
     }
 
     constructor(
         private readonly platform: Platform,
         private readonly faio: FingerprintAIO,
-        private readonly translateService: TranslateService
+        private readonly translateService: TranslateService,
+        private readonly storageService: StorageService
     ) { }
 
     async setData(data: IFingerprintData): Promise<void> {
@@ -32,7 +35,7 @@ export class FingerprintService {
                 secret: JSON.stringify(data)
             });
 
-            localStorage.setItem('FINGERPINT_SET', "1");
+            this.storageService.setItem('FINGERPINT_SET', "1");
 
             return;
         }
