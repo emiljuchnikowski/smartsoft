@@ -6,15 +6,16 @@ import { finalize, share } from "rxjs/operators";
 import { ObjectService } from "@smartsoft001/utils";
 import {
   IEntity,
-  IItemRepository, IItemRepositoryOptions,
+  IItemRepository,
+  IItemRepositoryOptions,
   ISpecification,
 } from "@smartsoft001/domain-core";
 import { IUser } from "@smartsoft001/users";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 
 import { MongoConfig } from "../mongo.config";
-import {getMongoUrl} from "../mongo.utils";
-import {IMongoTransaction} from "../mongo.unitofwork";
+import { getMongoUrl } from "../mongo.utils";
+import { IMongoTransaction } from "../mongo.unitofwork";
 
 @Injectable()
 export class MongoItemRepository<
@@ -24,22 +25,30 @@ export class MongoItemRepository<
     super();
   }
 
-  create(item: T, user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+  create(
+    item: T,
+    user: IUser,
+    repoOptions?: IItemRepositoryOptions
+  ): Promise<void> {
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
-        const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+        const db = (repoOptions.transaction as IMongoTransaction).connection.db(
+          this.config.database
+        );
 
         db.collection(this.config.collection).insertOne(
-            this.getModelToCreate(ObjectService.removeTypes(item) as T, user),
-            { session: (repoOptions.transaction as IMongoTransaction).session },
-            (errInsert) => {
-              if (errInsert) {
-                rej(errInsert);
-                return;
-              }
+          this.getModelToCreate(item as T, user),
+          { session: (repoOptions.transaction as IMongoTransaction).session },
+          (errInsert) => {
+            this.logChange('create', item, repoOptions, user, errInsert);
 
-              res();
+            if (errInsert) {
+              rej(errInsert);
+              return;
             }
+
+            res();
+          }
         );
       });
     }
@@ -54,8 +63,10 @@ export class MongoItemRepository<
         const db = client.db(this.config.database);
 
         db.collection(this.config.collection).insertOne(
-          this.getModelToCreate(ObjectService.removeTypes(item) as T, user),
+          this.getModelToCreate(item as T, user),
           (errInsert) => {
+            this.logChange('create', item, repoOptions, user, errInsert);
+
             if (errInsert) {
               rej(errInsert);
               return;
@@ -69,22 +80,26 @@ export class MongoItemRepository<
     });
   }
 
-  clear(user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+  clear(user: IUser, repoOptions?: IItemRepositoryOptions): Promise<void> {
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
-        const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+        const db = (repoOptions.transaction as IMongoTransaction).connection.db(
+          this.config.database
+        );
 
         db.collection(this.config.collection).deleteMany(
-            { },
-            { session: (repoOptions.transaction as IMongoTransaction).session },
-            (errClear) => {
-              if (errClear) {
-                rej(errClear);
-                return;
-              }
+          {},
+          { session: (repoOptions.transaction as IMongoTransaction).session },
+          (errClear) => {
+            this.logChange('clear', null, repoOptions, user, errClear);
 
-              res();
+            if (errClear) {
+              rej(errClear);
+              return;
             }
+
+            res();
+          }
         );
       });
     }
@@ -99,6 +114,8 @@ export class MongoItemRepository<
         const db = client.db(this.config.database);
 
         db.collection(this.config.collection).deleteMany({}, (err2) => {
+          this.logChange('clear', null, repoOptions, user, err2);
+
           if (err2) {
             rej(err2);
             return;
@@ -111,24 +128,30 @@ export class MongoItemRepository<
     });
   }
 
-  createMany(list: T[], user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+  createMany(
+    list: T[],
+    user: IUser,
+    repoOptions?: IItemRepositoryOptions
+  ): Promise<void> {
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
-        const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+        const db = (repoOptions.transaction as IMongoTransaction).connection.db(
+          this.config.database
+        );
 
         db.collection(this.config.collection).insertMany(
-            list.map((item) =>
-                this.getModelToCreate(ObjectService.removeTypes(item) as T, user)
-            ),
-            { session: (repoOptions.transaction as IMongoTransaction).session },
-            (errInsert) => {
-              if (errInsert) {
-                rej(errInsert);
-                return;
-              }
+          list.map((item) => this.getModelToCreate(item as T, user)),
+          { session: (repoOptions.transaction as IMongoTransaction).session },
+          (errInsert) => {
+            this.logChange('createMany', null, repoOptions, user, errInsert);
 
-              res();
+            if (errInsert) {
+              rej(errInsert);
+              return;
             }
+
+            res();
+          }
         );
       });
     }
@@ -144,9 +167,11 @@ export class MongoItemRepository<
 
         db.collection(this.config.collection).insertMany(
           list.map((item) =>
-            this.getModelToCreate(ObjectService.removeTypes(item) as T, user)
+            this.getModelToCreate(item as T, user)
           ),
           (errInsert) => {
+            this.logChange('createMany', null, repoOptions, user, errInsert);
+
             if (errInsert) {
               rej(errInsert);
               return;
@@ -160,33 +185,37 @@ export class MongoItemRepository<
     });
   }
 
-  async update(item: T, user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+  async update(
+    item: T,
+    user: IUser,
+    repoOptions?: IItemRepositoryOptions
+  ): Promise<void> {
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
         (async () => {
-          const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+          const db = (repoOptions.transaction as IMongoTransaction).connection.db(
+            this.config.database
+          );
           const collection = db.collection(this.config.collection);
 
           const info = await this.getInfo(item.id, collection);
 
           db.collection(this.config.collection).replaceOne(
-              { _id: item.id },
-              this.getModelToUpdate(
-                  ObjectService.removeTypes(item) as T,
-                  user,
-                  info
-              ),
-              { session: (repoOptions.transaction as IMongoTransaction).session },
-              (errInsert) => {
-                if (errInsert) {
-                  rej(errInsert);
-                  return;
-                }
+            { _id: item.id },
+            this.getModelToUpdate(item as T, user, info),
+            { session: (repoOptions.transaction as IMongoTransaction).session },
+            (errInsert) => {
+              this.logChange('update', item, repoOptions, user, errInsert);
 
-                res();
+              if (errInsert) {
+                rej(errInsert);
+                return;
               }
+
+              res();
+            }
           );
-        })()
+        })();
       });
     }
 
@@ -204,12 +233,10 @@ export class MongoItemRepository<
 
         db.collection(this.config.collection).replaceOne(
           { _id: item.id },
-          this.getModelToUpdate(
-            ObjectService.removeTypes(item) as T,
-            user,
-            info
-          ),
+          this.getModelToUpdate(item as T, user, info),
           (errUpdate) => {
+            this.logChange('update', item, repoOptions, user, errUpdate);
+
             if (errUpdate) {
               rej(errUpdate);
               return;
@@ -223,35 +250,39 @@ export class MongoItemRepository<
     });
   }
 
-  updatePartial(item: Partial<T> & { id: string }, user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+  updatePartial(
+    item: Partial<T> & { id: string },
+    user: IUser,
+    repoOptions?: IItemRepositoryOptions
+  ): Promise<void> {
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
         (async () => {
-          const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+          const db = (repoOptions.transaction as IMongoTransaction).connection.db(
+            this.config.database
+          );
           const collection = db.collection(this.config.collection);
 
           const info = await this.getInfo(item.id, collection);
 
           db.collection(this.config.collection).updateOne(
-              { _id: item.id },
-              {
-                $set: this.getModelToUpdate(
-                    ObjectService.removeTypes(item) as T,
-                    user,
-                    info
-                ),
-              },
-              { session: (repoOptions.transaction as IMongoTransaction).session },
-              (errUpdate) => {
-                if (errUpdate) {
-                  rej(errUpdate);
-                  return;
-                }
+            { _id: item.id },
+            {
+              $set: this.getModelToUpdate(item as T, user, info),
+            },
+            { session: (repoOptions.transaction as IMongoTransaction).session },
+            (errUpdate) => {
+              this.logChange('updatePartial', item, repoOptions, user, errUpdate);
 
-                res();
+              if (errUpdate) {
+                rej(errUpdate);
+                return;
               }
+
+              res();
+            }
           );
-        })()
+        })();
       });
     }
 
@@ -270,13 +301,11 @@ export class MongoItemRepository<
         db.collection(this.config.collection).updateOne(
           { _id: item.id },
           {
-            $set: this.getModelToUpdate(
-              ObjectService.removeTypes(item) as T,
-              user,
-              info
-            ),
+            $set: this.getModelToUpdate(item as T, user, info),
           },
           (errUpdate) => {
+            this.logChange('updatePartial', item, repoOptions, user, errUpdate);
+
             if (errUpdate) {
               rej(errUpdate);
               return;
@@ -291,35 +320,45 @@ export class MongoItemRepository<
   }
 
   updatePartialManyByCriteria(
-      criteria: any, set: Partial<T>, user: IUser, repoOptions? : IItemRepositoryOptions
+    criteria: any,
+    set: Partial<T>,
+    user: IUser,
+    repoOptions?: IItemRepositoryOptions
   ): Promise<void> {
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
         (async () => {
-          const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+          const db = (repoOptions.transaction as IMongoTransaction).connection.db(
+            this.config.database
+          );
 
           db.collection(this.config.collection).updateOne(
-              criteria,
-              {
-                $set: {
-                  ...set,
-                  "__info.update": {
-                    username: user?.username,
-                    date: new Date()
-                  }
+            criteria,
+            {
+              $set: {
+                ...set,
+                "__info.update": {
+                  username: user?.username,
+                  date: new Date(),
                 },
               },
-              { session: (repoOptions.transaction as IMongoTransaction).session },
-              (errUpdate) => {
-                if (errUpdate) {
-                  rej(errUpdate);
-                  return;
-                }
+            },
+            { session: (repoOptions.transaction as IMongoTransaction).session },
+            (errUpdate) => {
+              this.logChange('updatePartialManyByCriteria', {
+                ...criteria,
+                set
+              }, repoOptions, user, errUpdate);
 
-                res();
+              if (errUpdate) {
+                rej(errUpdate);
+                return;
               }
+
+              res();
+            }
           );
-        })()
+        })();
       });
     }
 
@@ -334,55 +373,78 @@ export class MongoItemRepository<
         const collection = db.collection(this.config.collection);
 
         db.collection(this.config.collection).updateOne(
-            criteria,
-            {
-              $set: {
-                ...set,
-                "__info.update": {
-                  username: user?.username,
-                  date: new Date()
-                }
+          criteria,
+          {
+            $set: {
+              ...set,
+              "__info.update": {
+                username: user?.username,
+                date: new Date(),
               },
             },
-            (errUpdate) => {
-              if (errUpdate) {
-                rej(errUpdate);
-                return;
-              }
+          },
+          (errUpdate) => {
+            this.logChange('updatePartialManyByCriteria', {
+              ...criteria,
+              set
+            }, repoOptions, user, errUpdate);
 
-              client.close();
-              res();
+            if (errUpdate) {
+              rej(errUpdate);
+              return;
             }
+
+            client.close();
+            res();
+          }
         );
       });
     });
   }
 
   updatePartialManyBySpecification(
-      spec: ISpecification, set: Partial<T>, user: IUser, repoOptions? : IItemRepositoryOptions
+    spec: ISpecification,
+    set: Partial<T>,
+    user: IUser,
+    repoOptions?: IItemRepositoryOptions
   ): Promise<void> {
-    return this.updatePartialManyByCriteria(spec.criteria, set, user, repoOptions);
+    return this.updatePartialManyByCriteria(
+      spec.criteria,
+      set,
+      user,
+      repoOptions
+    );
   }
 
-  delete(id: string, user: IUser, repoOptions? : IItemRepositoryOptions): Promise<void> {
+  delete(
+    id: string,
+    user: IUser,
+    repoOptions?: IItemRepositoryOptions
+  ): Promise<void> {
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
         (async () => {
-          const db = (repoOptions.transaction as IMongoTransaction).connection.db(this.config.database);
+          const db = (repoOptions.transaction as IMongoTransaction).connection.db(
+            this.config.database
+          );
 
           db.collection(this.config.collection).deleteOne(
-              { _id: id },
-              { session: (repoOptions.transaction as IMongoTransaction).session },
-              (errDelete) => {
-                if (errDelete) {
-                  rej(errDelete);
-                  return;
-                }
+            { _id: id },
+            { session: (repoOptions.transaction as IMongoTransaction).session },
+            (errDelete) => {
+              this.logChange('delete', {
+                id
+              }, repoOptions, user, errDelete);
 
-                res();
+              if (errDelete) {
+                rej(errDelete);
+                return;
               }
+
+              res();
+            }
           );
-        })()
+        })();
       });
     }
 
@@ -398,6 +460,10 @@ export class MongoItemRepository<
         db.collection(this.config.collection).deleteOne(
           { _id: id },
           (errDelete) => {
+            this.logChange('delete', {
+              id
+            }, repoOptions, user, errDelete);
+
             if (errDelete) {
               rej(errDelete);
               return;
@@ -615,5 +681,35 @@ export class MongoItemRepository<
 
   private getUrl(): string {
     return getMongoUrl(this.config);
+  }
+
+  private logChange(type, item, options, user, error) {
+    MongoClient.connect(this.getUrl(), (err, client) => {
+      if (err) {
+        console.warn(err);
+        return;
+      }
+
+      const db = client.db(this.config.database);
+
+      db.collection("changes").insertOne(
+          {
+            type,
+            item,
+            options,
+            user,
+            error,
+            date: new Date()
+          },
+        (errInsert) => {
+          client.close();
+
+          if (errInsert) {
+            console.warn(err);
+            return;
+          }
+        }
+      );
+    });
   }
 }
