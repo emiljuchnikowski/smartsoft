@@ -45,8 +45,10 @@ export class FingerprintService {
         // localStorage.setItem('FINGERPINT_SET', "1");
     }
 
-    async getDate(): Promise<IFingerprintData> {
-        if (!this.isSet()) return null;
+    async getDate(options: {
+        force?: boolean
+    } = {}): Promise<IFingerprintData> {
+        if (!options.force && !this.isSet()) return null;
 
         const data = await this.faio.loadBiometricSecret({
             title: this.translateService.instant('APP.signIn')

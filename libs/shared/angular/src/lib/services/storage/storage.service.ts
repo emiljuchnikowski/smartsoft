@@ -18,6 +18,8 @@ export class StorageService implements Storage {
 
     public async init(): Promise<void> {
         if (this.platform.is('mobile')) {
+            await this.platform.ready();
+
             const keys = await this.injector.get(IonicStorage).keys();
 
             for (let index = 0; index < keys.length; index++) {

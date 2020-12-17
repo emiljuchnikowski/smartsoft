@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.onCheckFingerprint();
+    // await this.onCheckFingerprint();
 
     this.isSetFingerprint = this.facade.isSetFingerprint;
   }

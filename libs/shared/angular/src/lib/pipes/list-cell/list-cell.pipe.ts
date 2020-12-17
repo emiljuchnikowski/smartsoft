@@ -11,9 +11,15 @@ export class ListCellPipe<T> implements PipeTransform {
     }
 
     transform(obj: T, key: string, pipe: IListCellPipe<T>): any {
-        if (!obj) return null;
-        else if (!pipe) return this.translateService.instant(obj[key]);
+        if (!obj) return obj;
 
-        return this.translateService.instant(pipe.transform(obj, key));
+        let result = null;
+
+        if (!pipe) result = obj[key];
+        else result = pipe.transform(obj, key);
+
+        if (typeof result === 'object') return result;
+
+        return this.translateService.instant(result);
     }
 }

@@ -21,11 +21,13 @@ export class AuthFacade {
     private fingerprintService: FingerprintService
   ) {}
 
-  async checkFingerprint(): Promise<void> {
+  async checkFingerprint(options: {
+      force?: boolean
+                         } = {}): Promise<boolean> {
     let data = null;
 
     try {
-      data = await this.fingerprintService.getDate();
+      data = await this.fingerprintService.getDate(options);
     } catch (e) {
       console.warn(e);
     }
@@ -33,6 +35,8 @@ export class AuthFacade {
     if (data) {
       this.login(data);
     }
+
+    return !!data;
   }
 
   init(): void {
