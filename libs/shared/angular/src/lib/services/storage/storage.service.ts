@@ -1,6 +1,7 @@
-import {Injectable, Injector} from '@angular/core';
+import {Inject, Injectable, Injector, PLATFORM_ID} from '@angular/core';
 import { CookieService } from '@gorniv/ngx-universal';
 import {Platform} from "@ionic/angular";
+import { isPlatformBrowser } from '@angular/common';
 import { Storage as IonicStorage } from '@ionic/storage';
 
 @Injectable()
@@ -12,12 +13,15 @@ export class StorageService implements Storage {
 
     private _storage = {};
 
-    constructor(private cookieService: CookieService, private platform: Platform,  private injector: Injector) {
-
-    }
+    constructor(
+        private cookieService: CookieService,
+        private platform: Platform,
+        private injector: Injector,
+        @Inject(PLATFORM_ID) private platformId: Object
+    ) { }
 
     public async init(): Promise<void> {
-        if (this.platform.is('mobile')) {
+        if (isPlatformBrowser(this.platformId) && this.platform.is('mobile')) {
             await this.platform.ready();
 
             const keys = await this.injector.get(IonicStorage).keys();
@@ -33,7 +37,7 @@ export class StorageService implements Storage {
     }
 
     public clear(): void {
-        if (this.platform.is('mobile')) {
+        if (isPlatformBrowser(this.platformId) && this.platform.is('mobile')) {
             this.injector.get(IonicStorage).clear();
         } else {
             this.cookieService.removeAll();
@@ -55,9 +59,7 @@ export class StorageService implements Storage {
     }
 
     public removeItem(key: string): void {
-        delete this._storage['key'];
-
-        if (this.platform.is('mobile')) {
+        if (isPlatformBrowser(this.platformId) && this.platform.is('mobile')) {
             this.injector.get(IonicStorage).remove(key);
         } else {
             this.cookieService.remove(key);
@@ -67,7 +69,7 @@ export class StorageService implements Storage {
     }
 
     public setItem(key: string, data: string): void {
-        if (this.platform.is('mobile')) {
+        if (isPlatformBrowser(this.platformId) && this.platform.is('mobile')) {
             this.injector.get(IonicStorage).set(key, data);
         } else {
             this.cookieService.put(key, data);

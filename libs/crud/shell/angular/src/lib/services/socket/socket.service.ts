@@ -6,7 +6,7 @@ import {CrudConfig} from "../../crud.config";
 @Injectable()
 export class SocketService<T> extends Socket {
     constructor(private crudConfig: CrudConfig<T>) {
-        super({
+        super( {
             url: crudConfig.apiUrl,
             options: {
                 transports: ["websocket"],

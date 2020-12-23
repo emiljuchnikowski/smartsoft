@@ -332,7 +332,7 @@ export class MongoItemRepository<
             this.config.database
           );
 
-          db.collection(this.config.collection).updateOne(
+          db.collection(this.config.collection).updateMany(
             criteria,
             {
               $set: {
@@ -372,7 +372,7 @@ export class MongoItemRepository<
         const db = client.db(this.config.database);
         const collection = db.collection(this.config.collection);
 
-        db.collection(this.config.collection).updateOne(
+        db.collection(this.config.collection).updateMany(
           criteria,
           {
             $set: {
@@ -695,6 +695,7 @@ export class MongoItemRepository<
       db.collection("changes").insertOne(
           {
             type,
+            collection: this.config.collection,
             item,
             options,
             user,

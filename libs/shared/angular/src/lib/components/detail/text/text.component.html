@@ -1,1 +1,1 @@
-<p *ngIf='options?.item$ | async; let item' [innerHTML]="item[options?.key] | translate"></p>
+<p *ngIf='options?.item$ | async; let item' [innerHTML]="item | smartListCell : options?.key : null"></p>
