@@ -38,9 +38,7 @@ node {
 //         }
 
         stage('Git push') {
-            sh(returnStdout: true, script: 'git add libs')
-            sh(returnStdout: true, script: 'git commit -m "build: npm publish')
-            sh(returnStdout: true, script: 'git push')
+            sh(returnStdout: true, script: 'push-npm.sh')
         }
     } catch (e) {
         // mark build as failed
