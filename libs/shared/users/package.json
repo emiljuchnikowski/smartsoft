@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/users",
-  "version": "1.0.78",
+  "version": "1.0.80",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "refresh": "npm version patch && npm i"
