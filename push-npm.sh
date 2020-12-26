@@ -1,0 +1,1 @@
+git add libs && git commit -m "build: npm publish" && git push
