@@ -1,22 +1,44 @@
-pipeline {
-    agent { docker { image 'node:12-alpine' } }
-    stages {
-        stage('Install Jest') {
-            steps {
-                sh 'npm install jest'
-            }
+node {
+    env.NODEJS_HOME = "${tool 'Node12'}"
+    env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+
+    def commit_id
+    def tag_name
+    def branch_name
+    def portainerToken
+
+    try {
+        stage('Preparation') {
+            checkout scm
         }
 
         stage('Install packages') {
-            steps {
-                sh 'npm install'
-            }
+            sh 'npm install'
         }
 
         stage('Unit tests') {
-            steps {
-                sh 'node node_modules/.bin/jest --runInBand'
-            }
+            sh 'npm test -- --ci --testResultsProcessor="jest-junit"'
+            junit 'junit.xml'
         }
+
+        stage('Lint') {
+            sh 'npm run lint'
+        }
+
+        stage('Npm update') {
+            sh 'npm run publish'
+        }
+
+        stage('Git push') {
+            sh 'git add .'
+            sh 'git commit -m "build: npm publish'
+            sh 'git push'
+        }
+    } catch (e) {
+        // mark build as failed
+        currentBuild.result = "FAILURE";
+
+        // mark current build as a failure and throw the error
+        throw e;
     }
 }
