@@ -38,7 +38,7 @@ node {
         }
 
         stage('Git push') {
-            sh 'git add .'
+            sh 'git add libs'
             sh 'git commit -m "build: npm publish'
             sh 'git push'
         }
