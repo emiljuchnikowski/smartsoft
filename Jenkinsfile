@@ -38,7 +38,7 @@ node {
 //         }
 
         stage('Git push') {
-            sh(returnStdout: true, script: 'push-npm.sh')
+            sh 'sh push-npm.sh'
         }
     } catch (e) {
         // mark build as failed
