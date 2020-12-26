@@ -26,7 +26,9 @@ node {
         }
 
         stage('Npm update') {
-            sh 'npm run publish'
+            withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
+                sh 'NPM_TOKEN=$TOKEN npm run publish'
+            }
         }
 
         stage('Git push') {
