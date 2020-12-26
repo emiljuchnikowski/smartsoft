@@ -13,16 +13,22 @@ node {
         }
 
         stage('Install packages') {
-            sh 'npm install'
+            withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
+                sh 'NPM_TOKEN=$TOKEN npm install'
+            }
         }
 
         stage('Unit tests') {
-            sh 'npm test -- --ci --testResultsProcessor="jest-junit"'
-            junit 'junit.xml'
+            withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
+                sh 'NPM_TOKEN=$TOKEN npm test -- --ci --testResultsProcessor="jest-junit"'
+                junit 'junit.xml'
+            }
         }
 
         stage('Lint') {
-            sh 'npm run lint'
+            withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
+                sh 'NPM_TOKEN=$TOKEN npm run lint'
+            }
         }
 
         stage('Npm update') {
