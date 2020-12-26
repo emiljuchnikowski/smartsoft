@@ -31,11 +31,11 @@ node {
             }
         }
 
-//         stage('Npm update') {
-//             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
-//                 sh 'NPM_TOKEN=$TOKEN npm run publish'
-//             }
-//         }
+        stage('Npm update') {
+            withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
+                sh 'NPM_TOKEN=$TOKEN npm run publish'
+            }
+        }
 
         stage('Git push') {
             sh 'sh push-npm.sh'

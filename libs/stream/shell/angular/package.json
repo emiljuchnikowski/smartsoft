@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/stream-shell-angular",
-  "version": "1.0.21",
+  "version": "1.0.31",
   "ngPackage": {
     "lib": {
       "entryFile": "src/index.ts"

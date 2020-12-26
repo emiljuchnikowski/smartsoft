@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/auth-shell-dtos",
-  "version": "1.0.17",
+  "version": "1.0.27",
   "description": "Utils to authorization",
   "peerDependencies": {
     "@angular/common": "^10.1.2",
