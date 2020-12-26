@@ -31,16 +31,16 @@ node {
             }
         }
 
-        stage('Npm update') {
-            withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
-                sh 'NPM_TOKEN=$TOKEN npm run publish'
-            }
-        }
+//         stage('Npm update') {
+//             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
+//                 sh 'NPM_TOKEN=$TOKEN npm run publish'
+//             }
+//         }
 
         stage('Git push') {
-            sh 'git add libs'
-            sh 'git commit -m "build: npm publish'
-            sh 'git push'
+            sh(returnStdout: true, script: 'git add libs')
+            sh(returnStdout: true, script: 'git commit -m "build: npm publish')
+            sh(returnStdout: true, script: 'git push')
         }
     } catch (e) {
         // mark build as failed
