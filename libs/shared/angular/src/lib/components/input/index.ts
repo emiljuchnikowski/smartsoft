@@ -20,3 +20,4 @@ export * from './strings/strings.component';
 export * from './text/text.component'
 export * from './logo/logo.component';
 export * from './check/check.component';
+export * from './ints/ints.component';

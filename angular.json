@@ -1606,11 +1606,11 @@
       "prefix": "smart",
       "architect": {
         "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/test/tsconfig.lib.json",
             "project": "libs/test/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": true
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -1650,11 +1650,11 @@
       "prefix": "smart",
       "architect": {
         "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/shared/users/tsconfig.lib.json",
             "project": "libs/shared/users/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": true
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -1741,11 +1741,11 @@
       "prefix": "smart",
       "architect": {
         "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/shared/models/tsconfig.lib.json",
             "project": "libs/shared/models/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": true
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -1785,11 +1785,11 @@
       "prefix": "smart",
       "architect": {
         "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/shared/angular/tsconfig.lib.json",
             "project": "libs/shared/angular/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": true
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -1863,11 +1863,11 @@
       "prefix": "smart",
       "architect": {
         "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/shared/domain-core/tsconfig.lib.json",
             "project": "libs/shared/domain-core/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": true
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -1907,11 +1907,11 @@
       "prefix": "smart",
       "architect": {
         "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/auth/shell/dtos/tsconfig.lib.json",
             "project": "libs/auth/shell/dtos/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": true
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           },
           "configurations": {
             "production": {
@@ -1956,11 +1956,11 @@
       "prefix": "smart",
       "architect": {
         "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/crud/shell/angular/tsconfig.lib.json",
             "project": "libs/crud/shell/angular/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": true
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           },
           "configurations": {
             "production": {
@@ -2005,11 +2005,11 @@
       "prefix": "smartsoft",
       "architect": {
         "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/auth/shell/angular/tsconfig.lib.json",
             "project": "libs/auth/shell/angular/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": true
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           },
           "configurations": {
             "production": {

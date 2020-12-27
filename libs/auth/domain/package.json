@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/auth-domain",
-  "version": "1.0.32",
+  "version": "1.0.42",
   "description": "Utils to authorization",
   "scripts": {
     "refresh": "npm version patch && npm i && npm i @smartsoft001/users@latest --save && npm i @smartsoft001/domain-core@latest --save && npm i @smartsoft001/utils@latest --save"

@@ -14,6 +14,7 @@ export enum FieldType {
     radio = "radio",
     text = "text",
     strings = "strings",
+    ints = "ints",
     longText = "longText",
     color = "color",
     logo = "logo",
