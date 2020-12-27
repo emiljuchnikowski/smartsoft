@@ -33,7 +33,7 @@ node {
 
         stage('Npm update') {
             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
-                sh 'NPM_TOKEN=$TOKEN npm run publish'
+                sh 'NPM_TOKEN=$TOKEN npm version patch --prefix libs/auth/shell/angular'
             }
         }
 
