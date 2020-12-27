@@ -43,7 +43,7 @@ node {
             withCredentials([usernamePassword(credentialsId: 'github',
                                          usernameVariable: 'username',
                                          passwordVariable: 'password')]){
-                sh("git push https://$username:$password@github.com/emiljuchnikowski/smartsoft")
+                sh("git push https://$username:$password@github.com/emiljuchnikowski/smartsoft HEAD:master")
             }
         }
     } catch (e) {
