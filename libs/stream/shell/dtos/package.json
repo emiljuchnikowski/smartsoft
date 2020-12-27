@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/stream-shell-dtos",
-  "version": "1.0.32",
+  "version": "1.0.42",
   "description": "Utils to stream",
   "ngPackage": {
     "lib": {
