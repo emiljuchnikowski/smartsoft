@@ -14,7 +14,7 @@ jobs:
     - name: trigger Job
       uses: appleboy/jenkins-action@master
       with:
-        url: "https://jenkins.smartsoft.biz.pl"
+        url: "http://jenkins.smartsoft.biz.pl"
         user: "emiljuchnikowski"
         token: ${{ secrets.JENKINS_TOKEN }}
         job: "smarttsoft"
