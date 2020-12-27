@@ -1,1 +1,1 @@
-git config --global user.email "emil@smartsoft.biz.pl" && git config --global user.name "emiljuchnikowski" && git add libs && git commit -m "build: npm publish" && git push origin HEAD:master
+git config --global user.email "emil@juchnikowski.com" && git config --global user.name "emiljuchnikowski" && git add libs && git commit -m "build: npm publish" && git push origin HEAD:master
