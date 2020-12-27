@@ -39,6 +39,12 @@ node {
 
         stage('Git push') {
             sh 'sh push-npm.sh'
+
+            withCredentials([usernamePassword(credentialsId: 'github',
+                                         usernameVariable: 'username',
+                                         passwordVariable: 'password')]){
+                sh("git push https://$username:$password@github.com/emiljuchnikowski/smartsoft")
+            }
         }
     } catch (e) {
         // mark build as failed

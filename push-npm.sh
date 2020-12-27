@@ -1,1 +1,1 @@
-git add libs && git commit -m "build: npm publish" && git push origin HEAD:master
+git add libs && git commit -m "build: npm publish"
