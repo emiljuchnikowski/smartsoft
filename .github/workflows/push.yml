@@ -17,4 +17,4 @@ jobs:
         url: "http://jenkins.smartsoft.biz.pl"
         user: "emiljuchnikowski"
         token: ${{ secrets.JENKINS_TOKEN }}
-        job: "smarttsoft"
+        job: "smartsoft"
