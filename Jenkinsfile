@@ -43,6 +43,8 @@ node {
             withCredentials([usernamePassword(credentialsId: 'github',
                                          usernameVariable: 'username',
                                          passwordVariable: 'password')]){
+                sh("git add libs")
+                sh('git commit -m "build: npm publish [skip ci]"')
                 sh("git push https://$username:$password@github.com/emiljuchnikowski/smartsoft HEAD:master")
             }
         }
