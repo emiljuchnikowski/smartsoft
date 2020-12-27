@@ -38,8 +38,6 @@ node {
         }
 
         stage('Git push') {
-            sh 'sh push-npm.sh'
-
             withCredentials([usernamePassword(credentialsId: 'github',
                                          usernameVariable: 'username',
                                          passwordVariable: 'password')]){
@@ -49,6 +47,16 @@ node {
             }
         }
     } catch (e) {
+        stage('Git push') {
+            withCredentials([usernamePassword(credentialsId: 'github',
+                                         usernameVariable: 'username',
+                                         passwordVariable: 'password')]){
+                sh("git add libs")
+                sh('git commit -m "build: npm publish [skip ci]"')
+                sh("git push https://$username:$password@github.com/emiljuchnikowski/smartsoft HEAD:master")
+            }
+        }
+
         // mark build as failed
         currentBuild.result = "FAILURE";
 
