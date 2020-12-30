@@ -1,10 +1,7 @@
 {
   "name": "@smartsoft001/auth-shell-app-services",
-  "version": "1.0.54",
+  "version": "1.0.56",
   "description": "Utils to authorization",
-  "scripts": {
-    "refresh": "npm version patch && npm i && npm i @smartsoft001/auth-domain@latest --save"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
@@ -16,12 +13,5 @@
   ],
   "main": "src/index.ts",
   "author": "Emil Juchnikowski",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
-  },
-  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme",
-  "dependencies": {
-    "@smartsoft001/auth-domain": "^1.0.12"
-  }
+  "license": "MIT"
 }

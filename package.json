@@ -35,8 +35,7 @@
     "ui-test:servessl": "ng serve ui-test --ssl true --ssl-cert ssl/server.crt --ssl-key ssl/server.key",
     "auth-domain:publish": "npm version patch --prefix libs/auth/domain && nx run auth-domain:build --with-deps && npm publish dist/libs/auth/domain --access public",
     "auth-shell-angular:publish": "npm version patch --prefix libs/auth/shell/angular && nx run auth-shell-angular:build --with-deps && npm publish dist/libs/auth/shell/angular --access public",
-    "auth-shell-app-services:build": "nx run auth-shell-app-services:build --with-deps",
-    "auth-shell-app-services:publish": "npm run auth-shell-app-services:build && npm publish libs/auth/shell/app-services/dist --access public",
+    "auth-shell-app-services:publish": "npm version patch --prefix libs/auth/shell/app-services && nx run auth-shell-app-services:build --with-deps && npm publish dist/libs/auth/shell/app-services --access public",
     "auth-shell-dtos:publish": "npm version patch --prefix libs/auth/shell/dtos && nx run auth-shell-dtos:build --with-deps && npm publish dist/libs/auth/shell/dtos --access public",
     "auth-shell-nestjs:build": "nx run auth-shell-nestjs:build --with-deps",
     "auth-shell-nestjs:publish": "npm run auth-shell-nestjs:build && npm publish libs/auth/shell/nestjs/dist --access public",
@@ -72,7 +71,7 @@
     "build-storybook": "build-storybook -c lisbs/shared/angular/.storybook -o dist/libs/shared/storybook && build-storybook -c lisbs/stream/shell/angular/.storybook -o dist/libs/stream/storybook",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js",
     "shared:publish": "npm run shared-utils:publish && npm run shared-users:publish && npm run shared-models:publish && npm run shared-domain-core:publish && npm run shared-angular:publish && npm run shared-mongo:publish && npm run shared-nestjs:publish",
-    "auth:publish": "npm run auth-domain:publish && npm run auth-shell-dtos:publish && npm run auth-shell-angular:publish",
+    "auth:publish": "npm run auth-domain:publish && npm run auth-shell-dtos:publish && npm run auth-shell-angular:publish && npm run auth-shell-app-services:publish",
     "crud:publish": "npm run crud-domain:publish && npm run crud-shell-dtos:publish && npm run crud-shell-app-services:publish && npm run crud-shell-nestjs:publish && npm run crud-shell-angular:publish && npm run trans-shell-nestjs:publish",
     "trans:publish": "npm run trans-domain:publish && npm run paypal:publish && npm run revolut:publish && npm run payu:publish && npm run trans-shell-app-services:publish && npm run trans-shell-nestjs:publish",
     "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish && npm run trans:publish"

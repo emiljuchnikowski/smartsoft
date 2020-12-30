@@ -37,40 +37,31 @@
       "root": "libs/auth/shell/app-services",
       "sourceRoot": "libs/auth/shell/app-services/src",
       "projectType": "library",
-      "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@nrwl/linter:lint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/auth/shell/app-services/tsconfig.lib.json",
-              "libs/auth/shell/app-services/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/auth/shell/app-services/**/*"
-            ]
+            "lintFilePatterns": ["libs/auth/shell/app-services/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/auth/shell/app-services"],
           "options": {
             "jestConfig": "libs/auth/shell/app-services/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/auth/shell/app-services"]
+          }
         },
         "build": {
           "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "libs/auth/shell/app-services/dist",
+            "outputPath": "dist/libs/auth/shell/app-services",
             "tsConfig": "libs/auth/shell/app-services/tsconfig.lib.json",
             "packageJson": "libs/auth/shell/app-services/package.json",
             "main": "libs/auth/shell/app-services/src/index.ts",
             "assets": ["libs/auth/shell/app-services/*.md"]
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         }
       }
     },

@@ -15,7 +15,7 @@
       "tags": []
     },
     "auth-shell-app-services": {
-      "tags": ["scope:auth", "type:shell"]
+      "tags": []
     },
     "auth-shell-nestjs": {
       "tags": ["scope:auth", "type:shell"]
