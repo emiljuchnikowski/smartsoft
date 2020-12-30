@@ -25,11 +25,11 @@ node {
 //             }
 //         }
 
-        stage('Lint') {
-            withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
-                sh 'NPM_TOKEN=$TOKEN npm run lint'
-            }
-        }
+//         stage('Lint') {
+//             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
+//                 sh 'NPM_TOKEN=$TOKEN npm run lint'
+//             }
+//         }
 
         stage('Npm update') {
             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
