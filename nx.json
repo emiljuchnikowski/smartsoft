@@ -12,7 +12,7 @@
       "tags": ["scope:app"]
     },
     "auth-domain": {
-      "tags": ["scope:auth", "type:domain"]
+      "tags": []
     },
     "auth-shell-app-services": {
       "tags": ["scope:auth", "type:shell"]
@@ -24,7 +24,7 @@
       "tags": ["scope:auth", "type:shell"]
     },
     "auth-shell-dtos": {
-      "tags": ["scope:auth", "type:shell"]
+      "tags": []
     },
     "crud-domain": {
       "tags": ["scope:crud", "type:domain"]
