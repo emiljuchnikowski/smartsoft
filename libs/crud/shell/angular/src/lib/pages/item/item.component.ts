@@ -51,7 +51,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
     private route: ActivatedRoute,
     private dynamicComponentLoader: DynamicComponentLoader<T>,
     private translateService: TranslateService,
-    config: CrudFullConfig<T>,
+    public config: CrudFullConfig<T>,
     private location: Location,
     private cd: ChangeDetectorRef,
     authService: AuthService

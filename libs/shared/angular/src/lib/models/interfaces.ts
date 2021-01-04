@@ -1,11 +1,13 @@
 import { AbstractControl } from "@angular/forms";
 import {Observable} from "rxjs";
+import {ComponentFactory, PipeTransform, Type} from "@angular/core";
 
-import { IAppProvider } from "../providers/interfaces";
 import { IFieldOptions } from "@smartsoft001/models";
 import { IEntity } from "@smartsoft001/domain-core";
-import {ComponentFactory, PipeTransform} from "@angular/core";
+
+import { IAppProvider } from "../providers/interfaces";
 import {IStyle} from "./style";
+import {InputBaseComponent} from "../components";
 
 export interface IAppOptions {
   provider: IAppProvider;
@@ -68,6 +70,9 @@ export interface IFormOptions<T> {
   possibilities?: {
     [key: string]: Observable<{ id: any, text: string }[]>;
   }
+  inputComponents?: {
+    [key: string]: Type<InputBaseComponent<T>>;
+  }
 }
 
 export interface IMenuItem {
@@ -100,6 +105,7 @@ export type InputOptions<T> = IInputOptions & IInputFromFieldOptions<T>;
 export interface IInputOptions {
   control: AbstractControl;
   possibilities$?: Observable<{ id: any, text: string }[]>;
+  component?: Type<InputBaseComponent<any>>;
 }
 
 export interface IInputFromFieldOptions<T> {

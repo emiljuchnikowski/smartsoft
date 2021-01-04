@@ -1,7 +1,7 @@
-import {Component, NgModule} from "@angular/core";
+import {ChangeDetectorRef, Component, NgModule, OnInit, Type} from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { SharedModule } from "@smartsoft001/angular";
+import {InputBaseComponent, SharedModule} from "@smartsoft001/angular";
 import { AuthModule } from "@smartsoft001/auth-shell-angular";
 import {User} from "./user.dto";
 import {
@@ -15,8 +15,29 @@ import {IonicModule} from "@ionic/angular";
 import {SERVICES} from "./services";
 import {Observable, of} from "rxjs";
 
+@Component({
+  template: `
+    <div *ngIf="control">
+      <ion-label position="floating">
+        {{ translateKey | translate }}
+        <ion-text color="danger">
+          <span *ngIf="fieldOptions?.required">*</span>
+        </ion-text>
+      </ion-label>
+      <ion-input [formControl]="control" type="email" [attr.autofocus]="fieldOptions?.focused"></ion-input>
+    </div>
+  `
+})
+export class CustomInputComponent extends InputBaseComponent<any> implements OnInit {
+  constructor(cd: ChangeDetectorRef) {
+    super(cd);
+  }
+
+  ngOnInit() {}
+}
+
 @NgModule({
-  declarations: [ChangePasswordComponent],
+  declarations: [ChangePasswordComponent, CustomInputComponent],
   imports: [
       IonicModule,
       SharedModule
@@ -77,7 +98,10 @@ export class TestComponent {}
         },
         buttons: [
           { type: "popover", icon: 'cloud-upload', component: TestComponent }
-        ]
+        ],
+        inputComponents: {
+          email: CustomInputComponent
+        }
       }
     })
   ]

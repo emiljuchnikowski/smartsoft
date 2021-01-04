@@ -1,7 +1,7 @@
-import { Inject, Optional, Pipe, PipeTransform } from "@angular/core";
+import {Inject, Optional, Pipe, PipeTransform, Type} from "@angular/core";
 
 import { IEntity } from "@smartsoft001/domain-core";
-import { IFormOptions } from "@smartsoft001/angular";
+import {IFormOptions, InputBaseComponent} from "@smartsoft001/angular";
 
 import {
   CRUD_MODEL_POSSIBILITIES_PROVIDER,
@@ -23,7 +23,8 @@ export class FormOptionsPipe<T extends IEntity<string>>
     item: T,
     mode: string,
     type: any,
-    uniqueProvider?: (values: Record<keyof T, any>) => Promise<boolean>
+    uniqueProvider?: (values: Record<keyof T, any>) => Promise<boolean>,
+    inputComponents?: { [key: string]: Type<InputBaseComponent<any>> }
   ): IFormOptions<T> {
     if (!mode || !type) return null;
 
@@ -37,6 +38,7 @@ export class FormOptionsPipe<T extends IEntity<string>>
       return {
         mode: "create",
         possibilities,
+        inputComponents,
         uniqueProvider,
         model: new type(),
       };
@@ -53,6 +55,7 @@ export class FormOptionsPipe<T extends IEntity<string>>
         mode: "update",
         uniqueProvider,
         possibilities: possibilities,
+        inputComponents,
         model: model,
       };
     }

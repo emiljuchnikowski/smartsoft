@@ -1,5 +1,9 @@
-import {Injectable} from "@angular/core";
-import {IIconButtonOptions, IListCellPipe} from "@smartsoft001/angular";
+import {Injectable, Type} from "@angular/core";
+
+import {
+    IIconButtonOptions, IListCellPipe, InputBaseComponent
+} from "@smartsoft001/angular";
+
 import {ICrudFilterQueryItem} from "./models";
 
 @Injectable()
@@ -37,4 +41,7 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
         }
     };
     buttons?: Array<IIconButtonOptions>;
+    inputComponents?: {
+        [key: string]: Type<InputBaseComponent<T>>
+    }
 }

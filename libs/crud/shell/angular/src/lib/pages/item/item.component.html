@@ -7,7 +7,8 @@
   <ng-template #editTpl>
       <smart-form
         [options]="
-          selected$ | async | smartFormOptions: mode:config?.type:uniqueProvider
+          (selected$ | async)
+          | smartFormOptions : mode:config?.type:uniqueProvider : config.inputComponents
         "
         (valuePartialChange)="onPartialChange($event)"
         (valueChange)="onChange($event)"

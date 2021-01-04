@@ -1,5 +1,5 @@
 <ion-item>
-    <ng-container [ngSwitch]="fieldOptions?.type">
+    <ng-container *ngIf="!options.component" [ngSwitch]="fieldOptions?.type">
         <smart-input-currency class="input-type" *ngSwitchCase="FieldType.currency" [options]="options" [fieldOptions]="fieldOptions"></smart-input-currency>
         <smart-input-date class="input-type" *ngSwitchCase="FieldType.date" [options]="options" [fieldOptions]="fieldOptions"></smart-input-date>
         <smart-input-date-with-edit class="input-type" *ngSwitchCase="FieldType.dateWithEdit" [options]="options" [fieldOptions]="fieldOptions"></smart-input-date-with-edit>
@@ -21,6 +21,8 @@
         <smart-input-check class="input-type" *ngSwitchCase="FieldType.check" [options]="options" [fieldOptions]="fieldOptions"></smart-input-check>
         <smart-input-ints class="input-type" *ngSwitchCase="FieldType.ints" [options]="options" [fieldOptions]="fieldOptions"></smart-input-ints>
     </ng-container>
+
+    <div #componentRef></div>
 </ion-item>
 
 <ion-item *ngIf="options?.control?.errors && options?.control?.touched">

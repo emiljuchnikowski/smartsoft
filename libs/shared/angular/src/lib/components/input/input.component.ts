@@ -1,8 +1,16 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ComponentFactoryResolver, Injector,
+  Input,
+  OnInit, ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import * as _ from 'lodash';
 
 import {InputOptions} from "../../models/interfaces";
 import {FieldType, getModelFieldOptions, IFieldOptions} from "@smartsoft001/models";
+import {InputBaseComponent} from "./base/base.component";
 
 @Component({
   selector: 'smart-input',
@@ -16,6 +24,8 @@ export class InputComponent<T> implements OnInit {
 
   fieldOptions: IFieldOptions;
   FieldType = FieldType;
+
+  @ViewChild('componentRef', {read: ViewContainerRef}) componentRef: ViewContainerRef;
 
   @Input() set options(val: InputOptions<T>) {
     this._options = val;
@@ -40,14 +50,35 @@ export class InputComponent<T> implements OnInit {
     }
 
     this.fieldOptions = fieldOptions;
+
+    this.initCustomComponent();
   }
   get options(): InputOptions<T> {
     return this._options;
   }
 
-  constructor() { }
+  constructor(
+      private componentFactoryResolver: ComponentFactoryResolver,
+      private injeector: Injector
+  ) { }
 
   ngOnInit() {
   }
 
+  private async initCustomComponent(): Promise<void> {
+    if (!this.options.component) return;
+
+    await new Promise(res => res());
+
+    const componentFactory = this.componentFactoryResolver
+        .resolveComponentFactory<InputBaseComponent<any>>(this.options.component);
+
+    const viewContainerRef = this.componentRef;
+    viewContainerRef.clear();
+
+    const componentRef = viewContainerRef.createComponent(componentFactory, 0, this.injeector);
+
+    componentRef.instance.options = this.options;
+    componentRef.instance.fieldOptions = this.fieldOptions;
+  }
 }
