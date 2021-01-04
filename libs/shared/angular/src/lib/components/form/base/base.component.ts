@@ -3,7 +3,7 @@ import {FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 
 import {IFormOptions} from "../../../models";
-import {InputBaseComponent} from "@smartsoft001/angular";
+import {InputBaseComponent} from "../../input/base/base.component";
 
 @Directive()
 export abstract class FormBaseComponent<T> {
