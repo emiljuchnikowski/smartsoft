@@ -106,7 +106,8 @@ export class User implements IEntity<string> {
             required: false
         },
         details: true,
-        type: FieldType.check
+        type: FieldType.radio,
+        possibilities: UserPermission
     })
     permissions2: Array<UserPermission>;
 

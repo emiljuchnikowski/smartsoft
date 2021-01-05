@@ -24,6 +24,8 @@ export abstract class InputBaseComponent<T> extends BaseComponent {
     this.control = this.internalOptions.control;
     this.setTranslateKey();
 
+    console.log(val.possibilities$);
+
     this.possibilities$ = val.possibilities$;
 
     this.afterSetOptionsHandler();

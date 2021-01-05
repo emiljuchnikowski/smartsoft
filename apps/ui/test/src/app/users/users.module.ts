@@ -62,10 +62,10 @@ export class TestComponent {}
           console.log(type);
 
           return {
-            "permissions2": of([
-              {id: 'test1', text: 'wartość 1'},
-              {id: 'test2', text: 'wartość 3'}
-            ])
+            // "permissions2": of([
+            //   {id: 'test1', text: 'wartość 1'},
+            //   {id: 'test2', text: 'wartość 3'}
+            // ])
           };
         }
       } as ICrudModelPossibilitiesProvider
