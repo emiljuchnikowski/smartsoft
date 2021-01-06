@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {map} from "rxjs/operators";
 
 import {FormComponent, IButtonOptions, IFormOptions} from "@smartsoft001/angular";
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   @ViewChild(FormComponent, { read: FormComponent, static: false })
   formComponent: FormComponent<LoginDto>;
 
-  constructor(private facade: AuthFacade) { }
+  constructor(private facade: AuthFacade, private cd: ChangeDetectorRef) { }
 
   login(): void {
     if (this.formComponent.form.valid) {
@@ -42,8 +42,9 @@ export class LoginComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    // await this.onCheckFingerprint();
-
-    this.isSetFingerprint = this.facade.isSetFingerprint;
+    setTimeout(() => {
+      this.isSetFingerprint = this.facade.isSetFingerprint;
+      this.cd.detectChanges();
+    });
   }
 }

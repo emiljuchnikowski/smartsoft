@@ -6,7 +6,7 @@
         <smart-form (invokeSubmit)="login()" [options]="formOptions" class="login-form"></smart-form>
         <ng-content select='.card-middle'></ng-content>
 
-        <ion-button slot="icon-only" *ngIf="isSetFingerprint" (click)="onCheckFingerprint()" class="smart-fingerprint">
+        <ion-button type="button" slot="icon-only" *ngIf="isSetFingerprint" (click)="onCheckFingerprint()" class="smart-fingerprint">
             <ion-icon name="finger-print-outline"></ion-icon>
         </ion-button>
 
