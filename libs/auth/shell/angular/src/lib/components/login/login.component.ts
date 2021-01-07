@@ -38,13 +38,13 @@ export class LoginComponent implements OnInit {
   }
 
   async onCheckFingerprint(): Promise<void> {
-    await this.facade.checkFingerprint();
+    await this.facade.checkFingerprint({ force: true });
   }
 
   async ngOnInit(): Promise<void> {
     setTimeout(() => {
       this.isSetFingerprint = this.facade.isSetFingerprint;
       this.cd.detectChanges();
-    });
+    }, 1000);
   }
 }

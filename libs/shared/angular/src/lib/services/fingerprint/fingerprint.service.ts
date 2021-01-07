@@ -18,8 +18,10 @@ export const FINGERPRINT_PLATFORMS: Platforms[] = [
 
 @Injectable()
 export class FingerprintService {
+    static set = false;
+
     isSet(): boolean {
-        return !!this.storageService.getItem('FINGERPINT_SET');
+        return FingerprintService.set || !!this.storageService.getItem('FINGERPINT_SET');
     }
 
     constructor(
@@ -30,12 +32,13 @@ export class FingerprintService {
     ) { }
 
     async setData(data: IFingerprintData): Promise<void> {
-        if (FINGERPRINT_PLATFORMS.some(p => this.platform.is(p)) && await this.faio.isAvailable()) {
+        if (!this.isSet() && FINGERPRINT_PLATFORMS.some(p => this.platform.is(p)) && await this.faio.isAvailable()) {
             await this.faio.registerBiometricSecret({
                 secret: JSON.stringify(data)
             });
 
             this.storageService.setItem('FINGERPINT_SET', "1");
+            FingerprintService.set = true;
 
             return;
         }
@@ -45,13 +48,21 @@ export class FingerprintService {
         // localStorage.setItem('FINGERPINT_SET', "1");
     }
 
+    async clearData(): Promise<void> {
+        this.storageService.removeItem('FINGERPINT_SET');
+        FingerprintService.set = false;
+    }
+
     async getDate(options: {
         force?: boolean
     } = {}): Promise<IFingerprintData> {
         if (!options.force && !this.isSet()) return null;
 
+        FingerprintService.set = true;
+
         const data = await this.faio.loadBiometricSecret({
-            title: this.translateService.instant('APP.signIn')
+            title: this.translateService.instant('APP.signIn'),
+            cancelButtonTitle: this.translateService.instant('cancel')
         });
 
         // // to tests
