@@ -47,8 +47,8 @@ export class AuthEffects {
                   username: action.username
                 }) as any
             ),
-            catchError(async error => {
-                await this.fingerprintService.clearData();
+            catchError(error => {
+                this.fingerprintService.clearData();
                 return of(AuthActions.createTokenFailure({ error }));
             })
           )
@@ -61,11 +61,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.createTokenSuccess.type),
         tap(_ => {
-            if (this.platform.is('mobile')) {
-                this.navCtrl.navigateRoot('')
-            } else {
-                window.location.href = '';
-            }
+            this.navCtrl.navigateRoot('');
         })
       ),
     { dispatch: false }
