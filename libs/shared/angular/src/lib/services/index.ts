@@ -10,3 +10,4 @@ export * from "./style/style.service";
 export * from './services.module';
 export * from './auth/auth.service';
 export * from './fingerprint/fingerprint.service';
+export * from './menu/menu.service';

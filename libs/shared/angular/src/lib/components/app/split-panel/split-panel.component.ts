@@ -11,6 +11,7 @@ import {DOCUMENT} from "@angular/common";
 
 import { AppBaseComponent } from "../base/base.component";
 import { StyleService } from "../../../services/style/style.service";
+import {MenuService} from "../../../services/menu/menu.service";
 
 @Component({
   selector: "smart-app-split-panel",
@@ -25,10 +26,11 @@ export class AppSplitPanelComponent extends AppBaseComponent implements OnInit {
     cd: ChangeDetectorRef,
     elementRef: ElementRef,
     styleService: StyleService,
+    menuService: MenuService,
     @Inject(PLATFORM_ID) readonly platform,
     @Inject(DOCUMENT) document: any
   ) {
-    super(router, cd, elementRef, styleService, platform, document);
+    super(router, cd, elementRef, styleService, menuService, platform, document);
   }
 
   ngOnInit() {}

@@ -59,4 +59,8 @@
     <ion-router-outlet id="menu-content"></ion-router-outlet>
 
     <ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar>
+
+    <ion-menu side="end" disabled="true" menuId="end" type="overlay" contentId="menu-content" swipeGesture="false">
+        <ng-template #endMenuContainer></ng-template>
+    </ion-menu>
 </ion-split-pane>

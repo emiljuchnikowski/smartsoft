@@ -6,7 +6,7 @@ import {
   Directive,
   ElementRef,
   PLATFORM_ID,
-  Inject,
+  Inject, ViewChild, ViewContainerRef,
 } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
 import { filter, map } from "rxjs/operators";
@@ -22,6 +22,7 @@ import { isPlatformBrowser } from "@angular/common";
 
 import { IAppOptions, IMenuItem } from "../../../models/interfaces";
 import { StyleService } from "../../../services/style/style.service";
+import {MenuService} from "../../../services/menu/menu.service";
 
 @Directive()
 export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
@@ -47,11 +48,14 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
     this.refreshStyles();
   }
 
+  @ViewChild("endMenuContainer", { read: ViewContainerRef }) endMenuContainer: ViewContainerRef;
+
   protected constructor(
     private router: Router,
     private cd: ChangeDetectorRef,
     private elementRef: ElementRef,
     private styleService: StyleService,
+    private menuService: MenuService,
     @Inject(PLATFORM_ID) private readonly platformId,
     @Inject(DOCUMENT) private document: any
   ) {
@@ -66,9 +70,11 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
     this._options.provider.logout();
   }
 
-  ngAfterViewInit(): void {
+  async ngAfterViewInit(): Promise<void> {
     this.initLoader();
     this.refreshStyles();
+
+    await this.menuService.init(this.endMenuContainer);
   }
 
   ngOnDestroy(): void {
