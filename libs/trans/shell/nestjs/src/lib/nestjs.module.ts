@@ -56,7 +56,13 @@ export class TransShellNestjsModule {
           },
         }),
       ],
-      exports: [...SERVICES],
+      exports: [
+          ...SERVICES,
+          TransConfig,
+          ...(config.payuConfig ? [PayuConfig, PayuService] : []),
+          ...(config.paypalConfig ? [ PaypalConfig, PaypalService] : []),
+          ...(config.revolutConfig ? [ RevolutConfig, RevolutService] : [])
+      ],
     };
   }
 }
