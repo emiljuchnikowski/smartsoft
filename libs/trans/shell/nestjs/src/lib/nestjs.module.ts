@@ -57,11 +57,11 @@ export class TransShellNestjsModule {
         }),
       ],
       exports: [
-          ...SERVICES,
-          TransConfig,
-          ...(config.payuConfig ? [PayuConfig, PayuService] : []),
-          ...(config.paypalConfig ? [ PaypalConfig, PaypalService] : []),
-          ...(config.revolutConfig ? [ RevolutConfig, RevolutService] : [])
+        ...SERVICES,
+        TransConfig,
+        ...(config.payuConfig ? [PayuConfig, PayuService] : []),
+        ...(config.paypalConfig ? [PaypalConfig, PaypalService] : []),
+        ...(config.revolutConfig ? [RevolutConfig, RevolutService] : []),
       ],
     };
   }
@@ -75,6 +75,7 @@ export class TransShellNestjsCoreModule {
     config: TransConfig & {
       payuConfig?: PayuConfig;
       paypalConfig?: PaypalConfig;
+      revolutConfig?: RevolutConfig;
     }
   ): DynamicModule {
     return {
@@ -103,7 +104,13 @@ export class TransShellNestjsCoreModule {
           },
         }),
       ],
-      exports: [...SERVICES],
+      exports: [
+        ...SERVICES,
+        TransConfig,
+        ...(config.payuConfig ? [PayuConfig, PayuService] : []),
+        ...(config.paypalConfig ? [PaypalConfig, PaypalService] : []),
+        ...(config.revolutConfig ? [RevolutConfig, RevolutService] : []),
+      ],
     };
   }
 }
