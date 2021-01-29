@@ -43,6 +43,7 @@ export interface IFieldModifyMetadata {
 
 export interface IFieldListMetadata {
     order?: number;
+    filter?: boolean;
     permissions?: Array<string>;
 }
 
