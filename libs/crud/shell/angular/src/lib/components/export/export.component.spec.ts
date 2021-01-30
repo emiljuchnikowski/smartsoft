@@ -3,8 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ExportComponent } from './export.component';
 
 describe('ExportComponent', () => {
-  let component: ExportComponent;
-  let fixture: ComponentFixture<ExportComponent>;
+  let component: ExportComponent<any>;
+  let fixture: ComponentFixture<ExportComponent<any>>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

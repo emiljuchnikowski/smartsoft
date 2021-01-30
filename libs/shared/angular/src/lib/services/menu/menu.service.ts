@@ -1,7 +1,7 @@
 import {
   ComponentFactoryResolver,
   Injectable,
-  Injector,
+  Provider, ReflectiveInjector,
   ViewContainerRef,
 } from "@angular/core";
 import { MenuController } from "@ionic/angular";
@@ -25,11 +25,17 @@ export class MenuService {
 
   async openEnd(options: {
     component: any;
-    injector?: Injector;
+    providers?: Provider[];
   }): Promise<void> {
+    let injector = null;
+
+    if (options.providers) {
+      injector = ReflectiveInjector.resolveAndCreate(options.providers);
+    }
+
     this._endContainer.clear();
     const factory = this.resolver.resolveComponentFactory(options.component);
-    this._endContainer.createComponent(factory, 0, options.injector);
+    this._endContainer.createComponent(factory, 0, injector);
 
     await this.menuCtrl.enable(true, "end");
     await this.menuCtrl.open("end");

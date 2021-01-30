@@ -12,19 +12,20 @@ import { combineLatest, Observable, Subscription } from "rxjs";
 
 import {
   AuthService,
-  DynamicComponentLoader, IListInternalOptions,
+  DynamicComponentLoader, IIconButtonOptions, IListInternalOptions,
   IListOptions,
-  IPageOptions,
+  IPageOptions, MenuService,
   SharedModule
 } from "@smartsoft001/angular";
 import { IEntity } from "@smartsoft001/domain-core";
+import {getModelFieldsWithOptions, IFieldListMetadata} from "@smartsoft001/models";
 
 import { CrudFacade } from "../../+state/crud.facade";
-import {CrudFullConfig} from "../../crud.config";
+import {CrudConfig, CrudFullConfig} from "../../crud.config";
 import { ICrudFilter } from "../../models/interfaces";
 import {ExportComponent} from "../../components/export/export.component";
-import {getModelOptions} from "@smartsoft001/models";
 import {PageBaseComponent} from "../base/base.component";
+import {FiltersComponent} from "../../components/filters/filters.component";
 
 @Component({
   selector: "smart-crud-list-page",
@@ -52,6 +53,7 @@ export class ListComponent<T extends IEntity<string>>
     private dynamicComponentLoader: DynamicComponentLoader<T>,
     private injector: Injector,
     private cd: ChangeDetectorRef,
+    private menuService: MenuService,
     authService: AuthService
   ) {
     super(authService, config);
@@ -71,6 +73,8 @@ export class ListComponent<T extends IEntity<string>>
       sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null
     });
 
+    const endButtons = this.getEndButtons();
+
     this.pageOptions = {
       title: this.config.title,
       search: this.config.search
@@ -86,30 +90,7 @@ export class ListComponent<T extends IEntity<string>>
             }
           }
         : null,
-      endButtons: [
-        ...(this.config.add
-          ? [
-              {
-                icon: "add",
-                handler: () => {
-                  this.router.navigate([
-                    "/" + this.router.routerState.snapshot.url + "/add"
-                  ]);
-                }
-              }
-            ]
-          : []),
-        ...(this.config.export
-          ? [
-              {
-                icon: "download-outline",
-                type: 'popover' as 'popover',
-                component: ExportComponent
-              }
-            ]
-          : []),
-        ...(this.config.buttons ? this.config.buttons : [])
-      ]
+      endButtons: endButtons
     };
 
     const compiledComponents = await this.dynamicComponentLoader.getComponentsWithFactories(
@@ -265,5 +246,61 @@ export class ListComponent<T extends IEntity<string>>
     };
 
     this.cd.detectChanges();
+  }
+
+  private getEndButtons(): Array<IIconButtonOptions> {
+    const fieldsWithOptions = getModelFieldsWithOptions(new this.config.type());
+
+    const showFilters =
+        fieldsWithOptions.some(x => (x.options?.list as IFieldListMetadata)?.filter);
+
+    return [
+      ...(showFilters
+          ? [
+            {
+              icon: "filter-outline",
+              handler: async () => {
+
+
+                await this.menuService.openEnd({
+                  component: FiltersComponent,
+                  providers: [
+                    {
+                      provide: CrudConfig,
+                      useValue: this.config
+                    },
+                    {
+                      provide: CrudFacade,
+                      useValue: this.facade
+                    }
+                  ]
+                })
+              }
+            }
+          ]
+          : []),
+      ...(this.config.add
+          ? [
+            {
+              icon: "add",
+              handler: () => {
+                this.router.navigate([
+                  "/" + this.router.routerState.snapshot.url + "/add"
+                ]);
+              }
+            }
+          ]
+          : []),
+      ...(this.config.export
+          ? [
+            {
+              icon: "download-outline",
+              type: 'popover' as 'popover',
+              component: ExportComponent
+            }
+          ]
+          : []),
+      ...(this.config.buttons ? this.config.buttons : [])
+    ];
   }
 }

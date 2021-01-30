@@ -16,17 +16,27 @@ import { CrudService } from './services/crud/crud.service';
 import { CrudFacade } from './+state/crud.facade';
 import {SocketService} from "./services/socket/socket.service";
 import {ExportComponent} from "./components/export/export.component";
+import {FiltersComponent} from "./components/filters/filters.component";
+import {FilterComponent} from "./components/filter/filter.component";
+import {FilterTextComponent} from "./components/filter/text/text.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
         ItemComponent,
         ListComponent,
-        ExportComponent
+        ExportComponent,
+        FilterComponent,
+        FilterTextComponent,
+        FiltersComponent
     ],
     entryComponents: [
         ItemComponent,
         ListComponent,
-        ExportComponent
+        ExportComponent,
+        FilterComponent,
+        FilterTextComponent,
+        FiltersComponent
     ],
     imports: [
         StoreModule,
@@ -37,7 +47,8 @@ import {ExportComponent} from "./components/export/export.component";
             {path: '', component: ListComponent}
             , {path: 'add', component: ItemComponent}
             , {path: ':id', component: ItemComponent}
-        ])
+        ]),
+        FormsModule
     ],
     exports: [
         ItemComponent,
