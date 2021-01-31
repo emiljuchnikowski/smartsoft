@@ -11,7 +11,7 @@ import {
   CRUD_MODEL_POSSIBILITIES_PROVIDER,
   ICrudModelPossibilitiesProvider,
 } from "../../../providers/model-possibilities/model-possibilities.provider";
-import {CrudConfig} from "@smartsoft001/crud-shell-angular";
+import {CrudConfig} from "../../../crud.config";
 
 @Directive()
 export class BaseComponent<T extends IEntity<string>> implements OnInit {
