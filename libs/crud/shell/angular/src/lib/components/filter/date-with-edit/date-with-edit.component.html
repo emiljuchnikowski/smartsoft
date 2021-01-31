@@ -1,0 +1,21 @@
+<ion-row>
+    <ion-col>
+        <ion-label position="floating">
+            {{ item.label | translate }}
+        </ion-label>
+
+        <ion-input placeholder="YYYY-MM-DD"
+                   [(ngModel)]="customValue"
+                   [pattern]="'([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))'"
+        ></ion-input>
+        <ion-datetime [hidden]="true"
+                      displayFormat="YYYY-MM-DD"
+                      pickerFormat="YYYY-MM-DD"
+                      [(ngModel)]="customValue"></ion-datetime>
+    </ion-col>
+    <ion-col size="auto">
+        <ion-button (click)="open()" class="squere-button">
+            <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+        </ion-button>
+    </ion-col>
+</ion-row>

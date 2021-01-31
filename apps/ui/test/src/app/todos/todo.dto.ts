@@ -1,4 +1,4 @@
-import {Field, IFieldModifyMetadata, Model} from "@smartsoft001/models";
+import {Field, FieldType, IFieldModifyMetadata, Model} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
 
 const modifyMetdata : IFieldModifyMetadata = {
@@ -11,6 +11,12 @@ const modifyMetdata : IFieldModifyMetadata = {
             label: 'testNegation',
             key: 'body',
             type: '!=',
+        },
+        {
+            label: 'fromDate',
+            key: 'createDate',
+            type: '<=',
+            fieldType: FieldType.dateWithEdit
         }
     ]
 })

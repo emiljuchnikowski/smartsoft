@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 
-import {IModelFilter} from "@smartsoft001/models";
+import {FieldType, IModelFilter} from "@smartsoft001/models";
 import {ICrudFilter} from "@smartsoft001/crud-shell-angular";
 
 @Component({
@@ -9,6 +9,8 @@ import {ICrudFilter} from "@smartsoft001/crud-shell-angular";
   styleUrls: ["./filter.component.scss"],
 })
 export class FilterComponent implements OnInit {
+  FieldType = FieldType;
+
   @Input() item: IModelFilter;
   @Input() filter: ICrudFilter;
 

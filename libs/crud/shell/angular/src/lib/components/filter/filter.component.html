@@ -1,4 +1,16 @@
 <ion-item [ngSwitch]="item.fieldType">
+  <smart-crud-filter-date
+          *ngSwitchCase="FieldType.date"
+          [item]="item"
+          [filter]="filter"
+  ></smart-crud-filter-date>
+
+  <smart-crud-filter-date-with-edit
+          *ngSwitchCase="FieldType.dateWithEdit"
+          [item]="item"
+          [filter]="filter"
+  ></smart-crud-filter-date-with-edit>
+
   <smart-crud-filter-text
     *ngSwitchDefault
     [item]="item"

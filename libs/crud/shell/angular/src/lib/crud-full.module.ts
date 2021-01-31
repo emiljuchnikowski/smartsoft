@@ -22,6 +22,8 @@ import {FiltersComponent} from "./components/filters/filters.component";
 import {FilterComponent} from "./components/filter/filter.component";
 import {FilterTextComponent} from "./components/filter/text/text.component";
 import {FiltersConfigComponent} from "./components/filters-config/filters-config.component";
+import {FilterDateComponent} from "./components/filter/date/date.component";
+import {FilterDateWithEditComponent} from "./components/filter/date-with-edit/date-with-edit.component";
 
 @NgModule({
     declarations: [
@@ -31,6 +33,8 @@ import {FiltersConfigComponent} from "./components/filters-config/filters-config
         FilterComponent,
         FilterTextComponent,
         FiltersConfigComponent,
+        FilterDateComponent,
+        FilterDateWithEditComponent,
         FiltersComponent
     ],
     entryComponents: [
@@ -40,6 +44,9 @@ import {FiltersConfigComponent} from "./components/filters-config/filters-config
         FilterComponent,
         FilterTextComponent,
         FiltersConfigComponent,
+        FilterDateComponent,
+        FilterDateWithEditComponent,
+        FilterDateWithEditComponent,
         FiltersComponent
     ],
     imports: [
