@@ -31,7 +31,12 @@ export class FiltersComponent<T extends IEntity<string>> implements OnInit {
     const modelFilters = getModelOptions(this.config.type).filters;
 
     this.list = [
-        ...(modelFilters ? modelFilters : []),
+        ...(modelFilters ? modelFilters.map(item => {
+          if (!item.label) {
+            item.label = 'MODEL.' + item.key;
+          }
+          return item;
+        }) : []),
         ...getModelFieldsWithOptions(new this.config.type()).map(item => ({
           key: item.key,
           type: '=' as '=',
