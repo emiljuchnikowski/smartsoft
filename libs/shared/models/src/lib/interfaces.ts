@@ -21,9 +21,17 @@ export enum FieldType {
     check = "check"
 }
 
+export interface IModelFilter {
+    label?: string;
+    fieldType?: FieldType;
+    key: string;
+    type: '=' | '!=' | '>=' | '<=' | '<' | '>';
+}
+
 export interface IModelMetadata {
     titleKey?: string;
     permissions?: Array<string>;
+    filters?: Array<IModelFilter>;
 }
 
 export interface IFieldMetadata extends IFieldModifyMetadata {
@@ -54,6 +62,7 @@ export interface IFieldDetailsMetadata {
 
 export interface IModelOptions {
     titleKey?: string;
+    filters?: Array<IModelFilter>;
     create?: IModelModeOptions;
     update?: IModelModeOptions;
     list?: IModelModeOptions;

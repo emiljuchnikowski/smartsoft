@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 
 import {MenuService} from "@smartsoft001/angular";
-import {getModelFieldsWithOptions, IFieldOptions} from "@smartsoft001/models";
+import {getModelFieldsWithOptions, getModelOptions, IModelFilter} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
 
 import {ICrudFilter} from "../../models/interfaces";
@@ -15,7 +15,7 @@ import {CrudFacade} from "../../+state/crud.facade";
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent<T extends IEntity<string>> implements OnInit {
-  list: Array<{ key:string, options: IFieldOptions }>;
+  list: Array<IModelFilter>;
 
   filter$: Observable<ICrudFilter>;
 
@@ -28,7 +28,17 @@ export class FiltersComponent<T extends IEntity<string>> implements OnInit {
   }
 
   ngOnInit(): void {
-    this.list = getModelFieldsWithOptions(new this.config.type());
+    const modelFilters = getModelOptions(this.config.type).filters;
+
+    this.list = [
+        ...(modelFilters ? modelFilters : []),
+        ...getModelFieldsWithOptions(new this.config.type()).map(item => ({
+          key: item.key,
+          type: '=' as '=',
+          label: 'MODEL.' + item.key,
+          fieldType: item.options.type
+        }))
+    ];
     this.filter$ = this.facade.filter$;
   }
 }

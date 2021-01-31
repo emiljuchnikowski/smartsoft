@@ -1,3 +1,5 @@
+import {IModelFilter} from "@smartsoft001/models";
+
 export interface ICrudFilter {
     searchText?: string;
     sortBy?: string;
@@ -7,7 +9,7 @@ export interface ICrudFilter {
     query?: Array<ICrudFilterQueryItem>
 }
 
-export interface ICrudFilterQueryItem {
+export interface ICrudFilterQueryItem extends IModelFilter {
     key: string;
     value: any;
     type: '=' | '!=' | '>=' | '<=' | '<' | '>';

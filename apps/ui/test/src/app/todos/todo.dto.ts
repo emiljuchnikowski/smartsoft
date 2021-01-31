@@ -5,7 +5,15 @@ const modifyMetdata : IFieldModifyMetadata = {
     required: true
 };
 
-@Model({})
+@Model({
+    filters: [
+        {
+            label: 'testNegation',
+            key: 'body',
+            type: '!=',
+        }
+    ]
+})
 export class Todo implements IEntity<string> {
     id: string;
 

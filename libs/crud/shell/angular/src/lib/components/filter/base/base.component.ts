@@ -2,18 +2,18 @@ import {Directive, Input, OnInit} from '@angular/core';
 import {Debounce} from "lodash-decorators";
 
 import {IEntity} from "@smartsoft001/domain-core";
-import {IFieldOptions} from "@smartsoft001/models";
+import {IModelFilter} from "@smartsoft001/models";
 
 import {ICrudFilter} from "../../../models/interfaces";
 import  {CrudFacade} from "../../../+state/crud.facade";
 
 @Directive()
 export class BaseComponent<T extends IEntity<string>> implements OnInit {
-  @Input() item: { key: string; options: IFieldOptions };
+  @Input() item: IModelFilter;
   @Input() filter: ICrudFilter;
 
   get value(): any {
-    const query = this.filter.query.find(q => q.key === this.item.key && q.type === "=");
+    const query = this.filter.query.find(q => q.key === this.item.key && q.type === this.item.type);
     return query?.value;
   }
 
@@ -28,7 +28,7 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
 
   @Debounce(500)
   private refresh(val: any) {
-    let query = this.filter.query.find(q => q.key === this.item.key && q.type === "=");
+    let query = this.filter.query.find(q => q.key === this.item.key && q.type === this.item.type);
 
     if (!val) {
       const index = this.filter.query.indexOf(query);
@@ -43,7 +43,7 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     if (!query) {
       query = {
         key: this.item.key,
-        type: "=",
+        type: this.item.type,
         value: null
       };
 
@@ -51,6 +51,7 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     }
 
     query.value = val;
+    query.label = this.item.label;
 
     this.facade.read(this.filter);
   }
