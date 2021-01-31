@@ -11,6 +11,12 @@
           [filter]="filter"
   ></smart-crud-filter-date-with-edit>
 
+  <smart-crud-filter-radio
+          *ngSwitchCase="FieldType.radio"
+          [item]="item"
+          [filter]="filter"
+  ></smart-crud-filter-radio>
+
   <smart-crud-filter-text
     *ngSwitchDefault
     [item]="item"

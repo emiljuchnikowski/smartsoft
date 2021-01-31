@@ -1,5 +1,6 @@
 import {Field, FieldType, IFieldModifyMetadata, Model} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
+import {of} from "rxjs";
 
 const modifyMetdata : IFieldModifyMetadata = {
     required: true
@@ -17,6 +18,20 @@ const modifyMetdata : IFieldModifyMetadata = {
             key: 'createDate',
             type: '<=',
             fieldType: FieldType.dateWithEdit
+        },
+        {
+            label: 'select',
+            key: 'type',
+            type: '=',
+            fieldType: FieldType.radio,
+            possibilities$: of([
+                {
+                    id: 1, text: 'Test 1'
+                },
+                {
+                    id: 2, text: 'Test 2'
+                }
+            ])
         }
     ]
 })

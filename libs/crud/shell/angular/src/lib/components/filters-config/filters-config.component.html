@@ -2,7 +2,7 @@
     <ion-toolbar *ngIf="filter?.query?.length">
         <ion-chip *ngFor="let item of filter.query" (click)="onRemoveQuery(item, filter)">
             <ion-icon name="filter-circle-outline" color="primary"></ion-icon>
-            <ion-label>{{ 'MODEL.' + item.key | translate }} {{ item.type }} {{ item.value }}</ion-label>
+            <ion-label>{{ 'MODEL.' + item.key | translate }} {{ item.type }} {{ item.value | translate }}</ion-label>
             <ion-icon name="close"></ion-icon>
         </ion-chip>
     </ion-toolbar>

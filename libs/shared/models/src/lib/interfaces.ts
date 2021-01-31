@@ -1,3 +1,5 @@
+import {Observable} from "rxjs";
+
 export enum FieldType {
     address = "address",
     currency = "currency",
@@ -26,6 +28,7 @@ export interface IModelFilter {
     fieldType?: FieldType;
     key: string;
     type: '=' | '!=' | '>=' | '<=' | '<' | '>';
+    possibilities$?: Observable<{ id: any, text: string }[]>;
 }
 
 export interface IModelMetadata {
