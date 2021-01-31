@@ -1,8 +1,7 @@
-<ion-item>
-    <div [ngSwitch]="item.options.type">
-        <smart-crud-filter-text *ngSwitchDefault
-                                [item]="item"
-                                [filter]="filter"
-        ></smart-crud-filter-text>
-    </div>
+<ion-item [ngSwitch]="item.options.type">
+  <smart-crud-filter-text
+    *ngSwitchDefault
+    [item]="item"
+    [filter]="filter"
+  ></smart-crud-filter-text>
 </ion-item>
