@@ -2,20 +2,17 @@ import {
   ChangeDetectorRef,
   Component,
   Injector,
-  OnDestroy,
   OnInit
 } from "@angular/core";
-import { map, tap } from "rxjs/operators";
+import {first, map, tap} from "rxjs/operators";
 import { Router } from "@angular/router";
-import { CommonModule } from "@angular/common";
-import { combineLatest, Observable, Subscription } from "rxjs";
+import { combineLatest, Observable } from "rxjs";
 
 import {
   AuthService,
-  DynamicComponentLoader, IIconButtonOptions, IListInternalOptions,
+  DynamicComponentLoader, IIconButtonOptions,
   IListOptions,
   IPageOptions, MenuService,
-  SharedModule
 } from "@smartsoft001/angular";
 import { IEntity } from "@smartsoft001/domain-core";
 import {getModelFieldsWithOptions, IFieldListMetadata} from "@smartsoft001/models";
@@ -246,6 +243,16 @@ export class ListComponent<T extends IEntity<string>>
     };
 
     this.cd.detectChanges();
+
+    this.initCloseMenu();
+  }
+
+  private initCloseMenu() {
+    this.router.events.pipe(
+        this.takeUntilDestroy
+    ).subscribe(async () => {
+      await this.menuService.closeEnd();
+    });
   }
 
   private getEndButtons(): Array<IIconButtonOptions> {
