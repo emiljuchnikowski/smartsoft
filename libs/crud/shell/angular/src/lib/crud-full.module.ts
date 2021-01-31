@@ -2,6 +2,8 @@ import {NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 import {Store, StoreModule} from "@ngrx/store";
 import {SocketIoModule} from "ngx-socket-io";
+import {FormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
 
 import {SharedModule} from "@smartsoft001/angular";
 import {IEntity} from "@smartsoft001/domain-core";
@@ -19,7 +21,7 @@ import {ExportComponent} from "./components/export/export.component";
 import {FiltersComponent} from "./components/filters/filters.component";
 import {FilterComponent} from "./components/filter/filter.component";
 import {FilterTextComponent} from "./components/filter/text/text.component";
-import {FormsModule} from "@angular/forms";
+import {FiltersConfigComponent} from "./components/filters-config/filters-config.component";
 
 @NgModule({
     declarations: [
@@ -28,6 +30,7 @@ import {FormsModule} from "@angular/forms";
         ExportComponent,
         FilterComponent,
         FilterTextComponent,
+        FiltersConfigComponent,
         FiltersComponent
     ],
     entryComponents: [
@@ -36,6 +39,7 @@ import {FormsModule} from "@angular/forms";
         ExportComponent,
         FilterComponent,
         FilterTextComponent,
+        FiltersConfigComponent,
         FiltersComponent
     ],
     imports: [
@@ -48,7 +52,8 @@ import {FormsModule} from "@angular/forms";
             , {path: 'add', component: ItemComponent}
             , {path: ':id', component: ItemComponent}
         ]),
-        FormsModule
+        FormsModule,
+        CommonModule
     ],
     exports: [
         ItemComponent,

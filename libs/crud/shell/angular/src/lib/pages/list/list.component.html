@@ -1,5 +1,4 @@
-<smart-page [options]="pageOptions">
-
-    <smart-list *ngIf="listOptions && (filter$ | async)" [options]="listOptions"></smart-list>
-
+<smart-page [options]="pageOptions" *ngIf="filter$ | async">
+    <smart-crud-filters-config></smart-crud-filters-config>
+    <smart-list *ngIf="listOptions" [options]="listOptions"></smart-list>
 </smart-page>
