@@ -65,6 +65,7 @@
     "payu:publish": "npm version patch --prefix libs/shared/payu && nx run shared-payu:build --with-deps && npm publish dist/libs/shared/payu --access public",
     "paypal:publish": "npm version patch --prefix libs/shared/paypal && nx run shared-paypal:build --with-deps && npm publish dist/libs/shared/paypal --access public",
     "revolut:publish": "npm version patch --prefix libs/shared/revolut && nx run shared-revolut:build --with-deps && npm publish dist/libs/shared/revolut --access public",
+    "core:publish": "npm version patch --prefix libs/shared/core && nx run shared-core:build --with-deps && npm publish dist/libs/shared/core --access public",
     "mongo:publish": "npm publish libs/shared/mongo --access public",
     "docker-crud:publish": "docker push smartsoft001/crud_api:latest",
     "docker-files:publish": "docker push smartsoft001/crud_files:latest",
@@ -74,7 +75,7 @@
     "auth:publish": "npm run auth-domain:publish && npm run auth-shell-dtos:publish && npm run auth-shell-angular:publish && npm run auth-shell-app-services:publish",
     "crud:publish": "npm run crud-domain:publish && npm run crud-shell-dtos:publish && npm run crud-shell-app-services:publish && npm run crud-shell-nestjs:publish && npm run crud-shell-angular:publish && npm run trans-shell-nestjs:publish",
     "trans:publish": "npm run trans-domain:publish && npm run paypal:publish && npm run revolut:publish && npm run payu:publish && npm run trans-shell-app-services:publish && npm run trans-shell-nestjs:publish",
-    "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish && npm run trans:publish"
+    "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish && npm run trans:publish && npm run core:publish"
   },
   "private": true,
   "dependencies": {

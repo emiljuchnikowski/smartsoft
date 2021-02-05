@@ -1773,6 +1773,38 @@
           "outputs": ["{options.outputPath}"]
         }
       }
+    },
+    "shared-core": {
+      "root": "libs/shared/core",
+      "sourceRoot": "libs/shared/core/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/core/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/core"],
+          "options": {
+            "jestConfig": "libs/shared/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/shared/core",
+            "tsConfig": "libs/shared/core/tsconfig.lib.json",
+            "packageJson": "libs/shared/core/package.json",
+            "main": "libs/shared/core/src/index.ts",
+            "assets": ["libs/shared/core/*.md"]
+          }
+        }
+      }
     }
   },
   "cli": {

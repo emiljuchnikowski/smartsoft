@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 import {FieldType, IModelFilter} from "@smartsoft001/models";
-import {ICrudFilter} from "@smartsoft001/crud-shell-angular";
+
+import {ICrudFilter} from "../../models/interfaces";
 
 @Component({
   selector: "smart-crud-filter",
