@@ -66,6 +66,7 @@
     "paypal:publish": "npm version patch --prefix libs/shared/paypal && nx run shared-paypal:build --with-deps && npm publish dist/libs/shared/paypal --access public",
     "revolut:publish": "npm version patch --prefix libs/shared/revolut && nx run shared-revolut:build --with-deps && npm publish dist/libs/shared/revolut --access public",
     "core:publish": "npm version patch --prefix libs/shared/core && nx run shared-core:build --with-deps && npm publish dist/libs/shared/core --access public",
+    "cli:publish": "npm version patch --prefix libs/shared/cli && nx run shared-cli:build --with-deps && npm publish dist/libs/shared/cli --access public",
     "mongo:publish": "npm publish libs/shared/mongo --access public",
     "docker-crud:publish": "docker push smartsoft001/crud_api:latest",
     "docker-files:publish": "docker push smartsoft001/crud_files:latest",

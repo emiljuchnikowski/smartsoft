@@ -1,0 +1,12 @@
+{
+  "name": "@smartsoft001/cli",
+  "version": "0.0.15",
+  "bin": {
+    "smart": "smart.js"
+  },
+  "dependencies": {
+    "fs-extra": "^9.0.1",
+    "tslib": "^2.0.3",
+    "yargs": "^16.1.0"
+  }
+}

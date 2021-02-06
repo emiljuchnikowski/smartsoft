@@ -140,6 +140,9 @@
     },
     "shared-core": {
       "tags": []
+    },
+    "shared-cli": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {
