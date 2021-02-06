@@ -33,8 +33,34 @@ export async function workspaceInit({ name }: {
     runCommand(createCommand)
 
     log('Install dependencies')
-    const deps = ['@smartsoft001/core']
+    const deps = ['@smartsoft001/core'];
     const installDeps = `npm i ${deps.join(' ')} --save`;
     runCommand(installDeps, target);
 
+    log('Install dev dependencies')
+    const devDeps = [
+        '@smartsoft001/core',
+        '@nrwl/angular',
+        '@ionic/angular-toolkit',
+        '@nestjs/schematics',
+        '@nestjs/testing',
+        '@ngneat/spectator',
+        '@ngrx/schematics',
+        '@ngrx/store-devtools',
+        '@nrwl/cypress',
+        '@nrwl/jest',
+        '@nrwl/nest',
+        '@nrwl/node',
+        '@nrwl/storybook',
+        '@storybook/addon-knobs',
+        '@storybook/addon-viewport',
+        '@storybook/angular',
+        '@storybook/client-api',
+        'ng-mocks',
+        'jest-junit',
+        'jest-preset-angular',
+        'mock-local-storage'
+    ];
+    const installDevDeps = `npm i ${devDeps.join(' ')} -D`;
+    runCommand(installDevDeps, target);
 }

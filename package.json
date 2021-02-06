@@ -76,7 +76,7 @@
     "auth:publish": "npm run auth-domain:publish && npm run auth-shell-dtos:publish && npm run auth-shell-angular:publish && npm run auth-shell-app-services:publish",
     "crud:publish": "npm run crud-domain:publish && npm run crud-shell-dtos:publish && npm run crud-shell-app-services:publish && npm run crud-shell-nestjs:publish && npm run crud-shell-angular:publish && npm run trans-shell-nestjs:publish",
     "trans:publish": "npm run trans-domain:publish && npm run paypal:publish && npm run revolut:publish && npm run payu:publish && npm run trans-shell-app-services:publish && npm run trans-shell-nestjs:publish",
-    "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish && npm run trans:publish && npm run core:publish"
+    "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish && npm run trans:publish && npm run core:publish && npm run cli:publish"
   },
   "private": true,
   "dependencies": {
