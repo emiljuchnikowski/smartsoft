@@ -26,4 +26,4 @@ import * as crudShellNestJS from "@smartsoft001/crud-shell-nestjs";
 //trans
 import * as transDomain from "@smartsoft001/trans-domain";
 import * as transShellAppService from "@smartsoft001/trans-shell-app-services";
-import * as transShellNestJS from "@smartsoft001/crud-shell-nestjs";
+import * as transShellNestJS from "@smartsoft001/trans-shell-nestjs";
