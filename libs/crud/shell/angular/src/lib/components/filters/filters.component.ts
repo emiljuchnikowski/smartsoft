@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 
 import {MenuService} from "@smartsoft001/angular";
-import {getModelFieldsWithOptions, getModelOptions, IModelFilter} from "@smartsoft001/models";
+import {getModelFieldsWithOptions, getModelOptions, IFieldListMetadata, IModelFilter} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
 
 import {ICrudFilter} from "../../models/interfaces";
@@ -37,12 +37,14 @@ export class FiltersComponent<T extends IEntity<string>> implements OnInit {
           }
           return item;
         }) : []),
-        ...getModelFieldsWithOptions(new this.config.type()).map(item => ({
-          key: item.key,
-          type: '=' as '=',
-          label: 'MODEL.' + item.key,
-          fieldType: item.options.type
-        }))
+        ...getModelFieldsWithOptions(new this.config.type())
+            .filter(item => (item.options?.list as IFieldListMetadata)?.filter)
+            .map(item => ({
+              key: item.key,
+              type: '=' as '=',
+              label: 'MODEL.' + item.key,
+              fieldType: item.options.type
+            }))
     ];
     this.filter$ = this.facade.filter$;
   }
