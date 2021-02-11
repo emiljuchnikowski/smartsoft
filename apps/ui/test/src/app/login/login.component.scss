@@ -29,7 +29,9 @@
         --background: transparent !important;
         text-align: center;
         width: 100%;
-        color: #ffffff;
+        a {
+            color: white !important;
+        }
     }
     .login-button {
         width: 100%;
@@ -41,6 +43,7 @@
     }
     .card-middle {
         text-align: right;
+        padding: .6rem 0;
     }
     .card-bottom {
         text-align: center;
