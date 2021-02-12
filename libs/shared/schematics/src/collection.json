@@ -7,6 +7,14 @@
       "description": "Smartsoft schematic",
       "schema": "./src/ng-add/schema.json",
       "factory": "./src/ng-add/index#smartNgAdd"
+    },
+    "library": {
+      "aliases": [
+        "al"
+      ],
+      "factory": "./ng-g/library",
+      "schema": "./ng-g/library/schema.json",
+      "description": "Add library"
     }
   }
 }

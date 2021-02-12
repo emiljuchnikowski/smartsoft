@@ -42,5 +42,6 @@ module.exports = {
     "<rootDir>/libs/shared/core",
     "<rootDir>/libs/shared/cli",
     "<rootDir>/libs/shared/schematics",
+    "<rootDir>/libs/shared/test",
   ],
 };

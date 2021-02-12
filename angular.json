@@ -1872,6 +1872,32 @@
           }
         }
       }
+    },
+    "shared-test": {
+      "projectType": "library",
+      "root": "libs/shared/test",
+      "sourceRoot": "libs/shared/test/src",
+      "prefix": "smartsoft",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/test/tsconfig.lib.json",
+              "libs/shared/test/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/test/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/test"],
+          "options": {
+            "jestConfig": "libs/shared/test/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -1886,6 +1912,9 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
     }
   }
 }

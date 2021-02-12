@@ -146,6 +146,9 @@
     },
     "shared-schematics": {
       "tags": []
+    },
+    "shared-test": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {
