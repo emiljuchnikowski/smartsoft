@@ -1,18 +1,15 @@
 import { execSync } from 'child_process';
 import { existsSync } from 'fs-extra';
 import { join } from 'path';
+import {log, runCommand} from "./utils";
 
-function log(...msg) {
-    console.log('>', ` SMART `, ...msg)
-}
-
-function runCommand(command: string, cwd = process.cwd()) {
-    log(` RUN `, command);
-    execSync(command, { cwd, stdio: [] })
-}
-
-function info(message: string) {
-    log(` INFO `, message);
+function runInstallDeps(target) {
+    log('Install dependencies');
+    const devDeps = [
+        '@smartsoft001/core',
+    ];
+    const installDevDeps = `npm i ${devDeps.join(' ')} --save`;
+    runCommand(installDevDeps, target);
 }
 
 function runInstallDevDeps(target) {
@@ -72,6 +69,8 @@ export async function workspaceInit({ name }: {
     }
 
     createNxWorkspace(name);
+
+    runInstallDeps(target);
 
     runInstallDevDeps(target);
 

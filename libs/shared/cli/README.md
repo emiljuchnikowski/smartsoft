@@ -8,6 +8,12 @@ This library allow generate dynamic code.
 
 ##  Usage
 
+### Prepare system
+
+Preparing operating system dependencies to work with the framework.
+
+`smart prepare`
+
 ### Create project
 
 `smart init --name [name]`

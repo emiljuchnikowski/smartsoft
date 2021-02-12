@@ -2,6 +2,7 @@ import { basename } from 'path';
 import * as yargs from 'yargs';
 
 import { workspaceInit } from "./commands/workspace-init";
+import {systemPrepare} from "./commands/system-prepare";
 //import { systemPrepare } from './commands/system-prepare'
 
 // tslint:disable-next-line:no-unused-expression
@@ -22,13 +23,13 @@ yargs
             })
         },
     )
-    // .command(
-    //     'prepare',
-    //     'Prepare dependencies',
-    //     async (args) => {
-    //         await workspacePrepare({ })
-    //     },
-    // )
+    .command(
+        'prepare',
+        'Prepare system dependencies',
+        async (args) => {
+            await systemPrepare()
+        },
+    )
     .command(
         '$0',
         'Show usage',
