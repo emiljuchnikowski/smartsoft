@@ -15,31 +15,10 @@ function info(message: string) {
     log(` INFO `, message);
 }
 
-export async function workspaceInit({ name }: {
-    name: string
-}) {
-    const target = join(process.cwd(), name)
-    if (existsSync(target)) {
-        throw new Error(`Path ${target} already exists`)
-    }
-    log('Creating Nx Workspace')
-    const params = [
-        '--nx-cloud=true',
-        '--preset=empty',
-        '--cli=angular',
-        '--package-manager=npm',
-    ]
-    const createCommand = `npx create-nx-workspace@latest ${name} ${params.join(' ')}`
-    runCommand(createCommand)
-
-    log('Install dependencies')
-    const deps = ['@smartsoft001/core'];
-    const installDeps = `npm i ${deps.join(' ')} --save`;
-    runCommand(installDeps, target);
-
-    log('Install dev dependencies')
+function runInstallDevDeps(target) {
+    log('Install dev dependencies');
     const devDeps = [
-        '@smartsoft001/core',
+        '@smartsoft001/schematics',
         '@nrwl/angular',
         '@ionic/angular-toolkit',
         '@nestjs/schematics',
@@ -59,8 +38,42 @@ export async function workspaceInit({ name }: {
         'ng-mocks',
         'jest-junit',
         'jest-preset-angular',
-        'mock-local-storage'
+        'mock-local-storage',
+        'schematics-utilities'
     ];
     const installDevDeps = `npm i ${devDeps.join(' ')} -D`;
     runCommand(installDevDeps, target);
+}
+
+function runSetNgConfig(target) {
+    log('Set NG config');
+    runCommand("ng config cli.defaultCollection @smartsoft001/schematics", target);
+    runCommand("ng add @smartsoft001/schematics", target);
+}
+
+function createNxWorkspace(name: string) {
+    log('Creating Nx Workspace')
+    const params = [
+        '--nx-cloud=true',
+        '--preset=empty',
+        '--cli=angular',
+        '--package-manager=npm',
+    ]
+    const createCommand = `npx create-nx-workspace@latest ${name} ${params.join(' ')}`
+    runCommand(createCommand);
+}
+
+export async function workspaceInit({ name }: {
+    name: string
+}) {
+    const target = join(process.cwd(), name)
+    if (existsSync(target)) {
+        throw new Error(`Path ${target} already exists`)
+    }
+
+    createNxWorkspace(name);
+
+    runInstallDevDeps(target);
+
+    runSetNgConfig(target);
 }

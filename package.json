@@ -66,6 +66,8 @@
     "paypal:publish": "npm version patch --prefix libs/shared/paypal && nx run shared-paypal:build --with-deps && npm publish dist/libs/shared/paypal --access public",
     "revolut:publish": "npm version patch --prefix libs/shared/revolut && nx run shared-revolut:build --with-deps && npm publish dist/libs/shared/revolut --access public",
     "core:publish": "npm version patch --prefix libs/shared/core && nx run shared-core:build --with-deps && npm publish dist/libs/shared/core --access public",
+    "schematics:copy": "copyfiles -u 1 libs/shared/schematics/src/**/files/**/* dist/libs && copyfiles -u 1 libs/shared/schematics/src/**/*.json dist/libs",
+    "schematics:publish": "npm version patch --prefix libs/shared/schematics && nx run shared-schematics:build --with-deps && npm run schematics:copy && npm publish dist/libs/shared/schematics --access public",
     "cli:publish": "npm version patch --prefix libs/shared/cli && nx run shared-cli:build --with-deps && npm publish dist/libs/shared/cli --access public",
     "mongo:publish": "npm publish libs/shared/mongo --access public",
     "docker-crud:publish": "docker push smartsoft001/crud_api:latest",
@@ -76,7 +78,7 @@
     "auth:publish": "npm run auth-domain:publish && npm run auth-shell-dtos:publish && npm run auth-shell-angular:publish && npm run auth-shell-app-services:publish",
     "crud:publish": "npm run crud-domain:publish && npm run crud-shell-dtos:publish && npm run crud-shell-app-services:publish && npm run crud-shell-nestjs:publish && npm run crud-shell-angular:publish && npm run trans-shell-nestjs:publish",
     "trans:publish": "npm run trans-domain:publish && npm run paypal:publish && npm run revolut:publish && npm run payu:publish && npm run trans-shell-app-services:publish && npm run trans-shell-nestjs:publish",
-    "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish && npm run trans:publish && npm run core:publish && npm run cli:publish"
+    "publish": "npm run shared:publish && npm run auth:publish && npm run crud:publish && npm run trans:publish && npm run core:publish && npm run schematics:publish && npm run cli:publish"
   },
   "private": true,
   "dependencies": {
@@ -187,6 +189,7 @@
     "@typescript-eslint/parser": "4.7.0",
     "babel-loader": "8.2.1",
     "codelyzer": "^6.0.1",
+    "copyfiles": "^2.4.1",
     "cypress": "^5.1.0",
     "dotenv": "8.2.0",
     "eslint": "7.13.0",
@@ -199,6 +202,7 @@
     "ng-mocks": "^10.5.4",
     "ng-packagr": "11.0.2",
     "prettier": "2.1.2",
+    "schematics-utilities": "^2.0.2",
     "ts-jest": "26.4.4",
     "ts-node": "9.1.1",
     "tsickle": "^0.37.0",

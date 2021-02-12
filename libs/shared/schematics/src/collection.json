@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "@schematics/angular"
+  ],
+  "schematics": {
+    "ng-add": {
+      "description": "Smartsoft schematic",
+      "schema": "./src/ng-add/schema.json",
+      "factory": "./src/ng-add/index#smartNgAdd"
+    }
+  }
+}

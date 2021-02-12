@@ -73,7 +73,8 @@
       "@smartsoft001/files-nestjs": ["libs/shared/files/nestjs/src/index.ts"],
       "@smartsoft001/paypal": ["libs/shared/paypal/src/index.ts"],
       "@smartsoft001/revolut": ["libs/shared/revolut/src/index.ts"],
-      "@smartsoft/core": ["libs/shared/core/src/index.ts"]
+      "@smartsoft001/core": ["libs/shared/core/src/index.ts"],
+      "@smartsoft001/schematics": ["libs/shared/schematics/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

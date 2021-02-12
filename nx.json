@@ -143,6 +143,9 @@
     },
     "shared-cli": {
       "tags": []
+    },
+    "shared-schematics": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

@@ -41,5 +41,6 @@ module.exports = {
     "<rootDir>/libs/autth/domain",
     "<rootDir>/libs/shared/core",
     "<rootDir>/libs/shared/cli",
+    "<rootDir>/libs/shared/schematics",
   ],
 };
