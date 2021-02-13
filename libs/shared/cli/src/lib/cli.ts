@@ -3,7 +3,7 @@ import * as yargs from 'yargs';
 
 import { workspaceInit } from "./commands/workspace-init";
 import {systemPrepare} from "./commands/system-prepare";
-//import { systemPrepare } from './commands/system-prepare'
+import {generate} from "./commands/generate";
 
 // tslint:disable-next-line:no-unused-expression
 yargs
@@ -28,6 +28,14 @@ yargs
         'Prepare system dependencies',
         async (args) => {
             await systemPrepare()
+        },
+    )
+    .command(
+        'generate',
+        'Generate resource',
+        () => null,
+        async (args) => {
+            await generate(args)
         },
     )
     .command(

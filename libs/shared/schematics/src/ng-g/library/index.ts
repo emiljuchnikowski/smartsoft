@@ -1,47 +1,61 @@
-import { apply, chain, externalSchematic, mergeWith, move, Rule, SchematicContext, template, Tree, url } from '@angular-devkit/schematics';
+import {
+    apply,
+    chain,
+    externalSchematic,
+    MergeStrategy,
+    mergeWith,
+    move,
+    Rule,
+    SchematicContext,
+    Tree,
+    url,
+    template
+} from '@angular-devkit/schematics';
 import { normalize, strings } from '@angular-devkit/core';
 
 import {Schema} from "./schema";
-import {setupOptions} from "../../utils/setup-options";
 
 export default function (options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        // setupOptions(tree, options);
-        //
-        // const movePath = (options.flat) ?
-        //     normalize(options.path) :
-        //     normalize(options.path + '/' + strings.dasherize(options.name));
-        //
-        // const templateSource = apply(url('./files'), [
-        //     template({
-        //         ...strings,
-        //         ...options,
-        //     }),
-        //     move(movePath),
-        // ]);
+        const projectName = strings.dasherize(options.name);
+        const projectPath = `libs/shared/${projectName}`;
+
+        const templateSource = apply(url('./files/base'), [
+            template({
+                ...strings,
+                projectName
+            }),
+            move(projectPath),
+        ]);
+
+        const removeModule = (t: Tree) => {
+            t.delete(projectPath + `/src/lib/shared-${projectName}.module.ts`)
+        }
 
         if (options.type === "angular")
             return chain([
                 externalSchematic('@nrwl/angular', 'library', {
-                    name: options.name,
+                    name: projectName,
                     directory: "shared",
                     style: "scss",
                     unitTestRunner: "jest",
                     linter: "tslint"
                 }),
-                //mergeWith(templateSource),
+                mergeWith(templateSource, MergeStrategy.Overwrite),
+                removeModule
             ])(tree, context);
         else
             return chain([
                 externalSchematic('@nrwl/nest', 'library', {
-                    name: options.name,
+                    name: projectName,
                     directory: "shared",
                     target: "es6",
                     unitTestRunner: "jest",
                     linter: "eslint",
                     testEnvironment: "node"
                 }),
-                //mergeWith(templateSource),
+                mergeWith(templateSource, MergeStrategy.Overwrite),
+                removeModule
             ])(tree, context);
     };
 }

@@ -9,7 +9,7 @@ function addPackageJsonDependencies(options: Schema): Rule {
         const dependencies: NodeDependency[] = [
             {
                 type: NodeDependencyType.Default,
-                version: '^0.0.0',
+                version: '^0.0.11',
                 name: '@smartsoft001/core',
             },
         ];

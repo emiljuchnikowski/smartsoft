@@ -25,3 +25,25 @@ Parameters:
         <td>Project name</td>
     </tr>
 </table>
+
+### Generate shared library
+
+`smart generate library [name] [type=default]`
+
+Parameters:
+<table>
+    <tr>
+        <td>name</td>
+        <td>Library name</td>
+    </tr>
+    <tr>
+        <td>type</td>
+        <td>
+            Type of library (default: default)
+            <ul>
+                <li>angular - angular library</li>
+                <li>default - nodejs library</li>
+            </ul>        
+        </td>
+    </tr>
+</table>
