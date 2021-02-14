@@ -28,7 +28,11 @@ Parameters:
 
 ### Generate shared library
 
-`smart generate library [name] [type=default]`
+`smart generate library [name] [--type=default]`
+
+alias:
+
+`smart g lib [name] [--type=default]`
 
 Parameters:
 <table>
@@ -37,7 +41,7 @@ Parameters:
         <td>Library name</td>
     </tr>
     <tr>
-        <td>type</td>
+        <td>--type</td>
         <td>
             Type of library (default: default)
             <ul>

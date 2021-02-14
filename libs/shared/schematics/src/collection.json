@@ -10,7 +10,7 @@
     },
     "library": {
       "aliases": [
-        "al"
+        "lib"
       ],
       "factory": "./src/ng-g/library",
       "schema": "./src/ng-g/library/schema.json",

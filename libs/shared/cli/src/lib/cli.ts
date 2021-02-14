@@ -39,6 +39,14 @@ yargs
         },
     )
     .command(
+        'g',
+        'Generate resource',
+        () => null,
+        async (args) => {
+            await generate(args)
+        },
+    )
+    .command(
         '$0',
         'Show usage',
         () => null,
