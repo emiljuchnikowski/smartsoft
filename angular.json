@@ -1870,6 +1870,18 @@
               "libs/shared/schematics/src/collection.json"
             ]
           }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npm version patch --prefix libs/shared/schematics",
+              "nx run shared-schematics:build --with-deps",
+              "node libs/shared/schematics/prepare.js",
+              "npm publish dist/libs/shared/schematics --access public"
+            ],
+            "parallel": false
+          }
         }
       }
     },

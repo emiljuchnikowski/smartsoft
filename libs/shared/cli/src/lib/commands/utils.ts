@@ -6,7 +6,7 @@ export function log(...msg) {
 
 export function runCommand(command: string, cwd = process.cwd()) {
     log(` RUN `, command);
-    execSync(command, { cwd, stdio: [] })
+    execSync(command, { cwd, stdio: 'inherit' })
 }
 
 export function info(message: string) {

@@ -1,0 +1,23 @@
+name: Push
+
+# Controls when the action will run.
+on:
+  push:
+    branches: master
+
+jobs:
+  # This workflow contains a single job called "build
+  build:
+    name: Build
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-latest
+#    steps:
+# JENKINS
+# Set jenkins url, password, job and JENKINS_TOKEN in github
+#      - name: trigger Job
+#        uses: appleboy/jenkins-action@master
+#        with:
+#          url: ""
+#          user: ""
+#          token: ${{ secrets.JENKINS_TOKEN }}
+#          job: ""
