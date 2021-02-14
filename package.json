@@ -203,7 +203,6 @@
     "ng-packagr": "11.0.2",
     "prettier": "2.1.2",
     "schematics-utilities": "^2.0.2",
-    "sleep": "^6.3.0",
     "ts-jest": "26.4.4",
     "ts-node": "9.1.1",
     "tsickle": "^0.37.0",
