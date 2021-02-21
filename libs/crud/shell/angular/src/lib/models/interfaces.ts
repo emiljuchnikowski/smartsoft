@@ -13,6 +13,7 @@ export interface ICrudFilterQueryItem extends IModelFilter {
     key: string;
     value: any;
     type: '=' | '!=' | '>=' | '<=' | '<' | '>';
+    hidden?: boolean;
 }
 
 export interface ICrudCreateManyOptions {

@@ -15,7 +15,7 @@ import {
   IPageOptions, MenuService,
 } from "@smartsoft001/angular";
 import { IEntity } from "@smartsoft001/domain-core";
-import {getModelFieldsWithOptions, IFieldListMetadata} from "@smartsoft001/models";
+import {getModelFieldsWithOptions, getModelOptions, IFieldListMetadata} from "@smartsoft001/models";
 
 import { CrudFacade } from "../../+state/crud.facade";
 import {CrudConfig, CrudFullConfig} from "../../crud.config";
@@ -257,9 +257,10 @@ export class ListComponent<T extends IEntity<string>>
 
   private getEndButtons(): Array<IIconButtonOptions> {
     const fieldsWithOptions = getModelFieldsWithOptions(new this.config.type());
+    const modelOptions = getModelOptions(this.config.type);
 
     const showFilters =
-        fieldsWithOptions.some(x => (x.options?.list as IFieldListMetadata)?.filter);
+        fieldsWithOptions.some(x => (x.options?.list as IFieldListMetadata)?.filter) || modelOptions?.filters?.length;
 
     return [
       ...(showFilters

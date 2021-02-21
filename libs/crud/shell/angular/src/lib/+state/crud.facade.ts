@@ -1,13 +1,16 @@
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
+import { map, tap } from "rxjs/operators";
+import * as _ from "lodash";
+
+import { IEntity } from "@smartsoft001/domain-core";
 
 import { CrudConfig } from "../crud.config";
 import * as CrudActions from "./crud.actions";
 import * as CrudSelectors from "./crud.selectors";
-import { IEntity } from "@smartsoft001/domain-core";
 import {ICrudCreateManyOptions, ICrudFilter} from "../models/interfaces";
-import { map, tap } from "rxjs/operators";
+
 
 @Injectable()
 export class CrudFacade<T extends IEntity<string>> {
@@ -65,7 +68,7 @@ export class CrudFacade<T extends IEntity<string>> {
 
     const fullFilter = {
       ...(filter ? filter : {}),
-      query: filter && filter.query ? [...baseQuery, ...filter.query] : baseQuery
+      query: filter && filter.query ? filter.query : baseQuery
     };
 
     this.store.dispatch(CrudActions.read(this.config.entity, fullFilter));

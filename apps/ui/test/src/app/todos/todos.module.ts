@@ -27,6 +27,9 @@ import {environment} from "../../environments/environment";
         title: 'Zadania',
         entity: "todos",
         apiUrl: environment.apiUrl + "cards",
+        baseQuery: [
+          { key: 'data.type', type: '!=', value: 'cards', hidden: true }
+        ],
         details: true,
         edit: true,
         add: true,

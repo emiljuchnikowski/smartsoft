@@ -42,7 +42,7 @@ export class Todo implements IEntity<string> {
         create: modifyMetdata,
         update: modifyMetdata,
         details: true,
-        list: { order: 1, filter: true }
+        list: { order: 1 }
     })
     number: string;
 
