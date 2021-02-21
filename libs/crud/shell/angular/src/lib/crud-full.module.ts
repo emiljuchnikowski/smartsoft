@@ -60,10 +60,7 @@ const COMPONENTS = [
         CommonModule
     ],
     exports: [
-        ItemComponent,
-        ListComponent,
-        ExportComponent,
-        CrudPipesModule
+        ...COMPONENTS
     ],
     providers: [CrudService, CrudEffects, CrudFacade, SocketService]
 })
