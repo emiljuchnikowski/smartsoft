@@ -18,7 +18,7 @@ export class ListCellPipe<T> implements PipeTransform {
         if (!pipe) result = obj[key];
         else result = pipe.transform(obj, key);
 
-        if (!(typeof result === 'string')) return result;
+        if (!(typeof result === 'string') || !result) return result;
 
         return this.translateService.instant(result);
     }
