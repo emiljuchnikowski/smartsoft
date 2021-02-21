@@ -1,6 +1,6 @@
 import {
   ComponentFactoryResolver,
-  Injectable,
+  Injectable, Injector,
   Provider, ReflectiveInjector,
   ViewContainerRef,
 } from "@angular/core";
@@ -24,18 +24,14 @@ export class MenuService {
   }
 
   async openEnd(options: {
-    component: any;
-    providers?: Provider[];
+    component: any,
+    injector: Injector,
   }): Promise<void> {
-    let injector = null;
-
-    if (options.providers) {
-      injector = ReflectiveInjector.resolveAndCreate(options.providers);
-    }
+    const resolver = options.injector.get(ComponentFactoryResolver);
 
     this._endContainer.clear();
-    const factory = this.resolver.resolveComponentFactory(options.component);
-    this._endContainer.createComponent(factory, 0, injector);
+    const factory = resolver.resolveComponentFactory(options.component);
+    this._endContainer.createComponent(factory, 0, options.injector);
 
     await this.menuCtrl.enable(true, "end");
     await this.menuCtrl.open("end");

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import RevolutCheckout from "@revolut/checkout";
 
 import {MenuService} from "@smartsoft001/angular";
@@ -17,7 +17,7 @@ export class TestMenuComponent {
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private readonly menuService: MenuService) { }
+  constructor(private readonly menuService: MenuService, private injector: Injector) { }
 
   ngOnInit() {
     // RevolutCheckout("50f5e610-c133-49df-8bec-bb87b471e32d", "sandbox").then((RC) => {
@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
 
   async onOpenMenu(): Promise<void> {
     await this.menuService.openEnd({
-      component: TestMenuComponent
+      component: TestMenuComponent,
+      injector: this.injector
     })
   }
 }

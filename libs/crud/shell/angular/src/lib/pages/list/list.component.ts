@@ -270,17 +270,8 @@ export class ListComponent<T extends IEntity<string>>
 
 
                 await this.menuService.openEnd({
-                  component: FiltersComponent,
-                  providers: [
-                    {
-                      provide: CrudConfig,
-                      useValue: this.config
-                    },
-                    {
-                      provide: CrudFacade,
-                      useValue: this.facade
-                    }
-                  ]
+                  injector: this.injector,
+                  component: FiltersComponent
                 })
               }
             }
