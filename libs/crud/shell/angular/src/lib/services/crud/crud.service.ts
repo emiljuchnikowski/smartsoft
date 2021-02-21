@@ -12,15 +12,15 @@ import { SocketService } from "../socket/socket.service";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
-  private _formatMap = {
+  protected _formatMap = {
     csv: "text/csv",
     xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   };
 
   constructor(
-    private config: CrudConfig<T>,
-    private http: HttpClient,
-    private socket: SocketService<T>
+    protected config: CrudConfig<T>,
+    protected http: HttpClient,
+    protected socket: SocketService<T>
   ) {}
 
   changes(criteria: { id?: string } = {}): Observable<ItemChangedData> {
@@ -70,29 +70,29 @@ export class CrudService<T extends IEntity<string>> {
     }
 
     if (format === "xlsx") {
-        return this.http
-            .get(this.config.apiUrl + this.getQuery(filter), {
-                headers: {
-                    "Content-Type": this._formatMap[format],
-                },
-                observe: 'response',
-                reportProgress: false,
-                responseType: 'blob'
-            })
-            .pipe(
-                map((res) => {
-                    const downloadLink = document.createElement("a");
-                    const blob = res.body;
+      return this.http
+        .get(this.config.apiUrl + this.getQuery(filter), {
+          headers: {
+            "Content-Type": this._formatMap[format],
+          },
+          observe: "response",
+          reportProgress: false,
+          responseType: "blob",
+        })
+        .pipe(
+          map((res) => {
+            const downloadLink = document.createElement("a");
+            const blob = res.body;
 
-                    const url = URL.createObjectURL(blob);
-                    downloadLink.href = url;
-                    downloadLink.download = "data." + format;
+            const url = URL.createObjectURL(blob);
+            downloadLink.href = url;
+            downloadLink.download = "data." + format;
 
-                    document.body.appendChild(downloadLink);
-                    downloadLink.click();
-                    document.body.removeChild(downloadLink);
-                })
-            );
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+          })
+        );
     }
 
     return this.http
@@ -130,7 +130,7 @@ export class CrudService<T extends IEntity<string>> {
     return this.http.delete<void>(this.config.apiUrl + "/" + id);
   }
 
-  private getQuery(filter: ICrudFilter): string {
+  protected getQuery(filter: ICrudFilter): string {
     let query = "";
 
     if (filter && filter.searchText) {
