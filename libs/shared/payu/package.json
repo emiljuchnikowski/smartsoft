@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/payu",
-  "version": "1.0.154",
+  "version": "1.0.155",
   "description": "This library was generated with [Nx](https://nx.dev).",
   "main": "src/index.ts",
   "repository": {
