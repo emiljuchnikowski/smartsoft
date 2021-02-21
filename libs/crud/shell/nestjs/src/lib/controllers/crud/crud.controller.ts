@@ -28,7 +28,7 @@ import { CreateManyMode } from "@smartsoft001/crud-domain";
 
 @Controller("")
 export class CrudController<T extends IEntity<string>> {
-  constructor(private readonly service: CrudService<T>) {}
+  constructor(protected readonly service: CrudService<T>) {}
 
   static getLink(req: Request): string {
     return req.protocol + "://" + req.headers.host + req.url;
@@ -143,7 +143,7 @@ export class CrudController<T extends IEntity<string>> {
     await this.service.delete(params.id, user);
   }
 
-  private getQueryObject(queryObject: any): { criteria; options; links } {
+  protected getQueryObject(queryObject: any): { criteria; options; links } {
     let customCriteria = {} as any;
     let q = "";
 
