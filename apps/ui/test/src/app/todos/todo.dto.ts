@@ -58,6 +58,35 @@ export class Todo implements IEntity<string> {
         create: modifyMetdata,
         update: modifyMetdata,
         details: true,
+        list: { order: 2 },
+        type: FieldType.check,
+        possibilities: [
+            {
+                id: 1, text: 'Test 1'
+            },
+            {
+                id: 2, text: 'Test 2'
+            },
+            {
+                id: 3, text: 'Test 3'
+            },
+            {
+                id: 4, text: 'Test 4'
+            },
+            {
+                id: 5, text: 'Test 5'
+            },
+            {
+                id: 6, text: 'Test 6'
+            }
+        ]
+    })
+    tags: Array<string>;
+
+    @Field({
+        create: modifyMetdata,
+        update: modifyMetdata,
+        details: true,
         list: { order: 3 }
     })
     done: string;

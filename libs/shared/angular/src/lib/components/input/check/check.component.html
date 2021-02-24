@@ -1,12 +1,40 @@
 <ng-container *ngIf="control">
-    <ion-item-group [formControl]="control" [attr.autofocus]="fieldOptions?.focused">
-        <ion-list-header>
-            {{ translateKey | translate }}
-        </ion-list-header>
+  <ng-container *ngIf="possibilities?.length <= 5; else multiSelectTpl">
+    <ion-item-group
+      [formControl]="control"
+      [attr.autofocus]="fieldOptions?.focused"
+    >
+      <ion-list-header>
+        {{ translateKey | translate }}
+      </ion-list-header>
 
-        <ion-item *ngFor="let item of possibilities">
-            <ion-label>{{ item.text | translate }}</ion-label>
-            <ion-checkbox [checked]="item.checked" (ionChange)="refresh(item)"></ion-checkbox>
-        </ion-item>
+      <ion-item *ngFor="let item of possibilities">
+        <ion-label>{{ item.text | translate }}</ion-label>
+        <ion-checkbox
+          [checked]="item.checked"
+          (ionChange)="refresh(item)"
+        ></ion-checkbox>
+      </ion-item>
     </ion-item-group>
+  </ng-container>
+
+  <ng-template #multiSelectTpl>
+    <ion-item>
+      <ion-label>{{ translateKey | translate }}</ion-label>
+      <ion-select
+        [formControl]="control"
+        multiple
+        [attr.autofocus]="fieldOptions?.focused"
+        [cancelText]="'cancel' | translate"
+        [okText]="'ok' | translate"
+      >
+        <ion-select-option
+          *ngFor="let item of possibilities"
+          [value]="item.id"
+        >
+          {{ item.text | translate }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ng-template>
 </ng-container>
