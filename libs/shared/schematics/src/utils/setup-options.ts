@@ -1,14 +1,15 @@
-import { getWorkspace } from '@schematics/angular/utility/config';
+
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { normalize } from '@angular-devkit/core';
 import {buildDefaultPath, getProject} from "schematics-utilities";
+import {getWorkspace} from "@schematics/angular/utility/workspace";
 
-export function setupOptions(tree: Tree, options: any): Tree {
-    const workspace = getWorkspace(tree);
+export async function setupOptions(tree: Tree, options: any): Promise<Tree> {
+    const workspace = await getWorkspace(tree);
 
     if (!options.project) {
-        options.project = Object.keys(workspace.projects)[0];
+        options.project = Object.keys(workspace)[0];
     }
 
     if (!options.project) {
