@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { IonicModule } from "@ionic/angular";
 import { TranslateModule } from "@ngx-translate/core";
 import { CookieModule, TransferHttpModule } from "@gorniv/ngx-universal";
-import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
+import { FingerprintAIO } from "@ionic-native/fingerprint-aio/ngx";
 
 import { ToastService } from "./toast/toast.service";
 import { ErrorService } from "./error/error.service";
@@ -14,6 +14,7 @@ import { StorageService } from "./storage/storage.service";
 import { StyleService } from "./style/style.service";
 import { AuthService } from "./auth/auth.service";
 import { FingerprintService } from "./fingerprint/fingerprint.service";
+import { CameraService } from "./camera/camera.service";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { FingerprintService } from "./fingerprint/fingerprint.service";
     StyleService,
     AuthService,
     FingerprintService,
-    FingerprintAIO
+    FingerprintAIO,
+    CameraService,
   ],
 })
 export class SharedServicesModule {}
