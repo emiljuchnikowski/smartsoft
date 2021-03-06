@@ -4,6 +4,8 @@ export interface ITransInternalService<T> {
     create(trans: Trans<T>): Promise<any>;
 
     refresh(trans: Trans<any>): Promise<any>;
+
+    refund(trans: Trans<any>): Promise<any>;
 }
 
 export interface ITransPaymentService {
@@ -25,4 +27,6 @@ export interface ITransPaymentSingleService {
     }): Promise<{ orderId: string, redirectUrl?: string, responseData?: any }>;
 
     getStatus<T>(trans: Trans<T>): Promise<{ status: TransStatus, data: any }>;
+
+    refund(trans: Trans<any>): Promise<any>;
 }

@@ -75,6 +75,7 @@ export type TransStatus =
   | "started"
   | "completed"
   | "canceled"
-  | "pending";
+  | "pending"
+  | "refund";
 
 export const TRANS_SYSTEMS = ["payu", "paypal", "revolut"];
