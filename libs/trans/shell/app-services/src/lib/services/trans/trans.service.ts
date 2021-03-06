@@ -10,7 +10,7 @@ import {
   CreatorService,
   RefresherService,
   ITransPaymentSingleService,
-  ITransInternalService,
+  ITransInternalService, RefundService,
 } from "@smartsoft001/trans-domain";
 import { PayuService } from "@smartsoft001/payu";
 import { PaypalService } from "@smartsoft001/paypal";
@@ -48,6 +48,7 @@ export class TransService {
     private moduleRef: ModuleRef,
     private creatorService: CreatorService<any>,
     private refresherService: RefresherService<any>,
+    private refundService: RefundService<any>,
     private httpService: HttpService,
     private config: TransConfig,
     @InjectRepository(Trans) private repository: Repository<Trans<any>>,
@@ -70,6 +71,15 @@ export class TransService {
       this.getInternalService(),
       this._paymentService,
       data
+    );
+  }
+
+  async refund(transId: string, comment = "Refund"): Promise<void> {
+    await this.refundService.refund(
+        transId,
+        this.getInternalService(),
+        this._paymentService,
+        comment
     );
   }
 
