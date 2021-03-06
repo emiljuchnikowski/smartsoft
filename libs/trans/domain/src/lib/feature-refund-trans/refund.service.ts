@@ -20,11 +20,9 @@ export class RefundService<T> extends TransBaseService<T> {
         paymentService: ITransPaymentService,
         comment = "Refund"
     ) : Promise<void> {
-
-        // hack : bad map id
         const trans: Trans<any> = await this.repository
             .findOne({
-                externalId: transId
+                id: transId
             });
 
         if (!trans) {
