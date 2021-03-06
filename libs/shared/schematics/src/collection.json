@@ -15,6 +15,11 @@
       "factory": "./src/ng-g/library",
       "schema": "./src/ng-g/library/schema.json",
       "description": "Add library"
+    },
+    "domain": {
+      "factory": "./src/ng-g/domain",
+      "schema": "./src/ng-g/domain/schema.json",
+      "description": "Add domain"
     }
   }
 }

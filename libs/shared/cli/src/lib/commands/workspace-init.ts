@@ -8,7 +8,7 @@ function runInstallDeps(target) {
     const devDeps = [
         '@smartsoft001/core',
     ];
-    const installDevDeps = `npm i ${devDeps.join(' ')} --save`;
+    const installDevDeps = `npm i ${devDeps.join(' ')} --save --force`;
     runCommand(installDevDeps, target);
 }
 
@@ -38,7 +38,7 @@ function runInstallDevDeps(target) {
         'mock-local-storage',
         'schematics-utilities'
     ];
-    const installDevDeps = `npm i ${devDeps.join(' ')} -D`;
+    const installDevDeps = `npm i ${devDeps.join(' ')} -D --force`;
     runCommand(installDevDeps, target);
 }
 

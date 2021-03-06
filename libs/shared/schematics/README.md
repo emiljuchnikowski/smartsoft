@@ -37,3 +37,15 @@ Parameters:
         </td>
     </tr>
 </table>
+
+### Generate domain
+
+`ng g library [name]`
+
+Parameters:
+<table>
+    <tr>
+        <td>name</td>
+        <td>Domain name</td>
+    </tr>
+</table>

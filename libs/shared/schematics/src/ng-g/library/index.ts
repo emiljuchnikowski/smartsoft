@@ -28,8 +28,9 @@ export default function (options: Schema): Rule {
             move(projectPath),
         ]);
 
-        const removeModule = (t: Tree) => {
-            t.delete(projectPath + `/src/lib/shared-${projectName}.module.ts`)
+        const removeFiles = (t: Tree) => {
+            t.delete(projectPath + `/src/lib/shared-${projectName}.module.ts`);
+            t.delete(projectPath + `/README.md`);
         }
 
         if (options.type === "angular")
@@ -41,8 +42,8 @@ export default function (options: Schema): Rule {
                     unitTestRunner: "jest",
                     linter: "tslint"
                 }),
-                mergeWith(templateSource, MergeStrategy.Overwrite),
-                removeModule
+                removeFiles,
+                mergeWith(templateSource, MergeStrategy.Overwrite)
             ])(tree, context);
         else
             return chain([
@@ -54,8 +55,8 @@ export default function (options: Schema): Rule {
                     linter: "eslint",
                     testEnvironment: "node"
                 }),
+                removeFiles,
                 mergeWith(templateSource, MergeStrategy.Overwrite),
-                removeModule
             ])(tree, context);
     };
 }

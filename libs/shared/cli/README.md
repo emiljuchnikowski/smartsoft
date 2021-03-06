@@ -51,3 +51,19 @@ Parameters:
         </td>
     </tr>
 </table>
+
+### Generate domain
+
+`smart generate domain`
+
+alias:
+
+`smart g domain [name]`
+
+Parameters:
+<table>
+    <tr>
+        <td>name</td>
+        <td>Domain name</td>
+    </tr>
+</table>
