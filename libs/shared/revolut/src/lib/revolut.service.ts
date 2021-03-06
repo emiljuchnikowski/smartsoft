@@ -82,6 +82,10 @@ export class RevolutService implements ITransPaymentSingleService {
     };
   }
 
+  refund(trans: Trans<any>, comment: string): Promise<any> {
+    return Promise.reject('Revolut not support');
+  }
+
   private getBaseUrl(config: RevolutConfig): string {
     if (config.test) return "https://sandbox-merchant.revolut.com";
 

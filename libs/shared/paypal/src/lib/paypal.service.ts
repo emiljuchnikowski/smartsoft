@@ -117,14 +117,7 @@ export class PaypalService implements ITransPaymentSingleService {
   async getStatus<T>(
     trans: Trans<T>
   ): Promise<{ status: TransStatus; data: any }> {
-    const historyItem = trans.history.find((x) => x.status === "started");
-
-    if (!historyItem) {
-      console.warn("Transaction without start status");
-      return null;
-    }
-
-    const orderId = historyItem.data.orderId;
+    const orderId = this.getOrderId(trans);
     const config = await this.getConfig(trans.data);
 
     const payment: { state } = await new Promise((res, rej) => {
@@ -141,6 +134,37 @@ export class PaypalService implements ITransPaymentSingleService {
       status: this.getStatusFromExternal(payment.state),
       data: payment,
     };
+  }
+
+  async refund(trans: Trans<any>, comment: string): Promise<any> {
+    const orderId = this.getOrderId(trans);
+    const config = await this.getConfig(trans.data);
+
+    const payment: { state } = await new Promise((res, rej) => {
+      paypal.refund.get(orderId, this.getEnv(config), (error, result) => {
+        if (error) {
+          rej(error);
+        } else {
+          res(result);
+        }
+      });
+    });
+
+    return {
+      status: this.getStatusFromExternal(payment.state),
+      data: payment,
+    };
+  }
+
+  private getOrderId(trans: Trans<any>): string {
+    const historyItem = trans.history.find((x) => x.status === "started");
+
+    if (!historyItem) {
+      console.warn("Transaction without start status");
+      return null;
+    }
+
+    return  historyItem.data.orderId;
   }
 
   private getStatusFromExternal(status: string): any {

@@ -36,7 +36,7 @@ export class RefundService<T> extends TransBaseService<T> {
         }
 
         try {
-            const data = await paymentService[trans.system].refund(trans);
+            const data = await paymentService[trans.system].refund(trans, comment);
 
             trans.modifyDate = new Date();
             trans.status = "refund";
@@ -44,12 +44,6 @@ export class RefundService<T> extends TransBaseService<T> {
                 comment
             };
             this.addHistory(trans, data);
-
-            const internalRes = await internalService.refund(trans);
-
-            if (!internalRes) return;
-
-            this.addHistory(trans, internalRes);
 
             await this.repository.save(trans);
         } catch (err) {
