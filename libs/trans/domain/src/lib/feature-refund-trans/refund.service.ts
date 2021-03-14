@@ -22,15 +22,15 @@ export class RefundService<T> extends TransBaseService<T> {
     ) : Promise<void> {
         const trans: Trans<any> = await this.repository
             .findOne({
-                id: transId
-            });
+                _id: transId
+            } as any);
 
         if (!trans) {
             throw new NotFoundException("Transaction not found: " + transId);
         }
 
         if (trans.status !== "completed") {
-            throw new NotFoundException("Transaction is not completed: " + transId);
+            throw new NotFoundException("Transaction is not completed/error: " + transId);
         }
 
         try {

@@ -136,24 +136,34 @@ export class PaypalService implements ITransPaymentSingleService {
     };
   }
 
-  async refund(trans: Trans<any>, comment: string): Promise<any> {
-    const orderId = this.getOrderId(trans);
-    const config = await this.getConfig(trans.data);
+  refund(trans: Trans<any>, comment: string): Promise<any> {
+    return Promise.reject('Revolut not support');
 
-    const payment: { state } = await new Promise((res, rej) => {
-      paypal.refund.get(orderId, this.getEnv(config), (error, result) => {
-        if (error) {
-          rej(error);
-        } else {
-          res(result);
-        }
-      });
-    });
-
-    return {
-      status: this.getStatusFromExternal(payment.state),
-      data: payment,
-    };
+    // const orderId = this.getOrderId(trans);
+    // const config = await this.getConfig(trans.data);
+    //
+    // const token = await new Promise((res, rej) => {
+    //   paypal.generateToken(this.getEnv(config), (error, result) => {
+    //     if (error) {
+    //       rej(error);
+    //     } else {
+    //       res(result);
+    //     }
+    //   });
+    // });
+    //
+    // const { data } = await this.httpService.post(
+    //     `${ this.getApiUrl(config) }v1/payments/sale/${ this.getTransactionId(trans) }/refund`, {},
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: token,
+    //         "X-Requested-With": "XMLHttpRequest",
+    //       },
+    //       maxRedirects: 0,
+    //     }).toPromise();
+    //
+    // return data;
   }
 
   private getOrderId(trans: Trans<any>): string {
@@ -203,5 +213,23 @@ export class PaypalService implements ITransPaymentSingleService {
       client_id: config.clientId,
       client_secret: config.clientSecret,
     };
+  }
+
+  private getApiUrl(config: PaypalConfig): string {
+    return config.test ? 'https://api-m.sandbox.paypal.com/' : 'https://api-m.paypal.com/';
+  }
+
+  private getTransactionId(trans: Trans<any>): string {
+    const historyItem = trans.history.find((i) =>
+        i.status === "completed"
+        && i.data && i.data.customData
+        && i.data.customData.transactions
+        && i.data.customData.transactions.length
+        && i.data.customData.transactions[0].related_resources
+        && i.data.customData.transactions[0].related_resources.length
+        && i.data.customData.transactions[0].related_resources[0].sale
+    );
+
+    return historyItem ? historyItem.data.customData.transactions[0].related_resources[0].sale.id : null;
   }
 }
