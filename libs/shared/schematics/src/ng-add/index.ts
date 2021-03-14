@@ -13,20 +13,20 @@ import { addModuleImportToRootModule, addPackageJsonDependency, getAppModulePath
 
 import {Schema} from "./schema";
 import {strings} from "@angular-devkit/core";
+import {logRule} from "../utils";
 
 function addPackageJsonDependencies(options: Schema): Rule {
     return (host: Tree, context: SchematicContext) => {
         const dependencies: NodeDependency[] = [
             {
                 type: NodeDependencyType.Default,
-                version: '^1.0.1',
+                version: '^1.0.23',
                 name: '@smartsoft001/core',
             },
         ];
 
         dependencies.forEach((dependency) => {
             addPackageJsonDependency(host, dependency);
-            context.logger.log('info', `✅️ Added "${dependency.name}" into ${dependency.type}`);
         });
 
         return host;
@@ -35,6 +35,7 @@ function addPackageJsonDependencies(options: Schema): Rule {
 
 export function smartNgAdd(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
+        // tslint:disable-next-line:no-non-null-assertion
         const sourceText = tree.read('package.json')!.toString();
         const json = JSON.parse(sourceText);
 
@@ -50,23 +51,29 @@ export function smartNgAdd(options: Schema): Rule {
 
         return chain([
             addPackageJsonDependencies(options),
+            logRule('Add packages'),
             externalSchematic('@smartsoft001/schematics', 'library', {
                 name: "angular",
                 type: "angular"
             }),
+            logRule('Add angular library'),
             externalSchematic('@smartsoft001/schematics', 'library', {
                 name: "models",
                 type: "default"
             }),
+            logRule('Add models library'),
             externalSchematic('@smartsoft001/schematics', 'library', {
                 name: "nestjs",
                 type: "default"
             }),
+            logRule('Add models nestjs'),
             externalSchematic('@smartsoft001/schematics', 'library', {
                 name: "services",
                 type: "default"
             }),
+            logRule('Add services library'),
             mergeWith(templateSource, MergeStrategy.Overwrite),
+            logRule('Add base files'),
         ])(tree, context);
     };
 }

@@ -16,22 +16,10 @@ function runInstallDevDeps(target) {
     log('Install dev dependencies');
     const devDeps = [
         '@smartsoft001/schematics',
-        '@nrwl/angular',
         '@ionic/angular-toolkit',
-        '@nestjs/schematics',
-        '@nestjs/testing',
         '@ngneat/spectator',
         '@ngrx/schematics',
         '@ngrx/store-devtools',
-        '@nrwl/cypress',
-        '@nrwl/jest',
-        '@nrwl/nest',
-        '@nrwl/node',
-        '@nrwl/storybook',
-        '@storybook/addon-knobs',
-        '@storybook/addon-viewport',
-        '@storybook/angular',
-        '@storybook/client-api',
         'ng-mocks',
         'jest-junit',
         'jest-preset-angular',
@@ -47,6 +35,15 @@ function runSetNgConfig(target) {
     runCommand("ng analytics project off", target);
     runCommand("ng config cli.defaultCollection @smartsoft001/schematics", target);
     runCommand("ng add @smartsoft001/schematics", target);
+}
+
+function runNgAdd(target) {
+    log('NG add');
+    const plugins = ['@nrwl/angular', '@nrwl/node', '@nrwl/nest', '@nrwl/cypress', '@nrwl/storybook', '@nrwl/jest'];
+
+    plugins.forEach(plugin => {
+        runCommand("ng add " + plugin, target);
+    })
 }
 
 function createNxWorkspace(name: string) {
@@ -70,6 +67,8 @@ export async function workspaceInit({ name }: {
     }
 
     createNxWorkspace(name);
+
+    runNgAdd(target);
 
     runInstallDeps(target);
 
