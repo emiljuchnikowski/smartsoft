@@ -9,6 +9,8 @@ execSync("copyfiles --all libs/shared/schematics/src/**/files/**/* dist", { cwd,
 (async () => {
     await new Promise(res => {
         fse.copySync("libs/shared/schematics/src/ng-add/files", "dist/libs/shared/schematics/src/ng-add/files");
+        fse.copySync("libs/shared/schematics/src/ng-g/domain/files", "dist/libs/shared/schematics/src/ng-g/domain/files");
+        fse.copySync("libs/shared/schematics/src/ng-g/library/files", "dist/libs/shared/schematics/src/ng-g/library/files");
         res();
     });
 })()
