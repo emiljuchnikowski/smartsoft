@@ -5,7 +5,7 @@ import {
     noop,
     Rule,
     SchematicContext,
-    SchematicsException, template,
+    SchematicsException, applyTemplates,
     Tree, url
 } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
@@ -42,7 +42,7 @@ export function smartNgAdd(options: Schema): Rule {
         const projectName = json.name;
 
         const templateSource = apply(url('./files'), [
-            template({
+            applyTemplates({
                 ...strings,
                 projectName
             }),

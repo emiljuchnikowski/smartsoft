@@ -1882,6 +1882,18 @@
             ],
             "parallel": false
           }
+        },
+        "dev": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npm version patch --prefix libs/shared/schematics",
+              "nx run shared-schematics:build --with-deps",
+              "node libs/shared/schematics/prepare.js",
+              "node libs/shared/schematics/dev.js"
+            ],
+            "parallel": false
+          }
         }
       }
     },

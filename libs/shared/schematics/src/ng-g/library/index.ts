@@ -9,7 +9,7 @@ import {
     SchematicContext,
     Tree,
     url,
-    template
+    applyTemplates
 } from '@angular-devkit/schematics';
 import { normalize, strings } from '@angular-devkit/core';
 
@@ -21,7 +21,7 @@ export default function (options: Schema): Rule {
         const projectPath = `libs/shared/${projectName}`;
 
         const templateSource = apply(url('./files/base'), [
-            template({
+            applyTemplates({
                 ...strings,
                 projectName
             }),

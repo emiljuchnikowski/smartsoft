@@ -7,7 +7,7 @@ import {
     SchematicContext,
     Tree,
     url,
-    template, mergeWith, MergeStrategy
+    applyTemplates, mergeWith, MergeStrategy
 } from '@angular-devkit/schematics';
 import { strings } from '@angular-devkit/core';
 
@@ -20,7 +20,7 @@ export default function (options: Schema): Rule {
         const projectPath = `libs/${domainNamePluralize}`;
 
         const templateSource = apply(url('./files'), [
-            template({
+            applyTemplates({
                 ...strings,
                 domainName
             }),
