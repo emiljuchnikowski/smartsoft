@@ -23,7 +23,9 @@ export default function (options: Schema): Rule {
         const templateSource = apply(url('./files'), [
             applyTemplates({
                 ...strings,
-                domainName
+                domainName,
+                domainNamePluralize,
+                projectName: PackageService.getProjectName(tree)
             }),
             move(projectPath),
         ]);

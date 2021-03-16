@@ -1,0 +1,82 @@
+import { NgModule } from "@angular/core";
+import { CrudModule } from "@smartsoft001/crud-shell-angular";
+import { ReducerManager } from "@ngrx/store";
+
+import { environment } from "@<%= dasherize(projectName) %>/shared/angular";
+import { <%= classify(domainName) %> } from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/domain";
+import { SharedModule } from "@<%= dasherize(projectName) %>/shared/angular";
+
+import { <%= classify(domainNamePluralize) %>Facade } from "./+state/<%= dasherize(domainNamePluralize) %>.facade";
+import { SERVICES } from "./services";
+import { getReducer } from "./+state/cards.reducer";
+import { DetailsBottomComponent } from "./components/details-bottom/details-bottom.component";
+import { DetailsTopComponent } from "./components/details-top/details-top.component";
+import { ListTopComponent } from "./components/list-top/list-top.component";
+import { <%= classify(domainNamePluralize) %>RoutingModule } from "./<%= dasherize(domainNamePluralize) %>-routing.module";
+import { PAGES } from "./pages";
+import {ComponentsModule} from "./components/components.module";
+
+@NgModule({
+  imports: [ SharedModule, ComponentsModule ],
+  declarations: [
+    DetailsBottomComponent,
+    DetailsTopComponent,
+    ListTopComponent
+  ],
+})
+export class FakeModule {}
+
+@NgModule({
+  declarations: [...PAGES],
+  providers: [...SERVICES, <%= classify(domainNamePluralize) %>Facade],
+  imports: [
+    SharedModule,
+    ComponentsModule,
+    <%= classify(domainNamePluralize) %>RoutingModule,
+    CrudModule.forFeature({
+      routing: true,
+      config: {
+        type: <%= classify(domainName) %>,
+        title: "<%= classify(domainNamePluralize) %>",
+        entity: "<%= dasherize(domainNamePluralize) %>",
+        apiUrl: environment.apiUrl + "<%= dasherize(domainNamePluralize) %>",
+        export: true,
+        search: true,
+        details: {
+          components: {
+            bottom: DetailsBottomComponent,
+            top: DetailsTopComponent,
+          },
+        },
+        pagination: { limit: 25 },
+        buttons: [
+          //{
+          //  icon: "cloud-upload-outline",
+          //  type: "popover",
+          //  component: TestComponent,
+          //},
+        ],
+        list: {
+          cellPipe: {
+            transform(value: <%= classify(domainName) %>, columnName: string): string {
+              // custom format ...
+              return value[columnName];
+            },
+          },
+          components: {
+            top: ListTopComponent,
+          }
+        },
+        //sort: {
+        //  default: "createDate",
+        //  defaultDesc: true,
+        //},
+      },
+    }),
+  ],
+})
+export class <%= classify(domainNamePluralize) %>Module {
+  constructor(reducerManager: ReducerManager) {
+    reducerManager.addReducer("<%= dasherize(domainNamePluralize) %>", getReducer());
+  }
+}

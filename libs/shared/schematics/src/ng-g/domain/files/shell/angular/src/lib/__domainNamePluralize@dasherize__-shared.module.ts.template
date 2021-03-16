@@ -1,0 +1,24 @@
+import {NgModule} from "@angular/core";
+import {RouterModule} from "@angular/router";
+
+import {SharedModule} from "@<%= dasherize(projectName) %>/shared/angular";
+
+// import {SharedComponent} from "./components/shared/shared.component";
+
+const COMPONENTS = [
+//    SharedComponent
+]
+
+@NgModule({
+    declarations: [
+        ...COMPONENTS
+    ],
+    exports: [
+        ...COMPONENTS
+    ],
+    imports: [
+        SharedModule,
+        RouterModule
+    ]
+})
+export class <%= classify(domainNamePluralize) %>SharedModule { }

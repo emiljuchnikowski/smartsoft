@@ -39,7 +39,16 @@ function runSetNgConfig(target) {
 
 function runNgAdd(target) {
     log('NG add');
-    const plugins = ['@nrwl/angular', '@nrwl/node', '@nrwl/nest', '@nrwl/cypress', '@nrwl/storybook', '@nrwl/jest'];
+    const plugins = [
+        '@nrwl/angular',
+        '@nrwl/node',
+        '@nrwl/nest',
+        '@nrwl/cypress',
+        '@nrwl/storybook',
+        '@nrwl/jest',
+        '@angular/material',
+        '@angular/cdk'
+    ];
 
     plugins.forEach(plugin => {
         runCommand("ng add " + plugin, target);

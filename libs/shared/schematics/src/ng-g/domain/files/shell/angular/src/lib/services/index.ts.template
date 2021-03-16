@@ -1,0 +1,11 @@
+import {CrudService} from "@smartsoft001/crud-shell-angular";
+
+import {<%= classify(domainNamePluralize) %>Service} from "./<%= dasherize(domainNamePluralize) %>/<%= dasherize(domainNamePluralize) %>.service";
+
+export const SERVICES = [
+    <%= classify(domainNamePluralize) %>Service,
+    {
+        provide: CrudService,
+        useClass: <%= classify(domainNamePluralize) %>Service
+    }
+];

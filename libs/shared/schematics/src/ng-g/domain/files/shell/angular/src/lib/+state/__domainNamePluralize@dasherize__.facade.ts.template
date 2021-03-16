@@ -1,0 +1,28 @@
+import { CrudConfig, CrudFacade } from "@smartsoft001/crud-shell-angular";
+import { ReduxAction, ReduxSelect } from "@smartsoft001/angular";
+import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
+
+import { <%= classify(domainName) %> } from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/domain";
+
+// import { <%= classify(domainNamePluralize) %>Service } from "../services/<%= dasherize(domainNamePluralize) %>/<%= dasherize(domainNamePluralize) %>.service";
+
+@Injectable()
+export class <%= classify(domainNamePluralize) %>Facade extends CrudFacade<<%= classify(domainName) %>> {
+  // @ReduxSelect(getTest)
+  // selectedTest$: Observable<Test>;
+
+  constructor(
+    store: Store,
+    config: CrudConfig<<%= classify(domainName) %>>,
+    // private service: <%= classify(domainNamePluralize) %>Service
+  ) {
+    super(store, config);
+  }
+
+  // @ReduxAction()
+  // async test(val: Test): Promise<void> {
+  //  await this.service.test(val);
+  //}
+}

@@ -1,0 +1,21 @@
+import { Injectable } from "@angular/core";
+import { CrudConfig, CrudService } from "@smartsoft001/crud-shell-angular";
+import { HttpClient } from "@angular/common/http";
+
+import { <%= classify(domainName) %> } from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/domain";
+
+@Injectable()
+export class <%= classify(domainNamePluralize) %>Service extends CrudService<<%= classify(domainName) %>> {
+  constructor(
+    config: CrudConfig<<%= classify(domainName) %>>,
+    httpClient: HttpClient
+  ) {
+    super(config, httpClient, null);
+  }
+
+  //getTest(): Observable<<%= classify(domainName) %>[]> {
+  //  return this.httpClient
+  //    .get<{ data: <%= classify(domainName) %>[] }>(environment.apiUrl + "test")
+  //    .pipe(map((r) => r.data));
+  //}
+}
