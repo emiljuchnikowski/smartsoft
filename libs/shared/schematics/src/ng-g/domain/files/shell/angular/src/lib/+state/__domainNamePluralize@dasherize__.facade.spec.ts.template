@@ -1,0 +1,24 @@
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { CrudConfig } from '@smartsoft001/crud-shell-angular';
+import { Store } from "@ngrx/store";
+
+import { <%= classify(domainNamePluralize) %>Facade } from './<%= dasherize(domainNamePluralize) %>.facade';
+
+describe('<%= dasherize(domainNamePluralize) %>-shell-angular: <%= classify(domainNamePluralize) %>Facade', () => {
+  let spectator: SpectatorService<<%= classify(domainNamePluralize) %>Facade>;
+  const createService = createServiceFactory({
+    service: <%= classify(domainNamePluralize) %>Facade,
+    providers: [],
+    entryComponents: [],
+    mocks: [
+        CrudConfig,
+        Store
+    ]
+  });
+
+  beforeEach(() => spectator = createService());
+
+  it('should init', () => {
+    expect(spectator.service).toBeDefined();
+  });
+});

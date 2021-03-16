@@ -1,0 +1,13 @@
+import {
+    createFeatureSelector,
+    //createSelector
+} from "@ngrx/store";
+
+import { State } from "./<%= dasherize(domainNamePluralize) %>.reducer";
+
+export const get<%= classify(domainNamePluralize) %>State = createFeatureSelector<State>("<%= dasherize(domainNamePluralize) %>");
+
+//export const get<%= classify(domainNamePluralize) %>Test = createSelector(
+//  get<%= classify(domainNamePluralize) %>State,
+//  (state) => state.test
+//);

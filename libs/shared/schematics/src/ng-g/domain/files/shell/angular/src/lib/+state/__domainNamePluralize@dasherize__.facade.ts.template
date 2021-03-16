@@ -10,7 +10,7 @@ import { <%= classify(domainName) %> } from "@<%= dasherize(projectName) %>/<%= 
 
 @Injectable()
 export class <%= classify(domainNamePluralize) %>Facade extends CrudFacade<<%= classify(domainName) %>> {
-  // @ReduxSelect(getTest)
+  // @ReduxSelect(get<%= classify(domainNamePluralize) %>Test)
   // selectedTest$: Observable<Test>;
 
   constructor(

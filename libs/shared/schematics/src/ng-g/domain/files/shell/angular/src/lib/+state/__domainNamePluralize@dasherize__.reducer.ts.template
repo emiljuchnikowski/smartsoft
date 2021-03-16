@@ -1,0 +1,33 @@
+import {State as SmartState, initialState as smartInitialState, getReducer as smartGetReducer} from "@smartsoft001/crud-shell-angular";
+import {Action} from "@ngrx/store";
+
+import {<%= classify(domainName) %>} from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/domain";
+
+// import {<%= classify(domainNamePluralize) %>Facade} from "./<%= dasherize(domainNamePluralize) %>.facade";
+
+export interface State extends SmartState<<%= classify(domainName) %>> {
+
+}
+
+export const initialState = {
+    ...smartInitialState,
+};
+
+const <%= dasherize(domainNamePluralize) %>Reducer = (state = initialState, action) => {
+    switch (action.type) {
+        //case <%= classify(domainNamePluralize) %>Facade.name + ' test':
+        //    return {
+        //        ...state,
+        //        loaded: false,
+        //    }
+
+        default:
+            return smartGetReducer('<%= dasherize(domainNamePluralize) %>')(state, action);
+    }
+};
+
+export function getReducer() {
+    return (state, action: Action) => {
+        return <%= dasherize(domainNamePluralize) %>Reducer(state, action);
+    }
+}
