@@ -13,7 +13,7 @@ import { addModuleImportToRootModule, addPackageJsonDependency, getAppModulePath
 
 import {Schema} from "./schema";
 import {strings} from "@angular-devkit/core";
-import {logRule} from "../utils";
+import {logRule, PackageService} from "../utils";
 
 function addPackageJsonDependencies(options: Schema): Rule {
     return (host: Tree, context: SchematicContext) => {
@@ -35,11 +35,7 @@ function addPackageJsonDependencies(options: Schema): Rule {
 
 export function smartNgAdd(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        // tslint:disable-next-line:no-non-null-assertion
-        const sourceText = tree.read('package.json')!.toString();
-        const json = JSON.parse(sourceText);
-
-        const projectName = json.name;
+        const projectName = PackageService.getProjectName(tree);
 
         const templateSource = apply(url('./files'), [
             applyTemplates({

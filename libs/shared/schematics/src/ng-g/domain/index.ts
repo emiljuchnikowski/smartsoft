@@ -12,6 +12,7 @@ import {
 import { strings } from '@angular-devkit/core';
 
 import {Schema} from "./schema";
+import {PackageService, TsConfigService} from "../../utils";
 
 export default function (options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
@@ -39,6 +40,16 @@ export default function (options: Schema): Rule {
 
             t.delete(projectPath + `/shell/dtos/src/lib/${domainNamePluralize}-shell-dtos.module.ts`);
             t.delete(projectPath + `/shell/dtos/README.md`);
+        }
+
+        const changeTsConfig = (t: Tree) => {
+            const projectName = PackageService.getProjectName(t);
+
+            TsConfigService.setPath(
+                t,
+                `@${projectName}/${domainNamePluralize}/domain/features`,
+                `libs/${domainNamePluralize}/domain/src/features.ts`
+                );
         }
 
         return chain([
@@ -75,6 +86,7 @@ export default function (options: Schema): Rule {
             }),
             clearModules,
             mergeWith(templateSource, MergeStrategy.Overwrite),
+            changeTsConfig
         ])(tree, context);
     };
 }
