@@ -1,0 +1,26 @@
+import { Component, ElementRef, OnInit } from "@angular/core";
+import { AuthService, BaseComponent } from "@smartsoft001/angular";
+
+import {StyleService} from "@<%= dasherize(projectName) %>/shared/angular";
+
+//import { <%= classify(domainNamePluralize) %>Facade } from "../../+state/<%= dasherize(domainNamePluralize) %>.facade";
+
+@Component({
+  selector: "<%= classify(domainName) %>-details-top",
+  templateUrl: "./details-top.component.html",
+  styleUrls: ["./details-top.component.scss"],
+})
+export class DetailsTopComponent extends BaseComponent implements OnInit {
+
+  constructor(
+    //private facade: <%= classify(domainNamePluralize) %>Facade,
+    private elementRef: ElementRef,
+    private styleService: StyleService
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.styleService.init(this.elementRef);
+  }
+}

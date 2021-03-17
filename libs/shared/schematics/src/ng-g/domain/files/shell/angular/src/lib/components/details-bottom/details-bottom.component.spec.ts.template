@@ -1,0 +1,21 @@
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
+
+import { StyleService } from '@<%= dasherize(projectName) %>/shared/angular';
+
+import { DetailsTopComponent } from './details-top.component';
+
+describe('<%= dasherize(domainNamePluralize) %>-shell-angular: DetailsTopComponent', () => {
+  let spectator: Spectator<DetailsTopComponent>;
+  const createComponent = createComponentFactory({
+    component: DetailsTopComponent,
+    mocks: [
+      StyleService
+    ]
+  });
+
+  beforeEach(() => spectator = createComponent());
+
+  it('should init', () => {
+    expect(spectator.component).toBeDefined();
+  });
+});
