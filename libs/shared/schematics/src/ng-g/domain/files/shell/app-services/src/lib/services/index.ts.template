@@ -1,0 +1,13 @@
+import {CrudService} from "@smartsoft001/crud-shell-app-services";
+
+import {<%= classify(domainNamePluralize) %>AppService} from "./%= dasherize(domainNamePluralize) %>/%= dasherize(domainNamePluralize) %>.service";
+
+export * from "./%= dasherize(domainNamePluralize) %>/%= dasherize(domainNamePluralize) %>.service";
+
+export const SERVICES = [
+    <%= classify(domainNamePluralize) %>AppService,
+    {
+        provide: CrudService,
+        useClass: <%= classify(domainNamePluralize) %>AppService
+    }
+];

@@ -1,0 +1,35 @@
+import { Test } from '@nestjs/testing';
+import { PermissionService } from '@smartsoft001/nestjs';
+import { IItemRepository } from '@smartsoft001/domain-core';
+
+import { <%= classify(domainNamePluralize) %>AppService } from './<%= dasherize(domainNamePluralize) %>.service';
+
+describe('<%= dasherize(domainNamePluralize) %>-shell-app-services: <%= classify(domainNamePluralize) %>AppService', () => {
+  let service: <%= classify(domainNamePluralize) %>AppService;
+  let permissionService, repository;
+
+  beforeEach(async () => {
+    permissionService = {};
+    repository = {};
+
+    const moduleRef = await Test.createTestingModule({
+      providers: [
+        <%= classify(domainNamePluralize) %>AppService,
+        {
+          provide: PermissionService,
+          useValue: permissionService
+        },
+        {
+          provide: IItemRepository,
+          useValue: repository
+        }
+      ],
+    }).compile();
+
+    service = moduleRef.get<<%= classify(domainNamePluralize) %>AppService>(<%= classify(domainNamePluralize) %>AppService);
+  });
+
+  it('should init', () => {
+    expect(service).toBeDefined();
+  });
+});

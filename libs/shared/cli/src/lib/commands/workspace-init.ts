@@ -7,6 +7,7 @@ function runInstallDeps(target) {
     log('Install dependencies');
     const devDeps = [
         '@smartsoft001/core',
+        "passport"
     ];
     const installDevDeps = `npm i ${devDeps.join(' ')} --save --force`;
     runCommand(installDevDeps, target);
