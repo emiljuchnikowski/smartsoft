@@ -1,26 +1,21 @@
-import { Component, ElementRef, OnInit } from "@angular/core";
-import { AuthService, BaseComponent } from "@smartsoft001/angular";
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 
-import {StyleService} from "@<%= dasherize(projectName) %>/shared/angular";
+import { StyleService } from '@<%= dasherize(projectName) %>/shared/angular';
 
-//import { <%= classify(domainNamePluralize) %>Facade } from "../../+state/<%= dasherize(domainNamePluralize) %>.facade";
+import { DetailsTopComponent } from './details-top.component';
 
-@Component({
-  selector: "<%= classify(domainName) %>-details-top",
-  templateUrl: "./details-top.component.html",
-  styleUrls: ["./details-top.component.scss"],
-})
-export class DetailsTopComponent extends BaseComponent implements OnInit {
+describe('<%= dasherize(domainNamePluralize) %>-shell-angular: DetailsTopComponent', () => {
+  let spectator: Spectator<DetailsTopComponent>;
+  const createComponent = createComponentFactory({
+    component: DetailsTopComponent,
+    mocks: [
+      StyleService
+    ]
+  });
 
-  constructor(
-    //private facade: <%= classify(domainNamePluralize) %>Facade,
-    private elementRef: ElementRef,
-    private styleService: StyleService
-  ) {
-    super();
-  }
+  beforeEach(() => spectator = createComponent());
 
-  ngOnInit(): void {
-    this.styleService.init(this.elementRef);
-  }
-}
+  it('should init', () => {
+    expect(spectator.component).toBeDefined();
+  });
+});

@@ -1,0 +1,7 @@
+//import {TestComponent} from "./test/test.component";
+
+//export * from "./test/test.component";
+
+export const PAGES = [
+//    TestComponent
+];

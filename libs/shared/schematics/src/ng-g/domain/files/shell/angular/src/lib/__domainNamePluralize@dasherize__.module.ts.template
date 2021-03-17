@@ -8,7 +8,7 @@ import { SharedModule } from "@<%= dasherize(projectName) %>/shared/angular";
 
 import { <%= classify(domainNamePluralize) %>Facade } from "./+state/<%= dasherize(domainNamePluralize) %>.facade";
 import { SERVICES } from "./services";
-import { getReducer } from "./+state/cards.reducer";
+import { getReducer } from "./+state/<%= dasherize(domainNamePluralize) %>.reducer";
 import { DetailsBottomComponent } from "./components/details-bottom/details-bottom.component";
 import { DetailsTopComponent } from "./components/details-top/details-top.component";
 import { ListTopComponent } from "./components/list-top/list-top.component";

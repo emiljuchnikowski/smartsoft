@@ -2,12 +2,12 @@ import { Spectator, createComponentFactory } from '@ngneat/spectator';
 
 import { StyleService } from '@<%= dasherize(projectName) %>/shared/angular';
 
-import { DetailsTopComponent } from './details-top.component';
+import { DetailsBottomComponent } from './details-bottom.component';
 
-describe('<%= dasherize(domainNamePluralize) %>-shell-angular: DetailsTopComponent', () => {
-  let spectator: Spectator<DetailsTopComponent>;
+describe('<%= dasherize(domainNamePluralize) %>-shell-angular: DetailsBottomComponent', () => {
+  let spectator: Spectator<DetailsBottomComponent>;
   const createComponent = createComponentFactory({
-    component: DetailsTopComponent,
+    component: DetailsBottomComponent,
     mocks: [
       StyleService
     ]

@@ -6,11 +6,11 @@ import {StyleService} from "@<%= dasherize(projectName) %>/shared/angular";
 //import { <%= classify(domainNamePluralize) %>Facade } from "../../+state/<%= dasherize(domainNamePluralize) %>.facade";
 
 @Component({
-  selector: "<%= classify(domainName) %>-details-top",
-  templateUrl: "./details-top.component.html",
-  styleUrls: ["./details-top.component.scss"],
+  selector: "<%= classify(domainName) %>-list-top",
+  templateUrl: "./list-top.component.html",
+  styleUrls: ["./list-top.component.scss"],
 })
-export class DetailsTopComponent extends BaseComponent implements OnInit {
+export class ListTopComponent extends BaseComponent implements OnInit {
 
   constructor(
     //private facade: <%= classify(domainNamePluralize) %>Facade,
