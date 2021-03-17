@@ -1,0 +1,30 @@
+import { Test } from '@nestjs/testing';
+
+import { <%= classify(domainNamePluralize) %>AppService } from '@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/shell/app-services';
+
+import { <%= classify(domainNamePluralize) %>Controller } from './<%= dasherize(domainNamePluralize) %>.controller';
+
+describe('<%= dasherize(domainNamePluralize) %>-shell-nestjs: <%= classify(domainNamePluralize) %>Controller', () => {
+  let service: <%= classify(domainNamePluralize) %>AppService;
+  let controller: <%= classify(domainNamePluralize) %>Controller;
+
+  beforeEach(async () => {
+    service = {} as any;
+
+    const moduleRef = await Test.createTestingModule({
+      controllers: [ <%= classify(domainNamePluralize) %>Controller ],
+      providers: [
+        {
+          provide: <%= classify(domainNamePluralize) %>AppService,
+          useValue: service
+        }
+      ],
+    }).compile();
+
+    controller = moduleRef.get<<%= classify(domainNamePluralize) %>Controller>(<%= classify(domainNamePluralize) %>Controller);
+  });
+
+  it('should init', () => {
+    expect(controller).toBeDefined();
+  });
+});

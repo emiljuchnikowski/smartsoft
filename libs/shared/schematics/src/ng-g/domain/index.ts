@@ -40,6 +40,9 @@ export default function (options: Schema): Rule {
             t.delete(projectPath + `/shell/app-services/src/lib/${domainNamePluralize}-shell-app-services.module.ts`);
             t.delete(projectPath + `/shell/app-services/README.md`);
 
+            t.delete(projectPath + `/shell/nestjs/src/lib/${domainNamePluralize}-shell-nestjs.module.ts`);
+            t.delete(projectPath + `/shell/nestjs/README.md`);
+
             t.delete(projectPath + `/shell/dtos/src/lib/${domainNamePluralize}-shell-dtos.module.ts`);
             t.delete(projectPath + `/shell/dtos/README.md`);
         }
@@ -65,6 +68,14 @@ export default function (options: Schema): Rule {
             }),
             externalSchematic('@nrwl/nest', 'library', {
                 name: 'app-services',
+                directory: domainNamePluralize + '/shell',
+                target: "es6",
+                unitTestRunner: "jest",
+                linter: "eslint",
+                testEnvironment: "node"
+            }),
+            externalSchematic('@nrwl/nest', 'library', {
+                name: 'nestjs',
                 directory: domainNamePluralize + '/shell',
                 target: "es6",
                 unitTestRunner: "jest",

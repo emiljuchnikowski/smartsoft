@@ -1,0 +1,5 @@
+import {<%= classify(domainNamePluralize) %>Controller} from "./<%= dasherize(domainNamePluralize) %>/<%= dasherize(domainNamePluralize) %>.controller";
+
+export const CONTROLLERS = [
+    <%= classify(domainNamePluralize) %>Controller
+];

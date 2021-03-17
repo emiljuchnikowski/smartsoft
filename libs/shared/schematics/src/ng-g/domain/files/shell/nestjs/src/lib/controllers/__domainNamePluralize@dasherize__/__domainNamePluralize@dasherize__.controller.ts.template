@@ -1,0 +1,91 @@
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+  Req,
+  Res,
+  UseGuards,
+  UseInterceptors,
+} from "@nestjs/common";
+import { AuthJwtGuard, CrudController } from "@smartsoft001/crud-shell-nestjs";
+import { User } from "@smartsoft001/nestjs";
+import { IUser } from "@smartsoft001/users";
+import { Request, Response } from "express";
+
+import {<%= classify(domainName) %>} from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/domain";
+import {<%= classify(domainNamePluralize) %>AppService} from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/shell/app-services";
+
+@Controller("<%= dasherize(domainNamePluralize) %>")
+export class <%= classify(domainNamePluralize) %>Controller extends CrudController<<%= classify(domainName) %>> {
+  constructor(service: <%= classify(domainNamePluralize) %>AppService) {
+    super(service);
+  }
+
+  @Get()
+  @UseGuards(AuthJwtGuard)
+  read(
+    @User() user: IUser,
+    @Req() req: Request,
+    @Res() res: Response
+  ): Promise<void> {
+    return super.read(user, req, res);
+  }
+
+  @Post()
+  @UseGuards(AuthJwtGuard)
+  @HttpCode(200)
+  async create(
+    @Body() data: <%= classify(domainName) %>,
+    @User() user: IUser,
+    @Res() res: Response
+  ): Promise<Response> {
+    return await super.create(data, user, res);
+  }
+
+  @Post("bulk")
+  @UseGuards(AuthJwtGuard)
+  async createMany(
+    @Body() data: <%= classify(domainName) %>[],
+    @User() user: IUser,
+    @Res() res: Response,
+    @Query("mode") mode: any
+  ): Promise<Response> {
+    return await super.createMany(data, user, res, mode);
+  }
+
+  @Put(":id")
+  @UseGuards(AuthJwtGuard)
+  async update(
+    @Param() params: { id: string },
+    @Body() data: <%= classify(domainName) %>,
+    @User() user: IUser
+  ): Promise<void> {
+    await super.update(params, data, user);
+  }
+
+  @Patch(":id")
+  @UseGuards(AuthJwtGuard)
+  async updatePartial(
+    @Param() params: { id: string },
+    @Body() data: Partial<<%= classify(domainName) %>>,
+    @User() user: IUser
+  ): Promise<void> {
+    await super.updatePartial(params, data, user);
+  }
+
+  @Delete(":id")
+  @UseGuards(AuthJwtGuard)
+  async delete(
+    @Param() params: { id: string },
+    @User() user: IUser
+  ): Promise<void> {
+    await super.delete(params, user);
+  }
+}

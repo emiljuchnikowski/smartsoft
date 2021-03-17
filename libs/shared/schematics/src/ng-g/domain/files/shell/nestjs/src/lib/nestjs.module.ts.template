@@ -1,0 +1,51 @@
+import { DynamicModule, Module } from "@nestjs/common";
+import { SharedConfig, SharedModule } from "@smartsoft001/nestjs";
+import { CrudShellNestjsModule } from "@smartsoft001/crud-shell-nestjs";
+import { CqrsModule } from "@nestjs/cqrs";
+
+import { SERVICES } from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/shell/app-services";
+import {DOMAIN_SERVICES} from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/domain/features";
+
+import { CONTROLLERS } from "./controllers";
+
+@Module({
+  controllers: [],
+  providers: [],
+  exports: [],
+})
+export class <%= classify(domainNamePluralize) %>ShellNestjsModule {
+  static forRoot(
+    options: SharedConfig & {
+      db: {
+        host: string;
+        port: number;
+        database: string;
+        username?: string;
+        password?: string;
+      };
+      restApi?: boolean;
+    }
+  ): DynamicModule {
+    return {
+      module: <%= classify(domainNamePluralize) %>ShellNestjsModule,
+      controllers: options.restApi ? CONTROLLERS : [],
+      providers: [...SERVICES, ...DOMAIN_SERVICES],
+      imports: [
+        SharedModule.forRoot(options),
+        CrudShellNestjsModule.forRoot({
+          ...options,
+          db: {
+            ...options.db,
+            collection: "<%= dasherize(domainNamePluralize) %>",
+          },
+          restApi: false,
+          socket: true,
+        }),
+        CqrsModule
+      ],
+      exports: [
+        //...SERVICES
+      ],
+    };
+  }
+}
