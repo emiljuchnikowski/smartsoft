@@ -7,7 +7,9 @@ function runInstallDeps(target) {
     log('Install dependencies');
     const devDeps = [
         '@smartsoft001/core',
-        "passport"
+        "passport",
+        '@angular/material',
+        '@angular/cdk',
     ];
     const installDevDeps = `npm i ${devDeps.join(' ')} --save --force`;
     runCommand(installDevDeps, target);
@@ -47,8 +49,6 @@ function runNgAdd(target) {
         '@nrwl/cypress',
         '@nrwl/storybook',
         '@nrwl/jest',
-        '@angular/material',
-        '@angular/cdk'
     ];
 
     plugins.forEach(plugin => {

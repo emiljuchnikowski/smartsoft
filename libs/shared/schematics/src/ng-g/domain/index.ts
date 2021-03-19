@@ -12,7 +12,7 @@ import {
 import { strings } from '@angular-devkit/core';
 
 import {Schema} from "./schema";
-import {PackageService, TsConfigService} from "../../utils";
+import {PackageService, SmartConfigService, TsConfigService} from "../../utils";
 
 export default function (options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
@@ -47,7 +47,7 @@ export default function (options: Schema): Rule {
             t.delete(projectPath + `/shell/dtos/README.md`);
         }
 
-        const changeTsConfig = (t: Tree) => {
+        const changeConfig = (t: Tree) => {
             const projectName = PackageService.getProjectName(t);
 
             TsConfigService.setPath(
@@ -55,6 +55,10 @@ export default function (options: Schema): Rule {
                 `@${projectName}/${domainNamePluralize}/domain/features`,
                 `libs/${domainNamePluralize}/domain/src/features.ts`
                 );
+
+            SmartConfigService.addDomain(tree, {
+                name: domainName
+            });
         }
 
         return chain([
@@ -99,7 +103,7 @@ export default function (options: Schema): Rule {
             }),
             clearModules,
             mergeWith(templateSource, MergeStrategy.Overwrite),
-            changeTsConfig
+            changeConfig
         ])(tree, context);
     };
 }
