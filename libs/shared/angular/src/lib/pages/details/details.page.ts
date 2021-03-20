@@ -1,26 +1,36 @@
-import { Component } from "@angular/core";
+import {Component, ElementRef, OnInit} from "@angular/core";
 import { NavParams } from "@ionic/angular";
 import { first } from "rxjs/operators";
 
 import { IPageOptions, IDetailsOptions } from "../../models/interfaces";
 import {IEntity} from "@smartsoft001/domain-core";
 import {ModalService} from "../../services/modal/modal.service";
+import {StyleService} from "../../services";
 
 @Component({
   templateUrl: "./details.page.html",
   styleUrls: ["./details.page.scss"]
 })
-export class DetailsPage<T extends IEntity<string>> {
+export class DetailsPage<T extends IEntity<string>> implements OnInit {
   pageOptions: IPageOptions = {
     title: "details",
     hideMenuButton: true
   };
   detailsOptions: IDetailsOptions<T>;
 
-  constructor(navParams: NavParams, private modalService: ModalService) {
+  constructor(
+      navParams: NavParams,
+      private modalService: ModalService,
+      private styleService: StyleService,
+      private elementRef: ElementRef
+  ) {
     this.detailsOptions = navParams.get("value") as IDetailsOptions<T>;
     this.initTitle();
     this.initButtons();
+  }
+
+  ngOnInit(): void {
+    this.styleService.init(this.elementRef);
   }
 
   private initTitle(): void {
