@@ -6,7 +6,7 @@ import {IStyle, StyleType} from "../../models/style";
 
 @Injectable()
 export class StyleService {
-    static style: IStyle;
+    static style: IStyle = null;
 
     private _elementRef: ElementRef;
 
