@@ -4,7 +4,9 @@ import {isPlatformBrowser} from "@angular/common";
 
 import {IStyle, StyleType} from "../../models/style";
 
-@Injectable()
+@Injectable({
+    providedIn: "root"
+})
 export class StyleService {
     private _elementRef: ElementRef;
     private _style: IStyle;
