@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 
-import {MenuService} from "@smartsoft001/angular";
+import {AuthService, MenuService, StyleService} from "@smartsoft001/angular";
 import {getModelFieldsWithOptions, getModelOptions, IFieldListMetadata, IModelFilter} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
 
@@ -20,7 +20,11 @@ export class FiltersComponent<T extends IEntity<string>> implements OnInit {
   filter$: Observable<ICrudFilter>;
 
   constructor(
-      private menuService: MenuService, private config: CrudConfig<T>, private facade: CrudFacade<T>
+      private menuService: MenuService,
+      private config: CrudConfig<T>,
+      private facade: CrudFacade<T>,
+      private styleService: StyleService,
+      private elementRef: ElementRef
   ) { }
 
   async onClose(): Promise<void> {
@@ -28,6 +32,8 @@ export class FiltersComponent<T extends IEntity<string>> implements OnInit {
   }
 
   ngOnInit(): void {
+      this.styleService.init(this.elementRef);
+
     const modelFilters = getModelOptions(this.config.type).filters;
 
     this.list = [

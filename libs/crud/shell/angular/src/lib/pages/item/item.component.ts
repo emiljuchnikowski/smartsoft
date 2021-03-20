@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit} from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { Location } from "@angular/common";
@@ -6,11 +6,10 @@ import {TranslateService} from "@ngx-translate/core";
 
 import {
   AuthService,
-  BaseComponent,
   DynamicComponentLoader,
   IDetailsOptions,
   IIconButtonOptions,
-  IPageOptions,
+  IPageOptions, StyleService,
 } from "@smartsoft001/angular";
 import { IEntity } from "@smartsoft001/domain-core";
 import {getModelOptions} from "@smartsoft001/models";
@@ -54,7 +53,9 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
     public config: CrudFullConfig<T>,
     private location: Location,
     private cd: ChangeDetectorRef,
-    authService: AuthService
+    authService: AuthService,
+    private styleService: StyleService,
+    private elementRef: ElementRef
   ) {
     super(authService, config);
 
@@ -62,6 +63,8 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   }
 
   async ngOnInit() {
+    this.styleService.init(this.elementRef);
+
     await super.ngOnInit();
 
     if (this.router.routerState.snapshot.url.endsWith("/add")) {
