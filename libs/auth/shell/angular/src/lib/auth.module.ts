@@ -20,7 +20,8 @@ import {AuthService} from "./services/auth/auth.service";
 
 export const initializer = (
   facade: AuthFacade,
-   translateService: TranslateService
+   translateService: TranslateService,
+  config: AuthConfig
 ) => () => {
   facade.init();
   setDefaultTranslationsAndLang(translateService);
@@ -53,7 +54,7 @@ export class AuthModule {
         {
           provide: APP_INITIALIZER,
           useFactory: initializer,
-          deps: [AuthFacade, TranslateService],
+          deps: [AuthFacade, TranslateService, AuthConfig],
           multi: true
         },
         AuthGuard,

@@ -4,4 +4,5 @@ import {Injectable} from "@angular/core";
 export class AuthConfig {
     apiUrl: string;
     clientId: string;
+    facebookId?: string;
 }

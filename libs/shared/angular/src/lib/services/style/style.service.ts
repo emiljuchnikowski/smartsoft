@@ -4,12 +4,11 @@ import {isPlatformBrowser} from "@angular/common";
 
 import {IStyle, StyleType} from "../../models/style";
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class StyleService {
+    static style: IStyle;
+
     private _elementRef: ElementRef;
-    private _style: IStyle;
 
     static create(platform: Platform, platformId: Object, el: ElementRef, style?: Partial<IStyle>): StyleService {
         const result = new StyleService(platform, platformId);
@@ -30,10 +29,10 @@ export class StyleService {
     set(style?: Partial<IStyle>): void {
         if (!style) style = {};
 
-        if (!this._style) this._style = {};
+        if (!StyleService.style) StyleService.style = {};
 
-        this._style = {
-            ...this._style,
+        StyleService.style = {
+            ...StyleService.style,
             ...style
         };
 
@@ -73,10 +72,10 @@ export class StyleService {
     }
 
     private setProperty(property: string, type: StyleType): void {
-        if (!this._style[type]) return;
+        if (!StyleService.style[type]) return;
 
         const native: HTMLElement = this._elementRef.nativeElement;
-        native.style.setProperty(property, this._style[type]);
+        native.style.setProperty(property, StyleService.style[type]);
     }
 
     private setFont(): void {

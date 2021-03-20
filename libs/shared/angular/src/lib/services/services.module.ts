@@ -14,6 +14,7 @@ import { StorageService } from "./storage/storage.service";
 import { AuthService } from "./auth/auth.service";
 import { FingerprintService } from "./fingerprint/fingerprint.service";
 import { CameraService } from "./camera/camera.service";
+import {StyleService} from "./style/style.service";
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { CameraService } from "./camera/camera.service";
     DynamicComponentLoader,
     PopoverService,
     StorageService,
+    StyleService,
     AuthService,
     FingerprintService,
     FingerprintAIO,
