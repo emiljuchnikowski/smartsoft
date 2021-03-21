@@ -1,8 +1,8 @@
 import { Inject, Injectable, Optional } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { from, Observable, of } from "rxjs";
+import {EMPTY, from, Observable, of} from "rxjs";
 import decode from "jwt-decode";
-import { first, switchMap, tap } from "rxjs/operators";
+import {concatMap, first, switchMap, tap} from "rxjs/operators";
 
 import { IAuthToken } from "@smartsoft001/auth-domain";
 import { IUserCredentials } from "@smartsoft001/users";
@@ -17,6 +17,8 @@ import {
   AUTH_REQUEST_BODY_PROVIDER,
   IAuthRequestBodyProvider,
 } from "../../providers/request-body/request-body.provider";
+
+declare const FB;
 
 @Injectable()
 export class AuthService extends SharedAuthService {
@@ -46,6 +48,35 @@ export class AuthService extends SharedAuthService {
     private bodyProvider: IAuthRequestBodyProvider
   ) {
     super(storageService);
+  }
+
+  loginFb(): Observable<IAuthToken> {
+    return from(new Promise<any>(resolve => FB.login(resolve)))
+        .pipe(switchMap(({ authResponse }) => {
+          if (!authResponse) return EMPTY;
+
+            const baseBody = {
+                grant_type: "fb",
+                fb_token: authResponse.accessToken,
+                client_id: this.config.clientId,
+            };
+
+            const obsBody$ = this.bodyProvider
+                ? from(this.bodyProvider.get(baseBody))
+                : of(baseBody);
+
+            return obsBody$.pipe(
+                switchMap((body: string) =>
+                    this.http.post<IAuthToken>(this.config.apiUrl + "/token", body).pipe(
+                        tap((token) => {
+                            this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
+                        }),
+                        // TODO : fix
+                        first()
+                    )
+                )
+            ) as Observable<IAuthToken>;
+        }));
   }
 
   createToken(userCreds: IUserCredentials): Observable<IAuthToken> {
@@ -81,6 +112,10 @@ export class AuthService extends SharedAuthService {
 
   removeToken(): void {
     this.storageService.removeItem(AUTH_TOKEN);
+
+    if (this.config.facebookId) {
+        FB.api('/me/permissions', 'delete', null, () => FB.logout());
+    }
   }
 
   refreshToken(): Observable<IAuthToken> {

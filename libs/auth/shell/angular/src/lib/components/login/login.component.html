@@ -12,6 +12,14 @@
 
         <smart-button class="login-button" [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
         </smart-button>
+
+        <ng-container *ngIf="showFb">
+            <br/><br/><br/>
+            <smart-button class="login-button" [options]="buttonFbOptions">
+                <ion-icon name="logo-facebook"></ion-icon>&nbsp; {{ "FORM.login" | translate }}
+            </smart-button>
+        </ng-container>
+
         <ng-content select='.card-bottom'></ng-content>
         <!-- TODO:reset password option -->
         <!--        <a href="#">-->

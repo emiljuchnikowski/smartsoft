@@ -24,4 +24,7 @@ export class User implements IEntity<string>, IUser, IUserCredentials {
     @Column("authRefreshToken")
     authRefreshToken: string;
 
+    @Column("facebookUserId")
+    facebookUserId?: string;
+
 }

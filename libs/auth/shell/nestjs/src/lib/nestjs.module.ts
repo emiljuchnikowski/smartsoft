@@ -1,4 +1,4 @@
-import {DynamicModule, Module} from "@nestjs/common";
+import {DynamicModule, HttpModule, Module} from "@nestjs/common";
 import {PassportModule} from "@nestjs/passport";
 import {JwtModule} from "@nestjs/jwt";
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import {TokenController} from "./controllers/token/token.controller";
 import {DOMAIN_SERVICES, ENTITIES, TokenConfig} from "@smartsoft001/auth-domain";
 import {AuthService} from "@smartsoft001/auth-shell-app-services";
+import {FbService} from "@smartsoft001/fb";
 
 @Module({ })
 export class AuthShellNestjsModule {
@@ -18,9 +19,11 @@ export class AuthShellNestjsModule {
             providers: [
                 { provide: TokenConfig, useValue: options.tokenConfig },
                 AuthService,
+                FbService,
                 ...DOMAIN_SERVICES,
             ],
             imports: [
+                HttpModule,
                 TypeOrmModule.forFeature(ENTITIES),
                 PassportModule.register({ defaultStrategy: 'jwt', session: false }),
                 JwtModule.register({

@@ -79,9 +79,9 @@ import { Todo } from "./todos/todo.dto";
     EffectsModule.forRoot([]),
     SharedModule,
     AuthModule.forRoot({
-      apiUrl: environment.apiUrl + "auth",
+      apiUrl: "http://localhost:3334",
       clientId: "admin",
-      facebookId: "test",
+      facebookId: "813277462877495",
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({

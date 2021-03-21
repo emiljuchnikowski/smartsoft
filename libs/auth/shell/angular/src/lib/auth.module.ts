@@ -18,10 +18,40 @@ import { AuthGuard } from './guards/auth/auth.guard';
 import {PermissionsGuard} from "./guards/permissions/permissions.guard";
 import {AuthService} from "./services/auth/auth.service";
 
+declare const FB;
+
 export const initializer = (
   facade: AuthFacade,
-   translateService: TranslateService
-) => () => {
+   translateService: TranslateService,
+  config: AuthConfig
+) => async () => {
+
+  if (config.facebookId) {
+    await new Promise(resolve => {
+      // wait for facebook sdk to initialize before starting the angular app
+      window['fbAsyncInit'] = function () {
+        FB.init({
+          appId: config.facebookId,
+          cookie: true,
+          xfbml: true,
+          version: 'v8.0'
+        });
+
+        resolve();
+      };
+
+      // load facebook sdk script
+      (function (d, s, id) {
+        let js;
+        const fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    });
+  }
+
   facade.init();
   setDefaultTranslationsAndLang(translateService);
 };
@@ -53,7 +83,7 @@ export class AuthModule {
         {
           provide: APP_INITIALIZER,
           useFactory: initializer,
-          deps: [AuthFacade, TranslateService],
+          deps: [AuthFacade, TranslateService, AuthConfig],
           multi: true
         },
         AuthGuard,

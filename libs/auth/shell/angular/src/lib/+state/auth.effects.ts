@@ -56,6 +56,29 @@ export class AuthEffects {
     )
   );
 
+    loginFb$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.loginFB.type),
+            switchMap((action: ReturnType<typeof AuthActions.loginFB>) =>
+                this.service
+                    .loginFb()
+                    .pipe(
+                        map(
+                            (token) =>
+                                AuthActions.createTokenSuccess({
+                                    token,
+                                    username: token.username
+                                }) as any
+                        ),
+                        catchError(error => {
+                            this.fingerprintService.clearData();
+                            return of(AuthActions.createTokenFailure({ error }));
+                        })
+                    )
+            )
+        )
+    );
+
   createTokenSuccess$: Observable<any> = createEffect(
     () =>
       this.actions$.pipe(

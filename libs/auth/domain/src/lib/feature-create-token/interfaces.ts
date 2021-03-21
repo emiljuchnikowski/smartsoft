@@ -1,6 +1,14 @@
 import {IUserCredentials} from "@smartsoft001/users";
 
-export type IAuthTokenRequest = IAuthTokenRequestPassword | IAuthTokenRequestRefreshToken;
+export type IAuthTokenRequest = IAuthTokenRequestPassword | IAuthTokenRequestRefreshToken | IAuthTokenRequestFb;
+
+export interface IAuthTokenRequestFb extends IUserCredentials {
+    grant_type: "fb";
+    fb_token: string;
+    fb_user_id?: string;
+    scope?: string;
+    client_id: string;
+}
 
 export interface IAuthTokenRequestPassword extends IUserCredentials {
     grant_type: "password";
@@ -21,4 +29,5 @@ export interface IAuthToken {
     refresh_token: string;
     expired_in: number;
     token_type: 'bearer';
+    username?: string;
 }

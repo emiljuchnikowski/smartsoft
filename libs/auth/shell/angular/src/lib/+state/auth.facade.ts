@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { select, Store } from "@ngrx/store";
-import {FingerprintService} from "@smartsoft001/angular";
+import { FingerprintService } from "@smartsoft001/angular";
 
 import * as fromAuth from "./auth.reducer";
 import * as AuthSelectors from "./auth.selectors";
@@ -21,9 +21,11 @@ export class AuthFacade {
     private fingerprintService: FingerprintService
   ) {}
 
-  async checkFingerprint(options: {
-      force?: boolean
-                         } = {}): Promise<boolean> {
+  async checkFingerprint(
+    options: {
+      force?: boolean;
+    } = {}
+  ): Promise<boolean> {
     let data = null;
 
     try {
@@ -49,5 +51,9 @@ export class AuthFacade {
 
   logout(): void {
     this.store.dispatch(AuthActions.removeToken());
+  }
+
+  loginFb(): void {
+    this.store.dispatch(AuthActions.loginFB());
   }
 }

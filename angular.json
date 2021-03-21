@@ -1922,6 +1922,38 @@
           }
         }
       }
+    },
+    "shared-fb": {
+      "root": "libs/shared/fb",
+      "sourceRoot": "libs/shared/fb/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/fb/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/fb"],
+          "options": {
+            "jestConfig": "libs/shared/fb/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/shared/fb",
+            "tsConfig": "libs/shared/fb/tsconfig.lib.json",
+            "packageJson": "libs/shared/fb/package.json",
+            "main": "libs/shared/fb/src/index.ts",
+            "assets": ["libs/shared/fb/*.md"]
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -5,6 +5,7 @@ import {FormComponent, IButtonOptions, IFormOptions} from "@smartsoft001/angular
 import {LoginDto} from "@smartsoft001/auth-shell-dtos";
 
 import {AuthFacade} from "../../+state/auth.facade";
+import {AuthConfig} from "../../auth.config";
 
 @Component({
   selector: 'smart-auth-login',
@@ -19,6 +20,11 @@ export class LoginComponent implements OnInit {
     click: () => this.login(),
     loading$: this._loading$
   };
+  buttonFbOptions: IButtonOptions = {
+    type: 'button',
+    click: () => this.loginFb(),
+    loading$: this._loading$
+  };
   formOptions: IFormOptions<LoginDto> = {
     model: new LoginDto(),
     loading$: this._loading$
@@ -28,7 +34,15 @@ export class LoginComponent implements OnInit {
   @ViewChild(FormComponent, { read: FormComponent, static: false })
   formComponent: FormComponent<LoginDto>;
 
-  constructor(private facade: AuthFacade, private cd: ChangeDetectorRef) { }
+  get showFb(): boolean {
+    return !!this.config?.facebookId;
+  }
+
+  constructor(
+      private facade: AuthFacade,
+      private cd: ChangeDetectorRef,
+      private config: AuthConfig
+  ) { }
 
   login(): void {
     if (this.formComponent.form.valid) {
@@ -46,5 +60,9 @@ export class LoginComponent implements OnInit {
       this.isSetFingerprint = this.facade.isSetFingerprint;
       this.cd.detectChanges();
     }, 1000);
+  }
+
+  private loginFb(): void {
+    this.facade.loginFb();
   }
 }

@@ -36,6 +36,23 @@ export const createTokenFailure = createAction(
 );
 
 /*
+ * Login FB
+ */
+export const loginFB = createAction(
+    "[Auth] Login FB"
+);
+
+export const loginFBSuccess = createAction(
+    "[Auth] Login FB Success",
+    props<{ token: IAuthToken, username: string }>()
+);
+
+export const loginFBFailure = createAction(
+    "[Auth] Login FB Failure",
+    props<{ error: any }>()
+);
+
+/*
  * Remove token
  */
 export const removeToken = createAction("[Auth] Remove token");

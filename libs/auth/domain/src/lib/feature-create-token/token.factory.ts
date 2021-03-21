@@ -6,6 +6,7 @@ import { Guid } from "guid-typescript";
 
 import { DomainValidationError, IFactory } from "@smartsoft001/domain-core";
 import { PasswordService } from "@smartsoft001/utils";
+import {FbService} from "@smartsoft001/fb";
 
 import { User } from "../entities/user.entity";
 import { TokenConfig } from "./token.config";
@@ -31,13 +32,15 @@ export class TokenFactory
   constructor(
     private config: TokenConfig,
     @InjectRepository(User) private repository: Repository<User>,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private fbService: FbService
   ) {}
 
   static getQuery(config: IAuthTokenRequest): Partial<User> {
     return config.grant_type === "password"
       ? { username: config.username }
-      : { authRefreshToken: config.refresh_token };
+      : config.grant_type === "refresh_token"
+            ? { authRefreshToken: config.refresh_token } : { facebookUserId: config.fb_user_id };
   }
 
   static checkDisabled(user: User) {
@@ -50,6 +53,10 @@ export class TokenFactory
     validationProvider?: ITokenValidationProvider;
     userProvider?: ITokenUserProvider;
   }): Promise<IAuthToken> {
+    if (options.request.grant_type === 'fb') {
+      options.request.fb_user_id = await this.fbService.getUserId(options.request.fb_token);
+    }
+
     this.valid(options.request);
 
     const query = TokenFactory.getQuery(options.request);
@@ -88,17 +95,14 @@ export class TokenFactory
     }
 
     return {
-      // eslint-disable-next-line @typescript-eslint/camelcase
       expired_in: this.config.expiredIn,
-      // eslint-disable-next-line @typescript-eslint/camelcase
       token_type: "bearer",
-      // eslint-disable-next-line @typescript-eslint/camelcase
       access_token: this.jwtService.sign(payload, {
         expiresIn: this.config.expiredIn,
         subject: user.username,
       }),
-      // eslint-disable-next-line @typescript-eslint/camelcase
       refresh_token: refreshToken,
+      username: user.username
     };
   }
 
@@ -138,6 +142,14 @@ export class TokenFactory
     } else if (req.grant_type === "refresh_token") {
       if (!req.refresh_token)
         throw new DomainValidationError("refresh_token is empty");
+
+      // fb token
+    } else if (req.grant_type === "fb") {
+      if (!req.fb_token)
+        throw new DomainValidationError("fb_token is empty");
+
+      if (!req.fb_user_id)
+        throw new DomainValidationError("fb_user_id is empty");
     } else {
       throw new DomainValidationError("grant_type is incorrect");
     }
