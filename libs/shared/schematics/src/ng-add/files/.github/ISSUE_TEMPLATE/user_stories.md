@@ -10,6 +10,11 @@ assignees: ''
 **Descriptions**
 [long description]
 
+**Acceptance criteria**
+
+- [ ] [description]
+- [ ] ...
+
 **Tasks**
 
 - [description] #[github id]

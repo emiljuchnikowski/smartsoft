@@ -21,6 +21,8 @@ node {
             println("COMMIT ID: " + commit_id)
             println("TAG NAME: " + tag_name)
             println("BRANCH NAME: " + branch_name)
+
+            sh "npm install jest nx"
         }
 
         stage('Install packages') {
