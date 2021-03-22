@@ -7,6 +7,7 @@ import { Guid } from "guid-typescript";
 import { DomainValidationError, IFactory } from "@smartsoft001/domain-core";
 import { PasswordService } from "@smartsoft001/utils";
 import {FbService} from "@smartsoft001/fb";
+import {GoogleService} from "@smartsoft001/google";
 
 import { User } from "../entities/user.entity";
 import { TokenConfig } from "./token.config";
@@ -14,7 +15,6 @@ import { IAuthToken, IAuthTokenRequest } from "./interfaces";
 import { ITokenPayloadProvider } from "./token-payload.provider";
 import { ITokenValidationProvider } from "./token-validation.provider";
 import { ITokenUserProvider } from "./token-user.provider";
-import {GoogleService} from "@smartsoft001/google";
 
 @Injectable()
 export class TokenFactory
