@@ -9,6 +9,8 @@ import * as sharedPayU from "@smartsoft001/payu";
 import * as sharedRevolut from "@smartsoft001/revolut";
 import * as sharedUsers from "@smartsoft001/users";
 import * as sharedUtils from "@smartsoft001/utils";
+import * as sharedGoogle from "@smartsoft001/google";
+import * as sharedFb from "@smartsoft001/fb";
 
 //auth
 import * as authDomain from "@smartsoft001/auth-domain";
