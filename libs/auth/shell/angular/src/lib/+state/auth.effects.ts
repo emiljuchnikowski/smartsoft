@@ -79,6 +79,29 @@ export class AuthEffects {
         )
     );
 
+    loginGoogle$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.loginGoogle.type),
+            switchMap((action: ReturnType<typeof AuthActions.loginGoogle>) =>
+                this.service
+                    .loginGoogle()
+                    .pipe(
+                        map(
+                            (token) =>
+                                AuthActions.createTokenSuccess({
+                                    token,
+                                    username: token.username
+                                }) as any
+                        ),
+                        catchError(error => {
+                            this.fingerprintService.clearData();
+                            return of(AuthActions.createTokenFailure({ error }));
+                        })
+                    )
+            )
+        )
+    );
+
   createTokenSuccess$: Observable<any> = createEffect(
     () =>
       this.actions$.pipe(

@@ -1,11 +1,22 @@
 import {IUserCredentials} from "@smartsoft001/users";
 
-export type IAuthTokenRequest = IAuthTokenRequestPassword | IAuthTokenRequestRefreshToken | IAuthTokenRequestFb;
+export type IAuthTokenRequest = IAuthTokenRequestPassword
+    | IAuthTokenRequestRefreshToken
+    | IAuthTokenRequestFb
+    | IAuthTokenRequestGoogle;
 
 export interface IAuthTokenRequestFb extends IUserCredentials {
     grant_type: "fb";
     fb_token: string;
     fb_user_id?: string;
+    scope?: string;
+    client_id: string;
+}
+
+export interface IAuthTokenRequestGoogle extends IUserCredentials {
+    grant_type: "google";
+    google_token: string;
+    google_user_id?: string;
     scope?: string;
     client_id: string;
 }

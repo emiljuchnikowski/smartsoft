@@ -27,4 +27,7 @@ export class User implements IEntity<string>, IUser, IUserCredentials {
     @Column("facebookUserId")
     facebookUserId?: string;
 
+    @Column("googleUserId")
+    googleUserId?: string;
+
 }

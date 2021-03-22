@@ -1954,6 +1954,38 @@
           }
         }
       }
+    },
+    "shared-google": {
+      "root": "libs/shared/google",
+      "sourceRoot": "libs/shared/google/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/google/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/google"],
+          "options": {
+            "jestConfig": "libs/shared/google/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/shared/google",
+            "tsConfig": "libs/shared/google/tsconfig.lib.json",
+            "packageJson": "libs/shared/google/package.json",
+            "main": "libs/shared/google/src/index.ts",
+            "assets": ["libs/shared/google/*.md"]
+          }
+        }
+      }
     }
   },
   "cli": {

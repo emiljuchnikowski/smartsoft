@@ -44,5 +44,6 @@ module.exports = {
     "<rootDir>/libs/shared/schematics",
     "<rootDir>/libs/shared/test",
     "<rootDir>/libs/shared/fb",
+    "<rootDir>/libs/shared/google",
   ],
 };

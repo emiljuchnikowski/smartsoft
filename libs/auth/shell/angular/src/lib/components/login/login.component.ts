@@ -25,6 +25,11 @@ export class LoginComponent implements OnInit {
     click: () => this.loginFb(),
     loading$: this._loading$
   };
+  buttonGoogleOptions: IButtonOptions = {
+    type: 'button',
+    click: () => this.loginGoogle(),
+    loading$: this._loading$
+  };
   formOptions: IFormOptions<LoginDto> = {
     model: new LoginDto(),
     loading$: this._loading$
@@ -36,6 +41,10 @@ export class LoginComponent implements OnInit {
 
   get showFb(): boolean {
     return !!this.config?.facebookId;
+  }
+
+  get showGoogle(): boolean {
+    return !!this.config?.googleId;
   }
 
   constructor(
@@ -64,5 +73,9 @@ export class LoginComponent implements OnInit {
 
   private loginFb(): void {
     this.facade.loginFb();
+  }
+
+  private loginGoogle(): void {
+    this.facade.loginGoogle();
   }
 }

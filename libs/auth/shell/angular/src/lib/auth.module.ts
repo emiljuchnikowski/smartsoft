@@ -20,6 +20,15 @@ import {AuthService} from "./services/auth/auth.service";
 
 declare const FB;
 
+function addScript(d, id, src) {
+  let js;
+  const fjs = d.getElementsByTagName('script')[0];
+  if (d.getElementById(id)) { return; }
+  js = d.createElement('script'); js.id = id;
+  js.src = src;
+  fjs.parentNode.insertBefore(js, fjs);
+}
+
 export const initializer = (
   facade: AuthFacade,
    translateService: TranslateService,
@@ -41,15 +50,13 @@ export const initializer = (
       };
 
       // load facebook sdk script
-      (function (d, s, id) {
-        let js;
-        const fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) { return; }
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+      addScript(document, 'facebook-jssdk', "https://connect.facebook.net/en_US/sdk.js");
     });
+  }
+
+  if (config.googleId) {
+    // load google sdk script
+    addScript(document, 'google-jssdk', "https://apis.google.com/js/api.js");
   }
 
   facade.init();

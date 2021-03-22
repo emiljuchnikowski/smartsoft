@@ -76,7 +76,8 @@
       "@smartsoft001/core": ["libs/shared/core/src/index.ts"],
       "@smartsoft001/schematics": ["libs/shared/schematics/src/index.ts"],
       "@smartsoft/shared/test": ["libs/shared/test/src/index.ts"],
-      "@smartsoft001/fb": ["libs/shared/fb/src/index.ts"]
+      "@smartsoft001/fb": ["libs/shared/fb/src/index.ts"],
+      "@smartsoft001/google": ["libs/shared/google/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,15 +1,16 @@
 import { Inject, Injectable, Optional } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import {EMPTY, from, Observable, of} from "rxjs";
+import { EMPTY, from, Observable, of } from "rxjs";
 import decode from "jwt-decode";
-import {concatMap, first, switchMap, tap} from "rxjs/operators";
+import { concatMap, first, switchMap, tap } from "rxjs/operators";
 
 import { IAuthToken } from "@smartsoft001/auth-domain";
 import { IUserCredentials } from "@smartsoft001/users";
 import {
   StorageService,
   AuthService as SharedAuthService,
-  AUTH_TOKEN, FingerprintService,
+  AUTH_TOKEN,
+  FingerprintService,
 } from "@smartsoft001/angular";
 
 import { AuthConfig } from "../../auth.config";
@@ -18,7 +19,7 @@ import {
   IAuthRequestBodyProvider,
 } from "../../providers/request-body/request-body.provider";
 
-declare const FB;
+declare const FB, gapi;
 
 @Injectable()
 export class AuthService extends SharedAuthService {
@@ -33,7 +34,9 @@ export class AuthService extends SharedAuthService {
   get username(): string {
     if (!this.token) return null;
 
-    const tokenPayload: { sub: string } = decode(this.token.access_token) as any;
+    const tokenPayload: { sub: string } = decode(
+      this.token.access_token
+    ) as any;
 
     return tokenPayload.sub;
   }
@@ -51,32 +54,75 @@ export class AuthService extends SharedAuthService {
   }
 
   loginFb(): Observable<IAuthToken> {
-    return from(new Promise<any>(resolve => FB.login(resolve)))
-        .pipe(switchMap(({ authResponse }) => {
-          if (!authResponse) return EMPTY;
+    return from(
+      new Promise<any>((resolve) => FB.login(resolve))
+    ).pipe(
+      switchMap(({ authResponse }) => {
+        if (!authResponse) return EMPTY;
 
-            const baseBody = {
-                grant_type: "fb",
-                fb_token: authResponse.accessToken,
-                client_id: this.config.clientId,
-            };
+        const baseBody = {
+          grant_type: "fb",
+          fb_token: authResponse.accessToken,
+          client_id: this.config.clientId,
+        };
 
-            const obsBody$ = this.bodyProvider
-                ? from(this.bodyProvider.get(baseBody))
-                : of(baseBody);
+        const obsBody$ = this.bodyProvider
+          ? from(this.bodyProvider.get(baseBody))
+          : of(baseBody);
 
-            return obsBody$.pipe(
-                switchMap((body: string) =>
-                    this.http.post<IAuthToken>(this.config.apiUrl + "/token", body).pipe(
-                        tap((token) => {
-                            this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
-                        }),
-                        // TODO : fix
-                        first()
-                    )
-                )
-            ) as Observable<IAuthToken>;
-        }));
+        return obsBody$.pipe(
+          switchMap((body: string) =>
+            this.http
+              .post<IAuthToken>(this.config.apiUrl + "/token", body)
+              .pipe(
+                tap((token) => {
+                  this.storageService.setItem(
+                    AUTH_TOKEN,
+                    JSON.stringify(token)
+                  );
+                }),
+                // TODO : fix
+                first()
+              )
+          )
+        ) as Observable<IAuthToken>;
+      })
+    );
+  }
+
+  loginGoogle(): Observable<IAuthToken> {
+      return from(
+          this.initGoogleAuth()
+      ).pipe(
+          switchMap((authToken) => {
+              const baseBody = {
+                  grant_type: "google",
+                  google_token: authToken,
+                  client_id: this.config.clientId,
+              };
+
+              const obsBody$ = this.bodyProvider
+                  ? from(this.bodyProvider.get(baseBody))
+                  : of(baseBody);
+
+              return obsBody$.pipe(
+                  switchMap((body: string) =>
+                      this.http
+                          .post<IAuthToken>(this.config.apiUrl + "/token", body)
+                          .pipe(
+                              tap((token) => {
+                                  this.storageService.setItem(
+                                      AUTH_TOKEN,
+                                      JSON.stringify(token)
+                                  );
+                              }),
+                              // TODO : fix
+                              first()
+                          )
+                  )
+              ) as Observable<IAuthToken>;
+          })
+      );
   }
 
   createToken(userCreds: IUserCredentials): Observable<IAuthToken> {
@@ -114,7 +160,7 @@ export class AuthService extends SharedAuthService {
     this.storageService.removeItem(AUTH_TOKEN);
 
     if (this.config.facebookId) {
-        FB.api('/me/permissions', 'delete', null, () => FB.logout());
+      FB.api("/me/permissions", "delete", null, () => FB.logout());
     }
   }
 
@@ -129,5 +175,29 @@ export class AuthService extends SharedAuthService {
           this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
         })
       );
+  }
+
+  private async initGoogleAuth(): Promise<any> {
+      //  Create a new Promise where the resolve
+      // function is the callback passed to gapi.load
+      const pload = new Promise((resolve) => {
+          gapi.load('auth2', resolve);
+      });
+
+      // When the first promise resolves, it means we have gapi
+      // loaded and that we can call gapi.init
+      return pload.then(async () => {
+          return await gapi.auth2
+              .init({ client_id: this.config.googleId })
+              .then(authInstance => {
+                  return authInstance.signIn();
+              })
+              .then(user => {
+                  return user.uc.access_token;
+              })
+              .catch(error => {
+                  throw error;
+              });
+      });
   }
 }

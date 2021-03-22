@@ -56,4 +56,8 @@ export class AuthFacade {
   loginFb(): void {
     this.store.dispatch(AuthActions.loginFB());
   }
+
+  loginGoogle(): void {
+    this.store.dispatch(AuthActions.loginGoogle());
+  }
 }

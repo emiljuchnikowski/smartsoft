@@ -63,7 +63,8 @@
     "shared-cli": { "tags": [] },
     "shared-schematics": { "tags": [] },
     "shared-test": { "tags": [] },
-    "shared-fb": { "tags": [] }
+    "shared-fb": { "tags": [] },
+    "shared-google": { "tags": [] }
   },
   "tasksRunnerOptions": {
     "default": {

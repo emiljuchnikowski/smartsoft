@@ -5,4 +5,5 @@ export class AuthConfig {
     apiUrl: string;
     clientId: string;
     facebookId?: string;
+    googleId?: string;
 }

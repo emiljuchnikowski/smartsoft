@@ -14,6 +14,7 @@ import { IAuthToken, IAuthTokenRequest } from "./interfaces";
 import { ITokenPayloadProvider } from "./token-payload.provider";
 import { ITokenValidationProvider } from "./token-validation.provider";
 import { ITokenUserProvider } from "./token-user.provider";
+import {GoogleService} from "@smartsoft001/google";
 
 @Injectable()
 export class TokenFactory
@@ -33,14 +34,23 @@ export class TokenFactory
     private config: TokenConfig,
     @InjectRepository(User) private repository: Repository<User>,
     private jwtService: JwtService,
-    private fbService: FbService
+    private fbService: FbService,
+    private googleService: GoogleService
   ) {}
 
   static getQuery(config: IAuthTokenRequest): Partial<User> {
-    return config.grant_type === "password"
-      ? { username: config.username }
-      : config.grant_type === "refresh_token"
-            ? { authRefreshToken: config.refresh_token } : { facebookUserId: config.fb_user_id };
+    switch (config.grant_type) {
+      case "fb":
+        return { facebookUserId: config.fb_user_id };
+      case "google":
+        return { googleUserId: config.google_user_id }
+      case "password":
+        return { username: config.username };
+      case "refresh_token":
+        return { authRefreshToken: config.refresh_token };
+      default:
+        throw new DomainValidationError('Invalid grand type')
+    }
   }
 
   static checkDisabled(user: User) {
@@ -54,7 +64,13 @@ export class TokenFactory
     userProvider?: ITokenUserProvider;
   }): Promise<IAuthToken> {
     if (options.request.grant_type === 'fb') {
-      options.request.fb_user_id = await this.fbService.getUserId(options.request.fb_token);
+      options.request.fb_user_id =
+          await this.fbService.getUserId(options.request.fb_token);
+    }
+
+    if (options.request.grant_type === 'google') {
+      options.request.google_user_id =
+          await this.googleService.getUserId(options.request.google_token);
     }
 
     this.valid(options.request);
@@ -150,6 +166,12 @@ export class TokenFactory
 
       if (!req.fb_user_id)
         throw new DomainValidationError("fb_user_id is empty");
+    } else if (req.grant_type === "google") {
+      if (!req.google_token)
+        throw new DomainValidationError("google_token is empty");
+
+      if (!req.google_user_id)
+        throw new DomainValidationError("google_user_id is empty");
     } else {
       throw new DomainValidationError("grant_type is incorrect");
     }

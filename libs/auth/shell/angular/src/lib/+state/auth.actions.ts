@@ -2,6 +2,8 @@ import { createAction, props } from "@ngrx/store";
 
 import {IAuthToken} from "@smartsoft001/auth-domain";
 
+
+
 /*
  * Init token
  */
@@ -49,6 +51,23 @@ export const loginFBSuccess = createAction(
 
 export const loginFBFailure = createAction(
     "[Auth] Login FB Failure",
+    props<{ error: any }>()
+);
+
+/*
+ * Login Google
+ */
+export const loginGoogle = createAction(
+    "[Auth] Login Google"
+);
+
+export const loginGoogleSuccess = createAction(
+    "[Auth] Login Google Success",
+    props<{ token: IAuthToken, username: string }>()
+);
+
+export const loginGoogleFailure = createAction(
+    "[Auth] Login Google Failure",
     props<{ error: any }>()
 );
 

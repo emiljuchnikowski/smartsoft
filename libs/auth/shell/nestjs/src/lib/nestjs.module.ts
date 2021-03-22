@@ -7,6 +7,7 @@ import {TokenController} from "./controllers/token/token.controller";
 import {DOMAIN_SERVICES, ENTITIES, TokenConfig} from "@smartsoft001/auth-domain";
 import {AuthService} from "@smartsoft001/auth-shell-app-services";
 import {FbService} from "@smartsoft001/fb";
+import {GoogleService} from "@smartsoft001/google";
 
 @Module({ })
 export class AuthShellNestjsModule {
@@ -20,6 +21,7 @@ export class AuthShellNestjsModule {
                 { provide: TokenConfig, useValue: options.tokenConfig },
                 AuthService,
                 FbService,
+                GoogleService,
                 ...DOMAIN_SERVICES,
             ],
             imports: [

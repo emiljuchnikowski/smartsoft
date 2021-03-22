@@ -20,6 +20,13 @@
             </smart-button>
         </ng-container>
 
+        <ng-container *ngIf="showGoogle">
+            <br/><br/><br/>
+            <smart-button class="login-button" [options]="buttonGoogleOptions">
+                <ion-icon name="logo-google"></ion-icon>&nbsp; {{ "FORM.login" | translate }}
+            </smart-button>
+        </ng-container>
+
         <ng-content select='.card-bottom'></ng-content>
         <!-- TODO:reset password option -->
         <!--        <a href="#">-->

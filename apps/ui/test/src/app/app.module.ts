@@ -82,6 +82,7 @@ import { Todo } from "./todos/todo.dto";
       apiUrl: "http://localhost:3334",
       clientId: "admin",
       facebookId: "813277462877495",
+      googleId: "103834343078-o736d22f2diersc4k6nge3uc4rtof6s1.apps.googleusercontent.com"
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({
