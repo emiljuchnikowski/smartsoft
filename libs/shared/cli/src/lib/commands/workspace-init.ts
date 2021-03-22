@@ -5,13 +5,14 @@ import {log, runCommand} from "./utils";
 
 function runInstallDeps(target) {
     log('Install dependencies');
-    const devDeps = [
+    const deps = [
         '@smartsoft001/core',
         "passport",
         '@angular/material',
         '@angular/cdk',
+        '@ionic-native/core'
     ];
-    const installDevDeps = `npm i ${devDeps.join(' ')} --save --force`;
+    const installDevDeps = `npm i ${deps.join(' ')} --save --force`;
     runCommand(installDevDeps, target);
 }
 
