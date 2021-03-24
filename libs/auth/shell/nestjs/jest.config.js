@@ -1,4 +1,5 @@
 module.exports = {
+  displayName: "auth-shell-nestjs",
   preset: "../../../../jest.preset.js",
   globals: {
     "ts-jest": {
@@ -9,7 +10,6 @@ module.exports = {
   transform: {
     "^.+\\.[tj]sx?$": "ts-jest",
   },
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "html"],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../../coverage/libs/auth/shell/nestjs",
-  displayName: "auth-shell-nestjs",
 };

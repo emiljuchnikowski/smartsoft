@@ -38,7 +38,7 @@
     "auth-shell-app-services:publish": "npm version patch --prefix libs/auth/shell/app-services && nx run auth-shell-app-services:build --with-deps && npm publish dist/libs/auth/shell/app-services --access public",
     "auth-shell-dtos:publish": "npm version patch --prefix libs/auth/shell/dtos && nx run auth-shell-dtos:build --with-deps && npm publish dist/libs/auth/shell/dtos --access public",
     "auth-shell-nestjs:build": "nx run auth-shell-nestjs:build --with-deps",
-    "auth-shell-nestjs:publish": "npm run auth-shell-nestjs:build && npm publish libs/auth/shell/nestjs/dist --access public",
+    "auth-shell-nestjs:publish": "npm run auth-shell-nestjs:build && npm publish dist/libs/auth/shell/nestjs --access public",
     "crud-domain:publish": "npm version patch --prefix libs/crud/domain && nx run crud-domain:build --with-deps && npm publish dist/libs/crud/domain --access public",
     "crud-shell-angular:publish": "npm version patch --prefix libs/crud/shell/angular && nx run crud-shell-angular:build --with-deps && npm publish dist/libs/crud/shell/angular --access public",
     "crud-shell-app-services:publish": "npm version patch --prefix libs/crud/shell/app-services && nx run crud-shell-app-services:build --with-deps && npm publish dist/libs/crud/shell/app-services --access public",

@@ -65,44 +65,6 @@
         }
       }
     },
-    "auth-shell-nestjs": {
-      "root": "libs/auth/shell/nestjs",
-      "sourceRoot": "libs/auth/shell/nestjs/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/auth/shell/nestjs/tsconfig.lib.json",
-              "libs/auth/shell/nestjs/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/auth/shell/nestjs/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/auth/shell/nestjs/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/auth/shell/nestjs"]
-        },
-        "build": {
-          "builder": "@nrwl/node:package",
-          "options": {
-            "outputPath": "libs/auth/shell/nestjs/dist",
-            "tsConfig": "libs/auth/shell/nestjs/tsconfig.lib.json",
-            "packageJson": "libs/auth/shell/nestjs/package.json",
-            "main": "libs/auth/shell/nestjs/src/index.ts",
-            "assets": ["libs/auth/shell/nestjs/*.md"]
-          },
-          "outputs": ["{options.outputPath}"]
-        }
-      }
-    },
     "api-auth": {
       "root": "apps/api/auth",
       "sourceRoot": "apps/api/auth/src",
@@ -1983,6 +1945,38 @@
             "packageJson": "libs/shared/google/package.json",
             "main": "libs/shared/google/src/index.ts",
             "assets": ["libs/shared/google/*.md"]
+          }
+        }
+      }
+    },
+    "auth-shell-nestjs": {
+      "root": "libs/auth/shell/nestjs",
+      "sourceRoot": "libs/auth/shell/nestjs/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/auth/shell/nestjs/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/auth/shell/nestjs"],
+          "options": {
+            "jestConfig": "libs/auth/shell/nestjs/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/auth/shell/nestjs",
+            "tsConfig": "libs/auth/shell/nestjs/tsconfig.lib.json",
+            "packageJson": "libs/auth/shell/nestjs/package.json",
+            "main": "libs/auth/shell/nestjs/src/index.ts",
+            "assets": ["libs/auth/shell/nestjs/*.md"]
           }
         }
       }
