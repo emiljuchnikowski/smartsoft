@@ -34,6 +34,10 @@ export class AuthShellNestjsModule {
                         expiresIn: options.tokenConfig.expiredIn
                     }
                 })
+            ],
+            exports: [
+                FbService,
+                GoogleService,
             ]
         }
     }

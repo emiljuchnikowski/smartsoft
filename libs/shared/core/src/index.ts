@@ -17,6 +17,7 @@ import * as authDomain from "@smartsoft001/auth-domain";
 import * as authShellAngular from "@smartsoft001/auth-shell-angular";
 import * as authShellAppService from "@smartsoft001/auth-shell-app-services";
 import * as authShellDtos from "@smartsoft001/auth-shell-dtos";
+import * as authShellNestJS from "@smartsoft001/auth-shell-nestjs";
 
 //crud
 import * as crudDomain from "@smartsoft001/crud-domain";
