@@ -14,8 +14,8 @@
             </smart-button>
         </div>
 
-        <div class="social-login">
-            <p>lub<br> szybko zaloguj się za pomocą</p>
+        <div class="social-login" *ngIf="showFb || showGoogle">
+            <p>{{ 'or' | translate }}<br> {{ 'signInQuicklyWith' | translate }}</p>
             <ng-container *ngIf="showFb">
                 <smart-button class="fb-login-button" [options]="buttonFbOptions" title="{{ 'FORM.login' | translate }}">
                     <ion-icon name="logo-facebook"></ion-icon>

@@ -28,6 +28,8 @@ export interface ITranslateData {
     search: string,
     page: string,
     filters,
+    or,
+    signInQuicklyWith,
 
     OBJECT: {
         deleted: string
@@ -84,6 +86,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     search: 'search',
     page: 'page',
     filters: 'filters',
+    or: 'or',
+    signInQuicklyWith: 'sign in quickly with',
 
     OBJECT: {
         deleted: 'object deleted'
@@ -140,6 +144,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     search: 'wyszukaj',
     page: 'strona',
     filters: 'filtry',
+    or: 'lub',
+    signInQuicklyWith: 'szybko zaloguj się za pomocą',
 
     OBJECT: {
         deleted: 'obiekt został usunięty'
