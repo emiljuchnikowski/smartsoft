@@ -5,27 +5,29 @@
 
         <smart-form (invokeSubmit)="login()" [options]="formOptions" class="login-form"></smart-form>
         <ng-content select='.card-middle'></ng-content>
+        <div class="default-login">
+            <ion-button type="button" slot="icon-only" *ngIf="isSetFingerprint" (click)="onCheckFingerprint()" class="smart-fingerprint">
+                <ion-icon name="finger-print-outline"></ion-icon>
+            </ion-button>
 
-        <ion-button type="button" slot="icon-only" *ngIf="isSetFingerprint" (click)="onCheckFingerprint()" class="smart-fingerprint">
-            <ion-icon name="finger-print-outline"></ion-icon>
-        </ion-button>
-
-        <smart-button class="login-button" [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
-        </smart-button>
-
-        <ng-container *ngIf="showFb">
-            <br/><br/><br/>
-            <smart-button class="login-button" [options]="buttonFbOptions">
-                <ion-icon name="logo-facebook"></ion-icon>&nbsp; {{ "FORM.login" | translate }}
+            <smart-button class="login-button" [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
             </smart-button>
-        </ng-container>
+        </div>
 
-        <ng-container *ngIf="showGoogle">
-            <br/><br/><br/>
-            <smart-button class="login-button" [options]="buttonGoogleOptions">
-                <ion-icon name="logo-google"></ion-icon>&nbsp; {{ "FORM.login" | translate }}
-            </smart-button>
-        </ng-container>
+        <div class="social-login">
+            <p>lub<br> szybko zaloguj się za pomocą</p>
+            <ng-container *ngIf="showFb">
+                <smart-button class="fb-login-button" [options]="buttonFbOptions" title="{{ 'FORM.login' | translate }}">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </smart-button>
+            </ng-container>
+
+            <ng-container *ngIf="showGoogle">
+                <smart-button class="g-login-button" [options]="buttonGoogleOptions" title="{{ 'FORM.login' | translate }}">
+                    <ion-icon name="logo-google"></ion-icon>
+                </smart-button>
+            </ng-container>
+        </div>
 
         <ng-content select='.card-bottom'></ng-content>
         <!-- TODO:reset password option -->
