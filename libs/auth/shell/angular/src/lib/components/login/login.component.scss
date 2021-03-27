@@ -25,13 +25,36 @@
     }
 }
 
+.social-login {
+    margin: 1.2rem 0;
+    p {
+        margin: 0;
+        color: #666;
+        font-size: var(--small-font-size);
+    }
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.default-login {
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+
 smart-button {
     &.login-button {
-        display: block;
+        display: inline-block;
         background-color: transparent;
         padding: 0;
         outline: 0;
-        float: right;
+    }
+    &.fb-login-button,
+    &.g-login-button {
+        display: inline-block;
+        padding: 0;
+        outline: 0;
     }
 }
 

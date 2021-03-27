@@ -1,3 +1,7 @@
-.squere-button {
-    height: var(--smart-button-height) !important;
+:host {
+    width: 100%;
+    .squere-button {
+        height: var(--smart-button-height) !important;
+        margin: .8rem;
+    }
 }
