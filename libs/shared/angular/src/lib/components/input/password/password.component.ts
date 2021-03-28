@@ -9,7 +9,7 @@ import {InputBaseComponent} from "../base/base.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputPasswordComponent<T> extends InputBaseComponent<T> implements OnInit {
-  valid: boolean;
+  valid = true;
 
   constructor(cd: ChangeDetectorRef) {
     super(cd);
