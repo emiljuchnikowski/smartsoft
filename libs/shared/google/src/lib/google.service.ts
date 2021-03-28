@@ -10,4 +10,14 @@ export class GoogleService {
 
         return data.user_id;
     }
+
+    async getData(token: string): Promise<{ email, id }> {
+        const { data } = await this.http
+            .get('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=' + token).toPromise();
+
+        return {
+            id: data.user_id,
+            email: data.email
+        };
+    }
 }

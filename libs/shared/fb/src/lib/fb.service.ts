@@ -10,4 +10,11 @@ export class FbService {
 
         return data.id;
     }
+
+    async getData(token: string): Promise<{ id, email }> {
+        const { data } = await this.http
+            .get('https://graph.facebook.com/me?fields=email,id&access_token=' + token).toPromise();
+
+        return data;
+    }
 }
