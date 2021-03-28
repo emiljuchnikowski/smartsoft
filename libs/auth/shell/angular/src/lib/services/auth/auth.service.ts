@@ -193,7 +193,11 @@ export class AuthService extends SharedAuthService {
                   return authInstance.signIn();
               })
               .then(user => {
-                  return user.uc.access_token;
+                  let token;
+                  Object.keys(user).forEach(key => {
+                      if (user[key].access_token) token = user[key].access_token;
+                  })
+                  return token;
               })
               .catch(error => {
                   throw error;
