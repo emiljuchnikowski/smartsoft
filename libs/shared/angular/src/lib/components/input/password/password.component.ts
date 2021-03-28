@@ -9,9 +9,29 @@ import {InputBaseComponent} from "../base/base.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputPasswordComponent<T> extends InputBaseComponent<T> implements OnInit {
+  valid: boolean;
+
   constructor(cd: ChangeDetectorRef) {
     super(cd);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.control.setValidators([
+        this.control.validator,
+      (c) => {
+        if (!this.valid) {
+          return {
+            passwordStrength: true
+          };
+        }
+
+        return null;
+      }
+    ])
+  }
+
+  onChangePasswordStrength(valid: boolean) {
+    this.valid = valid;
+    this.control.updateValueAndValidity();
+  }
 }

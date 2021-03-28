@@ -69,6 +69,7 @@ import { DetailLogoComponent } from "./detail/logo/logo.component";
 import { InputCheckComponent } from "./input/check/check.component";
 import { DynamicComponent } from "./dynamic/dynamic.component";
 import {InputIntsComponent} from "./input/ints/ints.component";
+import { PasswordStrengthComponent } from "./password-strength/password-strength.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -168,6 +169,7 @@ export const COMPONENTS = [
   ...CHART_COMPONENTS,
   ...GRID_COMPONENTS,
   ...DYNAMIC_COMPONENTS,
+  PasswordStrengthComponent
 ];
 
 export const IMPORTS = [

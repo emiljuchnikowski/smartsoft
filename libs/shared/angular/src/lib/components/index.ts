@@ -17,5 +17,6 @@ export * from './page';
 export * from './searchbar';
 export * from './tabs';
 export * from './dynamic';
+export * from './password-strength';
 
 export * from './components.module';

@@ -66,6 +66,11 @@ export interface ITranslateData {
             invalidNip: string,
             invalidUnique: string,
             confirm: string
+        },
+        'PASSWORD-STRENGTH': {
+            poor: string,
+            notGood: string,
+            good: string
         }
     };
     ERRORS: {
@@ -124,6 +129,11 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
             invalidNip: 'Invalid nip format',
             invalidUnique: 'Invalid unique value',
             confirm: 'bad confirmed'
+        },
+        'PASSWORD-STRENGTH': {
+            poor: 'poor',
+            notGood: 'not ood',
+            good: 'good'
         }
     },
     ERRORS: {
@@ -182,6 +192,11 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
             invalidNip: 'niepoprawny format nip',
             invalidUnique: 'wartość jest już w systemie',
             confirm: 'źle powtórzone'
+        },
+        'PASSWORD-STRENGTH': {
+            poor: 'bardzo słabe',
+            notGood: 'słabe',
+            good: 'dobre'
         }
     },
     ERRORS: {
