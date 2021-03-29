@@ -1,14 +1,14 @@
 import {Injectable} from "@angular/core";
-import {DeviceDetectorService} from "ngx-device-detector";
 import {App} from "@capacitor/core";
+import {Platform} from "@ionic/angular";
 
 @Injectable()
 export class HardwareService {
     get isMobile(): boolean {
-        return this.deviceDetector.isMobile();
+        return this.platform.is('capacitor');
     }
 
-    constructor(private deviceDetector: DeviceDetectorService) { }
+    constructor(private platform: Platform) { }
 
     onBackButtonClick(callback: () => void): IHardwareBackHandler {
         return App.addListener('backButton', () => {

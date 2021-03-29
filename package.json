@@ -142,7 +142,6 @@
     "multer": "^1.4.2",
     "ng2-charts": "^2.4.0",
     "ngx-color-picker": "^10.1.0",
-    "ngx-device-detector": "2.0.0",
     "ngx-editor": "^5.0.0-alpha.19",
     "ngx-socket-io": "^3.2.0",
     "passport": "0.4.1",

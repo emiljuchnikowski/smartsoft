@@ -6,12 +6,12 @@ import { Storage as IonicStorage } from '@ionic/storage';
 
 @Injectable()
 export class StorageService implements Storage {
+    static data = {};
+
     [index: number]: string;
     [key: string]: any;
     length: number;
     cookies: any;
-
-    private _storage = {};
 
     constructor(
         private cookieService: CookieService,
@@ -29,11 +29,11 @@ export class StorageService implements Storage {
             for (let index = 0; index < keys.length; index++) {
                 const key = keys[index];
 
-                this._storage[key] = await this.injector.get(IonicStorage).get(key);
+                StorageService.data[key] = await this.injector.get(IonicStorage).get(key);
             }
         }
 
-        this._storage = this.cookieService.getAll();
+        StorageService.data = this.cookieService.getAll();
     }
 
     public clear(): void {
@@ -43,15 +43,15 @@ export class StorageService implements Storage {
             this.cookieService.removeAll();
         }
 
-        this._storage = {};
+        StorageService.data = {};
     }
 
     public getAll(): Object {
-        return this._storage;
+        return StorageService.data;
     }
 
     public getItem(key: string): string {
-        return this._storage[key];
+        return StorageService.data[key];
     }
 
     public key(index: number): string {
@@ -65,7 +65,7 @@ export class StorageService implements Storage {
             this.cookieService.remove(key);
         }
 
-        delete this._storage[key];
+        delete StorageService.data[key];
     }
 
     public setItem(key: string, data: string): void {
@@ -75,6 +75,6 @@ export class StorageService implements Storage {
             this.cookieService.put(key, data);
         }
 
-        this._storage[key] = data;
+        StorageService.data[key] = data;
     }
 }
