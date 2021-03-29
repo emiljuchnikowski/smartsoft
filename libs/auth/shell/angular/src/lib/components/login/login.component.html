@@ -15,18 +15,35 @@
         </div>
 
         <div class="social-login" *ngIf="showFb || showGoogle">
-            <p>{{ 'or' | translate }}<br> {{ 'signInQuicklyWith' | translate }}</p>
-            <ng-container *ngIf="showFb">
-                <smart-button class="fb-login-button" [options]="buttonFbOptions" title="{{ 'FORM.login' | translate }}">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                </smart-button>
-            </ng-container>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <p>{{ 'or' | translate }}<br> {{ 'signInQuicklyWith' | translate }}</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ng-container *ngIf="showFb">
+                            <smart-button class="fb-login-button" [options]="buttonFbOptions" title="{{ 'FORM.login' | translate }}">
+                                <ion-icon name="logo-facebook"></ion-icon>
+                            </smart-button>
+                        </ng-container>
+                    </ion-col>
+                    <ion-col>
+                        <ng-container *ngIf="showGoogle">
+                            <smart-button class="g-login-button" [options]="buttonGoogleOptions" title="{{ 'FORM.login' | translate }}">
+                                <ion-icon name="logo-google"></ion-icon>
+                            </smart-button>
+                        </ng-container>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
 
-            <ng-container *ngIf="showGoogle">
-                <smart-button class="g-login-button" [options]="buttonGoogleOptions" title="{{ 'FORM.login' | translate }}">
-                    <ion-icon name="logo-google"></ion-icon>
-                </smart-button>
-            </ng-container>
+
+
+
+
+
         </div>
 
         <ng-content select='.card-bottom'></ng-content>
