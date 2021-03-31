@@ -1,5 +1,8 @@
 <ion-item *ngIf="options">
-    <ion-label color="medium" position="stacked">{{ 'MODEL.' + options.key | translate }}</ion-label>
+    <smart-info style="float: right" *ngIf="options?.options?.info" [text]="options?.options?.info"></smart-info>
+    <ion-label color="medium" position="stacked">
+        {{ 'MODEL.' + options.key | translate }}
+    </ion-label>
     <ng-container *ngIf='options.item$ | async; let item; else skeletonTpl'>
         <ng-container [ngSwitch]="options.options.type">
             <smart-detail-email *ngSwitchCase="FieldType.email" [options]="options"></smart-detail-email>

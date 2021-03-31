@@ -70,6 +70,7 @@ import { InputCheckComponent } from "./input/check/check.component";
 import { DynamicComponent } from "./dynamic/dynamic.component";
 import {InputIntsComponent} from "./input/ints/ints.component";
 import { PasswordStrengthComponent } from "./password-strength/password-strength.component";
+import {InfoComponent, InfoModalComponent} from "./info/info.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -150,6 +151,11 @@ export const GRID_COMPONENTS = [
   GridColumnComponent,
 ];
 
+export const INFO_COMPONENTS = [
+  InfoComponent,
+  InfoModalComponent
+];
+
 export const DYNAMIC_COMPONENTS = [DynamicComponent];
 
 export const COMPONENTS = [
@@ -169,7 +175,7 @@ export const COMPONENTS = [
   ...CHART_COMPONENTS,
   ...GRID_COMPONENTS,
   ...DYNAMIC_COMPONENTS,
-  PasswordStrengthComponent
+    ...INFO_COMPONENTS
 ];
 
 export const IMPORTS = [

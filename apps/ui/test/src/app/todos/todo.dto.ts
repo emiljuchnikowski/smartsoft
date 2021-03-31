@@ -42,7 +42,10 @@ export class Todo implements IEntity<string> {
         create: modifyMetdata,
         update: modifyMetdata,
         details: true,
-        list: { order: 1 }
+        list: { order: 1 },
+        info: `
+            <b>Test</b> new
+        `
     })
     number: string;
 
@@ -53,6 +56,18 @@ export class Todo implements IEntity<string> {
         list: { order: 2 }
     })
     body: string;
+
+    @Field({
+        create: modifyMetdata,
+        update: modifyMetdata,
+        details: true,
+        confirm: true,
+        possibilities: {
+            strength: true
+        },
+        list: { order: 2 }
+    })
+    password: string;
 
     @Field({
         create: modifyMetdata,
