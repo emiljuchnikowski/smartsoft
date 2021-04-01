@@ -3,3 +3,10 @@ smart-loader {
     margin-left: auto !important;
     margin-right: auto !important;
 }
+
+.top-info,
+.bottom-info {
+    font-size: 1.2rem;
+    color: var(--smart-color-medium-shade);
+    padding: .6rem 0;
+}
