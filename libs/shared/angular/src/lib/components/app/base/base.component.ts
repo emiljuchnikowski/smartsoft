@@ -6,7 +6,7 @@ import {
   Directive,
   ElementRef,
   PLATFORM_ID,
-  Inject, ViewChild, ViewContainerRef,
+  Inject, ViewChild, ViewContainerRef, AfterContentInit,
 } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
 import { filter, map } from "rxjs/operators";
@@ -25,7 +25,7 @@ import { StyleService } from "../../../services/style/style.service";
 import {MenuService} from "../../../services/menu/menu.service";
 
 @Directive()
-export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
+export abstract class AppBaseComponent implements OnDestroy, AfterContentInit {
   private _options: IAppOptions;
   private _subscriptions = new Subscription();
 
@@ -70,7 +70,7 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
     this._options.provider.logout();
   }
 
-  async ngAfterViewInit(): Promise<void> {
+  async ngAfterContentInit(): Promise<void> {
     this.initLoader();
     this.refreshStyles();
 
@@ -100,6 +100,9 @@ export abstract class AppBaseComponent implements OnDestroy, AfterViewInit {
           if (event.urlAfterRedirects)
             this.selectedPath = event.urlAfterRedirects;
           else this.selectedPath = event.url;
+
+          this.styleService.init(this.elementRef);
+
           this.cd.detectChanges();
         })
     );
