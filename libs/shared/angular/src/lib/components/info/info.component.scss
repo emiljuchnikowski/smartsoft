@@ -9,13 +9,11 @@
     ion-icon {
         color: var(--smart-color-primary);
     }
-    .item-datetime & {
-        right: 6.4rem;
-    }
     .item-multiple-inputs & {
         float: right;
         height: 100%;
-        border: .1rem dotted rgba(var(--smart-color-primary), .66);
+        width: .1rem;
+        border: .1rem dotted rgba(var(--smart-color-primary-rgb), .5) !important;
         right: 3.2rem;
         ion-icon {
             position: absolute;
@@ -27,5 +25,13 @@
             border-radius: 50%;
             padding-left: .1rem;
         }
+    }
+    .item-multiple-inputs.item-datetime & {
+        right: 7.8rem;
+        margin-top: -.3rem;
+        border: none !important;
+    }
+    .item-datetime & {
+        right: 6.4rem;
     }
 }
