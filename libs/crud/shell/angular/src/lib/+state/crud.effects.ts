@@ -39,7 +39,7 @@ export class CrudEffects<T extends IEntity<string>> {
                   CrudActions.createSuccess(this.config.entity, action.item)
                 )
               ),
-              catchError(error => {
+              catchError((error) => {
                 this.store.dispatch(
                   CrudActions.createFailure(
                     this.config.entity,
@@ -58,7 +58,7 @@ export class CrudEffects<T extends IEntity<string>> {
           this.store.dispatch(
             CrudActions.read(
               this.config.entity,
-                createState.filter ? { ...createState.filter, offset: 0 } : null
+              createState.filter ? { ...createState.filter, offset: 0 } : null
             )
           );
           break;
@@ -71,17 +71,17 @@ export class CrudEffects<T extends IEntity<string>> {
                 this.store.dispatch(
                   CrudActions.createManySuccess(this.config.entity, {
                     items: action.data.items,
-                    options: action.data.options
+                    options: action.data.options,
                   })
                 )
               ),
-              catchError(error => {
+              catchError((error) => {
                 this.store.dispatch(
                   CrudActions.createManyFailure(
                     this.config.entity,
                     {
                       items: action.data.items,
-                      options: action.data.options
+                      options: action.data.options,
                     },
                     error
                   )
@@ -97,7 +97,9 @@ export class CrudEffects<T extends IEntity<string>> {
           this.store.dispatch(
             CrudActions.read(
               this.config.entity,
-                createManyState.filter ? { ...createManyState.filter, offset: 0 } : null
+              createManyState.filter
+                ? { ...createManyState.filter, offset: 0 }
+                : null
             )
           );
           break;
@@ -106,7 +108,7 @@ export class CrudEffects<T extends IEntity<string>> {
           this.service
             .getList(action.filter)
             .pipe(
-              tap(result =>
+              tap((result) =>
                 this.store.dispatch(
                   CrudActions.readSuccess(
                     this.config.entity,
@@ -115,7 +117,7 @@ export class CrudEffects<T extends IEntity<string>> {
                   )
                 )
               ),
-              catchError(error => {
+              catchError((error) => {
                 this.store.dispatch(
                   CrudActions.readFailure(
                     this.config.entity,
@@ -133,7 +135,7 @@ export class CrudEffects<T extends IEntity<string>> {
           this.service
             .exportList(action.filter, action.format)
             .pipe(
-              tap(result =>
+              tap((result) =>
                 this.store.dispatch(
                   CrudActions.exportListSuccess(
                     this.config.entity,
@@ -141,7 +143,7 @@ export class CrudEffects<T extends IEntity<string>> {
                   )
                 )
               ),
-              catchError(error => {
+              catchError((error) => {
                 this.store.dispatch(
                   CrudActions.exportListFailure(
                     this.config.entity,
@@ -159,7 +161,7 @@ export class CrudEffects<T extends IEntity<string>> {
           this.service
             .getById(action.id)
             .pipe(
-              tap(result =>
+              tap((result) =>
                 this.store.dispatch(
                   CrudActions.selectSuccess(
                     this.config.entity,
@@ -168,7 +170,7 @@ export class CrudEffects<T extends IEntity<string>> {
                   )
                 )
               ),
-              catchError(error => {
+              catchError((error) => {
                 this.store.dispatch(
                   CrudActions.selectFailure(
                     this.config.entity,
@@ -191,7 +193,7 @@ export class CrudEffects<T extends IEntity<string>> {
                   CrudActions.updateSuccess(this.config.entity, action.item)
                 )
               ),
-              catchError(error => {
+              catchError((error) => {
                 this.store.dispatch(
                   CrudActions.updateFailure(
                     this.config.entity,
@@ -208,15 +210,12 @@ export class CrudEffects<T extends IEntity<string>> {
 
         case `[${this.config.entity}] Update Success`:
           this.store
-            .pipe(
-              select(getCrudFilter(this.config.entity)),
-              first()
-            )
-            .subscribe(filter => {
+            .pipe(select(getCrudFilter(this.config.entity)), first())
+            .subscribe((filter) => {
               this.store.dispatch(
                 CrudActions.read(this.config.entity, {
                   ...filter,
-                  offset: 0
+                  offset: 0,
                 })
               );
             });
@@ -234,7 +233,7 @@ export class CrudEffects<T extends IEntity<string>> {
                   )
                 )
               ),
-              catchError(error => {
+              catchError((error) => {
                 this.store.dispatch(
                   CrudActions.updatePartialFailure(
                     this.config.entity,
@@ -251,15 +250,52 @@ export class CrudEffects<T extends IEntity<string>> {
 
         case `[${this.config.entity}] Update partial Success`:
           this.store
-            .pipe(
-              select(getCrudFilter(this.config.entity)),
-              first()
-            )
-            .subscribe(filter => {
+            .pipe(select(getCrudFilter(this.config.entity)), first())
+            .subscribe((filter) => {
               this.store.dispatch(
                 CrudActions.read(this.config.entity, {
                   ...filter,
-                  offset: 0
+                  offset: 0,
+                })
+              );
+            });
+          break;
+
+        case `[${this.config.entity}] Update partial many`:
+          this.service
+            .updatePartialMany(action.items)
+            .pipe(
+              tap(() =>
+                this.store.dispatch(
+                  CrudActions.updatePartialManySuccess(
+                    this.config.entity,
+                    action.items
+                  )
+                )
+              ),
+              catchError((error) => {
+                this.store.dispatch(
+                  CrudActions.updatePartialManyFailure(
+                    this.config.entity,
+                    action.items,
+                    error
+                  )
+                );
+                this.store.dispatch(CrudActions.read(this.config.entity));
+                return of();
+              })
+            )
+            .subscribe();
+          break;
+
+        case `[${this.config.entity}] Update partial many Success`:
+          this.store
+            .pipe(select(getCrudFilter(this.config.entity)), first())
+            .subscribe((filter) => {
+              this.store.dispatch(
+                CrudActions.read(this.config.entity, {
+                  ...filter,
+                  offset: 0,
                 })
               );
             });
@@ -274,7 +310,7 @@ export class CrudEffects<T extends IEntity<string>> {
                   CrudActions.deleteSuccess(this.config.entity, action.id)
                 )
               ),
-              catchError(error => {
+              catchError((error) => {
                 this.store.dispatch(
                   CrudActions.deleteFailure(
                     this.config.entity,

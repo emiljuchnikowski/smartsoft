@@ -52,7 +52,7 @@ export class FormOptionsPipe<T extends IEntity<string>>
       }
 
       return {
-        mode: "update",
+        mode: mode,
         uniqueProvider,
         possibilities: possibilities,
         inputComponents,

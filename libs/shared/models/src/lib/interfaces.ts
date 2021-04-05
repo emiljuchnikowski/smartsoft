@@ -52,6 +52,10 @@ export interface IFieldModifyMetadata {
     defaltValue?: () => any;
 }
 
+export interface IFieldEditMetadata extends IFieldModifyMetadata {
+    multi?: boolean;
+}
+
 export interface IFieldListMetadata {
     order?: number;
     filter?: boolean;
@@ -84,7 +88,7 @@ export interface IModelModeOptionsCustom extends IModelModeOptions {
 
 export interface IFieldOptions extends IFieldMetadata {
     create?: IFieldModifyMetadata | boolean;
-    update?: IFieldModifyMetadata | boolean;
+    update?: IFieldEditMetadata | boolean;
     list?: IFieldListMetadata | boolean;
     details?: IFieldDetailsMetadata | boolean;
     customs?: Array<IModelMetadataCustom>;

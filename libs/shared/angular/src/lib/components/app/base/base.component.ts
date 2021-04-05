@@ -25,7 +25,7 @@ import { StyleService } from "../../../services/style/style.service";
 import {MenuService} from "../../../services/menu/menu.service";
 
 @Directive()
-export abstract class AppBaseComponent implements OnDestroy, AfterContentInit {
+export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, AfterViewInit {
   private _options: IAppOptions;
   private _subscriptions = new Subscription();
 
@@ -73,7 +73,9 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit {
   async ngAfterContentInit(): Promise<void> {
     this.initLoader();
     this.refreshStyles();
+  }
 
+  async ngAfterViewInit(): Promise<void> {
     await this.menuService.init(this.endMenuContainer);
   }
 

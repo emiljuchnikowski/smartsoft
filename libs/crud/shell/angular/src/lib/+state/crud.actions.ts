@@ -3,6 +3,7 @@ import { Action } from "@ngrx/store";
 import { IEntity } from "@smartsoft001/domain-core";
 import { ICrudCreateManyOptions, ICrudFilter } from "../models/interfaces";
 
+
 /*
  * Create
  */
@@ -191,6 +192,19 @@ export const unselect = function(entity: string): Action {
 };
 
 /*
+ * MultiSelect
+ */
+export const multiSelect = function<T extends IEntity<string>>(
+    entity: string,
+    items: Array<T>
+): Action & { items: Array<T> } {
+  return {
+    type: `[${entity}] MultiSelect`,
+    items
+  };
+};
+
+/*
  * Update
  */
 export const update = function<T extends IEntity<string>>(
@@ -256,6 +270,41 @@ export const updatePartialFailure = function<T extends IEntity<string>>(
   return {
     type: `[${entity}] Update partial Failure`,
     item,
+    error
+  };
+};
+
+/*
+ * Update partial many
+ */
+export const updatePartialMany = function<T extends IEntity<string>>(
+    entity: string,
+    items: Partial<T> & { id: string }[]
+): Action & { items: Partial<T> & { id: string }[] } {
+  return {
+    type: `[${entity}] Update partial many`,
+    items
+  };
+};
+
+export const updatePartialManySuccess = function<T extends IEntity<string>>(
+    entity: string,
+    items: Partial<T> & { id: string }[]
+): Action & { items: Partial<T> & { id: string }[] } {
+  return {
+    type: `[${entity}] Update partial many Success`,
+    items
+  };
+};
+
+export const updatePartialManyFailure = function<T extends IEntity<string>>(
+    entity: string,
+    items: Partial<T> & { id: string }[],
+    error
+): Action & { items: Partial<T> & { id: string }[]; error } {
+  return {
+    type: `[${entity}] Update partial many Failure`,
+    items,
     error
   };
 };

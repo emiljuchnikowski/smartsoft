@@ -10,12 +10,12 @@ import { combineLatest, Observable } from "rxjs";
 
 import {
   AuthService,
-  DynamicComponentLoader, IIconButtonOptions,
+  DynamicComponentLoader, HardwareService, IIconButtonOptions,
   IListOptions,
   IPageOptions, MenuService,
 } from "@smartsoft001/angular";
 import { IEntity } from "@smartsoft001/domain-core";
-import {getModelFieldsWithOptions, getModelOptions, IFieldListMetadata} from "@smartsoft001/models";
+import {getModelFieldsWithOptions, getModelOptions, IFieldEditMetadata, IFieldListMetadata} from "@smartsoft001/models";
 
 import { CrudFacade } from "../../+state/crud.facade";
 import {CrudConfig, CrudFullConfig} from "../../crud.config";
@@ -23,6 +23,7 @@ import { ICrudFilter } from "../../models/interfaces";
 import {ExportComponent} from "../../components/export/export.component";
 import {PageBaseComponent} from "../base/base.component";
 import {FiltersComponent} from "../../components/filters/filters.component";
+import {MultiselectComponent} from "../../components/multiselect/multiselect.component";
 
 @Component({
   selector: "smart-crud-list-page",
@@ -51,6 +52,7 @@ export class ListComponent<T extends IEntity<string>>
     private injector: Injector,
     private cd: ChangeDetectorRef,
     private menuService: MenuService,
+    private hardwareService: HardwareService,
     authService: AuthService
   ) {
     super(authService, config);
@@ -120,6 +122,18 @@ export class ListComponent<T extends IEntity<string>>
             ...filter
           };
           this.facade.read(global);
+        },
+        onChangeMultiSelected: async list => {
+          if (list.length && !this.menuService.openedEnd) {
+            await this.menuService.openEnd({
+              injector: this.injector,
+              component: MultiselectComponent
+            });
+          } else if (!list.length && this.menuService.openedEnd) {
+            await this.menuService.closeEnd();
+          }
+
+          this.facade.multiSelect(list);
         },
         list$: this.facade.list$,
         loading$: this.facade.loaded$.pipe(map(l => !l))
@@ -251,8 +265,19 @@ export class ListComponent<T extends IEntity<string>>
     this.router.events.pipe(
         this.takeUntilDestroy
     ).subscribe(async () => {
-      await this.menuService.closeEnd();
+      await this.clear();
     });
+  }
+
+  private async clear() {
+    await this.menuService.closeEnd();
+
+    this.listOptions = {
+      ...this.listOptions,
+      select: null
+    };
+
+    this.facade.multiSelect([]);
   }
 
   private getEndButtons(): Array<IIconButtonOptions> {
@@ -262,14 +287,32 @@ export class ListComponent<T extends IEntity<string>>
     const showFilters =
         fieldsWithOptions.some(x => (x.options?.list as IFieldListMetadata)?.filter) || modelOptions?.filters?.length;
 
+    const showMultiEdit = this.config.edit &&
+        fieldsWithOptions.some(x => (x.options?.update as IFieldEditMetadata)?.multi)  && !this.hardwareService.isMobile;
+
+
     return [
+      ...(showMultiEdit
+          ? [
+            {
+              icon: "checkbox-outline",
+              handler: async () => {
+                this.listOptions = {
+                  ...this.listOptions,
+                  select: this.listOptions.select === 'multi' ? null : 'multi'
+                };
+                this.facade.multiSelect([]);
+                if (this.menuService.openedEnd) await this.menuService.closeEnd();
+                this.cd.detectChanges();
+              }
+            }
+          ]
+          : []),
       ...(showFilters
           ? [
             {
               icon: "filter-outline",
               handler: async () => {
-
-
                 await this.menuService.openEnd({
                   injector: this.injector,
                   component: FiltersComponent

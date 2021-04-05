@@ -51,7 +51,10 @@ export class Todo implements IEntity<string> {
 
     @Field({
         create: modifyMetdata,
-        update: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
         details: true,
         list: { order: 2 }
     })
@@ -100,7 +103,10 @@ export class Todo implements IEntity<string> {
 
     @Field({
         create: modifyMetdata,
-        update: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
         details: true,
         list: { order: 3 }
     })

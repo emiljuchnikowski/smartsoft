@@ -28,6 +28,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
   private _fields: Array<{ key: string; options: IFieldOptions }>;
 
   detailsComponent;
+  selectMode?: 'multi';
   detailsComponentProps: IDetailsOptions<T>;
   select: (id: string) => void;
   unselect: () => void;
@@ -56,6 +57,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     this.provider = val.provider;
     this.sort = val.sort;
     this.cellPipe = val.cellPipe;
+    this.selectMode = val.select;
     this.initKeys();
     this.initList(val);
     this.initLoading();

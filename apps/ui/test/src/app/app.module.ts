@@ -38,10 +38,10 @@ import { Todo } from "./todos/todo.dto";
         },
         {
           path: "users",
-          canActivate: [PermissionsGuard],
-          data: {
-            expectedPermissions: ["admin"],
-          },
+          // canActivate: [PermissionsGuard],
+          // data: {
+          //   expectedPermissions: ["admin"],
+          // },
           loadChildren: () =>
             import("./users/users.module").then((m) => m.UsersModule),
         },

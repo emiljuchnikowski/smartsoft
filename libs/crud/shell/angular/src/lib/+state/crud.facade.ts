@@ -15,6 +15,7 @@ import {ICrudCreateManyOptions, ICrudFilter} from "../models/interfaces";
 @Injectable()
 export class CrudFacade<T extends IEntity<string>> {
   selected: T;
+  multiSelected: T;
   list: Array<T>;
   filter: ICrudFilter;
 
@@ -30,6 +31,12 @@ export class CrudFacade<T extends IEntity<string>> {
     tap(s => {
       this.selected = s;
     })
+  );
+  multiSelected$: Observable<T[]> = this.store.pipe(
+      select(CrudSelectors.getCrudMultiSelected(this.config.entity)),
+      tap(s => {
+        this.multiSelected = s;
+      })
   );
   list$: Observable<T[]> = this.store.pipe(
     select(CrudSelectors.getCrudList(this.config.entity)),
@@ -82,6 +89,10 @@ export class CrudFacade<T extends IEntity<string>> {
     this.store.dispatch(CrudActions.unselect(this.config.entity));
   }
 
+  multiSelect(items: Array<T>): void {
+    this.store.dispatch(CrudActions.multiSelect(this.config.entity, items));
+  }
+
   update(item: T): void {
     this.store.dispatch(CrudActions.update(this.config.entity, item));
   }
@@ -92,6 +103,10 @@ export class CrudFacade<T extends IEntity<string>> {
 
   updatePartial(item: Partial<T> & { id: string }): void {
     this.store.dispatch(CrudActions.updatePartial(this.config.entity, item));
+  }
+
+  updatePartialMany(items: (Partial<T> & {id: string})[]) {
+    this.store.dispatch(CrudActions.updatePartialMany(this.config.entity, items));
   }
 
   delete(id: string): void {

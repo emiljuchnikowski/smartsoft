@@ -6,7 +6,7 @@ import * as _ from "lodash";
 
 import {
   FieldType,
-  getModelFieldsWithOptions,
+  getModelFieldsWithOptions, IFieldEditMetadata,
   IFieldModifyMetadata,
   IFieldOptions,
   IFieldUniqueMetadata,
@@ -57,7 +57,7 @@ export class FormFactory {
   async create<T>(
     obj: T,
     ops: {
-      mode?: "create" | "update" | string;
+      mode?: "create" | "update" | "multiUpdate" | string;
       uniqueProvider?: (values: Record<string, any>) => Promise<boolean>;
     } = {}
   ): Promise<FormGroup> {
@@ -70,6 +70,7 @@ export class FormFactory {
         !ops.mode ||
         (ops.mode === "create" && field.options.create) ||
         (ops.mode === "update" && field.options.update) ||
+        (ops.mode === "multiUpdate" && (field.options?.update as IFieldEditMetadata)?.multi) ||
         (ops.mode !== "create" &&
           ops.mode !== "update" &&
           field.options.customs &&

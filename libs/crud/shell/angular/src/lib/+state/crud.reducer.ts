@@ -5,6 +5,7 @@ import {ICrudFilter} from "../models/interfaces";
 
 export interface State<T extends IEntity<string>> {
     selected?: T;
+    multiSelected?: Array<T>;
     list?: T[];
     totalCount?: number;
     filter?: ICrudFilter;
@@ -145,6 +146,12 @@ const crudReducer = (state = initialState, action, entity) => {
                 error: action.error
             };
 
+        case `[${entity}] MultiSelect`:
+            return {
+                ...state,
+                multiSelected: [...action.items]
+            };
+
         case `[${entity}] Unselect`:
             return {
                 ...state,
@@ -189,6 +196,27 @@ const crudReducer = (state = initialState, action, entity) => {
             };
 
         case `[${entity}] Update partial Failure`:
+            return {
+                ...state,
+                loaded: true,
+                error: action.error
+            };
+
+        case `[${entity}] Update partial many`:
+            return {
+                ...state,
+                loaded: false,
+                error: null
+            };
+
+        case `[${entity}] Update partial many Success`:
+            return {
+                ...state,
+                loaded: true,
+                error: null
+            };
+
+        case `[${entity}] Update partial many Failure`:
             return {
                 ...state,
                 loaded: true,

@@ -7,6 +7,11 @@ export const getCrudSelected = (entity) => createSelector(
     (state) => state.selected
 );
 
+export const getCrudMultiSelected = (entity) => createSelector(
+    getCrudState(entity),
+    (state) => state.multiSelected
+);
+
 export const getCrudList = (entity) => createSelector(
     getCrudState(entity),
     (state) => state.list

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import {forkJoin, Observable} from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
@@ -124,6 +124,12 @@ export class CrudService<T extends IEntity<string>> {
 
   updatePartial(item: Partial<T> & { id: string }): Observable<void> {
     return this.http.patch<void>(this.config.apiUrl + "/" + item.id, item);
+  }
+
+  updatePartialMany(items: (Partial<T> & { id: string })[]): Observable<any> {
+    return forkJoin(items.map(item => {
+        return this.updatePartial(item);
+    }));
   }
 
   delete(id: string): Observable<void> {

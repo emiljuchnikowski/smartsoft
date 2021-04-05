@@ -151,6 +151,8 @@ export interface IListOptions<T> {
     | {
         provider?: IRemoveProvider<T>;
       };
+
+  select?: 'multi'
 }
 
 export interface IListCellPipe<T> extends PipeTransform {
@@ -170,6 +172,7 @@ export type ItemOptions = IItemOptionsForPage;
 
 export interface IListProvider<T> {
   getData: (filter) => void;
+  onChangeMultiSelected?: (list: Array<T>) => void;
   list$: Observable<T[]>;
   loading$: Observable<boolean>;
 }

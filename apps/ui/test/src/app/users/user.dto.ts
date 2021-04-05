@@ -29,7 +29,10 @@ export class User implements IEntity<string> {
             required: true,
             permissions: [ 'admin2' ]
         },
-        update: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
         details: true,
         list: { order: 3, permissions: [ 'admin' ] }
     })
@@ -39,7 +42,7 @@ export class User implements IEntity<string> {
         create: modifyMetdata,
         update: {
             required: true,
-            permissions: [ 'admin2' ]
+            multi: true,
         },
         details: true,
         list: { order: 2 }

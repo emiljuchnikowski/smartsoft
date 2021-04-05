@@ -11,6 +11,11 @@ import { MenuController } from "@ionic/angular";
 })
 export class MenuService {
   _endContainer: ViewContainerRef;
+  _openedEnd = false;
+
+  get openedEnd(): boolean {
+    return this._openedEnd;
+  }
 
   constructor(
     private readonly menuCtrl: MenuController,
@@ -27,6 +32,8 @@ export class MenuService {
     component: any,
     injector: Injector,
   }): Promise<void> {
+    this._openedEnd = true;
+
     const resolver = options.injector.get(ComponentFactoryResolver);
 
     this._endContainer.clear();
@@ -38,6 +45,8 @@ export class MenuService {
   }
 
   async closeEnd(): Promise<void> {
+    this._openedEnd = false;
+
     await this.menuCtrl.close("end");
     await this.menuCtrl.enable(false, "end");
 

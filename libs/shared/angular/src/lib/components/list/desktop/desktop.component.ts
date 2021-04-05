@@ -29,12 +29,14 @@ export class ListDesktopComponent<T extends IEntity<string>>
   extends ListBaseComponent<T>
   implements OnInit, OnDestroy, AfterViewInit {
   private _subscriptions = new Subscription();
+  private _multiSelected = [];
 
   componentFactories: IListComponentFactories<T>;
 
   get desktopKeys(): Array<string> {
     if (this.keys) {
       return [
+        ...(this.selectMode === 'multi' ? ["selectMulti"] : []),
         ...this.keys,
         ...(this.removeHandler ? ["removeAction"] : []),
         ...(this.detailsComponent ? ["detailsAction"] : []),
@@ -65,6 +67,21 @@ export class ListDesktopComponent<T extends IEntity<string>>
     this.componentFactories = val.componentFactories;
 
     this.generateDynamicComponents();
+  }
+
+  onChangeMultiselect(checked: boolean, element: T) {
+    if (checked) {
+      this._multiSelected.push(element);
+    } else {
+      const index = this._multiSelected.indexOf(element);
+      if (index > -1) {
+        this._multiSelected.splice(index, 1);
+      }
+    }
+
+    if (this.provider.onChangeMultiSelected) {
+      this.provider.onChangeMultiSelected(this._multiSelected);
+    }
   }
 
   ngAfterViewInit(): void {
