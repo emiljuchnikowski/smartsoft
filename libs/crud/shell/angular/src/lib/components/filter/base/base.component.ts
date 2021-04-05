@@ -61,7 +61,7 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
       (q) => q.key === this.item.key && q.type === this.item.type
     );
 
-    if (!val) {
+    if (val === null || val === undefined || val === '') {
       const index = this.filter.query.indexOf(query);
       if (index > -1) {
         this.filter.query.splice(index, 1);

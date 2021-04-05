@@ -17,6 +17,12 @@
           [filter]="filter"
   ></smart-crud-filter-radio>
 
+  <smart-crud-filter-flag
+          *ngSwitchCase="FieldType.flag"
+          [item]="item"
+          [filter]="filter"
+  ></smart-crud-filter-flag>
+
   <smart-crud-filter-text
     *ngSwitchDefault
     [item]="item"

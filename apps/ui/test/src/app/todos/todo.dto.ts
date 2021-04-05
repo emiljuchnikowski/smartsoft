@@ -108,7 +108,8 @@ export class Todo implements IEntity<string> {
             multi: true
         },
         details: true,
-        list: { order: 3 }
+        list: { order: 3, filter: true },
+        type: FieldType.flag
     })
-    done: string;
+    done: boolean;
 }
