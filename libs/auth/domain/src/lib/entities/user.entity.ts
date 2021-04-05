@@ -21,6 +21,9 @@ export class User implements IEntity<string>, IUser, IUserCredentials {
     @Column("disabled")
     disabled: boolean;
 
+    @Column("lastLoginDate")
+    lastLoginDate: Date;
+
     @Column("authRefreshToken")
     authRefreshToken: string;
 

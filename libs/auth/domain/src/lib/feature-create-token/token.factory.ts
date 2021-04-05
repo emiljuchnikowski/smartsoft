@@ -95,6 +95,7 @@ export class TokenFactory
 
     const refreshToken = Guid.raw();
     await this.repository.update(query, {
+      lastLoginDate: new Date(),
       authRefreshToken: refreshToken,
     });
 
