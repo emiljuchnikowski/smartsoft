@@ -6,7 +6,8 @@ import * as _ from "lodash";
 
 import {
   FieldType,
-  getModelFieldsWithOptions, IFieldEditMetadata,
+  getModelFieldsWithOptions,
+  IFieldEditMetadata,
   IFieldModifyMetadata,
   IFieldOptions,
   IFieldUniqueMetadata,
@@ -141,6 +142,10 @@ export class FormFactory {
 
     if (options.required) {
       result.push(Validators.required);
+    }
+
+    if (options.type === FieldType.email) {
+      result.push(Validators.email);
     }
 
     if (options.unique) {

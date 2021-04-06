@@ -66,7 +66,8 @@ export interface ITranslateData {
             required: string,
             invalidNip: string,
             invalidUnique: string,
-            confirm: string
+            confirm: string,
+            invalidEmailFormat: string
         },
         'PASSWORD-STRENGTH': {
             poor: string,
@@ -130,7 +131,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
             required: 'field is required',
             invalidNip: 'Invalid nip format',
             invalidUnique: 'Invalid unique value',
-            confirm: 'bad confirmed'
+            confirm: 'bad confirmed',
+            invalidEmailFormat: "invalid email format"
         },
         'PASSWORD-STRENGTH': {
             poor: 'poor',
@@ -194,7 +196,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
             required: 'to pole jest wymagane',
             invalidNip: 'niepoprawny format nip',
             invalidUnique: 'wartość jest już w systemie',
-            confirm: 'źle powtórzone'
+            confirm: 'źle powtórzone',
+            invalidEmailFormat: "niepoprawny adres email"
         },
         'PASSWORD-STRENGTH': {
             poor: 'bardzo słabe',
