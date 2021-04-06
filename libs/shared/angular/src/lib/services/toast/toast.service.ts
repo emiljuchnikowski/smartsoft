@@ -3,10 +3,21 @@ import {ToastController} from "@ionic/angular";
 
 @Injectable()
 export class ToastService {
+  static lockError = 0;
 
   constructor(private toastCtrl: ToastController) { }
 
+  addLockError(): void {
+    ++ToastService.lockError;
+  }
+
+  removeLockError(): void {
+    --ToastService.lockError;
+  }
+
   async error(config: IToastOptions): Promise<void> {
+    if (ToastService.lockError) return;
+
     const toast = await this.toastCtrl.create({
       position: 'bottom',
       header: config.title,

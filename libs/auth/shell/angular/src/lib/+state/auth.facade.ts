@@ -15,6 +15,7 @@ export class AuthFacade {
   loaded$ = this.store.pipe(select(AuthSelectors.getAuthLoaded));
   token$ = this.store.pipe(select(AuthSelectors.getAuthToken));
   username$ = this.store.pipe(select(AuthSelectors.getAuthUsername));
+  error$ = this.store.pipe(select(AuthSelectors.getAuthError));
 
   constructor(
     private store: Store<fromAuth.AuthPartialState>,

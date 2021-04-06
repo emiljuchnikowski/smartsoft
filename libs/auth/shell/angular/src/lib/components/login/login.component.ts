@@ -6,6 +6,7 @@ import {LoginDto} from "@smartsoft001/auth-shell-dtos";
 
 import {AuthFacade} from "../../+state/auth.facade";
 import {AuthConfig} from "../../auth.config";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'smart-auth-login',
@@ -36,6 +37,8 @@ export class LoginComponent implements OnInit {
   };
   isSetFingerprint: boolean;
 
+  $error: Observable<any>;
+
   @ViewChild(FormComponent, { read: FormComponent, static: false })
   formComponent: FormComponent<LoginDto>;
 
@@ -51,7 +54,9 @@ export class LoginComponent implements OnInit {
       private facade: AuthFacade,
       private cd: ChangeDetectorRef,
       private config: AuthConfig
-  ) { }
+  ) {
+    this.$error = this.facade.error$;
+  }
 
   login(): void {
     if (this.formComponent.form.valid) {

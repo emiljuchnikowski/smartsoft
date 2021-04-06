@@ -3,6 +3,12 @@
     <smart-card>
         <ng-content select='.card-title'></ng-content>
 
+        <smart-error-context>
+            <div *ngIf="$error | async">
+                {{ 'ERRORS.invalidUsernameOrPassword' | translate }}
+            </div>
+        </smart-error-context>
+
         <smart-form (invokeSubmit)="login()" [options]="formOptions" class="login-form"></smart-form>
         <ng-content select='.card-middle'></ng-content>
         <div class="default-login">
