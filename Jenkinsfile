@@ -14,7 +14,7 @@ node {
 
         stage('Install packages') {
             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
-                sh 'NPM_TOKEN=$TOKEN npm install'
+                sh 'NPM_TOKEN=$TOKEN npm install --force'
             }
         }
 
