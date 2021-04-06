@@ -1,3 +1,9 @@
-ion-label {
-    --color: var(--smart-color-dark)
+.flag-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    ion-label {
+        --color: var(--smart-color-dark)
+    }
 }
