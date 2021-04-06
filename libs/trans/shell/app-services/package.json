@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/trans-shell-app-services",
-  "version": "1.0.201",
+  "version": "1.0.202",
   "description": "This library was generated with [Nx](https://nx.dev).",
   "main": "src/index.ts",
   "repository": {
