@@ -1,6 +1,4 @@
-<ion-item lines="none">
-    <ion-label position="floating">
-        {{ item.label | translate }}
-    </ion-label>
-    <ion-checkbox [(ngModel)]="value" slot="end"></ion-checkbox>
-</ion-item>
+<ion-label position="static">
+    {{ item.label | translate }}
+</ion-label>
+<ion-checkbox [(ngModel)]="value" slot="end"></ion-checkbox>
