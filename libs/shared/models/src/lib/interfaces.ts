@@ -22,6 +22,7 @@ export enum FieldType {
     logo = "logo",
     check = "check",
     phoneNumber = "phoneNumber",
+    pesel = "pesel",
 }
 
 export interface IModelFilter {

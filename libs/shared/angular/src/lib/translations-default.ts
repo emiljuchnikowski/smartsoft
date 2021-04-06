@@ -68,7 +68,8 @@ export interface ITranslateData {
             invalidUnique: string,
             confirm: string,
             invalidEmailFormat: string,
-            invalidPhoneNumberFormat: string
+            invalidPhoneNumberFormat: string,
+            invalidPeselFormat: string,
         },
         'PASSWORD-STRENGTH': {
             poor: string,
@@ -134,7 +135,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
             invalidUnique: 'Invalid unique value',
             confirm: 'bad confirmed',
             invalidEmailFormat: "invalid email format",
-            invalidPhoneNumberFormat: "invalid phone number (000000000)"
+            invalidPhoneNumberFormat: "invalid phone number (000000000)",
+            invalidPeselFormat: "invalid pesel",
         },
         'PASSWORD-STRENGTH': {
             poor: 'poor',
@@ -200,7 +202,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
             invalidUnique: 'wartość jest już w systemie',
             confirm: 'źle powtórzone',
             invalidEmailFormat: "niepoprawny adres email",
-            invalidPhoneNumberFormat: "niepoprawny number telefonu (000000000)"
+            invalidPhoneNumberFormat: "niepoprawny number telefonu (000000000)",
+            invalidPeselFormat: "niepoprawny number pesel",
         },
         'PASSWORD-STRENGTH': {
             poor: 'bardzo słabe',

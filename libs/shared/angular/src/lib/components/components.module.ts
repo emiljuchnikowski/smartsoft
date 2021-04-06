@@ -72,6 +72,7 @@ import { InputIntsComponent } from "./input/ints/ints.component";
 import { PasswordStrengthComponent } from "./password-strength/password-strength.component";
 import { InfoComponent, InfoModalComponent } from "./info/info.component";
 import {InputPhoneNumberComponent} from "./input/phone-number/phone-number.component";
+import {InputPeselComponent} from "./input/pesel/pesel.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -130,7 +131,8 @@ export const INPUT_COMPONENTS = [
   InputLogoComponent,
   InputCheckComponent,
   InputIntsComponent,
-  InputPhoneNumberComponent
+  InputPhoneNumberComponent,
+  InputPeselComponent
 ];
 
 export const LIST_COMPONENTS = [

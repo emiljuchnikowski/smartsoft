@@ -14,7 +14,8 @@ import {
   SYMBOL_FIELD,
   SYMBOL_MODEL,
 } from "@smartsoft001/models";
-import {ZipCodeService} from "@smartsoft001/utils";
+import {PeselService, ZipCodeService} from "@smartsoft001/utils";
+
 import {AuthService} from "../../services/auth/auth.service";
 
 @Injectable()
@@ -156,6 +157,16 @@ export class FormFactory {
         if (reg.test(c.value)) return null;
 
         return { phoneNumber: true };
+      });
+    }
+
+    if (options.type === FieldType.pesel) {
+      result.push((c: AbstractControl) => {
+        if (!c.value) return;
+
+        if (PeselService.isValid(c.value)) return null;
+
+        return { pesel: true };
       });
     }
 
