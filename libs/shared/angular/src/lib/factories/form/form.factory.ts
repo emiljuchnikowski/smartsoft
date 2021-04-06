@@ -148,6 +148,17 @@ export class FormFactory {
       result.push(Validators.email);
     }
 
+    if (options.type === FieldType.phoneNumber) {
+      result.push((c: AbstractControl) => {
+        if (!c.value) return;
+
+        const reg = new RegExp("^((\\+91-?)|0)?[0-9]{9}$");
+        if (reg.test(c.value)) return null;
+
+        return { phoneNumber: true };
+      });
+    }
+
     if (options.unique) {
       if (!uniqueProvider) throw Error("Required uniqueProvider");
 

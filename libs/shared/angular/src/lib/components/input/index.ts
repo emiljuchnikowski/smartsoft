@@ -21,3 +21,4 @@ export * from './text/text.component'
 export * from './logo/logo.component';
 export * from './check/check.component';
 export * from './ints/ints.component';
+export * from './phone-number/phone-number.component';

@@ -20,7 +20,8 @@ export enum FieldType {
     longText = "longText",
     color = "color",
     logo = "logo",
-    check = "check"
+    check = "check",
+    phoneNumber = "phoneNumber",
 }
 
 export interface IModelFilter {

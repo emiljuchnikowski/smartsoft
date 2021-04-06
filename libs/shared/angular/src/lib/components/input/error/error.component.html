@@ -14,6 +14,10 @@
     <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidEmailFormat' | translate }}
 </span>
 
+<span *ngIf="errors?.phoneNumber">
+    <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidPhoneNumberFormat' | translate }}
+</span>
+
 <ng-template #checkConfirm>
     <span *ngIf="errors?.confirm">
         <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.confirm' | translate }}
