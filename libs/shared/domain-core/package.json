@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/domain-core",
-  "version": "1.0.273",
+  "version": "1.0.274",
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
