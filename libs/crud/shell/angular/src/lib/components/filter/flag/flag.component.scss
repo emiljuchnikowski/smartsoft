@@ -1,9 +1,16 @@
-.flag-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    ion-label {
-        --color: var(--smart-color-dark)
+:host {
+    width: 100%;
+    .flag-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: 0 1.2rem 0 0;
+        ion-label {
+            --color: var(--smart-color-dark);
+            vertical-align: middle;
+            padding: 1.6rem 0;
+        }
     }
 }
