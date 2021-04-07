@@ -4,7 +4,7 @@ tr {
             background: #fdfdfd;
         }
         &:hover {
-            background-color: lighten(var(--smart-color-primary), 33%) !important;
+            background-color: rgba(var(--smart-color-primary-rgb), .05) !important;
         }
     }
 }
