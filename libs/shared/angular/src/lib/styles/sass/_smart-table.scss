@@ -3,6 +3,9 @@ tr {
         &:nth-child(even) {
             background: #fdfdfd;
         }
+        &:hover {
+            background-color: lighten(var(--smart-color-primary), 33%) !important;
+        }
     }
 }
 
@@ -10,6 +13,7 @@ td {
     &.mat-cell {
         padding-left: .6rem !important;
         border-right: .1rem solid #f6f6f6;
+        border-bottom-color: .1rem solid #ededed;
         text-overflow: unset;
         &:last-child {
             border-right: 0;
