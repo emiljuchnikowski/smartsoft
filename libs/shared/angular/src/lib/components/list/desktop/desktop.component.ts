@@ -69,7 +69,9 @@ export class ListDesktopComponent<T extends IEntity<string>>
     this.generateDynamicComponents();
   }
 
-  onChangeMultiselect(checked: boolean, element: T) {
+  onChangeMultiselect(checked: boolean, element: T, list: T[]) {
+    this._multiSelected = this._multiSelected.filter(m => list.some(i => i === m));
+
     if (checked) {
       this._multiSelected.push(element);
     } else {
