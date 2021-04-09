@@ -241,7 +241,7 @@ export class ListComponent<T extends IEntity<string>>
         },
         page$: this.facade.filter$.pipe(
           map(f => {
-            return f.offset / f.limit + 1;
+            return f?.limit ? f.offset / f.limit + 1 : 0;
           })
         ),
         totalPages$: combineLatest(
@@ -249,7 +249,7 @@ export class ListComponent<T extends IEntity<string>>
           this.facade.totalCount$
         ).pipe(
           map(([filter, totalCount]) => {
-            return Math.ceil(totalCount / filter.limit);
+            return filter?.limit ? Math.ceil(totalCount / filter.limit) : 0;
           })
         )
       },
