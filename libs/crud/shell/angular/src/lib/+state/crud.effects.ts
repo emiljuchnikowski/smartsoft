@@ -325,7 +325,16 @@ export class CrudEffects<T extends IEntity<string>> {
           break;
 
         case `[${this.config.entity}] Delete Success`:
-          this.store.dispatch(CrudActions.read(this.config.entity));
+            this.store
+                .pipe(select(getCrudFilter(this.config.entity)), first())
+                .subscribe((filter) => {
+                    this.store.dispatch(
+                        CrudActions.read(this.config.entity, {
+                            ...filter,
+                            offset: 0,
+                        })
+                    );
+                });
           break;
 
         default:
