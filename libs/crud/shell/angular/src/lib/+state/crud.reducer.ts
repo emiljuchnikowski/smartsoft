@@ -212,6 +212,7 @@ const crudReducer = (state = initialState, action, entity) => {
         case `[${entity}] Update partial many Success`:
             return {
                 ...state,
+                multiSelected: [],
                 loaded: true,
                 error: null
             };
