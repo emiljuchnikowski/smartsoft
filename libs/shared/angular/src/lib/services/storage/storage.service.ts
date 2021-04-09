@@ -21,7 +21,7 @@ export class StorageService implements Storage {
     ) { }
 
     public async init(): Promise<void> {
-        if (isPlatformBrowser(this.platformId) && this.platform.is('mobile')) {
+        if (isPlatformBrowser(this.platformId) && this.platform.is('capacitor')) {
             await this.platform.ready();
 
             const keys = await this.injector.get(IonicStorage).keys();
@@ -37,7 +37,7 @@ export class StorageService implements Storage {
     }
 
     public clear(): void {
-        if (isPlatformBrowser(this.platformId) && this.platform.is('mobile')) {
+        if (isPlatformBrowser(this.platformId) && this.platform.is('capacitor')) {
             this.injector.get(IonicStorage).clear();
         } else {
             this.cookieService.removeAll();
@@ -59,7 +59,7 @@ export class StorageService implements Storage {
     }
 
     public removeItem(key: string): void {
-        if (isPlatformBrowser(this.platformId) && this.platform.is('mobile')) {
+        if (isPlatformBrowser(this.platformId) && this.platform.is('capacitor')) {
             this.injector.get(IonicStorage).remove(key);
         } else {
             this.cookieService.remove(key);
@@ -69,7 +69,7 @@ export class StorageService implements Storage {
     }
 
     public setItem(key: string, data: string): void {
-        if (isPlatformBrowser(this.platformId) && this.platform.is('mobile')) {
+        if (isPlatformBrowser(this.platformId) && this.platform.is('capacitor')) {
             this.injector.get(IonicStorage).set(key, data);
         } else {
             this.cookieService.put(key, data);
