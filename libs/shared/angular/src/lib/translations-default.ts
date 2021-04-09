@@ -30,6 +30,7 @@ export interface ITranslateData {
     filters,
     or,
     signInQuicklyWith,
+    select: string,
     selected,
 
     OBJECT: {
@@ -98,6 +99,7 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     or: 'or',
     signInQuicklyWith: 'sign in quickly with',
     selected: "selected",
+    select: "select",
 
     OBJECT: {
         deleted: 'object deleted'
@@ -165,6 +167,7 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     or: 'lub',
     signInQuicklyWith: 'szybko zaloguj się za pomocą',
     selected: "wybrano",
+    select: "wybierz",
 
     OBJECT: {
         deleted: 'obiekt został usunięty'
@@ -202,8 +205,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
             invalidUnique: 'wartość jest już w systemie',
             confirm: 'źle powtórzone',
             invalidEmailFormat: "niepoprawny adres email",
-            invalidPhoneNumberFormat: "niepoprawny number telefonu (000000000)",
-            invalidPeselFormat: "niepoprawny number pesel",
+            invalidPhoneNumberFormat: "niepoprawny numer telefonu (000000000)",
+            invalidPeselFormat: "niepoprawny numer pesel",
         },
         'PASSWORD-STRENGTH': {
             poor: 'bardzo słabe',

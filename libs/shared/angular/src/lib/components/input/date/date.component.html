@@ -5,5 +5,11 @@
             <span *ngIf="fieldOptions?.required">*</span>
         </ion-text>
     </ion-label>
-    <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-datetime>
+    <ion-datetime displayFormat="YYYY-MM-DD"
+                  pickerFormat="YYYY-MM-DD"
+                  [formControl]="control"
+                  [attr.autofocus]="fieldOptions?.focused"
+                  [cancelText]="'cancel' | translate"
+                  [doneText]="'select' | translate"
+    ></ion-datetime>
 </ng-container>

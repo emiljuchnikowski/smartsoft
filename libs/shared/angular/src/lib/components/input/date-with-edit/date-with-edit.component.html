@@ -9,7 +9,14 @@
             </ion-label>
 
             <ion-input placeholder="YYYY-MM-DD" [formControl]="control" [pattern]="'([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))'"></ion-input>
-            <ion-datetime [hidden]="true" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-datetime>
+            <ion-datetime [hidden]="true"
+                          displayFormat="YYYY-MM-DD"
+                          pickerFormat="YYYY-MM-DD"
+                          [formControl]="control"
+                          [attr.autofocus]="fieldOptions?.focused"
+                          [cancelText]="'cancel' | translate"
+                          [doneText]="'select' | translate"
+            ></ion-datetime>
         </ion-col>
         <ion-col size="auto">
             <ion-button (click)="open()" class="squere-button">
