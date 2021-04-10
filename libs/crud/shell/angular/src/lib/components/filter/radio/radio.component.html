@@ -1,7 +1,9 @@
 <ion-radio-group [(ngModel)]="value">
-    <ion-list-header>
-        {{ item.label | translate }}
-    </ion-list-header>
+    <ion-item-divider>
+        <ion-label>
+            {{ item.label | translate }}
+        </ion-label>
+    </ion-item-divider>
 
     <ion-item *ngFor="let item of possibilities$ | async">
         <ion-label>{{ item.text | translate }}</ion-label>
