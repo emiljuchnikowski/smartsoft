@@ -8,6 +8,10 @@ export class HardwareService {
         return this.platform.is('capacitor');
     }
 
+    get isMobileWeb(): boolean {
+        return this.platform.is('mobileweb');
+    }
+
     constructor(private platform: Platform) { }
 
     onBackButtonClick(callback: () => void): IHardwareBackHandler {

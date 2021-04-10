@@ -29,7 +29,7 @@ export class ListComponent<T> implements OnInit {
   constructor(private hardwareService: HardwareService) { }
 
   ngOnInit() {
-    this.mobile = this.hardwareService.isMobile;
+    this.mobile = this.hardwareService.isMobileWeb;
   }
 
   private initFields(): void {
