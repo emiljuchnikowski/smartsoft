@@ -1,10 +1,12 @@
 :host {
     width: 100%;
     padding-right: 2.4rem;
+    margin-bottom: 1.2rem;
     ion-radio {
         margin-right: 1.2rem;
     }
     ion-item-divider {
+        margin-right: -2.4rem;
         font-weight: 300;
         font-size: 1.2rem;
         --ion-background-color: linear-gradient(90deg, transparent, var(--ion-color-light));
