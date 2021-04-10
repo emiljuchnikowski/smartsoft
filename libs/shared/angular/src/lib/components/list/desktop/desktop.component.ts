@@ -39,7 +39,8 @@ export class ListDesktopComponent<T extends IEntity<string>>
         ...(this.selectMode === 'multi' ? ["selectMulti"] : []),
         ...this.keys,
         ...(this.removeHandler ? ["removeAction"] : []),
-        ...(this.detailsComponent ? ["detailsAction"] : []),
+          // TODO : nikt tego nie chce :(
+        //...(this.detailsComponent ? ["detailsAction"] : []),
         ...(this.itemHandler ? ["itemAction"] : []),
       ];
     }
