@@ -65,6 +65,10 @@ export class MultiselectComponent<T extends IEntity<string>> implements OnInit {
         );
     }
 
+    async onClose(): Promise<void> {
+        await this.menuService.closeEnd();
+    }
+
     onPartialChange(changes: Partial<T>, list: Array<T>) {
         this.lock = false;
         this._list = list;
