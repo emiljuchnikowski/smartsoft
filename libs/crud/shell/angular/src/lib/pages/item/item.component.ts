@@ -27,6 +27,8 @@ import {PageBaseComponent} from "../base/base.component";
 })
 export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<T>
   implements OnInit, OnDestroy {
+  _saveButtonDisabled = new BehaviorSubject(false);
+
   pageOptions: IPageOptions = {
     title: "",
     showBackButton: true,
@@ -158,9 +160,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   }
 
   onValidChange(val: boolean) {
-    (this.pageOptions.endButtons[0].disabled$ as BehaviorSubject<boolean>).next(
-      !val
-    );
+    this._saveButtonDisabled.next(!val);
   }
 
   private initPageOptions(): void {
@@ -181,7 +181,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
               this.facade.create(this.formValue);
               this.location.back();
             },
-            disabled$: new BehaviorSubject(false),
+            disabled$: this._saveButtonDisabled,
           },
         ];
       case "update":
@@ -206,7 +206,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
 
               this.location.back();
             },
-            disabled$: new BehaviorSubject(false),
+            disabled$: this._saveButtonDisabled,
           },
         ];
       case "details":
