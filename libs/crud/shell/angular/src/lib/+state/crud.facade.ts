@@ -57,6 +57,10 @@ export class CrudFacade<T extends IEntity<string>> {
     select(CrudSelectors.getCrudLinks(this.config.entity))
   );
 
+  error$: Observable<any> = this.store.pipe(
+      select(CrudSelectors.getCrudError(this.config.entity))
+  );
+
   constructor(private store: Store<any>, private config: CrudConfig<T>) {}
 
   create(item: T): void {
