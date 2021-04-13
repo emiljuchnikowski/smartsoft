@@ -1,9 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {FormArray, FormControl} from "@angular/forms";
 
 import {InputBaseComponent} from "../base/base.component";
 import {IButtonOptions, IFormOptions} from "../../../models";
-import {FormArray, FormControl} from "@angular/forms";
-import {FormFactory} from "../../../factories";
+import {FormFactory} from "../../../factories/form/form.factory";
 
 @Component({
     selector: 'smart-input-array',
