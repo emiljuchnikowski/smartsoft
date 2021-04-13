@@ -14,8 +14,8 @@ export enum UserPermission {
 
 @Model({})
 export class UserInfo {
-    @Field({ details: true }) info1 = 'Test info 1';
-    @Field({ details: true }) info2 = 'Test info 2';
+    @Field({ details: true, create: true, update: true, required: true }) info1 = 'Test info 1';
+    @Field({ details: true, create: true, update: true }) info2 = 'Test info 2';
 }
 
 @Model({
@@ -61,6 +61,17 @@ export class User implements IEntity<string> {
 
     @Field({
         details: true,
+        create: true,
+        update: true,
+        type: FieldType.array,
+        classType: UserInfo
+    })
+    infos: Array<UserInfo>;
+
+    @Field({
+        details: true,
+        create: true,
+        update: true,
         type: FieldType.object,
         classType: UserInfo
     })
@@ -154,6 +165,7 @@ export class User implements IEntity<string> {
     mode: string;
 
     constructor() {
+        this.infos = [];
         this.info = new UserInfo();
     }
 }

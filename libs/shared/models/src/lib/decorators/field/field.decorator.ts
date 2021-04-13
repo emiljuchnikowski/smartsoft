@@ -31,7 +31,9 @@ export function FieldDecorator(options: IFieldOptions) {
                    return target['_' + key];
                },
                 set(v: any) {
-                    target['_' + key] = ObjectService.createByType(v, options.classType);
+                    target['_' + key] = options.type === FieldType.array && v ?
+                        v.map(i => ObjectService.createByType(i, options.classType))
+                        : ObjectService.createByType(v, options.classType);
                 },
                 enumerable: true,
                 configurable: true

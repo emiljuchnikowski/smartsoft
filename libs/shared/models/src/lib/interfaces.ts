@@ -12,6 +12,7 @@ export enum FieldType {
     int = "int",
     nip = "nip",
     object = "object",
+    array = "array",
     password = "password",
     radio = "radio",
     text = "text",

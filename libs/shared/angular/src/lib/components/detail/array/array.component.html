@@ -1,0 +1,5 @@
+<br/>
+
+<ng-container *ngIf="childOptions$ | async; let childOptions">
+    <smart-details *ngFor="let options of childOptions" [options]="options"></smart-details>
+</ng-container>

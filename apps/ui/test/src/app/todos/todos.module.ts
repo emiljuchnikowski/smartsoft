@@ -33,6 +33,7 @@ import {environment} from "../../environments/environment";
         details: true,
         edit: true,
         add: true,
+        remove: true,
         export: true,
         list: {
           cellPipe: {

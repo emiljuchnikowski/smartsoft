@@ -1,7 +1,7 @@
 import "reflect-metadata";
 
 import {Injectable} from "@angular/core";
-import {AbstractControl, FormBuilder, FormGroup, Validators,} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators,} from "@angular/forms";
 import * as _ from "lodash";
 
 import {
@@ -92,6 +92,13 @@ export class FormFactory {
 
       if (field.options.type === FieldType.object) {
         control = await this.create(obj[field.key], ops);
+      } else if (field.options.type === FieldType.array) {
+        control = this.fb.array([]);
+        if (obj[field.key]) {
+          for (let indexField = 0; indexField < (obj[field.key] as []).length; indexField ++) {
+            (control as FormArray).push(await this.create(obj[field.key][indexField], ops))
+          }
+        }
       } else {
         control = this.createControl(obj, field, options.required);
       }

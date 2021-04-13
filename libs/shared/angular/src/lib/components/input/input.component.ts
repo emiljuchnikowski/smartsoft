@@ -36,6 +36,7 @@ export class InputComponent<T> implements OnInit {
     }
 
     let fieldOptions = getModelFieldOptions(this._options.model, key);
+    if (!fieldOptions && this._options.model[0]) fieldOptions = getModelFieldOptions(this._options.model[0], key);
 
     if (val.mode === 'create' && _.isObject(fieldOptions.create)) {
       fieldOptions = {

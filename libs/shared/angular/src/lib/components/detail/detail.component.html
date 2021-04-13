@@ -12,6 +12,7 @@
             <smart-detail-object *ngSwitchCase="FieldType.object" [options]="options"></smart-detail-object>
             <smart-detail-color *ngSwitchCase="FieldType.color" [options]="options"></smart-detail-color>
             <smart-detail-logo *ngSwitchCase="FieldType.logo" [options]="options"></smart-detail-logo>
+            <smart-detail-array *ngSwitchCase="FieldType.array" [options]="options"></smart-detail-array>
             <smart-detail-text *ngSwitchDefault [options]="options"></smart-detail-text>
         </ng-container>
     </ng-container>

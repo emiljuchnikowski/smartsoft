@@ -59,7 +59,7 @@ import { Todo } from "./todos/todo.dto";
           loadChildren: () =>
             import("./login/login.module").then((m) => m.LoginModule),
         },
-        { path: "", redirectTo: "/todos", pathMatch: "full" },
+        { path: "", redirectTo: "/users", pathMatch: "full" },
       ],
       { initialNavigation: "enabled", useHash: true, relativeLinkResolution: 'legacy' }
     ),

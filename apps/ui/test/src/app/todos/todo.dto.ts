@@ -112,4 +112,40 @@ export class Todo implements IEntity<string> {
         type: FieldType.flag
     })
     done: boolean;
+
+    @Field({
+        create: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
+        details: true,
+        list: { order: 3, filter: true },
+        type: FieldType.email
+    })
+    email: string;
+
+    @Field({
+        create: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
+        details: true,
+        list: { order: 3, filter: true },
+        type: FieldType.phoneNumber
+    })
+    numberPersonal: string;
+
+    @Field({
+        create: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
+        details: true,
+        list: { order: 3, filter: true },
+        type: FieldType.pesel
+    })
+    myPesel: string;
 }

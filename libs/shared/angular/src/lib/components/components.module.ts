@@ -74,6 +74,8 @@ import { InfoComponent, InfoModalComponent } from "./info/info.component";
 import {InputPhoneNumberComponent} from "./input/phone-number/phone-number.component";
 import {InputPeselComponent} from "./input/pesel/pesel.component";
 import {ErrorContextComponent} from "./error-context/error-context.component";
+import {InputArrayComponent} from "./input/array/array.component";
+import {DetailArrayComponent} from "./detail/array/array.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -105,6 +107,7 @@ export const DETAIL_COMPONENTS = [
   DetailObjectComponent,
   DetailColorComponent,
   DetailLogoComponent,
+  DetailArrayComponent
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];
@@ -133,7 +136,8 @@ export const INPUT_COMPONENTS = [
   InputCheckComponent,
   InputIntsComponent,
   InputPhoneNumberComponent,
-  InputPeselComponent
+  InputPeselComponent,
+  InputArrayComponent
 ];
 
 export const LIST_COMPONENTS = [
