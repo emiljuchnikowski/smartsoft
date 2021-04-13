@@ -9,7 +9,7 @@ import {
 import * as _ from 'lodash';
 
 import {InputOptions} from "../../models/interfaces";
-import {FieldType, getModelFieldOptions, IFieldOptions} from "@smartsoft001/models";
+import {FieldType, getModelFieldOptions, getModelFieldsWithOptions, IFieldOptions} from "@smartsoft001/models";
 import {InputBaseComponent} from "./base/base.component";
 
 @Component({
@@ -37,6 +37,9 @@ export class InputComponent<T> implements OnInit {
 
     let fieldOptions = getModelFieldOptions(this._options.model, key);
     if (!fieldOptions && this._options.model[0]) fieldOptions = getModelFieldOptions(this._options.model[0], key);
+    if (!fieldOptions) {
+      fieldOptions = getModelFieldsWithOptions(this._options.model).find(x => x.key === key)?.options;
+    }
 
     if (val.mode === 'create' && _.isObject(fieldOptions.create)) {
       fieldOptions = {
