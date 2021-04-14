@@ -4,3 +4,4 @@ export * from './zip-code/zip-code.service';
 export * from './object/object.service';
 export * from './guid/guid.service';
 export * from './pesel/pesel.service';
+export * from './specification/specification.service';

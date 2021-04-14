@@ -26,6 +26,10 @@ export enum FieldType {
     pesel = "pesel",
 }
 
+export interface ISpecification {
+    criteria: any;
+}
+
 export interface IModelFilter {
     label?: string;
     fieldType?: FieldType;
@@ -53,6 +57,7 @@ export interface IFieldModifyMetadata {
     permissions?: Array<string>;
     unique?: boolean | IFieldUniqueMetadata;
     defaltValue?: () => any;
+    enabled?: ISpecification;
 }
 
 export interface IFieldEditMetadata extends IFieldModifyMetadata {
@@ -68,6 +73,7 @@ export interface IFieldListMetadata {
 export interface IFieldDetailsMetadata {
     order?: number;
     permissions?: Array<string>;
+    enabled?: ISpecification;
 }
 
 export interface IModelOptions {

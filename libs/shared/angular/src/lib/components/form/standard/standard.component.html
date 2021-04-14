@@ -1,6 +1,6 @@
 <ion-list class="smart-list">
     <ng-container *ngFor="let field of fields">
-        <smart-input *ngIf="form.controls[field]" [options]="{
+        <smart-input *ngIf="form.controls[field] && !form.controls[field]['__smartDisabled']" [options]="{
             fieldKey: field,
             control: form.controls[field],
             model: model,

@@ -1,9 +1,17 @@
-import {Field, FieldType, IFieldModifyMetadata, Model} from "@smartsoft001/models";
+import {Field, FieldType, IFieldModifyMetadata, ISpecification, Model} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
 
 const modifyMetdata : IFieldModifyMetadata = {
     required: true,
 };
+
+export class UserTestLastNameSpecification implements ISpecification {
+    get criteria() {
+        return {
+            firstName: "Test"
+        }
+    }
+}
 
 export enum UserPermission {
     admin = "admin",
@@ -26,8 +34,7 @@ export class User implements IEntity<string> {
 
     @Field({
         create: {
-            required: true,
-            permissions: [ 'admin2' ]
+            required: true
         },
         update: {
             ...modifyMetdata,
@@ -45,7 +52,8 @@ export class User implements IEntity<string> {
             multi: true,
         },
         details: true,
-        list: { order: 2 }
+        list: { order: 2 },
+        enabled: new UserTestLastNameSpecification()
     })
     lastName: string;
 
@@ -55,14 +63,17 @@ export class User implements IEntity<string> {
             permissions: [ 'admin2' ]
         },
         unique: true,
-        list: { order: 1 }
+        list: { order: 1 },
+        enabled: new UserTestLastNameSpecification()
     })
     username: string;
 
     @Field({
         details: true,
         create: true,
-        update: true,
+        update: {
+            enabled: new UserTestLastNameSpecification()
+        },
         type: FieldType.array,
         classType: UserInfo
     })

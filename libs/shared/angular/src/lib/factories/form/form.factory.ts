@@ -10,13 +10,14 @@ import {
   IFieldEditMetadata,
   IFieldModifyMetadata,
   IFieldOptions,
-  IFieldUniqueMetadata,
+  IFieldUniqueMetadata, ISpecification,
   SYMBOL_FIELD,
   SYMBOL_MODEL,
 } from "@smartsoft001/models";
-import {PeselService, ZipCodeService} from "@smartsoft001/utils";
+import {PeselService, SpecificationService, ZipCodeService} from "@smartsoft001/utils";
 
 import {AuthService} from "../../services/auth/auth.service";
+import {delay, tap} from "rxjs/operators";
 
 @Injectable()
 export class FormFactory {
@@ -80,6 +81,8 @@ export class FormFactory {
       );
     });
 
+    const enabledDefinitions: Array<{ key: string, control: AbstractControl, enabled: ISpecification }> = [];
+
     for (let index = 0; index < fields.length; index++) {
       const field = fields[index];
       let control: AbstractControl = null;
@@ -133,7 +136,35 @@ export class FormFactory {
 
         result.addControl(field.key + "Confirm", confirmControl);
       }
+
+      if (options.enabled) {
+        enabledDefinitions.push({
+          key: field.key,
+          control,
+          enabled: options.enabled
+        });
+      }
     }
+
+    result.valueChanges.pipe(
+        tap(value => {
+          enabledDefinitions.forEach(def => {
+            const enabled = SpecificationService.valid(value, def.enabled);
+            def.control['__smartDisabled'] = !enabled;
+          });
+        }),
+        delay(0)
+    ).subscribe(value => {
+      enabledDefinitions.forEach(def => {
+        if (!def.control['__smartDisabled'] && !result.controls[def.key]) {
+          result.addControl(def.key, def.control);
+          result.updateValueAndValidity();
+        } else if (def.control['__smartDisabled'] && result.controls[def.key]) {
+          result.removeControl(def.key);
+          result.updateValueAndValidity();
+        }
+      });
+    });
 
     return result;
   }

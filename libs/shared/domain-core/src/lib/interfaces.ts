@@ -10,10 +10,8 @@ export interface IAddress {
     zipCode: string;
 }
 
-export interface ISpecification {
-    criteria: any;
-}
-
 export interface IFactory<T, TConfig> {
     create(config: NonNullable<TConfig>): Promise<T>;
 }
+
+export { ISpecification } from "@smartsoft001/models";

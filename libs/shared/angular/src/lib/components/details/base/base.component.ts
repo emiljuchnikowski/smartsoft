@@ -6,18 +6,19 @@ import {
   Directive,
 } from "@angular/core";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 import {
   getModelFieldsWithOptions,
   IFieldDetailsMetadata,
   IFieldOptions,
+  ISpecification,
 } from "@smartsoft001/models";
 import { IEntity } from "@smartsoft001/domain-core";
+import { ObjectService, SpecificationService } from "@smartsoft001/utils";
 
 import { IDetailsComponentFactories, IDetailsOptions } from "../../../models";
 import { AuthService } from "../../../services/auth/auth.service";
-import {map} from "rxjs/operators";
-import {ObjectService} from "@smartsoft001/utils";
 
 @Directive()
 export abstract class DetailsBaseComponent<T extends IEntity<string>>
@@ -46,9 +47,24 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
 
   @Input() set options(obj: IDetailsOptions<T>) {
     this._type = obj.type;
+
+    const enabledDefinitions: Array<{ key: string; spec: ISpecification }> = [];
+
     this._fields = getModelFieldsWithOptions(new this._type())
       .filter((f) => f.options.details)
       .filter((field) => {
+        if ((field.options.details as IFieldDetailsMetadata).enabled) {
+          enabledDefinitions.push({
+            key: field.key,
+            spec: (field.options.details as IFieldDetailsMetadata).enabled,
+          });
+        } else if (field.options.enabled) {
+          enabledDefinitions.push({
+            key: field.key,
+            spec: field.options.enabled,
+          });
+        }
+
         if (
           (field.options.details as IFieldDetailsMetadata).permissions &&
           !this.authService.expectPermissions(
@@ -61,13 +77,22 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
         return true;
       });
     this.item$ = obj.item$.pipe(
-        map(item => {
-          if (!item) return item;
+      map((item) => {
+        if (!item) return item;
 
-          if (item instanceof obj.type) return item;
+        let result = null;
 
-          return ObjectService.createByType(item, obj.type);
-        })
+        if (item instanceof obj.type) result = item;
+        else result = ObjectService.createByType(item, obj.type);
+
+        const removeFields = enabledDefinitions.filter((def) => {
+          return SpecificationService.invalid(result, def.spec);
+        }).map(def => def.key);
+
+        this._fields = this._fields.filter(f => !removeFields.some(rf => rf === f.key));
+
+        return result;
+      })
     );
     this.loading$ = obj.loading$;
     this.componentFactories = obj.componentFactories;
