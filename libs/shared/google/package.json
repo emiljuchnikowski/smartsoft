@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/google",
-  "version": "1.0.66",
+  "version": "1.0.67",
   "description": "This library was generated with [Nx](https://nx.dev).",
   "main": "src/index.ts",
   "repository": {
