@@ -184,7 +184,14 @@ export class FormFactory {
     }
 
     if (options.type === FieldType.email) {
-      result.push(Validators.email);
+      result.push((c: AbstractControl) => {
+        if (!c.value) return;
+
+        const reg = new RegExp("^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$");
+        if (reg.test(c.value)) return null;
+
+        return { email: true };
+      });
     }
 
     if (options.type === FieldType.phoneNumber) {
