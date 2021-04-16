@@ -81,7 +81,7 @@ export class TestComponent {}
         type: User,
         title: 'Użytkownicy',
         entity: "users",
-        apiUrl: environment.apiUrl + "users",
+        apiUrl: "http://localhost:3334/api/users",
         details: {
           components: {
             bottom: ChangePasswordComponent

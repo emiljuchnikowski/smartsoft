@@ -2,7 +2,8 @@ import {
   Body,
   Controller,
   Delete,
-  Get, HttpCode,
+  Get,
+  HttpCode,
   NotFoundException,
   Param,
   Patch,
@@ -11,13 +12,15 @@ import {
   Query,
   Req,
   Res,
-  UseGuards
+  UseGuards,
 } from "@nestjs/common";
 import * as q2m from "query-to-mongo";
 import { Response, Request } from "express";
 import { Parser } from "json2csv";
 import * as _ from "lodash";
-import * as XLSX from 'xlsx';
+import * as XLSX from "xlsx";
+import * as Busboy from "busboy";
+import { Readable } from "stream";
 
 import { CrudService } from "@smartsoft001/crud-shell-app-services";
 import { IUser } from "@smartsoft001/users";
@@ -25,6 +28,7 @@ import { User } from "@smartsoft001/nestjs";
 import { IEntity } from "@smartsoft001/domain-core";
 import { AuthJwtGuard } from "../../guards/auth/auth.guard";
 import { CreateManyMode } from "@smartsoft001/crud-domain";
+import {GuidService} from "@smartsoft001/utils";
 
 @Controller("")
 export class CrudController<T extends IEntity<string>> {
@@ -34,7 +38,7 @@ export class CrudController<T extends IEntity<string>> {
     return req.protocol + "://" + req.headers.host + req.url;
   }
 
-  @UseGuards(AuthJwtGuard)
+  //@UseGuards(AuthJwtGuard)
   @Post()
   @HttpCode(200)
   async create(
@@ -45,7 +49,7 @@ export class CrudController<T extends IEntity<string>> {
     const id = await this.service.create(data, user);
     res.set("Location", CrudController.getLink(res.req) + "/" + id);
     return res.send({
-      id
+      id,
     });
   }
 
@@ -95,14 +99,18 @@ export class CrudController<T extends IEntity<string>> {
 
     if (req.headers["content-type"] === "text/csv") {
       res.set({
-        "Content-Type": "text/csv"
+        "Content-Type": "text/csv",
       });
       res.send(this.parseToCsv(data));
     }
 
-    if (req.headers["content-type"] === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+    if (
+      req.headers["content-type"] ===
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    ) {
       res.set({
-        "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        "Content-Type":
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       });
       res.send(this.parseToXlsx(data));
     }
@@ -110,7 +118,10 @@ export class CrudController<T extends IEntity<string>> {
     res.send({
       data,
       totalCount,
-      links: object.links(CrudController.getLink(req).split("?")[0], totalCount)
+      links: object.links(
+        CrudController.getLink(req).split("?")[0],
+        totalCount
+      ),
     });
   }
 
@@ -143,11 +154,97 @@ export class CrudController<T extends IEntity<string>> {
     await this.service.delete(params.id, user);
   }
 
+  @Post("attachments")
+  uploadAttachment(@Req() request: Request, @Res() response: Response) {
+    const busboy = new Busboy({
+      headers: request.headers,
+    });
+    const id = GuidService.create();
+    const readable = new Readable();
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    readable._read = () => {};
+
+    busboy.on("file", (field, file, fileName, encoding, mimeType) => {
+      this.service
+        .uploadAttachment({
+          id,
+          stream: readable,
+          fileName,
+          encoding,
+          mimeType,
+        });
+
+      file.on("data", (data) => {
+        readable.push(data);
+      });
+    });
+
+    busboy.on("finish", function () {
+      readable.push(null);
+      response.set("Location", CrudController.getLink(response.req) + "/" + id);
+      response.json({ id });
+      response.end();
+    });
+
+    return request.pipe(busboy);
+  }
+
+  @Get("attachments/:id")
+  async downloadAttachment(@Param('id') id: string,  @Req() request: Request, @Res() response: Response) {
+    const fileInfo = await this.service.getAttachmentInfo(id);
+
+    if (request.headers.range) {
+      const range = request.headers.range.substr(6).split('-')
+      const start = parseInt(range[0], 10)
+      const end = parseInt(range[1], 10) || null;
+
+      const readstream = await this.service.getAttachmentStream(id, { start, end });
+
+      response.status(206);
+      response.set({
+        'Accept-Ranges': 'bytes',
+        'Content-Type': fileInfo.contentType,
+        'Content-Range': `bytes ${start}-${end ? end : fileInfo.length - 1}/${
+            fileInfo.length
+        }`,
+        'Content-Length': (end ? end : fileInfo.length) - start,
+        'Content-Disposition': `attachment; filename="${encodeURI(fileInfo.fileName)}"`,
+      })
+
+      response.on('close', () => {
+        readstream.destroy()
+      })
+
+      readstream.pipe(response);
+    } else {
+      const readstream = await this.service.getAttachmentStream(id);
+
+      response.on('close', () => {
+        readstream.destroy()
+      })
+
+      response.status(200)
+      response.set({
+        'Accept-Range': 'bytes',
+        'Content-Type': fileInfo.contentType,
+        'Content-Length': fileInfo.length,
+        'Content-Disposition': `attachment; filename="${ encodeURI(fileInfo.fileName) }"`,
+      })
+
+      readstream.pipe(response);
+    }
+  }
+
+  @Delete("attachments/:id")
+  async deleteAttachment(@Param('id') id: string): Promise<void> {
+    await this.service.deleteAttachment(id);
+  }
+
   protected getQueryObject(queryObject: any): { criteria; options; links } {
     let customCriteria = {} as any;
     let q = "";
 
-    Object.keys(queryObject).forEach(key => {
+    Object.keys(queryObject).forEach((key) => {
       q += `&${key}=${queryObject[key]}`;
     });
 
@@ -155,14 +252,14 @@ export class CrudController<T extends IEntity<string>> {
 
     if (result.criteria["$search"]) {
       customCriteria = {
-        $text: { $search: ' "' + result.criteria["$search"].toString() + '" ' }
+        $text: { $search: ' "' + result.criteria["$search"].toString() + '" ' },
       };
 
       delete result.criteria["$search"];
 
       result.criteria = {
         ...result.criteria,
-        ...customCriteria
+        ...customCriteria,
       };
     }
 
@@ -194,11 +291,11 @@ export class CrudController<T extends IEntity<string>> {
     return new Parser(fields).parse(data);
   }
 
-  private getDataWithFields(data: Array<T>): { res, fields } {
+  private getDataWithFields(data: Array<T>): { res; fields } {
     const fields = [];
 
     const execute = (item, baseKey, baseItem) => {
-      Object.keys(item).forEach(key => {
+      Object.keys(item).forEach((key) => {
         const val = item[key];
 
         if (_.isArray(val)) {
@@ -207,21 +304,21 @@ export class CrudController<T extends IEntity<string>> {
           execute(val, baseKey + key + "_", baseItem);
         } else if (baseKey) {
           baseItem[baseKey + key] = val;
-          if (!fields.some(f => f === baseKey + key))
+          if (!fields.some((f) => f === baseKey + key))
             fields.push(baseKey + key);
         } else {
-          if (!fields.some(f => f === key)) fields.push(key);
+          if (!fields.some((f) => f === key)) fields.push(key);
         }
       });
     };
 
-    data.forEach(item => {
+    data.forEach((item) => {
       execute(item, "", item);
     });
 
-    data.forEach(item => {
-      Object.keys(item).forEach(key => {
-        if (!fields.some(f => f === key)) {
+    data.forEach((item) => {
+      Object.keys(item).forEach((key) => {
+        if (!fields.some((f) => f === key)) {
           delete item[key];
         }
       });

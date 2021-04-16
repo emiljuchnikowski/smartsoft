@@ -32,6 +32,7 @@ export interface ITranslateData {
     signInQuicklyWith,
     select: string,
     selected,
+    show: string,
 
     OBJECT: {
         deleted: string
@@ -100,6 +101,7 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     signInQuicklyWith: 'sign in quickly with',
     selected: "selected",
     select: "select",
+    show: "show",
 
     OBJECT: {
         deleted: 'object deleted'
@@ -168,6 +170,7 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     signInQuicklyWith: 'szybko zaloguj się za pomocą',
     selected: "wybrano",
     select: "wybierz",
+    show: "pokaż",
 
     OBJECT: {
         deleted: 'obiekt został usunięty'

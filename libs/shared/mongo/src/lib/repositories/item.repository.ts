@@ -2,8 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { ChangeStream, MongoClient } from "mongodb";
 import { Observable, Observer } from "rxjs";
 import { finalize, share } from "rxjs/operators";
+import {Readable, Stream} from "stream";
+import * as Grid from 'gridfs-stream';
+import * as mongo from "mongodb";
 
-import { ObjectService } from "@smartsoft001/utils";
 import {
   IEntity,
   IItemRepository,
@@ -588,6 +590,112 @@ export class MongoItemRepository<
       }),
       share()
     );
+  }
+
+  uploadAttachment(data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string }): Promise<string> {
+    return new Promise<string>((res, rej) => {
+      MongoClient.connect(this.getUrl(), async (err, client) => {
+        if (err) {
+          rej(err);
+          return;
+        }
+
+        const db = client.db(this.config.database);
+        const gfs = Grid(db, mongo);
+
+        const writeStream = gfs.createWriteStream({
+          _id: data.id,
+          filename: data.fileName,
+          mode: 'w',
+          chunkSize: 1024,
+          content_type: data.mimeType,
+          root: this.config.collection,
+        } as any);
+        data.stream.pipe(writeStream);
+
+        data.stream.on("finish", () => {
+          client.close();
+          res();
+        })
+      });
+    });
+  }
+
+  getAttachmentInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }> {
+    return new Promise<{ fileName: string, contentType: string, length: number }>((res, rej) => {
+      MongoClient.connect(this.getUrl(), async (err, client) => {
+        if (err) {
+          rej(err);
+          return;
+        }
+
+        const db = client.db(this.config.database);
+
+        db.collection(this.config.collection + ".files").findOne(
+            { _id: id },
+            (errDelete, item) => {
+              if (errDelete) {
+                rej(errDelete);
+                return;
+              }
+
+              client.close();
+              res({
+                fileName: item.filename,
+                contentType: item.contentType,
+                length: item.length
+              });
+            }
+        );
+      });
+    });
+  }
+
+  getAttachmentStream(id: string, options: { start: number; end: number } | undefined): Promise<Readable> {
+    return new Promise<Readable>((res, rej) => {
+      MongoClient.connect(this.getUrl(), async (err, client) => {
+        if (err) {
+          rej(err);
+          return;
+        }
+
+        const db = client.db(this.config.database);
+        const gfs = Grid(db, mongo);
+
+        res(gfs.createReadStream({
+          _id: id,
+          root: this.config.collection,
+          range: options ? {
+            startPos: options.start,
+            endPos: options.end
+          }: null
+        } as any));
+      });
+    });
+  }
+
+  deleteAttachment(id: string): Promise<void> {
+    return new Promise<void>((res, rej) => {
+      MongoClient.connect(this.getUrl(), async (err, client) => {
+        if (err) {
+          rej(err);
+          return;
+        }
+
+        const db = client.db(this.config.database);
+        const gfs = Grid(db, mongo);
+
+        gfs.remove({
+          _id: id,
+          root: this.config.collection,
+        }, (err2, info) => {
+          if (err2) rej(err2);
+          else res();
+
+          client.close();
+        });
+      });
+    });
   }
 
   private getCount(criteria: any, collection): Promise<any> {

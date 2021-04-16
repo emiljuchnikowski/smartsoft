@@ -3,7 +3,7 @@ import { Store, StoreModule } from "@ngrx/store";
 import { SocketIoModule } from "ngx-socket-io";
 
 import { IEntity } from "@smartsoft001/domain-core";
-import { SharedModule } from "@smartsoft001/angular";
+import {FILE_SERVICE_CONFIG, IFileServiceConfig, SharedModule} from "@smartsoft001/angular";
 
 import { CrudConfig, CrudFullConfig } from "./crud.config";
 import { CrudEffects } from "./+state/crud.effects";
@@ -35,7 +35,8 @@ export class CrudModule<T extends IEntity<string>> {
       ngModule: options.routing ? CrudFullModule : CrudModule,
       providers: [
         { provide: CrudConfig, useValue: options.config },
-        { provide: CrudFullConfig, useValue: options.config }
+        { provide: CrudFullConfig, useValue: options.config },
+        { provide: FILE_SERVICE_CONFIG, useValue: { apiUrl: options.config.apiUrl } as IFileServiceConfig }
       ]
     };
   }

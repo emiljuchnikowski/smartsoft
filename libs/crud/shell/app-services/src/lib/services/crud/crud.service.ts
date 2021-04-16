@@ -1,6 +1,7 @@
 import {Injectable, Logger} from "@nestjs/common";
 import { Guid } from "guid-typescript";
 import { Observable } from "rxjs";
+import {Readable, Stream} from "stream";
 
 import { IUser } from "@smartsoft001/users";
 import {
@@ -13,7 +14,7 @@ import {ICreateManyOptions} from "@smartsoft001/crud-domain";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 import {PermissionService} from "@smartsoft001/nestjs";
 import {castModel, getInvalidFields, isModel} from "@smartsoft001/models";
-import {PasswordService} from "@smartsoft001/utils";
+import {GuidService, PasswordService} from "@smartsoft001/utils";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
@@ -186,6 +187,28 @@ export class CrudService<T extends IEntity<string>> {
       this._logger.error(e);
       throw e;
     }
+  }
+
+  async uploadAttachment(data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string}): Promise<string> {
+    if (!data.id) {
+      data.id = GuidService.create();
+    }
+
+    await this.repository.uploadAttachment(data);
+
+    return data.id;
+  }
+
+  getAttachmentInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }> {
+    return this.repository.getAttachmentInfo(id);
+  }
+
+  getAttachmentStream(id: string, options?: { start: number; end: number }): Promise<Readable> {
+    return this.repository.getAttachmentStream(id, options);
+  }
+
+  async deleteAttachment(id: string): Promise<void> {
+    return this.repository.deleteAttachment(id);
   }
 
   changes(criteria: { id?: string }): Observable<ItemChangedData> {

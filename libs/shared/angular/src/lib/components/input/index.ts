@@ -24,3 +24,4 @@ export * from './ints/ints.component';
 export * from './phone-number/phone-number.component';
 export * from './pesel/pesel.component';
 export * from './array/array.component';
+export * from './pdf/pdf.component';
