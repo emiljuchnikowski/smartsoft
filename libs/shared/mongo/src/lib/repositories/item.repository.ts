@@ -3,9 +3,7 @@ import { ChangeStream, MongoClient } from "mongodb";
 import { Observable, Observer } from "rxjs";
 import { finalize, share } from "rxjs/operators";
 import {Readable, Stream} from "stream";
-import * as Grid from 'gridfs-stream';
 import * as mongo from "mongodb";
-import {Memoize} from "lodash-decorators";
 
 import {
   IEntity,
@@ -57,7 +55,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -108,7 +106,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -160,7 +158,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -223,7 +221,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -290,7 +288,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -366,7 +364,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -452,7 +450,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -482,7 +480,7 @@ export class MongoItemRepository<
 
   getById(id: string): Promise<T> {
     return new Promise<T>((res, rej) => {
-      MongoClient.connect(this.getUrl(), (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -511,7 +509,7 @@ export class MongoItemRepository<
     options: any = {}
   ): Promise<{ data: T[]; totalCount: number }> {
     return new Promise<{ data: T[]; totalCount: number }>((res, rej) => {
-      MongoClient.connect(this.getUrl(), async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -550,7 +548,7 @@ export class MongoItemRepository<
     let client: MongoClient;
 
     return new Observable((observer: Observer<ItemChangedData>) => {
-      MongoClient.connect(this.getUrl(), async (err, c) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, c) => {
         client = c;
 
         if (err) {
@@ -595,27 +593,24 @@ export class MongoItemRepository<
 
   uploadAttachment(data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string }): Promise<string> {
     return new Promise<string>((res, rej) => {
-      MongoClient.connect(this.getUrl(), async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
         if (err) {
           rej(err);
           return;
         }
 
         const db = client.db(this.config.database);
-        const gfs = Grid(db, mongo);
+        const bucket = new mongo.GridFSBucket(db, {
+          bucketName: this.config.collection
+        });
 
-        const writeStream = gfs.createWriteStream({
-          _id: data.id,
-          filename: data.fileName,
-          mode: 'w',
-          chunkSize: 1024,
-          content_type: data.mimeType,
-          root: this.config.collection,
-        } as any);
+        const writeStream = bucket.openUploadStreamWithId(data.id, data.fileName, {
+          contentType: data.mimeType,
+        });
+
         data.stream.pipe(writeStream);
 
         data.stream.on("finish", () => {
-          client.close();
           res();
         })
       });
@@ -624,7 +619,7 @@ export class MongoItemRepository<
 
   getAttachmentInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }> {
     return new Promise<{ fileName: string, contentType: string, length: number }>((res, rej) => {
-      MongoClient.connect(this.getUrl(), async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -632,9 +627,14 @@ export class MongoItemRepository<
 
         const db = client.db(this.config.database);
 
-        db.collection(this.config.collection + ".files").findOne(
-            { _id: id },
-            (errDelete, item) => {
+        const bucket = new mongo.GridFSBucket(db, {
+          bucketName: this.config.collection
+        });
+
+        bucket.find({
+          _id: id
+        }).toArray(
+            (errDelete, items) => {
               if (errDelete) {
                 rej(errDelete);
                 return;
@@ -642,9 +642,9 @@ export class MongoItemRepository<
 
               client.close();
               res({
-                fileName: item.filename,
-                contentType: item.contentType,
-                length: item.length
+                fileName: items[0].filename,
+                contentType: items[0].contentType,
+                length: items[0].length
               });
             }
         );
@@ -654,42 +654,36 @@ export class MongoItemRepository<
 
   getAttachmentStream(id: string, options: { start: number; end: number } | undefined): Promise<Readable> {
     return new Promise<Readable>((res, rej) => {
-      MongoClient.connect(this.getUrl(), async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
         if (err) {
           rej(err);
           return;
         }
 
         const db = client.db(this.config.database);
-        const gfs = Grid(db, mongo);
+        const bucket = new mongo.GridFSBucket(db, {
+          bucketName: this.config.collection
+        });
 
-        res(gfs.createReadStream({
-          _id: id,
-          root: this.config.collection,
-          range: options ? {
-            startPos: options.start,
-            endPos: options.end
-          }: null
-        } as any));
+        res(bucket.openDownloadStream(id as any, options));
       });
     });
   }
 
   deleteAttachment(id: string): Promise<void> {
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
         if (err) {
           rej(err);
           return;
         }
 
         const db = client.db(this.config.database);
-        const gfs = Grid(db, mongo);
+        const bucket = new mongo.GridFSBucket(db, {
+          bucketName: this.config.collection
+        });
 
-        gfs.remove({
-          _id: id,
-          root: this.config.collection,
-        }, (err2, info) => {
+        bucket.delete(id as any, (err2) => {
           if (err2) rej(err2);
           else res();
 
@@ -793,7 +787,7 @@ export class MongoItemRepository<
   }
 
   private logChange(type, item, options, user, error) {
-    MongoClient.connect(this.getUrl(), (err, client) => {
+    MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
       if (err) {
         console.warn(err);
         return;
