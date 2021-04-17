@@ -5,6 +5,7 @@ import { finalize, share } from "rxjs/operators";
 import {Readable, Stream} from "stream";
 import * as Grid from 'gridfs-stream';
 import * as mongo from "mongodb";
+import {Memoize} from "lodash-decorators";
 
 import {
   IEntity,

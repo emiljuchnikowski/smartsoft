@@ -2,7 +2,7 @@ import {Inject, Injectable, Optional} from "@angular/core";
 import {Observable, of} from "rxjs";
 import { InjectionToken } from '@angular/core';
 import {HttpClient, HttpEvent, HttpEventType} from "@angular/common/http";
-import {map} from "rxjs/operators";
+import {delay, map} from "rxjs/operators";
 
 export const FILE_SERVICE_CONFIG =
     new InjectionToken<IFileServiceConfig>('FILE_SERVICE_CONFIG');
@@ -39,10 +39,14 @@ export class FileService {
     }
 
     download(id: string): void {
-        window.open(this.config.apiUrl + '/attachments/' + id, '_blank').focus();
+        window.open(this.getUrl(id), '_blank').focus();
     }
 
     delete(id: string): Promise<void> {
         return this.http.delete<void>(this.config.apiUrl + '/attachments/' + id).toPromise();
+    }
+
+    getUrl(id: string): string {
+        return this.config.apiUrl + '/attachments/' + id;
     }
 }

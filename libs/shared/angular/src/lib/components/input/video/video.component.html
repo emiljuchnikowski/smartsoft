@@ -7,10 +7,17 @@
     </ion-label><br/>
     <smart-button [options]="addButtonOptions">{{ (control.value ? 'change' : 'add') | translate }}</smart-button>
 
-    <smart-button *ngIf="control.value" [options]="showButtonOptions">{{ 'show' | translate }}</smart-button>
+    <smart-button *ngIf="control.value && !play" [options]="playButtonOptions">{{ 'play' | translate }}</smart-button>
 
     <smart-button *ngIf="control.value" [options]="deleteButtonOptions">{{ 'delete' | translate }}</smart-button>
 
     <ion-progress-bar *ngIf="loading$ | async" [value]="(percent$ | async) / 100"></ion-progress-bar>
+
+    <ng-container *ngIf="url && play">
+        <video style="width: 100%" controls controlsList="nodownload">
+            <source type="video/mp4" [src]="url">
+            Your browser does not support the video tag.
+        </video>
+    </ng-container>
 </ng-container>
-<input type="file" accept=".pdf" [hidden]="true" #inputObj>
+<input type="file" accept=".avi,.mp4" [hidden]="true" #inputObj>

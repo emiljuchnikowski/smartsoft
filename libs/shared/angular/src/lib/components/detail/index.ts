@@ -10,3 +10,4 @@ export * from './color/color.component';
 export * from './logo/logo.component';
 export * from './array/array.component';
 export * from './pdf/pdf.component';
+export * from './video/video.component';

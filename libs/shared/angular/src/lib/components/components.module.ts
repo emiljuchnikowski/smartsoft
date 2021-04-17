@@ -78,6 +78,8 @@ import {InputArrayComponent} from "./input/array/array.component";
 import {DetailArrayComponent} from "./detail/array/array.component";
 import {InputPdfComponent} from "./input/pdf/pdf.component";
 import {DetailPdfComponent} from "./detail/pdf/pdf.component";
+import {InputVideoComponent} from "./input/video/video.component";
+import {DetailVideoComponent} from "./detail/video/video.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -110,7 +112,8 @@ export const DETAIL_COMPONENTS = [
   DetailColorComponent,
   DetailLogoComponent,
   DetailArrayComponent,
-  DetailPdfComponent
+  DetailPdfComponent,
+  DetailVideoComponent
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];
@@ -141,7 +144,8 @@ export const INPUT_COMPONENTS = [
   InputPhoneNumberComponent,
   InputPeselComponent,
   InputArrayComponent,
-  InputPdfComponent
+  InputPdfComponent,
+  InputVideoComponent
 ];
 
 export const LIST_COMPONENTS = [

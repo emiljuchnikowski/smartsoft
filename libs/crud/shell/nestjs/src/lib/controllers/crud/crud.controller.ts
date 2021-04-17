@@ -73,8 +73,6 @@ export class CrudController<T extends IEntity<string>> {
   ): Promise<T> {
     const result = await this.service.readById(params.id, user);
 
-    console.log(params);
-
     if (!result) {
       throw new NotFoundException("Invalid id");
     }
@@ -164,7 +162,13 @@ export class CrudController<T extends IEntity<string>> {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     readable._read = () => {};
 
-    busboy.on("file", (field, file, fileName, encoding, mimeType) => {
+    let fileName, encoding, mimeType;
+
+    busboy.on("file", (field, file, resultFileName, resultEncoding, resultMimeType) => {
+      fileName = resultFileName;
+      encoding = resultEncoding;
+      mimeType = resultMimeType;
+
       this.service
         .uploadAttachment({
           id,
@@ -182,7 +186,7 @@ export class CrudController<T extends IEntity<string>> {
     busboy.on("finish", function () {
       readable.push(null);
       response.set("Location", CrudController.getLink(response.req) + "/" + id);
-      response.json({ id });
+      response.json({ id, fileName, contentType: mimeType , length: readable.readableLength });
       response.end();
     });
 

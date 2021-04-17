@@ -58,6 +58,19 @@ export class User implements IEntity<string> {
     })
     instruction: any;
 
+    @Field({
+        create: {
+            required: true
+        },
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
+        details: true,
+        type: FieldType.video
+    })
+    media: any;
+
     // @Field({
     //     create: modifyMetdata,
     //     update: {

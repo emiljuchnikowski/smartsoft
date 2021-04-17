@@ -15,6 +15,7 @@ import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 import {PermissionService} from "@smartsoft001/nestjs";
 import {castModel, getInvalidFields, isModel} from "@smartsoft001/models";
 import {GuidService, PasswordService} from "@smartsoft001/utils";
+import {Memoize} from "lodash-decorators";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
@@ -199,6 +200,7 @@ export class CrudService<T extends IEntity<string>> {
     return data.id;
   }
 
+  @Memoize()
   getAttachmentInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }> {
     return this.repository.getAttachmentInfo(id);
   }

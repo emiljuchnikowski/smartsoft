@@ -25,6 +25,7 @@ export enum FieldType {
     phoneNumber = "phoneNumber",
     pesel = "pesel",
     pdf = "pdf",
+    video = "video",
 }
 
 export interface ISpecification {
