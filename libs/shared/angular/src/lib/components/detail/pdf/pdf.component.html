@@ -1,0 +1,6 @@
+<ng-container *ngIf='options?.item$ | async; let item'>
+    <smart-button *ngIf="item"
+                  [options]="getButtonOptions(item[options?.key])">
+        {{ 'show' | translate }}
+    </smart-button>
+</ng-container>

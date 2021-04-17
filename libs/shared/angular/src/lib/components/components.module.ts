@@ -77,6 +77,7 @@ import {ErrorContextComponent} from "./error-context/error-context.component";
 import {InputArrayComponent} from "./input/array/array.component";
 import {DetailArrayComponent} from "./detail/array/array.component";
 import {InputPdfComponent} from "./input/pdf/pdf.component";
+import {DetailPdfComponent} from "./detail/pdf/pdf.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -108,7 +109,8 @@ export const DETAIL_COMPONENTS = [
   DetailObjectComponent,
   DetailColorComponent,
   DetailLogoComponent,
-  DetailArrayComponent
+  DetailArrayComponent,
+  DetailPdfComponent
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];
