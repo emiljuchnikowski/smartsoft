@@ -11,3 +11,4 @@ export * from './logo/logo.component';
 export * from './array/array.component';
 export * from './pdf/pdf.component';
 export * from './video/video.component';
+export * from './attachment/attachment.component';

@@ -71,6 +71,19 @@ export class User implements IEntity<string> {
     })
     media: any;
 
+    @Field({
+        create: {
+            required: true
+        },
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
+        details: true,
+        type: FieldType.attachment
+    })
+    newFile: any;
+
     // @Field({
     //     create: modifyMetdata,
     //     update: {

@@ -33,6 +33,8 @@ export interface ITranslateData {
     select: string,
     selected,
     show: string,
+    download: string,
+    play: string,
 
     OBJECT: {
         deleted: string
@@ -102,6 +104,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     selected: "selected",
     select: "select",
     show: "show",
+    download: "download",
+    play: "play",
 
     OBJECT: {
         deleted: 'object deleted'
@@ -171,6 +175,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     selected: "wybrano",
     select: "wybierz",
     show: "pokaż",
+    download: "pobierz",
+    play: "włącz",
 
     OBJECT: {
         deleted: 'obiekt został usunięty'

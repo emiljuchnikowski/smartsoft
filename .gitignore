@@ -55,3 +55,4 @@
 /libs/auth/shell/app-services/dist/
 /libs/shared/users/dist/
 /yarn.lock
+/.env
