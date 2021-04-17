@@ -5,7 +5,7 @@ import {Readable, Stream} from "stream";
 
 import { IUser } from "@smartsoft001/users";
 import {
-  DomainValidationError,
+  DomainValidationError, IAttachmentRepository,
   IEntity,
   IItemRepository,
   ISpecification,
@@ -23,7 +23,8 @@ export class CrudService<T extends IEntity<string>> {
 
   constructor(
       private readonly permissionService: PermissionService,
-      private readonly repository: IItemRepository<T>
+      private readonly repository: IItemRepository<T>,
+      private readonly attachmentRepository: IAttachmentRepository<T>
   ) {}
 
   async create(data: T, user: IUser): Promise<string> {
@@ -195,22 +196,22 @@ export class CrudService<T extends IEntity<string>> {
       data.id = GuidService.create();
     }
 
-    await this.repository.uploadAttachment(data);
+    await this.attachmentRepository.upload(data);
 
     return data.id;
   }
 
   @Memoize()
   getAttachmentInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }> {
-    return this.repository.getAttachmentInfo(id);
+    return this.attachmentRepository.getInfo(id);
   }
 
   getAttachmentStream(id: string, options?: { start: number; end: number }): Promise<Readable> {
-    return this.repository.getAttachmentStream(id, options);
+    return this.attachmentRepository.getStream(id, options);
   }
 
   async deleteAttachment(id: string): Promise<void> {
-    return this.repository.deleteAttachment(id);
+    return this.attachmentRepository.delete(id);
   }
 
   changes(criteria: { id?: string }): Observable<ItemChangedData> {

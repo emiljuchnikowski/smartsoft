@@ -60,12 +60,14 @@ export abstract class IItemRepository<T extends IEntity<string>> {
   abstract async clear(user: IUser | IItemRepositoryOptions): Promise<void>;
 
   abstract changesByCriteria(criteria: { id?: string }): Observable<any>;
+}
 
-  abstract uploadAttachment(data: { id: string, fileName: string; stream: any; mimeType: string; encoding: string }): Promise<string>;
+export abstract class IAttachmentRepository<T extends IEntity<string>> {
+  abstract upload(data: { id: string, fileName: string; stream: any; mimeType: string; encoding: string }): Promise<string>;
 
-  abstract getAttachmentInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }>;
+  abstract getInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }>;
 
-  abstract getAttachmentStream(id: string, options?: { start: number; end: number }): Promise<any>;
+  abstract getStream(id: string, options?: { start: number; end: number }): Promise<any>;
 
-  abstract deleteAttachment(id: string): Promise<void>;
+  abstract delete(id: string): Promise<void>;
 }
