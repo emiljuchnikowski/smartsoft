@@ -3,7 +3,6 @@ import {ChangeDetectorRef, Component} from '@angular/core';
 import {IEntity} from "@smartsoft001/domain-core";
 
 import {DetailBaseComponent} from "../base/base.component";
-import {IButtonOptions} from "../../../models";
 import {FileService} from "../../../services/file/file.service";
 
 @Component({
@@ -16,11 +15,7 @@ export class DetailVideoComponent<T extends IEntity<string>> extends DetailBaseC
         super(cd);
     }
 
-    getButtonOptions(item: { id }): IButtonOptions {
-        return {
-            click: () => {
-                this.fileService.download(item.id);
-            }
-        }
+    getUrl(item: { id: string }): string {
+        return this.fileService.getUrl(item.id);
     }
 }

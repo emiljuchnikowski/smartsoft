@@ -1,0 +1,6 @@
+<ng-container *ngIf='options?.item$ | async; let item'>
+    <video style="width: 100%" controls controlsList="nodownload">
+        <source type="video/mp4" [src]="getUrl(item[options?.key])">
+        Your browser does not support the video tag.
+    </video>
+</ng-container>
