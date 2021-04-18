@@ -36,6 +36,38 @@ export interface ITranslateData {
     download: string,
     play: string,
 
+    CALENDAR: {
+        DAY_OF_WEEK: {
+            Mon: string,
+            Tue: string,
+            Wed: string,
+            Thu: string,
+            Fri: string,
+            Sat: string,
+            Sun: string,
+        },
+        MONTH: {
+            January,
+            February,
+            March,
+            April,
+            May,
+            June,
+            July,
+            August,
+            September,
+            October,
+            November,
+            December
+        },
+        Today,
+        LastSevenDays,
+        ThisMonth,
+        Yesterday,
+        LastThirtyDays,
+        LastMonth
+    },
+
     OBJECT: {
         deleted: string
     },
@@ -107,6 +139,38 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     download: "download",
     play: "play",
 
+    CALENDAR: {
+        DAY_OF_WEEK: {
+            Mon: 'Mon',
+            Tue: 'Tue',
+            Wed: 'Wed',
+            Thu: 'Thu',
+            Fri: 'Fri',
+            Sat: 'Sat',
+            Sun: 'Sun',
+        },
+        MONTH: {
+            January: "January",
+            February: "February",
+            March: "March",
+            April: "April",
+            May: "May",
+            June: "June",
+            July: "July",
+            August: "August",
+            September: "September",
+            October: "October",
+            November: "November",
+            December: "December"
+        },
+        Today: "Today",
+        LastSevenDays: "Last 7 days",
+        ThisMonth: "This month",
+        Yesterday: "Yesterday",
+        LastThirtyDays: "Last 30 days",
+        LastMonth: "Last month"
+    },
+
     OBJECT: {
         deleted: 'object deleted'
     },
@@ -177,6 +241,38 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     show: "pokaż",
     download: "pobierz",
     play: "włącz",
+
+    CALENDAR: {
+        DAY_OF_WEEK: {
+            Mon: 'Pon',
+            Tue: 'Wto',
+            Wed: 'Śro',
+            Thu: 'Czw',
+            Fri: 'Pio',
+            Sat: 'Sob',
+            Sun: 'Nie',
+        },
+        MONTH: {
+            January: "Styczeń",
+            February: "Luty",
+            March: "Marzec",
+            April: "Kwiecień",
+            May: "Maj",
+            June: "Czerwiec",
+            July: "Lipiec",
+            August: "Sierpień",
+            September: "Wrzesień",
+            October: "Październik",
+            November: "Listopad",
+            December: "Grudzień"
+        },
+        Today: "Dzisiaj",
+        LastSevenDays: "Ostatnie 7 dnii",
+        ThisMonth: "Ten miesiąc",
+        Yesterday: "Wczoraj",
+        LastThirtyDays: "Ostatnie 30 dni",
+        LastMonth: "Ostatni miesiąc"
+    },
 
     OBJECT: {
         deleted: 'obiekt został usunięty'

@@ -82,6 +82,9 @@ import {InputVideoComponent} from "./input/video/video.component";
 import {DetailVideoComponent} from "./detail/video/video.component";
 import {InputAttachmentComponent} from "./input/attachment/attachment.component";
 import {DetailAttachmentComponent} from "./detail/attachment/attachment.component";
+import {InputDateRangeComponent} from "./input/date-range/date-range.component";
+import {DateRangeComponent, DateRangeModalComponent} from "./date-range/date-range.component";
+import {DetailDateRangeComponent} from "./detail/date-range/date-range.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -116,7 +119,8 @@ export const DETAIL_COMPONENTS = [
   DetailArrayComponent,
   DetailPdfComponent,
   DetailVideoComponent,
-  DetailAttachmentComponent
+  DetailAttachmentComponent,
+  DetailDateRangeComponent
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];
@@ -149,7 +153,8 @@ export const INPUT_COMPONENTS = [
   InputArrayComponent,
   InputPdfComponent,
   InputVideoComponent,
-  InputAttachmentComponent
+  InputAttachmentComponent,
+  InputDateRangeComponent
 ];
 
 export const LIST_COMPONENTS = [
@@ -173,6 +178,7 @@ export const GRID_COMPONENTS = [
 ];
 
 export const INFO_COMPONENTS = [InfoComponent, InfoModalComponent];
+export const DATE_RANGE_COMPONENTS = [DateRangeComponent, DateRangeModalComponent];
 
 export const DYNAMIC_COMPONENTS = [DynamicComponent];
 
@@ -195,6 +201,7 @@ export const COMPONENTS = [
   ...DYNAMIC_COMPONENTS,
   PasswordStrengthComponent,
   ...INFO_COMPONENTS,
+    ...DATE_RANGE_COMPONENTS,
     ErrorContextComponent
 ];
 

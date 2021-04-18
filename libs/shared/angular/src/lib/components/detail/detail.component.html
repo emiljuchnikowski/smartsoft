@@ -16,6 +16,7 @@
             <smart-detail-pdf *ngSwitchCase="FieldType.pdf" [options]="options"></smart-detail-pdf>
             <smart-detail-video *ngSwitchCase="FieldType.video" [options]="options"></smart-detail-video>
             <smart-detail-attachment *ngSwitchCase="FieldType.attachment" [options]="options"></smart-detail-attachment>
+            <smart-detail-date-range *ngSwitchCase="FieldType.dateRange" [options]="options"></smart-detail-date-range>
             <smart-detail-text *ngSwitchDefault [options]="options"></smart-detail-text>
         </ng-container>
     </ng-container>

@@ -1,5 +1,5 @@
 import {Field, FieldType, IFieldModifyMetadata, ISpecification, Model} from "@smartsoft001/models";
-import {IEntity} from "@smartsoft001/domain-core";
+import {IDateRange, IEntity} from "@smartsoft001/domain-core";
 
 const modifyMetdata : IFieldModifyMetadata = {
     required: true,
@@ -83,6 +83,19 @@ export class User implements IEntity<string> {
         type: FieldType.attachment
     })
     newFile: any;
+
+    @Field({
+        create: {
+            required: true
+        },
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
+        details: true,
+        type: FieldType.dateRange
+    })
+    range: IDateRange;
 
     // @Field({
     //     create: modifyMetdata,

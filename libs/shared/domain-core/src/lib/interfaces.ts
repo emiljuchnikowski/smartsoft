@@ -10,6 +10,17 @@ export interface IAddress {
     zipCode: string;
 }
 
+export interface IDateRange {
+    /*
+     * YYYY-MM-DD
+     */
+    start: string;
+    /*
+     * YYYY-MM-DD
+     */
+    end: string;
+}
+
 export interface IFactory<T, TConfig> {
     create(config: NonNullable<TConfig>): Promise<T>;
 }

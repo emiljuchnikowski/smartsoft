@@ -12,3 +12,4 @@ export * from './array/array.component';
 export * from './pdf/pdf.component';
 export * from './video/video.component';
 export * from './attachment/attachment.component';
+export * from './date-range/date-range.component';

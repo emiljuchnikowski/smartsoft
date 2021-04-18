@@ -19,6 +19,7 @@ export * from './tabs';
 export * from './dynamic';
 export * from './password-strength';
 export * from './info';
+export * from './date-range';
 export * from './error-context';
 
 export * from './components.module';

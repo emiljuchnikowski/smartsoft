@@ -16,6 +16,8 @@ import { AuthService } from "./auth/auth.service";
 import { FingerprintService } from "./fingerprint/fingerprint.service";
 import { CameraService } from "./camera/camera.service";
 import {FileService} from "./file/file.service";
+import {CalendarService} from "./calendar/calendar.service";
+import {UIService} from "./ui/ui.service";
 
 @NgModule({
   imports: [
@@ -37,7 +39,9 @@ import {FileService} from "./file/file.service";
     FingerprintService,
     FingerprintAIO,
     CameraService,
-    FileService
+    FileService,
+    CalendarService,
+    UIService
   ],
 })
 export class SharedServicesModule {}

@@ -1,8 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
 import {NavParams, PopoverController} from "@ionic/angular";
 
-import {PopoverService} from "../../services";
-
 @Component({
     selector: "smart-info",
     templateUrl: "./info.component.html",
