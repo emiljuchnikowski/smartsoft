@@ -2,6 +2,7 @@ import {Injectable, Logger} from "@nestjs/common";
 import { Guid } from "guid-typescript";
 import { Observable } from "rxjs";
 import {Readable, Stream} from "stream";
+import {Memoize} from "lodash-decorators";
 
 import { IUser } from "@smartsoft001/users";
 import {
@@ -15,16 +16,15 @@ import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 import {PermissionService} from "@smartsoft001/nestjs";
 import {castModel, getInvalidFields, isModel} from "@smartsoft001/models";
 import {GuidService, PasswordService} from "@smartsoft001/utils";
-import {Memoize} from "lodash-decorators";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
   private _logger = new Logger(CrudService.name, true);
 
   constructor(
-      private readonly permissionService: PermissionService,
-      private readonly repository: IItemRepository<T>,
-      private readonly attachmentRepository: IAttachmentRepository<T>
+      protected readonly permissionService: PermissionService,
+      protected readonly repository: IItemRepository<T>,
+      protected readonly attachmentRepository: IAttachmentRepository<T>
   ) {}
 
   async create(data: T, user: IUser): Promise<string> {
