@@ -1,6 +1,6 @@
 import {Injectable} from "@nestjs/common";
 import {CrudService} from "@smartsoft001/crud-shell-app-services";
-import {IItemRepository} from "@smartsoft001/domain-core";
+import {IItemRepository, IAttachmentRepository} from "@smartsoft001/domain-core";
 import {PermissionService} from "@smartsoft001/nestjs";
 
 import {<%= classify(domainName) %>} from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/domain";
@@ -9,6 +9,7 @@ import {<%= classify(domainName) %>} from "@<%= dasherize(projectName) %>/<%= da
 export class <%= classify(domainNamePluralize) %>AppService extends CrudService<<%= classify(domainName) %>> {
   constructor(
     readonly permissions: PermissionService,
+    readonly attachRepository: IAttachmentRepository<<%= classify(domainName) %>>,
     readonly itemRepository: IItemRepository<<%= classify(domainName) %>>
   ) {
     super(permissions, itemRepository);

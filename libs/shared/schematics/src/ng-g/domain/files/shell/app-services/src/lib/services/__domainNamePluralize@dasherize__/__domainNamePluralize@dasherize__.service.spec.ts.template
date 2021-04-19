@@ -1,16 +1,17 @@
 import { Test } from '@nestjs/testing';
 import { PermissionService } from '@smartsoft001/nestjs';
-import { IItemRepository } from '@smartsoft001/domain-core';
+import { IItemRepository, IAttachmentRepository } from '@smartsoft001/domain-core';
 
 import { <%= classify(domainNamePluralize) %>AppService } from './<%= dasherize(domainNamePluralize) %>.service';
 
 describe('<%= dasherize(domainNamePluralize) %>-shell-app-services: <%= classify(domainNamePluralize) %>AppService', () => {
   let service: <%= classify(domainNamePluralize) %>AppService;
-  let permissionService, repository;
+  let permissionService, repository, attachRepository;
 
   beforeEach(async () => {
     permissionService = {};
     repository = {};
+    attachRepository = {};
 
     const moduleRef = await Test.createTestingModule({
       providers: [
@@ -22,6 +23,10 @@ describe('<%= dasherize(domainNamePluralize) %>-shell-app-services: <%= classify
         {
           provide: IItemRepository,
           useValue: repository
+        },
+        {
+          provide: IAttachmentRepository,
+          useValue: attachRepository
         }
       ],
     }).compile();
