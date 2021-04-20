@@ -63,7 +63,7 @@ export function getInvalidFields<T>(
       }
     }
 
-    if (required && !instance[key]) result.push(key);
+    if (required && (instance[key] === null || instance[key] === undefined || instance[key] === '')) result.push(key);
   });
 
   return result;
