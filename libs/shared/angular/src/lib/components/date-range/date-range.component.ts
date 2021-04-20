@@ -138,15 +138,15 @@ export interface CalendarState {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateRangeModalComponent implements OnInit, AfterContentInit {
-    @Input() showFilterBtns = true;
+    @Input() showFilterBtns = false;
     @Input() restrictSelectionTo: number;
     @ViewChild('scrollMe', { static: true }) scrollMe: IonContent;
     public currentDate = moment().clone();
     public dateForm: FormGroup;
-    calendar: month[] = [{ dates: null, monthName: null, year: null }];
+    calendar: month[] = [{ dates: null, monthName: null, year: null, number: null }];
     selectedButtonName = FilterBtnConstants.empthyString;
     scrollPositionValue = 0;
-    valueTop = 6985;  //calculated value of the scrollHeight
+    valueTop = 6000;  //calculated value of the scrollHeight
     previousState: CalendarState = {
         dateFrom: null,
         dateTo: null,
@@ -189,7 +189,7 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
         if (this.previousState.dateFrom) {
             this.setPreviousStateData();
         } else {
-            this.selectLastSevenDays();
+            this.selectToday();
             this.scrollMe.scrollToPoint(0, this.valueTop, 300);
         }
     }
@@ -206,7 +206,7 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
                 });
             }),
         ).subscribe(({ date }) => {
-            const formattedDate = date.format('DD-MMM-YY');
+            const formattedDate = date.format('YYYY-MM-DD');
             const areBothDatesSelected = this.datesRefGroup.valid;
             this.when(areBothDatesSelected, this.resetDates);
             const { startDateRef } = this.datesRefGroup.value;
@@ -393,5 +393,21 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
         this.modalController.dismiss({
             calendarData: data
         });
+    }
+
+    loadDataNext(event) {
+        this.calendarService.generateNextMonths();
+        this.calendar = this.calendarService.state.calendar;
+        this.changeDetectionRef.detectChanges();
+
+        event.target.complete();
+    }
+
+    loadDataPrev(event: any) {
+        this.calendarService.generatePrevMonths() ;
+        this.calendar = this.calendarService.state.calendar;
+        this.changeDetectionRef.detectChanges();
+
+        event.target.complete();
     }
 }
