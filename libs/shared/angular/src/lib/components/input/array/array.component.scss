@@ -4,6 +4,17 @@ ion-label {
     }
 }
 
-smart-form {
+smart-form,
+ion-card {
     width: 100%;
+    ion-card-header {
+        padding: 0;
+        margin: 0;
+        text-align: right;
+        ion-button {
+            &[fill="outline"] {
+                --border-color: transparent !important;
+            }
+        }
+    }
 }
