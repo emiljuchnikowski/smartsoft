@@ -7,13 +7,17 @@ ion-label {
 smart-form,
 ion-card {
     width: 100%;
+    margin: .3rem;
     ion-card-header {
         padding: 0;
         margin: 0;
-        text-align: right;
+        ion-item {
+            margin: 0;
+        }
         ion-button {
             &[fill="outline"] {
                 --border-color: transparent !important;
+                margin-right: -1.2rem;
             }
         }
     }

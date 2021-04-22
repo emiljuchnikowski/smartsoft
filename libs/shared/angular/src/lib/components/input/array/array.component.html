@@ -9,9 +9,12 @@
         <ion-item *ngFor="let options of childOptions; let index = index" lines="none">
             <ion-card>
                 <ion-card-header>
-                    <ion-button (click)="onRemove(index)" size="small" fill="outline">
-                        <ion-icon name="close-outline"></ion-icon>
-                    </ion-button>
+                    <ion-item lines="none">
+                        <ion-label>{{ translateKey | translate }}</ion-label>
+                        <ion-button (click)="onRemove(index)" size="small" fill="outline" slot="end">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </ion-button>
+                    </ion-item>
                 </ion-card-header>
                 <ion-card-content>
 
@@ -22,6 +25,6 @@
         </ion-item>
     </ion-list>
     <smart-button [options]="addButtonOptions">
-        + Dodaj
+        Dodaj
     </smart-button>
 </ng-container>
