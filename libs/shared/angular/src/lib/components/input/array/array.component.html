@@ -1,16 +1,19 @@
 <ng-container *ngIf="control">
-    <ion-label position="floating">
+    <ion-label position="static">
         {{ translateKey | translate }}
         <ion-text color="danger">
             <span *ngIf="fieldOptions?.required">*</span>
         </ion-text>
     </ion-label>
-    <br/>
     <ion-list>
         <ion-item *ngFor="let options of childOptions; let index = index">
             <smart-form [options]="options"></smart-form>
-            <ion-button (click)="onRemove(index)">X</ion-button>
+            <ion-button (click)="onRemove(index)">
+                <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
         </ion-item>
     </ion-list>
-    <smart-button [options]="addButtonOptions">+</smart-button>
+    <smart-button [options]="addButtonOptions">
+        +
+    </smart-button>
 </ng-container>
