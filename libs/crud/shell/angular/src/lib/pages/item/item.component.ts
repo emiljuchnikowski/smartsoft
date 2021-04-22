@@ -80,6 +80,14 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
           this.facade.select(id);
           this.id = id;
         });
+
+      this.activeRoute.queryParams
+          .pipe(this.takeUntilDestroy)
+          .subscribe(({ edit }) => {
+            if (edit) {
+              this.mode = "update";
+            }
+          });
     }
 
     this.uniqueProvider = async (values) => {
