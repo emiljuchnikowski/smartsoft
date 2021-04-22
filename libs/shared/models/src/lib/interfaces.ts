@@ -62,6 +62,7 @@ export interface IFieldModifyMetadata {
     unique?: boolean | IFieldUniqueMetadata;
     defaltValue?: () => any;
     enabled?: ISpecification;
+    hide?: boolean;
 }
 
 export interface IFieldEditMetadata extends IFieldModifyMetadata {
