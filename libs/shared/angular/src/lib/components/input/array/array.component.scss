@@ -4,7 +4,14 @@ ion-label {
     }
 }
 
-smart-form,
+smart-form {
+    width: 100%;
+    margin: .3rem;
+    form {
+        margin: 0 -.9rem;
+    }
+}
+
 ion-card {
     width: 100%;
     margin: .3rem;
@@ -13,6 +20,10 @@ ion-card {
         margin: 0;
         ion-item {
             margin: 0;
+            item-inner {
+                margin: 0;
+                padding: 0;
+            }
         }
         ion-button {
             &[fill="outline"] {
@@ -20,5 +31,8 @@ ion-card {
                 margin-right: -1.2rem;
             }
         }
+    }
+    ion-card-content {
+        padding: 0;
     }
 }
