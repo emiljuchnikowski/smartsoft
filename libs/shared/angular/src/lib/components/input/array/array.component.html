@@ -8,7 +8,7 @@
     <ion-list>
         <ion-item *ngFor="let options of childOptions; let index = index" lines="none">
             <ion-card>
-                <ion-card-header>
+                <ion-card-header *ngIf="options.fieldOptions.type !== FieldType.array">
                     <ion-item lines="none">
                         <ion-label>{{ translateKey | translate }}</ion-label>
                         <ion-button (click)="onRemove(index)" size="small" fill="outline" slot="end">
@@ -17,7 +17,6 @@
                     </ion-item>
                 </ion-card-header>
                 <ion-card-content>
-
                     <smart-form [options]="options"></smart-form>
                 </ion-card-content>
 

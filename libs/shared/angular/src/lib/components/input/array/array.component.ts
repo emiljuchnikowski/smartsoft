@@ -1,11 +1,12 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormArray, FormControl} from "@angular/forms";
 
+import {ObjectService} from "@smartsoft001/utils";
+
 import {InputBaseComponent} from "../base/base.component";
 import {IButtonOptions, IFormOptions} from "../../../models";
 import {FormFactory} from "../../../factories/form/form.factory";
-import {getModelFieldOptions} from "@smartsoft001/models";
-import {ObjectService} from "@smartsoft001/utils";
+import {FieldType, getModelFieldOptions, IFieldOptions} from "@smartsoft001/models";
 
 @Component({
     selector: 'smart-input-array',
@@ -13,7 +14,7 @@ import {ObjectService} from "@smartsoft001/utils";
     styleUrls: ['./array.component.scss'],
 })
 export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implements OnInit {
-    childOptions: IFormOptions<TChild>[];
+    childOptions: Array<IFormOptions<TChild> & { fieldOptions: IFieldOptions }>;
     addButtonOptions: IButtonOptions = {
         click: async () => {
             (this.internalOptions.control as FormArray).push(await this.factory.create(
@@ -22,6 +23,8 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
             this.initData();
         }
     };
+
+    FieldType = FieldType;
 
     constructor(cd: ChangeDetectorRef,  private factory: FormFactory) {
         super(cd);
@@ -40,28 +43,27 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
 
     private initData(): void {
         this.childOptions = (this.internalOptions.control as FormArray).controls.map(control => {
-            let model = this.internalOptions.model[this.internalOptions.fieldKey];
 
-            // check for array parent
-            if (!model && this.internalOptions.model[0][this.internalOptions.fieldKey]) {
-                const modelWithOptions = getModelFieldOptions(this.internalOptions.model[0], this.internalOptions.fieldKey);
-                model = ObjectService.createByType(control.value, modelWithOptions.classType);
+            console.log(this.internalOptions.fieldKey);
+
+            if (this.internalOptions.model[0] && this.internalOptions.model[0][this.internalOptions.fieldKey]) {
+                const options = getModelFieldOptions(this.internalOptions.model[0], this.internalOptions.fieldKey);
 
                 return {
                     mode: this.internalOptions.mode,
                     control,
-                    model
-                }
-            }
+                    model : ObjectService.createByType(control.value, options.classType),
+                    fieldOptions: options
+                } as IFormOptions<TChild> & { fieldOptions: IFieldOptions };
+            } else {
+                const options = getModelFieldOptions(this.internalOptions.model, this.internalOptions.fieldKey);
 
-            if (!model || !model.length) {
-                model = new this.fieldOptions.classType();
-            }
-
-            return {
-                mode: this.internalOptions.mode,
-                control,
-                model
+                return {
+                    mode: this.internalOptions.mode,
+                    control,
+                    model : ObjectService.createByType(control.value, options.classType),
+                    fieldOptions: options
+                } as IFormOptions<TChild> & { fieldOptions: IFieldOptions };
             }
         });
     }
