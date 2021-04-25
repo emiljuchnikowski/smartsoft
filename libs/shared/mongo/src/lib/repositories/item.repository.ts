@@ -2,9 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { ChangeStream, MongoClient } from "mongodb";
 import { Observable, Observer } from "rxjs";
 import { finalize, share } from "rxjs/operators";
-import {Readable, Stream} from "stream";
-import * as mongo from "mongodb";
-
 import {
   IEntity,
   IItemRepository,
@@ -13,6 +10,7 @@ import {
 } from "@smartsoft001/domain-core";
 import { IUser } from "@smartsoft001/users";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
+import {ObjectService} from "@smartsoft001/utils";
 
 import { MongoConfig } from "../mongo.config";
 import { getMongoUrl } from "../mongo.utils";
@@ -591,108 +589,6 @@ export class MongoItemRepository<
     );
   }
 
-  uploadAttachment(data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string }): Promise<string> {
-    return new Promise<string>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-        const bucket = new mongo.GridFSBucket(db, {
-          bucketName: this.config.collection
-        });
-
-        const writeStream = bucket.openUploadStreamWithId(data.id, data.fileName, {
-          contentType: data.mimeType,
-        });
-
-        data.stream.pipe(writeStream);
-
-        data.stream.on("finish", () => {
-          res();
-        })
-      });
-    });
-  }
-
-  getAttachmentInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }> {
-    return new Promise<{ fileName: string, contentType: string, length: number }>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-
-        const bucket = new mongo.GridFSBucket(db, {
-          bucketName: this.config.collection
-        });
-
-        bucket.find({
-          _id: id
-        }).toArray(
-            (errDelete, items) => {
-              if (errDelete) {
-                rej(errDelete);
-                return;
-              }
-
-              client.close();
-              res({
-                fileName: items[0].filename,
-                contentType: items[0].contentType,
-                length: items[0].length
-              });
-            }
-        );
-      });
-    });
-  }
-
-  getAttachmentStream(id: string, options: { start: number; end: number } | undefined): Promise<Readable> {
-    return new Promise<Readable>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-        const bucket = new mongo.GridFSBucket(db, {
-          bucketName: this.config.collection
-        });
-
-        res(bucket.openDownloadStream(id as any, options));
-      });
-    });
-  }
-
-  deleteAttachment(id: string): Promise<void> {
-    return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-        const bucket = new mongo.GridFSBucket(db, {
-          bucketName: this.config.collection
-        });
-
-        bucket.delete(id as any, (err2) => {
-          if (err2) rej(err2);
-          else res();
-
-          client.close();
-        });
-      });
-    });
-  }
-
   private getCount(criteria: any, collection): Promise<any> {
     return new Promise<any>((res, rej) => {
       collection.countDocuments(criteria, (err, count) => {
@@ -726,7 +622,7 @@ export class MongoItemRepository<
   }
 
   private getModelToCreate(item: T, user: IUser): T {
-    const result = { ...item };
+    const result = ObjectService.removeTypes(item);
     result["_id"] = result.id;
     delete result.id;
 
@@ -755,7 +651,7 @@ export class MongoItemRepository<
     user: IUser,
     info
   ): { id: string } {
-    const result = { ...item };
+    const result = ObjectService.removeTypes(item);
     result["_id"] = result.id;
     delete result.id;
 
@@ -773,7 +669,7 @@ export class MongoItemRepository<
   private getModelToResult(item: T): T {
     if (!item) return null;
 
-    const result = { ...item } as any;
+    const result = ObjectService.removeTypes(item) as any;
     result["id"] = result._id;
 
     delete result._id;
