@@ -4,6 +4,8 @@ import {FormArray, FormControl} from "@angular/forms";
 import {InputBaseComponent} from "../base/base.component";
 import {IButtonOptions, IFormOptions} from "../../../models";
 import {FormFactory} from "../../../factories/form/form.factory";
+import {getModelFieldOptions} from "@smartsoft001/models";
+import {ObjectService} from "@smartsoft001/utils";
 
 @Component({
     selector: 'smart-input-array',
@@ -41,8 +43,15 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
             let model = this.internalOptions.model[this.internalOptions.fieldKey];
 
             // check for array parent
-            if (!model && this.internalOptions.model[0]) {
-                model = this.internalOptions.model[0][this.internalOptions.fieldKey];
+            if (!model && this.internalOptions.model[0][this.internalOptions.fieldKey]) {
+                const modelWithOptions = getModelFieldOptions(this.internalOptions.model[0], this.internalOptions.fieldKey);
+                model = ObjectService.createByType(control.value, modelWithOptions.classType);
+
+                return {
+                    mode: this.internalOptions.mode,
+                    control,
+                    model
+                }
             }
 
             if (!model || !model.length) {
