@@ -8,9 +8,11 @@
     <ion-list>
         <ion-item *ngFor="let options of childOptions; let index = index" lines="none">
             <ion-card>
-                <ion-card-header *ngIf="options.fieldOptions.type !== FieldType.array">
+                <ion-card-header>
                     <ion-item lines="none">
-                        <ion-label>{{ translateKey | translate }}</ion-label>
+                        <ion-label *ngIf="options.fieldOptions.type !== FieldType.array">
+                            {{ translateKey | translate }}
+                        </ion-label>
                         <ion-button (click)="onRemove(index)" size="small" fill="outline" slot="end">
                             <ion-icon name="close-outline"></ion-icon>
                         </ion-button>
