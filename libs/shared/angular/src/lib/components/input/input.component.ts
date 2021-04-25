@@ -35,6 +35,10 @@ export class InputComponent<T> implements OnInit {
       key = key.replace('Confirm', '');
     }
 
+
+    if (!this._options.model) {
+      console.error('empty model', this._options);
+    }
     let fieldOptions = getModelFieldOptions(this._options.model, key);
     if (!fieldOptions && this._options.model[0]) fieldOptions = getModelFieldOptions(this._options.model[0], key);
     if (!fieldOptions) {

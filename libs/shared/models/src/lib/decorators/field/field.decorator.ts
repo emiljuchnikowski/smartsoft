@@ -28,6 +28,9 @@ export function FieldDecorator(options: IFieldOptions) {
 
             Object.defineProperty(target, key, {
                get(): any {
+                   if (!target['_' + key] && options.type === FieldType.array) {
+                       target['_' + key] = [];
+                   }
                    return target['_' + key];
                },
                 set(v: any) {

@@ -40,6 +40,11 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
         this.childOptions = (this.internalOptions.control as FormArray).controls.map(control => {
             let model = this.internalOptions.model[this.internalOptions.fieldKey];
 
+            // check for array parent
+            if (!model && this.internalOptions.model[0]) {
+                model = this.internalOptions.model[0][this.internalOptions.fieldKey];
+            }
+
             if (!model || !model.length) {
                 model = new this.fieldOptions.classType();
             }

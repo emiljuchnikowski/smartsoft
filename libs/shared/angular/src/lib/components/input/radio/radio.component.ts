@@ -21,10 +21,12 @@ export class InputRadioComponent<T> extends InputBaseComponent<T>
     super.afterSetOptionsHandler();
 
     if (this.internalOptions && !this.possibilities$) {
-      this.possibilities$ = of(
-        getModelFieldOptions(this.internalOptions.model, this.internalOptions.fieldKey)
-          .possibilities
-      ).pipe(
+      let options = getModelFieldOptions(this.internalOptions.model, this.internalOptions.fieldKey);
+
+      if (!options && this.internalOptions.model[0])
+        options = getModelFieldOptions(this.internalOptions.model[0], this.internalOptions.fieldKey);
+
+      this.possibilities$ = of(options.possibilities).pipe(
           map(possibilities => {
             if (!possibilities || _.isArray(possibilities)) return possibilities;
 
