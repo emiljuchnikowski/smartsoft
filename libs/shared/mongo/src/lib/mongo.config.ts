@@ -5,4 +5,5 @@ export class MongoConfig {
     username?: string;
     password?: string;
     collection?: string;
+    type?: any;
 }

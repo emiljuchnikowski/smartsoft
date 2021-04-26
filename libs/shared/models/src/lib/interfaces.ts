@@ -106,6 +106,7 @@ export interface IFieldOptions extends IFieldMetadata {
     list?: IFieldListMetadata | boolean;
     details?: IFieldDetailsMetadata | boolean;
     customs?: Array<IModelMetadataCustom>;
+    search?: boolean;
     info?: string;
 }
 

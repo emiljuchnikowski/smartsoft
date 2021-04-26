@@ -15,6 +15,7 @@ import {ObjectService} from "@smartsoft001/utils";
 import { MongoConfig } from "../mongo.config";
 import { getMongoUrl } from "../mongo.utils";
 import { IMongoTransaction } from "../mongo.unitofwork";
+import {getModelFieldsWithOptions} from "@smartsoft001/models";
 
 @Injectable()
 export class MongoItemRepository<
@@ -513,6 +514,8 @@ export class MongoItemRepository<
           return;
         }
 
+        this.generateSearch(criteria);
+
         const db = client.db(this.config.database);
         const collection = db.collection(this.config.collection);
 
@@ -711,5 +714,34 @@ export class MongoItemRepository<
         }
       );
     });
+  }
+
+  private generateSearch(criteria: any): void {
+    if (!criteria["$search"]) return;
+
+    if (this.config.type) {
+      const modelFields = getModelFieldsWithOptions(new this.config.type()).filter(i => i.options.search);
+
+      if (modelFields.length) {
+        modelFields.forEach(val => {
+          criteria[val.key] = { $regex: criteria["$search"], $options: 'i' };
+        });
+
+        delete criteria["$search"];
+
+        return;
+      }
+    }
+
+    const customCriteria = {
+      $text: { $search: ' "' + criteria["$search"].toString() + '" ' },
+    };
+
+    delete criteria["$search"];
+
+    criteria = {
+      ...criteria,
+      ...customCriteria,
+    };
   }
 }

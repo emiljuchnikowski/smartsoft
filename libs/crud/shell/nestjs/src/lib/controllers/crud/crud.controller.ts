@@ -254,19 +254,6 @@ export class CrudController<T extends IEntity<string>> {
 
     const result = q2m(q);
 
-    if (result.criteria["$search"]) {
-      customCriteria = {
-        $text: { $search: ' "' + result.criteria["$search"].toString() + '" ' },
-      };
-
-      delete result.criteria["$search"];
-
-      result.criteria = {
-        ...result.criteria,
-        ...customCriteria,
-      };
-    }
-
     return result;
   }
 

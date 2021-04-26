@@ -14,7 +14,7 @@ import { GATEWAYS } from "./gateways";
 
 @Module({})
 export class CrudShellNestjsModule {
-  static forRoot(
+  static forRoot<T>(
     options: SharedConfig & {
       db: {
         host: string;
@@ -23,6 +23,7 @@ export class CrudShellNestjsModule {
         username?: string;
         password?: string;
         collection?: string;
+        type?: T;
       };
     } & {
       restApi: boolean;
@@ -66,7 +67,7 @@ export class CrudShellNestjsModule {
 
 @Module({})
 export class CrudShellNestjsCoreModule {
-  static forRoot(
+  static forRoot<T>(
     options: SharedConfig & {
       db: {
         host: string;
@@ -75,6 +76,7 @@ export class CrudShellNestjsCoreModule {
         username?: string;
         password?: string;
         collection?: string;
+        type?: any;
       };
     }
   ): DynamicModule {

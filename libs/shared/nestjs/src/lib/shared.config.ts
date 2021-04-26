@@ -13,6 +13,7 @@ export class SharedConfig {
     delete?: Array<string>;
     [key: string]: Array<string>;
   };
+  type?: any;
 }
 
 export type PermissionType = "create" | "read" | "update" | "delete" | string;
