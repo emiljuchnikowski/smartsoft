@@ -245,7 +245,6 @@ export class CrudController<T extends IEntity<string>> {
   }
 
   protected getQueryObject(queryObject: any): { criteria; options; links } {
-    let customCriteria = {} as any;
     let q = "";
 
     Object.keys(queryObject).forEach((key) => {
@@ -257,7 +256,7 @@ export class CrudController<T extends IEntity<string>> {
     return result;
   }
 
-  private parseToXlsx(data: T[]) {
+  protected parseToXlsx(data: T[]) {
     if (!data || !data.length) {
       return "";
     }
@@ -272,7 +271,7 @@ export class CrudController<T extends IEntity<string>> {
     return XLSX.write(wb, { bookType: "xlsx", type: "buffer" });
   }
 
-  private parseToCsv(data: T[]): string {
+  protected parseToCsv(data: T[]): string {
     if (!data || !data.length) {
       return "";
     }
@@ -282,7 +281,7 @@ export class CrudController<T extends IEntity<string>> {
     return new Parser(fields).parse(data);
   }
 
-  private getDataWithFields(data: Array<T>): { res; fields } {
+  protected getDataWithFields(data: Array<T>): { res; fields } {
     const fields = [];
 
     const execute = (item, baseKey, baseItem) => {
