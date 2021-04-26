@@ -86,6 +86,7 @@ export class DateRangeComponent implements ControlValueAccessor {
 
     writeValue(value): void {
         this.value = value;
+        this.cd.detectChanges();
     }
 
     registerOnChange(fn) : void {
