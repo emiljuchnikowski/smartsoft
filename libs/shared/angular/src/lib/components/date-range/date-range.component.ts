@@ -5,7 +5,7 @@ import {
     Component,
     Input, NgZone,
     OnInit, Output,
-    ViewChild, EventEmitter, forwardRef
+    ViewChild, EventEmitter, forwardRef, ElementRef
 } from "@angular/core";
 import {DomController, IonContent, ModalController, NavParams} from "@ionic/angular";
 import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
@@ -17,6 +17,7 @@ import {IDateRange} from "@smartsoft001/domain-core";
 
 import {CalendarService, month} from "../../services/calendar/calendar.service";
 import {UIService} from "../../services/ui/ui.service";
+import {StyleService} from "../../services/style/style.service";
 
 @Component({
     selector: "smart-date-range",
@@ -44,8 +45,10 @@ export class DateRangeComponent implements ControlValueAccessor {
         selectedButtonName: FilterBtnConstants.empthyString
     };
 
-    constructor(private modalCtrl: ModalController, private cd: ChangeDetectorRef) {
-    }
+    constructor(
+        private modalCtrl: ModalController,
+        private cd: ChangeDetectorRef,
+    ) { }
 
     async onClick(): Promise<void> {
         if (this.ngModel?.start) this.calendarData.dateFrom = moment(this.ngModel.start);
@@ -162,7 +165,10 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
                 private changeDetectionRef: ChangeDetectorRef,
                 private domController: DomController,
                 private calendarService: CalendarService,
-                private zone: NgZone) {
+                private zone: NgZone,
+                private styleService: StyleService,
+                private elementRef: ElementRef
+    ) {
         this.initDateRangeForm();
         this.previousState = this.navParams.get('previousState');
     }
@@ -215,6 +221,7 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
             this.when(this.canSelectionBeRestricted(), this.showRestrictSelectionAlertAndResetDates);
         });
 
+        this.styleService.init(this.elementRef);
     }
 
     private setPreviousStateData(): void {
