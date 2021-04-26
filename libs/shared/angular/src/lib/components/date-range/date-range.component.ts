@@ -82,9 +82,7 @@ export class DateRangeComponent implements ControlValueAccessor {
     }
 
     writeValue(value): void {
-        if (value) {
-            this.value = value;
-        }
+        this.value = value;
     }
 
     registerOnChange(fn) : void {
