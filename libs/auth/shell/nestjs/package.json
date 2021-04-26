@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/auth-shell-nestjs",
-  "version": "1.0.203",
+  "version": "1.0.204",
   "description": "Utils to authorization",
   "repository": {
     "type": "git",
