@@ -27,14 +27,14 @@ export function FieldDecorator(options: IFieldOptions) {
             delete target[key];
 
             Object.defineProperty(target, key, {
-               get(): any {
-                   if (!target['_' + key] && options.type === FieldType.array) {
-                       target['_' + key] = [];
+               get: function () {
+                   if (!this['_' + key] && options.type === FieldType.array) {
+                       this['_' + key] = [];
                    }
-                   return target['_' + key];
+                   return this['_' + key];
                },
-                set(v: any) {
-                    target['_' + key] = options.type === FieldType.array && v ?
+                set: function (v: any) {
+                    this['_' + key] = options.type === FieldType.array && v ?
                         v.map(i => ObjectService.createByType(i, options.classType))
                         : ObjectService.createByType(v, options.classType);
                 },
