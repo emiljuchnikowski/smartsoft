@@ -27,6 +27,7 @@ import {FilterDateWithEditComponent} from "./components/filter/date-with-edit/da
 import {FilterRadioComponent} from "./components/filter/radio/radio.component";
 import {FilterFlagComponent} from "./components/filter/flag/flag.component";
 import {MultiselectComponent} from "./components/multiselect/multiselect.component";
+import {CrudListPaginationFactory} from "./factories/list-pagination/list-pagination.factory";
 
 const COMPONENTS = [
     ItemComponent,
@@ -66,7 +67,7 @@ const COMPONENTS = [
     exports: [
         ...COMPONENTS
     ],
-    providers: [CrudService, CrudEffects, CrudFacade, SocketService]
+    providers: [CrudService, CrudEffects, CrudFacade, SocketService, CrudListPaginationFactory]
 })
 export class CrudFullModule<T extends IEntity<string>> {
     constructor(store: Store<any>, config: CrudConfig<T>, effects: CrudEffects<any>) {

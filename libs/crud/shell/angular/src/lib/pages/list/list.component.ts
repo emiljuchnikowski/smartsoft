@@ -24,6 +24,7 @@ import {ExportComponent} from "../../components/export/export.component";
 import {PageBaseComponent} from "../base/base.component";
 import {FiltersComponent} from "../../components/filters/filters.component";
 import {MultiselectComponent} from "../../components/multiselect/multiselect.component";
+import {CrudListPaginationFactory} from "../../factories/list-pagination/list-pagination.factory";
 
 @Component({
   selector: "smart-crud-list-page",
@@ -53,6 +54,7 @@ export class ListComponent<T extends IEntity<string>>
     private cd: ChangeDetectorRef,
     private menuService: MenuService,
     private hardwareService: HardwareService,
+    private paginationFacade: CrudListPaginationFactory<T>,
     authService: AuthService
   ) {
     super(authService, config);
@@ -199,60 +201,13 @@ export class ListComponent<T extends IEntity<string>>
             }
           }
         : null,
-      pagination: {
-        ...this.config.pagination,
-        loadNextPage: () => {
-          if (!this.links || !this.links.next) return Promise.resolve(false);
-
-          return new Promise(res => {
-            const sub = this.facade.loaded$.subscribe(l => {
-              if (l) {
-                // if (sub && !sub.closed) sub.unsubscribe();
-                setTimeout(() => {
-                  res(this.links && this.links.next);
-                });
-              }
-            });
-
-            this.facade.read({
-              ...this.filter,
-              offset: this.filter.offset + this.filter.limit
-            });
-          });
-        },
-        loadPrevPage: () => {
-          if (!this.links || !this.links.prev) return Promise.resolve(false);
-
-          return new Promise(res => {
-            const sub = this.facade.loaded$.subscribe(l => {
-              if (l) {
-                // if (sub && !sub.closed) sub.unsubscribe();
-                setTimeout(() => {
-                  res(this.links && this.links.prev);
-                });
-              }
-            });
-
-            this.facade.read({
-              ...this.filter,
-              offset: this.filter.offset - this.filter.limit
-            });
-          });
-        },
-        page$: this.facade.filter$.pipe(
-          map(f => {
-            return f?.limit ? f.offset / f.limit + 1 : 0;
-          })
-        ),
-        totalPages$: combineLatest(
-          this.facade.filter$,
-          this.facade.totalCount$
-        ).pipe(
-          map(([filter, totalCount]) => {
-            return filter?.limit ? Math.ceil(totalCount / filter.limit) : 0;
-          })
-        )
-      },
+      pagination: await this.paginationFacade.create({
+        limit: this.config.pagination.limit,
+        provider:{
+          getFilter: () => this.filter,
+          getLinks: () => this.links
+        }
+      }),
       sort: this.config.sort
     };
 

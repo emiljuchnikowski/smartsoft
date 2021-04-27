@@ -13,6 +13,7 @@ import { CrudFacade } from "./+state/crud.facade";
 import { CrudPipesModule } from "./pipes/pipes.module";
 import { CrudFullModule } from "./crud-full.module";
 import { SocketService } from "./services/socket/socket.service";
+import {CrudListPaginationFactory} from "./factories/list-pagination/list-pagination.factory";
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { SocketService } from "./services/socket/socket.service";
     SocketIoModule
   ],
   exports: [CrudPipesModule],
-  providers: [CrudService, CrudEffects, CrudFacade, SocketService]
+  providers: [CrudService, CrudEffects, CrudFacade, SocketService, CrudListPaginationFactory]
 })
 export class CrudModule<T extends IEntity<string>> {
   static forFeature<T extends IEntity<string>>(

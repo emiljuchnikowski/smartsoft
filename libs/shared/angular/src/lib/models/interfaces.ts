@@ -114,17 +114,19 @@ export interface IInputFromFieldOptions<T> {
   mode?: "create" | "update" | string;
 }
 
+export interface IListPaginationOptions {
+  limit: number,
+  loadNextPage: () => Promise<boolean>,
+  loadPrevPage: () => Promise<boolean>,
+  page$: Observable<number>,
+  totalPages$: Observable<number>
+}
+
 export interface IListOptions<T> {
   provider: IListProvider<T>;
   type: any;
 
-  pagination?: {
-    limit: number,
-    loadNextPage: () => Promise<boolean>,
-    loadPrevPage: () => Promise<boolean>,
-    page$: Observable<number>,
-    totalPages$: Observable<number>
-  };
+  pagination?: IListPaginationOptions;
 
   cellPipe?: IListCellPipe<T>;
   componentFactories?: IListComponentFactories<T>,

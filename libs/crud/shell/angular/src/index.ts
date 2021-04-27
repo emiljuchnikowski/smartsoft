@@ -9,3 +9,4 @@ export * from "./lib/+state/crud.selectors";
 export * from "./lib/providers/model-possibilities/model-possibilities.provider";
 export * from './lib/models';
 export * from "./lib/pipes";
+export * from "./lib/factories/list-pagination/list-pagination.factory";
