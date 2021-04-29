@@ -97,7 +97,8 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
       if (!val.item["options"]) throw Error("Must set edit options");
 
       this.itemHandler = (id) => {
-        this.router.navigate([val.item["options"].routingPrefix, id]);
+        if (val.item["options"].routingPrefix) this.router.navigate([val.item["options"].routingPrefix, id]);
+        if (val.item["options"].select) val.item["options"].select(id);
       };
     }
 

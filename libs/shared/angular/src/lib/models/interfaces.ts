@@ -170,7 +170,12 @@ export interface IItemOptionsForPage {
   edit: boolean;
 }
 
-export type ItemOptions = IItemOptionsForPage;
+export interface IItemOptionsForCustom {
+  select: (id: string) => void;
+  edit: boolean;
+}
+
+export type ItemOptions = IItemOptionsForPage | IItemOptionsForCustom;
 
 export interface IListProvider<T> {
   getData: (filter) => void;
