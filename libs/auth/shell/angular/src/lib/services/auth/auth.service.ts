@@ -31,6 +31,11 @@ export class AuthService extends SharedAuthService {
     return JSON.parse(str);
   }
 
+  set token(val: IAuthToken) {
+      const str = JSON.stringify(val);
+      this.storageService.setItem(AUTH_TOKEN, str);
+  }
+
   get username(): string {
     if (!this.token) return null;
 
