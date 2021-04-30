@@ -219,6 +219,7 @@ export const IMPORTS = [
   MatSortModule,
   ChartsModule,
   ColorPickerModule,
+  NgxEditorModule
 ];
 
 @NgModule({
@@ -226,8 +227,7 @@ export const IMPORTS = [
   entryComponents: [...COMPONENTS],
   exports: [...COMPONENTS],
     imports: [
-        IMPORTS,
-        NgxEditorModule
+        IMPORTS
     ],
 })
 export class SharedComponentsModule {}
