@@ -63,7 +63,7 @@ export abstract class IItemRepository<T extends IEntity<string>> {
 }
 
 export abstract class IAttachmentRepository<T extends IEntity<string>> {
-  abstract upload(data: { id: string, fileName: string; stream: any; mimeType: string; encoding: string }): Promise<string>;
+  abstract upload(data: { id: string, fileName: string; stream: any; mimeType: string; encoding: string }): Promise<any>;
 
   abstract getInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }>;
 

@@ -191,14 +191,14 @@ export class CrudService<T extends IEntity<string>> {
     }
   }
 
-  async uploadAttachment(data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string}): Promise<string> {
+  async uploadAttachment(data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string}): Promise<any> {
     if (!data.id) {
       data.id = GuidService.create();
     }
 
     await this.attachmentRepository.upload(data);
 
-    return data.id;
+    return await this.attachmentRepository.upload(data);
   }
 
   @Memoize()
