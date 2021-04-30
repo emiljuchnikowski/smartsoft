@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable, Optional} from "@angular/core";
 import {forkJoin, Observable} from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -20,7 +20,7 @@ export class CrudService<T extends IEntity<string>> {
   constructor(
     protected config: CrudConfig<T>,
     protected http: HttpClient,
-    protected socket: SocketService<T>
+    @Optional() protected socket: SocketService<T>
   ) {}
 
   changes(criteria: { id?: string } = {}): Observable<ItemChangedData> {

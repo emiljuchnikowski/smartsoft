@@ -1,5 +1,5 @@
 import {Inject, Injectable, Injector, PLATFORM_ID} from '@angular/core';
-import { CookieService } from '@gorniv/ngx-universal';
+import { CookieService } from 'ngx-cookie';
 import {Platform} from "@ionic/angular";
 import { isPlatformBrowser } from '@angular/common';
 import { Storage as IonicStorage } from '@ionic/storage';

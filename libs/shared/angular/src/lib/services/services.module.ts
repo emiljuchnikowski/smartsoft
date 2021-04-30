@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { IonicModule } from "@ionic/angular";
 import { TranslateModule } from "@ngx-translate/core";
-import { CookieModule, TransferHttpModule } from "@gorniv/ngx-universal";
+import { CookieModule } from "ngx-cookie";
 import { FingerprintAIO } from "@ionic-native/fingerprint-aio/ngx";
 
 import { ToastService } from "./toast/toast.service";
@@ -24,7 +24,6 @@ import {UIService} from "./ui/ui.service";
     IonicModule,
     TranslateModule.forChild(),
     CookieModule.forRoot(),
-    TransferHttpModule,
   ],
   providers: [
     ToastService,

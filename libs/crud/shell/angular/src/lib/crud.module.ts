@@ -37,7 +37,8 @@ export class CrudModule<T extends IEntity<string>> {
       providers: [
         { provide: CrudConfig, useValue: options.config },
         { provide: CrudFullConfig, useValue: options.config },
-        { provide: FILE_SERVICE_CONFIG, useValue: { apiUrl: options.config.apiUrl } as IFileServiceConfig }
+        { provide: FILE_SERVICE_CONFIG, useValue: { apiUrl: options.config.apiUrl } as IFileServiceConfig },
+          ...(options.socket ? [] : [ SocketService ])
       ]
     };
   }
@@ -54,10 +55,12 @@ export class CrudModule<T extends IEntity<string>> {
 
 export interface ICrudModuleOptionsWithRoutng<T> {
   config: CrudFullConfig<T>;
+  socket?: boolean;
   routing: true;
 }
 
 export interface ICrudModuleOptionsWithoutRoutng<T> {
   config: CrudConfig<T>;
+  socket?: boolean;
   routing: false;
 }

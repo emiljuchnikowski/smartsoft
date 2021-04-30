@@ -67,7 +67,12 @@ const COMPONENTS = [
     exports: [
         ...COMPONENTS
     ],
-    providers: [CrudService, CrudEffects, CrudFacade, SocketService, CrudListPaginationFactory]
+    providers: [
+        CrudService,
+        CrudEffects,
+        CrudFacade,
+        CrudListPaginationFactory,
+    ]
 })
 export class CrudFullModule<T extends IEntity<string>> {
     constructor(store: Store<any>, config: CrudConfig<T>, effects: CrudEffects<any>) {

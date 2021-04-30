@@ -249,7 +249,9 @@
               "lodash",
               "jwt-decode",
               "chart.js",
-              "socket.io-client"
+              "socket.io-client",
+              "md5",
+              "lodash-decorators"
             ]
           },
           "configurations": {
