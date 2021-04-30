@@ -1,9 +1,15 @@
 <ng-container *ngIf="control">
-    <ion-label position="floating">
+    <ion-label>
         {{ translateKey | translate }}
         <ion-text color="danger">
             <span *ngIf="fieldOptions?.required">*</span>
         </ion-text>
     </ion-label>
-    <ion-textarea [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-textarea>
+    <br/>
+<!--    <ion-textarea [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-textarea>-->
+    <div class="NgxEditor__Wrapper" *ngIf="editor">
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+        <ngx-editor [editor]="editor" [formControl]="control" [placeholder]="placeholder"> </ngx-editor>
+    </div>
+    <br/>
 </ng-container>

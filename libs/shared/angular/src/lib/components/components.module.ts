@@ -85,6 +85,7 @@ import {DetailAttachmentComponent} from "./detail/attachment/attachment.componen
 import {InputDateRangeComponent} from "./input/date-range/date-range.component";
 import {DateRangeComponent, DateRangeModalComponent} from "./date-range/date-range.component";
 import {DetailDateRangeComponent} from "./detail/date-range/date-range.component";
+import {NgxEditorModule} from "ngx-editor";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -224,6 +225,9 @@ export const IMPORTS = [
   declarations: [...COMPONENTS],
   entryComponents: [...COMPONENTS],
   exports: [...COMPONENTS],
-  imports: IMPORTS,
+    imports: [
+        IMPORTS,
+        NgxEditorModule
+    ],
 })
 export class SharedComponentsModule {}
