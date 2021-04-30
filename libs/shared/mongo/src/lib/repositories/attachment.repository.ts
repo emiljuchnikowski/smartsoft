@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { MongoClient } from "mongodb";
-import {Readable, Stream, Writable} from "stream";
+import { ChangeStream, MongoClient } from "mongodb";
+import { Observable, Observer } from "rxjs";
+import { finalize, share } from "rxjs/operators";
+import {Readable, Stream} from "stream";
 import * as mongo from "mongodb";
 
 import {
@@ -19,8 +21,8 @@ export class MongoAttachmentRepository<
         super();
     }
 
-    upload(data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string }): Promise<Writable> {
-        return new Promise<Writable>((res, rej) => {
+    upload(data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string }): Promise<string> {
+        return new Promise<string>((res, rej) => {
             MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
                 if (err) {
                     rej(err);
@@ -38,7 +40,9 @@ export class MongoAttachmentRepository<
 
                 data.stream.pipe(writeStream);
 
-                res(writeStream);
+                data.stream.on("finish", () => {
+                    res();
+                })
             });
         });
     }
