@@ -15,4 +15,20 @@ export class SpecificationService {
     static invalid<T>(value: T, spec: { criteria: any }): boolean {
         return !SpecificationService.valid(value, spec);
     }
+
+    static getSqlCriteria(spec: { criteria: any }): string {
+        const keys = Object.keys(spec.criteria);
+        let result = '';
+
+        for (let index = 0; index < keys.length; index++) {
+            const key = keys[index];
+            const val = spec.criteria[key];
+
+            if (index) result += ' and ';
+
+            result += `${ key } = ${ (typeof val === 'number') ? val : "'" + val + "'" }`;
+        }
+
+        return result;
+    }
 }
