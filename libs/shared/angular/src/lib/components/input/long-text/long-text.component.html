@@ -7,7 +7,7 @@
     </ion-label>
     <br/>
 <!--    <ion-textarea [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-textarea>-->
-    <div class="NgxEditor__Wrapper" *ngIf="editor">
+    <div class="NgxEditor__Wrapper" *ngIf="editor" style="min-height: 220px">
         <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
         <ngx-editor [outputFormat]="'html'" [editor]="editor" [formControl]="control" [placeholder]="placeholder"> </ngx-editor>
     </div>
