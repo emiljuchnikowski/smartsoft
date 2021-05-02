@@ -18,6 +18,7 @@ export abstract class FormBaseComponent<T> {
   private _inputComponents: { [key: string]: Type<InputBaseComponent<T>>; };
 
   mode: string;
+  treeLevel: number;
 
   get fields(): Array<string> {
     return this._fields;
@@ -62,6 +63,8 @@ export abstract class FormBaseComponent<T> {
       this.mode = obj.mode;
       this._possibilities = obj.possibilities ? obj.possibilities : {};
       this._inputComponents = obj.inputComponents ? obj.inputComponents : {};
+
+      this.treeLevel = obj.treeLevel;
   }
 
   @Output() invokeSubmit = new EventEmitter();

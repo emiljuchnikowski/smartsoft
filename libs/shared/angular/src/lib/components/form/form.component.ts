@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
-  Component,
-  EventEmitter,
+  Component, ElementRef,
+  EventEmitter, HostBinding,
   Input, OnDestroy,
   Output,
 } from "@angular/core";
@@ -36,6 +36,7 @@ export class FormComponent<T> implements OnDestroy {
     if (!val) return;
 
     if (!val.treeLevel) val.treeLevel = 1;
+    (this.elementRef.nativeElement as HTMLElement).setAttribute('tree-level', val.treeLevel.toString());
 
     this._options = val;
 
@@ -66,7 +67,7 @@ export class FormComponent<T> implements OnDestroy {
   @Output() valuePartialChange = new EventEmitter<Partial<T>>();
   @Output() validChange = new EventEmitter<boolean>();
 
-  constructor(private formFactory: FormFactory, private cd: ChangeDetectorRef) {
+  constructor(private formFactory: FormFactory, private cd: ChangeDetectorRef, private elementRef: ElementRef) {
   }
 
   ngOnDestroy(): void {

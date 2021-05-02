@@ -104,6 +104,7 @@ export interface IIconButtonOptions {
 export type InputOptions<T> = IInputOptions & IInputFromFieldOptions<T>;
 
 export interface IInputOptions {
+  treeLevel: number;
   control: AbstractControl;
   possibilities$?: Observable<{ id: any, text: string }[]>;
   component?: Type<InputBaseComponent<any>>;

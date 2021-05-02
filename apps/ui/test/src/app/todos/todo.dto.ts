@@ -6,6 +6,12 @@ const modifyMetdata : IFieldModifyMetadata = {
     required: true
 };
 
+@Model({})
+export class TodoInfo {
+    @Field({ details: true, create: true, update: true, required: true }) info1 = 'Test info 1';
+    @Field({ details: true, create: true, update: true }) info2 = 'Test info 2';
+}
+
 @Model({
     filters: [
         {
@@ -60,6 +66,15 @@ export class Todo implements IEntity<string> {
         list: { order: 2 }
     })
     body: string;
+
+    @Field({
+        details: true,
+        create: true,
+        update: true,
+        type: FieldType.array,
+        classType: TodoInfo
+    })
+    infos: Array<TodoInfo>;
 
     // @Field({
     //     create: modifyMetdata,

@@ -50,6 +50,7 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
                 const options = getModelFieldOptions(this.internalOptions.model[0], this.internalOptions.fieldKey);
 
                 return {
+                    treeLevel: this.internalOptions.treeLevel + 1,
                     mode: this.internalOptions.mode,
                     control,
                     model : ObjectService.createByType(control.value, options.classType),
@@ -59,6 +60,7 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
                 const options = getModelFieldOptions(this.internalOptions.model, this.internalOptions.fieldKey);
 
                 return {
+                    treeLevel: this.internalOptions.treeLevel + 1,
                     mode: this.internalOptions.mode,
                     control,
                     model : ObjectService.createByType(control.value, options.classType),
