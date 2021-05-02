@@ -38,7 +38,7 @@ export class CrudController<T extends IEntity<string>> {
     return req.protocol + "://" + req.headers.host + req.url;
   }
 
-  //@UseGuards(AuthJwtGuard)
+  @UseGuards(AuthJwtGuard)
   @Post()
   @HttpCode(200)
   async create(
