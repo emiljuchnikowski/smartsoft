@@ -27,7 +27,8 @@ export enum FieldType {
     pdf = "pdf",
     video = "video",
     attachment = "attachment",
-    dateRange = "dateRange"
+    dateRange = "dateRange",
+    image = "image"
 }
 
 export interface ISpecification {

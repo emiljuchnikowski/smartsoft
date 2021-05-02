@@ -1,0 +1,19 @@
+<ng-container *ngIf="control">
+    <ion-label position="floating">
+        {{ translateKey | translate }}
+        <ion-text color="danger">
+            <span *ngIf="fieldOptions?.required">*</span>
+        </ion-text>
+    </ion-label><br/>
+    <smart-button [options]="addButtonOptions">{{ (control.value ? 'change' : 'add') | translate }}</smart-button>
+
+    <smart-button *ngIf="control.value" [options]="deleteButtonOptions">{{ 'delete' | translate }}</smart-button>
+
+    <ion-progress-bar *ngIf="loading$ | async" [value]="(percent$ | async) / 100"></ion-progress-bar>
+
+    <ng-container *ngIf="imageUrl">
+        <ion-img style="max-width: 400px; max-height: 400px" [src]="fileService.getUrl(control.value.id)"></ion-img>
+        <br/>
+    </ng-container>
+</ng-container>
+<input type="file" accept="image/*" [hidden]="true" #inputObj>

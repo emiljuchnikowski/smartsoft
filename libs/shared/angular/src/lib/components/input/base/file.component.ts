@@ -9,8 +9,11 @@ import {FileService} from "../../../services/file/file.service";
 export abstract class InputFileBaseComponent<T> extends InputBaseComponent<T> implements OnInit {
     valid = true;
     oldId: number;
+    file: File;
+
     loading$ = new BehaviorSubject(false);
     percent$: Observable<number>;
+
     addButtonOptions: IButtonOptions ={
         click: () => {
             this.control.markAsDirty();
@@ -29,8 +32,9 @@ export abstract class InputFileBaseComponent<T> extends InputBaseComponent<T> im
         click: () => {
             this.control.markAsDirty();
             this.control.markAsTouched();
-            this.fileService.delete(this.control.value.id);
+            //this.fileService.delete(this.control.value.id);
             this.control.setValue(null);
+            this.file = null;
         },
         loading$: this.loading$,
         confirm: true
@@ -49,12 +53,12 @@ export abstract class InputFileBaseComponent<T> extends InputBaseComponent<T> im
     ngOnInit(): void {
         this.renderer.listen(this.inputElementRef.nativeElement, 'change', () => {
             this.loading$.next(true);
-            const file = (this.inputElementRef.nativeElement as HTMLInputElement).files[0];
+            this.file = (this.inputElementRef.nativeElement as HTMLInputElement).files[0];
 
             (this.inputElementRef.nativeElement as HTMLInputElement).type = 'text';
             (this.inputElementRef.nativeElement as HTMLInputElement).type = 'file';
 
-            this.percent$ = this.fileService.upload(file, res => {
+            this.percent$ = this.fileService.upload(this.file, res => {
                 this.control.setValue(res);
                 this.loading$.next(false);
             });

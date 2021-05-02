@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Input, OnInit, Directive } from "@angular/core";
+import {ChangeDetectorRef, Input, OnInit, Directive, Type} from "@angular/core";
 import {
-  getModelOptions,
   IFieldListMetadata,
   IFieldOptions,
 } from "@smartsoft001/models";
@@ -45,6 +44,8 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
   loading$: Observable<boolean>;
   page$: Observable<number>;
   totalPages$: Observable<number>;
+
+  type: Type<T>;
   sort:
     | boolean
     | {
@@ -58,6 +59,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     this.sort = val.sort;
     this.cellPipe = val.cellPipe;
     this.selectMode = val.select;
+    this.type = val.type;
     this.initKeys();
     this.initList(val);
     this.initLoading();

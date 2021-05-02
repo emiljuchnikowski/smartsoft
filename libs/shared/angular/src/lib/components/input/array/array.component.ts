@@ -74,5 +74,6 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
         moveItemInArray(this.childOptions, event.previousIndex, event.currentIndex);
         this.control.markAsDirty();
         this.control.setValue(this.childOptions.map(o => o.control.value));
+        this.cd.detectChanges();
     }
 }

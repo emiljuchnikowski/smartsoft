@@ -10,6 +10,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { ColorPickerModule } from "ngx-color-picker";
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {NgxEditorModule} from "ngx-editor";
 
 import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { AccordionComponent } from "./accordion/accordion.component";
@@ -86,7 +87,8 @@ import {DetailAttachmentComponent} from "./detail/attachment/attachment.componen
 import {InputDateRangeComponent} from "./input/date-range/date-range.component";
 import {DateRangeComponent, DateRangeModalComponent} from "./date-range/date-range.component";
 import {DetailDateRangeComponent} from "./detail/date-range/date-range.component";
-import {NgxEditorModule} from "ngx-editor";
+import {InputImageComponent} from "./input/image/image.component";
+import {DetailImageComponent} from "./detail/image/image.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -122,7 +124,8 @@ export const DETAIL_COMPONENTS = [
   DetailPdfComponent,
   DetailVideoComponent,
   DetailAttachmentComponent,
-  DetailDateRangeComponent
+  DetailDateRangeComponent,
+  DetailImageComponent
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];
@@ -156,7 +159,8 @@ export const INPUT_COMPONENTS = [
   InputPdfComponent,
   InputVideoComponent,
   InputAttachmentComponent,
-  InputDateRangeComponent
+  InputDateRangeComponent,
+  InputImageComponent
 ];
 
 export const LIST_COMPONENTS = [
