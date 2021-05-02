@@ -12,7 +12,7 @@
     <ion-progress-bar *ngIf="loading$ | async" [value]="(percent$ | async) / 100"></ion-progress-bar>
 
     <ng-container *ngIf="imageUrl">
-        <ion-img style="max-width: 400px; max-height: 400px" [src]="fileService.getUrl(control.value.id)"></ion-img>
+        <ion-img style="max-width: 400px; max-height: 400px" [src]="imageUrl"></ion-img>
         <br/>
     </ng-container>
 </ng-container>
