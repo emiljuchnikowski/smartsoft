@@ -218,6 +218,8 @@ export class CrudEffects<T extends IEntity<string>> {
                   offset: 0,
                 })
               );
+
+              this.store.dispatch(CrudActions.select(this.config.entity, action.item.id));
             });
           break;
 
@@ -258,6 +260,8 @@ export class CrudEffects<T extends IEntity<string>> {
                   offset: 0,
                 })
               );
+
+              this.store.dispatch(CrudActions.select(this.config.entity, action.item.id));
             });
           break;
 

@@ -35,6 +35,8 @@ export class FormComponent<T> implements OnDestroy {
   @Input() set options(val: IFormOptions<T>) {
     if (!val) return;
 
+    if (!val.treeLevel) val.treeLevel = 1;
+
     this._options = val;
 
     this.initLoading();

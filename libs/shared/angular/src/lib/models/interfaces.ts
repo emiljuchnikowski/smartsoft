@@ -62,6 +62,7 @@ export interface IDetailsProvider<T> {
 }
 
 export interface IFormOptions<T> {
+  treeLevel?: number;
   model: T;
   control?: AbstractControl;
   mode?: "create" | "update" | string;

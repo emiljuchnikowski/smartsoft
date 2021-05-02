@@ -214,8 +214,6 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
               this.facade.updatePartial(this.formPartialValue as any);
 
               if (this.config.details) {
-                this.facade.select(this.id);
-
                 this.mode = "details";
                 this.initPageOptions();
               } else {
