@@ -212,7 +212,14 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
               this.formPartialValue.id = this.id;
               this.facade.updatePartial(this.formPartialValue as any);
 
-              this.location.back();
+              if (this.config.details) {
+                this.facade.select(this.id);
+
+                this.mode = "details";
+                this.initPageOptions();
+              } else {
+                this.location.back();
+              }
             },
             disabled$: this._saveButtonDisabled,
           },
