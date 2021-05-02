@@ -1,5 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormArray, FormControl} from "@angular/forms";
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 import {ObjectService} from "@smartsoft001/utils";
 
@@ -37,15 +38,14 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
     onRemove(index: number) {
         (this.internalOptions.control as FormArray).removeAt(index);
         this.initData();
+        this.control.markAsDirty();
+        this.control.setValue(this.childOptions.map(o => o.control.value));
     }
 
     ngOnInit() {}
 
     private initData(): void {
         this.childOptions = (this.internalOptions.control as FormArray).controls.map(control => {
-
-            console.log(this.internalOptions.fieldKey);
-
             if (this.internalOptions.model[0] && this.internalOptions.model[0][this.internalOptions.fieldKey]) {
                 const options = getModelFieldOptions(this.internalOptions.model[0], this.internalOptions.fieldKey);
 
@@ -66,5 +66,11 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
                 } as IFormOptions<TChild> & { fieldOptions: IFieldOptions };
             }
         });
+    }
+
+    drop(event: CdkDragDrop<T, any>) {
+        moveItemInArray(this.childOptions, event.previousIndex, event.currentIndex);
+        this.control.markAsDirty();
+        this.control.setValue(this.childOptions.map(o => o.control.value));
     }
 }

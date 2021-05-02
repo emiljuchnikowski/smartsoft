@@ -9,6 +9,7 @@ import { ChartsModule } from "ng2-charts";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { ColorPickerModule } from "ngx-color-picker";
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { AccordionComponent } from "./accordion/accordion.component";
@@ -219,7 +220,8 @@ export const IMPORTS = [
   MatSortModule,
   ChartsModule,
   ColorPickerModule,
-  NgxEditorModule
+  NgxEditorModule,
+    DragDropModule
 ];
 
 @NgModule({
