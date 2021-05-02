@@ -1,5 +1,5 @@
 import {Field, FieldType, IFieldModifyMetadata, Model} from "@smartsoft001/models";
-import {IDateRange, IEntity} from "@smartsoft001/domain-core";
+import {IEntity} from "@smartsoft001/domain-core";
 import {of} from "rxjs";
 
 const modifyMetdata : IFieldModifyMetadata = {
@@ -49,16 +49,17 @@ export class Todo implements IEntity<string> {
     // })
     // number: string;
 
-    // @Field({
-    //     create: modifyMetdata,
-    //     update: {
-    //         ...modifyMetdata,
-    //         multi: true
-    //     },
-    //     details: true,
-    //     list: { order: 2 }
-    // })
-    // body: string;
+    @Field({
+        create: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
+        type: FieldType.longText,
+        details: true,
+        list: { order: 2 }
+    })
+    body: string;
 
     // @Field({
     //     create: modifyMetdata,
@@ -149,55 +150,55 @@ export class Todo implements IEntity<string> {
     // })
     // myPesel: string;
 
-    @Field({
-        create: {
-            required: true
-        },
-        update: {
-            ...modifyMetdata,
-            multi: true
-        },
-        details: true,
-        type: FieldType.pdf
-    })
-    instruction: any;
+    // @Field({
+    //     create: {
+    //         required: true
+    //     },
+    //     update: {
+    //         ...modifyMetdata,
+    //         multi: true
+    //     },
+    //     details: true,
+    //     type: FieldType.pdf
+    // })
+    // instruction: any;
 
-    @Field({
-        create: {
-            required: true
-        },
-        update: {
-            ...modifyMetdata,
-            multi: true
-        },
-        details: true,
-        type: FieldType.video
-    })
-    media: any;
+    // @Field({
+    //     create: {
+    //         required: true
+    //     },
+    //     update: {
+    //         ...modifyMetdata,
+    //         multi: true
+    //     },
+    //     details: true,
+    //     type: FieldType.video
+    // })
+    // media: any;
 
-    @Field({
-        create: {
-            required: true
-        },
-        update: {
-            ...modifyMetdata,
-            multi: true
-        },
-        details: true,
-        type: FieldType.attachment
-    })
-    newFile: any;
+    // @Field({
+    //     create: {
+    //         required: true
+    //     },
+    //     update: {
+    //         ...modifyMetdata,
+    //         multi: true
+    //     },
+    //     details: true,
+    //     type: FieldType.attachment
+    // })
+    // newFile: any;
 
-    @Field({
-        create: {
-            required: true
-        },
-        update: {
-            ...modifyMetdata,
-            multi: true
-        },
-        details: true,
-        type: FieldType.dateRange
-    })
-    range: IDateRange;
+    // @Field({
+    //     create: {
+    //         required: true
+    //     },
+    //     update: {
+    //         ...modifyMetdata,
+    //         multi: true
+    //     },
+    //     details: true,
+    //     type: FieldType.dateRange
+    // })
+    // range: IDateRange;
 }

@@ -13,21 +13,21 @@ import { variables } from "../theme/variables";
 export class TestComponent {}
 
 const MENU_ITEMS: Array<IMenuItem> = [
-  {
-    caption: 'Users',
-    icon: 'person-outline',
-    route: '/users'
-  },
+  // {
+  //   caption: 'Users',
+  //   icon: 'person-outline',
+  //   route: '/users'
+  // },
   {
     caption: 'Zadania',
     icon: 'list-outline',
     route: '/todos'
   },
-  {
-    caption: 'Transakcje',
-    icon: 'cash-outline',
-    route: '/trans'
-  },
+  // {
+  //   caption: 'Transakcje',
+  //   icon: 'cash-outline',
+  //   route: '/trans'
+  // },
   {
     component: TestComponent
   }

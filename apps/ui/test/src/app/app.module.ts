@@ -18,12 +18,9 @@ import { environment } from "../environments/environment";
 import { NgrxSharedModule, SharedModule } from "@smartsoft001/angular";
 import {
   AUTH_REQUEST_BODY_PROVIDER,
-  AuthModule,
-  PermissionsGuard,
+  AuthModule, PermissionsGuard,
 } from "@smartsoft001/auth-shell-angular";
 import { HttpClientModule } from "@angular/common/http";
-import { CrudModule } from "@smartsoft001/crud-shell-angular";
-import { Todo } from "./todos/todo.dto";
 
 @NgModule({
   declarations: [AppComponent, TestComponent],
@@ -31,26 +28,26 @@ import { Todo } from "./todos/todo.dto";
     BrowserAnimationsModule,
     RouterModule.forRoot(
       [
-        {
-          path: "trans",
-          loadChildren: () =>
-            import("./trans/trans.module").then((m) => m.TransModule),
-        },
-        {
-          path: "users",
-          // canActivate: [PermissionsGuard],
-          // data: {
-          //   expectedPermissions: ["admin"],
-          // },
-          loadChildren: () =>
-            import("./users/users.module").then((m) => m.UsersModule),
-        },
+        // {
+        //   path: "trans",
+        //   loadChildren: () =>
+        //     import("./trans/trans.module").then((m) => m.TransModule),
+        // },
+        // {
+        //   path: "users",
+        //   canActivate: [PermissionsGuard],
+        //   data: {
+        //     expectedPermissions: ["admin"],
+        //   },
+        //   loadChildren: () =>
+        //     import("./users/users.module").then((m) => m.UsersModule),
+        // },
         {
           path: "todos",
-          // canActivate: [PermissionsGuard],
-          // data: {
-          //   expectedPermissions: ["admin"],
-          // },
+          canActivate: [PermissionsGuard],
+          data: {
+            expectedPermissions: ["admin"],
+          },
           loadChildren: () =>
             import("./todos/todos.module").then((m) => m.TodosModule),
         },
@@ -79,7 +76,7 @@ import { Todo } from "./todos/todo.dto";
     EffectsModule.forRoot([]),
     SharedModule,
     AuthModule.forRoot({
-      apiUrl: "http://localhost:3334",
+      apiUrl:  environment.apiUrl + "auth",
       clientId: "admin",
       facebookId: "813277462877495",
       googleId: "103834343078-o736d22f2diersc4k6nge3uc4rtof6s1.apps.googleusercontent.com"
@@ -88,7 +85,6 @@ import { Todo } from "./todos/todo.dto";
     StoreRouterConnectingModule.forRoot({
       serializer: DefaultRouterStateSerializer,
     }),
-    SharedModule,
     NgrxSharedModule,
   ],
 

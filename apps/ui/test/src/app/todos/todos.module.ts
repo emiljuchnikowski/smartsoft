@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import {IListCellPipe, SharedModule} from "@smartsoft001/angular";
-import { AuthModule } from "@smartsoft001/auth-shell-angular";
+import { AuthModule, AuthSharedModule } from "@smartsoft001/auth-shell-angular";
 import {Todo} from "./todo.dto";
 import {CrudModule} from "@smartsoft001/crud-shell-angular";
 import {environment} from "../../environments/environment";
@@ -19,6 +19,7 @@ import {environment} from "../../environments/environment";
   imports: [
     CommonModule,
     SharedModule,
+    AuthSharedModule,
     AuthModule,
     CrudModule.forFeature({
       routing: true,
@@ -38,7 +39,7 @@ import {environment} from "../../environments/environment";
         list: {
           cellPipe: {
             transform(value, columnName): string {
-              if (columnName === 'body') return '<b>test</b>';
+              //if (columnName === 'body') return '<b>test</b>';
 
               return value[columnName];
             }
