@@ -160,7 +160,6 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   }
 
   onPartialChange(val: Partial<T>) {
-    console.log(val);
     this.formPartialValue = val;
   }
 
