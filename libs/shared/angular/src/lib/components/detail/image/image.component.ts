@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 
 import {DetailBaseComponent} from "../base/base.component";
-import {FileService} from "../../../services";
+import {FileService} from "../../../services/file/file.service";
 
 @Component({
     selector: 'smart-detail-image',

@@ -61,6 +61,18 @@ export class Todo implements IEntity<string> {
             ...modifyMetdata,
             multi: true
         },
+        type: FieldType.image,
+        details: true,
+        list: { order: 1 }
+    })
+    img: string;
+
+    @Field({
+        create: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
         type: FieldType.longText,
         details: true,
         list: { order: 2 }

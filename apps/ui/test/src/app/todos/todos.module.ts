@@ -27,7 +27,8 @@ import {environment} from "../../environments/environment";
         type: Todo,
         title: 'Zadania',
         entity: "todos",
-        apiUrl: environment.apiUrl + "notes",
+        apiUrl: "http://localhost:3334/api/notes",
+        //apiUrl: environment.apiUrl + "notes",
         baseQuery: [
           { key: 'data.type', type: '!=', value: 'cards', hidden: true }
         ],
