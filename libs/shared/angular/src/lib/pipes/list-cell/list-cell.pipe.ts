@@ -5,7 +5,7 @@ import {Memoize} from "lodash-decorators";
 import {FieldType, getModelFieldOptions} from "@smartsoft001/models";
 
 import {IListCellPipe} from "../../models/interfaces";
-import {FileService} from "../../services";
+import {FileService} from "../../services/file/file.service";
 
 @Pipe({
     name: 'smartListCell'
