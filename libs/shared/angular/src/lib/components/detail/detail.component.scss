@@ -1,5 +1,7 @@
 @import "styles/smart-styles.scss";
 :host {
+    margin: 0;
+    padding: 0;
     ion-item {
         padding-left: 0;
         padding-right: 0;
