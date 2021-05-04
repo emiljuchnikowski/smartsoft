@@ -4,9 +4,11 @@ import {
     OnInit, Renderer2,
 } from '@angular/core';
 import {debounceTime} from "rxjs/operators";
+import {TranslateService} from "@ngx-translate/core";
 
 import {InputFileBaseComponent} from "../base/file.component";
 import {FileService} from "../../../services/file/file.service";
+import {ToastService} from "../../../services/toast/toast.service";
 
 @Component({
     selector: "smart-input-image",
@@ -17,8 +19,14 @@ import {FileService} from "../../../services/file/file.service";
 export class InputImageComponent<T> extends InputFileBaseComponent<T> implements OnInit {
     imageUrl: any;
 
-    constructor(cd: ChangeDetectorRef, renderer: Renderer2, fileService: FileService) {
-        super(cd, renderer, fileService);
+    constructor(
+        cd: ChangeDetectorRef,
+        renderer: Renderer2,
+        fileService: FileService,
+        toastService: ToastService,
+        translateService: TranslateService
+    ) {
+        super(cd, renderer, fileService, toastService, translateService);
     }
 
     ngOnInit() {

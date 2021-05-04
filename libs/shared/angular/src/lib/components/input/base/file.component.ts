@@ -1,9 +1,11 @@
 import {ChangeDetectorRef, Directive, ElementRef, OnInit, Renderer2, ViewChild} from "@angular/core";
 import {BehaviorSubject, Observable} from "rxjs";
+import {TranslateService} from "@ngx-translate/core";
 
 import {InputBaseComponent} from "./base.component";
 import {IButtonOptions} from "../../../models/interfaces";
 import {FileService} from "../../../services/file/file.service";
+import {ToastService} from "../../../services/toast/toast.service";
 
 @Directive()
 export abstract class InputFileBaseComponent<T> extends InputBaseComponent<T> implements OnInit {
@@ -42,7 +44,13 @@ export abstract class InputFileBaseComponent<T> extends InputBaseComponent<T> im
 
     @ViewChild('inputObj', { read: ElementRef }) inputElementRef: ElementRef;
 
-    protected constructor(cd: ChangeDetectorRef, protected renderer: Renderer2, protected fileService: FileService) {
+    protected constructor(
+        cd: ChangeDetectorRef,
+        protected renderer: Renderer2,
+        protected fileService: FileService,
+        protected toastService: ToastService,
+        protected translateService: TranslateService
+    ) {
         super(cd);
     }
 
@@ -57,6 +65,22 @@ export abstract class InputFileBaseComponent<T> extends InputBaseComponent<T> im
 
             (this.inputElementRef.nativeElement as HTMLInputElement).type = 'text';
             (this.inputElementRef.nativeElement as HTMLInputElement).type = 'file';
+
+            if ((this.inputElementRef.nativeElement as HTMLInputElement).accept && this.file && this.file.name) {
+                const acceptTypes = (this.inputElementRef.nativeElement as HTMLInputElement).accept
+                    .split(',').map(type => type.replace('.', ''));
+
+                const fileType = this.file.name.substr(this.file.name.lastIndexOf('.') + 1);
+
+                if (!acceptTypes.some(a => a === fileType)) {
+                    this.toastService.error({
+                        duration: 3000,
+                        message: this.translateService.instant('INPUT.ERRORS.invalidFileType')
+                            + ` (${(this.inputElementRef.nativeElement as HTMLInputElement).accept})`
+                    }).then(() => {})
+                    return;
+                }
+            }
 
             this.percent$ = this.fileService.upload(this.file, (res: Object) => {
                 this.control.setValue(res);

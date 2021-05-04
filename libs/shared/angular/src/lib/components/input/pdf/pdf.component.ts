@@ -3,9 +3,11 @@ import {
     Component,
     OnInit, Renderer2,
 } from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 import {InputFileBaseComponent} from "../base/file.component";
 import {FileService} from "../../../services/file/file.service";
+import {ToastService} from "../../../services/toast/toast.service";
 
 @Component({
     selector: "smart-input-pdf",
@@ -14,7 +16,13 @@ import {FileService} from "../../../services/file/file.service";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputPdfComponent<T> extends InputFileBaseComponent<T> implements OnInit {
-    constructor(cd: ChangeDetectorRef, renderer: Renderer2, fileService: FileService) {
-        super(cd, renderer, fileService);
+    constructor(
+        cd: ChangeDetectorRef,
+        renderer: Renderer2,
+        fileService: FileService,
+        toastService: ToastService,
+        translateService: TranslateService
+    ) {
+        super(cd, renderer, fileService, toastService, translateService);
     }
 }

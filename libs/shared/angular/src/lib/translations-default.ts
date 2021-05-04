@@ -102,6 +102,7 @@ export interface ITranslateData {
         ERRORS: {
             required: string,
             invalidNip: string,
+            invalidFileType: string,
             invalidUnique: string,
             confirm: string,
             invalidEmailFormat: string,
@@ -207,6 +208,7 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
             required: 'field is required',
             invalidNip: 'Invalid nip format',
             invalidUnique: 'Invalid unique value',
+            invalidFileType: 'Invalid file type',
             confirm: 'bad confirmed',
             invalidEmailFormat: "invalid email format",
             invalidPhoneNumberFormat: "invalid phone number (000000000)",
@@ -313,6 +315,7 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
             invalidUnique: 'wartość jest już w systemie',
             confirm: 'źle powtórzone',
             invalidEmailFormat: "niepoprawny adres email",
+            invalidFileType: 'niepoprawny format pliku',
             invalidPhoneNumberFormat: "niepoprawny numer telefonu (000000000)",
             invalidPeselFormat: "niepoprawny numer pesel",
         },
