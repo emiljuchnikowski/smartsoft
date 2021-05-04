@@ -58,7 +58,7 @@ export abstract class InputFileBaseComponent<T> extends InputBaseComponent<T> im
             (this.inputElementRef.nativeElement as HTMLInputElement).type = 'text';
             (this.inputElementRef.nativeElement as HTMLInputElement).type = 'file';
 
-            this.percent$ = this.fileService.upload(this.file, res => {
+            this.percent$ = this.fileService.upload(this.file, (res: Object) => {
                 this.control.setValue(res);
                 this.loading$.next(false);
             });
