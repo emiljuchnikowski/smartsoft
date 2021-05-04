@@ -1,10 +1,153 @@
-import {Field, FieldType, IFieldModifyMetadata, Model} from "@smartsoft001/models";
+import {Field, FieldType, IFieldModifyMetadata, ISpecification, Model} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
 import {of} from "rxjs";
 
 const modifyMetdata : IFieldModifyMetadata = {
     required: true
 };
+
+export enum CourseSectionItemType {
+    pdf = "pdf",
+    video = "video",
+    test = "test"
+}
+
+export class CoursesSectionsItemByTypeSpecification implements ISpecification {
+    readonly criteria: Partial<CourseSectionItem>;
+
+    constructor(type: CourseSectionItemType) {
+        this.criteria = { type };
+    }
+}
+
+@Model({})
+export class CourseTestAnswer {
+    @Field({
+        create: true,
+        update: true,
+        required: true
+    })
+    answer: string;
+
+    @Field({
+        create: true,
+        update: true,
+        type: FieldType.flag
+    })
+    correct: boolean;
+}
+
+@Model({})
+export class CourseTestQuestion {
+    @Field({
+        create: true,
+        update: true,
+        required: true
+    })
+    question: string;
+
+    @Field({
+        create: true,
+        update: true,
+        type: FieldType.array,
+        required: true,
+        classType: CourseTestAnswer
+    })
+    answers: Array<CourseTestAnswer>;
+
+    constructor() {
+        this.answers = [];
+    }
+}
+
+@Model({})
+export class CourseTest {
+    @Field({
+        create: true,
+        update: true,
+        type: FieldType.array,
+        required: true,
+        classType: CourseTestQuestion
+    })
+    questions: Array<CourseTestQuestion>;
+
+    constructor() {
+        this.questions = [];
+    }
+}
+
+@Model({})
+export class CourseSectionItem {
+    @Field({
+        create: true,
+        update: true,
+        required: true,
+        type: FieldType.radio,
+        possibilities: [
+            { id: CourseSectionItemType.pdf, text: CourseSectionItemType.pdf },
+            { id: CourseSectionItemType.video, text: CourseSectionItemType.video },
+            { id: CourseSectionItemType.test, text: CourseSectionItemType.test }
+        ]
+    })
+    type: CourseSectionItemType;
+
+    @Field({
+        create: true,
+        update: true,
+        required: true,
+        type: FieldType.pdf,
+        enabled: new CoursesSectionsItemByTypeSpecification(CourseSectionItemType.pdf)
+    })
+    pdf: any;
+
+    @Field({
+        create: true,
+        update: true,
+        required: true,
+        type: FieldType.video,
+        enabled: new CoursesSectionsItemByTypeSpecification(CourseSectionItemType.video)
+    })
+    video: any;
+
+    @Field({
+        create: true,
+        update: true,
+        required: true,
+        type: FieldType.object,
+        classType: CourseTest,
+        enabled: new CoursesSectionsItemByTypeSpecification(CourseSectionItemType.test)
+    })
+    test: CourseTest;
+
+    constructor() {
+        this.test = new CourseTest();
+    }
+}
+
+@Model({})
+export class CourseSection implements IEntity<string> {
+    id: string;
+
+    @Field({
+        create: true,
+        update: true,
+        required: true
+    })
+    name: string;
+
+    @Field({
+        create: true,
+        update: true,
+        required: true,
+        type: FieldType.array,
+        classType: CourseSectionItem
+    })
+    items: Array<CourseSectionItem>
+
+    constructor() {
+        this.items = [];
+    }
+}
 
 @Model({})
 export class TodoInfo {
@@ -56,9 +199,13 @@ export class Todo implements IEntity<string> {
     // number: string;
 
     @Field({
-        create: modifyMetdata,
+        create: {
+            ...modifyMetdata,
+            required: false
+        },
         update: {
             ...modifyMetdata,
+            required: false,
             multi: true
         },
         type: FieldType.image,
@@ -87,6 +234,14 @@ export class Todo implements IEntity<string> {
         classType: TodoInfo
     })
     infos: Array<TodoInfo>;
+
+    @Field({
+        create: true,
+        update: true,
+        type: FieldType.array,
+        classType: CourseSection
+    })
+    sections: Array<CourseSection>;
 
     // @Field({
     //     create: modifyMetdata,
