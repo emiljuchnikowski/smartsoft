@@ -9,7 +9,7 @@ import {
   Inject, ViewChild, ViewContainerRef, AfterContentInit,
 } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
-import { filter, map } from "rxjs/operators";
+import {filter, map, tap} from "rxjs/operators";
 import { DOCUMENT } from "@angular/common";
 import {
   NavigationCancel,
@@ -51,13 +51,13 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
   @ViewChild("endMenuContainer", { read: ViewContainerRef }) endMenuContainer: ViewContainerRef;
 
   protected constructor(
-    private router: Router,
-    private cd: ChangeDetectorRef,
-    private elementRef: ElementRef,
-    private styleService: StyleService,
-    private menuService: MenuService,
-    @Inject(PLATFORM_ID) private readonly platformId,
-    @Inject(DOCUMENT) private document: any
+    protected router: Router,
+    protected cd: ChangeDetectorRef,
+    protected elementRef: ElementRef,
+    protected styleService: StyleService,
+    protected menuService: MenuService,
+    @Inject(PLATFORM_ID) protected readonly platformId,
+    @Inject(DOCUMENT) protected document: any
   ) {
     this.initSelectedPath();
 

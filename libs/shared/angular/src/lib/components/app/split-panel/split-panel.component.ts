@@ -4,7 +4,7 @@ import {
   Component,
   ElementRef, Inject,
   PLATFORM_ID,
-  OnInit
+  OnInit, ViewChild, AfterContentInit
 } from "@angular/core";
 import { Router } from "@angular/router";
 import {DOCUMENT} from "@angular/common";
@@ -20,7 +20,9 @@ import {MenuService} from "../../../services/menu/menu.service";
   //encapsulation: ViewEncapsulation.ShadowDom,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppSplitPanelComponent extends AppBaseComponent implements OnInit {
+export class AppSplitPanelComponent extends AppBaseComponent implements OnInit, AfterContentInit {
+  @ViewChild('listRef', { read: ElementRef }) listRef: ElementRef;
+
   constructor(
     router: Router,
     cd: ChangeDetectorRef,
@@ -33,5 +35,14 @@ export class AppSplitPanelComponent extends AppBaseComponent implements OnInit {
     super(router, cd, elementRef, styleService, menuService, platform, document);
   }
 
-  ngOnInit() {}
+  async ngAfterContentInit(): Promise<void> {
+    await super.ngAfterContentInit();
+
+    console.log(this.listRef);
+    this.styleService.init(this.listRef);
+  }
+
+  ngOnInit() {
+
+  }
 }

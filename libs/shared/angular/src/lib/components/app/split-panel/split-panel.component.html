@@ -15,7 +15,7 @@
         </ion-header>
 
         <ion-content>
-            <ion-list *ngIf="menuItems$">
+            <ion-list #listRef>
                 <ng-container *ngFor="let item of menuItems$ | async">
                     <ion-menu-toggle auto-hide="false" *ngIf="item.mode !== 'divider'">
                         <ion-item *ngIf="!item.component" [routerDirection]="'root'" [routerLink]="[item.route]" [class.active-item]="selectedPath == item.route">
