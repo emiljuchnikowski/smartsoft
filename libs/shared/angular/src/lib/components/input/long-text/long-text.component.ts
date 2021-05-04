@@ -48,19 +48,6 @@ export class InputLongTextComponent<T>
       history: true,
       inputRules: true,
     });
-
-    this.control.valueChanges.pipe(
-        this.takeUntilDestroy
-    ).subscribe(val => {
-      if (!val || val.indexOf('<p>') !== 0) return;
-
-      const div=document.createElement("div");
-      div.innerHTML=val;
-
-      const item = div.querySelectorAll("p").item(0);
-
-      this.control.setValue(item.innerHTML);
-    })
   }
 
   ngOnDestroy(): void {
