@@ -12,8 +12,8 @@
                             <smart-accordion-header>
                                 <ion-card-header>
                                     <ion-item lines="none">
-                                        <ion-label *ngIf="!options.show && options.modelOptions.titleKey">
-                                            {{ options.control.value[options.modelOptions.titleKey] }}
+                                        <ion-label *ngIf="!options.show && options.control?.value[options.modelOptions.titleKey]">
+                                            {{ options.control.value[options.modelOptions.titleKey] | translate }}
                                         </ion-label>
                                         <ion-button (click)="onRemove(index)" size="small" fill="outline" slot="end">
                                             <ion-icon name="close-outline"></ion-icon>
