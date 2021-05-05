@@ -19,9 +19,7 @@ ion-backdrop {
 
 ion-menu {
     --ion-background-color: linear-gradient(90deg, #FFF, #ededed) !important;
-    border-right: .2rem dashed rgba(var(--smart-color-primary-rgb), .6);
     ion-toolbar {
-        // --ion-background-color: var(--ion-color-primary);
         --ion-background-color: linear-gradient(33deg, var(--ion-color-primary), var(--ion-color-tertiary));
         --color: var(--ion-color-light);
         &.ios {
@@ -44,22 +42,19 @@ ion-menu {
         padding: 0;
     }
     ion-item {
-        --ion-background-color: linear-gradient(90deg, #FFF, #ededed);
+        --background: linear-gradient(90deg, #FFF, #ededed) !important;
         --background-hover: linear-gradient(90deg, transparent, var(--smart-color-primary));
-        --background-focused: linear-gradient(90deg, transparent, var(--smart-color-light-shade));
-        --border-color: var(--smart-color-light-shade);
         ion-icon {
             margin-left: 1.6rem;
             margin-right: 1.6rem;
         }
-        .item-native {
-            --ion-background-color: linear-gradient(90deg, #FFF, #ededed) !important;
-        }
         &.active-item {
             --border-width: 0;
             --border-color: var(--ion-color-light-shade);
-            --ion-background-color: linear-gradient(90deg, transparent, var(--ion-color-light));
+            --ion-background-color: linear-gradient(90deg, transparent, var(--ion-background-color));
             --color: var(--ion-color-primary);
+            --background: var(--ion-background-color, #fff) !important;
+            font-weight: 500;
             ion-icon {
                 --ion-text-color: var(--ion-color-primary);
             }
@@ -71,7 +66,6 @@ ion-menu {
     ion-item-divider {
         font-weight: 300;
         font-size: 1.2rem;
-        --ion-background-color: linear-gradient(90deg, transparent, #efefef);
         ion-icon {
             margin-left: 1.6rem;
             margin-right: 1.6rem;
