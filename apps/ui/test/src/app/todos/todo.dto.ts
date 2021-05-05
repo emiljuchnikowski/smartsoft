@@ -20,7 +20,9 @@ export class CoursesSectionsItemByTypeSpecification implements ISpecification {
     }
 }
 
-@Model({})
+@Model({
+    titleKey: 'answer'
+})
 export class CourseTestAnswer {
     @Field({
         create: true,
@@ -37,7 +39,9 @@ export class CourseTestAnswer {
     correct: boolean;
 }
 
-@Model({})
+@Model({
+    titleKey: 'question'
+})
 export class CourseTestQuestion {
     @Field({
         create: true,
@@ -76,7 +80,9 @@ export class CourseTest {
     }
 }
 
-@Model({})
+@Model({
+    titleKey: 'type'
+})
 export class CourseSectionItem {
     @Field({
         create: true,
@@ -124,7 +130,9 @@ export class CourseSectionItem {
     }
 }
 
-@Model({})
+@Model({
+    titleKey: 'name'
+})
 export class CourseSection implements IEntity<string> {
     id: string;
 
@@ -149,7 +157,9 @@ export class CourseSection implements IEntity<string> {
     }
 }
 
-@Model({})
+@Model({
+    titleKey: 'info1'
+})
 export class TodoInfo {
     @Field({ details: true, create: true, update: true, required: true }) info1 = 'Test info 1';
     @Field({ details: true, create: true, update: true }) info2 = 'Test info 2';

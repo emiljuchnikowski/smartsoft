@@ -1,31 +1,36 @@
 <ng-container *ngIf="control">
-    <ion-label position="static">
-        {{ translateKey | translate }}
-        <ion-text color="danger">
-            <span *ngIf="fieldOptions?.required">*</span>
-        </ion-text>
-    </ion-label>
-    <ion-list class="array" cdkDropList (cdkDropListDropped)="drop($event)">
-        <ion-item class="array-box" *ngFor="let options of childOptions; let index = index" lines="none" cdkDrag>
-            <ion-card>
-                <ion-card-header>
-                    <ion-item lines="none">
-                        <ion-label *ngIf="options.fieldOptions.type !== FieldType.array">
-                            {{ translateKey | translate }}
-                        </ion-label>
-                        <ion-button (click)="onRemove(index)" size="small" fill="outline" slot="end">
-                            <ion-icon name="close-outline"></ion-icon>
-                        </ion-button>
-                    </ion-item>
-                </ion-card-header>
-                <ion-card-content>
-                    <smart-form [options]="options"></smart-form>
-                </ion-card-content>
-
-            </ion-card>
-        </ion-item>
-    </ion-list>
-    <smart-button [options]="addButtonOptions">
-        Dodaj
+            <ion-label position="static">
+                {{ translateKey | translate }}
+                <ion-text color="danger">
+                    <span *ngIf="fieldOptions?.required">*</span>
+                </ion-text>
+            </ion-label>
+            <ion-list class="array" cdkDropList (cdkDropListDropped)="drop($event)">
+                <ion-item class="array-box" *ngFor="let options of childOptions; let index = index" lines="none" cdkDrag>
+                    <ion-card>
+                        <smart-accordion [(show)]="options.show">
+                            <smart-accordion-header>
+                                <ion-card-header>
+                                    <ion-item lines="none">
+                                        <ion-label *ngIf="!options.show && options.modelOptions.titleKey">
+                                            {{ options.control.value[options.modelOptions.titleKey] }}
+                                        </ion-label>
+                                        <ion-button (click)="onRemove(index)" size="small" fill="outline" slot="end">
+                                            <ion-icon name="close-outline"></ion-icon>
+                                        </ion-button>
+                                    </ion-item>
+                                </ion-card-header>
+                            </smart-accordion-header>
+                            <smart-accordion-body>
+                                <ion-card-content>
+                                    <smart-form [options]="options"></smart-form>
+                                </ion-card-content>
+                            </smart-accordion-body>
+                        </smart-accordion>
+                    </ion-card>
+                </ion-item>
+            </ion-list>
+    <smart-button [options]="addButtonOptions" class="add">
+        <span style="font-weight: 300">{{ translateKey | translate }} > &nbsp;</span><b>{{ 'add' | translate }}</b>
     </smart-button>
 </ng-container>

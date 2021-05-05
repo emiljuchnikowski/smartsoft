@@ -7,7 +7,7 @@ import {ObjectService} from "@smartsoft001/utils";
 import {InputBaseComponent} from "../base/base.component";
 import {IButtonOptions, IFormOptions} from "../../../models";
 import {FormFactory} from "../../../factories/form/form.factory";
-import {FieldType, getModelFieldOptions, IFieldOptions} from "@smartsoft001/models";
+import {FieldType, getModelFieldOptions, getModelOptions, IFieldOptions, IModelOptions} from "@smartsoft001/models";
 
 @Component({
     selector: 'smart-input-array',
@@ -15,13 +15,25 @@ import {FieldType, getModelFieldOptions, IFieldOptions} from "@smartsoft001/mode
     styleUrls: ['./array.component.scss'],
 })
 export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implements OnInit {
-    childOptions: Array<IFormOptions<TChild> & { fieldOptions: IFieldOptions }>;
+    childOptions: Array<IFormOptions<TChild> & { fieldOptions: IFieldOptions, show?: boolean, modelOptions: IModelOptions }>;
     addButtonOptions: IButtonOptions = {
         click: async () => {
-            (this.internalOptions.control as FormArray).push(await this.factory.create(
+            const options = this.getOptions();
+            const modelOptions = getModelOptions(options.classType);
+            const control = await this.factory.create(
                 new this.fieldOptions.classType(), { mode: this.internalOptions.mode }
-            ));
-            this.initData();
+            );
+            (this.internalOptions.control as FormArray).push(control);
+            this.childOptions.push({
+                treeLevel: this.internalOptions.treeLevel + 1,
+                mode: this.internalOptions.mode,
+                control,
+                model : ObjectService.createByType(control.value, options.classType),
+                fieldOptions: options,
+                modelOptions,
+                show: true
+            });
+            this.control.markAsDirty();
         }
     };
 
@@ -46,27 +58,18 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
 
     private initData(): void {
         this.childOptions = (this.internalOptions.control as FormArray).controls.map(control => {
-            if (this.internalOptions.model[0] && this.internalOptions.model[0][this.internalOptions.fieldKey]) {
-                const options = getModelFieldOptions(this.internalOptions.model[0], this.internalOptions.fieldKey);
+            const options = this.getOptions();
+            const modelOptions = getModelOptions(options.classType);
 
-                return {
-                    treeLevel: this.internalOptions.treeLevel + 1,
-                    mode: this.internalOptions.mode,
-                    control,
-                    model : ObjectService.createByType(control.value, options.classType),
-                    fieldOptions: options
-                } as IFormOptions<TChild> & { fieldOptions: IFieldOptions };
-            } else {
-                const options = getModelFieldOptions(this.internalOptions.model, this.internalOptions.fieldKey);
-
-                return {
-                    treeLevel: this.internalOptions.treeLevel + 1,
-                    mode: this.internalOptions.mode,
-                    control,
-                    model : ObjectService.createByType(control.value, options.classType),
-                    fieldOptions: options
-                } as IFormOptions<TChild> & { fieldOptions: IFieldOptions };
-            }
+            return {
+                treeLevel: this.internalOptions.treeLevel + 1,
+                mode: this.internalOptions.mode,
+                control,
+                model : ObjectService.createByType(control.value, options.classType),
+                fieldOptions: options,
+                modelOptions,
+                show: false
+            } as IFormOptions<TChild> & { fieldOptions: IFieldOptions, modelOptions: IModelOptions };
         });
     }
 
@@ -75,5 +78,12 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
         this.control.markAsDirty();
         this.control.setValue(this.childOptions.map(o => o.control.value));
         this.cd.detectChanges();
+    }
+
+    private getOptions(): IFieldOptions {
+        const options = this.internalOptions.model[0] && this.internalOptions.model[0][this.internalOptions.fieldKey] ?
+            getModelFieldOptions(this.internalOptions.model[0], this.internalOptions.fieldKey)
+            : getModelFieldOptions(this.internalOptions.model, this.internalOptions.fieldKey);
+        return options;
     }
 }

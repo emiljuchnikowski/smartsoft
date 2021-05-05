@@ -6,6 +6,10 @@ ion-label {
     }
 }
 
+.add {
+    float: right;
+}
+
 smart-form {
     width: 100%;
     margin: .3rem 0;
@@ -245,7 +249,6 @@ ion-card {
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    cursor: move;
     font-size: 14px;
     background-color: transparent;
     box-shadow: none;
@@ -273,4 +276,8 @@ ion-card {
 
 .array.cdk-drop-list-dragging .array-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+smart-accordion-header {
+    cursor: move;
 }
