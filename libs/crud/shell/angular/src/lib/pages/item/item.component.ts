@@ -241,15 +241,26 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   private getTitle(): string {
     const options = getModelOptions(this.config.type);
 
-    const prefix = options.titleKey && this.item ? this.item[options.titleKey] + ' - ' : '';
+    const prefix = options.titleKey && this.item ? this.removeParagraph(this.item[options.titleKey]) + ' - ' : '';
 
     switch (this.mode) {
       case "create":
         return "add";
       case "update":
-        return prefix + this.translateService.instant("change");
+        return prefix + `<div style="float: right">${ this.translateService.instant("change") }</div>`;
       case "details":
         return prefix + this.translateService.instant("details");
     }
+  }
+
+  private removeParagraph(val: string): string {
+    if (!val || val.indexOf('<p>') !== 0) return;
+
+    const div=document.createElement("div");
+    div.innerHTML=val;
+
+    const item = div.querySelectorAll("p").item(0);
+
+    return item.innerHTML;
   }
 }

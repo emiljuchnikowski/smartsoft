@@ -166,6 +166,7 @@ export class TodoInfo {
 }
 
 @Model({
+    titleKey: 'body',
     filters: [
         {
             label: 'testNegation',
