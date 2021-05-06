@@ -92,6 +92,8 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
             arr.controls[index1] = c2;
         }
         swapFormArray(this.control as FormArray, event.previousIndex, event.currentIndex);
+
+        this.control.updateValueAndValidity();
     }
 
     private getOptions(): IFieldOptions {
