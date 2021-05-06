@@ -254,7 +254,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   }
 
   private removeParagraph(val: string): string {
-    if (!val || val.indexOf('<p>') !== 0) return;
+    if (!val || val.indexOf('<p>') !== 0) return val;
 
     const div=document.createElement("div");
     div.innerHTML=val;
