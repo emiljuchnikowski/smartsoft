@@ -82,10 +82,16 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
             arr[index1] = arr[index2];
             arr[index2] = temp;
         }
-
         swapArray(this.childOptions, event.previousIndex, event.currentIndex);
 
-        this.control.setValue(this.childOptions.map(o => o.control.value));
+        const swapFormArray = function (arr: FormArray, index1, index2) {
+            const c1 = arr.at(index1);
+            const c2 = arr.at(index2);
+
+            arr.controls[index2] = c1;
+            arr.controls[index1] = c2;
+        }
+        swapFormArray(this.control as FormArray, event.previousIndex, event.currentIndex);
     }
 
     private getOptions(): IFieldOptions {
