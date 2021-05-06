@@ -14,25 +14,21 @@ export class ListCellPipe<T> implements PipeTransform {
     constructor(private translateService: TranslateService, private fileService: FileService) {
     }
 
-    transform(obj: T, key: string, pipe: IListCellPipe<T>, type?: Type<T>): any {
-        if (!obj) return obj;
+    transform(obj: T, key: string, pipe: IListCellPipe<T>, type?: Type<T>): { value?: any, type?: FieldType } {
+        if (!obj) return {};
 
         let result;
+
+        const fieldType = this.getFieldType(type, key);
 
         if (!pipe) result = obj[key];
         else result = pipe.transform(obj, key);
 
         if (!result) return result;
 
-        const fieldType = this.getFieldType(type, key);
-
-        switch (fieldType) {
-            case FieldType.image:
-                return `<img height="50" src="${ this.fileService.getUrl(result.id) }">`
-
-            default:
-                if (!(typeof result === 'string')) return result;
-                return this.translateService.instant(result);
+        return {
+            value: result,
+            type: fieldType
         }
     }
 

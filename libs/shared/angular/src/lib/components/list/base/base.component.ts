@@ -1,13 +1,16 @@
 import {ChangeDetectorRef, Input, OnInit, Directive, Type} from "@angular/core";
+
+import { Observable } from "rxjs";
+import { Router } from "@angular/router";
+import { map } from "rxjs/operators";
+import { TranslateService } from "@ngx-translate/core";
+
 import {
+  FieldType,
   IFieldListMetadata,
   IFieldOptions,
 } from "@smartsoft001/models";
-import { Observable } from "rxjs";
-import { Router } from "@angular/router";
 import { IEntity } from "@smartsoft001/domain-core";
-import { map } from "rxjs/operators";
-import { TranslateService } from "@ngx-translate/core";
 
 import { DetailsPage } from "../../../pages/details/details.page";
 import {
@@ -44,6 +47,8 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
   loading$: Observable<boolean>;
   page$: Observable<number>;
   totalPages$: Observable<number>;
+
+  FieldType = FieldType;
 
   type: Type<T>;
   sort:

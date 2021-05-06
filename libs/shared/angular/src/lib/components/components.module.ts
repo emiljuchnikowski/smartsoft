@@ -11,6 +11,7 @@ import { MatSortModule } from "@angular/material/sort";
 import { ColorPickerModule } from "ngx-color-picker";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {NgxEditorModule} from "ngx-editor";
+import {LazyLoadImageModule} from "ng-lazyload-image";
 
 import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { AccordionComponent } from "./accordion/accordion.component";
@@ -225,6 +226,7 @@ export const IMPORTS = [
   ChartsModule,
   ColorPickerModule,
   NgxEditorModule,
+  LazyLoadImageModule,
     DragDropModule
 ];
 

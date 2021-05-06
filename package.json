@@ -141,6 +141,7 @@
     "mongoose": "^5.11.8",
     "multer": "^1.4.2",
     "multiparty": "^4.2.2",
+    "ng-lazyload-image": "^9.1.0",
     "ng2-charts": "^2.4.0",
     "ngx-color-picker": "^10.1.0",
     "ngx-cookie": "^5.0.2",
