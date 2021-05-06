@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormArray, FormControl} from "@angular/forms";
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {FormArray} from "@angular/forms";
+import {CdkDragDrop} from '@angular/cdk/drag-drop';
 
 import {ObjectService} from "@smartsoft001/utils";
 
@@ -74,10 +74,18 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
     }
 
     drop(event: CdkDragDrop<T, any>) {
-        moveItemInArray(this.childOptions, event.previousIndex, event.currentIndex);
-        this.control.setValue(this.childOptions.map(o => o.control.value));
         this.control.markAsDirty();
-        this.cd.detectChanges();
+
+        const swapArray = function (arr, index1, index2) {
+            const temp = arr[index1];
+
+            arr[index1] = arr[index2];
+            arr[index2] = temp;
+        }
+
+        swapArray(this.childOptions, event.previousIndex, event.currentIndex);
+
+        this.control.setValue(this.childOptions.map(o => o.control.value));
     }
 
     private getOptions(): IFieldOptions {
