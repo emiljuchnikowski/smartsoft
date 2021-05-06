@@ -247,7 +247,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
       case "create":
         return "add";
       case "update":
-        return prefix + `<div style="float: right">${ this.translateService.instant("change") }</div>`;
+        return prefix + this.translateService.instant("change");
       case "details":
         return prefix + this.translateService.instant("details");
     }
