@@ -1,4 +1,4 @@
-<ion-segment #group [tabIndex]="0" (ionChange)="onSelectTab($event.detail.value)">
+<ion-segment #group scrollable [tabIndex]="0" (ionChange)="onSelectTab($event.detail.value)">
     <ion-segment-button *ngFor="let tab of tabs; let index = i" [value]="tab">
         <ion-label>{{ tab.title }}</ion-label>
     </ion-segment-button>
