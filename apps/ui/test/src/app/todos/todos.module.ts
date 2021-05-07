@@ -1,11 +1,12 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import {IListCellPipe, SharedModule} from "@smartsoft001/angular";
+import {IListCellPipe, NgrxSharedModule, SharedModule} from "@smartsoft001/angular";
 import { AuthModule, AuthSharedModule } from "@smartsoft001/auth-shell-angular";
 import {Todo} from "./todo.dto";
 import {CrudModule} from "@smartsoft001/crud-shell-angular";
 import {environment} from "../../environments/environment";
+import {TodoFacade} from "./todo.facade";
 
 // export class CellPipe<T> implements IListCellPipe<T> {
 //   transform(value: T, columnName): string {
@@ -16,10 +17,14 @@ import {environment} from "../../environments/environment";
 // }
 
 @NgModule({
+  providers: [
+    TodoFacade
+  ],
   imports: [
     CommonModule,
     SharedModule,
     AuthSharedModule,
+    NgrxSharedModule,
     AuthModule,
     CrudModule.forFeature({
       routing: true,
@@ -52,4 +57,8 @@ import {environment} from "../../environments/environment";
     })
   ]
 })
-export class TodosModule {}
+export class TodosModule {
+  constructor(facade: TodoFacade) {
+    facade.do();
+  }
+}

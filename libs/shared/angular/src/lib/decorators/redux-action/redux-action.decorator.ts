@@ -1,6 +1,6 @@
 import {isObservable} from "rxjs";
 import {Guid} from "guid-typescript";
-import {catchError, first} from "rxjs/operators";
+import {catchError, first, tap} from "rxjs/operators";
 
 import {NgrxStoreService} from "../../services/ngrx-store/ngrx-store.service";
 
@@ -65,21 +65,24 @@ export function ReduxActionDecorator(options: any = {}) {
             }
 
             if (result instanceof Promise) {
-                result.then(r => {
+                result = result.then(r => {
                     successAction(executionId, names, r);
+                    return r;
                 }).catch(e => {
                     errorAction(executionId, names, params, e);
+                    throw e;
                 })
             } else if (isObservable(result)) {
-                result.pipe(
+                result = result.pipe(
                     first(),
+                    tap(r => {
+                        successAction(executionId, names, r);
+                    }),
                     catchError(e => {
                         errorAction(executionId, names, params, e);
                         throw e;
                     })
-                ).subscribe(r => {
-                    successAction(executionId, names, r);
-                });
+                );
             } else {
                 successAction(executionId, names, result);
             }
