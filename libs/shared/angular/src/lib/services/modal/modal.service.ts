@@ -5,10 +5,11 @@ import {ModalController} from "@ionic/angular";
 export class ModalService {
     constructor(private modalCtrl: ModalController) { }
 
-    async show(options: { component, props?, mode?: 'default' | 'bottom' }): Promise<IModal> {
+    async show(options: { component, props?, mode?: 'default' | 'bottom', cssClass?: string }): Promise<IModal> {
         const modalOptions = {
             component: options.component,
-            componentProps: options.props
+            componentProps: options.props,
+            cssClass: options.cssClass
         } as any;
 
         if (options.mode === "bottom") {
