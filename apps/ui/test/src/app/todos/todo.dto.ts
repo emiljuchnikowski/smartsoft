@@ -242,7 +242,10 @@ export class Todo implements IEntity<string> {
         create: true,
         update: true,
         type: FieldType.array,
-        classType: TodoInfo
+        classType: TodoInfo,
+        possibilities: {
+            static: true
+        }
     })
     infos: Array<TodoInfo>;
 
@@ -394,4 +397,11 @@ export class Todo implements IEntity<string> {
     //     type: FieldType.dateRange
     // })
     // range: IDateRange;
+
+    constructor() {
+        this.infos = [
+            new TodoInfo(),
+            new TodoInfo()
+        ]
+    }
 }

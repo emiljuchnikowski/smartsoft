@@ -5,10 +5,14 @@
                     <span *ngIf="fieldOptions?.required">*</span>
                 </ion-text>
             </ion-label>
-            <ion-list class="array" cdkDropList (cdkDropListDropped)="drop($event)">
+            <ion-list class="array"
+                      cdkDropList
+                      [cdkDropListDisabled]="fieldOptions?.possibilities?.static"
+                      (cdkDropListDropped)="drop($event)"
+            >
                 <ion-item class="array-box" *ngFor="let options of childOptions; let index = index" lines="none" cdkDrag>
-                    <ion-card>
-                        <smart-accordion [(show)]="options.show">
+                    <ion-card *ngIf="!(fieldOptions?.possibilities?.static); else staticCardTpl">
+                        <smart-accordion [(show)]="options.show" >
                             <smart-accordion-header>
                                 <ion-card-header>
                                     <ion-item lines="none">
@@ -28,9 +32,17 @@
                             </smart-accordion-body>
                         </smart-accordion>
                     </ion-card>
+
+                    <ng-template #staticCardTpl>
+                        <ion-card>
+                            <ion-card-content>
+                                <smart-form [options]="options"></smart-form>
+                            </ion-card-content>
+                        </ion-card>
+                    </ng-template>
                 </ion-item>
             </ion-list>
-    <smart-button [options]="addButtonOptions" class="add">
+    <smart-button [options]="addButtonOptions" class="add" *ngIf="!(fieldOptions?.possibilities?.static)">
         <span style="font-weight: 300">{{ translateKey | translate }} > &nbsp;</span><b>{{ 'add' | translate }}</b>
     </smart-button>
 </ng-container>
