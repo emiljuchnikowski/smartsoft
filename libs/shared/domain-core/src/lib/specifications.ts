@@ -20,7 +20,7 @@ export class OrSpecification implements ISpecification {
 
     constructor(...spec: Array<ISpecification>) {
         this.criteria = {
-            $or: spec
+            $or: spec.map(c => c.criteria)
         };
     }
 }
@@ -30,7 +30,7 @@ export class AndSpecification implements ISpecification {
 
     constructor(...spec: Array<ISpecification>) {
         this.criteria = {
-            $and: spec
+            $and: spec.map(c => c.criteria)
         };
     }
 }
