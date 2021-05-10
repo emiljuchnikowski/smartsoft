@@ -70,14 +70,15 @@ export abstract class InputFileBaseComponent<T> extends InputBaseComponent<T> im
                 const acceptTypes = (this.inputElementRef.nativeElement as HTMLInputElement).accept
                     .split(',').map(type => type.replace('.', ''));
 
-                const fileType = this.file.name.substr(this.file.name.lastIndexOf('.') + 1);
+                const fileType = this.file.name.substr(this.file.name.lastIndexOf('.') + 1).toLowerCase();
 
                 if (!acceptTypes.some(a => a === fileType)) {
                     this.toastService.error({
                         duration: 3000,
                         message: this.translateService.instant('INPUT.ERRORS.invalidFileType')
                             + ` (${(this.inputElementRef.nativeElement as HTMLInputElement).accept})`
-                    }).then(() => {})
+                    }).then(() => {});
+                    this.loading$.next(false);
                     return;
                 }
             }
