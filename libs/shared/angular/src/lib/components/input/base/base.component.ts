@@ -9,8 +9,7 @@ import {BaseComponent} from "../../base";
 
 @Directive()
 export abstract class InputBaseComponent<T> extends BaseComponent {
-  protected internalOptions: InputOptions<T>;
-
+  internalOptions: InputOptions<T>;
   translateKey: string;
   control: AbstractControl;
 

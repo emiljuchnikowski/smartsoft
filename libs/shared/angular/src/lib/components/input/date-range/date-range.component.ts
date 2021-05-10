@@ -1,6 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-
-import {IDateRange} from "@smartsoft001/domain-core";
+import {ChangeDetectorRef, Component} from '@angular/core';
 
 import {InputBaseComponent} from "../base/base.component";
 
@@ -9,11 +7,8 @@ import {InputBaseComponent} from "../base/base.component";
     templateUrl: './date-range.component.html',
     styleUrls: ['./date-range.component.scss'],
 })
-export class InputDateRangeComponent<T> extends InputBaseComponent<T> implements OnInit {
-
+export class InputDateRangeComponent<T> extends InputBaseComponent<T> {
     constructor(cd: ChangeDetectorRef) {
         super(cd);
     }
-
-    ngOnInit() {}
 }

@@ -5,7 +5,7 @@ import {
     Component,
     Input, NgZone,
     OnInit, Output,
-    ViewChild, EventEmitter, forwardRef, ElementRef
+    ViewChild, EventEmitter, forwardRef, ElementRef, HostListener
 } from "@angular/core";
 import {DomController, IonContent, ModalController, NavParams} from "@ionic/angular";
 import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
@@ -23,15 +23,15 @@ import {StyleService} from "../../services/style/style.service";
     selector: "smart-date-range",
     templateUrl: "./date-range.component.html",
     styleUrls: ["./date-range.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateRangeComponent), multi: true }
     ]
 })
 export class DateRangeComponent implements ControlValueAccessor {
     value : any;
-    propagateChange: (val: IDateRange) => void;
-    propagateTouched: () => void;
+
+    propagateChange = val => {};
+    propagateTouched = () => {};
 
     @Input() set ngModel(val: IDateRange) {
         this.value = val;
@@ -70,14 +70,14 @@ export class DateRangeComponent implements ControlValueAccessor {
             }
             this.calendarData = data.data['calendarData'];
             if (this.calendarData.dateFrom) {
-                this.value = {
+                const value = {
                     start: this.calendarData.dateFrom.format('YYYY-MM-DD'),
                     end: this.calendarData.dateTo.format('YYYY-MM-DD')
                 }
 
+                this.writeValue(value);
                 this.ngModelChange.emit(this.value);
                 this.propagateChange(this.value);
-                this.cd.detectChanges();
             }
         });
 
@@ -148,7 +148,7 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
     calendar: month[] = [{ dates: null, monthName: null, year: null, number: null }];
     selectedButtonName = FilterBtnConstants.empthyString;
     scrollPositionValue = 0;
-    valueTop = 6000;  //calculated value of the scrollHeight
+    valueTop = 6400;  //calculated value of the scrollHeight
     previousState: CalendarState = {
         dateFrom: null,
         dateTo: null,
@@ -238,7 +238,7 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
         this.scrollPositionValue = scrollPosition;
         this.selectedButtonName = selectedButtonName;
         // tslint:disable-next-line:no-unused-expression
-        this.scrollPositionValue ? this.scrollMe && this.scrollMe.scrollToPoint(0, (this.scrollPositionValue - 100), 300)
+        this.scrollPositionValue ? this.scrollMe && this.scrollMe.scrollToPoint(0, (this.scrollPositionValue - 300), 300)
             : this.scrollMe && this.scrollMe.scrollToPoint(0, this.valueTop, 300);
     }
 
