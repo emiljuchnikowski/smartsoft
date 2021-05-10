@@ -21,8 +21,11 @@ export class MongoAttachmentRepository<
         super();
     }
 
-    upload(data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string }): Promise<string> {
-        return new Promise<string>((res, rej) => {
+    upload(
+        data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string },
+        options?: { streamCallback?: (r) => void }
+    ): Promise<void> {
+        return new Promise<void>((res, rej) => {
             MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
                 if (err) {
                     rej(err);
@@ -37,6 +40,8 @@ export class MongoAttachmentRepository<
                 const writeStream = bucket.openUploadStreamWithId(data.id, data.fileName, {
                     contentType: data.mimeType,
                 });
+
+                if (options?.streamCallback) options.streamCallback(writeStream);
 
                 data.stream.pipe(writeStream);
 
