@@ -16,40 +16,19 @@ import {ItemComponent} from "./pages/item/item.component";
 import {CrudPipesModule} from "./pipes/pipes.module";
 import { CrudService } from './services/crud/crud.service';
 import { CrudFacade } from './+state/crud.facade';
-import {SocketService} from "./services/socket/socket.service";
-import {ExportComponent} from "./components/export/export.component";
-import {FiltersComponent} from "./components/filters/filters.component";
-import {FilterComponent} from "./components/filter/filter.component";
-import {FilterTextComponent} from "./components/filter/text/text.component";
-import {FiltersConfigComponent} from "./components/filters-config/filters-config.component";
-import {FilterDateComponent} from "./components/filter/date/date.component";
-import {FilterDateWithEditComponent} from "./components/filter/date-with-edit/date-with-edit.component";
-import {FilterRadioComponent} from "./components/filter/radio/radio.component";
-import {FilterFlagComponent} from "./components/filter/flag/flag.component";
-import {MultiselectComponent} from "./components/multiselect/multiselect.component";
 import {CrudListPaginationFactory} from "./factories/list-pagination/list-pagination.factory";
 
-const COMPONENTS = [
+const PAGES = [
     ItemComponent,
-    ListComponent,
-    ExportComponent,
-    FilterComponent,
-    FilterTextComponent,
-    FiltersConfigComponent,
-    FilterDateComponent,
-    FilterDateWithEditComponent,
-    FilterRadioComponent,
-    FiltersComponent,
-    FilterFlagComponent,
-    MultiselectComponent
+    ListComponent
 ];
 
 @NgModule({
     declarations: [
-        ...COMPONENTS
+        ...PAGES
     ],
     entryComponents: [
-        ...COMPONENTS
+        ...PAGES
     ],
     imports: [
         StoreModule,
@@ -65,7 +44,7 @@ const COMPONENTS = [
         CommonModule
     ],
     exports: [
-        ...COMPONENTS
+        ...PAGES
     ],
     providers: [
         CrudService,

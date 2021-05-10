@@ -1,9 +1,13 @@
-import {ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
+import { ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { Store, StoreModule } from "@ngrx/store";
 import { SocketIoModule } from "ngx-socket-io";
 
 import { IEntity } from "@smartsoft001/domain-core";
-import {FILE_SERVICE_CONFIG, IFileServiceConfig, SharedModule} from "@smartsoft001/angular";
+import {
+  FILE_SERVICE_CONFIG,
+  IFileServiceConfig,
+  SharedModule,
+} from "@smartsoft001/angular";
 
 import { CrudConfig, CrudFullConfig } from "./crud.config";
 import { CrudEffects } from "./+state/crud.effects";
@@ -13,18 +17,60 @@ import { CrudFacade } from "./+state/crud.facade";
 import { CrudPipesModule } from "./pipes/pipes.module";
 import { CrudFullModule } from "./crud-full.module";
 import { SocketService } from "./services/socket/socket.service";
-import {CrudListPaginationFactory} from "./factories/list-pagination/list-pagination.factory";
+import { CrudListPaginationFactory } from "./factories/list-pagination/list-pagination.factory";
+import {ExportComponent} from "./components/export/export.component";
+import {
+  FilterComponent,
+  FilterDateComponent,
+  FilterDateWithEditComponent, FilterFlagComponent, FilterRadioComponent,
+  FilterTextComponent
+} from "./components/filter";
+import {FiltersConfigComponent} from "./components/filters-config/filters-config.component";
+import {FiltersComponent} from "./components/filters/filters.component";
+import {MultiselectComponent} from "./components/multiselect/multiselect.component";
+import {FormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
+
+const COMPONENTS = [
+  ExportComponent,
+  FilterComponent,
+  FilterTextComponent,
+  FiltersConfigComponent,
+  FilterDateComponent,
+  FilterDateWithEditComponent,
+  FilterRadioComponent,
+  FiltersComponent,
+  FilterFlagComponent,
+  MultiselectComponent
+];
 
 @NgModule({
+  declarations: [
+    ...COMPONENTS
+  ],
+  entryComponents: [
+    ...COMPONENTS
+  ],
   imports: [
     //AuthSharedModule,
     StoreModule,
     SharedModule,
     CrudPipesModule,
-    SocketIoModule
+    SocketIoModule,
+    FormsModule,
+    CommonModule
   ],
-  exports: [CrudPipesModule],
-  providers: [CrudService, CrudEffects, CrudFacade, SocketService, CrudListPaginationFactory]
+  exports: [
+      CrudPipesModule,
+      ...COMPONENTS
+  ],
+  providers: [
+    CrudService,
+    CrudEffects,
+    CrudFacade,
+    SocketService,
+    CrudListPaginationFactory,
+  ],
 })
 export class CrudModule<T extends IEntity<string>> {
   static forFeature<T extends IEntity<string>>(
@@ -37,9 +83,12 @@ export class CrudModule<T extends IEntity<string>> {
       providers: [
         { provide: CrudConfig, useValue: options.config },
         { provide: CrudFullConfig, useValue: options.config },
-        { provide: FILE_SERVICE_CONFIG, useValue: { apiUrl: options.config.apiUrl } as IFileServiceConfig },
-          ...(options.socket ? [] : [ SocketService ])
-      ]
+        {
+          provide: FILE_SERVICE_CONFIG,
+          useValue: { apiUrl: options.config.apiUrl } as IFileServiceConfig,
+        },
+        ...(options.socket ? [] : [SocketService]),
+      ],
     };
   }
 
