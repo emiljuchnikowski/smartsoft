@@ -44,7 +44,16 @@ import {CrudComponentsModule} from "./components/components.module";
     CrudListPaginationFactory,
   ],
 })
-export class CrudCoreModule<T extends IEntity<string>> { }
+export class CrudCoreModule<T extends IEntity<string>> {
+  constructor(
+      store: Store<any>,
+      config: CrudConfig<T>,
+      effects: CrudEffects<any>
+  ) {
+    store.addReducer(config.entity, getReducer(config.entity));
+    effects.init();
+  }
+}
 
 @NgModule({ })
 export class CrudModule<T extends IEntity<string>> {
@@ -65,15 +74,6 @@ export class CrudModule<T extends IEntity<string>> {
         ...(options.socket ? [] : [SocketService]),
       ],
     };
-  }
-
-  constructor(
-    store: Store<any>,
-    config: CrudConfig<T>,
-    effects: CrudEffects<any>
-  ) {
-    store.addReducer(config.entity, getReducer(config.entity));
-    effects.init();
   }
 }
 
