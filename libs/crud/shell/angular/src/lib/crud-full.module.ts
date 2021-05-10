@@ -17,6 +17,7 @@ import {CrudPipesModule} from "./pipes/pipes.module";
 import { CrudService } from './services/crud/crud.service';
 import { CrudFacade } from './+state/crud.facade';
 import {CrudListPaginationFactory} from "./factories/list-pagination/list-pagination.factory";
+import {CrudComponentsModule} from "./components/components.module";
 
 const PAGES = [
     ItemComponent,
@@ -41,7 +42,8 @@ const PAGES = [
             , {path: ':id', component: ItemComponent}
         ]),
         FormsModule,
-        CommonModule
+        CommonModule,
+        CrudComponentsModule
     ],
     exports: [
         ...PAGES
