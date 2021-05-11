@@ -76,7 +76,9 @@ export class MongoAttachmentRepository<
                         }
 
                         client.close();
-                        res({
+
+                        if (!items[0]) res(items[0]);
+                        else res({
                             fileName: items[0].filename,
                             contentType: items[0].contentType,
                             length: items[0].length
