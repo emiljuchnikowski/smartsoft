@@ -211,9 +211,9 @@ export class CrudService<T extends IEntity<string>> {
       combinedStream.append(data.stream);
 
       data.stream = combinedStream;
-    }
 
-    await this.attachmentRepository.delete(data.id);
+      await this.attachmentRepository.delete(data.id);
+    }
 
     await this.attachmentRepository.upload(data, options);
 
