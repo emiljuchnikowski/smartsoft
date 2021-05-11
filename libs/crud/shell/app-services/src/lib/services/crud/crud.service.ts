@@ -3,6 +3,7 @@ import { Guid } from "guid-typescript";
 import { Observable } from "rxjs";
 import {Readable, Stream} from "stream";
 import {Memoize} from "lodash-decorators";
+import * as CombinedStream from "combined-stream2";
 
 import { IUser } from "@smartsoft001/users";
 import {
@@ -193,11 +194,26 @@ export class CrudService<T extends IEntity<string>> {
 
   async uploadAttachment(
       data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string},
-      options?: { streamCallback?: (r) => void }
+      options?: { streamCallback?: (r) => void, start?: number }
   ): Promise<string> {
     if (!data.id) {
       data.id = GuidService.create();
     }
+
+    if (options?.start) {
+      const stream = await this.attachmentRepository.getStream(data.id, {
+        start: 0,
+        end: options.start - 1
+      });
+
+      const combinedStream = CombinedStream.create();
+      combinedStream.append(stream);
+      combinedStream.append(data.stream);
+
+      data.stream = combinedStream;
+    }
+
+    await this.attachmentRepository.delete(data.id);
 
     await this.attachmentRepository.upload(data, options);
 
