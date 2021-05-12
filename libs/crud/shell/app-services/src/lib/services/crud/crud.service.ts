@@ -199,8 +199,10 @@ export class CrudService<T extends IEntity<string>> {
     if (!data.id) {
       data.id = GuidService.create();
     }
+    let oldId = null;
 
     if (options?.start) {
+      oldId = data.id;
       const stream = await this.attachmentRepository.getStream(data.id, {
         start: 0,
         end: options.start - 1
@@ -211,11 +213,12 @@ export class CrudService<T extends IEntity<string>> {
       combinedStream.append(data.stream);
 
       data.stream = combinedStream;
-
-      await this.attachmentRepository.delete(data.id);
+      data.id = GuidService.create();
     }
 
-    await this.attachmentRepository.upload(data, options);
+    this.attachmentRepository.upload(data, options);
+
+    if (oldId) await this.attachmentRepository.delete(data.id);
 
     return data.id;
   }
