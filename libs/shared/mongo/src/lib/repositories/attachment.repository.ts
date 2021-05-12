@@ -45,9 +45,13 @@ export class MongoAttachmentRepository<
 
                 data.stream.pipe(writeStream);
 
-                data.stream.on("finish", () => {
+                writeStream.on('error', error => {
+                    rej(error);
+                });
+
+                writeStream.on("finish", () => {
                     res();
-                })
+                });
             });
         });
     }
