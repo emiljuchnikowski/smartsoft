@@ -2,6 +2,9 @@
     <ion-radio-group [formControl]="control" [attr.autofocus]="fieldOptions?.focused">
         <ion-list-header>
             {{ translateKey | translate }}
+            <ion-text color="danger">
+                <span *ngIf="fieldOptions?.required">*</span>
+            </ion-text>
         </ion-list-header>
 
         <ion-item *ngFor="let item of possibilities$ | async">
