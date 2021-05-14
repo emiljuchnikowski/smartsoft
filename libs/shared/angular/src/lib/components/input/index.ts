@@ -29,3 +29,4 @@ export * from './video/video.component';
 export * from './attachment/attachment.component';
 export * from './date-range/date-range.component';
 export * from './image/image.component';
+export * from './float/float.component';

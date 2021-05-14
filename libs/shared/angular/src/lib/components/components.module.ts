@@ -90,6 +90,7 @@ import {DateRangeComponent, DateRangeModalComponent} from "./date-range/date-ran
 import {DetailDateRangeComponent} from "./detail/date-range/date-range.component";
 import {InputImageComponent} from "./input/image/image.component";
 import {DetailImageComponent} from "./detail/image/image.component";
+import {InputFloatComponent} from "./input/float/float.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -161,7 +162,8 @@ export const INPUT_COMPONENTS = [
   InputVideoComponent,
   InputAttachmentComponent,
   InputDateRangeComponent,
-  InputImageComponent
+  InputImageComponent,
+  InputFloatComponent
 ];
 
 export const LIST_COMPONENTS = [
