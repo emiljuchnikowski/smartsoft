@@ -1,13 +1,11 @@
 <ng-container *ngIf="control">
   <ng-container *ngIf="possibilities?.length <= 5; else multiSelectTpl">
     <ion-item-group
-      [formControl]="control"
       [attr.autofocus]="fieldOptions?.focused"
     >
       <ion-list-header>
         {{ translateKey | translate }}
       </ion-list-header>
-
       <ion-item *ngFor="let item of possibilities">
         <ion-label>{{ item.text | translate }}</ion-label>
         <ion-checkbox
