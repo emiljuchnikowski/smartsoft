@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ComponentFactoryResolver, Injector,
+  ComponentFactoryResolver, ElementRef, Injector,
   Input,
   OnInit, ViewChild,
   ViewContainerRef
@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 import {InputOptions} from "../../models/interfaces";
 import {FieldType, getModelFieldOptions, getModelFieldsWithOptions, IFieldOptions} from "@smartsoft001/models";
 import {InputBaseComponent} from "./base/base.component";
+import {StyleService} from "../../services";
 
 @Component({
   selector: 'smart-input',
@@ -63,10 +64,18 @@ export class InputComponent<T> implements OnInit {
 
   constructor(
       private componentFactoryResolver: ComponentFactoryResolver,
-      private injeector: Injector
+      private injector: Injector
   ) { }
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
+    await this.initStyles();
+  }
+
+  private async initStyles() {
+    const styleService = await this.injector.get(StyleService);
+    const elementRef = await this.injector.get(ElementRef);
+
+    styleService.init(elementRef);
   }
 
   private async initCustomComponent(): Promise<void> {
@@ -80,7 +89,7 @@ export class InputComponent<T> implements OnInit {
     const viewContainerRef = this.componentRef;
     viewContainerRef.clear();
 
-    const componentRef = viewContainerRef.createComponent(componentFactory, 0, this.injeector);
+    const componentRef = viewContainerRef.createComponent(componentFactory, 0, this.injector);
 
     componentRef.instance.options = this.options;
     componentRef.instance.fieldOptions = this.fieldOptions;
