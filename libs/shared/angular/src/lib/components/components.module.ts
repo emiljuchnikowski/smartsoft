@@ -91,6 +91,7 @@ import {DetailDateRangeComponent} from "./detail/date-range/date-range.component
 import {InputImageComponent} from "./input/image/image.component";
 import {DetailImageComponent} from "./detail/image/image.component";
 import {InputFloatComponent} from "./input/float/float.component";
+import {ListMasonryGridComponent} from "./list/masonry-grid/masonry-grid.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -170,6 +171,7 @@ export const LIST_COMPONENTS = [
   ListComponent,
   ListMobileComponent,
   ListDesktopComponent,
+  ListMasonryGridComponent
 ];
 
 export const LOADER_COMPONENTS = [LoaderComponent];
@@ -229,7 +231,7 @@ export const IMPORTS = [
   ColorPickerModule,
   NgxEditorModule,
   LazyLoadImageModule,
-    DragDropModule
+  DragDropModule
 ];
 
 @NgModule({

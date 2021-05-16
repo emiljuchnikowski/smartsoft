@@ -1,25 +1,24 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  Injector,
-  OnInit
-} from "@angular/core";
-import {first, map, tap} from "rxjs/operators";
-import { Router } from "@angular/router";
-import { combineLatest, Observable } from "rxjs";
+import {ChangeDetectorRef, Component, Injector, OnInit} from "@angular/core";
+import {map, tap} from "rxjs/operators";
+import {Router} from "@angular/router";
+import {Observable} from "rxjs";
 
 import {
   AuthService,
-  DynamicComponentLoader, HardwareService, IIconButtonOptions,
+  DynamicComponentLoader,
+  HardwareService,
+  IIconButtonOptions,
   IListOptions,
-  IPageOptions, MenuService,
+  IPageOptions,
+  ListMode,
+  MenuService,
 } from "@smartsoft001/angular";
-import { IEntity } from "@smartsoft001/domain-core";
+import {IEntity} from "@smartsoft001/domain-core";
 import {getModelFieldsWithOptions, getModelOptions, IFieldEditMetadata, IFieldListMetadata} from "@smartsoft001/models";
 
-import { CrudFacade } from "../../+state/crud.facade";
-import {CrudConfig, CrudFullConfig} from "../../crud.config";
-import { ICrudFilter } from "../../models/interfaces";
+import {CrudFacade} from "../../+state/crud.facade";
+import {CrudFullConfig} from "../../crud.config";
+import {ICrudFilter} from "../../models/interfaces";
 import {ExportComponent} from "../../components/export/export.component";
 import {PageBaseComponent} from "../base/base.component";
 import {FiltersComponent} from "../../components/filters/filters.component";
@@ -141,6 +140,7 @@ export class ListComponent<T extends IEntity<string>>
         loading$: this.facade.loaded$.pipe(map(l => !l))
       },
       cellPipe: this.config.list ? this.config.list.cellPipe : null,
+      mode: this.config.list?.mode,
       componentFactories: {
         top:
           this.config.list &&
@@ -242,9 +242,10 @@ export class ListComponent<T extends IEntity<string>>
     const showFilters =
         fieldsWithOptions.some(x => (x.options?.list as IFieldListMetadata)?.filter) || modelOptions?.filters?.length;
 
-    const showMultiEdit = this.config.edit &&
-        fieldsWithOptions.some(x => (x.options?.update as IFieldEditMetadata)?.multi)  && !this.hardwareService.isMobile;
-
+    const showMultiEdit = this.config.edit
+        && fieldsWithOptions.some(x => (x.options?.update as IFieldEditMetadata)?.multi)
+        && !this.hardwareService.isMobile
+        && (!this.config?.list?.mode || this.config?.list?.mode === ListMode.desktop);
 
     return [
       ...(showMultiEdit

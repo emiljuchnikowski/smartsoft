@@ -124,9 +124,16 @@ export interface IListPaginationOptions {
   totalPages$: Observable<number>
 }
 
+export enum ListMode {
+  mobile = "mobile",
+  desktop = "desktop",
+  masonryGrid = "masonryGrid"
+}
+
 export interface IListOptions<T> {
   provider: IListProvider<T>;
   type: any;
+  mode?: ListMode;
 
   pagination?: IListPaginationOptions;
 

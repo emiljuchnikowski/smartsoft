@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} fr
 import * as _ from 'lodash';
 
 import {getModelFieldsWithOptions, IFieldListMetadata, IFieldOptions} from "@smartsoft001/models";
-import {IListOptions} from "../../models/interfaces";
+import {IListOptions, ListMode} from "../../models/interfaces";
 import {HardwareService} from "../../services/hardware/hardware.service";
 
 @Component({
@@ -15,11 +15,14 @@ import {HardwareService} from "../../services/hardware/hardware.service";
 export class ListComponent<T> implements OnInit {
   private _options: IListInternalOptions<T>;
 
-  mobile: boolean;
+  mode: ListMode;
+
+  ListMode = ListMode;
 
   @Input() set options(val: IListOptions<T>) {
     this._options = val;
     this.initFields();
+    this.initModel();
   }
 
   get internalOptions(): IListInternalOptions<T> {
@@ -29,7 +32,7 @@ export class ListComponent<T> implements OnInit {
   constructor(private hardwareService: HardwareService) { }
 
   ngOnInit() {
-    this.mobile = this.hardwareService.isMobileWeb;
+
   }
 
   private initFields(): void {
@@ -37,6 +40,14 @@ export class ListComponent<T> implements OnInit {
         getModelFieldsWithOptions(new this._options.type()).filter(item => item.options.list),
         item => (item.options.list as IFieldListMetadata).order
     );
+  }
+
+  private initModel(): void {
+    if (this._options.mode) {
+      this.mode = this._options.mode;
+    } else {
+      this.mode = this.hardwareService.isMobileWeb ? ListMode.mobile : ListMode.desktop
+    }
   }
 }
 

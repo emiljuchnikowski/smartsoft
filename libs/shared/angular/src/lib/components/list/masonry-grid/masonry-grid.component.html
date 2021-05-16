@@ -1,0 +1,37 @@
+<div class="ion-padding">
+    <div id="container">
+        <ion-card *ngFor="let item of listWithImages$ | async" (click)='unselect && unselect()'>
+            <img *ngIf="item.image" [src]="item.image | smartFileUrl">
+
+            <ion-card-content>
+                <ng-container *ngFor="let key of keys; let index = index">
+                    <ng-container *ngIf="item.data | smartListCell : key : cellPipe : type; let cell">
+                        <ng-container *ngIf="cell.value != item.image">
+                            <h3 *ngIf='index < 2' [innerHTML]="cell.value"></h3>
+                            <p *ngIf='index >= 2' [innerHTML]="cell.value"></p>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </ion-card-content>
+
+            <ion-row>
+                <ion-col size="auto" *ngIf="removeHandler">
+                    <ion-button (click)="removeHandler && removeHandler(item.data)">
+                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
+                </ion-col>
+                <ion-col></ion-col>
+                <ion-col size="auto" *ngIf="itemHandler">
+                    <ion-button (click)="itemHandler && itemHandler(item.data.id)">
+                        <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </div>
+</div>
+
+<ion-infinite-scroll threshold="100px" *ngIf="loadNextPage && (list$ | async)?.length" (ionInfinite)="loadNextPage($event)">
+    <ion-infinite-scroll-content loadingSpinner="circles">
+    </ion-infinite-scroll-content>
+</ion-infinite-scroll>

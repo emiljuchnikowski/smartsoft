@@ -1,0 +1,10 @@
+#container {
+  columns: 4;
+  column-gap: 10px;
+
+  ion-card {
+    width: 100%;
+    margin: 0 0 10px 0;
+    break-inside: avoid;
+  }
+}

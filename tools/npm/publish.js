@@ -134,10 +134,10 @@ const libs = [
         name: "shared-core",
         path: "libs/shared/core"
     },
-    {
-        name: "shared-cli",
-        path: "libs/shared/cli"
-    }
+    // {
+    //     name: "shared-cli",
+    //     path: "libs/shared/cli"
+    // }
 ];
 
 console.log('npm version path');
@@ -164,7 +164,7 @@ runCommand('npm run schematics:publish');
 
 console.log('build');
 runCommand('npm run core:build');
-runCommand('npm run cli:build');
+//runCommand('npm run cli:build');
 
 console.log('npm publish');
 for (let index = 0; index < libs.length; index++) {

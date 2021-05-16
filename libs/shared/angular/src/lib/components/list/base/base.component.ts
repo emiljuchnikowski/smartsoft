@@ -148,6 +148,8 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
       this.page$ = val.pagination.page$;
       this.totalPages$ = val.pagination.totalPages$;
     }
+
+    this.afterInitOptions();
   }
 
   constructor(
@@ -196,4 +198,8 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
   }
 
   ngOnInit() {}
+
+  protected afterInitOptions(): void {
+
+  }
 }
