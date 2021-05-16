@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ChangeStream, MongoClient } from "mongodb";
 import { Observable, Observer } from "rxjs";
 import { finalize, share } from "rxjs/operators";
+
 import {
   IEntity,
   IItemRepository,
@@ -11,16 +12,18 @@ import {
 import { IUser } from "@smartsoft001/users";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 import {ObjectService} from "@smartsoft001/utils";
+import {getModelFieldsWithOptions} from "@smartsoft001/models";
 
 import { MongoConfig } from "../mongo.config";
 import { getMongoUrl } from "../mongo.utils";
 import { IMongoTransaction } from "../mongo.unitofwork";
-import {getModelFieldsWithOptions} from "@smartsoft001/models";
 
 @Injectable()
 export class MongoItemRepository<
   T extends IEntity<string>
 > extends IItemRepository<T> {
+  readonly useUnifiedTopology = false;
+  
   constructor(private config: MongoConfig) {
     super();
   }
@@ -54,7 +57,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -105,7 +108,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -157,7 +160,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -220,7 +223,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -287,7 +290,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -363,7 +366,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -449,7 +452,7 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -479,7 +482,7 @@ export class MongoItemRepository<
 
   getById(id: string): Promise<T> {
     return new Promise<T>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -508,7 +511,7 @@ export class MongoItemRepository<
     options: any = {}
   ): Promise<{ data: T[]; totalCount: number }> {
     return new Promise<{ data: T[]; totalCount: number }>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, client) => {
         if (err) {
           rej(err);
           return;
@@ -549,7 +552,7 @@ export class MongoItemRepository<
     let client: MongoClient;
 
     return new Observable((observer: Observer<ItemChangedData>) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, c) => {
+      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, c) => {
         client = c;
 
         if (err) {
@@ -686,7 +689,7 @@ export class MongoItemRepository<
   }
 
   private logChange(type, item, options, user, error) {
-    MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, (err, client) => {
+    MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
       if (err) {
         console.warn(err);
         return;
