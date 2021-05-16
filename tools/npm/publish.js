@@ -148,6 +148,15 @@ for (let index = 0; index < libs.length; index++) {
         runCommand('npm version patch --prefix ' + lib.path);
     }
 }
+// [1,2,3,4,5,6,7,8,9,10].forEach(() => {
+//     for (let index = 0; index < libs.length; index++) {
+//         const lib = libs[index];
+//
+//         if (lib.path) {
+//             runCommand('npm version patch --prefix ' + lib.path);
+//         }
+//     }
+// })
 
 console.log('publish schematics');
 runCommand('npm run schematics:publish');
