@@ -36,7 +36,7 @@ export const initializer = (
 ) => async () => {
 
   if (config.facebookId) {
-    await new Promise(resolve => {
+    await new Promise<void>(resolve => {
       // wait for facebook sdk to initialize before starting the angular app
       window['fbAsyncInit'] = function () {
         FB.init({

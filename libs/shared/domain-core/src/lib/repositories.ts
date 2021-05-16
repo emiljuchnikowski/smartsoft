@@ -57,7 +57,7 @@ export abstract class IItemRepository<T extends IEntity<string>> {
     options?: any
   ): Promise<{ data: T[]; totalCount: number }>;
 
-  abstract async clear(user: IUser | IItemRepositoryOptions): Promise<void>;
+  abstract clear(user: IUser | IItemRepositoryOptions): Promise<void>;
 
   abstract changesByCriteria(criteria: { id?: string }): Observable<any>;
 }

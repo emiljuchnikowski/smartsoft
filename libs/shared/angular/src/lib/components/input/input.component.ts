@@ -81,7 +81,7 @@ export class InputComponent<T> implements OnInit {
   private async initCustomComponent(): Promise<void> {
     if (!this.options.component) return;
 
-    await new Promise(res => res());
+    await new Promise<void>(res => res());
 
     const componentFactory = this.componentFactoryResolver
         .resolveComponentFactory<InputBaseComponent<any>>(this.options.component);

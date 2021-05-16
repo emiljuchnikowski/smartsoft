@@ -62,7 +62,7 @@ export class PasswordStrengthComponent implements OnChanges {
   }
 
   async ngOnChanges(changes: { [propName: string]: SimpleChange }): Promise<void> {
-    await new Promise(res => res());
+    await new Promise<void>(res => res());
 
     const password = changes.passwordToCheck.currentValue;
     this.setBarColors(3, "#DDD");
