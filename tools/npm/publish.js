@@ -158,6 +158,7 @@ for (let index = 0; index < libs.length; index++) {
 //     }
 // })
 
+
 console.log('publish schematics');
 runCommand('npm run schematics:publish');
 
