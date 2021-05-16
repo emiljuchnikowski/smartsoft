@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/paypal",
-  "version": "1.0.337",
+  "version": "1.0.339",
   "description": "This library was generated with [Nx](https://nx.dev).",
   "main": "src/index.ts",
   "repository": {
