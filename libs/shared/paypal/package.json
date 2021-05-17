@@ -1,8 +1,7 @@
 {
   "name": "@smartsoft001/paypal",
-  "version": "1.0.342",
+  "version": "1.0.346",
   "description": "This library was generated with [Nx](https://nx.dev).",
-  "main": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"

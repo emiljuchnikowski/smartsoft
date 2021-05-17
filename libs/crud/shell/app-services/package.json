@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/crud-shell-app-services",
-  "version": "1.0.353",
+  "version": "1.0.357",
   "description": "Utils to crud",
   "repository": {
     "type": "git",
@@ -11,7 +11,6 @@
     "oauth",
     "nestjs"
   ],
-  "main": "src/index.ts",
   "author": "Emil Juchnikowski",
   "license": "MIT",
   "bugs": {

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
+import {ChangeDetectorRef, Component, OnInit, ViewChild, ViewContainerRef, AfterViewInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {Observable} from "rxjs";
@@ -10,6 +10,8 @@ import {FieldType, getModelFieldsWithOptions} from "@smartsoft001/models";
 import {ListBaseComponent} from "../base/base.component";
 import {ToastService} from "../../../services/toast/toast.service";
 import {AuthService} from "../../../services/auth/auth.service";
+import {IListComponentFactories} from "../../../models";
+import {IListInternalOptions} from "../list.component";
 
 @Component({
     selector: "smart-list-masonry-grid",
@@ -18,9 +20,14 @@ import {AuthService} from "../../../services/auth/auth.service";
 })
 export class ListMasonryGridComponent<T extends IEntity<string>>
     extends ListBaseComponent<T>
-    implements OnInit {
+    implements OnInit, AfterViewInit {
 
-    listWithImages$: Observable<{ data: T, image: any }[]>
+    componentFactories: IListComponentFactories<T>;
+
+    listWithImages$: Observable<{ data: T, image: any }[]>;
+
+    @ViewChild("topTpl", { read: ViewContainerRef, static: true })
+    topTpl: ViewContainerRef;
 
     constructor(
         authService: AuthService,
@@ -33,6 +40,10 @@ export class ListMasonryGridComponent<T extends IEntity<string>>
     }
 
     ngOnInit() {}
+
+    ngAfterViewInit(): void {
+        this.generateDynamicComponents();
+    }
 
     protected afterInitOptions() {
         super.afterInitOptions();
@@ -52,5 +63,23 @@ export class ListMasonryGridComponent<T extends IEntity<string>>
               });
             })
         );
+    }
+
+    protected initList(val: IListInternalOptions<T>): void {
+        super.initList(val);
+
+        this.componentFactories = val.componentFactories;
+
+        this.generateDynamicComponents();
+    }
+
+    private generateDynamicComponents(): void {
+        if (!this.componentFactories) return;
+
+        if (this.componentFactories.top && this.topTpl) {
+            if (!this.topTpl.get(0)) {
+                this.topTpl.createComponent(this.componentFactories.top);
+            }
+        }
     }
 }

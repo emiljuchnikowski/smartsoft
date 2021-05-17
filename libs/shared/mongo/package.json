@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/mongo",
-  "version": "1.0.375",
+  "version": "1.0.379",
   "description": "Utils to mongo",
   "repository": {
     "type": "git",
@@ -11,7 +11,6 @@
     "oauth",
     "nestjs"
   ],
-  "main": "src/index.ts",
   "author": "Emil Juchnikowski",
   "license": "MIT",
   "bugs": {

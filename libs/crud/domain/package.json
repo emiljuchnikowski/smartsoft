@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/crud-domain",
-  "version": "1.0.340",
+  "version": "1.0.344",
   "description": "Utils to crud",
   "repository": {
     "type": "git",
@@ -11,7 +11,6 @@
     "oauth",
     "nestjs"
   ],
-  "main": "src/index.ts",
   "author": "Emil Juchnikowski",
   "license": "MIT",
   "bugs": {
