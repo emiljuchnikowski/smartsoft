@@ -3,14 +3,15 @@
     row-gap: 12px;
     column-gap: 12px;
     ion-card {
+        width: 100%;
+        margin: 0;
+        break-inside: avoid;
+        border: .1rem solid #f4f4f4;
         h3 {
             color: #333;
         }
         p {
             color: #666
         }
-        width: 100%;
-        margin: 0;
-        break-inside: avoid;
     }
 }
