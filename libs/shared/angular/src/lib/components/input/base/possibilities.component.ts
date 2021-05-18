@@ -1,11 +1,11 @@
-import {InputBaseComponent} from "@smartsoft001/angular";
 import {ChangeDetectorRef, Directive, Inject, Optional} from "@angular/core";
+import {Observable} from "rxjs";
 
 import {
     IModelPossibilitiesProvider,
     MODEL_POSSIBILITIES_PROVIDER
 } from "../../../providers/model-possibilities.provider";
-import {Observable} from "rxjs";
+import {InputBaseComponent} from "./base.component";
 
 @Directive()
 export abstract class InputPossibilitiesBaseComponent<T> extends InputBaseComponent<T> {
