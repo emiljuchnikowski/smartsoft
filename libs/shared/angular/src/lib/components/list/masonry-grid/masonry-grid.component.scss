@@ -19,10 +19,10 @@
     @media screen and (max-width: 768px) {
         columns: 2;
     }
-    @media screen and (min-width: 1024) {
+    @media screen and (min-width: 1024px) {
         columns: 4;
     }
-    @media screen and (min-width: 1600) {
+    @media screen and (min-width: 1600px) {
         columns: 6;
     }
 }
