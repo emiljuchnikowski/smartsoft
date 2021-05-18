@@ -13,3 +13,10 @@ export class AuthJwtGuard extends AuthGuard('jwt') {
         return user;
     }
 }
+
+@Injectable()
+export class AuthOrAnonymousJwtGuard extends AuthGuard('jwt') {
+    handleRequest(err: any, user: any, info: any): any {
+        return user;
+    }
+}
