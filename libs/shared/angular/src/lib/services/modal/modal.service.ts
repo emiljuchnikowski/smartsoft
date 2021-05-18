@@ -6,13 +6,7 @@ import { ModalOptions } from '@ionic/core';
 export class ModalService {
     constructor(private modalCtrl: ModalController) { }
 
-    async show(options: {
-        component,
-        props?,
-        mode?: 'default' | 'bottom',
-        cssClass?: string[],
-        backdropDismiss?: boolean
-    }): Promise<IModal> {
+    async show(options: IModalOptions): Promise<IModal> {
         const modalOptions = {
             component: options.component,
             componentProps: options.props,
@@ -33,6 +27,14 @@ export class ModalService {
     dismiss(): void {
         this.modalCtrl.dismiss();
     }
+}
+
+export interface IModalOptions {
+    component;
+    props?;
+    mode?: 'default' | 'bottom';
+    cssClass?: string[];
+    backdropDismiss?: boolean;
 }
 
 export interface IModal {
