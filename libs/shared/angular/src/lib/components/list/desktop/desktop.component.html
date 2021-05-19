@@ -59,7 +59,7 @@
 
       <ng-container *ngSwitchDefault>
         <th mat-header-cell *matHeaderCellDef mat-sort-header="{{ key }}">
-          {{ "MODEL." + key | translate }}
+          {{ (list$ | async) | smartListHeader : key }}
           <ng-container *ngTemplateOutlet="pagination"></ng-container>
         </th>
         <ng-container *matCellDef="let element">

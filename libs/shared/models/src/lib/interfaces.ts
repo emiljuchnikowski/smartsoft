@@ -75,6 +75,12 @@ export interface IFieldListMetadata {
     order?: number;
     filter?: boolean;
     permissions?: Array<string>;
+    /**
+     * Configuration for dynamic list table data
+     * @param {string} dynamic.headerKey - column header object key
+     * @param {string} dynamic.rowKey - column row value object key
+     */
+    dynamic?: { headerKey: string, rowKey: string }
 }
 
 export interface IFieldDetailsMetadata {

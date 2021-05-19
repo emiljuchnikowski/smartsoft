@@ -167,8 +167,10 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     };
   }
 
-  protected initKeys(): void {
-    this.keys = this._fields
+  protected initKeys(data: Array<T> = null): void {
+    const result = [];
+
+    this._fields
       .filter((field) => {
         if (
           field.options.list &&
@@ -181,14 +183,35 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
 
         return true;
       })
-      .map((field) => field.key);
+      .forEach((field) => {
+        if ((field.options.list as IFieldListMetadata).dynamic) {
+          if (!data?.length) return;
+
+          (data[0][field.key] as [])
+              .map((_, index) =>
+                  '__array.' + field.key + '.' + index
+                  + '.' + (field.options.list as IFieldListMetadata).dynamic.headerKey
+                  + '.' + (field.options.list as IFieldListMetadata).dynamic.rowKey
+              )
+              .forEach(item => result.push(item));
+
+          return;
+        }
+
+        result.push(field.key);
+      });
+
+    if (!this.keys || this.keys.length !== result.length) this.keys = result;
   }
 
   protected initList(val: IListInternalOptions<T>): void {
     this.list$ = this.provider.list$.pipe(
       map((list) => {
         if (!list) return list;
-        return list.filter((item) => !this.removed.has(item.id));
+        const result =  list.filter((item) => !this.removed.has(item.id));
+        this.initKeys(list);
+
+        return result;
       })
     );
   }
