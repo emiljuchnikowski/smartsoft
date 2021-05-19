@@ -23,14 +23,7 @@
                     </ion-button>
                 </ion-col>
                 <ion-col>
-                    <!-- do polubienia -->
-                    <ion-button fill="clear">
-                        <ion-icon slot="icon-only" color="medium" name="star-outline"></ion-icon>
-                    </ion-button>
-                    <!-- polubione -->
-                    <!-- <ion-button fill="clear">
-                        <ion-icon slot="icon-only" color="primary" name="star"></ion-icon>
-                    </ion-button> -->
+
                 </ion-col>
                 <ion-col size="auto" *ngIf="itemHandler">
                     <ion-button (click)="itemHandler && itemHandler(item.data.id)">
