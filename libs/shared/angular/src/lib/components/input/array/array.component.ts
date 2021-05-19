@@ -39,7 +39,9 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
 
     FieldType = FieldType;
 
-    constructor(cd: ChangeDetectorRef,  private factory: FormFactory) {
+    constructor(
+        cd: ChangeDetectorRef,
+        private factory: FormFactory) {
         super(cd);
     }
 

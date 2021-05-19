@@ -30,7 +30,7 @@ export abstract class InputBaseComponent<T> extends BaseComponent {
     this.cd.detectChanges();
   }
 
-  constructor(protected cd: ChangeDetectorRef) {
+  protected constructor(protected cd: ChangeDetectorRef) {
     super();
   }
 

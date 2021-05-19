@@ -1,21 +1,29 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { of } from "rxjs";
-
-import { InputBaseComponent } from "../base/base.component";
-import { getModelFieldOptions } from "@smartsoft001/models";
+import {ChangeDetectorRef, Component, Inject, OnInit, Optional} from "@angular/core";
+import {of} from "rxjs";
 import {filter} from "rxjs/operators";
+
+import { getModelFieldOptions } from "@smartsoft001/models";
+import {
+  IModelPossibilitiesProvider,
+  MODEL_POSSIBILITIES_PROVIDER
+} from "../../../providers/model-possibilities.provider";
+import {InputPossibilitiesBaseComponent} from "../base/possibilities.component";
 
 @Component({
   selector: "smart-input-check",
   templateUrl: "./check.component.html",
   styleUrls: ["./check.component.scss"]
 })
-export class InputCheckComponent<T> extends InputBaseComponent<T>
+export class InputCheckComponent<T> extends InputPossibilitiesBaseComponent<T>
   implements OnInit {
   possibilities: Array<{id: string, text: string, checked: boolean}>;
 
-  constructor(cd: ChangeDetectorRef) {
-    super(cd);
+  constructor(
+      cd: ChangeDetectorRef,
+      @Optional()
+      @Inject(MODEL_POSSIBILITIES_PROVIDER) modelPossibilitiesProvider: IModelPossibilitiesProvider
+  ) {
+    super(cd, modelPossibilitiesProvider);
   }
 
   protected afterSetOptionsHandler(): void {
