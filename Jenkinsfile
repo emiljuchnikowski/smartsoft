@@ -12,6 +12,10 @@ node {
             checkout scm
         }
 
+        stage('Clear data') {
+            sh("rm -rf node_modules")
+        }
+
         stage('Install packages') {
             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
                 sh 'NPM_TOKEN=$TOKEN npm install --force'
