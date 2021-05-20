@@ -14,6 +14,7 @@ node {
 
         stage('Clear data') {
             sh("rm -rf node_modules")
+            sh("rm package-lock.json")
         }
 
         stage('Install packages') {
