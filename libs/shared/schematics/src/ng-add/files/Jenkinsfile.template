@@ -25,6 +25,11 @@ node {
             sh "npm install jest nx"
         }
 
+        stage('Clear data') {
+            sh("rm -rf node_modules")
+            sh("rm package-lock.json")
+        }
+
         stage('Install packages') {
             sh 'npm install'
         }
