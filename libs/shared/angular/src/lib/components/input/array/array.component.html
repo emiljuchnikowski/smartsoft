@@ -1,6 +1,6 @@
 <ng-container *ngIf="control">
             <ion-label position="static">
-                {{ translateKey | translate }}
+                {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
                 <ion-text color="danger">
                     <span *ngIf="fieldOptions?.required">*</span>
                 </ion-text>

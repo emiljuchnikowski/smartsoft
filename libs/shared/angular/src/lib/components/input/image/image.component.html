@@ -1,6 +1,7 @@
 <ng-container *ngIf="control">
     <ion-label position="floating">
-        {{ translateKey | translate }} <ng-container *ngIf="control.value">({{ control.value.fileName }})</ng-container>
+        {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
+        <ng-container *ngIf="control.value">({{ control.value.fileName }})</ng-container>
         <ion-text color="danger">
             <span *ngIf="fieldOptions?.required">*</span>
         </ion-text>

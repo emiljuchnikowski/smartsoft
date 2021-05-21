@@ -288,11 +288,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ui-test:build"
+            "browserTarget": "ui-test:build",
+            "optimization": false
           },
           "configurations": {
             "production": {
               "browserTarget": "ui-test:build:production"
+            },
+            "development": {
+              "sourceMap": true
             }
           }
         },

@@ -13,6 +13,7 @@ export class DetailComponent<T> implements OnInit {
   FieldType = FieldType;
 
   @Input() options: IDetailOptions<T>;
+  @Input() type: any;
 
   constructor() { }
 

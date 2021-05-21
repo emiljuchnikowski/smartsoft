@@ -10,7 +10,6 @@ import {BaseComponent} from "../../base";
 @Directive()
 export abstract class InputBaseComponent<T> extends BaseComponent {
   internalOptions: InputOptions<T>;
-  translateKey: string;
   control: AbstractControl;
 
   possibilities$: Observable<{ id: any, text: string }[]>;
@@ -21,7 +20,6 @@ export abstract class InputBaseComponent<T> extends BaseComponent {
 
     this.internalOptions = val;
     this.control = this.internalOptions.control;
-    this.setTranslateKey();
 
     this.possibilities$ = val.possibilities$;
 
@@ -36,9 +34,5 @@ export abstract class InputBaseComponent<T> extends BaseComponent {
 
   protected afterSetOptionsHandler(): void {
 
-  }
-
-  private setTranslateKey(): void {
-    this.translateKey = "MODEL." + this.internalOptions.fieldKey;
   }
 }

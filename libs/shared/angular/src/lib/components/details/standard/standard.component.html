@@ -2,7 +2,7 @@
     <div #topTpl class="top-content"></div>
 
     <smart-card>
-        <smart-detail *ngFor="let field of fields" [options]="{
+        <smart-detail *ngFor="let field of fields" [type]="type" [options]="{
         key: field.key,
         options: field.options,
         item$: item$,

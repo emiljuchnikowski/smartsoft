@@ -20,10 +20,6 @@ export class ListCellPipe<T> implements PipeTransform {
         if (!pipe) result = this.getValue(obj, key);
         else result = pipe.transform(obj, key);
 
-        console.log({
-            pipe, result
-        });
-
         if (!result) return result;
 
         return {
