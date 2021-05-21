@@ -43,6 +43,6 @@
                 </ion-item>
             </ion-list>
     <smart-button [options]="addButtonOptions" class="add" *ngIf="!(fieldOptions?.possibilities?.static)">
-        <span style="font-weight: 300">{{ translateKey | translate }} > &nbsp;</span><b>{{ 'add' | translate }}</b>
+        <span style="font-weight: 300">{{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }} > &nbsp;</span><b>{{ 'add' | translate }}</b>
     </smart-button>
 </ng-container>
