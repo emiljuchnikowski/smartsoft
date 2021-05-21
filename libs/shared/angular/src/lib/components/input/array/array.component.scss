@@ -211,6 +211,8 @@ smart-form {
         &[tree-level="4"],
         &[tree-level="5"],
         &[tree-level="6"] {
+            border-left: .1rem solid #dedede;
+            border-bottom: .1rem solid #dedede;
             &::before {
                 display: none;
             }
