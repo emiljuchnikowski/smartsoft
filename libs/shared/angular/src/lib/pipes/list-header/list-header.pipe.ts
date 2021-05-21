@@ -2,7 +2,7 @@ import {Inject, Optional, Pipe, PipeTransform, Type} from "@angular/core";
 import {TranslateService} from "@ngx-translate/core";
 import {Observable, of} from "rxjs";
 
-import {IModelLabelProvider, MODEL_LABEL_PROVIDER} from "../../providers";
+import {IModelLabelProvider, MODEL_LABEL_PROVIDER} from "../../providers/model-label.provider";
 
 @Pipe({
     name: 'smartListHeader'
