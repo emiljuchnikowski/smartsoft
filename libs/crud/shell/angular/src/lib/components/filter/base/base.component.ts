@@ -40,7 +40,7 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
   ) {}
 
   @Debounce(500)
-  protected refresh(val: any): void {
+  refresh(val: any): void {
     let query = this.filter.query.find(
         (q) => q.key === this.item.key && q.type === this.item.type
     );
