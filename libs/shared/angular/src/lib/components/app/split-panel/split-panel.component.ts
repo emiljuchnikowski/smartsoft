@@ -37,12 +37,8 @@ export class AppSplitPanelComponent extends AppBaseComponent implements OnInit, 
 
   async ngAfterContentInit(): Promise<void> {
     await super.ngAfterContentInit();
-
-    console.log(this.listRef);
     this.styleService.init(this.listRef);
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 }

@@ -7,7 +7,7 @@ export abstract class IModelLabelProvider {
 
 export interface IModelLabelOptions {
     key: string;
-    instance: any;
+    instance?: any;
     type?: Type<any>;
 }
 
