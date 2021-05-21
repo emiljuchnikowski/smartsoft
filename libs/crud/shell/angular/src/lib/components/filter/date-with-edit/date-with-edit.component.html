@@ -18,4 +18,9 @@
             <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
         </ion-button>
     </ion-col>
+    <ion-col size="auto" *ngIf="value">
+        <ion-button color="danger" (click)="refresh(null)" class="squere-button">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+    </ion-col>
 </ion-row>

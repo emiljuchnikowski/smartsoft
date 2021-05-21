@@ -18,4 +18,9 @@
             --padding: var(--smart-button-padding-left)/2 var(--smart-button-padding-top)/2 var(--smart-button-padding-right)/2 var(--smart-button-padding-bottom)/2;
         }
     }
+
+    .squere-button {
+        height: var(--smart-button-height) !important;
+        margin: .8rem;
+    }
 }

@@ -39,26 +39,10 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     private modelPossibilitiesProvider: ICrudModelPossibilitiesProvider
   ) {}
 
-  ngOnInit(): void {
-    this.initPossibilities();
-  }
-
-  private initPossibilities(): void {
-    let possibilities = this.item.possibilities$;
-
-    if (this.modelPossibilitiesProvider) {
-      const possibilitiesFromProvider = this.modelPossibilitiesProvider.get(this.config.type);
-      if (possibilitiesFromProvider && possibilitiesFromProvider[this.item.key])
-        possibilities = possibilitiesFromProvider[this.item.key];
-    }
-
-    this.possibilities$ = possibilities;
-  }
-
   @Debounce(500)
-  private refresh(val: any): void {
+  protected refresh(val: any): void {
     let query = this.filter.query.find(
-      (q) => q.key === this.item.key && q.type === this.item.type
+        (q) => q.key === this.item.key && q.type === this.item.type
     );
 
     if (val === null || val === undefined || val === '') {
@@ -85,5 +69,21 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     query.label = this.item.label;
 
     this.facade.read(this.filter);
+  }
+
+  ngOnInit(): void {
+    this.initPossibilities();
+  }
+
+  private initPossibilities(): void {
+    let possibilities = this.item.possibilities$;
+
+    if (this.modelPossibilitiesProvider) {
+      const possibilitiesFromProvider = this.modelPossibilitiesProvider.get(this.config.type);
+      if (possibilitiesFromProvider && possibilitiesFromProvider[this.item.key])
+        possibilities = possibilitiesFromProvider[this.item.key];
+    }
+
+    this.possibilities$ = possibilities;
   }
 }
