@@ -204,11 +204,24 @@ smart-form {
             background-color: #dedede;
         }
     }
+    .cdk-drag-disabled & {
+        &[tree-level="1"],
+        &[tree-level="2"],
+        &[tree-level="3"],
+        &[tree-level="4"],
+        &[tree-level="5"],
+        &[tree-level="6"] {
+            &::before {
+                display: none;
+            }
+        }
+    }
 }
 
 ion-card {
     width: 100%;
     margin: .3rem;
+    padding-left: 0;
     ion-card-header {
         padding: 0;
         margin: 0;
