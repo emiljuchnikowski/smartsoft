@@ -209,21 +209,21 @@ export class Todo implements IEntity<string> {
     // })
     // number: string;
 
-    @Field({
-        create: {
-            ...modifyMetdata,
-            required: false
-        },
-        update: {
-            ...modifyMetdata,
-            required: false,
-            multi: true
-        },
-        type: FieldType.image,
-        details: true,
-        list: { order: 1 }
-    })
-    img: string;
+    // @Field({
+    //     create: {
+    //         ...modifyMetdata,
+    //         required: false
+    //     },
+    //     update: {
+    //         ...modifyMetdata,
+    //         required: false,
+    //         multi: true
+    //     },
+    //     type: FieldType.image,
+    //     details: true,
+    //     list: { order: 1 }
+    // })
+    // img: string;
 
     @Field({
         create: modifyMetdata,
@@ -237,10 +237,27 @@ export class Todo implements IEntity<string> {
     })
     body: string;
 
+    // @Field({
+    //     create: modifyMetdata,
+    //     update: {
+    //         ...modifyMetdata,
+    //         multi: true
+    //     },
+    //     type: FieldType.check,
+    //     details: true,
+    // })
+    // select: string;
+
     @Field({
         details: true,
         create: true,
         update: true,
+        list: {
+          dynamic: {
+              headerKey: 'info1',
+              rowKey: 'info2'
+          }
+        },
         type: FieldType.array,
         classType: TodoInfo,
         possibilities: {
@@ -249,13 +266,13 @@ export class Todo implements IEntity<string> {
     })
     infos: Array<TodoInfo>;
 
-    @Field({
-        create: true,
-        update: true,
-        type: FieldType.array,
-        classType: CourseSection
-    })
-    sections: Array<CourseSection>;
+    // @Field({
+    //     create: true,
+    //     update: true,
+    //     type: FieldType.array,
+    //     classType: CourseSection
+    // })
+    // sections: Array<CourseSection>;
 
     // @Field({
     //     create: modifyMetdata,

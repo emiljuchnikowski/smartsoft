@@ -3,7 +3,7 @@ import {of} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {map} from "rxjs/operators";
 
-import {IAppOptions, IMenuItem, IStyle} from "@smartsoft001/angular";
+import {AppService, IAppOptions, IMenuItem, IStyle} from "@smartsoft001/angular";
 import {AuthFacade} from "@smartsoft001/auth-shell-angular";
 import { variables } from "../theme/variables";
 
@@ -52,11 +52,17 @@ export class AppComponent implements OnInit {
     style: variables
   };
 
-  constructor(translateService: TranslateService, private authFacade: AuthFacade) {
+  constructor(translateService: TranslateService, private authFacade: AuthFacade, private appService: AppService) {
     //translateService.use('eng');
   }
 
   ngOnInit(): void {
-
+    this.appService.addEndButton({
+      icon: 'bag-outline',
+      handler: () => {
+        console.log('test')
+      },
+      number: 5
+    });
   }
 }
