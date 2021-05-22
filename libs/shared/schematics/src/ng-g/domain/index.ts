@@ -99,7 +99,7 @@ export default function (options: Schema): Rule {
                 directory: domainNamePluralize + '/shell',
                 style: "scss",
                 unitTestRunner: "jest",
-                linter: "tslint"
+                linter: "eslint"
             }),
             clearModules,
             mergeWith(templateSource, MergeStrategy.Overwrite),
