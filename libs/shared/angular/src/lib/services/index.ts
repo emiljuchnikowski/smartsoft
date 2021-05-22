@@ -15,3 +15,4 @@ export * from './camera/camera.service';
 export * from './file/file.service';
 export * from './calendar/calendar.service';
 export * from './ui/ui.service';
+export * from './app/app.service';

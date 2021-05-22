@@ -4,6 +4,7 @@ import {PopoverController} from "@ionic/angular";
 import { Subscription} from "rxjs";
 
 import {IIconButtonOptions, IPageOptions} from "../../../models/interfaces";
+import {AppService} from "../../../services/app/app.service";
 
 @Directive()
 export abstract class PageBaseComponent implements OnInit, OnDestroy {
@@ -21,7 +22,8 @@ export abstract class PageBaseComponent implements OnInit, OnDestroy {
         private el: ElementRef,
         private renderer: Renderer2,
         private location: Location,
-        private popover: PopoverController
+        private popover: PopoverController,
+        public appService: AppService,
     ) { }
 
     back(): void {

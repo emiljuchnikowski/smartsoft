@@ -99,6 +99,7 @@ export interface IIconButtonOptions {
   component?: any;
   type?: 'default' | 'popover'
   disabled$?: Observable<boolean>;
+  number?: number;
 }
 
 export type InputOptions<T> = IInputOptions & IInputFromFieldOptions<T>;
