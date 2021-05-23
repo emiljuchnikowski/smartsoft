@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CrudModule } from "@smartsoft001/crud-shell-angular";
-import { ReducerManager } from "@ngrx/store";
 
 import { environment } from "@<%= dasherize(projectName) %>/shared/angular";
 import { <%= classify(domainName) %> } from "@<%= dasherize(projectName) %>/<%= dasherize(domainNamePluralize) %>/domain";
@@ -36,6 +35,7 @@ export class FakeModule {}
     CrudModule.forFeature({
       routing: true,
       config: {
+        reducerFactory: getReducer,
         type: <%= classify(domainName) %>,
         title: "<%= classify(domainNamePluralize) %>",
         entity: "<%= dasherize(domainNamePluralize) %>",
@@ -75,8 +75,4 @@ export class FakeModule {}
     }),
   ],
 })
-export class <%= classify(domainNamePluralize) %>Module {
-  constructor(reducerManager: ReducerManager) {
-    reducerManager.addReducer("<%= dasherize(domainNamePluralize) %>", getReducer());
-  }
-}
+export class <%= classify(domainNamePluralize) %>Module { }

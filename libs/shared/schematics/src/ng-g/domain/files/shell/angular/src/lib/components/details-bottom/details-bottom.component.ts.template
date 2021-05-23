@@ -6,7 +6,7 @@ import {StyleService} from "@<%= dasherize(projectName) %>/shared/angular";
 //import { <%= classify(domainNamePluralize) %>Facade } from "../../+state/<%= dasherize(domainNamePluralize) %>.facade";
 
 @Component({
-  selector: "<%= classify(domainName) %>-details-bottom",
+  selector: "<%= classify(projectName) %>-<%= classify(domainNamePluralize) %>-details-bottom",
   templateUrl: "./details-bottom.component.html",
   styleUrls: ["./details-bottom.component.scss"],
 })

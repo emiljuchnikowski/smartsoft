@@ -11,6 +11,7 @@ export class CrudConfig<T> {
     apiUrl: string;
     entity: string;
     type?: any;
+    reducerFactory?: () => any;
     baseQuery?: Array<ICrudFilterQueryItem>;
 }
 

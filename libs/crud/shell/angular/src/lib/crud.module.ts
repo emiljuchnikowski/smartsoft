@@ -1,8 +1,8 @@
 import { ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { Store, StoreModule } from "@ngrx/store";
 import { SocketIoModule } from "ngx-socket-io";
-import {FormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 import { IEntity } from "@smartsoft001/domain-core";
 import {
@@ -20,7 +20,7 @@ import { CrudPipesModule } from "./pipes/pipes.module";
 import { CrudFullModule } from "./crud-full.module";
 import { SocketService } from "./services/socket/socket.service";
 import { CrudListPaginationFactory } from "./factories/list-pagination/list-pagination.factory";
-import {CrudComponentsModule} from "./components/components.module";
+import { CrudComponentsModule } from "./components/components.module";
 
 @NgModule({
   imports: [
@@ -31,11 +31,9 @@ import {CrudComponentsModule} from "./components/components.module";
     SocketIoModule,
     FormsModule,
     CommonModule,
-    CrudComponentsModule
+    CrudComponentsModule,
   ],
-  exports: [
-    CrudComponentsModule
-  ],
+  exports: [CrudComponentsModule],
   providers: [
     CrudService,
     CrudEffects,
@@ -46,16 +44,21 @@ import {CrudComponentsModule} from "./components/components.module";
 })
 export class CrudCoreModule<T extends IEntity<string>> {
   constructor(
-      store: Store<any>,
-      config: CrudConfig<T>,
-      effects: CrudEffects<any>
+    store: Store<any>,
+    config: CrudConfig<T>,
+    effects: CrudEffects<any>
   ) {
-    store.addReducer(config.entity, getReducer(config.entity));
+    store.addReducer(
+      config.entity,
+      config.reducerFactory
+        ? config.reducerFactory()
+        : getReducer(config.entity)
+    );
     effects.init();
   }
 }
 
-@NgModule({ })
+@NgModule({})
 export class CrudModule<T extends IEntity<string>> {
   static forFeature<T extends IEntity<string>>(
     options:
