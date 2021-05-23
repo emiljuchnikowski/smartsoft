@@ -8,6 +8,8 @@ import { IEntity } from "@smartsoft001/domain-core";
 import {
   FILE_SERVICE_CONFIG,
   IFileServiceConfig,
+  NgrxSharedModule,
+  NgrxStoreService,
   SharedModule,
 } from "@smartsoft001/angular";
 
@@ -32,6 +34,7 @@ import { CrudComponentsModule } from "./components/components.module";
     FormsModule,
     CommonModule,
     CrudComponentsModule,
+    NgrxSharedModule,
   ],
   exports: [CrudComponentsModule],
   providers: [
@@ -43,12 +46,8 @@ import { CrudComponentsModule } from "./components/components.module";
   ],
 })
 export class CrudCoreModule<T extends IEntity<string>> {
-  constructor(
-    store: Store<any>,
-    config: CrudConfig<T>,
-    effects: CrudEffects<any>
-  ) {
-    store.addReducer(
+  constructor(config: CrudConfig<T>, effects: CrudEffects<any>) {
+    NgrxStoreService.addReducer(
       config.entity,
       config.reducerFactory
         ? config.reducerFactory()
