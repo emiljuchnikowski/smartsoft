@@ -5,7 +5,7 @@ import {SocketIoModule} from "ngx-socket-io";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 
-import {SharedModule} from "@smartsoft001/angular";
+import {NgrxStoreService, SharedModule} from "@smartsoft001/angular";
 import {IEntity} from "@smartsoft001/domain-core";
 
 import {CrudConfig} from "./crud.config";
@@ -57,7 +57,12 @@ const PAGES = [
 })
 export class CrudFullModule<T extends IEntity<string>> {
     constructor(store: Store<any>, config: CrudConfig<T>, effects: CrudEffects<any>) {
-        store.addReducer(config.entity, getReducer(config.entity));
+        NgrxStoreService.addReducer(
+            config.entity,
+            config.reducerFactory
+                ? config.reducerFactory()
+                : getReducer(config.entity)
+        );
         effects.init();
     }
 }

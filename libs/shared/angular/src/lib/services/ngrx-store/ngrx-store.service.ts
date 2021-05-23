@@ -12,6 +12,7 @@ export class NgrxStoreService {
         if (!NgrxStoreService._reducers[key]) {
             NgrxStoreService._reducers[key] = reducer;
             NgrxStoreService.store.addReducer(key, reducer);
+            console.log(`${NgrxStoreService.name} register reducer ${key}`);
         }
     }
 
