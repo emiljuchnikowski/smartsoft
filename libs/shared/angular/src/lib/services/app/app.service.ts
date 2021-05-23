@@ -15,7 +15,7 @@ export class AppService {
 
     addEndButton(button: AppEndButton): void {
         if (button.id) {
-            const exist = AppService._endButtonsSource$.value.filter(e => e.id === button.id);
+            const exist = AppService._endButtonsSource$.value.find(e => e.id === button.id);
 
             if (exist) {
                 Object.keys(button).filter(k => k !== 'id').forEach(key => {
