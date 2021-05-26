@@ -28,7 +28,7 @@ export class ModalService {
         return modal as any;
     }
 
-    async dismiss<T>(data: T): Promise<void> {
+    async dismiss<T>(data: T = null): Promise<void> {
         await this.modalCtrl.dismiss(data);
     }
 }
