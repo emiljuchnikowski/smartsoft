@@ -1,10 +1,14 @@
-import {Injectable} from "@angular/core";
-import {ModalController} from "@ionic/angular";
+import {Injectable, Optional} from "@angular/core";
+import {ModalController, NavParams} from "@ionic/angular";
 import { ModalOptions } from '@ionic/core';
 
 @Injectable()
 export class ModalService {
-    constructor(private modalCtrl: ModalController) { }
+    constructor(private modalCtrl: ModalController, @Optional() private navParams: NavParams) { }
+
+    getParam<T>(key: string): T {
+        return this.navParams?.get(key);
+    }
 
     async show(options: IModalOptions): Promise<IModal> {
         const modalOptions = {
@@ -24,8 +28,8 @@ export class ModalService {
         return modal as any;
     }
 
-    dismiss(): void {
-        this.modalCtrl.dismiss();
+    async dismiss<T>(data: T): Promise<void> {
+        await this.modalCtrl.dismiss(data);
     }
 }
 
