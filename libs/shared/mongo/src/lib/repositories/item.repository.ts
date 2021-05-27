@@ -726,8 +726,14 @@ export class MongoItemRepository<
       const modelFields = getModelFieldsWithOptions(new this.config.type()).filter(i => i.options.search);
 
       if (modelFields.length) {
-        modelFields.forEach(val => {
-          criteria[val.key] = { $regex: criteria["$search"], $options: 'i' };
+        if (!criteria['$or']) criteria['$or'] = [];
+
+        modelFields.forEach(val =>{
+          const res = {};
+
+          res[val.key] = { $regex: criteria["$search"], $options: 'i' };
+
+          criteria['$or'].push(res);
         });
 
         delete criteria["$search"];
