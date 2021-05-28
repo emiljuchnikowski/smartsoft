@@ -1,11 +1,14 @@
 import {
   ComponentFactoryResolver,
   Injectable, Injector,
-  Provider, ReflectiveInjector,
   ViewContainerRef,
 } from "@angular/core";
 import { MenuController } from "@ionic/angular";
 
+/**
+ * Only to use in smart-page
+ * @requires PageComponent
+ */
 @Injectable({
   providedIn: "root",
 })
@@ -13,6 +16,9 @@ export class MenuService {
   _endContainer: ViewContainerRef;
   _openedEnd = false;
 
+  /**
+   * @desc checking if the menu is open (menu on the right side of the screen)
+   */
   get openedEnd(): boolean {
     return this._openedEnd;
   }
@@ -28,6 +34,12 @@ export class MenuService {
     await this.menuCtrl.close("end");
   }
 
+  /**
+   * @desc open menu (menu on the right side of the screen)
+   * @param {object} options - use options
+   * @param {class} options.component - angular component to render
+   * @param {class} options.injector - angular injector to use in component
+   */
   async openEnd(options: {
     component: any,
     injector: Injector,
@@ -44,6 +56,9 @@ export class MenuService {
     await this.menuCtrl.open("end");
   }
 
+  /**
+   * @desc close menu (menu on the right side of the screen)
+   */
   async closeEnd(): Promise<void> {
     this._openedEnd = false;
 
