@@ -13,8 +13,8 @@ import { MenuController } from "@ionic/angular";
   providedIn: "root",
 })
 export class MenuService {
-  _endContainer: ViewContainerRef;
-  _openedEnd = false;
+  private _endContainer: ViewContainerRef;
+  private _openedEnd = false;
 
   /**
    * @desc checking if the menu is open (menu on the right side of the screen)
@@ -28,6 +28,9 @@ export class MenuService {
     private readonly resolver: ComponentFactoryResolver
   ) {}
 
+  /**
+   * @private
+   */
   async init(endContainer: ViewContainerRef): Promise<void> {
     this._endContainer = endContainer;
 
