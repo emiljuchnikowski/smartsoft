@@ -233,7 +233,10 @@ export class Todo implements IEntity<string> {
         },
         type: FieldType.longText,
         details: true,
-        list: { order: 2 }
+        list: {
+            order: 2,
+            filter: true
+        }
     })
     body: string;
 

@@ -9,6 +9,61 @@ import {ICrudFilter} from "../../models/interfaces";
 import {CrudConfig} from "../../crud.config";
 import {CrudFacade} from "../../+state/crud.facade";
 
+/**
+ * This component is only to use in crud module
+ * @requires CrudModule
+ * @example
+ *
+ * html: <smart-crud-filters></smart-crud-filters>
+ *
+ * use on the model:
+ * @Model({
+    titleKey: 'body',
+    filters: [
+        {
+            label: 'testNegation',
+            key: 'body',
+            type: '!=',
+        },
+        {
+            label: 'fromDate',
+            key: 'createDate',
+            type: '<=',
+            fieldType: FieldType.dateWithEdit
+        },
+        {
+            label: 'select',
+            key: 'type',
+            type: '=',
+            fieldType: FieldType.radio,
+            possibilities$: of([
+                {
+                    id: 1, text: 'Test 1'
+                },
+                {
+                    id: 2, text: 'Test 2'
+                }
+            ])
+        }
+    ]
+})
+ *
+ * use on the field (list.filter property):
+ * @Field({
+        create: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
+        type: FieldType.longText,
+        details: true,
+        list: {
+            order: 2,
+            filter: true
+        }
+    })
+ body: string;
+ */
 @Component({
   selector: 'smart-crud-filters',
   templateUrl: './filters.component.html',
