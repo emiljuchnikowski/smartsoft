@@ -1,6 +1,26 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {InputBaseComponent} from "../base/base.component";
 
+/**
+ * @example
+ *
+ * set accepts (possibilities property):
+ * - @Field({
+        create: {
+            ...modifyMetdata,
+            required: false
+        },
+        update: {
+            ...modifyMetdata,
+            required: false,
+            multi: true
+        },
+        type: FieldType.image,
+        details: true,
+        possibilities: '.jpg',
+        list: { order: 1 }
+    })
+ */
 @Component({
   selector: 'smart-input-file',
   templateUrl: './file.component.html',
