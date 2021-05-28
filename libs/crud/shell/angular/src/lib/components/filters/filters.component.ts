@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 
 import {AuthService, MenuService, StyleService} from "@smartsoft001/angular";
@@ -73,6 +73,11 @@ export class FiltersComponent<T extends IEntity<string>> implements OnInit {
   list: Array<IModelFilter>;
 
   filter$: Observable<ICrudFilter>;
+
+    /**
+     * Hide menu used only from MenuService
+     */
+  @Input() hideMenu: boolean;
 
   constructor(
       private menuService: MenuService,
