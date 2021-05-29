@@ -1,5 +1,6 @@
 node {
     env.NODEJS_HOME = "${tool 'Node14'}"
+    env.NODE_OPTIONS = "--max-old-space-size=8192"
     env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
 
     def commit_id
