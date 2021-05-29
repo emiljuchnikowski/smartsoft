@@ -65,12 +65,11 @@
         <ng-container *matCellDef="let element">
           <td mat-cell
               *ngIf="element | smartListCell : key : cellPipe : type; else blankCellTpl; let cell"
-              [style.maxWidth.px]="cell.type === FieldType.image ? 60 : null"
-              [style.maxHeight.px]="cell.type === FieldType.image ? 60 : null"
+              [style.width.px]="cell.type === FieldType.image ? 60 : null"
               [style.textAlign]="cell.type === FieldType.image ? 'center' : null"
           >
             <ng-container [ngSwitch]="cell.type">
-              <img *ngSwitchCase="FieldType.image" width="50" [lazyLoad]="cell.value | smartFileUrl">
+              <img *ngSwitchCase="FieldType.image" height="50" [lazyLoad]="cell.value | smartFileUrl">
               <div *ngSwitchDefault [innerHTML]="cell.value"></div>
             </ng-container>
           </td>
