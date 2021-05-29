@@ -4,7 +4,7 @@ import {TranslateService} from "@ngx-translate/core";
 
 import {FieldType, getModelFieldOptions} from "@smartsoft001/models";
 
-import {IListCellPipe} from "../../models/interfaces";
+import {ICellPipe} from "../../models/interfaces";
 
 @Pipe({
     name: 'smartListCell'
@@ -12,7 +12,7 @@ import {IListCellPipe} from "../../models/interfaces";
 export class ListCellPipe<T> implements PipeTransform {
     constructor(private readonly translateService: TranslateService) { }
 
-    transform(obj: T, key: string, pipe: IListCellPipe<T>, type?: Type<T>): { value?: any, type?: FieldType } {
+    transform(obj: T, key: string, pipe: ICellPipe<T>, type?: Type<T>): { value?: any, type?: FieldType } {
         if (!obj) return {};
 
         let result;

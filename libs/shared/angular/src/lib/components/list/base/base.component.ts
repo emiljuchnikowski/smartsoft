@@ -17,7 +17,7 @@ import {
   IDetailsOptions,
   IListProvider,
   IButtonOptions,
-  IListCellPipe,
+  ICellPipe,
 } from "../../../models/interfaces";
 import { IListInternalOptions } from "../list.component";
 import { ToastService } from "../../../services/toast/toast.service";
@@ -39,7 +39,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
   detailsButtonOptions: IButtonOptions;
   removed: Set<string> = new Set<string>();
   keys: Array<string>;
-  cellPipe: IListCellPipe<T>;
+  cellPipe: ICellPipe<T>;
   loadPrevPage: (event) => void;
   loadNextPage: (event) => void;
 

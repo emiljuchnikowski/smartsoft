@@ -6,7 +6,7 @@ import {TranslateService} from "@ngx-translate/core";
 
 import {
   AuthService,
-  DynamicComponentLoader,
+  DynamicComponentLoader, ICellPipe,
   IDetailsOptions,
   IIconButtonOptions,
   IPageOptions, StyleService,
@@ -129,6 +129,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
       this.detailsOptions = {
         type: this.config.type,
         item$: this.facade.selected$,
+        cellPipe: this.config.details ? (this.config.details as {cellPipe?: ICellPipe<T>}).cellPipe : null,
         componentFactories: {
           top:
             this.config.details &&

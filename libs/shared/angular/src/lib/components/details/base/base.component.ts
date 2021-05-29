@@ -17,7 +17,7 @@ import {
 import { IEntity } from "@smartsoft001/domain-core";
 import { ObjectService, SpecificationService } from "@smartsoft001/utils";
 
-import { IDetailsComponentFactories, IDetailsOptions } from "../../../models";
+import {ICellPipe, IDetailsComponentFactories, IDetailsOptions} from "../../../models";
 import { AuthService } from "../../../services/auth/auth.service";
 
 @Directive()
@@ -27,6 +27,7 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
   private _type: any;
 
   componentFactories: IDetailsComponentFactories<T>;
+  cellPipe: ICellPipe<T>;
 
   get fields(): Array<{ key: string; options: IFieldOptions }> {
     return this._fields;
@@ -96,6 +97,7 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
     );
     this.loading$ = obj.loading$;
     this.componentFactories = obj.componentFactories;
+    this.cellPipe = obj.cellPipe;
 
     this.generateDynamicComponents();
   }

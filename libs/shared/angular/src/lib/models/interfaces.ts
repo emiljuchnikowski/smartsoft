@@ -39,6 +39,7 @@ export interface IDetailsComponentFactories<T> {
 
 export interface IDetailsOptions<T extends IEntity<string>> {
   title?: string;
+  cellPipe?: ICellPipe<T>;
   type: any;
   item$: Observable<T>;
   loading$?: Observable<boolean>;
@@ -50,6 +51,7 @@ export interface IDetailsOptions<T extends IEntity<string>> {
 export interface IDetailOptions<T> {
   key: string;
   item$: Observable<T>;
+  cellPipe?: ICellPipe<T>;
   options: IFieldOptions;
   loading$?: Observable<boolean>;
 }
@@ -138,7 +140,7 @@ export interface IListOptions<T> {
 
   pagination?: IListPaginationOptions;
 
-  cellPipe?: IListCellPipe<T>;
+  cellPipe?: ICellPipe<T>;
   componentFactories?: IListComponentFactories<T>,
   sort?: boolean | {
     default?: string;
@@ -167,7 +169,7 @@ export interface IListOptions<T> {
   select?: 'multi'
 }
 
-export interface IListCellPipe<T> extends PipeTransform {
+export interface ICellPipe<T> extends PipeTransform {
   transform(value: T, columnName: string): string;
 }
 

@@ -5,6 +5,7 @@
         <smart-detail *ngFor="let field of fields" [type]="type" [options]="{
         key: field.key,
         options: field.options,
+        cellPipe: cellPipe,
         item$: item$,
         loading$: loading$
         }">
