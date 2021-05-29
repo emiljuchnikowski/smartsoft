@@ -5,10 +5,10 @@ import {FieldType, IFieldOptions} from "../../interfaces";
 import {ObjectService} from "@smartsoft001/utils";
 
 export const Field = FieldDecorator;
-export function FieldDecorator(options: IFieldOptions = {}) {
+export function FieldDecorator(options?: IFieldOptions) {
     return <T>(target: T, key: string) => {
 
-        options = { ...options };
+        options = options ? { ...options } : {};
 
         if (!target.constructor['__fields']) {
             target.constructor['__fields'] = {};
