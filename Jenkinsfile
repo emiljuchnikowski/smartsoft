@@ -1,6 +1,5 @@
 node {
     env.NODEJS_HOME = "${tool 'Node14'}"
-    env.NODE_OPTIONS = "--max-old-space-size=8192"
     env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
 
     def commit_id
@@ -20,7 +19,7 @@ node {
 
         stage('Install packages') {
             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
-                sh 'NPM_TOKEN=$TOKEN npm install --force'
+                sh 'NODE_OPTIONS="--max-old-space-size=8192" NPM_TOKEN=$TOKEN npm install --force'
             }
         }
 
@@ -39,7 +38,7 @@ node {
 
         stage('Npm update') {
             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
-                sh 'NPM_TOKEN=$TOKEN npm run publish'
+                sh 'NODE_OPTIONS="--max-old-space-size=8192" NPM_TOKEN=$TOKEN npm run publish'
             }
         }
 
