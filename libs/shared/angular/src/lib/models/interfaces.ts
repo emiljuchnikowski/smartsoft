@@ -170,7 +170,7 @@ export interface IListOptions<T> {
 }
 
 export interface ICellPipe<T> extends PipeTransform {
-  transform(value: T, columnName: string): string;
+  transform(value: T, columnName: string, translate?: (val: string) => string): string;
 }
 
 export interface IListComponentFactories<T> {
