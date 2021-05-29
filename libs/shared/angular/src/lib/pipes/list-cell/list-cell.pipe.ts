@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform, Type} from "@angular/core";
 import {Memoize} from "lodash-decorators";
+import {TranslateService} from "@ngx-translate/core";
 
 import {FieldType, getModelFieldOptions} from "@smartsoft001/models";
 
@@ -9,6 +10,7 @@ import {IListCellPipe} from "../../models/interfaces";
     name: 'smartListCell'
 })
 export class ListCellPipe<T> implements PipeTransform {
+    constructor(private readonly translateService: TranslateService) { }
 
     transform(obj: T, key: string, pipe: IListCellPipe<T>, type?: Type<T>): { value?: any, type?: FieldType } {
         if (!obj) return {};
@@ -21,6 +23,10 @@ export class ListCellPipe<T> implements PipeTransform {
         else result = pipe.transform(obj, key);
 
         if (!result) return result;
+
+        if (typeof result === 'string') {
+            result = this.translateService.instant(result);
+        }
 
         return {
             value: result,

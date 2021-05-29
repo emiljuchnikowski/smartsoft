@@ -65,7 +65,8 @@
         <ng-container *matCellDef="let element">
           <td mat-cell
               *ngIf="element | smartListCell : key : cellPipe : type; else blankCellTpl; let cell"
-              [style.width.px]="cell.type === FieldType.image ? 60 : 0"
+              [style.maxWidth.px]="cell.type === FieldType.image ? 60 : null"
+              [style.maxHeight.px]="cell.type === FieldType.image ? 60 : null"
               [style.textAlign]="cell.type === FieldType.image ? 'center' : null"
           >
             <ng-container [ngSwitch]="cell.type">
