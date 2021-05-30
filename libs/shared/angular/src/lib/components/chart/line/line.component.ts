@@ -17,6 +17,11 @@ export class ChartLineComponent<T> extends ChartBaseComponent<T> {
   labels: Array<string>;
   lineOptions = {
     responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
   };
   legend = true;
   plugins = [];
