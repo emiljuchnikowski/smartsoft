@@ -18,9 +18,11 @@ export class ChartBarComponent<T> extends ChartBaseComponent<T> {
   barOptions = {
     responsive: true,
     scales: {
-      y: {
-        beginAtZero: true
-      }
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
     }
   };
   legend = true;
