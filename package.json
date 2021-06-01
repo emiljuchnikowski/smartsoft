@@ -105,7 +105,7 @@
     "ng2-charts": "2.4.2",
     "ngx-color-picker": "^10.1.0",
     "ngx-cookie": "^5.0.2",
-    "ngx-editor": "^8.1.1",
+    "ngx-editor": "10.0.1",
     "ngx-socket-io": "^4.0.0",
     "passport": "0.4.1",
     "passport-jwt": "4.0.0",
