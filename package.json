@@ -86,7 +86,7 @@
     "chart.js": "2.9.4",
     "class-transformer": "0.3.1",
     "class-validator": "0.12.2",
-    "combined-stream2": "^1.1.2",
+    "combined-stream": "^1.0.8",
     "core-js": "3.7.0",
     "fastify-multipart": "^3.3.1",
     "fastify-swagger": "^3.5.0",

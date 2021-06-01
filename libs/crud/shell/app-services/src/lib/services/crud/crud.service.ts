@@ -3,7 +3,7 @@ import { Guid } from "guid-typescript";
 import { Observable } from "rxjs";
 import {Readable, Stream} from "stream";
 import {Memoize} from "lodash-decorators";
-import * as CombinedStream from "combined-stream2";
+import * as CombinedStream from "combined-stream";
 
 import { IUser } from "@smartsoft001/users";
 import {
