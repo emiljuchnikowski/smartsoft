@@ -31,6 +31,7 @@ export class FormComponent<T> implements OnDestroy {
   private _subscription = new Subscription();
 
   form: FormGroup;
+  type: "standard" | "stepper";
 
   @Input() set options(val: IFormOptions<T>) {
     if (!val) return;
@@ -41,6 +42,7 @@ export class FormComponent<T> implements OnDestroy {
     this._options = val;
 
     this.initLoading();
+    this.initType();
 
     if (val.control) {
       this.form = val.control as FormGroup;
@@ -106,5 +108,9 @@ export class FormComponent<T> implements OnDestroy {
     }));
 
     this.form.updateValueAndValidity();
+  }
+
+  private initType() {
+    this.type = 'standard';
   }
 }
