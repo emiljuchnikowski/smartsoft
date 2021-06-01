@@ -53,6 +53,8 @@ export abstract class FormBaseComponent<T> {
     ).subscribe(() => {
       this.cd.detectChanges();
     }));
+
+    this.afterSetForm();
   }
   get form(): FormGroup {
     return this._form;
@@ -65,6 +67,8 @@ export abstract class FormBaseComponent<T> {
       this._inputComponents = obj.inputComponents ? obj.inputComponents : {};
 
       this.treeLevel = obj.treeLevel;
+
+      this.afterSetOptions();
   }
 
   @Output() invokeSubmit = new EventEmitter();
@@ -74,4 +78,8 @@ export abstract class FormBaseComponent<T> {
   submit(): void {
     this.invokeSubmit.emit(this.form.value);
   }
+
+  protected afterSetOptions(): void { }
+
+  protected afterSetForm(): void { }
 }

@@ -12,6 +12,8 @@ import { ColorPickerModule } from "ngx-color-picker";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {NgxEditorModule} from "ngx-editor";
 import {LazyLoadImageModule} from "ng-lazyload-image";
+import {MatStepperModule} from '@angular/material/stepper';
+
 
 import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { AccordionComponent } from "./accordion/accordion.component";
@@ -92,6 +94,8 @@ import {InputImageComponent} from "./input/image/image.component";
 import {DetailImageComponent} from "./detail/image/image.component";
 import {InputFloatComponent} from "./input/float/float.component";
 import {ListMasonryGridComponent} from "./list/masonry-grid/masonry-grid.component";
+import {FormStepperComponent} from "./form/stepper/stepper.component";
+import {MatButtonModule} from "@angular/material/button";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -131,7 +135,7 @@ export const DETAIL_COMPONENTS = [
   DetailImageComponent
 ];
 
-export const FORM_COMPONENTS = [FormStandardComponent, FormComponent];
+export const FORM_COMPONENTS = [FormStandardComponent, FormStepperComponent, FormComponent];
 
 export const INPUT_COMPONENTS = [
   InputComponent,
@@ -231,15 +235,17 @@ export const IMPORTS = [
   ColorPickerModule,
   NgxEditorModule,
   LazyLoadImageModule,
-  DragDropModule
+  DragDropModule,
+  MatStepperModule,
+  MatButtonModule
 ];
 
 @NgModule({
   declarations: [...COMPONENTS],
   entryComponents: [...COMPONENTS],
   exports: [...COMPONENTS],
-    imports: [
-        IMPORTS
-    ],
+  imports: [
+      ...IMPORTS
+  ]
 })
 export class SharedComponentsModule {}

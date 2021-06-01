@@ -36,6 +36,8 @@ export interface ITranslateData {
     download: string,
     play: string,
     writeHere: string,
+    next: string,
+    prev: string,
 
     CALENDAR: {
         DAY_OF_WEEK: {
@@ -141,6 +143,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     download: "download",
     play: "play",
     writeHere: "write here",
+    next: 'next',
+    prev: 'prev',
 
     CALENDAR: {
         DAY_OF_WEEK: {
@@ -246,6 +250,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     download: "pobierz",
     play: "włącz",
     writeHere: "napisz tutaj",
+    next: 'dalej',
+    prev: 'wstecz',
 
     CALENDAR: {
         DAY_OF_WEEK: {

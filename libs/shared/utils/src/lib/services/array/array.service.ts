@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 export class ArrayService {
     static addItem<T>(array: Array<T>, item: T): Array<T> {
         array.push(item);
@@ -12,5 +14,9 @@ export class ArrayService {
         }
 
         return [...array];
+    }
+
+    static sort<T>(array: Array<T>, by: (item: T) => any): Array<T> {
+        return _.sortBy(array, by);
     }
 }

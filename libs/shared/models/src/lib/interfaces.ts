@@ -44,6 +44,11 @@ export interface IModelFilter {
     possibilities$?: Observable<{ id: any, text: string }[]>;
 }
 
+export interface IModelStep {
+    number: number;
+    name: string;
+}
+
 export interface IModelMetadata {
     titleKey?: string;
     permissions?: Array<string>;
@@ -65,6 +70,10 @@ export interface IFieldModifyMetadata {
     defaltValue?: () => any;
     enabled?: ISpecification;
     hide?: boolean;
+    /**
+     * @desc - Model step configuration
+     */
+    step?: IModelStep;
 }
 
 export interface IFieldEditMetadata extends IFieldModifyMetadata {

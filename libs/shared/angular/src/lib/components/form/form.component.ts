@@ -11,17 +11,25 @@ import {filter} from "rxjs/operators";
 
 import { IFormOptions } from "../../models/interfaces";
 import {FormFactory} from "../../factories/form/form.factory";
+import {getModelFieldsWithOptions} from "@smartsoft001/models";
 
 @Component({
   selector: "smart-form",
   template: `
       <form *ngIf="form" [formGroup]="form" (ngSubmit)="invokeSubmit.emit(form.value)" (keyup.enter)="invokeSubmit.emit(form.value)">
         <smart-form-standard
-            *ngIf="options"
+            *ngIf="options && type === 'standard'"
             [options]="options"
             [form]="form"
             (invokeSubmit)="invokeSubmit.emit($event)"
         ></smart-form-standard>
+
+        <smart-form-stepper
+            *ngIf="options && type === 'stepper'"
+            [options]="options"
+            [form]="form"
+            (invokeSubmit)="invokeSubmit.emit($event)"
+        ></smart-form-stepper>
       </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -111,6 +119,13 @@ export class FormComponent<T> implements OnDestroy {
   }
 
   private initType() {
+    const fieldWithOptions = getModelFieldsWithOptions(this._options.model);
+
+    if (fieldWithOptions.some(fwo => fwo.options.step)) {
+      this.type = "stepper";
+      return;
+    }
+
     this.type = 'standard';
   }
 }
