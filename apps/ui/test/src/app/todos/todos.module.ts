@@ -42,7 +42,7 @@ export class ModelLabelProvider extends IModelLabelProvider {
   get(options: IModelLabelOptions): Observable<string> {
     console.log(options);
 
-    if (options.key === 'body') return of('testLabel');
+    //if (options.key === 'body') return of('testLabel');
 
     return null;
   }
@@ -77,19 +77,27 @@ export class ModelLabelProvider extends IModelLabelProvider {
         baseQuery: [
           { key: 'data.type', type: '!=', value: 'cards', hidden: true }
         ],
-        details: true,
+        details: {
+          cellPipe: {
+            transform(value, columnName): string {
+              if (columnName === 'body') return '<b>test</b>';
+
+              return value[columnName];
+            }
+          }
+        },
         edit: true,
         add: true,
         remove: true,
         export: true,
         list: {
-          // cellPipe: {
-          //   transform(value, columnName): string {
-          //     //if (columnName === 'body') return '<b>test</b>';
-          //
-          //     return value[columnName];
-          //   }
-          // },
+          cellPipe: {
+            transform(value, columnName): string {
+              if (columnName === 'body') return '<b>test</b>';
+
+              return value[columnName];
+            }
+          },
           mode: ListMode.desktop
         },
         search: true,

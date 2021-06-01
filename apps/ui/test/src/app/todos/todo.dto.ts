@@ -1,4 +1,4 @@
-import {Field, FieldType, IFieldModifyMetadata, ISpecification, Model} from "@smartsoft001/models";
+import {Field, FieldType, IFieldModifyMetadata, IModelStep, ISpecification, Model} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
 import {of} from "rxjs";
 
@@ -19,6 +19,21 @@ export class CoursesSectionsItemByTypeSpecification implements ISpecification {
         this.criteria = { type };
     }
 }
+
+const steps: Array<IModelStep> = [
+    {
+        number: 1,
+        name: "Step 1"
+    },
+    {
+        number: 2,
+        name: "Step 2"
+    },
+    {
+        number: 3,
+        name: "Summary"
+    }
+]
 
 @Model({
     titleKey: 'answer'
@@ -198,16 +213,17 @@ export class TodoInfo {
 export class Todo implements IEntity<string> {
     id: string;
 
-    // @Field({
-    //     create: modifyMetdata,
-    //     update: modifyMetdata,
-    //     details: true,
-    //     list: { order: 1 },
-    //     info: `
-    //         <b>Test</b> new
-    //     `
-    // })
-    // number: string;
+    @Field({
+        create: modifyMetdata,
+        update: modifyMetdata,
+        details: true,
+        list: { order: 1 },
+        info: `
+            <b>Test</b> new
+        `,
+        step: steps[0]
+    })
+    number: string;
 
     // @Field({
     //     create: {
@@ -221,7 +237,9 @@ export class Todo implements IEntity<string> {
     //     },
     //     type: FieldType.image,
     //     details: true,
-    //     list: { order: 1 }
+    //     possibilities: '.jpg',
+    //     list: { order: 1 },
+    //     step: steps[0]
     // })
     // img: string;
 
@@ -236,7 +254,8 @@ export class Todo implements IEntity<string> {
         list: {
             order: 2,
             filter: true
-        }
+        },
+        step: steps[1]
     })
     body: string;
 
@@ -265,7 +284,8 @@ export class Todo implements IEntity<string> {
         classType: TodoInfo,
         possibilities: {
             static: true
-        }
+        },
+        step: steps[2]
     })
     infos: Array<TodoInfo>;
 
