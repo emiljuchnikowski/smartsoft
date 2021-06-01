@@ -1,7 +1,7 @@
 tr {
     &.mat-row {
         &:nth-child(even) {
-            background: #fdfdfd;
+            background-color: #fdfdfd;
         }
         &:hover {
             background-color: rgba(var(--smart-color-primary-rgb), .05) !important;
@@ -25,6 +25,7 @@ td {
 }
 
 th {
+    background-color: var(--smart-color-light);
     padding-left: .6rem !important;
     &.mat-header-cell {
         color: var(--smart-color-secondary) !important;
