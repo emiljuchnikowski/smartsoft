@@ -1,13 +1,14 @@
 import {EventEmitter, Input, Output, Directive, Type, ChangeDetectorRef} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
+import {delay} from "rxjs/operators";
 
 import {IFormOptions} from "../../../models";
 import {InputBaseComponent} from "../../input/base/base.component";
-import {delay} from "rxjs/operators";
+import {BaseComponent} from "../../base/base.component";
 
 @Directive()
-export abstract class FormBaseComponent<T> {
+export abstract class FormBaseComponent<T> extends BaseComponent {
   private _fields: Array<string>;
   private _subscription: Subscription;
   private _model: any;
@@ -73,7 +74,9 @@ export abstract class FormBaseComponent<T> {
 
   @Output() invokeSubmit = new EventEmitter();
 
-  constructor(protected cd: ChangeDetectorRef) { }
+  constructor(protected cd: ChangeDetectorRef) {
+    super();
+  }
 
   submit(): void {
     this.invokeSubmit.emit(this.form.value);

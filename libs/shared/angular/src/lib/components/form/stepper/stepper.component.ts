@@ -53,7 +53,16 @@ export class FormStepperComponent<T> extends FormBaseComponent<T> implements OnI
             }
 
             step.fields.push(fwo.key);
-            step.form.addControl(fwo.key, this.form.controls[fwo.key])
+            step.form.addControl(fwo.key, this.form.controls[fwo.key]);
+
+            step.form.valueChanges.pipe(
+                this.takeUntilDestroy
+            ).subscribe(value => {
+                this.form.setValue({
+                    ...this.form.value,
+                    ...value
+                })
+            })
         });
 
         this.steps = steps;
