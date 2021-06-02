@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import {AfterViewInit, ChangeDetectorRef, Component, ViewChild, ViewContainerRef} from "@angular/core";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -7,6 +7,8 @@ import { IEntity } from "@smartsoft001/domain-core";
 import { ListBaseComponent } from "../base/base.component";
 import { ToastService } from "../../../services/toast/toast.service";
 import { AuthService } from "../../../services/auth/auth.service";
+import {IListInternalOptions} from "../list.component";
+import {IListComponentFactories} from "../../../models";
 
 @Component({
   selector: "smart-list-mobile",
@@ -15,7 +17,13 @@ import { AuthService } from "../../../services/auth/auth.service";
 })
 export class ListMobileComponent<T extends IEntity<string>>
   extends ListBaseComponent<T>
-  implements OnInit {
+  implements AfterViewInit {
+
+  componentFactories: IListComponentFactories<T>;
+
+  @ViewChild("topTpl", { read: ViewContainerRef, static: true })
+  topTpl: ViewContainerRef;
+
   constructor(
     authService: AuthService,
     router: Router,
@@ -26,5 +34,25 @@ export class ListMobileComponent<T extends IEntity<string>>
     super(authService, router, toastService, cd, translateService);
   }
 
-  ngOnInit() {}
+  protected initList(val: IListInternalOptions<T>): void {
+    super.initList(val);
+
+    this.componentFactories = val.componentFactories;
+
+    this.generateDynamicComponents();
+  }
+
+  ngAfterViewInit(): void {
+    this.generateDynamicComponents();
+  }
+
+  private generateDynamicComponents(): void {
+    if (!this.componentFactories) return;
+
+    if (this.componentFactories.top && this.topTpl) {
+      if (!this.topTpl.get(0)) {
+        this.topTpl.createComponent(this.componentFactories.top);
+      }
+    }
+  }
 }
