@@ -2,7 +2,7 @@
 <!-- <ion-split-pane contentId="menu-content" [ngStyle]="{'margin-top': loadingPage ? '4px' : '0'}"> -->
 <ion-split-pane contentId="menu-content">
     <!--  our side menu  -->
-    <ion-menu contentId="menu-content" [hidden]="!(showMenu$ | async)">
+    <ion-menu contentId="menu-content" [hidden]="!(showMenu$ | async) || (!(menuItems$ | async)?.length && !(logged$ | async))">
         <ion-header>
             <ion-toolbar>
                 <ion-title>
