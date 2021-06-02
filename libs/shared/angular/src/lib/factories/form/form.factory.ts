@@ -223,11 +223,11 @@ export class FormFactory {
       result.push(Validators.maxLength(options.possibilities?.maxLength));
     }
 
-    if (options.possibilities?.min) {
+    if (options.possibilities?.min || options.possibilities?.min === 0) {
       result.push(Validators.min(options.possibilities?.min));
     }
 
-    if (options.possibilities?.max) {
+    if (options.possibilities?.max || options.possibilities?.max === 0) {
       result.push(Validators.max(options.possibilities?.max));
     }
 
