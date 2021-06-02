@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { IonicModule } from "@ionic/angular";
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
@@ -224,6 +224,7 @@ export const IMPORTS = [
   CommonModule,
   IonicModule,
   ReactiveFormsModule,
+  FormsModule,
   TranslateModule,
   RouterModule,
   SharedPipesModule,

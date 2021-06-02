@@ -6,5 +6,8 @@
         </ion-text>
     </ion-label>
     <br/>
-    <smart-date-range (click)="control.markAsTouched()" (ngModelChange)="control.setValue($event)"></smart-date-range>
+    <smart-date-range (click)="control.markAsTouched()"
+                      [ngModel]="control.value"
+                      (ngModelChange)="control.setValue($event); control.markAsDirty()"
+    ></smart-date-range>
 </ng-container>
