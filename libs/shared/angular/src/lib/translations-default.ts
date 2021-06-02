@@ -111,7 +111,9 @@ export interface ITranslateData {
             invalidPhoneNumberFormat: string,
             invalidPeselFormat: string,
             invalidMinLength: string,
-            invalidMaxLength: string
+            invalidMaxLength: string,
+            invalidMin: string,
+            invalidMax: string,
         },
         'PASSWORD-STRENGTH': {
             poor: string,
@@ -221,7 +223,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
             invalidPeselFormat: "invalid pesel",
             invalidMinLength: "min length",
             invalidMaxLength: "max length",
-
+            invalidMin: 'min value',
+            invalidMax: 'max value',
         },
         'PASSWORD-STRENGTH': {
             poor: 'poor',
@@ -331,6 +334,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
             invalidPeselFormat: "niepoprawny numer pesel",
             invalidMinLength: "minimalna długość",
             invalidMaxLength: "maksymalna długość",
+            invalidMin: "minimalna wartość",
+            invalidMax: "maksymalna wartość",
         },
         'PASSWORD-STRENGTH': {
             poor: 'bardzo słabe',

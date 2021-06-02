@@ -223,6 +223,14 @@ export class FormFactory {
       result.push(Validators.maxLength(options.possibilities?.maxLength));
     }
 
+    if (options.possibilities?.min) {
+      result.push(Validators.min(options.possibilities?.min));
+    }
+
+    if (options.possibilities?.max) {
+      result.push(Validators.max(options.possibilities?.max));
+    }
+
     if (options.unique) {
       if (!uniqueProvider) throw Error("Required uniqueProvider");
 

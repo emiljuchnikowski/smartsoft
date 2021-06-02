@@ -30,6 +30,14 @@
     <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidMaxLength' | translate }}: {{ errors?.maxlength?.requiredLength }}
 </span>
 
+<span *ngIf="errors?.min">
+    <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidMin' | translate }}: {{ errors?.min?.min }}
+</span>
+
+<span *ngIf="errors?.max">
+    <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidMax' | translate }}: {{ errors?.max?.max }}
+</span>
+
 <ng-template #checkConfirm>
     <span *ngIf="errors?.confirm">
         <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.confirm' | translate }}
