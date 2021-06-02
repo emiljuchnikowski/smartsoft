@@ -22,6 +22,14 @@
     <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidPeselFormat' | translate }}
 </span>
 
+<span *ngIf="errors?.minlength">
+    <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidMinLength' | translate }}: {{ errors?.minlength?.requiredLength }}
+</span>
+
+<span *ngIf="errors?.maxlength">
+    <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidMaxLength' | translate }}: {{ errors?.maxlength?.requiredLength }}
+</span>
+
 <ng-template #checkConfirm>
     <span *ngIf="errors?.confirm">
         <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.confirm' | translate }}

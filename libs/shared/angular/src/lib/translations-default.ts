@@ -110,6 +110,8 @@ export interface ITranslateData {
             invalidEmailFormat: string,
             invalidPhoneNumberFormat: string,
             invalidPeselFormat: string,
+            invalidMinLength: string,
+            invalidMaxLength: string
         },
         'PASSWORD-STRENGTH': {
             poor: string,
@@ -217,6 +219,9 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
             invalidEmailFormat: "invalid email format",
             invalidPhoneNumberFormat: "invalid phone number (000000000)",
             invalidPeselFormat: "invalid pesel",
+            invalidMinLength: "min length",
+            invalidMaxLength: "max length",
+
         },
         'PASSWORD-STRENGTH': {
             poor: 'poor',
@@ -324,6 +329,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
             invalidFileType: 'niepoprawny format pliku',
             invalidPhoneNumberFormat: "niepoprawny numer telefonu (000000000)",
             invalidPeselFormat: "niepoprawny numer pesel",
+            invalidMinLength: "minimalna długość",
+            invalidMaxLength: "maksymalna długość",
         },
         'PASSWORD-STRENGTH': {
             poor: 'bardzo słabe',

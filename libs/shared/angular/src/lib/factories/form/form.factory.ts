@@ -215,6 +215,14 @@ export class FormFactory {
       });
     }
 
+    if (options.possibilities?.minLength) {
+      result.push(Validators.minLength(options.possibilities?.minLength));
+    }
+
+    if (options.possibilities?.maxLength) {
+      result.push(Validators.maxLength(options.possibilities?.maxLength));
+    }
+
     if (options.unique) {
       if (!uniqueProvider) throw Error("Required uniqueProvider");
 
