@@ -1,7 +1,23 @@
-# shared-utils
+# @smartsoft001/utils
 
-This library was generated with [Nx](https://nx.dev).
+## Usage
 
-## Running unit tests
+`npm i @smartsoft001/utis`
 
-Run `ng test shared-utils` to execute the unit tests via [Jest](https://jestjs.io).
+# ArrayService
+
+Methods:
+<table>
+    <tr>
+        <td>addItem</td>
+        <td>creating new array with pushed item</td>
+    </tr>
+    <tr>
+        <td>removeItem</td>
+        <td>creating new array without item</td>
+    </tr>
+    <tr>
+        <td>sort</td>
+        <td>return sorted array</td>
+    </tr>
+</table>
