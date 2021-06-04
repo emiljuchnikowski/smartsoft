@@ -4,8 +4,8 @@ import {CommonModule} from "@angular/common";
 import {
   IModelLabelOptions,
   IModelLabelProvider, IModelPossibilitiesOptions,
-  IModelPossibilitiesProvider,
-  ListMode, MODEL_LABEL_PROVIDER, MODEL_POSSIBILITIES_PROVIDER,
+  IModelPossibilitiesProvider, IModelValidators, IModelValidatorsOptions, IModelValidatorsProvider,
+  ListMode, MODEL_LABEL_PROVIDER, MODEL_POSSIBILITIES_PROVIDER, MODEL_VALIDATORS_PROVIDER,
   NgrxSharedModule,
   SharedModule
 } from "@smartsoft001/angular";
@@ -15,6 +15,7 @@ import {CrudModule} from "@smartsoft001/crud-shell-angular";
 import {environment} from "../../environments/environment";
 import {TodoFacade} from "./todo.facade";
 import {Observable, of} from "rxjs";
+import {Validators} from "@angular/forms";
 
 // export class CellPipe<T> implements IListCellPipe<T> {
 //   transform(value: T, columnName): string {
@@ -24,6 +25,26 @@ import {Observable, of} from "rxjs";
 //   }
 // }
 
+@Injectable()
+export class ModelValidatorsProvider extends IModelValidatorsProvider {
+  async get(options: IModelValidatorsOptions): Promise<IModelValidators> {
+    if (options.type === Todo && options.key === 'test') {
+      return {
+        validators: null,
+        asyncValidators: null
+      }
+    }
+
+    if (options.type === Todo && options.key === 'number') {
+      return {
+        validators: [ Validators.required ],
+        asyncValidators: null
+      }
+    }
+
+    return Promise.resolve(options.base);
+  }
+}
 
 @Injectable()
 export class ModelPossibilitiesProvider extends IModelPossibilitiesProvider {
@@ -40,7 +61,7 @@ export class ModelPossibilitiesProvider extends IModelPossibilitiesProvider {
 @Injectable()
 export class ModelLabelProvider extends IModelLabelProvider {
   get(options: IModelLabelOptions): Observable<string> {
-    console.log(options);
+    //console.log(options);
 
     //if (options.key === 'body') return of('testLabel');
 
@@ -58,6 +79,10 @@ export class ModelLabelProvider extends IModelLabelProvider {
     {
       provide: MODEL_LABEL_PROVIDER,
       useClass: ModelLabelProvider
+    },
+    {
+      provide: MODEL_VALIDATORS_PROVIDER,
+      useClass: ModelValidatorsProvider
     }
   ],
   imports: [
