@@ -3,7 +3,7 @@
         {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
         <ng-container *ngIf="control.value">({{ control.value.fileName }})</ng-container>
         <ion-text color="danger">
-            <span *ngIf="fieldOptions?.required">*</span>
+            <span *ngIf="required">*</span>
         </ion-text>
     </ion-label><br/>
     <smart-button [options]="addButtonOptions">{{ (control.value ? 'change' : 'add') | translate }}</smart-button>

@@ -1,8 +1,9 @@
 import "reflect-metadata";
 
-import {Injectable} from "@angular/core";
+import {Inject, Injectable, Optional} from "@angular/core";
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators,} from "@angular/forms";
 import * as _ from "lodash";
+import {delay, tap} from "rxjs/operators";
 
 import {
   FieldType,
@@ -17,11 +18,15 @@ import {
 import {PeselService, SpecificationService, ZipCodeService} from "@smartsoft001/utils";
 
 import {AuthService} from "../../services/auth/auth.service";
-import {delay, tap} from "rxjs/operators";
+import {IModelValidatorsProvider, MODEL_VALIDATORS_PROVIDER} from "../../providers/model-validators.provider";
 
 @Injectable()
 export class FormFactory {
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+      private fb: FormBuilder,
+      private authService: AuthService,
+      @Optional() @Inject(MODEL_VALIDATORS_PROVIDER) private validatorsProvider: IModelValidatorsProvider
+  ) {}
 
   static checkModelMeta<T>(obj: T) {
     if (!obj) throw new Error("You should set object as param");
@@ -113,6 +118,21 @@ export class FormFactory {
         result,
         ops.uniqueProvider
       );
+
+      if (this.validatorsProvider) {
+        const providerResult = await this.validatorsProvider.get({
+          key: field.key,
+          instance: obj,
+          type: obj.constructor,
+          base: {
+            validators: control.validator,
+            asyncValidators: control.asyncValidator
+          }
+        });
+
+        control.setValidators(providerResult.validators);
+        control.setAsyncValidators(providerResult.asyncValidators);
+      }
 
       result.addControl(field.key, control);
 

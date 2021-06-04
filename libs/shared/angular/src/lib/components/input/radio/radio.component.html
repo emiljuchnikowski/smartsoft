@@ -5,7 +5,7 @@
                 <ion-list-header>
                     {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
                     <ion-text color="danger">
-                        <span *ngIf="fieldOptions?.required">*</span>
+                        <span *ngIf="required">*</span>
                     </ion-text>
                 </ion-list-header>
 
@@ -21,7 +21,7 @@
                 <ion-label>
                     {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
                     <ion-text color="danger">
-                        <span *ngIf="fieldOptions?.required">*</span>
+                        <span *ngIf="required">*</span>
                     </ion-text>
                 </ion-label>
                 <ion-select

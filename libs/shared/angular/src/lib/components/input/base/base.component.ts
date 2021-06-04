@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Input, Directive } from "@angular/core";
-import { AbstractControl } from "@angular/forms";
+import {AbstractControl, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
 
 import {  IFieldOptions } from "@smartsoft001/models";
@@ -11,6 +11,7 @@ import {BaseComponent} from "../../base";
 export abstract class InputBaseComponent<T> extends BaseComponent {
   internalOptions: InputOptions<T>;
   control: AbstractControl;
+  required: boolean;
 
   possibilities$: Observable<{ id: any, text: string }[]>;
 
@@ -23,6 +24,8 @@ export abstract class InputBaseComponent<T> extends BaseComponent {
 
     this.possibilities$ = val.possibilities$;
 
+    this.setRequired();
+
     this.afterSetOptionsHandler();
 
     this.cd.detectChanges();
@@ -34,5 +37,10 @@ export abstract class InputBaseComponent<T> extends BaseComponent {
 
   protected afterSetOptionsHandler(): void {
 
+  }
+
+  private setRequired(): void {
+    const validator = this.control?.validator ? this.control.validator({} as AbstractControl) : null;
+    this.required = validator && validator.required;
   }
 }
