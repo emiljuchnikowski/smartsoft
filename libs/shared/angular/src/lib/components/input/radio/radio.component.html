@@ -1,15 +1,43 @@
 <ng-container *ngIf="control">
-    <ion-radio-group [formControl]="control" [attr.autofocus]="fieldOptions?.focused">
-        <ion-list-header>
-            {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
-            <ion-text color="danger">
-                <span *ngIf="fieldOptions?.required">*</span>
-            </ion-text>
-        </ion-list-header>
+    <ng-container *ngIf="possibilities$ | async; let possibilities">
+        <ng-container *ngIf="possibilities?.length <= 5; else selectTpl">
+            <ion-radio-group [formControl]="control" [attr.autofocus]="fieldOptions?.focused">
+                <ion-list-header>
+                    {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
+                    <ion-text color="danger">
+                        <span *ngIf="fieldOptions?.required">*</span>
+                    </ion-text>
+                </ion-list-header>
 
-        <ion-item *ngFor="let item of possibilities$ | async">
-            <ion-label>{{ item.text | translate }}</ion-label>
-            <ion-radio [value]="item.id"></ion-radio>
-        </ion-item>
-    </ion-radio-group>
+                <ion-item *ngFor="let item of possibilities$ | async">
+                    <ion-label>{{ item.text | translate }}</ion-label>
+                    <ion-radio [value]="item.id"></ion-radio>
+                </ion-item>
+            </ion-radio-group>
+        </ng-container>
+
+        <ng-template #selectTpl>
+            <ion-item>
+                <ion-label>
+                    {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
+                    <ion-text color="danger">
+                        <span *ngIf="fieldOptions?.required">*</span>
+                    </ion-text>
+                </ion-label>
+                <ion-select
+                        [formControl]="control"
+                        [attr.autofocus]="fieldOptions?.focused"
+                        [cancelText]="'cancel' | translate"
+                        [okText]="'ok' | translate"
+                >
+                    <ion-select-option
+                            *ngFor="let item of possibilities"
+                            [value]="item.id"
+                    >
+                        {{ item.text | translate }}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ng-template>
+    </ng-container>
 </ng-container>
