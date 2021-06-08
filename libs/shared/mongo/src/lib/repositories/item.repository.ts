@@ -11,8 +11,8 @@ import {
 } from "@smartsoft001/domain-core";
 import { IUser } from "@smartsoft001/users";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
-import {ObjectService} from "@smartsoft001/utils";
-import {getModelFieldsWithOptions} from "@smartsoft001/models";
+import { ObjectService } from "@smartsoft001/utils";
+import { getModelFieldsWithOptions } from "@smartsoft001/models";
 
 import { MongoConfig } from "../mongo.config";
 import { getMongoUrl } from "../mongo.utils";
@@ -23,7 +23,7 @@ export class MongoItemRepository<
   T extends IEntity<string>
 > extends IItemRepository<T> {
   readonly useUnifiedTopology = false;
-  
+
   constructor(private config: MongoConfig) {
     super();
   }
@@ -43,7 +43,7 @@ export class MongoItemRepository<
           this.getModelToCreate(item as T, user),
           { session: (repoOptions.transaction as IMongoTransaction).session },
           (errInsert) => {
-            this.logChange('create', item, repoOptions, user, errInsert);
+            this.logChange("create", item, repoOptions, user, errInsert);
 
             if (errInsert) {
               rej(errInsert);
@@ -57,29 +57,33 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-
-        db.collection(this.config.collection).insertOne(
-          this.getModelToCreate(item as T, user),
-          (errInsert) => {
-            this.logChange('create', item, repoOptions, user, errInsert);
-
-            if (errInsert) {
-              rej(errInsert);
-              return;
-            }
-
-            client.close();
-            res();
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        (err, client) => {
+          if (err) {
+            rej(err);
+            return;
           }
-        );
-      });
+
+          const db = client.db(this.config.database);
+
+          db.collection(this.config.collection).insertOne(
+            this.getModelToCreate(item as T, user),
+            (errInsert) => {
+              this.logChange("create", item, repoOptions, user, errInsert);
+
+              if (errInsert) {
+                rej(errInsert);
+                return;
+              }
+
+              client.close();
+              res();
+            }
+          );
+        }
+      );
     });
   }
 
@@ -94,7 +98,7 @@ export class MongoItemRepository<
           {},
           { session: (repoOptions.transaction as IMongoTransaction).session },
           (errClear) => {
-            this.logChange('clear', null, repoOptions, user, errClear);
+            this.logChange("clear", null, repoOptions, user, errClear);
 
             if (errClear) {
               rej(errClear);
@@ -108,26 +112,30 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-
-        db.collection(this.config.collection).deleteMany({}, (err2) => {
-          this.logChange('clear', null, repoOptions, user, err2);
-
-          if (err2) {
-            rej(err2);
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        (err, client) => {
+          if (err) {
+            rej(err);
             return;
           }
 
-          client.close();
-          res();
-        });
-      });
+          const db = client.db(this.config.database);
+
+          db.collection(this.config.collection).deleteMany({}, (err2) => {
+            this.logChange("clear", null, repoOptions, user, err2);
+
+            if (err2) {
+              rej(err2);
+              return;
+            }
+
+            client.close();
+            res();
+          });
+        }
+      );
     });
   }
 
@@ -146,7 +154,7 @@ export class MongoItemRepository<
           list.map((item) => this.getModelToCreate(item as T, user)),
           { session: (repoOptions.transaction as IMongoTransaction).session },
           (errInsert) => {
-            this.logChange('createMany', null, repoOptions, user, errInsert);
+            this.logChange("createMany", null, repoOptions, user, errInsert);
 
             if (errInsert) {
               rej(errInsert);
@@ -160,31 +168,33 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-
-        db.collection(this.config.collection).insertMany(
-          list.map((item) =>
-            this.getModelToCreate(item as T, user)
-          ),
-          (errInsert) => {
-            this.logChange('createMany', null, repoOptions, user, errInsert);
-
-            if (errInsert) {
-              rej(errInsert);
-              return;
-            }
-
-            client.close();
-            res();
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        (err, client) => {
+          if (err) {
+            rej(err);
+            return;
           }
-        );
-      });
+
+          const db = client.db(this.config.database);
+
+          db.collection(this.config.collection).insertMany(
+            list.map((item) => this.getModelToCreate(item as T, user)),
+            (errInsert) => {
+              this.logChange("createMany", null, repoOptions, user, errInsert);
+
+              if (errInsert) {
+                rej(errInsert);
+                return;
+              }
+
+              client.close();
+              res();
+            }
+          );
+        }
+      );
     });
   }
 
@@ -208,7 +218,7 @@ export class MongoItemRepository<
             this.getModelToUpdate(item as T, user, info),
             { session: (repoOptions.transaction as IMongoTransaction).session },
             (errInsert) => {
-              this.logChange('update', item, repoOptions, user, errInsert);
+              this.logChange("update", item, repoOptions, user, errInsert);
 
               if (errInsert) {
                 rej(errInsert);
@@ -223,33 +233,37 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-        const collection = db.collection(this.config.collection);
-
-        const info = await this.getInfo(item.id, collection);
-
-        db.collection(this.config.collection).replaceOne(
-          { _id: item.id },
-          this.getModelToUpdate(item as T, user, info),
-          (errUpdate) => {
-            this.logChange('update', item, repoOptions, user, errUpdate);
-
-            if (errUpdate) {
-              rej(errUpdate);
-              return;
-            }
-
-            client.close();
-            res();
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        async (err, client) => {
+          if (err) {
+            rej(err);
+            return;
           }
-        );
-      });
+
+          const db = client.db(this.config.database);
+          const collection = db.collection(this.config.collection);
+
+          const info = await this.getInfo(item.id, collection);
+
+          db.collection(this.config.collection).replaceOne(
+            { _id: item.id },
+            this.getModelToUpdate(item as T, user, info),
+            (errUpdate) => {
+              this.logChange("update", item, repoOptions, user, errUpdate);
+
+              if (errUpdate) {
+                rej(errUpdate);
+                return;
+              }
+
+              client.close();
+              res();
+            }
+          );
+        }
+      );
     });
   }
 
@@ -275,7 +289,13 @@ export class MongoItemRepository<
             },
             { session: (repoOptions.transaction as IMongoTransaction).session },
             (errUpdate) => {
-              this.logChange('updatePartial', item, repoOptions, user, errUpdate);
+              this.logChange(
+                "updatePartial",
+                item,
+                repoOptions,
+                user,
+                errUpdate
+              );
 
               if (errUpdate) {
                 rej(errUpdate);
@@ -290,35 +310,45 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-        const collection = db.collection(this.config.collection);
-
-        const info = await this.getInfo(item.id, collection);
-
-        db.collection(this.config.collection).updateOne(
-          { _id: item.id },
-          {
-            $set: this.getModelToUpdate(item as T, user, info),
-          },
-          (errUpdate) => {
-            this.logChange('updatePartial', item, repoOptions, user, errUpdate);
-
-            if (errUpdate) {
-              rej(errUpdate);
-              return;
-            }
-
-            client.close();
-            res();
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        async (err, client) => {
+          if (err) {
+            rej(err);
+            return;
           }
-        );
-      });
+
+          const db = client.db(this.config.database);
+          const collection = db.collection(this.config.collection);
+
+          const info = await this.getInfo(item.id, collection);
+
+          db.collection(this.config.collection).updateOne(
+            { _id: item.id },
+            {
+              $set: this.getModelToUpdate(item as T, user, info),
+            },
+            (errUpdate) => {
+              this.logChange(
+                "updatePartial",
+                item,
+                repoOptions,
+                user,
+                errUpdate
+              );
+
+              if (errUpdate) {
+                rej(errUpdate);
+                return;
+              }
+
+              client.close();
+              res();
+            }
+          );
+        }
+      );
     });
   }
 
@@ -348,10 +378,16 @@ export class MongoItemRepository<
             },
             { session: (repoOptions.transaction as IMongoTransaction).session },
             (errUpdate) => {
-              this.logChange('updatePartialManyByCriteria', {
-                ...criteria,
-                set
-              }, repoOptions, user, errUpdate);
+              this.logChange(
+                "updatePartialManyByCriteria",
+                {
+                  ...criteria,
+                  set,
+                },
+                repoOptions,
+                user,
+                errUpdate
+              );
 
               if (errUpdate) {
                 rej(errUpdate);
@@ -366,42 +402,52 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        async (err, client) => {
+          if (err) {
+            rej(err);
+            return;
+          }
 
-        const db = client.db(this.config.database);
-        const collection = db.collection(this.config.collection);
+          const db = client.db(this.config.database);
+          const collection = db.collection(this.config.collection);
 
-        db.collection(this.config.collection).updateMany(
-          criteria,
-          {
-            $set: {
-              ...set,
-              "__info.update": {
-                username: user?.username,
-                date: new Date(),
+          db.collection(this.config.collection).updateMany(
+            criteria,
+            {
+              $set: {
+                ...set,
+                "__info.update": {
+                  username: user?.username,
+                  date: new Date(),
+                },
               },
             },
-          },
-          (errUpdate) => {
-            this.logChange('updatePartialManyByCriteria', {
-              ...criteria,
-              set
-            }, repoOptions, user, errUpdate);
+            (errUpdate) => {
+              this.logChange(
+                "updatePartialManyByCriteria",
+                {
+                  ...criteria,
+                  set,
+                },
+                repoOptions,
+                user,
+                errUpdate
+              );
 
-            if (errUpdate) {
-              rej(errUpdate);
-              return;
+              if (errUpdate) {
+                rej(errUpdate);
+                return;
+              }
+
+              client.close();
+              res();
             }
-
-            client.close();
-            res();
-          }
-        );
-      });
+          );
+        }
+      );
     });
   }
 
@@ -435,9 +481,15 @@ export class MongoItemRepository<
             { _id: id },
             { session: (repoOptions.transaction as IMongoTransaction).session },
             (errDelete) => {
-              this.logChange('delete', {
-                id
-              }, repoOptions, user, errDelete);
+              this.logChange(
+                "delete",
+                {
+                  id,
+                },
+                repoOptions,
+                user,
+                errDelete
+              );
 
               if (errDelete) {
                 rej(errDelete);
@@ -452,57 +504,71 @@ export class MongoItemRepository<
     }
 
     return new Promise<void>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-
-        db.collection(this.config.collection).deleteOne(
-          { _id: id },
-          (errDelete) => {
-            this.logChange('delete', {
-              id
-            }, repoOptions, user, errDelete);
-
-            if (errDelete) {
-              rej(errDelete);
-              return;
-            }
-
-            client.close();
-            res();
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        (err, client) => {
+          if (err) {
+            rej(err);
+            return;
           }
-        );
-      });
+
+          const db = client.db(this.config.database);
+
+          db.collection(this.config.collection).deleteOne(
+            { _id: id },
+            (errDelete) => {
+              this.logChange(
+                "delete",
+                {
+                  id,
+                },
+                repoOptions,
+                user,
+                errDelete
+              );
+
+              if (errDelete) {
+                rej(errDelete);
+                return;
+              }
+
+              client.close();
+              res();
+            }
+          );
+        }
+      );
     });
   }
 
   getById(id: string): Promise<T> {
     return new Promise<T>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        const db = client.db(this.config.database);
-
-        db.collection(this.config.collection).findOne(
-          { _id: id },
-          (errDelete, item) => {
-            if (errDelete) {
-              rej(errDelete);
-              return;
-            }
-
-            client.close();
-            res(this.getModelToResult(item));
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        (err, client) => {
+          if (err) {
+            rej(err);
+            return;
           }
-        );
-      });
+
+          const db = client.db(this.config.database);
+
+          db.collection(this.config.collection).findOne(
+            { _id: id },
+            (errDelete, item) => {
+              if (errDelete) {
+                rej(errDelete);
+                return;
+              }
+
+              client.close();
+              res(this.getModelToResult(item));
+            }
+          );
+        }
+      );
     });
   }
 
@@ -511,32 +577,36 @@ export class MongoItemRepository<
     options: any = {}
   ): Promise<{ data: T[]; totalCount: number }> {
     return new Promise<{ data: T[]; totalCount: number }>((res, rej) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, client) => {
-        if (err) {
-          rej(err);
-          return;
-        }
-
-        this.generateSearch(criteria);
-
-        const db = client.db(this.config.database);
-        const collection = db.collection(this.config.collection);
-
-        const totalCount = await this.getCount(criteria, collection);
-
-        collection.find(criteria, options).toArray((errDelete, list) => {
-          if (errDelete) {
-            rej(errDelete);
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        async (err, client) => {
+          if (err) {
+            rej(err);
             return;
           }
 
-          client.close();
-          res({
-            data: list.map((item) => this.getModelToResult(item)),
-            totalCount,
+          this.generateSearch(criteria);
+
+          const db = client.db(this.config.database);
+          const collection = db.collection(this.config.collection);
+
+          const totalCount = await this.getCount(criteria, collection);
+
+          collection.find(criteria, options).toArray((errDelete, list) => {
+            if (errDelete) {
+              rej(errDelete);
+              return;
+            }
+
+            client.close();
+            res({
+              data: list.map((item) => this.getModelToResult(item)),
+              totalCount,
+            });
           });
-        });
-      });
+        }
+      );
     });
   }
 
@@ -552,38 +622,42 @@ export class MongoItemRepository<
     let client: MongoClient;
 
     return new Observable((observer: Observer<ItemChangedData>) => {
-      MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, async (err, c) => {
-        client = c;
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        async (err, c) => {
+          client = c;
 
-        if (err) {
-          observer.error(err);
-          return;
-        }
+          if (err) {
+            observer.error(err);
+            return;
+          }
 
-        const db = client.db(this.config.database);
-        const collection = db.collection(this.config.collection);
+          const db = client.db(this.config.database);
+          const collection = db.collection(this.config.collection);
 
-        const pipeline = criteria.id
-          ? [
-              {
-                $match: {
-                  "documentKey._id": criteria.id,
+          const pipeline = criteria.id
+            ? [
+                {
+                  $match: {
+                    "documentKey._id": criteria.id,
+                  },
                 },
-              },
-            ]
-          : [];
+              ]
+            : [];
 
-        stream = collection.watch(pipeline).on("change", (result) => {
-          observer.next({
-            id: result["documentKey"]["_id"],
-            type: this.mapChangeType(result.operationType),
-            data:
-              result.operationType === "update"
-                ? result["updateDescription"]
-                : this.getModelToResult(result["fullDocument"]),
-          } as any);
-        });
-      });
+          stream = collection.watch(pipeline).on("change", (result) => {
+            observer.next({
+              id: result["documentKey"]["_id"],
+              type: this.mapChangeType(result.operationType),
+              data:
+                result.operationType === "update"
+                  ? result["updateDescription"]
+                  : this.getModelToResult(result["fullDocument"]),
+            } as any);
+          });
+        }
+      );
     }).pipe(
       finalize(async () => {
         console.log("Stop watch");
@@ -689,15 +763,18 @@ export class MongoItemRepository<
   }
 
   private logChange(type, item, options, user, error) {
-    MongoClient.connect(this.getUrl(), { useUnifiedTopology: this.useUnifiedTopology }, (err, client) => {
-      if (err) {
-        console.warn(err);
-        return;
-      }
+    MongoClient.connect(
+      this.getUrl(),
+      { useUnifiedTopology: this.useUnifiedTopology },
+      (err, client) => {
+        if (err) {
+          console.warn(err);
+          return;
+        }
 
-      const db = client.db(this.config.database);
+        const db = client.db(this.config.database);
 
-      db.collection("changes").insertOne(
+        db.collection("changes").insertOne(
           {
             type,
             collection: this.config.collection,
@@ -705,36 +782,48 @@ export class MongoItemRepository<
             options,
             user,
             error,
-            date: new Date()
+            date: new Date(),
           },
-        (errInsert) => {
-          client.close();
+          (errInsert) => {
+            client.close();
 
-          if (errInsert) {
-            console.warn(err);
-            return;
+            if (errInsert) {
+              console.warn(err);
+              return;
+            }
           }
-        }
-      );
-    });
+        );
+      }
+    );
   }
 
   private generateSearch(criteria: any): void {
     if (!criteria["$search"]) return;
 
     if (this.config.type) {
-      const modelFields = getModelFieldsWithOptions(new this.config.type()).filter(i => i.options.search);
+      const modelFields = getModelFieldsWithOptions(
+        new this.config.type()
+      ).filter((i) => i.options.search);
 
       if (modelFields.length) {
-        if (!criteria['$or']) criteria['$or'] = [];
+        const searchArray = [];
 
-        modelFields.forEach(val =>{
+        modelFields.forEach((val) => {
           const res = {};
 
-          res[val.key] = { $regex: criteria["$search"], $options: 'i' };
+          res[val.key] = { $regex: criteria["$search"], $options: "i" };
 
-          criteria['$or'].push(res);
+          searchArray.push(res);
         });
+
+        if (!criteria["$or"]) criteria["$or"] = searchArray;
+        else if (criteria["$or"] && !criteria["$and"]) {
+          criteria["$and"] = [{ $or: criteria["$or"] }, { $or: searchArray }];
+
+          delete criteria["$or"];
+        } else if (criteria["$and"]) {
+          criteria["$and"] = [...criteria["$and"], { $or: searchArray }];
+        }
 
         delete criteria["$search"];
 
