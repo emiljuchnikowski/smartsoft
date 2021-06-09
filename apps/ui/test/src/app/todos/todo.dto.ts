@@ -253,19 +253,15 @@ export class Todo implements IEntity<string> {
             ...modifyMetdata,
             multi: true
         },
-        type: FieldType.int,
+        type: FieldType.file,
         details: true,
         list: {
             order: 2,
             filter: true
         },
-        possibilities: {
-            min: 2,
-            max: 43
-        },
         step: steps[0]
     })
-    test: number;
+    test: File;
 
     @Field({
         create: modifyMetdata,
