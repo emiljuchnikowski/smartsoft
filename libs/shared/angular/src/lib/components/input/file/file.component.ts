@@ -1,4 +1,5 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+
 import {InputBaseComponent} from "../base/base.component";
 
 /**
@@ -27,6 +28,15 @@ import {InputBaseComponent} from "../base/base.component";
   styleUrls: ['./file.component.scss']
 })
 export class InputFileComponent<T> extends InputBaseComponent<T> implements OnInit {
+  addButtonOptions = {
+    click: () => {
+      this.control.markAsDirty();
+      this.control.markAsTouched();
+      (this.inputElementRef.nativeElement as HTMLInputElement).click();
+    }
+  };
+
+  @ViewChild('inputObj', { read: ElementRef }) inputElementRef: ElementRef;
 
   constructor(cd: ChangeDetectorRef) {
     super(cd);
@@ -34,7 +44,10 @@ export class InputFileComponent<T> extends InputBaseComponent<T> implements OnIn
 
   changeListener($event) : void {
     const file = $event.target.files[0];
-    console.log(file);
+
+    $event.target.type = 'text';
+    $event.target.type = 'file';
+
     this.control.setValue(file);
     this.control.updateValueAndValidity();
     this.cd.detectChanges();
