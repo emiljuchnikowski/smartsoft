@@ -8,10 +8,14 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
-    ion-grid,
-    ion-row,
-    ion-col {
-        margin: 0;
-        padding: 0;
+    // ion-grid,
+    // ion-row,
+    // ion-col {
+    //     margin: 0;
+    //     padding: 0;
+    //     vertical-align: middle;
+    // }
+    ion-select {
+        width: 100%;
     }
 }
