@@ -1,38 +1,32 @@
 <ng-container *ngIf="control">
-  <ng-container *ngIf="possibilities?.length <= 5; else multiSelectTpl">
-    <ion-item-group
-      [attr.autofocus]="fieldOptions?.focused"
-    >
-      <ion-list-header>
-        {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
-      </ion-list-header>
-      <ion-item *ngFor="let item of possibilities">
-        <ion-label>{{ item.text | translate }}</ion-label>
-        <ion-checkbox
-          [checked]="item.checked"
-          (ionChange)="refresh(item)"
-        ></ion-checkbox>
-      </ion-item>
-    </ion-item-group>
-  </ng-container>
+    <ng-container *ngIf="possibilities?.length <= 5; else multiSelectTpl">
+        <ion-item-group [attr.autofocus]="fieldOptions?.focused">
+            <ion-list-header>
+                {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
+            </ion-list-header>
+            <ion-item *ngFor="let item of possibilities">
+                <ion-label>{{ item.text | translate }}</ion-label>
+                <ion-checkbox [checked]="item.checked" (ionChange)="refresh(item)"></ion-checkbox>
+            </ion-item>
+        </ion-item-group>
+    </ng-container>
 
-  <ng-template #multiSelectTpl>
-    <ion-item>
-      <ion-label>{{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}</ion-label>
-      <ion-select
-        [formControl]="control"
-        multiple
-        [attr.autofocus]="fieldOptions?.focused"
-        [cancelText]="'cancel' | translate"
-        [okText]="'ok' | translate"
-      >
-        <ion-select-option
-          *ngFor="let item of possibilities"
-          [value]="item.id"
-        >
-          {{ item.text | translate }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ng-template>
+    <ng-template #multiSelectTpl>
+        <ion-item>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="auto">
+                        <ion-label>{{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}</ion-label>
+                    </ion-col>
+                    <ion-col>
+                        <ion-select [formControl]="control" multiple [attr.autofocus]="fieldOptions?.focused" [cancelText]="'cancel' | translate" [okText]="'ok' | translate">
+                            <ion-select-option *ngFor="let item of possibilities" [value]="item.id">
+                                {{ item.text | translate }}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ng-template>
 </ng-container>

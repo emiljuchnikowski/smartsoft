@@ -1,4 +1,17 @@
 @import "styles/smart-styles.scss";
-.label-floating {
+.label {
     --color: var(--smart-color-medium);
+}
+
+:host {
+    ion-card & {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    ion-grid,
+    ion-row,
+    ion-col {
+        margin: 0;
+        padding: 0;
+    }
 }
