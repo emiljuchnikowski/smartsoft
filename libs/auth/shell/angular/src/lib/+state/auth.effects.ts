@@ -7,8 +7,8 @@ import { Observable, of } from "rxjs";
 
 import * as AuthActions from "./auth.actions";
 import { AuthService } from "../services/auth/auth.service";
-import {NavController, Platform} from "@ionic/angular";
-import {FingerprintService} from "@smartsoft001/angular";
+import { NavController, Platform } from "@ionic/angular";
+import { FingerprintService } from "@smartsoft001/angular";
 
 @Injectable()
 export class AuthEffects {
@@ -19,7 +19,7 @@ export class AuthEffects {
         try {
           return AuthActions.initTokenSuccess({
             token: this.service.token,
-            username: this.service.username
+            username: this.service.username,
           });
         } catch (error) {
           console.error("Error", error);
@@ -37,77 +37,73 @@ export class AuthEffects {
         this.service
           .createToken({
             username: action.username,
-            password: action.password
+            password: action.password,
           })
           .pipe(
             map(
-              token =>
+              (token) =>
                 AuthActions.createTokenSuccess({
                   token,
-                  username: action.username
+                  username: action.username,
                 }) as any
             ),
-            catchError(error => {
-                this.fingerprintService.clearData();
-                return of(AuthActions.createTokenFailure({ error }));
+            catchError((error) => {
+              this.fingerprintService.clearData();
+              return of(AuthActions.createTokenFailure({ error }));
             })
           )
       )
     )
   );
 
-    loginFb$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(AuthActions.loginFB.type),
-            switchMap((action: ReturnType<typeof AuthActions.loginFB>) =>
-                this.service
-                    .loginFb()
-                    .pipe(
-                        map(
-                            (token) =>
-                                AuthActions.createTokenSuccess({
-                                    token,
-                                    username: token.username
-                                }) as any
-                        ),
-                        catchError(error => {
-                            this.fingerprintService.clearData();
-                            return of(AuthActions.createTokenFailure({ error }));
-                        })
-                    )
-            )
+  loginFb$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginFB.type),
+      switchMap((action: ReturnType<typeof AuthActions.loginFB>) =>
+        this.service.loginFb().pipe(
+          map(
+            (token) =>
+              AuthActions.createTokenSuccess({
+                token,
+                username: token.username,
+              }) as any
+          ),
+          catchError((error) => {
+            this.fingerprintService.clearData();
+            return of(AuthActions.createTokenFailure({ error }));
+          })
         )
-    );
+      )
+    )
+  );
 
-    loginGoogle$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(AuthActions.loginGoogle.type),
-            switchMap((action: ReturnType<typeof AuthActions.loginGoogle>) =>
-                this.service
-                    .loginGoogle()
-                    .pipe(
-                        map(
-                            (token) =>
-                                AuthActions.createTokenSuccess({
-                                    token,
-                                    username: token.username
-                                }) as any
-                        ),
-                        catchError(error => {
-                            this.fingerprintService.clearData();
-                            return of(AuthActions.createTokenFailure({ error }));
-                        })
-                    )
-            )
+  loginGoogle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginGoogle.type),
+      switchMap((action: ReturnType<typeof AuthActions.loginGoogle>) =>
+        this.service.loginGoogle().pipe(
+          map(
+            (token) =>
+              AuthActions.createTokenSuccess({
+                token,
+                username: token.username,
+              }) as any
+          ),
+          catchError((error) => {
+            this.fingerprintService.clearData();
+            return of(AuthActions.createTokenFailure({ error }));
+          })
         )
-    );
+      )
+    )
+  );
 
   createTokenSuccess$: Observable<any> = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AuthActions.createTokenSuccess.type),
-        tap(_ => {
-            this.navCtrl.navigateRoot('');
+        tap((_) => {
+          this.navCtrl.navigateRoot("");
         })
       ),
     { dispatch: false }
@@ -132,8 +128,8 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.removeTokenSuccess.type),
-        tap(_ => {
-            document.location.href = "";
+        tap((_) => {
+          document.location.href = "login";
           document.location.reload();
         })
       ),
