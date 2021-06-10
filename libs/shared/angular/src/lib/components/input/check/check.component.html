@@ -15,7 +15,7 @@
         <ion-item>
 
 
-            <ion-label position="floating">{{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}</ion-label>
+            <ion-label>{{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}</ion-label>
 
             <ion-select [formControl]="control" multiple [attr.autofocus]="fieldOptions?.focused" [cancelText]="'cancel' | translate" [okText]="'ok' | translate">
                 <ion-select-option *ngFor="let item of possibilities" [value]="item.id">
