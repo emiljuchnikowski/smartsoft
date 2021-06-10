@@ -129,7 +129,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.removeTokenSuccess.type),
         tap((_) => {
-          document.location.href = "login";
+          document.location.hash = "login";
           document.location.reload();
         })
       ),
