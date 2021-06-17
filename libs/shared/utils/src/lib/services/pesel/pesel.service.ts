@@ -1,4 +1,9 @@
 export class PeselService {
+    /***
+     * Check valid pesel format
+     * @param pesel {string} - pesel string
+     * @return return true when correct
+     */
     static isValid(pesel: string): boolean {
         const reg = /^[0-9]{11}$/;
         if(reg.test(pesel) === false)
@@ -20,6 +25,11 @@ export class PeselService {
         }
     }
 
+    /***
+     * Check invalid pesel format
+     * @param pesel {string} - pesel string
+     * @return return true when incorrect
+     */
     static isInvalid(pesel: string): boolean {
         return !PeselService.isValid(pesel);
     }

@@ -59,3 +59,31 @@ Methods:
         <td>remove object type from data</td>
     </tr>
 </table>
+
+# PasswordService
+
+Methods:
+<table>
+    <tr>
+        <td>hash(p: string): Promise<string></td>
+        <td>hash password text</td>
+    </tr>
+    <tr>
+        <td>compare(p: string, h: string): Promise<boolean></td>
+        <td>compare password text with hashed text</td>
+    </tr>
+</table>
+
+# PeselService
+
+Methods:
+<table>
+    <tr>
+        <td>isValid(pesel: string)</td>
+        <td>check pesel nip format</td>
+    </tr>
+    <tr>
+        <td>isInvalid(pesel: string)</td>
+        <td>check invalid pesel format</td>
+    </tr>
+</table>
