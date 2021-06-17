@@ -1,4 +1,9 @@
 export class SpecificationService {
+    /**
+     * Checking if the value meets the specifications
+     * @param value {object} - object to check
+     * @param spec {ISpecificatio} - specification
+     */
     static valid<T>(value: T, spec: { criteria: any }): boolean {
         const keys = Object.keys(spec.criteria);
 
@@ -12,10 +17,20 @@ export class SpecificationService {
         return true;
     }
 
+    /**
+     * Checking if the object does not meet the specifications
+     * @param value {object} - object to check
+     * @param spec {ISpecificatio} - specification
+     */
     static invalid<T>(value: T, spec: { criteria: any }): boolean {
         return !SpecificationService.valid(value, spec);
     }
 
+    /**
+     * Convert specification to sql
+     * @param spec {ISpecificatio} - specification
+     * @return - sql criteria
+     */
     static getSqlCriteria(spec: { criteria: any }): string {
         const keys = Object.keys(spec.criteria);
         let result = '';

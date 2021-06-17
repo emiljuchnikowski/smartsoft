@@ -87,3 +87,21 @@ Methods:
         <td>check invalid pesel format</td>
     </tr>
 </table>
+
+# SpecificationService
+
+Methods:
+<table>
+    <tr>
+        <td>valid<T>(value: T, spec: { criteria: any }): boolean</td>
+        <td>checking if the value meets the specifications</td>
+    </tr>
+    <tr>
+        <td>invalid<T>(value: T, spec: { criteria: any }): boolean</td>
+        <td>checking if the object does not meet the specifications</td>
+    </tr>
+    <tr>
+        <td>getSqlCriteria(spec: { criteria: any }): string</td>
+        <td>convert specification to sql</td>
+    </tr>
+</table>
