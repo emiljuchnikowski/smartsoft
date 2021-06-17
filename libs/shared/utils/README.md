@@ -21,3 +21,13 @@ Methods:
         <td>return sorted array</td>
     </tr>
 </table>
+
+# GuidService
+
+Methods:
+<table>
+    <tr>
+        <td>create</td>
+        <td>creating guid string</td>
+    </tr>
+</table>
