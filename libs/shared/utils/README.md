@@ -80,7 +80,7 @@ Methods:
 <table>
     <tr>
         <td>isValid(pesel: string)</td>
-        <td>check pesel nip format</td>
+        <td>check pesel format</td>
     </tr>
     <tr>
         <td>isInvalid(pesel: string)</td>
@@ -103,5 +103,19 @@ Methods:
     <tr>
         <td>getSqlCriteria(spec: { criteria: any }): string</td>
         <td>convert specification to sql</td>
+    </tr>
+</table>
+
+# ZipCodeService
+
+Methods:
+<table>
+    <tr>
+        <td>isValid(code: string)</td>
+        <td>check zip code format</td>
+    </tr>
+    <tr>
+        <td>isInvalid(code: string)</td>
+        <td>check invalid zip code format</td>
     </tr>
 </table>
