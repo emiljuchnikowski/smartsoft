@@ -45,3 +45,17 @@ Methods:
         <td>check invalid nip format</td>
     </tr>
 </table>
+
+# ObjectService
+
+Methods:
+<table>
+    <tr>
+        <td>createByType<T>(data: any, type: any): T</td>
+        <td>create object with data</td>
+    </tr>
+    <tr>
+        <td>removeTypes(obj: any): any</td>
+        <td>remove object type from data</td>
+    </tr>
+</table>
