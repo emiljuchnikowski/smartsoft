@@ -31,3 +31,17 @@ Methods:
         <td>creating guid string</td>
     </tr>
 </table>
+
+# NipService
+
+Methods:
+<table>
+    <tr>
+        <td>isValid(nip: string)</td>
+        <td>check valid nip format</td>
+    </tr>
+    <tr>
+        <td>isInvalid(nip: string)</td>
+        <td>check invalid nip format</td>
+    </tr>
+</table>

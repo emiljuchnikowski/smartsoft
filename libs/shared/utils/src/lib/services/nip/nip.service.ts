@@ -1,4 +1,9 @@
 export class NipService {
+    /***
+     * Check valid nip format
+     * @param nip {string} - nip string
+     * @return return true when correct
+     */
     static isValid(nip: string): boolean {
         if(typeof nip !== 'string')
             return false;
@@ -18,6 +23,11 @@ export class NipService {
         return sum % 11 === controlNumber;
     }
 
+    /***
+     * Check invalid nip format
+     * @param nip {string} - nip string
+     * @return return true when incorrect
+     */
     static isInvalid(nip: string): boolean {
         return !NipService.isValid(nip);
     }
