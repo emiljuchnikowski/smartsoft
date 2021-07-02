@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, Inject, OnInit, Optional} from "@angular/core";
 import {of} from "rxjs";
 import {filter} from "rxjs/operators";
+import * as _ from "lodash";
 
 import { getModelFieldOptions } from "@smartsoft001/models";
 import {
@@ -43,7 +44,7 @@ export class InputCheckComponent<T> extends InputPossibilitiesBaseComponent<T>
       const result = list.map(item => {
         return {
           ...item,
-          checked: this.control.value && this.control.value.some(v => v === item.id)
+          checked: _.isEqual(this.control.value, this.control.value.some(v => v === item.id))
         }
       })
 
