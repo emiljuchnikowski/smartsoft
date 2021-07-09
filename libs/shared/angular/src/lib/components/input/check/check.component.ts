@@ -44,7 +44,7 @@ export class InputCheckComponent<T> extends InputPossibilitiesBaseComponent<T>
       const result = list.map(item => {
         return {
           ...item,
-          checked: _.isEqual(this.control.value, this.control.value.some(v => v === item.id))
+          checked: _.isEqual(this.control.value, this.control.value ? this.control.value.some(v => v === item.id) : [])
         }
       })
 
