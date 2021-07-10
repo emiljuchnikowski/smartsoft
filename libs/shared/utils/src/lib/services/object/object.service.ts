@@ -30,7 +30,7 @@ export class ObjectService {
         const result = {} as any;
 
         Object.keys(obj).forEach(key => {
-            if (obj[key].constructor && !(obj[key] instanceof Date)) {
+            if (obj[key] && obj[key].constructor && !(obj[key] instanceof Date)) {
                 const stringValue = JSON.stringify(obj[key]);
                 result[key] = JSON.parse(stringValue);
             } else {

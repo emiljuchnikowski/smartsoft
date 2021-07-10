@@ -1,4 +1,5 @@
 import {ObjectService} from "./object.service";
+import {isNull} from "util";
 
 describe("shared-utils: ObjectService", () => {
     describe("createByType()", () => {
@@ -78,6 +79,20 @@ describe("shared-utils: ObjectService", () => {
             const result = ObjectService.removeTypes(obj);
 
             expect(result.date instanceof Date).toBeTruthy();
+        });
+
+        it('should handle null fields', function () {
+            class Test {
+                test1: string;
+                date: Date;
+            }
+            const obj = new Test();
+            obj.test1 = null;
+            obj.date = new Date();
+
+            const result = ObjectService.removeTypes(obj);
+
+            expect(obj.test1 === null).toBeTruthy();
         });
     });
 });
