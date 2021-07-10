@@ -65,5 +65,19 @@ describe("shared-utils: ObjectService", () => {
 
             expect(result.test1).toBe(obj.test1);
         });
+
+        it('should remove only object types in parent', function () {
+            class Test {
+                test1: string;
+                date: Date;
+            }
+            const obj = new Test();
+            obj.test1 = "test123";
+            obj.date = new Date();
+
+            const result = ObjectService.removeTypes(obj);
+
+            expect(result.date instanceof Date).toBeTruthy();
+        });
     });
 });

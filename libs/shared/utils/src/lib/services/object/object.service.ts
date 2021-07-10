@@ -27,8 +27,17 @@ export class ObjectService {
     static removeTypes(obj: any): any {
         if (!obj) return obj;
 
-        const stringObj = JSON.stringify(obj);
+        const result = {} as any;
 
-        return JSON.parse(stringObj);
+        Object.keys(obj).forEach(key => {
+            if (obj[key].constructor && !(obj[key] instanceof Date)) {
+                const stringValue = JSON.stringify(obj[key]);
+                result[key] = JSON.parse(stringValue);
+            } else {
+                result[key] = obj[key];
+            }
+        });
+
+        return result;
     }
 }
