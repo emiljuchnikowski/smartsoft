@@ -14,15 +14,12 @@
                     <ng-container *ngIf="item | smartListCell : key : cellPipe : type; let cell">
                         <ng-container [ngSwitch]="cell.type">
                             <img *ngSwitchCase="FieldType.image" height="100" [lazyLoad]="cell.value | smartFileUrl">
-                            <div class="list-content">
-                                <ng-container *ngSwitchDefault>
-                                    <h2 *ngIf='first' [innerHTML]="cell.value"></h2>
-                                    <p *ngIf='!first' [innerHTML]="cell.value"></p>
-                                </ng-container>
-                            </div>
+                            <ng-container *ngSwitchDefault>
+                                <h2 *ngIf='first' [innerHTML]="cell.value"></h2>
+                                <p *ngIf='!first' [innerHTML]="cell.value"></p>
+                            </ng-container>
                         </ng-container>
                     </ng-container>
-
                 </ng-container>
             </ion-label>
         </ion-item>
