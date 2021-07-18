@@ -23,6 +23,7 @@ import { isPlatformBrowser } from "@angular/common";
 import { IAppOptions, IMenuItem } from "../../../models/interfaces";
 import { StyleService } from "../../../services/style/style.service";
 import {MenuService} from "../../../services/menu/menu.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Directive()
 export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, AfterViewInit {
@@ -56,6 +57,7 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
     protected elementRef: ElementRef,
     protected styleService: StyleService,
     protected menuService: MenuService,
+    protected authService: AuthService,
     @Inject(PLATFORM_ID) protected readonly platformId,
     @Inject(DOCUMENT) protected document: any
   ) {
@@ -72,6 +74,7 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
 
   async ngAfterContentInit(): Promise<void> {
     this.initLoader();
+    this.initPermissionClasses();
     this.refreshStyles();
   }
 
@@ -142,6 +145,19 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
             .getElementById("app-favicon")
             .setAttribute("href", this.logo);
         }
+      });
+    }
+  }
+
+  private initPermissionClasses() {
+    if (isPlatformBrowser(this.platformId)) {
+      this._options.provider.logged$.pipe(
+          filter(logged => !!logged)
+
+      ).subscribe(() => {
+        this.authService.getPermissions().forEach(permission => {
+          (this.elementRef.nativeElement as HTMLElement).classList.add("auth-permissions-" + permission);
+        });
       });
     }
   }
