@@ -9,10 +9,10 @@ import {<%= classify(domainName) %>} from "@<%= dasherize(projectName) %>/<%= da
 export class <%= classify(domainNamePluralize) %>AppService extends CrudService<<%= classify(domainName) %>> {
   constructor(
     readonly permissions: PermissionService,
+    readonly itemRepository: IItemRepository<<%= classify(domainName) %>>,
     readonly attachRepository: IAttachmentRepository<<%= classify(domainName) %>>,
-    readonly itemRepository: IItemRepository<<%= classify(domainName) %>>
   ) {
-    super(permissions, itemRepository);
+    super(permissions, itemRepository, attachRepository);
   }
 
   //create(data: <%= classify(domainName) %>, user: IUser): Promise<string> {

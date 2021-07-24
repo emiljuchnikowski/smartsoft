@@ -811,7 +811,7 @@ export class MongoItemRepository<
         modelFields.forEach((val) => {
           const res = {};
 
-          res[val.key] = { $regex: criteria["$search"], $options: "i" };
+          res[val.key] = { $regex: criteria["$search"].toString(), $options: "i" };
 
           searchArray.push(res);
         });

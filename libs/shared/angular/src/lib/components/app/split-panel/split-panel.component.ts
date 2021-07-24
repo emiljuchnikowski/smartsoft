@@ -12,6 +12,7 @@ import {DOCUMENT} from "@angular/common";
 import { AppBaseComponent } from "../base/base.component";
 import { StyleService } from "../../../services/style/style.service";
 import {MenuService} from "../../../services/menu/menu.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: "smart-app-split-panel",
@@ -29,10 +30,11 @@ export class AppSplitPanelComponent extends AppBaseComponent implements OnInit, 
     elementRef: ElementRef,
     styleService: StyleService,
     menuService: MenuService,
+    authService: AuthService,
     @Inject(PLATFORM_ID) readonly platform,
     @Inject(DOCUMENT) document: any
   ) {
-    super(router, cd, elementRef, styleService, menuService, platform, document);
+    super(router, cd, elementRef, styleService, menuService, authService, platform, document);
   }
 
   async ngAfterContentInit(): Promise<void> {

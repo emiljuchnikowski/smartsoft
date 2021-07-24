@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, Inject, OnInit, Optional} from "@angular/core";
 import {of} from "rxjs";
 import {filter} from "rxjs/operators";
+import * as _ from "lodash";
 
 import { getModelFieldOptions } from "@smartsoft001/models";
 import {
@@ -41,10 +42,17 @@ export class InputCheckComponent<T> extends InputPossibilitiesBaseComponent<T>
         filter(list => list)
     ).subscribe(list => {
       const result = list.map(item => {
-        return {
-          ...item,
-          checked: this.control.value && this.control.value.some(v => v === item.id)
+        if (this.control.value && item?.id?.id) {
+          const controlItem = this.control.value.find(ci => ci?.id === item?.id.id);
+          if (controlItem) {
+            item.id = controlItem;
+            item['checked'] = true;
+          }
+        } else {
+          item['checked'] = item.id === this.control.value;
         }
+
+        return item;
       })
 
       this.possibilities = result;

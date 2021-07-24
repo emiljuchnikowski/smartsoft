@@ -13,7 +13,7 @@ export class ErrorService {
     let message = '';
 
     if (obj instanceof HttpErrorResponse) {
-      if (obj.error.details === 'Invalid username or password') {
+      if (obj.error && obj.error.details === 'Invalid username or password') {
         message = await  this.translateService.get('ERRORS.invalidUsernameOrPassword').toPromise();
       }
     }

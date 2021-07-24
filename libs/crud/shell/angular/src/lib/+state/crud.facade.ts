@@ -10,6 +10,7 @@ import { CrudConfig } from "../crud.config";
 import * as CrudActions from "./crud.actions";
 import * as CrudSelectors from "./crud.selectors";
 import {ICrudCreateManyOptions, ICrudFilter} from "../models/interfaces";
+import {NgrxStoreService} from "@smartsoft001/angular";
 
 
 @Injectable()
@@ -61,7 +62,11 @@ export class CrudFacade<T extends IEntity<string>> {
       select(CrudSelectors.getCrudError(this.config.entity))
   );
 
-  constructor(private store: Store<any>, private config: CrudConfig<T>) {}
+  constructor(private store: Store<any>, private config: CrudConfig<T>) {
+    if (NgrxStoreService.store) {
+      this.store = NgrxStoreService.store;
+    }
+  }
 
   create(item: T): void {
     this.store.dispatch(CrudActions.create(this.config.entity, item));
@@ -98,22 +103,28 @@ export class CrudFacade<T extends IEntity<string>> {
   }
 
   update(item: T): void {
-    this.store.dispatch(CrudActions.update(this.config.entity, item));
+    this.getStore().dispatch(CrudActions.update(this.config.entity, item));
   }
 
   export(filter: ICrudFilter = null, format = null): void {
-    this.store.dispatch(CrudActions.exportList(this.config.entity, filter, format));
+    this.getStore().dispatch(CrudActions.exportList(this.config.entity, filter, format));
   }
 
   updatePartial(item: Partial<T> & { id: string }): void {
-    this.store.dispatch(CrudActions.updatePartial(this.config.entity, item));
+    this.getStore().dispatch(CrudActions.updatePartial(this.config.entity, item));
   }
 
   updatePartialMany(items: (Partial<T> & {id: string})[]) {
-    this.store.dispatch(CrudActions.updatePartialMany(this.config.entity, items));
+    this.getStore().dispatch(CrudActions.updatePartialMany(this.config.entity, items));
   }
 
   delete(id: string): void {
-    this.store.dispatch(CrudActions.deleteItem(this.config.entity, id));
+    this.getStore().dispatch(CrudActions.deleteItem(this.config.entity, id));
+  }
+
+  private getStore(): Store {
+    if (NgrxStoreService.store) return NgrxStoreService.store;
+
+    return this.store;
   }
 }

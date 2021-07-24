@@ -3,7 +3,7 @@ import {of} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {map} from "rxjs/operators";
 
-import {AppService, IAppOptions, IMenuItem, IStyle} from "@smartsoft001/angular";
+import {AppService, IAppOptions, IMenuItem, IStyle, MenuService} from "@smartsoft001/angular";
 import {AuthFacade} from "@smartsoft001/auth-shell-angular";
 import { variables } from "../theme/variables";
 
@@ -52,7 +52,12 @@ export class AppComponent implements OnInit {
     style: variables
   };
 
-  constructor(translateService: TranslateService, private authFacade: AuthFacade, private appService: AppService) {
+  constructor(
+      translateService: TranslateService,
+      private authFacade: AuthFacade,
+      private appService: AppService,
+      private menuService: MenuService
+  ) {
     //translateService.use('eng');
   }
 
@@ -64,5 +69,7 @@ export class AppComponent implements OnInit {
       },
       number: 5
     });
+
+    //this.menuService.closeStart();
   }
 }

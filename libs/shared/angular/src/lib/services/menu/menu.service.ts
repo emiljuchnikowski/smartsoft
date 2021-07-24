@@ -60,6 +60,16 @@ export class MenuService {
   }
 
   /**
+   * @desc close menu (menu on the left side of the screen)
+   */
+  async closeStart(): Promise<void> {
+    this._openedEnd = false;
+
+    await this.menuCtrl.close("start");
+    await this.menuCtrl.enable(false, "start");
+  }
+
+  /**
    * @desc close menu (menu on the right side of the screen)
    */
   async closeEnd(): Promise<void> {

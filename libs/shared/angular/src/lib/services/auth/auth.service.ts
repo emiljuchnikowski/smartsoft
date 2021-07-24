@@ -32,6 +32,18 @@ export class AuthService {
     );
   }
 
+  getPermissions(): Array<string> {
+    const token: { access_token: string } = this.getToken();
+
+    if (!token) return [];
+
+    const tokenPayload: { permissions: Array<string> } = decode(
+        token.access_token
+    ) as any;
+
+    return tokenPayload.permissions;
+  }
+
   protected getToken(): any {
     const token = this.storageService.getItem(AUTH_TOKEN);
 

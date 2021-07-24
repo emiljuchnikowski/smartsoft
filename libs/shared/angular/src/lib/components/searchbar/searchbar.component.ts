@@ -25,7 +25,7 @@ export class SearchbarComponent implements OnDestroy, AfterViewInit {
   private _subscriptions = new Subscription();
 
   control: FormControl;
-  show: boolean;
+  @Input() show: boolean;
 
   @Input() set text(val: string) {
     this.control.setValue(val);
