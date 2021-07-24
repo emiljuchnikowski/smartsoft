@@ -329,34 +329,35 @@ export class Todo implements IEntity<string> {
     // })
     // password: string;
 
-    // @Field({
-    //     create: modifyMetdata,
-    //     update: modifyMetdata,
-    //     details: true,
-    //     list: { order: 2 },
-    //     type: FieldType.check,
-    //     possibilities: [
-    //         {
-    //             id: 1, text: 'Test 1'
-    //         },
-    //         {
-    //             id: 2, text: 'Test 2'
-    //         },
-    //         {
-    //             id: 3, text: 'Test 3'
-    //         },
-    //         {
-    //             id: 4, text: 'Test 4'
-    //         },
-    //         {
-    //             id: 5, text: 'Test 5'
-    //         },
-    //         {
-    //             id: 6, text: 'Test 6'
-    //         }
-    //     ]
-    // })
-    // tags: Array<string>;
+    @Field({
+        create: modifyMetdata,
+        update: modifyMetdata,
+        details: true,
+        list: { order: 2 },
+        step: steps[0],
+        type: FieldType.check,
+        possibilities: [
+            {
+                id: { id: 1, name: "test" }, text: 'Test 1'
+            },
+            {
+                id: { id: 2, name: "test" }, text: 'Test 2'
+            },
+            {
+                id: { id: 3, name: "test" }, text: 'Test 3'
+            },
+            {
+                id: { id: 4, name: "test" }, text: 'Test 4'
+            },
+            {
+                id: { id: 5, name: "test" }, text: 'Test 5'
+            },
+            {
+                id: { id: 6, name: "test" }, text: 'Test 6'
+            }
+        ]
+    })
+    tags: Array<string>;
 
     // @Field({
     //     create: modifyMetdata,

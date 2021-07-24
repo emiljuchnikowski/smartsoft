@@ -52,8 +52,24 @@ export class ModelPossibilitiesProvider extends IModelPossibilitiesProvider {
     console.log(options);
 
     return of([
-      {id: 1, text: 'test1' },
-      {id: 2, text: 'test2' }
+      {
+        id: { id: 1, name: "test" }, text: 'Test 1'
+      },
+      {
+        id: { id: 2, name: "test" }, text: 'Test 2'
+      },
+      {
+        id: { id: 3, name: "test" }, text: 'Test 3'
+      },
+      {
+        id: { id: 4, name: "test" }, text: 'Test 4'
+      },
+      {
+        id: { id: 5, name: "test" }, text: 'Test 5'
+      },
+      {
+        id: { id: 6, name: "test" }, text: 'Test 6'
+      }
     ]);
   }
 }
@@ -123,7 +139,7 @@ export class ModelLabelProvider extends IModelLabelProvider {
               return value[columnName];
             }
           },
-          mode: ListMode.desktop
+          mode: ListMode.mobile
         },
         search: true,
         pagination: { limit: 25 },

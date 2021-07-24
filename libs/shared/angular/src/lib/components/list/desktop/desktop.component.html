@@ -63,7 +63,7 @@
           <ng-container *ngTemplateOutlet="pagination"></ng-container>
         </th>
         <ng-container *matCellDef="let element">
-          <td mat-cell
+          <td mat-cell [attr.smart-item-key]="key"
               *ngIf="element | smartListCell : key : cellPipe : type; else blankCellTpl; let cell"
               [style.width.px]="cell.type === FieldType.image ? 60 : null"
               [style.textAlign]="cell.type === FieldType.image ? 'center' : null"
