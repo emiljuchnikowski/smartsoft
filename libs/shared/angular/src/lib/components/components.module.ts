@@ -77,6 +77,7 @@ import { InputIntsComponent } from "./input/ints/ints.component";
 import { PasswordStrengthComponent } from "./password-strength/password-strength.component";
 import { InfoComponent, InfoModalComponent } from "./info/info.component";
 import { ExportComponent } from "./export/export.component";
+import { ImportComponent } from "./import/import.component";
 import {InputPhoneNumberComponent} from "./input/phone-number/phone-number.component";
 import {InputPeselComponent} from "./input/pesel/pesel.component";
 import {ErrorContextComponent} from "./error-context/error-context.component";
@@ -219,7 +220,8 @@ export const COMPONENTS = [
   ...INFO_COMPONENTS,
     ...DATE_RANGE_COMPONENTS,
     ErrorContextComponent,
-    ExportComponent
+    ExportComponent,
+  ImportComponent
 ];
 
 export const IMPORTS = [

@@ -1,5 +1,4 @@
 import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
-import {NavParams, PopoverController} from "@ionic/angular";
 
 @Component({
     selector: "smart-export",
@@ -14,7 +13,11 @@ export class ExportComponent {
     constructor() { }
 
     async onClick(): Promise<void> {
-        this.download(this.value, (this.fileName ? this.fileName : 'data') + '.json','application/json');
+        this.download(
+            JSON.stringify(this.value, null, "\t"),
+            (this.fileName ? this.fileName : 'data') + '.json',
+            'application/json'
+        );
     }
 
     private download(text, name, type): void {
