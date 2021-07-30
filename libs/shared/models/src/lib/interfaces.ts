@@ -70,6 +70,7 @@ export interface IFieldModifyMetadata {
      * @desc - Allow import field data
      */
     import?: boolean;
+
     required?: boolean;
     focused?: boolean;
     confirm?: boolean;
