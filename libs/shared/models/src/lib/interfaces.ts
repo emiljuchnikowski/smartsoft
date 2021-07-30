@@ -62,6 +62,14 @@ export interface IFieldMetadata extends IFieldModifyMetadata {
 }
 
 export interface IFieldModifyMetadata {
+    /**
+     * @desc - Allow export field data
+     */
+    export?: boolean;
+    /**
+     * @desc - Allow import field data
+     */
+    import?: boolean;
     required?: boolean;
     focused?: boolean;
     confirm?: boolean;
