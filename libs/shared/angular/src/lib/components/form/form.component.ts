@@ -11,11 +11,20 @@ import {filter} from "rxjs/operators";
 
 import { IFormOptions } from "../../models/interfaces";
 import {FormFactory} from "../../factories/form/form.factory";
-import {getModelFieldsWithOptions} from "@smartsoft001/models";
+import {getModelFieldsWithOptions, getModelOptions} from "@smartsoft001/models";
+import {ObjectService} from "@smartsoft001/utils";
 
 @Component({
   selector: "smart-form",
   template: `
+    <div *ngIf="export || import" style="text-align: right">
+      <smart-export *ngIf="export"
+                    [value]="options?.control?.value"
+      ></smart-export>
+      <smart-import *ngIf="import"
+                    (set)="oSetValue($event)"
+      ></smart-import>
+    </div>
       <form *ngIf="form" [formGroup]="form" (ngSubmit)="invokeSubmit.emit(form.value)" (keyup.enter)="invokeSubmit.emit(form.value)">
         <smart-form-standard
             *ngIf="options && type === 'standard'"
@@ -37,9 +46,13 @@ import {getModelFieldsWithOptions} from "@smartsoft001/models";
 export class FormComponent<T> implements OnDestroy {
   private _options: IFormOptions<T>;
   private _subscription = new Subscription();
+  private _mode: "create" | "update" | string;
+  private _uniqueProvider: (values: Record<keyof T, any>) => Promise<boolean>;
 
   form: FormGroup;
   type: "standard" | "stepper";
+  export: boolean;
+  import: boolean;
 
   @Input() set options(val: IFormOptions<T>) {
     if (!val) return;
@@ -52,14 +65,19 @@ export class FormComponent<T> implements OnDestroy {
     this.initLoading();
     this.initType();
 
+    this.initExportImport();
+
+    this._mode = val.mode;
+    this._uniqueProvider = val.uniqueProvider;
+
     if (val.control) {
       this.form = val.control as FormGroup;
       this.registerChanges();
       this.cd.detectChanges();
     } else {
       this.formFactory.create(this._options.model, {
-        mode: val.mode,
-        uniqueProvider: val.uniqueProvider
+        mode: this._mode,
+        uniqueProvider: this._uniqueProvider
       })
           .then(res => {
             this.form = res;
@@ -68,6 +86,7 @@ export class FormComponent<T> implements OnDestroy {
           });
     }
   }
+
   get options(): IFormOptions<T> {
     return this._options;
   }
@@ -78,6 +97,20 @@ export class FormComponent<T> implements OnDestroy {
   @Output() validChange = new EventEmitter<boolean>();
 
   constructor(private formFactory: FormFactory, private cd: ChangeDetectorRef, private elementRef: ElementRef) {
+  }
+
+  oSetValue($event: any): void {
+    this._options.model = ObjectService.createByType($event, this.options.model.constructor);
+
+    this.formFactory.create(this._options.model, {
+      mode: this._mode,
+      uniqueProvider: this._uniqueProvider
+    })
+        .then(res => {
+          this.form = res;
+          this.registerChanges();
+          this.cd.detectChanges();
+        });
   }
 
   ngOnDestroy(): void {
@@ -127,5 +160,11 @@ export class FormComponent<T> implements OnDestroy {
     }
 
     this.type = 'standard';
+  }
+
+  private initExportImport() {
+    const modelOptions = getModelOptions(this._options.model.constructor);
+    this.export = modelOptions.export;
+    this.import = modelOptions.import;
   }
 }

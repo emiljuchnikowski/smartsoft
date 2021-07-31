@@ -1,13 +1,3 @@
-<div *ngIf="fieldOptions?.export || fieldOptions?.import" style="text-align: right">
-    <smart-export *ngIf="fieldOptions?.export"
-                  [value]="options?.control?.value"
-                  [fileName]="'MODEL.' + options.fieldKey | translate"
-    ></smart-export>
-    <smart-import *ngIf="fieldOptions?.import"
-                  (set)="options.control.setValue($event)"
-    ></smart-import>
-</div>
-
 <ion-item  *ngIf="!fieldOptions?.hide">
     <smart-info style="float: right" *ngIf="fieldOptions?.info" [text]="fieldOptions.info"></smart-info>
     <ng-container *ngIf="!options.component" [ngSwitch]="fieldOptions?.type">

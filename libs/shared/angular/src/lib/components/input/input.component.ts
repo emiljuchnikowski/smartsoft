@@ -12,6 +12,8 @@ import {InputOptions} from "../../models/interfaces";
 import {FieldType, getModelFieldOptions, getModelFieldsWithOptions, IFieldOptions} from "@smartsoft001/models";
 import {InputBaseComponent} from "./base/base.component";
 import {StyleService} from "../../services";
+import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {ObjectService} from "@smartsoft001/utils";
 
 @Component({
   selector: 'smart-input',
@@ -66,6 +68,18 @@ export class InputComponent<T> implements OnInit {
       private componentFactoryResolver: ComponentFactoryResolver,
       private injector: Injector
   ) { }
+
+  oSetValue($event: any): void {
+    if (!$event) return;
+
+    if (this.options.control instanceof FormArray) {
+      this.options.control.clear();
+    }
+
+    setTimeout(() => {
+      this.options.control.setValue($event);
+    });
+  }
 
   async ngOnInit(): Promise<void> {
     await this.initStyles();
