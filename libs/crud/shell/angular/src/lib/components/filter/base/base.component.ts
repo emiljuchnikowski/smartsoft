@@ -1,12 +1,12 @@
-import { Directive, Inject, Input, OnInit, Optional } from "@angular/core";
-import { Debounce } from "lodash-decorators";
+import {Directive, Inject, Input, OnInit, Optional} from "@angular/core";
+import {Debounce} from "lodash-decorators";
 import {Observable} from "rxjs";
 
-import { IEntity } from "@smartsoft001/domain-core";
-import { IModelFilter } from "@smartsoft001/models";
+import {IEntity} from "@smartsoft001/domain-core";
+import {FieldType, IModelFilter} from "@smartsoft001/models";
 
-import { ICrudFilter } from "../../../models/interfaces";
-import { CrudFacade } from "../../../+state/crud.facade";
+import {ICrudFilter} from "../../../models/interfaces";
+import {CrudFacade} from "../../../+state/crud.facade";
 import {
   CRUD_MODEL_POSSIBILITIES_PROVIDER,
   ICrudModelPossibilitiesProvider,
@@ -21,6 +21,14 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
   @Input() filter: ICrudFilter;
 
   get value(): any {
+    if (this.isArrayType()) {
+      return this.filter.query
+          .filter(
+            (q) => q.key === this.item.key && q.type === this.item.type
+          )
+          .map(q => q.value);
+    }
+
     const query = this.filter.query.find(
       (q) => q.key === this.item.key && q.type === this.item.type
     );
@@ -32,7 +40,7 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
   }
 
   constructor(
-    private facade: CrudFacade<T>,
+    protected facade: CrudFacade<T>,
     private config: CrudConfig<T>,
     @Optional()
     @Inject(CRUD_MODEL_POSSIBILITIES_PROVIDER)
@@ -41,6 +49,11 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
 
   @Debounce(500)
   refresh(val: any): void {
+    if (this.isArrayType()) {
+      this.refreshForArray(val as []);
+      return;
+    }
+
     let query = this.filter.query.find(
         (q) => q.key === this.item.key && q.type === this.item.type
     );
@@ -85,5 +98,39 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     }
 
     this.possibilities$ = possibilities;
+  }
+
+  private isArrayType(): boolean {
+    return (this.item?.fieldType === FieldType.check);
+  }
+
+  private refreshForArray(vals: []): void {
+    const queries = this.filter.query.filter(
+        (q) => q.key === this.item.key && q.type === this.item.type
+    );
+
+    queries.forEach(query => {
+      const index = this.filter.query.indexOf(query);
+      if (index > -1) {
+        this.filter.query.splice(index, 1);
+      }
+    });
+
+    if (vals === null || vals === undefined || !vals.length) {
+      this.facade.read(this.filter);
+      return;
+    }
+
+    vals.forEach(val => {
+      const query = {
+        key: this.item.key,
+        type: this.item.type,
+        value: val,
+      };
+
+      this.filter.query.push(query);
+    });
+
+    this.facade.read(this.filter);
   }
 }

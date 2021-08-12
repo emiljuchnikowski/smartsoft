@@ -4,3 +4,4 @@ export * from "./date-with-edit/date-with-edit.component";
 export * from "./radio/radio.component";
 export * from "./text/text.component";
 export * from "./flag/flag.component";
+export * from "./check/check.component";
