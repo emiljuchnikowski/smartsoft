@@ -10,7 +10,7 @@
             </ion-button>
         </ion-item-divider>
         <ion-item *ngFor="let entry of list$ | async">
-            <ion-label>{{entry.value.text}}</ion-label>
+            <ion-label>{{entry.value.text | translate}}</ion-label>
             <ion-checkbox slot="end" [checked]="entry.isCheck" (ionChange)="onCheckChange($event.detail.checked, entry)"></ion-checkbox>
         </ion-item>
     </ion-col>
