@@ -14,26 +14,30 @@
             <ng-container *ngIf="options?.endButtons">
                 <ng-container *ngFor="let btn of options.endButtons" [ngSwitch]="btn.type">
                     <ion-button (click)="presentPopover($event, btn)" [disabled]="btn.disabled$ | async" *ngSwitchCase="'popover'">
-                        <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
-                        <ion-badge *ngIf="btn.number" color="primary">{{btn.number}}</ion-badge>
+                        <ng-container [ngTemplateOutlet]="btnContent"
+                                      [ngTemplateOutletContext]="{ btn: btn }"
+                        ></ng-container>
                     </ion-button>
 
                     <ion-button (click)="btn.handler()" [disabled]="btn.disabled$ | async" *ngSwitchDefault>
-                        <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
-                        <ion-badge *ngIf="btn.number" color="primary">{{btn.number}}</ion-badge>
+                        <ng-container [ngTemplateOutlet]="btnContent"
+                                      [ngTemplateOutletContext]="{ btn: btn }"
+                        ></ng-container>
                     </ion-button>
                 </ng-container>
             </ng-container>
 
             <ng-container *ngFor="let btn of appService.endButtons$ | async" [ngSwitch]="btn.type">
                 <ion-button (click)="presentPopover($event, btn)" [disabled]="btn.disabled$ | async" *ngSwitchCase="'popover'">
-                    <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
-                    <ion-badge *ngIf="btn.number" color="primary">{{btn.number}}</ion-badge>
+                    <ng-container [ngTemplateOutlet]="btnContent"
+                                  [ngTemplateOutletContext]="{ btn: btn }"
+                    ></ng-container>
                 </ion-button>
 
                 <ion-button (click)="btn.handler()" [disabled]="btn.disabled$ | async" *ngSwitchDefault>
-                    <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
-                    <ion-badge *ngIf="btn.number" color="primary">{{btn.number}}</ion-badge>
+                    <ng-container [ngTemplateOutlet]="btnContent"
+                                  [ngTemplateOutletContext]="{ btn: btn }"
+                    ></ng-container>
                 </ion-button>
             </ng-container>
         </ion-buttons>
@@ -42,3 +46,16 @@
 <ion-content scroll>
     <ng-content></ng-content>
 </ion-content>
+
+<ng-template #btnContent let-btn="btn">
+    <ng-container *ngIf="!isMobile && btn.text">
+        <ion-icon slot="start" [name]="btn.icon"></ion-icon>
+        {{ btn.text | translate }}
+        <ion-badge *ngIf="btn.number" color="primary">{{btn.number}}</ion-badge>
+    </ng-container>
+
+    <ng-container *ngIf="isMobile || !btn.text">
+        <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
+        <ion-badge *ngIf="btn.number" color="primary">{{btn.number}}</ion-badge>
+    </ng-container>
+</ng-template>

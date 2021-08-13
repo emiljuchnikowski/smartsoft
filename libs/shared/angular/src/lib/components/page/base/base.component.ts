@@ -5,6 +5,7 @@ import { Subscription} from "rxjs";
 
 import {IIconButtonOptions, IPageOptions} from "../../../models/interfaces";
 import {AppService} from "../../../services/app/app.service";
+import { HardwareService } from "../../../services/hardware/hardware.service";
 
 @Directive()
 export abstract class PageBaseComponent implements OnInit, OnDestroy {
@@ -18,12 +19,17 @@ export abstract class PageBaseComponent implements OnInit, OnDestroy {
         return this._options;
     }
 
+    get isMobile(): boolean {
+        return this.hardwareService.isMobile || this.hardwareService.isMobileWeb;
+    }
+
     protected constructor(
         private el: ElementRef,
         private renderer: Renderer2,
         private location: Location,
         private popover: PopoverController,
         public appService: AppService,
+        public hardwareService: HardwareService,
     ) { }
 
     back(): void {

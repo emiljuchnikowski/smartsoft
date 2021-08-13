@@ -186,6 +186,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
         return [
           {
             icon: "add",
+            text: "add",
             handler: () => {
               this.facade.create(this.formValue);
               this.location.back();
@@ -199,6 +200,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
             ? [
                 {
                   icon: "close",
+                  text: "cancel",
                   handler: () => {
                     this.mode = "details";
                     this.initPageOptions();
@@ -209,6 +211,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
             : []),
           {
             icon: "save",
+            text: "save",
             handler: () => {
               this.formPartialValue.id = this.id;
               this.facade.updatePartial(this.formPartialValue as any);
@@ -228,6 +231,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
           ? [
               {
                 icon: "create",
+                text: "edit",
                 handler: () => {
                   this.mode = "update";
                   this.initPageOptions();

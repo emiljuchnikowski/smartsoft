@@ -38,6 +38,8 @@ export interface ITranslateData {
     writeHere: string,
     next: string,
     prev: string,
+    edit: string,
+    save: string,
 
     CALENDAR: {
         DAY_OF_WEEK: {
@@ -149,6 +151,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     writeHere: "write here",
     next: 'next',
     prev: 'prev',
+    edit: "edit",
+    save: "save",
 
     CALENDAR: {
         DAY_OF_WEEK: {
@@ -260,6 +264,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     writeHere: "napisz tutaj",
     next: 'dalej',
     prev: 'wstecz',
+    edit: "edycja",
+    save: "zapisz",
 
     CALENDAR: {
         DAY_OF_WEEK: {

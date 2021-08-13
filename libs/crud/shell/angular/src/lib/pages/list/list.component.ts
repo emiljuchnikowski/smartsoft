@@ -252,6 +252,7 @@ export class ListComponent<T extends IEntity<string>>
           ? [
             {
               icon: "checkbox-outline",
+              text: "multi",
               handler: async () => {
                 this.listOptions = {
                   ...this.listOptions,
@@ -268,6 +269,7 @@ export class ListComponent<T extends IEntity<string>>
           ? [
             {
               icon: "filter-outline",
+              text: "filter",
               handler: async () => {
                 await this.menuService.openEnd({
                   injector: this.injector,
@@ -281,6 +283,7 @@ export class ListComponent<T extends IEntity<string>>
           ? [
             {
               icon: "add",
+              text: "add",
               handler: () => {
                 this.router.navigate([
                   "/" + this.router.routerState.snapshot.url + "/add"
@@ -292,6 +295,7 @@ export class ListComponent<T extends IEntity<string>>
       ...(this.config.export
           ? [
             {
+              text: "export",
               icon: "download-outline",
               type: 'popover' as 'popover',
               component: ExportComponent
