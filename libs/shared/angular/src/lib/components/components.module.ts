@@ -13,7 +13,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {NgxEditorModule} from "ngx-editor";
 import {LazyLoadImageModule} from "ng-lazyload-image";
 import {MatStepperModule} from '@angular/material/stepper';
-
+import {MatButtonModule} from "@angular/material/button";
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MomentDateModule} from "@angular/material-moment-adapter";
 
 import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { AccordionComponent } from "./accordion/accordion.component";
@@ -97,7 +100,6 @@ import {DetailImageComponent} from "./detail/image/image.component";
 import {InputFloatComponent} from "./input/float/float.component";
 import {ListMasonryGridComponent} from "./list/masonry-grid/masonry-grid.component";
 import {FormStepperComponent} from "./form/stepper/stepper.component";
-import {MatButtonModule} from "@angular/material/button";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -242,7 +244,10 @@ export const IMPORTS = [
   LazyLoadImageModule,
   DragDropModule,
   MatStepperModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MomentDateModule
 ];
 
 @NgModule({
@@ -250,7 +255,7 @@ export const IMPORTS = [
   entryComponents: [...COMPONENTS],
   exports: [...COMPONENTS],
   imports: [
-      ...IMPORTS
+    ...IMPORTS,
   ]
 })
 export class SharedComponentsModule {}
