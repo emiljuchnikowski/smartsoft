@@ -1,4 +1,13 @@
-import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit} from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { Location } from "@angular/common";
@@ -6,10 +15,11 @@ import {TranslateService} from "@ngx-translate/core";
 
 import {
   AuthService,
-  DynamicComponentLoader, ICellPipe,
+  DynamicComponentLoader, FormComponent, ICellPipe,
   IDetailsOptions,
   IIconButtonOptions,
-  IPageOptions, StyleService,
+  InputComponent,
+  IPageOptions, StyleService, ToastService,
 } from "@smartsoft001/angular";
 import { IEntity } from "@smartsoft001/domain-core";
 import {getModelOptions} from "@smartsoft001/models";
@@ -19,6 +29,8 @@ import { CrudFullConfig } from "../../crud.config";
 import { CrudService } from "../../services/crud/crud.service";
 import { ICrudFilter } from "../../models/interfaces";
 import {PageBaseComponent} from "../base/base.component";
+import { IonContent } from "@ionic/angular";
+import {AbstractControl, FormArray, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: "smart-crud-item-page",
@@ -27,7 +39,6 @@ import {PageBaseComponent} from "../base/base.component";
 })
 export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<T>
   implements OnInit, OnDestroy {
-  _saveButtonDisabled = new BehaviorSubject(false);
 
   pageOptions: IPageOptions = {
     title: "",
@@ -38,11 +49,15 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   mode: string;
   id: string;
   formValue: T;
+  formValid = false;
   item: T;
   formPartialValue: Partial<T>;
   uniqueProvider: (values: Record<keyof T, any>) => Promise<boolean>;
 
   selected$: Observable<T>;
+
+  @ViewChildren(FormComponent, { read: FormComponent }) formComponents = new QueryList<FormComponent<any>>();
+  @ViewChild(IonContent, { static: true }) content: IonContent;
 
   constructor(
     private router: Router,
@@ -57,7 +72,8 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
     private cd: ChangeDetectorRef,
     authService: AuthService,
     private styleService: StyleService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private toastService: ToastService
   ) {
     super(authService, config);
 
@@ -169,7 +185,7 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   }
 
   onValidChange(val: boolean) {
-    this._saveButtonDisabled.next(!val);
+    this.formValid = val;
   }
 
   private initPageOptions(): void {
@@ -188,10 +204,13 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
             icon: "add",
             text: "add",
             handler: () => {
+              if (this.checkFirstInvalid()) {
+                return;
+              }
+
               this.facade.create(this.formValue);
               this.location.back();
             },
-            disabled$: this._saveButtonDisabled,
           },
         ];
       case "update":
@@ -213,6 +232,10 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
             icon: "save",
             text: "save",
             handler: () => {
+              if (this.checkFirstInvalid()) {
+                return;
+              }
+
               this.formPartialValue.id = this.id;
               this.facade.updatePartial(this.formPartialValue as any);
 
@@ -223,7 +246,6 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
                 this.location.back();
               }
             },
-            disabled$: this._saveButtonDisabled,
           },
         ];
       case "details":
@@ -267,5 +289,44 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
     const item = div.querySelectorAll("p").item(0);
 
     return item.innerHTML;
+  }
+
+  private checkFirstInvalid(): boolean {
+    const form = this.formComponents.first.form;
+
+    if (form.valid) return false;
+
+    const invalidFields = [];
+
+    this.getInvalidFields(form, invalidFields, '');
+
+    this.toastService.info({
+      title: this.translateService.instant('INPUT.ERRORS.requires'),
+      message: invalidFields.slice(0, 3).join('<br/>')
+    });
+
+    return true;
+  }
+
+  private getInvalidFields(control: AbstractControl, invalidFields: any[], baseField: string, key = null) {
+    if (control.valid) return;
+
+    const field = key ? baseField + ' > ' + this.translateService.instant('MODEL.' + key) : baseField;
+
+    if (control instanceof FormControl) {
+      invalidFields.push(field);
+    }
+
+    if (control instanceof FormGroup) {
+      Object.keys(control.controls).forEach(groupKey => {
+        this.getInvalidFields(control.controls[groupKey], invalidFields, field, groupKey);
+      });
+    }
+
+    if (control instanceof FormArray) {
+      control.controls.forEach((c, index) => {
+        this.getInvalidFields(c, invalidFields, field + `(${index + 1})`);
+      });
+    }
   }
 }
