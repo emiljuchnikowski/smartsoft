@@ -73,6 +73,14 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
                 show: false
             } as IFormOptions<TChild> & { fieldOptions: IFieldOptions, modelOptions: IModelOptions };
         });
+
+        this.internalOptions.control.valueChanges
+            .pipe(
+                this.takeUntilDestroy
+            )
+            .subscribe(val => {
+                this.control.markAsDirty();
+            });
     }
 
     drop(event: CdkDragDrop<T, any>) {

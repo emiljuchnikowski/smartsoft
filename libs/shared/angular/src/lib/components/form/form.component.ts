@@ -1,18 +1,22 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef,
-  EventEmitter, HostBinding,
-  Input, OnDestroy,
+  EventEmitter, Inject,
+  Input, OnDestroy, Optional,
   Output,
+  Type,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import {Subscription} from "rxjs";
 import {filter} from "rxjs/operators";
 
-import { IFormOptions } from "../../models/interfaces";
-import {FormFactory} from "../../factories/form/form.factory";
 import {getModelFieldsWithOptions, getModelOptions} from "@smartsoft001/models";
 import {ObjectService} from "@smartsoft001/utils";
+
+import { IFormOptions } from "../../models/interfaces";
+import {FormFactory} from "../../factories/form/form.factory";
+import {IModelExportProvider, MODEL_EXPORT_PROVIDER} from "../../providers/model-export.provider";
+import {IModelImportProvider, MODEL_IMPORT_PROVIDER} from "../../providers/model-import.provider";
 
 @Component({
   selector: "smart-form",
@@ -20,9 +24,11 @@ import {ObjectService} from "@smartsoft001/utils";
     <div *ngIf="export || import" style="text-align: right">
       <smart-export *ngIf="export"
                     [value]="options?.control?.value"
+                    [handler]="exportHandler"
       ></smart-export>
       <smart-import *ngIf="import"
                     (set)="oSetValue($event)"
+                    [accept]="importAccept"
       ></smart-import>
     </div>
       <form *ngIf="form" [formGroup]="form" (ngSubmit)="invokeSubmit.emit(form.value)" (keyup.enter)="invokeSubmit.emit(form.value)">
@@ -52,7 +58,9 @@ export class FormComponent<T> implements OnDestroy {
   form: FormGroup;
   type: "standard" | "stepper";
   export: boolean;
+  exportHandler: (val) => void;
   import: boolean;
+  importAccept: string;
 
   @Input() set options(val: IFormOptions<T>) {
     if (!val) return;
@@ -96,18 +104,44 @@ export class FormComponent<T> implements OnDestroy {
   @Output() valuePartialChange = new EventEmitter<Partial<T>>();
   @Output() validChange = new EventEmitter<boolean>();
 
-  constructor(private formFactory: FormFactory, private cd: ChangeDetectorRef, private elementRef: ElementRef) {
-  }
+  constructor(
+      private formFactory: FormFactory,
+      private cd: ChangeDetectorRef,
+      private elementRef: ElementRef,
+      @Optional()
+      @Inject(MODEL_EXPORT_PROVIDER) public exportProvider: IModelExportProvider,
+      @Optional()
+      @Inject(MODEL_IMPORT_PROVIDER) public importProvider: IModelImportProvider
+  ) { }
 
-  oSetValue($event: any): void {
-    this._options.model = ObjectService.createByType($event, this.options.model.constructor);
+  async oSetValue(file: File): Promise<void> {
+    let result;
+
+    if (this.importProvider) {
+      result = await this.importProvider.convert(this._options.model.constructor as Type<any>, file);
+    } else {
+      result = await new Promise((res, rej) => {
+        const fr =new FileReader();
+        fr.onload = () => {
+          res(JSON.parse(fr.result as string));
+        }
+        fr.onerror = err => {
+          rej(err);
+        }
+
+        fr.readAsText(file);
+      })
+    }
+
+    this._options.model = ObjectService.createByType(result, this.options.model.constructor);
 
     this.formFactory.create(this._options.model, {
       mode: this._mode,
       uniqueProvider: this._uniqueProvider
     })
         .then(res => {
-          this.form = res;
+          if (this.form) this.form.setValue(res.value)
+          else this.form = res;
           this.registerChanges();
           this.cd.detectChanges();
         });
@@ -162,9 +196,21 @@ export class FormComponent<T> implements OnDestroy {
     this.type = 'standard';
   }
 
-  private initExportImport() {
+  private async initExportImport() {
     const modelOptions = getModelOptions(this._options.model.constructor);
     this.export = modelOptions.export;
     this.import = modelOptions.import;
+
+    if (this.import) {
+      this.importAccept = this.importProvider
+          ? await this.importProvider.getAccept(this._options.model.constructor as Type<any>) : "application/json";
+      if (this.importProvider) this.cd.detectChanges();
+    }
+
+    if (this.export && this.exportProvider) {
+      this.exportHandler = val => {
+        this.exportProvider.execute(this._options.model.constructor as Type<any>, val);
+      }
+    }
   }
 }

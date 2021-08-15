@@ -6,7 +6,7 @@ import {
     Output,
     Renderer2,
     ViewChild,
-    AfterViewInit
+    AfterViewInit, Input
 } from "@angular/core";
 
 @Component({
@@ -16,7 +16,9 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImportComponent implements AfterViewInit {
-    @Output() set = new EventEmitter();
+    @Input() accept = "application/json";
+
+    @Output() set = new EventEmitter<File>();
 
     @ViewChild('inputObj', { read: ElementRef }) inputElementRef: ElementRef;
 
@@ -33,12 +35,7 @@ export class ImportComponent implements AfterViewInit {
             (this.inputElementRef.nativeElement as HTMLInputElement).type = 'text';
             (this.inputElementRef.nativeElement as HTMLInputElement).type = 'file';
 
-            const fr =new FileReader();
-            fr.onload = () => {
-                this.set.next(JSON.parse(fr.result as string));
-            }
-
-            fr.readAsText(file);
+            this.set.next(file);
         });
     }
 }
