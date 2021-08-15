@@ -140,8 +140,7 @@ export class FormComponent<T> implements OnDestroy {
       uniqueProvider: this._uniqueProvider
     })
         .then(res => {
-          if (this.form) this.form.setValue(res.value)
-          else this.form = res;
+          this.form.setValue(res.value);
           this.registerChanges();
           this.cd.detectChanges();
         });
