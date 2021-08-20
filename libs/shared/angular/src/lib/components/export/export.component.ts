@@ -6,23 +6,16 @@ import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
     styleUrls: ["./export.component.scss"]
 })
 export class ExportComponent {
-    private _handler: () => void;
 
     @Input() value: any;
     @Input() fileName: string;
-    @Input() set handler(h: (value) => void) {
-        if (!h) return;
-
-        this._handler = () => {
-          h(this.value);
-        };
-    }
+    @Input() handler: (value) => void;
 
     constructor() { }
 
     async onClick(): Promise<void> {
-        if (this._handler) {
-            this._handler();
+        if (this.handler) {
+            this.handler(this.value);
             return;
         }
 
