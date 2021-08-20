@@ -126,7 +126,7 @@ export class FormComponent<T> implements OnDestroy {
       uniqueProvider: this._uniqueProvider
     })
         .then(res => {
-          this.form.patchValue(res.value);
+          this.form.setValue(res.value);
           this.registerChanges();
           this.cd.detectChanges();
         });
