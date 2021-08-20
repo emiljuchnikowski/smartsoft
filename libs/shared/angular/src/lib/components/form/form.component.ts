@@ -127,7 +127,6 @@ export class FormComponent<T> implements OnDestroy {
     })
         .then(res => {
           this.form = res;
-          this._options.control.setValue(res.value);
           this.registerChanges();
           this.cd.detectChanges();
         });
