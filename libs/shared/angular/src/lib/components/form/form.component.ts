@@ -117,21 +117,7 @@ export class FormComponent<T> implements OnDestroy {
   async oSetValue(file: File): Promise<void> {
     let result;
 
-    if (this.importProvider) {
-      result = await this.importProvider.convert(this._options.model.constructor as Type<any>, file);
-    } else {
-      result = await new Promise((res, rej) => {
-        const fr =new FileReader();
-        fr.onload = () => {
-          res(JSON.parse(fr.result as string));
-        }
-        fr.onerror = err => {
-          rej(err);
-        }
-
-        fr.readAsText(file);
-      })
-    }
+    result = await this.importProvider.convert(this._options.model.constructor as Type<any>, file);
 
     this._options.model = ObjectService.createByType(result, this.options.model.constructor);
 
@@ -140,7 +126,8 @@ export class FormComponent<T> implements OnDestroy {
       uniqueProvider: this._uniqueProvider
     })
         .then(res => {
-          this.form.setValue(res.value);
+          this.form = res;
+          this._options.control.setValue(res.value);
           this.registerChanges();
           this.cd.detectChanges();
         });
