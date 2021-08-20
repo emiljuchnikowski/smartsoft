@@ -218,5 +218,7 @@ export class FormComponent<T> implements OnDestroy {
         this.exportProvider.execute(this._options.model.constructor as Type<any>, val);
       }
     }
+
+    this.cd.detectChanges();
   }
 }
