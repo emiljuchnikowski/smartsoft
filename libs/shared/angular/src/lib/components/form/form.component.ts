@@ -197,16 +197,23 @@ export class FormComponent<T> implements OnDestroy {
 
   private async initExportImport() {
     const modelOptions = getModelOptions(this._options.model.constructor);
-    this.export = modelOptions.export;
-    this.import = modelOptions.import;
+    if (modelOptions.export && !this.exportProvider) {
+      console.error("exportProvider is not provided");
+    }
+
+    if (modelOptions.import && !this.importProvider) {
+      console.error("importProvider is not provided");
+    }
+
+    this.export = modelOptions.export && !!this.exportProvider;
+    this.import = modelOptions.import && !!this.importProvider;
 
     if (this.import) {
-      this.importAccept = this.importProvider
-          ? await this.importProvider.getAccept(this._options.model.constructor as Type<any>) : "application/json";
+      this.importAccept = await this.importProvider.getAccept(this._options.model.constructor as Type<any>);
       if (this.importProvider) this.cd.detectChanges();
     }
 
-    if (this.export && this.exportProvider) {
+    if (this.export) {
       this.exportHandler = val => {
         this.exportProvider.execute(this._options.model.constructor as Type<any>, val);
       }
