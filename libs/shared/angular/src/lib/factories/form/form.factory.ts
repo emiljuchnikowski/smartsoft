@@ -19,6 +19,7 @@ import {PeselService, SpecificationService, ZipCodeService} from "@smartsoft001/
 
 import {AuthService} from "../../services/auth/auth.service";
 import {IModelValidatorsProvider, MODEL_VALIDATORS_PROVIDER} from "../../providers/model-validators.provider";
+import {SmartFormGroup} from "../../services";
 
 @Injectable()
 export class FormFactory {
@@ -68,10 +69,10 @@ export class FormFactory {
       mode?: "create" | "update" | "multiUpdate" | string;
       uniqueProvider?: (values: Record<string, any>) => Promise<boolean>;
     } = {}
-  ): Promise<FormGroup> {
+  ): Promise<SmartFormGroup> {
     FormFactory.checkModelMeta(obj);
 
-    const result = this.fb.group({});
+    const result = SmartFormGroup.create();
 
     const fields = getModelFieldsWithOptions(obj).filter((field) => {
       return (

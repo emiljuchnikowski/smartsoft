@@ -17,6 +17,7 @@ import { IFormOptions } from "../../models/interfaces";
 import {FormFactory} from "../../factories/form/form.factory";
 import {IModelExportProvider, MODEL_EXPORT_PROVIDER} from "../../providers/model-export.provider";
 import {IModelImportProvider, MODEL_IMPORT_PROVIDER} from "../../providers/model-import.provider";
+import {SmartFormGroup} from "../../services/form/form.group";
 
 @Component({
   selector: "smart-form",
@@ -27,7 +28,7 @@ import {IModelImportProvider, MODEL_IMPORT_PROVIDER} from "../../providers/model
                     [handler]="exportHandler"
       ></smart-export>
       <smart-import *ngIf="import"
-                    (set)="oSetValue($event)"
+                    (set)="onSetValue($event)"
                     [accept]="importAccept"
       ></smart-import>
     </div>
@@ -55,7 +56,7 @@ export class FormComponent<T> implements OnDestroy {
   private _mode: "create" | "update" | string;
   private _uniqueProvider: (values: Record<keyof T, any>) => Promise<boolean>;
 
-  form: FormGroup;
+  form: SmartFormGroup;
   type: "standard" | "stepper";
   export: boolean;
   exportHandler: (val) => void;
@@ -79,7 +80,7 @@ export class FormComponent<T> implements OnDestroy {
     this._uniqueProvider = val.uniqueProvider;
 
     if (val.control) {
-      this.form = val.control as FormGroup;
+      this.form = val.control as SmartFormGroup;
       this.registerChanges();
       this.cd.detectChanges();
     } else {
@@ -114,7 +115,7 @@ export class FormComponent<T> implements OnDestroy {
       @Inject(MODEL_IMPORT_PROVIDER) public importProvider: IModelImportProvider
   ) { }
 
-  async oSetValue(file: File): Promise<void> {
+  async onSetValue(file: File): Promise<void> {
     let result;
 
     result = await this.importProvider.convert(this._options.model.constructor as Type<any>, file);
@@ -126,7 +127,7 @@ export class FormComponent<T> implements OnDestroy {
       uniqueProvider: this._uniqueProvider
     })
         .then(res => {
-          this.form.setValue(res.value);
+          this.form.setForm(res);
           this.registerChanges();
           this.cd.detectChanges();
         });
