@@ -1,7 +1,7 @@
 import "reflect-metadata";
 
 import {Inject, Injectable, Optional} from "@angular/core";
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators,} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, Validators,} from "@angular/forms";
 import * as _ from "lodash";
 import {delay, tap} from "rxjs/operators";
 
@@ -194,7 +194,7 @@ export class FormFactory {
     key: string,
     control: AbstractControl,
     options: IFieldOptions,
-    form: FormGroup,
+    form: SmartFormGroup,
     uniqueProvider: (values: Record<string, any>) => Promise<boolean>
   ): void {
     const result = [];
