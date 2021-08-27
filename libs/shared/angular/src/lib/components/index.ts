@@ -20,6 +20,7 @@ export * from './dynamic';
 export * from './password-strength';
 export * from './info';
 export * from './date-range';
+export * from './date-edit';
 export * from './error-context';
 export * from './export';
 export * from './import';

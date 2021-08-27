@@ -100,6 +100,7 @@ import {DetailImageComponent} from "./detail/image/image.component";
 import {InputFloatComponent} from "./input/float/float.component";
 import {ListMasonryGridComponent} from "./list/masonry-grid/masonry-grid.component";
 import {FormStepperComponent} from "./form/stepper/stepper.component";
+import {DateEditComponent} from "./date-edit/date-edit.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -198,6 +199,7 @@ export const GRID_COMPONENTS = [
 
 export const INFO_COMPONENTS = [InfoComponent, InfoModalComponent];
 export const DATE_RANGE_COMPONENTS = [DateRangeComponent, DateRangeModalComponent];
+export const DATE_EDIT_COMPONENTS = [DateEditComponent];
 
 export const DYNAMIC_COMPONENTS = [DynamicComponent];
 
@@ -221,6 +223,7 @@ export const COMPONENTS = [
   PasswordStrengthComponent,
   ...INFO_COMPONENTS,
     ...DATE_RANGE_COMPONENTS,
+    ...DATE_EDIT_COMPONENTS,
     ErrorContextComponent,
     ExportComponent,
   ImportComponent
