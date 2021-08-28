@@ -14,7 +14,7 @@ import {
   Res,
   UseGuards,
 } from "@nestjs/common";
-import * as q2m from "query-to-mongo";
+import * as q2m from "./query-to-mongo";
 import { Response, Request } from "express";
 import { Parser } from "json2csv";
 import * as _ from "lodash";
