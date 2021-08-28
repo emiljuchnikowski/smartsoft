@@ -217,7 +217,7 @@ function queryOptionsToMongo(query, options) {
     return hash
 }
 
-export function q2m(query, options) {
+export function q2m(query = null, options = null) {
     query = query || {};
     options = options || {}
     options.keywords = options.keywords || {}
