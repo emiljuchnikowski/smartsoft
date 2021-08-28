@@ -1,2 +1,4 @@
-<ion-icon name="cloud-upload" (click)="onClick()"></ion-icon>
+<ion-button title="import" (click)="onClick()" slot="icon-only">
+    <ion-icon name="cloud-upload"></ion-icon>
+</ion-button>
 <input type="file" [accept]="accept ? accept : 'application/json'" [hidden]="true" #inputObj>
