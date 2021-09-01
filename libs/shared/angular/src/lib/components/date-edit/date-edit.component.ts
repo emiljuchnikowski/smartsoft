@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output} from "@angular/core";
 import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import * as moment from "moment";
+import {IonInput} from "@ionic/angular";
 
 @Component({
     selector: "smart-date-edit",
@@ -162,5 +163,39 @@ export class DateEditComponent implements ControlValueAccessor {
     private setCharAt(str,index,chr) {
         if(index > str.length-1) return str;
         return str.substring(0,index) + chr + str.substring(index+1);
+    }
+
+    async moveTo(event: KeyboardEvent, el: IonInput): Promise<void> {
+        if (event.key === 'Backspace' || event.key === 'Enter') return;
+
+        const allowKeys = ["0","1","2","3","4","5","6","7","8","9"];
+
+        if (!allowKeys.some(k => k === event.key)) {
+            (event.target as HTMLInputElement).value = "0";
+            return;
+        }
+
+        (event.target as HTMLInputElement).value = (event.target as HTMLInputElement).value.substr(0, 1);
+
+        await el.setFocus();
+
+        await this.select(el);
+    }
+
+    async select(el: IonInput): Promise<void> {
+        setTimeout(async () => {
+            const nativeEl: HTMLInputElement = await el.getInputElement();
+
+            if (nativeEl) {
+                if (nativeEl.setSelectionRange) {
+                    nativeEl.type = 'text';
+                    nativeEl.setSelectionRange(0, nativeEl.value.length);
+                    nativeEl.type = 'number';
+                    return;
+                }
+
+                nativeEl.select();
+            }
+        });
     }
 }
