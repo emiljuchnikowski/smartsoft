@@ -1,11 +1,12 @@
 ion-grid {
-  width: 400px;
+    max-width: 400px;
+    padding: 0;
+    margin: 0;
 }
 
 .cell {
-  background-color: #8c8c8c;
-
-  ion-input {
-    margin-left: 15px;
-  }
+    background-color: #ededed;
+    ion-input {
+        margin-left: 1.2rem;
+    }
 }
