@@ -21,26 +21,14 @@ export class DateEditComponent implements ControlValueAccessor {
         return this.value[8];
     }
     set d1(val: string) {
-        if (val === null) return;
-        const newValue = Number(val);
-        if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
-        this.value = this.setCharAt(this.value, 8, newValue);
-        this.writeValue(this.value);
-        this.propagateChange(this.value);
-        this.propagateTouched();
+        this.setValueAt(val, 8);
     }
     get d2(): string {
         if (!this.value) return null;
         return this.value[9];
     }
     set d2(val: string) {
-        if (val === null) return;
-        const newValue = Number(val);
-        if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
-        this.value = this.setCharAt(this.value, 9, newValue);
-        this.writeValue(this.value);
-        this.propagateChange(this.value);
-        this.propagateTouched();
+        this.setValueAt(val, 9);
     }
 
     get m1(): string {
@@ -48,26 +36,14 @@ export class DateEditComponent implements ControlValueAccessor {
         return this.value[5];
     }
     set m1(val: string) {
-        if (val === null) return;
-        const newValue = Number(val);
-        if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
-        this.value = this.setCharAt(this.value, 5, newValue);
-        this.writeValue(this.value);
-        this.propagateChange(this.value);
-        this.propagateTouched();
+        this.setValueAt(val, 5);
     }
     get m2(): string {
         if (!this.value) return null;
         return this.value[6];
     }
     set m2(val: string) {
-        if (val === null) return;
-        const newValue = Number(val);
-        if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
-        this.value = this.setCharAt(this.value, 6, newValue);
-        this.writeValue(this.value);
-        this.propagateChange(this.value);
-        this.propagateTouched();
+        this.setValueAt(val, 6);
     }
 
     get y1(): string {
@@ -75,55 +51,32 @@ export class DateEditComponent implements ControlValueAccessor {
         return this.value[0];
     }
     set y1(val: string) {
-        if (val === null) return;
-        const newValue = Number(val);
-        if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
-        this.value = this.setCharAt(this.value, 0, newValue);
-        this.writeValue(this.value);
-        this.propagateChange(this.value);
-        this.propagateTouched();
+        this.setValueAt(val, 0);
     }
     get y2(): string {
         if (!this.value) return null;
         return this.value[1];
     }
     set y2(val: string) {
-        if (val === null) return;
-        const newValue = Number(val);
-        if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
-        this.value = this.setCharAt(this.value, 1, newValue);
-        this.writeValue(this.value);
-        this.propagateChange(this.value);
-        this.propagateTouched();
+        this.setValueAt(val, 1);
     }
     get y3(): string {
         if (!this.value) return null;
         return this.value[2];
     }
     set y3(val: string) {
-        if (val === null) return;
-        const newValue = Number(val);
-        if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
-        this.value = this.setCharAt(this.value, 2, newValue);
-        this.writeValue(this.value);
-        this.propagateChange(this.value);
-        this.propagateTouched();
+        this.setValueAt(val, 2);
     }
     get y4(): string {
         if (!this.value) return null;
         return this.value[3];
     }
     set y4(val: string) {
-        if (val === null) return;
-        const newValue = Number(val);
-        if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
-        this.value = this.setCharAt(this.value, 3, newValue);
-        this.writeValue(this.value);
-        this.propagateChange(this.value);
-        this.propagateTouched();
+        this.setValueAt(val, 3);
     }
 
     value: any = this.DEFAULT_DATE;
+    validDate: boolean = true;
 
     propagateChange = val => {};
     propagateTouched = () => {};
@@ -132,6 +85,7 @@ export class DateEditComponent implements ControlValueAccessor {
         this.value = val;
     }
     @Output() ngModelChange = new EventEmitter<string>();
+    @Output() validChange = new EventEmitter<boolean>();
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -158,11 +112,6 @@ export class DateEditComponent implements ControlValueAccessor {
         this.ngModelChange.emit(this.value);
         this.propagateChange(this.value);
         this.propagateTouched();
-    }
-
-    private setCharAt(str,index,chr) {
-        if(index > str.length-1) return str;
-        return str.substring(0,index) + chr + str.substring(index+1);
     }
 
     async moveTo(event: KeyboardEvent, el: IonInput): Promise<void> {
@@ -197,5 +146,30 @@ export class DateEditComponent implements ControlValueAccessor {
                 nativeEl.select();
             }
         });
+    }
+
+    private setValueAt(val: string, index: number): void {
+        if (val === null) return;
+        const newValue = Number(val);
+        if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
+        this.value = this.setCharAt(this.value, index, newValue);
+
+        this.validDate = moment(this.value).isValid();
+
+        if (this.validDate) {
+            this.writeValue(this.value);
+            this.propagateChange(this.value);
+            this.propagateTouched();
+        } else {
+            this.propagateChange(null);
+            this.propagateTouched();
+        }
+
+        this.validChange.emit(this.validDate);
+    }
+
+    private setCharAt(str,index,chr) {
+        if(index > str.length-1) return str;
+        return str.substring(0,index) + chr + str.substring(index+1);
     }
 }
