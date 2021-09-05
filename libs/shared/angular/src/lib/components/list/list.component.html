@@ -8,6 +8,10 @@
     <ion-col></ion-col>
     <ion-col size="auto">
         <smart-loader [show]="internalOptions?.provider?.loading$ | async"></smart-loader>
+        <h2 *ngIf="!(internalOptions?.provider?.loading$ | async) && !(internalOptions.provider.list$ | async)?.length">
+            <br/>
+             {{ 'noResults' | translate }}
+        </h2>
     </ion-col>
     <ion-col></ion-col>
 </ion-row>
