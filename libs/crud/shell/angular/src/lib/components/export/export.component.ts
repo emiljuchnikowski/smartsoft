@@ -46,6 +46,7 @@ export class ExportComponent<T extends IEntity<string>> extends BaseComponent im
           subscription.unsubscribe();
         });
       },
+      loading$: this.facade.loading$,
       expand: 'block'
     }
   }
