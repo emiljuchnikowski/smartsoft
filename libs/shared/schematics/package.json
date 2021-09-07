@@ -1,5 +1,5 @@
 {
   "name": "@smartsoft001/schematics",
-  "version": "1.0.407",
+  "version": "1.0.408",
   "schematics": "./collection.json"
 }
