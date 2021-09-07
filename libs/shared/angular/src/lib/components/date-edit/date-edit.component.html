@@ -43,7 +43,7 @@
         </ion-col>
         <ion-col>
             <div class="cell">
-                <ion-input type="number" min="0" max="9"  maxlength="1"  [(ngModel)]="y4" #y4Element (click)="select(y4Element)"></ion-input>
+                <ion-input type="number" min="0" max="9"  maxlength="1"  [(ngModel)]="y4" #y4Element (click)="select(y4Element)" (keyup)="select(y4Element)"></ion-input>
             </div>
         </ion-col>
     </ion-row>

@@ -136,6 +136,8 @@ export class DateEditComponent implements ControlValueAccessor {
             const nativeEl: HTMLInputElement = await el.getInputElement();
 
             if (nativeEl) {
+                nativeEl.value = nativeEl.value.substr(0, 1);
+
                 if (nativeEl.setSelectionRange) {
                     nativeEl.type = 'text';
                     nativeEl.setSelectionRange(0, nativeEl.value.length);
@@ -150,6 +152,8 @@ export class DateEditComponent implements ControlValueAccessor {
 
     private setValueAt(val: string, index: number): void {
         if (val === null) return;
+
+        val = val.toString().substr(0, 1);
         const newValue = Number(val);
         if (!this.value || newValue > 9 || newValue < 0) this.value = this.DEFAULT_DATE;
         this.value = this.setCharAt(this.value, index, newValue);
