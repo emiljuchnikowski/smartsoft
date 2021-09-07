@@ -269,7 +269,7 @@ export class ListComponent<T extends IEntity<string>>
           ? [
             {
               icon: "filter-outline",
-              text: "filter",
+              text: "filters",
               handler: async () => {
                 await this.menuService.openEnd({
                   injector: this.injector,
