@@ -53,7 +53,8 @@ export default function (options: Schema): Rule {
                     target: "es6",
                     unitTestRunner: "jest",
                     linter: "eslint",
-                    testEnvironment: "node"
+                    testEnvironment: "node",
+                    buildable: true
                 }),
                 removeFiles,
                 mergeWith(templateSource, MergeStrategy.Overwrite),
