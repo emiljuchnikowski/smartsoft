@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/cli",
-  "version": "1.0.200",
+  "version": "1.0.300",
   "bin": {
     "smart": "smart.js"
   },
@@ -8,5 +8,7 @@
     "fs-extra": "^9.0.1",
     "tslib": "^2.0.3",
     "yargs": "^16.1.0"
-  }
+  },
+  "main": "src/index.js",
+  "typings": "src/index.d.ts"
 }
