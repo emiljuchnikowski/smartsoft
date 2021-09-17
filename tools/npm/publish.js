@@ -134,10 +134,10 @@ const libs = [
         name: "shared-core",
         path: "libs/shared/core"
     },
-    // {
-    //     name: "shared-cli",
-    //     path: "libs/shared/cli"
-    // }
+    {
+        name: "shared-cli",
+        path: "libs/shared/cli"
+    }
 ];
 
 console.log('npm version path');
