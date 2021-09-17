@@ -40,7 +40,7 @@ export default function (options: Schema): Rule {
                     directory: "shared",
                     style: "scss",
                     unitTestRunner: "jest",
-                    linter: "tslint"
+                    linter: "eslint"
                 }),
                 removeFiles,
                 mergeWith(templateSource, MergeStrategy.Overwrite)
