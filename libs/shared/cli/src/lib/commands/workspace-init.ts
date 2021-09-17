@@ -48,7 +48,7 @@ function runNgAdd(target) {
         '@nrwl/node',
         '@nrwl/nest',
         '@nrwl/cypress',
-        '@nrwl/storybook --uiFramework=@nrwl/storybook',
+        '@nrwl/storybook --uiFramework=@storybook/angular',
         '@nrwl/jest',
     ];
 

@@ -68,7 +68,8 @@ export default function (options: Schema): Rule {
                 target: "es6",
                 unitTestRunner: "jest",
                 linter: "eslint",
-                testEnvironment: "node"
+                testEnvironment: "node",
+                buildable: true
             }),
             externalSchematic('@nrwl/nest', 'library', {
                 name: 'app-services',
@@ -76,7 +77,8 @@ export default function (options: Schema): Rule {
                 target: "es6",
                 unitTestRunner: "jest",
                 linter: "eslint",
-                testEnvironment: "node"
+                testEnvironment: "node",
+                buildable: true
             }),
             externalSchematic('@nrwl/nest', 'library', {
                 name: 'nestjs',
@@ -84,7 +86,8 @@ export default function (options: Schema): Rule {
                 target: "es6",
                 unitTestRunner: "jest",
                 linter: "eslint",
-                testEnvironment: "node"
+                testEnvironment: "node",
+                buildable: true
             }),
             externalSchematic('@nrwl/nest', 'library', {
                 name: 'dtos',
@@ -92,14 +95,16 @@ export default function (options: Schema): Rule {
                 target: "es6",
                 unitTestRunner: "jest",
                 linter: "eslint",
-                testEnvironment: "node"
+                testEnvironment: "node",
+                buildable: true
             }),
             externalSchematic('@nrwl/angular', 'library', {
                 name: 'angular',
                 directory: domainNamePluralize + '/shell',
                 style: "scss",
                 unitTestRunner: "jest",
-                linter: "eslint"
+                linter: "eslint",
+                buildable: true
             }),
             clearModules,
             mergeWith(templateSource, MergeStrategy.Overwrite),
