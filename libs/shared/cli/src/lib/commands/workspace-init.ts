@@ -19,7 +19,7 @@ function runInstallDeps(target) {
 function runInstallDevDeps(target) {
     log('Install dev dependencies');
     const devDeps = [
-        '@smartsoft001/schematics',
+        //'@smartsoft001/schematics',
         '@ionic/angular-toolkit',
         '@ngneat/spectator',
         '@ngrx/schematics',
@@ -36,9 +36,9 @@ function runInstallDevDeps(target) {
 
 function runSetNgConfig(target) {
     log('Set NG config');
-    runCommand("ng analytics project off", target);
-    runCommand("ng config cli.defaultCollection @smartsoft001/schematics", target);
+    //runCommand("ng analytics project off", target);
     runCommand("ng add @smartsoft001/schematics", target);
+    runCommand("ng config cli.defaultCollection @smartsoft001/schematics", target);
 }
 
 function runNgAdd(target) {
