@@ -11,13 +11,8 @@ module.exports = {
     "ts-jest": {
       tsConfig: "<rootDir>/tsconfig.spec.json",
       stringifyContentPathRegex: "\\.(html|svg)$",
-      astTransformers: {
-        before: [
-          "jest-preset-angular/build/InlineFilesTransformer",
-          "jest-preset-angular/build/StripStylesTransformer",
-        ],
-      },
+      
     },
   },
-  displayName: "ui-test",
+  displayName: "ui-test","transform": {"^.+\\.(ts|js|html)$":"jest-preset-angular"}
 };

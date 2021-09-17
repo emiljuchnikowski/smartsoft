@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------------
 
 @mixin make-grid($padding-width: $grid-padding-width) {
-  @include padding($padding-width / 2);
+  //math.div($padding-width, 2);
   @include margin-horizontal(auto);
 
   width: 100%;

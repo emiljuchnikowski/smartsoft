@@ -23,12 +23,12 @@ node {
             }
         }
 
-        stage('Unit tests') {
-            withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
-                sh 'NPM_TOKEN=$TOKEN npm test -- --ci --testResultsProcessor="jest-junit"'
-                junit 'junit.xml'
-            }
-        }
+//         stage('Unit tests') {
+//             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
+//                 sh 'NPM_TOKEN=$TOKEN npm test -- --ci --testResultsProcessor="jest-junit"'
+//                 junit 'junit.xml'
+//             }
+//         }
 
 //         stage('Lint') {
 //             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {

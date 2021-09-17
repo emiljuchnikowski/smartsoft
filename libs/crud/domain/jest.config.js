@@ -10,5 +10,5 @@ module.exports = {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../coverage/libs/crud/domain",
-  displayName: "crud-domain",
+  displayName: "crud-domain","testEnvironment": "node"
 };

@@ -10,5 +10,5 @@ module.exports = {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../coverage/libs/shared/mongo",
-  displayName: "shared-mongo",
+  displayName: "shared-mongo","testEnvironment": "node"
 };

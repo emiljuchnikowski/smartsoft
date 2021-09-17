@@ -5,12 +5,7 @@ module.exports = {
     "ts-jest": {
       tsConfig: "<rootDir>/tsconfig.spec.json",
       stringifyContentPathRegex: "\\.(html|svg)$",
-      astTransformers: {
-        before: [
-          "jest-preset-angular/build/InlineFilesTransformer",
-          "jest-preset-angular/build/StripStylesTransformer",
-        ],
-      },
+      
     },
   },
   coverageDirectory: "../../../coverage/libs/shared/users",
@@ -19,5 +14,5 @@ module.exports = {
     "jest-preset-angular/build/AngularSnapshotSerializer.js",
     "jest-preset-angular/build/HTMLCommentSerializer.js",
   ],
-  displayName: "shared-users",
+  displayName: "shared-users","transform": {"^.+\\.(ts|js|html)$":"jest-preset-angular"}
 };

@@ -10,5 +10,5 @@ module.exports = {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../../coverage/libs/crud/shell/dtos",
-  displayName: "crud-shell-dtos",
+  displayName: "crud-shell-dtos","testEnvironment": "node"
 };
