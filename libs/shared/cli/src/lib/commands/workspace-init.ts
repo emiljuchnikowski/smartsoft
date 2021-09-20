@@ -10,7 +10,8 @@ function runInstallDeps(target) {
         "passport",
         '@angular/material',
         '@angular/cdk',
-        '@ionic-native/core'
+        '@ionic-native/core',
+        "@nestjs/cqrs"
     ];
     const installDevDeps = `npm i ${deps.join(' ')} --save --force`;
     runCommand(installDevDeps, target);
