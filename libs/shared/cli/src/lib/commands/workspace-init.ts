@@ -38,7 +38,7 @@ function runSetNgConfig(target) {
     log('Set NG config');
     //runCommand("ng analytics project off", target);
     runCommand("ng config cli.defaultCollection @smartsoft001/schematics", target);
-    runCommand("ng add @smartsoft001/schematics", target);
+    runCommand("ng add @smartsoft001/schematics --skip-confirmation=true", target);
 }
 
 function runNgAdd(target) {
