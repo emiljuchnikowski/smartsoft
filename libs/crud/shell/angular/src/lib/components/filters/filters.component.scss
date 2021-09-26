@@ -104,4 +104,9 @@
             }
         }
     }
+    .filter-content {
+        display: block;
+        overflow: auto;
+        overflow-x: hidden;
+    }
 }
