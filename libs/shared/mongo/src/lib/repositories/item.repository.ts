@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { ChangeStream, MongoClient } from "mongodb";
+import { ChangeStream, Db, MongoClient } from "mongodb";
 import { Observable, Observer } from "rxjs";
 import { finalize, share } from "rxjs/operators";
 
@@ -206,9 +206,9 @@ export class MongoItemRepository<
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
         (async () => {
-          const db = (repoOptions.transaction as IMongoTransaction).connection.db(
-            this.config.database
-          );
+          const db = (
+            repoOptions.transaction as IMongoTransaction
+          ).connection.db(this.config.database);
           const collection = db.collection(this.config.collection);
 
           const info = await this.getInfo(item.id, collection);
@@ -275,9 +275,9 @@ export class MongoItemRepository<
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
         (async () => {
-          const db = (repoOptions.transaction as IMongoTransaction).connection.db(
-            this.config.database
-          );
+          const db = (
+            repoOptions.transaction as IMongoTransaction
+          ).connection.db(this.config.database);
           const collection = db.collection(this.config.collection);
 
           const info = await this.getInfo(item.id, collection);
@@ -361,9 +361,9 @@ export class MongoItemRepository<
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
         (async () => {
-          const db = (repoOptions.transaction as IMongoTransaction).connection.db(
-            this.config.database
-          );
+          const db = (
+            repoOptions.transaction as IMongoTransaction
+          ).connection.db(this.config.database);
 
           db.collection(this.config.collection).updateMany(
             criteria,
@@ -473,9 +473,9 @@ export class MongoItemRepository<
     if (repoOptions && repoOptions.transaction) {
       return new Promise<void>((res, rej) => {
         (async () => {
-          const db = (repoOptions.transaction as IMongoTransaction).connection.db(
-            this.config.database
-          );
+          const db = (
+            repoOptions.transaction as IMongoTransaction
+          ).connection.db(this.config.database);
 
           db.collection(this.config.collection).deleteOne(
             { _id: id },
@@ -669,6 +669,31 @@ export class MongoItemRepository<
     );
   }
 
+  protected getContext(handler: (db: Db) => Promise<void>): Promise<void> {
+    return new Promise<void>((res, rej) => {
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        async (err, client) => {
+          if (err) {
+            rej(err);
+            return;
+          }
+
+          const db = client.db(this.config.database);
+
+          try {
+            await handler(db);
+            await client.close();
+          } catch (e) {
+            await client.close();
+            throw e;
+          }
+        }
+      );
+    });
+  }
+
   private getCount(criteria: any, collection): Promise<any> {
     return new Promise<any>((res, rej) => {
       collection.countDocuments(criteria, (err, count) => {
@@ -811,7 +836,10 @@ export class MongoItemRepository<
         modelFields.forEach((val) => {
           const res = {};
 
-          res[val.key] = { $regex: criteria["$search"].toString(), $options: "i" };
+          res[val.key] = {
+            $regex: criteria["$search"].toString(),
+            $options: "i",
+          };
 
           searchArray.push(res);
         });
