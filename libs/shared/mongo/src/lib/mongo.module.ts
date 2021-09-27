@@ -9,19 +9,17 @@ import {MongoAttachmentRepository} from "./repositories/attachment.repository";
 
 export class MongoModule {
     static forRoot(config: MongoConfig): DynamicModule {
+        const providers = [
+            { provide: MongoConfig, useValue: config },
+            { provide: IItemRepository, useClass: MongoItemRepository },
+            { provide: IAttachmentRepository, useClass: MongoAttachmentRepository },
+            { provide: IUnitOfWork, useClass: MongoUnitOfWork }
+        ];
+
         return {
             module: MongoModule,
-            providers: [
-                { provide: MongoConfig, useValue: config },
-                { provide: IItemRepository, useClass: MongoItemRepository },
-                { provide: IAttachmentRepository, useClass: MongoAttachmentRepository },
-                { provide: IUnitOfWork, useClass: MongoUnitOfWork }
-            ],
-            exports: [
-                { provide: IItemRepository, useClass: MongoItemRepository },
-                { provide: IAttachmentRepository, useClass: MongoAttachmentRepository },
-                { provide: IUnitOfWork, useClass: MongoUnitOfWork }
-            ]
+            providers: providers,
+            exports: providers
         };
     }
 }
