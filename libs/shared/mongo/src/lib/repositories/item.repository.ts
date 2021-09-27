@@ -669,8 +669,8 @@ export class MongoItemRepository<
     );
   }
 
-  protected getContext(handler: (db: Db) => Promise<void>): Promise<void> {
-    return new Promise<void>((res, rej) => {
+  protected getContext<TResult>(handler: (db: Db) => Promise<TResult>): Promise<TResult> {
+    return new Promise<TResult>((res, rej) => {
       MongoClient.connect(
         this.getUrl(),
         { useUnifiedTopology: this.useUnifiedTopology },
@@ -683,11 +683,12 @@ export class MongoItemRepository<
           const db = client.db(this.config.database);
 
           try {
-            await handler(db);
+            const result = await handler(db);
             await client.close();
+            res(result);
           } catch (e) {
             await client.close();
-            throw e;
+            rej(e);
           }
         }
       );
