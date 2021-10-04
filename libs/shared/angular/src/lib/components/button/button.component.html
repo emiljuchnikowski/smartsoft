@@ -1,5 +1,5 @@
 <ng-container *ngIf="mode != 'confirm'; else confirmTpl">
-    <ion-button [expand]="options?.expand" [type]="options?.type" (click)="invoke()" [disabled]="disabled || (options?.loading$ | async)">
+    <ion-button [color]="options?.color" [expand]="options?.expand" [type]="options?.type" (click)="invoke()" [disabled]="disabled || (options?.loading$ | async)">
         <ion-spinner *ngIf="options?.loading$ | async; else content"></ion-spinner>
         <ng-template #content>
             <ng-content></ng-content>

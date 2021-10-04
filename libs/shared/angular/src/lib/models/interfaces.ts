@@ -23,6 +23,7 @@ export interface IButtonOptions {
   type?: "submit" | "button";
   expand?: "block" | "full" | undefined;
   confirm?: boolean;
+  color?: 'primary' | 'light' | string;
   click: () => void;
   loading$?: Observable<boolean>;
 }
