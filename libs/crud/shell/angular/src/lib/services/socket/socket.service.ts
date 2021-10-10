@@ -15,3 +15,6 @@ export class SocketService<T> extends Socket {
         });
     }
 }
+
+@Injectable()
+export class NotSocketService<T> { }

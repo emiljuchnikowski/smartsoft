@@ -34,7 +34,6 @@ export abstract class PageBaseComponent implements OnInit, OnDestroy {
 
     back(): void {
         this.location.back();
-        console.log( 'goBack()...' );
     }
 
     async presentPopover(ev: any, btn: IIconButtonOptions): Promise<void> {

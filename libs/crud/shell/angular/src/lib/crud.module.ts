@@ -20,7 +20,7 @@ import { CrudService } from "./services/crud/crud.service";
 import { CrudFacade } from "./+state/crud.facade";
 import { CrudPipesModule } from "./pipes/pipes.module";
 import { CrudFullModule } from "./crud-full.module";
-import { SocketService } from "./services/socket/socket.service";
+import {NotSocketService, SocketService} from "./services/socket/socket.service";
 import { CrudListPaginationFactory } from "./factories/list-pagination/list-pagination.factory";
 import { CrudComponentsModule } from "./components/components.module";
 
@@ -73,7 +73,11 @@ export class CrudModule<T extends IEntity<string>> {
           provide: FILE_SERVICE_CONFIG,
           useValue: { apiUrl: options.config.apiUrl } as IFileServiceConfig,
         },
-        ...(options.socket ? [] : [SocketService]),
+        ...(
+            options.socket
+                ? [SocketService]
+                : [{ provide: SocketService, useClass: NotSocketService }]
+        ),
       ],
     };
   }
