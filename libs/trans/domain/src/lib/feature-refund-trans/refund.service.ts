@@ -39,7 +39,7 @@ export class RefundService<T> extends TransBaseService<T> {
             };
             this.addHistory(trans, data);
 
-            await this.repository.save(trans);
+            await this.repository.update(trans, null);
         } catch (err) {
             console.error(err);
 
