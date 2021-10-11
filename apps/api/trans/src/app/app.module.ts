@@ -5,8 +5,8 @@ import { APP_FILTER } from "@nestjs/core";
 
 import { ENTITIES } from "@smartsoft001/trans-domain";
 import { AppExceptionFilter } from "@smartsoft001/nestjs";
-import { TransShellNestjsModule } from "@smartsoft001-trans/shell-nestjs";
 import { InternalController } from "./internal.controller";
+import {TransShellNestjsModule} from "@smartsoft001/trans-shell-nestjs";
 
 const dbOptions: Partial<ConnectionOptions> = {
   type: "mongodb",

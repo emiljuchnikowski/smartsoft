@@ -1,6 +1,4 @@
 import { HttpService, Injectable, Optional } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
 import { ModuleRef } from "@nestjs/core";
 
 import {
@@ -17,6 +15,7 @@ import { PaypalService } from "@smartsoft001/paypal";
 import { RevolutService } from "@smartsoft001/revolut";
 
 import { TRANS_TOKEN_INTERNAL_SERVICE } from "../internal/internal.service";
+import {IItemRepository} from "@smartsoft001/domain-core";
 
 @Injectable()
 export class TransService {
@@ -51,7 +50,7 @@ export class TransService {
     private refundService: RefundService<any>,
     private httpService: HttpService,
     private config: TransConfig,
-    @InjectRepository(Trans) private repository: Repository<Trans<any>>,
+    private repository: IItemRepository<Trans<any>>,
     @Optional() private payuService: PayuService,
     @Optional() private paypalService: PaypalService,
     @Optional() private revolutService: RevolutService
@@ -84,9 +83,7 @@ export class TransService {
   }
 
   async getById(id: any): Promise<Trans<any>> {
-    return await this.repository.findOne({
-      _id: id,
-    } as any);
+    return await this.repository.getById(id);
   }
 
   private getInternalService(): ITransInternalService<any> {

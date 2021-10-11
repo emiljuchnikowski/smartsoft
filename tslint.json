@@ -76,7 +76,8 @@
             "onlyDependOnLibsWithTags": [
               "type:shell",
               "type:domain",
-              "type:util"
+              "type:util",
+              "scope:trans"
             ]
           },
           {

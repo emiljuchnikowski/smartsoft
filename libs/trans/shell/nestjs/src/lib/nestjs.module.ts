@@ -11,16 +11,29 @@ import { PaypalConfig, PaypalService } from "@smartsoft001/paypal";
 import { RevolutConfig, RevolutService } from "@smartsoft001/revolut";
 
 import { CONTROLLERS } from "./controllers";
+import {CrudModule} from "@smartsoft001/crud-shell-angular";
+import {CrudShellNestjsCoreModule, CrudShellNestjsModule} from "@smartsoft001/crud-shell-nestjs";
+import {SharedConfig} from "@smartsoft001/nestjs";
 
 @Module({
   imports: [HttpModule],
 })
 export class TransShellNestjsModule {
   static forRoot(
-    config: TransConfig & {
+    config: SharedConfig & TransConfig & {
       payuConfig?: PayuConfig;
       paypalConfig?: PaypalConfig;
       revolutConfig?: RevolutConfig;
+    } & {
+      db: {
+        host: string;
+        port: number;
+        database: string;
+        username?: string;
+        password?: string;
+        collection?: string;
+        type?: any;
+      };
     }
   ): DynamicModule {
     return {
@@ -47,7 +60,15 @@ export class TransShellNestjsModule {
           : []),
       ],
       imports: [
-        TypeOrmModule.forFeature(ENTITIES),
+        CrudShellNestjsModule.forRoot({
+          ...config,
+          db: {
+            ...config.db,
+            collection: "trans"
+          },
+          restApi: false,
+          socket: false
+        }),
         PassportModule.register({ defaultStrategy: "jwt", session: false }),
         JwtModule.register({
           secret: config.tokenConfig.secretOrPrivateKey,
@@ -72,11 +93,21 @@ export class TransShellNestjsModule {
 })
 export class TransShellNestjsCoreModule {
   static forRoot(
-    config: TransConfig & {
-      payuConfig?: PayuConfig;
-      paypalConfig?: PaypalConfig;
-      revolutConfig?: RevolutConfig;
-    }
+      config: SharedConfig & TransConfig & {
+        payuConfig?: PayuConfig;
+        paypalConfig?: PaypalConfig;
+        revolutConfig?: RevolutConfig;
+      } & {
+        db: {
+          host: string;
+          port: number;
+          database: string;
+          username?: string;
+          password?: string;
+          collection?: string;
+          type?: any;
+        };
+      }
   ): DynamicModule {
     return {
       module: TransShellNestjsCoreModule,
@@ -95,7 +126,15 @@ export class TransShellNestjsCoreModule {
           : []),
       ],
       imports: [
-        TypeOrmModule.forFeature(ENTITIES),
+        CrudShellNestjsModule.forRoot({
+          ...config,
+          db: {
+            ...config.db,
+            collection: "trans"
+          },
+          restApi: false,
+          socket: false
+        }),
         PassportModule.register({ defaultStrategy: "jwt", session: false }),
         JwtModule.register({
           secret: config.tokenConfig.secretOrPrivateKey,

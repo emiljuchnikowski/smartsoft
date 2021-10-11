@@ -1,16 +1,15 @@
 import {Injectable, NotFoundException} from "@nestjs/common";
-import {Repository} from "typeorm";
-import {InjectRepository} from "@nestjs/typeorm";
+
+import {IItemRepository} from "@smartsoft001/domain-core";
 
 import {TransBaseService} from "../trans.service";
 import {Trans} from "../entities";
 import {ITransInternalService, ITransPaymentService} from "../interfaces";
 
+
 @Injectable()
 export class RefundService<T> extends TransBaseService<T> {
-    constructor(
-        @InjectRepository(Trans) repository: Repository<Trans<T>>
-    ) {
+    constructor(repository: IItemRepository<Trans<T>>) {
         super(repository);
     }
 
@@ -20,10 +19,7 @@ export class RefundService<T> extends TransBaseService<T> {
         paymentService: ITransPaymentService,
         comment = "Refund"
     ) : Promise<void> {
-        const trans: Trans<any> = await this.repository
-            .findOne({
-                _id: transId
-            } as any);
+        const trans: Trans<any> = await this.repository.getById(transId);
 
         if (!trans) {
             throw new NotFoundException("Transaction not found: " + transId);

@@ -1,21 +1,18 @@
 import {Injectable} from "@nestjs/common";
 import {Guid} from "guid-typescript";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+
+import {DomainValidationError, IItemRepository} from "@smartsoft001/domain-core";
 
 import {
   ITransCreate,
 } from "./interfaces";
-import { DomainValidationError } from "@smartsoft001/domain-core";
 import { Trans, TRANS_SYSTEMS } from "../entities/trans.entity";
 import { TransBaseService } from "../trans.service";
 import {ITransInternalService, ITransPaymentService} from "../interfaces";
 
 @Injectable()
 export class CreatorService<T> extends TransBaseService<T> {
-  constructor(
-    @InjectRepository(Trans) repository: Repository<Trans<T>>
-  ) {
+  constructor(repository: IItemRepository<Trans<T>>) {
     super(repository);
   }
 
@@ -64,7 +61,7 @@ export class CreatorService<T> extends TransBaseService<T> {
 
     this.addHistory(trans, paymentResult);
 
-    await this.repository.save(trans as any);
+    await this.repository.update(trans as any, null);
 
     return paymentResult;
   }
@@ -81,7 +78,7 @@ export class CreatorService<T> extends TransBaseService<T> {
     trans.modifyDate = new Date();
     this.addHistory(trans, internalResult);
 
-    await this.repository.save(trans as any);
+    await this.repository.update(trans as any, null);
   }
 
   private async prepare(config: ITransCreate<T>): Promise<Trans<T>> {
@@ -99,7 +96,7 @@ export class CreatorService<T> extends TransBaseService<T> {
 
     this.addHistory(trans, trans.data);
 
-    await this.repository.save(trans as any);
+    await this.repository.create(trans as any, null);
 
     return trans;
   }

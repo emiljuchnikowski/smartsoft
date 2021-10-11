@@ -1,16 +1,15 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { Repository } from "typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
+
+import {IItemRepository} from "@smartsoft001/domain-core";
 
 import { TransBaseService } from "../trans.service";
 import { ITransInternalService, ITransPaymentService } from "../interfaces";
 import { Trans } from "../entities";
 
+
 @Injectable()
 export class RefresherService<T> extends TransBaseService<T> {
-  constructor(
-    @InjectRepository(Trans) repository: Repository<Trans<T>>
-  ) {
+  constructor(repository: IItemRepository<Trans<T>>) {
     super(repository);
   }
 
@@ -22,10 +21,10 @@ export class RefresherService<T> extends TransBaseService<T> {
   ) : Promise<void> {
 
     // hack : bad map id
-    const trans: Trans<any> = await this.repository
-        .findOne({
+    const trans: Trans<any> = (await this.repository
+        .getByCriteria({
           externalId: transId
-        });
+        })).data[0];
 
     if (!trans) {
       throw new NotFoundException("Transaction not found: " + transId);
@@ -47,7 +46,7 @@ export class RefresherService<T> extends TransBaseService<T> {
 
       this.addHistory(trans, internalRes);
 
-      await this.repository.save(trans);
+      await this.repository.update(trans, null);
     } catch (err) {
       console.error(err);
 

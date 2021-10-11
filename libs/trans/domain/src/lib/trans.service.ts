@@ -1,13 +1,10 @@
-import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {ObjectService} from "@smartsoft001/utils";
+import {IItemRepository} from "@smartsoft001/domain-core";
 
 import {Trans, TransHistory} from "./entities/trans.entity";
-import {ObjectService} from "@smartsoft001/utils";
 
 export abstract class TransBaseService<T> {
-    protected constructor(
-        @InjectRepository(Trans) protected repository: Repository<Trans<T>>
-    ) {
+    protected constructor(protected repository: IItemRepository<Trans<T>>) {
     }
 
     protected addHistory(trans: Trans<T>, data: any): void {
@@ -26,7 +23,7 @@ export abstract class TransBaseService<T> {
         trans.status = "error";
         this.addHistory(trans, error);
 
-        await this.repository.save(trans as any);
+        await this.repository.update(trans as any, null);
     }
 }
 
