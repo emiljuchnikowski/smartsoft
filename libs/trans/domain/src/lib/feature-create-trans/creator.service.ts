@@ -88,8 +88,7 @@ export class CreatorService<T> extends TransBaseService<T> {
       trans[key] = config[key];
     });
 
-    // hack: generate id
-    trans['_id'] = Guid.raw();
+    trans.id = Guid.raw();
 
     trans.modifyDate = new Date();
     trans.status = "prepare";
