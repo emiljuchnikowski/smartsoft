@@ -1,6 +1,5 @@
 import { ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { Store, StoreModule } from "@ngrx/store";
-import { SocketIoModule } from "ngx-socket-io";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 
@@ -30,7 +29,6 @@ import { CrudComponentsModule } from "./components/components.module";
     StoreModule,
     SharedModule,
     CrudPipesModule,
-    SocketIoModule,
     FormsModule,
     CommonModule,
     CrudComponentsModule,

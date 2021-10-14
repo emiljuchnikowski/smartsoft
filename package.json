@@ -108,7 +108,6 @@
     "ngx-color-picker": "^10.1.0",
     "ngx-cookie": "^5.0.2",
     "ngx-editor": "9.0.2",
-    "ngx-socket-io": "^4.0.0",
     "passport": "0.4.1",
     "passport-jwt": "4.0.0",
     "paypal-rest-sdk": "^1.8.1",

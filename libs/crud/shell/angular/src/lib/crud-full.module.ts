@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 import {Store, StoreModule} from "@ngrx/store";
-import {SocketIoModule} from "ngx-socket-io";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 
@@ -35,7 +34,6 @@ const PAGES = [
         StoreModule,
         SharedModule,
         CrudPipesModule,
-        SocketIoModule,
         RouterModule.forChild([
             {path: '', component: ListComponent}
             , {path: 'add', component: ItemComponent}

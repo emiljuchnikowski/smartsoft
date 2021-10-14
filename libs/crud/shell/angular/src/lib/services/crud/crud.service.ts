@@ -23,10 +23,10 @@ export class CrudService<T extends IEntity<string>> {
     @Optional() protected socket: SocketService<T>
   ) {}
 
-  changes(criteria: { id?: string } = {}): Observable<ItemChangedData> {
-    this.socket.emit("changes", criteria);
-    return this.socket.fromEvent("changes");
-  }
+  // changes(criteria: { id?: string } = {}): Observable<ItemChangedData> {
+  //   this.socket.emit("changes", criteria);
+  //   return this.socket.fromEvent("changes");
+  // }
 
   // TODO : Location is null
   create(item: T): Observable<string> {
