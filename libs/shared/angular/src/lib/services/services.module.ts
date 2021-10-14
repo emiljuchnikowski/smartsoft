@@ -18,6 +18,7 @@ import { CameraService } from "./camera/camera.service";
 import {FileService} from "./file/file.service";
 import {CalendarService} from "./calendar/calendar.service";
 import {UIService} from "./ui/ui.service";
+import {AlertService} from "./alert/alert.service";
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import {UIService} from "./ui/ui.service";
     CameraService,
     FileService,
     CalendarService,
-    UIService
+    UIService,
+    AlertService
   ],
 })
 export class SharedServicesModule {}
