@@ -5,9 +5,9 @@ import {AlertController} from "@ionic/angular";
 export class AlertService {
     constructor(private readonly alertCtrl: AlertController) {}
 
-    async show(options: IAlertOptions): Promise<string> {
+    async show(options: IAlertOptions): Promise<void> {
         const alert = await this.alertCtrl.create(options);
-        return await alert.onWillDismiss().then(r => r.data);
+        await alert.present();
     }
 }
 
