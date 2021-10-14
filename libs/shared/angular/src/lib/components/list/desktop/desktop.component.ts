@@ -15,7 +15,7 @@ import { MatSort } from "@angular/material/sort";
 import { IEntity } from "@smartsoft001/domain-core";
 
 import { ListBaseComponent } from "../base/base.component";
-import { ToastService } from "../../../services/toast/toast.service";
+import { AlertService } from "../../../services/alert/alert.service";
 import { IListComponentFactories } from "../../../models";
 import { IListInternalOptions } from "../list.component";
 import { AuthService } from "../../../services/auth/auth.service";
@@ -55,11 +55,11 @@ export class ListDesktopComponent<T extends IEntity<string>>
   constructor(
     authService: AuthService,
     router: Router,
-    toastService: ToastService,
+    alertService: AlertService,
     cd: ChangeDetectorRef,
     translateService: TranslateService
   ) {
-    super(authService, router, toastService, cd, translateService);
+    super(authService, router, alertService, cd, translateService);
   }
 
   protected initList(val: IListInternalOptions<T>): void {

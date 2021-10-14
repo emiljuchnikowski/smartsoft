@@ -5,7 +5,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { IEntity } from "@smartsoft001/domain-core";
 
 import { ListBaseComponent } from "../base/base.component";
-import { ToastService } from "../../../services/toast/toast.service";
+import { AlertService } from "../../../services/alert/alert.service";
 import { AuthService } from "../../../services/auth/auth.service";
 import {IListInternalOptions} from "../list.component";
 import {IListComponentFactories} from "../../../models";
@@ -27,11 +27,11 @@ export class ListMobileComponent<T extends IEntity<string>>
   constructor(
     authService: AuthService,
     router: Router,
-    toastService: ToastService,
+    alertService: AlertService,
     cd: ChangeDetectorRef,
     translateService: TranslateService
   ) {
-    super(authService, router, toastService, cd, translateService);
+    super(authService, router, alertService, cd, translateService);
   }
 
   protected initList(val: IListInternalOptions<T>): void {

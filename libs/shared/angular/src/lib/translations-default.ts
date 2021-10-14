@@ -75,7 +75,8 @@ export interface ITranslateData {
     },
 
     OBJECT: {
-        deleted: string
+        deleted: string,
+        confirmDelete: string
     },
     APP: {
         logout: string,
@@ -190,7 +191,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     },
 
     OBJECT: {
-        deleted: 'object deleted'
+        deleted: 'object deleted',
+        confirmDelete: 'confirm delete object'
     },
     APP: {
         logout: 'log out',
@@ -305,7 +307,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     },
 
     OBJECT: {
-        deleted: 'obiekt został usunięty'
+        deleted: 'obiekt został usunięty',
+        confirmDelete: 'potwierdź usunięcie'
     },
     APP: {
         logout: 'wyloguj się',

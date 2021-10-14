@@ -20,7 +20,7 @@ import {
   ICellPipe,
 } from "../../../models/interfaces";
 import { IListInternalOptions } from "../list.component";
-import { ToastService } from "../../../services/toast/toast.service";
+import { AlertService } from "../../../services/alert/alert.service";
 import { AuthService } from "../../../services/auth/auth.service";
 
 @Directive()
@@ -70,32 +70,22 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     this.initLoading();
 
     if (val.remove) {
-      this.removeHandler = (obj: T) => {
-        let timeoutId;
-        if (val.remove["provider"]) {
-          timeoutId = setTimeout(() => {
-            val.remove["provider"].invoke(obj.id);
-          }, 5000);
-        }
-
-        this.removed.add(obj.id);
-        this.initList(val);
-        this.cd.detectChanges();
-        this.toastService.info({
-          message: this.translateService.instant("OBJECT.deleted"),
-          duration: 5000,
+      this.removeHandler = async (obj: T) => {
+        const alertResult = await this.alertService.show({
+          header: this.translateService.instant("OBJECT.confirmDelete"),
           buttons: [
             {
-              text: this.translateService.instant("undo"),
-              position: "end",
-              handler: () => {
-                if (timeoutId) clearTimeout(timeoutId);
-                this.removed.delete(obj.id);
-                this.initList(val);
-                this.cd.detectChanges();
-              },
+              text: this.translateService.instant("cancel"),
+              role: "cancel"
             },
+            {
+              text: this.translateService.instant("confirm"),
+              handler: () => {
+                val.remove["provider"].invoke(obj.id);
+              }
+            }
           ],
+          backdropDismiss: false
         });
       };
     }
@@ -155,7 +145,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
   constructor(
     protected authService: AuthService,
     protected router: Router,
-    protected toastService: ToastService,
+    protected alertService: AlertService,
     protected cd: ChangeDetectorRef,
     protected translateService: TranslateService
   ) {

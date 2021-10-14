@@ -8,7 +8,7 @@ import {IEntity} from "@smartsoft001/domain-core";
 import {FieldType, getModelFieldsWithOptions} from "@smartsoft001/models";
 
 import {ListBaseComponent} from "../base/base.component";
-import {ToastService} from "../../../services/toast/toast.service";
+import { AlertService } from "../../../services/alert/alert.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {IListComponentFactories} from "../../../models";
 import {IListInternalOptions} from "../list.component";
@@ -32,11 +32,11 @@ export class ListMasonryGridComponent<T extends IEntity<string>>
     constructor(
         authService: AuthService,
         router: Router,
-        toastService: ToastService,
+        alertService: AlertService,
         cd: ChangeDetectorRef,
         translateService: TranslateService
     ) {
-        super(authService, router, toastService, cd, translateService);
+        super(authService, router, alertService, cd, translateService);
     }
 
     ngOnInit() {}
