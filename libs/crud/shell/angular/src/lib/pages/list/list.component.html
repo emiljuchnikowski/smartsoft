@@ -1,6 +1,7 @@
 <smart-page [options]="pageOptions" *ngIf="filter$ | async">
+    <div #topTpl></div>
     <smart-crud-filters-config></smart-crud-filters-config>
-    <smart-list *ngIf="listOptions && !config.list?.group" [options]="listOptions"></smart-list>
+    <smart-list *ngIf="listOptions" [hidden]="config.list?.group" [options]="listOptions"></smart-list>
     <smart-crud-group *ngIf="config.list?.group" [group]="config.list?.group" [listOptions]="listOptions">
     </smart-crud-group>
 </smart-page>

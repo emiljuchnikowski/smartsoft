@@ -1,4 +1,4 @@
-import {Injectable, NgModule, Type} from "@angular/core";
+import {Component, Injectable, NgModule, Type} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
 import {
@@ -24,6 +24,11 @@ import {Validators} from "@angular/forms";
 //     return value[columnName];
 //   }
 // }
+
+// @Component({
+//   template: `test top`
+// })
+// export class FakeListTopComponent {}
 
 @Injectable()
 export class ModelValidatorsProvider extends IModelValidatorsProvider {
@@ -132,6 +137,9 @@ export class ModelLabelProvider extends IModelLabelProvider {
         remove: true,
         export: true,
         list: {
+          // components: {
+          //   top: FakeListTopComponent
+          // },
           cellPipe: {
             transform(value, columnName): string {
               if (columnName === 'body') return '<b>test</b>';
@@ -140,20 +148,20 @@ export class ModelLabelProvider extends IModelLabelProvider {
             }
           },
           //mode: ListMode.mobile/
-          group: {
-            key: "number",
-            items: [
-              { id: "xzc", text: "identykator1" },
-              { id: "234", text: "identykator2" },
-            ],
-           child: {
-              key: "name",
-              items: [
-                { id: "name1", text: "nazwa1" },
-                { id: "name2", text: "nazwa2" },
-              ],
-            }
-          }
+          // group: {
+          //   key: "number",
+          //   items: [
+          //     { id: "xzc", text: "identykator1" },
+          //     { id: "234", text: "identykator2" },
+          //   ],
+          //  child: {
+          //     key: "name",
+          //     items: [
+          //       { id: "name1", text: "nazwa1" },
+          //       { id: "name2", text: "nazwa2" },
+          //     ],
+          //   }
+          // }
         },
         search: true,
         pagination: { limit: 25 },
