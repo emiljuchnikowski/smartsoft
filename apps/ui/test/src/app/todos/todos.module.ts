@@ -139,7 +139,21 @@ export class ModelLabelProvider extends IModelLabelProvider {
               return value[columnName];
             }
           },
-          mode: ListMode.mobile
+          //mode: ListMode.mobile/
+          group: {
+            key: "number",
+            items: [
+              { id: "xzc", text: "identykator1" },
+              { id: "234", text: "identykator2" },
+            ],
+           child: {
+              key: "name",
+              items: [
+                { id: "name1", text: "nazwa1" },
+                { id: "name2", text: "nazwa2" },
+              ],
+            }
+          }
         },
         search: true,
         pagination: { limit: 25 },
