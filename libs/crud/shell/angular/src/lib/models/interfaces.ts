@@ -20,4 +20,10 @@ export interface ICrudCreateManyOptions {
     mode: CrudCreateManyMode
 }
 
+export interface ICrudListGroup {
+    items: Array<{ id: string, text: string, show?: boolean }>;
+    key: string;
+    child? : ICrudListGroup;
+}
+
 export type CrudCreateManyMode = 'default' | 'replace';

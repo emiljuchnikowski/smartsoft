@@ -4,7 +4,7 @@ import {
     IIconButtonOptions, ICellPipe, InputBaseComponent, ListMode
 } from "@smartsoft001/angular";
 
-import {ICrudFilterQueryItem} from "./models";
+import {ICrudFilterQueryItem, ICrudListGroup} from "./models";
 
 @Injectable()
 export class CrudConfig<T> {
@@ -48,10 +48,4 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     inputComponents?: {
         [key: string]: Type<InputBaseComponent<T>>
     }
-}
-
-export interface ICrudListGroup {
-    items: Array<{ id: string, text: string, show?: boolean }>;
-    key: string;
-    child? : ICrudListGroup;
 }

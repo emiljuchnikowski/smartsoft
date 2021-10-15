@@ -2,7 +2,9 @@ import {ChangeDetectorRef, Component, ElementRef, Input, OnInit} from '@angular/
 
 import {BaseComponent, IListOptions, StyleService} from "@smartsoft001/angular";
 import {IEntity} from "@smartsoft001/domain-core";
-import {CrudFacade, ICrudListGroup} from "@smartsoft001/crud-shell-angular";
+
+import {ICrudListGroup} from "../../models/interfaces";
+import {CrudFacade} from "../../+state/crud.facade";
 
 @Component({
     selector: 'smart-crud-group',
