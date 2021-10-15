@@ -23,6 +23,7 @@ import {CrudService} from "../services/crud/crud.service";
 import {CrudEffects} from "../+state/crud.effects";
 import {CrudFacade} from "../+state/crud.facade";
 import {CrudListPaginationFactory} from "../factories/list-pagination/list-pagination.factory";
+import {GroupComponent} from "./group/group.component";
 
 const COMPONENTS = [
     ExportComponent,
@@ -35,7 +36,8 @@ const COMPONENTS = [
     FiltersComponent,
     FilterFlagComponent,
     FilterCheckComponent,
-    MultiselectComponent
+    MultiselectComponent,
+    GroupComponent
 ];
 
 @NgModule({

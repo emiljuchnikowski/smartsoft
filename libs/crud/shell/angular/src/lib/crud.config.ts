@@ -41,10 +41,17 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
         components?: {
             top: any
         },
-        mode?: ListMode
+        mode?: ListMode,
+        group?: ICrudListGroup
     };
     buttons?: Array<IIconButtonOptions>;
     inputComponents?: {
         [key: string]: Type<InputBaseComponent<T>>
     }
+}
+
+export interface ICrudListGroup {
+    items: Array<{ id: string, text: string, show?: boolean }>;
+    key: string;
+    child? : ICrudListGroup;
 }

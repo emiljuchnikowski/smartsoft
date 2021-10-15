@@ -47,13 +47,13 @@ export class ListComponent<T extends IEntity<string>>
   constructor(
     private facade: CrudFacade<T>,
     private router: Router,
-    config: CrudFullConfig<T>,
     private dynamicComponentLoader: DynamicComponentLoader<T>,
     private injector: Injector,
     private cd: ChangeDetectorRef,
     private menuService: MenuService,
     private hardwareService: HardwareService,
     private paginationFacade: CrudListPaginationFactory<T>,
+    public config: CrudFullConfig<T>,
     authService: AuthService
   ) {
     super(authService, config);
