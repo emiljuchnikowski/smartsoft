@@ -94,7 +94,10 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
         );
       })
     );
-    if (this._options.menu) this.menuItems$ = this._options.menu.items$;
+    if (this._options.menu) {
+      this.menuService.setMenuItems(this._options.menu.items);
+      this.menuItems$ = this.menuService.menuItems$;
+    }
   }
 
   private initSelectedPath(): void {

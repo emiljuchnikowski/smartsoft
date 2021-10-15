@@ -26,6 +26,10 @@
                             <ion-icon *ngIf="item.icon" [color]="selectedPath == item.route ? 'primary' : ''" [name]="item.icon" slot="start"></ion-icon>
                             <ng-container *ngIf="item.caption">{{ item.caption | translate }}
                             </ng-container>
+
+                            <ng-container *ngIf="item.infos">
+                                <ion-chip slot="end" *ngFor="let info of item.infos">{{ info.text }}</ion-chip>
+                            </ng-container>
                         </ion-item>
                         <ion-item *ngIf="item.component">
                             <smart-dynamic [component]="item.component"></smart-dynamic>

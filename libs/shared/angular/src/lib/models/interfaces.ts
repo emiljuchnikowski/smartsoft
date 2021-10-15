@@ -14,7 +14,7 @@ export interface IAppOptions {
   logo?: string;
   menu?: {
     showForAnonymous?: boolean;
-    items$?: Observable<IMenuItem[]>;
+    items?: IMenuItem[];
   };
   style?: IStyle;
 }
@@ -85,6 +85,7 @@ export interface IMenuItem {
   caption?: string;
   component?: any;
   icon?: string;
+  infos?: Array<{ text: string }>;
 }
 
 export interface IPageOptions {

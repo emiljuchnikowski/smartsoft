@@ -16,7 +16,7 @@ const MENU_ITEMS: Array<IMenuItem> = [
   {
     caption: 'Users',
     icon: 'person-outline',
-    route: '/users'
+    route: '/users',
   },
   {
     caption: 'Zadania',
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
       logout: () => this.authFacade.logout()
     },
     menu: {
-      items$: of(MENU_ITEMS)
+      items: MENU_ITEMS
     },
     style: variables
   };

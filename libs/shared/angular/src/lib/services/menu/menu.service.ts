@@ -4,6 +4,8 @@ import {
   ViewContainerRef,
 } from "@angular/core";
 import { MenuController } from "@ionic/angular";
+import {IMenuItem} from "../../models";
+import {BehaviorSubject} from "rxjs";
 
 /**
  * Only to use in smart-page
@@ -15,6 +17,9 @@ import { MenuController } from "@ionic/angular";
 export class MenuService {
   private _endContainer: ViewContainerRef;
   private _openedEnd = false;
+  private _menuItemsSource = new BehaviorSubject<IMenuItem[]>([]);
+
+  menuItems$ = this._menuItemsSource.asObservable();
 
   /**
    * @desc checking if the menu is open (menu on the right side of the screen)
@@ -27,6 +32,23 @@ export class MenuService {
     private readonly menuCtrl: MenuController,
     private readonly resolver: ComponentFactoryResolver
   ) {}
+
+  changeMenuItemByRoute(route: string, changes: Partial<IMenuItem>): void {
+    const items = this._menuItemsSource.value.map(i => {
+      if (i.route === route) return {
+        ...i,
+        ...changes
+      }
+
+      return i;
+    });
+
+    this._menuItemsSource.next(items);
+  }
+
+  setMenuItems(items: IMenuItem[]): void {
+    this._menuItemsSource.next(items);
+  }
 
   /**
    * @private
