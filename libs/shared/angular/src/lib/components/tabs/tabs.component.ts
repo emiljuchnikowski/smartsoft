@@ -1,8 +1,8 @@
 import {
   AfterContentInit,
   Component,
-  ContentChildren,
-  OnDestroy,
+  ContentChildren, EventEmitter,
+  OnDestroy, Output,
   QueryList,
   ViewChild
 } from "@angular/core";
@@ -25,6 +25,8 @@ export class TabsComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(TabComponent, { read: TabComponent })
   tabComponents = new QueryList<TabComponent>();
 
+  @Output() tabChange = new EventEmitter<TabComponent>();
+
   ngAfterContentInit(): void {
     this.setComponents();
 
@@ -42,6 +44,7 @@ export class TabsComponent implements AfterContentInit, OnDestroy {
     this.tabs.forEach((tab) => {
       tab.show = tab === selected;
     });
+    this.tabChange.emit(selected);
   }
 
   ngOnDestroy(): void {
