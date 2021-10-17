@@ -61,16 +61,16 @@ export class ModelPossibilitiesProvider extends IModelPossibilitiesProvider {
         id: { id: 1, name: "test" }, text: 'Test 1'
       },
       {
-        id: { id: 2, name: "test" }, text: 'Test 2'
+        id: { id: 2, name: "test" }, text: 'Test 2223242343'
       },
       {
-        id: { id: 3, name: "test" }, text: 'Test 3'
+        id: { id: 3, name: "test" }, text: 'Test 332432432423'
       },
       {
-        id: { id: 4, name: "test" }, text: 'Test 4'
+        id: { id: 4, name: "test" }, text: 'Test 4234234234234235346 234234234'
       },
       {
-        id: { id: 5, name: "test" }, text: 'Test 5'
+        id: { id: 5, name: "test" }, text: 'Test 5324324234223 23423423534534 '
       },
       {
         id: { id: 6, name: "test" }, text: 'Test 6'
