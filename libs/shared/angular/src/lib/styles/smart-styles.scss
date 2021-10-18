@@ -256,5 +256,23 @@ body {
     vertical-align: middle;
 }
 
+ion-alert {
+    .alert-checkbox-group {
+        .alert-tappable {
+            // height: auto !important;
+            .alert-checkbox-label {
+                padding: .6rem 2.4rem .6rem 5.2rem !important;
+                font-size: 1.5rem !important;
+            }
+            height: 7rem !important;
+            border: .1rem solid #efefef;
+        }
+        .alert-checkbox-label {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+        }
+    }
+}
+
 // Table styles
 @import 'sass/smart-table';
