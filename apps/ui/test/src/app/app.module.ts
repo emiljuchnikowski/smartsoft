@@ -21,9 +21,10 @@ import {
   AuthModule, PermissionsGuard,
 } from "@smartsoft001/auth-shell-angular";
 import { HttpClientModule } from "@angular/common/http";
+import {CUSTOM_COMPONENTS} from "./custom";
 
 @NgModule({
-  declarations: [AppComponent, TestComponent],
+  declarations: [AppComponent, TestComponent, CUSTOM_COMPONENTS],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(

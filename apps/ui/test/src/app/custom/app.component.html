@@ -1,0 +1,74 @@
+<!-- <ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar> -->
+<!-- <ion-split-pane contentId="menu-content" [ngStyle]="{'margin-top': loadingPage ? '4px' : '0'}"> -->
+<ion-app content="menu-content">
+    <!--  our side menu  -->
+    <ion-menu menuId="start" contentId="menu-content" [hidden]="!(showMenu$ | async) || (!(menuItems$ | async)?.length && !(logged$ | async))">
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>
+                    <ion-col size="auto" *ngIf="logo" class="smart-logo-container">
+                        <ion-img *ngIf="logo" [src]="logo" class="smart-logo"></ion-img>
+                    </ion-col>
+                    <ng-container *ngIf="!logo">MENU</ng-container>
+                </ion-title>
+            </ion-toolbar>
+        </ion-header>
+
+        <ion-content>
+            <ion-list #listRef>
+                <ng-container *ngFor="let item of menuItems$ | async">
+                    <ion-menu-toggle auto-hide="false" *ngIf="item.mode !== 'divider'">
+                        <ion-item *ngIf="!item.component"
+                                  [routerDirection]="'root'"
+                                  [routerLink]="[item.route]"
+                                  [class.active-item]="selectedPath == item.route"
+                        >
+                            <ion-icon *ngIf="item.icon" [color]="selectedPath == item.route ? 'primary' : ''" [name]="item.icon" slot="start"></ion-icon>
+                            <ng-container *ngIf="item.caption">{{ item.caption | translate }}
+                            </ng-container>
+
+                            <ng-container *ngIf="item.infos">
+                                <ion-chip slot="end" *ngFor="let info of item.infos">{{ info.text }}</ion-chip>
+                            </ng-container>
+                        </ion-item>
+                        <ion-item *ngIf="item.component">
+                            <smart-dynamic [component]="item.component"></smart-dynamic>
+                        </ion-item>
+                    </ion-menu-toggle>
+
+                    <ion-item-divider *ngIf="item.mode === 'divider'">
+                        <ion-label *ngIf="item.caption">
+                            {{ item.caption }}
+                        </ion-label>
+
+                        <ng-container *ngIf="item.component">
+                            <smart-dynamic [component]="item.component"></smart-dynamic>
+                        </ng-container>
+                    </ion-item-divider>
+                </ng-container>
+            </ion-list>
+        </ion-content>
+
+        <ion-footer>
+            <ion-list *ngIf="logged$ | async">
+                <ion-item-divider>
+                    <ion-icon name="person" slot="start"></ion-icon>
+                    {{ "APP.logged" | translate }}:&nbsp;<b>{{ username$ | async }}</b>
+                </ion-item-divider>
+                <ion-item button (click)="logout()">
+                    <ion-icon name="log-out" slot="start"></ion-icon>
+                    {{ "APP.logout" | translate }}
+                </ion-item>
+            </ion-list>
+        </ion-footer>
+    </ion-menu>
+
+    <!-- the main content -->
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
+
+    <ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar>
+
+    <ion-menu side="end" disabled="true" menuId="end" type="overlay" contentId="menu-content" swipeGesture="false">
+        <ng-template #endMenuContainer></ng-template>
+    </ion-menu>
+</ion-app>
