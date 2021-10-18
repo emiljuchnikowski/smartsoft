@@ -16,6 +16,7 @@ import {environment} from "../../environments/environment";
 import {TodoFacade} from "./todo.facade";
 import {Observable, of} from "rxjs";
 import {Validators} from "@angular/forms";
+import {CustomFormComponent} from "../custom";
 
 // export class CellPipe<T> implements IListCellPipe<T> {
 //   transform(value: T, columnName): string {
@@ -166,7 +167,10 @@ export class ModelLabelProvider extends IModelLabelProvider {
         search: true,
         pagination: { limit: 25 },
       }
-    })
+    }),
+  ],
+  declarations: [
+    //CustomFormComponent
   ]
 })
 export class TodosModule {

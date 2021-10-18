@@ -1,10 +1,11 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy, ChangeDetectorRef,
-  Component, ElementRef,
+  Component, ComponentFactoryResolver, ElementRef,
   EventEmitter, Inject,
-  Input, OnDestroy, Optional,
+  Input, NgModuleRef, OnDestroy, Optional,
   Output,
-  Type,
+  Type, ViewChild, ViewContainerRef,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import {Subscription} from "rxjs";
@@ -18,6 +19,8 @@ import {FormFactory} from "../../factories/form/form.factory";
 import {IModelExportProvider, MODEL_EXPORT_PROVIDER} from "../../providers/model-export.provider";
 import {IModelImportProvider, MODEL_IMPORT_PROVIDER} from "../../providers/model-import.provider";
 import {SmartFormGroup} from "../../services/form/form.group";
+import {DynamicComponentStorageService} from "../../services/dynamic-component-storage/dynamic-component-storage.service";
+import {FormBaseComponent} from "./base/base.component";
 
 @Component({
   selector: "smart-form",
@@ -46,6 +49,8 @@ import {SmartFormGroup} from "../../services/form/form.group";
             [form]="form"
             (invokeSubmit)="invokeSubmit.emit($event)"
         ></smart-form-stepper>
+        
+        <div #customTpl></div>
       </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -57,11 +62,14 @@ export class FormComponent<T> implements OnDestroy {
   private _uniqueProvider: (values: Record<keyof T, any>) => Promise<boolean>;
 
   form: SmartFormGroup;
-  type: "standard" | "stepper";
+  type: "standard" | "stepper" | "custom";
   export: boolean;
   exportHandler: (val) => void;
   import: boolean;
   importAccept: string;
+
+  @ViewChild("customTpl", { read: ViewContainerRef, static: false })
+  customTpl: ViewContainerRef;
 
   @Input() set options(val: IFormOptions<T>) {
     if (!val) return;
@@ -112,8 +120,12 @@ export class FormComponent<T> implements OnDestroy {
       @Optional()
       @Inject(MODEL_EXPORT_PROVIDER) public exportProvider: IModelExportProvider,
       @Optional()
-      @Inject(MODEL_IMPORT_PROVIDER) public importProvider: IModelImportProvider
-  ) { }
+      @Inject(MODEL_IMPORT_PROVIDER) public importProvider: IModelImportProvider,
+      private moduleRef: NgModuleRef<any>,
+      private componentFactoryResolver: ComponentFactoryResolver
+  ) {
+
+  }
 
   async onSetValue(file: File): Promise<void> {
     let result;
@@ -173,6 +185,24 @@ export class FormComponent<T> implements OnDestroy {
 
   private initType() {
     const fieldWithOptions = getModelFieldsWithOptions(this._options.model);
+
+    const component = DynamicComponentStorageService.get("form", this.moduleRef)[0];
+
+    if (component) {
+      setTimeout(() => {
+        const factory = this.componentFactoryResolver.resolveComponentFactory(component);
+        if (!this.customTpl.get(0)) {
+          const instance: FormBaseComponent<any> = this.customTpl.createComponent(factory).instance;
+          instance.options = this.options;
+          instance.form = this.form;
+          this._subscription.add(instance.invokeSubmit.subscribe(e => this.invokeSubmit.emit(e)));
+
+          this.cd.detectChanges();
+        }
+      });
+
+      return;
+    }
 
     if (fieldWithOptions.some(fwo => fwo.options.step)) {
       this.type = "stepper";

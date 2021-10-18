@@ -202,3 +202,10 @@ export interface IListProvider<T> {
 export interface IRemoveProvider<T> {
   invoke: (id: string) => void;
 }
+
+export type DynamicComponentType = "form";
+export interface IDynamicComponentData {
+  key: DynamicComponentType;
+  component: Type<any>;
+  data?: any;
+}
