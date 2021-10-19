@@ -1,14 +1,25 @@
-import { ElementRef, Input, OnDestroy, OnInit, Renderer2, Directive } from "@angular/core";
+import {
+    ElementRef,
+    Input,
+    OnDestroy,
+    OnInit,
+    Renderer2,
+    Directive,
+    ViewChild,
+    ViewContainerRef,
+} from "@angular/core";
 import { Location } from '@angular/common';
 import {PopoverController} from "@ionic/angular";
 import { Subscription} from "rxjs";
 
-import {IIconButtonOptions, IPageOptions} from "../../../models/interfaces";
+import {DynamicComponentType, IIconButtonOptions, IPageOptions} from "../../../models/interfaces";
 import {AppService} from "../../../services/app/app.service";
 import { HardwareService } from "../../../services/hardware/hardware.service";
 
 @Directive()
 export abstract class PageBaseComponent implements OnInit, OnDestroy {
+    static smartType: DynamicComponentType = "page";
+
     private _options: IPageOptions;
     private _subscriptions = new Subscription();
 
@@ -23,7 +34,10 @@ export abstract class PageBaseComponent implements OnInit, OnDestroy {
         return this.hardwareService.isMobile || this.hardwareService.isMobileWeb;
     }
 
-    protected constructor(
+    @ViewChild("contentTpl", { read: ViewContainerRef, static: true })
+    contentTpl: ViewContainerRef;
+
+    constructor(
         private el: ElementRef,
         private renderer: Renderer2,
         private location: Location,

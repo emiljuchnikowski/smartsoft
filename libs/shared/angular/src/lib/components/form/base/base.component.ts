@@ -3,14 +3,13 @@ import {FormGroup} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
 import {delay} from "rxjs/operators";
 
-import {IFormOptions} from "../../../models";
+import {DynamicComponentType, IFormOptions} from "../../../models";
 import {InputBaseComponent} from "../../input/base/base.component";
 import {BaseComponent} from "../../base/base.component";
-import {DynamicComponentStorageService} from "../../../services/dynamic-component-storage/dynamic-component-storage.service";
 
 @Directive()
 export abstract class FormBaseComponent<T> extends BaseComponent {
-  static smartType: DynamicComponentStorageService = "form";
+  static smartType: DynamicComponentType = "form";
 
   private _fields: Array<string>;
   private _subscription: Subscription;

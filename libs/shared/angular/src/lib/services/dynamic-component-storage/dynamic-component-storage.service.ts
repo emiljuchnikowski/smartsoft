@@ -1,5 +1,6 @@
 import {ApplicationRef, NgModuleRef, Type} from "@angular/core";
-import {DynamicComponentType} from "@smartsoft001/angular";
+
+import {DynamicComponentType} from "../../models";
 
 export class DynamicComponentStorageService {
     static get(key: DynamicComponentType, moduleRef: NgModuleRef<any>): Type<any>[] {
