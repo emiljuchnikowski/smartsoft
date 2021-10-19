@@ -203,7 +203,7 @@ export interface IRemoveProvider<T> {
   invoke: (id: string) => void;
 }
 
-export type DynamicComponentType = "form" | "page";
+export type DynamicComponentType = "form" | "page" | "button";
 export interface IDynamicComponentData {
   key: DynamicComponentType;
   component: Type<any>;

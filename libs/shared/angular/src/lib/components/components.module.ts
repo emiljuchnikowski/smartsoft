@@ -101,6 +101,7 @@ import {InputFloatComponent} from "./input/float/float.component";
 import {ListMasonryGridComponent} from "./list/masonry-grid/masonry-grid.component";
 import {FormStepperComponent} from "./form/stepper/stepper.component";
 import {DateEditComponent} from "./date-edit/date-edit.component";
+import {ButtonStandardComponent} from "./button/standard/standard.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -110,7 +111,7 @@ export const ACCORDION_COMPONENTS = [
   AccordionBodyComponent,
 ];
 
-export const BUTTON_COMPONENTS = [ButtonComponent];
+export const BUTTON_COMPONENTS = [ButtonComponent, ButtonStandardComponent];
 
 export const CARD_COMPONENTS = [CardComponent];
 

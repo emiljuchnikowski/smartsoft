@@ -16,7 +16,7 @@ import {environment} from "../../environments/environment";
 import {TodoFacade} from "./todo.facade";
 import {Observable, of} from "rxjs";
 import {Validators} from "@angular/forms";
-import {CustomFormComponent} from "../custom";
+import {CustomButtonComponent, CustomFormComponent} from "../custom";
 import {CustomPageComponent} from "../custom/page.component";
 
 // export class CellPipe<T> implements IListCellPipe<T> {
@@ -173,6 +173,7 @@ export class ModelLabelProvider extends IModelLabelProvider {
   declarations: [
     //CustomFormComponent
       //CustomPageComponent
+      //CustomButtonComponent
   ]
 })
 export class TodosModule {

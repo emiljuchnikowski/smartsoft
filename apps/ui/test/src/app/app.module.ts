@@ -21,7 +21,7 @@ import {
   AuthModule, PermissionsGuard,
 } from "@smartsoft001/auth-shell-angular";
 import { HttpClientModule } from "@angular/common/http";
-import {CUSTOM_COMPONENTS, CustomFormComponent, CustomPageComponent} from "./custom";
+import {CUSTOM_COMPONENTS, CustomButtonComponent, CustomFormComponent, CustomPageComponent} from "./custom";
 
 @NgModule({
   declarations: [AppComponent, TestComponent, ],
