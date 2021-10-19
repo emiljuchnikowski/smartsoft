@@ -16,8 +16,7 @@ import {FormBaseComponent} from "@smartsoft001/angular";
 //             component: inputComponents[field]
 //         }"></smart-input>
 //             </ng-container>
-//         </ion-list>
-//     `
+//         </ion-list>`
 // })
 export class CustomFormComponent<T> extends FormBaseComponent<T> {
 
