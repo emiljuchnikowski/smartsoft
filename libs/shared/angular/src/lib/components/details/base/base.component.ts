@@ -17,12 +17,14 @@ import {
 import { IEntity } from "@smartsoft001/domain-core";
 import { ObjectService, SpecificationService } from "@smartsoft001/utils";
 
-import {ICellPipe, IDetailsComponentFactories, IDetailsOptions} from "../../../models";
+import {DynamicComponentType, ICellPipe, IDetailsComponentFactories, IDetailsOptions} from "../../../models";
 import { AuthService } from "../../../services/auth/auth.service";
 
 @Directive()
 export abstract class DetailsBaseComponent<T extends IEntity<string>>
   implements AfterViewInit {
+  static smartType: DynamicComponentType = 'details';
+
   private _fields: Array<{ key: string; options: IFieldOptions }>;
   private _type: any;
 
@@ -39,6 +41,9 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
 
   item$: Observable<T>;
   loading$: Observable<boolean>;
+
+  @ViewChild("contentTpl", { read: ViewContainerRef, static: true })
+  contentTpl: ViewContainerRef;
 
   @ViewChild("topTpl", { read: ViewContainerRef, static: true })
   topTpl: ViewContainerRef;

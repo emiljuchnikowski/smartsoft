@@ -1,24 +1,31 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input, OnDestroy,
+  Input,
+  OnDestroy,
 } from "@angular/core";
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
 
 import { IDetailsOptions } from "../../models";
-import {IEntity} from "@smartsoft001/domain-core";
+import { IEntity } from "@smartsoft001/domain-core";
+import { CreateDynamicComponent } from "../base";
+import { DetailsBaseComponent } from "./base/base.component";
 
 @Component({
   selector: "smart-details",
   template: `
-      <smart-details-standard
-            *ngIf="options"
-            [options]="options"
-      ></smart-details-standard>
+    <smart-details-standard
+      *ngIf="options && template === 'default'"
+      [options]="options"
+    ></smart-details-standard>
+    <div #customTpl></div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailsComponent<T extends IEntity<string>> implements OnDestroy {
+export class DetailsComponent<T extends IEntity<string>>
+  extends CreateDynamicComponent<DetailsBaseComponent<any>>("details")
+  implements OnDestroy
+{
   private _options: IDetailsOptions<T>;
   private _subscription = new Subscription();
 
@@ -27,17 +34,25 @@ export class DetailsComponent<T extends IEntity<string>> implements OnDestroy {
   @Input() set options(val: IDetailsOptions<T>) {
     this._options = val;
 
-    this._subscription.add(this._options.item$.subscribe(item => {
-      this.item = item;
-    }));
+    this._subscription.add(
+      this._options.item$.subscribe((item) => {
+        this.item = item;
+      })
+    );
+
+    this.refreshDynamicInstance();
   }
   get options(): IDetailsOptions<T> {
     return this._options;
   }
 
   ngOnDestroy(): void {
-    if (this._subscription){
+    if (this._subscription) {
       this._subscription.unsubscribe();
     }
+  }
+
+  refreshProperties(): void {
+    this.baseInstance.options = this.options;
   }
 }
