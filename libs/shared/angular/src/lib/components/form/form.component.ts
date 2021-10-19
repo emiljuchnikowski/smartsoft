@@ -21,6 +21,8 @@ import {IModelImportProvider, MODEL_IMPORT_PROVIDER} from "../../providers/model
 import {SmartFormGroup} from "../../services/form/form.group";
 import {DynamicComponentStorageService} from "../../services/dynamic-component-storage/dynamic-component-storage.service";
 import {FormBaseComponent} from "./base/base.component";
+import {CreateDynamicComponent} from "../base";
+import {ButtonBaseComponent} from "../button";
 
 @Component({
   selector: "smart-form",
@@ -36,26 +38,28 @@ import {FormBaseComponent} from "./base/base.component";
       ></smart-import>
     </div>
       <form *ngIf="form" [formGroup]="form" (ngSubmit)="invokeSubmit.emit(form.value)" (keyup.enter)="invokeSubmit.emit(form.value)">
-        <smart-form-standard
-            *ngIf="options && type === 'standard'"
-            [options]="options"
-            [form]="form"
-            (invokeSubmit)="invokeSubmit.emit($event)"
-        ></smart-form-standard>
+        <ng-container *ngIf="template === 'default'">
+          <smart-form-standard
+              *ngIf="options && type === 'standard'"
+              [options]="options"
+              [form]="form"
+              (invokeSubmit)="invokeSubmit.emit($event)"
+          ></smart-form-standard>
 
-        <smart-form-stepper
-            *ngIf="options && type === 'stepper'"
-            [options]="options"
-            [form]="form"
-            (invokeSubmit)="invokeSubmit.emit($event)"
-        ></smart-form-stepper>
+          <smart-form-stepper
+              *ngIf="options && type === 'stepper'"
+              [options]="options"
+              [form]="form"
+              (invokeSubmit)="invokeSubmit.emit($event)"
+          ></smart-form-stepper>
+        </ng-container>
         
         <div #customTpl></div>
       </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormComponent<T> implements OnDestroy {
+export class FormComponent<T> extends CreateDynamicComponent<FormBaseComponent<any>>("form") implements OnDestroy {
   private _options: IFormOptions<T>;
   private _subscription = new Subscription();
   private _mode: "create" | "update" | string;
@@ -102,6 +106,10 @@ export class FormComponent<T> implements OnDestroy {
             this.cd.detectChanges();
           });
     }
+
+    setTimeout(() => {
+      this.refreshDynamicInstance();
+    });
   }
 
   get options(): IFormOptions<T> {
@@ -124,7 +132,7 @@ export class FormComponent<T> implements OnDestroy {
       private moduleRef: NgModuleRef<any>,
       private componentFactoryResolver: ComponentFactoryResolver
   ) {
-
+    super(cd, moduleRef, componentFactoryResolver);
   }
 
   async onSetValue(file: File): Promise<void> {
@@ -143,6 +151,12 @@ export class FormComponent<T> implements OnDestroy {
           this.registerChanges();
           this.cd.detectChanges();
         });
+  }
+
+  refreshProperties(): void {
+    this.baseInstance.options = this.options;
+    this.baseInstance.form = this.form;
+    this._subscription.add(this.baseInstance.invokeSubmit.subscribe(e => this.invokeSubmit.emit(e)));
   }
 
   ngOnDestroy(): void {
@@ -185,24 +199,6 @@ export class FormComponent<T> implements OnDestroy {
 
   private initType() {
     const fieldWithOptions = getModelFieldsWithOptions(this._options.model);
-
-    const component = DynamicComponentStorageService.get("form", this.moduleRef)[0];
-
-    if (component) {
-      setTimeout(() => {
-        const factory = this.componentFactoryResolver.resolveComponentFactory(component);
-        if (!this.customTpl.get(0)) {
-          const instance: FormBaseComponent<any> = this.customTpl.createComponent(factory).instance;
-          instance.options = this.options;
-          instance.form = this.form;
-          this._subscription.add(instance.invokeSubmit.subscribe(e => this.invokeSubmit.emit(e)));
-
-          this.cd.detectChanges();
-        }
-      });
-
-      return;
-    }
 
     if (fieldWithOptions.some(fwo => fwo.options.step)) {
       this.type = "stepper";

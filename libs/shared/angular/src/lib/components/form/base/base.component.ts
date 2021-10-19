@@ -1,4 +1,13 @@
-import {EventEmitter, Input, Output, Directive, Type, ChangeDetectorRef} from '@angular/core';
+import {
+  EventEmitter,
+  Input,
+  Output,
+  Directive,
+  Type,
+  ChangeDetectorRef,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
 import {delay} from "rxjs/operators";
@@ -75,6 +84,9 @@ export abstract class FormBaseComponent<T> extends BaseComponent {
   }
 
   @Output() invokeSubmit = new EventEmitter();
+
+  @ViewChild("contentTpl", { read: ViewContainerRef, static: true })
+  contentTpl: ViewContainerRef;
 
   constructor(protected cd: ChangeDetectorRef) {
     super();

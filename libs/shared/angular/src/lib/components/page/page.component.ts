@@ -12,6 +12,7 @@ import {IPageOptions} from "../../models/interfaces";
 import {DynamicComponentStorageService} from "../../services/dynamic-component-storage/dynamic-component-storage.service";
 import {FormBaseComponent} from "../form";
 import {PageBaseComponent} from "./base/base.component";
+import {CreateDynamicComponent} from "../base";
 
 @Component({
     selector: 'smart-page',
@@ -26,23 +27,16 @@ import {PageBaseComponent} from "./base/base.component";
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PageComponent implements OnInit, AfterViewInit {
+export class PageComponent extends CreateDynamicComponent<PageBaseComponent>('page') implements OnInit {
     private _options: IPageOptions;
-
-    template: "custom" | "default";
 
     @Input() set options(val: IPageOptions) {
         this._options = val;
+        this.refreshDynamicInstance();
     }
     get options(): IPageOptions {
         return this._options;
     }
-
-    @ViewChild("customTpl", { read: ViewContainerRef, static: false })
-    customTpl: ViewContainerRef;
-
-    @ViewChild("contentTpl", { read: TemplateRef, static: false })
-    contentTpl: TemplateRef<any>;
 
     constructor(
         private el: ElementRef,
@@ -50,25 +44,15 @@ export class PageComponent implements OnInit, AfterViewInit {
         private renderer: Renderer2,
         private moduleRef: NgModuleRef<any>,
         private componentFactoryResolver: ComponentFactoryResolver
-    ) { }
+    ) {
+        super(cd, moduleRef, componentFactoryResolver);
+    }
 
     ngOnInit() {
         this.renderer.setStyle(this.el.nativeElement, 'height', '100%');
     }
 
-    ngAfterViewInit(): void {
-        const component = DynamicComponentStorageService.get("page", this.moduleRef)[0];
-        this.template = component ? "custom" : "default";
-
-        if (component) {
-            const factory = this.componentFactoryResolver.resolveComponentFactory(component);
-            if (!this.customTpl.get(0)) {
-                const instance: PageBaseComponent = this.customTpl.createComponent(factory).instance;
-                instance.options = this.options;
-                instance.contentTpl.createEmbeddedView(this.contentTpl);
-            }
-        }
-
-        this.cd.detectChanges();
+    refreshProperties(): void {
+        this.baseInstance.options = this.options;
     }
 }

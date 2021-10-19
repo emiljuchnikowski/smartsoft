@@ -24,7 +24,7 @@ import { HttpClientModule } from "@angular/common/http";
 import {CUSTOM_COMPONENTS, CustomButtonComponent, CustomFormComponent, CustomPageComponent} from "./custom";
 
 @NgModule({
-  declarations: [AppComponent, TestComponent, ],
+  declarations: [AppComponent, TestComponent],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(

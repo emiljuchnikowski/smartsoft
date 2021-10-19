@@ -1,6 +1,6 @@
 import {ButtonBaseComponent} from "@smartsoft001/angular";
 import {Component} from "@angular/core";
-//
+
 // @Component({
 //     template: `
 //         <button [type]="options?.type" (click)="invoke()" [disabled]="disabled || (options?.loading$ | async)">
