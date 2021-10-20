@@ -13,7 +13,7 @@ export class DynamicComponentStorageService {
 
         let components = getComponents(key, moduleRef);
 
-        if (!components.length) {
+        if (!components.length && moduleRef) {
             const applicationRef = moduleRef.injector.get(ApplicationRef);
             let appComponentInjector = applicationRef.components
                 .find(t => t.componentType.name === "AppComponent")?.injector;
