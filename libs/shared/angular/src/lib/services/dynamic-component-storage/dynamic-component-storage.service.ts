@@ -5,6 +5,8 @@ import {DynamicComponentType} from "../../models";
 export class DynamicComponentStorageService {
     static get(key: DynamicComponentType, moduleRef: NgModuleRef<any>): Type<any>[] {
         const getComponents = (k: DynamicComponentType, m: NgModuleRef<any>): Type<any>[] => {
+            if (!m) return [];
+
             return  m.instance.constructor['ɵmod'].declarations
                 .filter(c => c['smartType'] === k)
         }
@@ -13,8 +15,12 @@ export class DynamicComponentStorageService {
 
         if (!components.length) {
             const applicationRef = moduleRef.injector.get(ApplicationRef);
-            const appComponentInjector = applicationRef.components
+            let appComponentInjector = applicationRef.components
                 .find(t => t.componentType.name === "AppComponent")?.injector;
+
+            if (!appComponentInjector) {
+                appComponentInjector = applicationRef.components[0]?.injector;
+            }
 
             if (!appComponentInjector) {
                 throw new Error(DynamicComponentStorageService.name + " not found AppComponent");
