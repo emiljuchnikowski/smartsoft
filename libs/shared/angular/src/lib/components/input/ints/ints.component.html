@@ -1,12 +1,12 @@
 <ng-container *ngIf="control">
     <br/>
-    <ion-label>
-        {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
-        <ion-text color="danger">
-            <span *ngIf="required">*</span>
-        </ion-text>
-    </ion-label>
     <ion-list>
+        <ion-item>
+            {{ control?.parent?.value | smartModelLabel : internalOptions.fieldKey : internalOptions?.model?.constructor | async }}
+            <ion-text color="danger">
+                <span *ngIf="required">*</span>
+            </ion-text>
+        </ion-item>
         <ion-item *ngFor="let item of list; let last = last" lines="none">
             <ion-icon slot="start" name="ellipse-outline"></ion-icon>
             <ion-input [placeholder]="(last ? ('add' | translate) : '') + '...'"
