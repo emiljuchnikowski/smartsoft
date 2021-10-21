@@ -12,7 +12,7 @@ import {CrudFacade} from "../../+state/crud.facade";
     styleUrls: ['./group.component.scss']
 })
 export class GroupComponent<T extends IEntity<string>> extends BaseComponent implements OnInit {
-    @Input() group: ICrudListGroup;
+    @Input() groups: Array<ICrudListGroup>;
     @Input() listOptions: IListOptions<T>;
 
     constructor(
@@ -24,24 +24,24 @@ export class GroupComponent<T extends IEntity<string>> extends BaseComponent imp
         super();
     }
 
-    change(val, item: { id, text: string, show?: boolean }): void {
-        this.group.items.filter(i => i.id !== item.id).forEach(i => {
+    change(val, item: ICrudListGroup): void {
+        this.groups.filter(i => i.value !== item.value || i.key !== item.key).forEach(i => {
             i.show = false;
         });
 
         if (val) {
-            let current = this.facade.filter.query.find(q => q.key === this.group.key && q.type === '=');
+            let current = this.facade.filter.query.find(q => q.key === item.key && q.type === '=');
 
             if (!current) {
                 current = {
-                    key: this.group.key,
+                    key: item.key,
                     type: "=",
                     value: null
                 };
                 this.facade.filter.query.push(current);
             }
 
-            current.value = item.id;
+            current.value = item.value;
             current.hidden = true;
 
             this.facade.read({

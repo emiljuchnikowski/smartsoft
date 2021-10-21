@@ -42,7 +42,7 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
             top: any
         },
         mode?: ListMode,
-        group?: ICrudListGroup
+        groups?: Array<ICrudListGroup>
     };
     buttons?: Array<IIconButtonOptions>;
     inputComponents?: {

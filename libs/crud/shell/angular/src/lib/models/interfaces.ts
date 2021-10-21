@@ -21,9 +21,11 @@ export interface ICrudCreateManyOptions {
 }
 
 export interface ICrudListGroup {
-    items: Array<{ id: string, text: string, show?: boolean }>;
     key: string;
-    child? : ICrudListGroup;
+    value: string;
+    text: string;
+    show?: boolean;
+    children?: Array<ICrudListGroup>;
 }
 
 export type CrudCreateManyMode = 'default' | 'replace';
