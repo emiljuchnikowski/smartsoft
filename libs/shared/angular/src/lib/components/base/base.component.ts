@@ -97,7 +97,7 @@ export function CreateDynamicComponent<
         }
       }
 
-      this.cd.detectChanges();
+      if (this.cd) this.cd.detectChanges();
     }
   }
 
