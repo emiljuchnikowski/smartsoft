@@ -94,10 +94,10 @@ export function CreateDynamicComponent<
           this.baseInstance = this.customTpl.createComponent(factory).instance;
           this.refreshDynamicInstance();
           this.baseInstance.contentTpl?.createEmbeddedView(this.contentTpl);
-
-          this.cd.detectChanges();
         }
       }
+
+      this.cd.detectChanges();
     }
   }
 
