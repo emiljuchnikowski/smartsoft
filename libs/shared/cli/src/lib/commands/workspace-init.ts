@@ -39,7 +39,7 @@ function runSetNgConfig(target) {
     log('Set NG config');
     //runCommand("ng analytics project off", target);
     runCommand("ng config cli.defaultCollection @smartsoft001/schematics", target);
-    runCommand("ng add @smartsoft001/schematics --skip-confirmation=true", target);
+    runCommand("npm i  @smartsoft001/schematics && npx nx g @smartsoft001/schematics:ng-add", target);
 }
 
 function runNgAdd(target) {
@@ -54,7 +54,7 @@ function runNgAdd(target) {
     ];
 
     plugins.forEach(plugin => {
-        runCommand(`npm i ${plugin} && npx nx g ${plugin}:ng-add --skip-confirmation=true`, target);
+        runCommand(`npm i ${plugin} && npx nx g ${plugin}:ng-add`, target);
     })
 }
 
