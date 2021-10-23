@@ -1,9 +1,19 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component, ComponentFactoryResolver,
+  Input,
+  NgModuleRef,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core';
 import * as _ from 'lodash';
 
 import {getModelFieldsWithOptions, IFieldListMetadata, IFieldOptions} from "@smartsoft001/models";
 import {IListOptions, ListMode} from "../../models/interfaces";
 import {HardwareService} from "../../services/hardware/hardware.service";
+import {CreateDynamicComponent} from "../base";
+import {ListBaseComponent} from "./base/base.component";
 
 @Component({
   selector: 'smart-list',
@@ -12,7 +22,7 @@ import {HardwareService} from "../../services/hardware/hardware.service";
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListComponent<T> implements OnInit {
+export class ListComponent<T> extends CreateDynamicComponent<ListBaseComponent<any>>('list') implements OnInit {
   private _options: IListInternalOptions<T>;
 
   mode: ListMode;
@@ -23,16 +33,28 @@ export class ListComponent<T> implements OnInit {
     this._options = val;
     this.initFields();
     this.initModel();
+    this.refreshDynamicInstance();
   }
 
   get internalOptions(): IListInternalOptions<T> {
     return this._options;
   }
 
-  constructor(private hardwareService: HardwareService) { }
+  constructor(
+      private hardwareService: HardwareService,
+      private cd: ChangeDetectorRef,
+      private moduleRef: NgModuleRef<any>,
+      private componentFactoryResolver: ComponentFactoryResolver
+  ) {
+    super(cd, moduleRef, componentFactoryResolver);
+  }
 
   ngOnInit() {
 
+  }
+
+  refreshProperties(): void {
+    this.baseInstance.options = this.internalOptions;
   }
 
   private initFields(): void {

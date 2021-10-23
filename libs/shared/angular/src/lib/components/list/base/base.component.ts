@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Input, OnInit, Directive, Type} from "@angular/core";
+import {ChangeDetectorRef, Input, OnInit, Directive, Type, ViewChild, ViewContainerRef} from "@angular/core";
 
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
@@ -17,7 +17,7 @@ import {
   IDetailsOptions,
   IListProvider,
   IButtonOptions,
-  ICellPipe,
+  ICellPipe, DynamicComponentType,
 } from "../../../models/interfaces";
 import { IListInternalOptions } from "../list.component";
 import { AlertService } from "../../../services/alert/alert.service";
@@ -26,8 +26,11 @@ import { AuthService } from "../../../services/auth/auth.service";
 @Directive()
 export abstract class ListBaseComponent<T extends IEntity<string>>
   implements OnInit {
+  static smartType: DynamicComponentType = "list";
+
   protected provider: IListProvider<T>;
   private _fields: Array<{ key: string; options: IFieldOptions }>;
+  private _internalOptions: IListInternalOptions<T>;
 
   detailsComponent;
   selectMode?: 'multi';
@@ -59,6 +62,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
       };
 
   @Input() set options(val: IListInternalOptions<T>) {
+    this._internalOptions = val;
     this._fields = val.fields;
     this.provider = val.provider;
     this.sort = val.sort;
@@ -141,6 +145,14 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
 
     this.afterInitOptions();
   }
+
+  get options(): IListInternalOptions<T> {
+    return this._internalOptions;
+  }
+
+
+  @ViewChild("contentTpl", { read: ViewContainerRef, static: true })
+  contentTpl: ViewContainerRef;
 
   constructor(
     protected authService: AuthService,

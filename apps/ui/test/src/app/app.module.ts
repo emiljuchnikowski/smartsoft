@@ -25,13 +25,13 @@ import {
   CUSTOM_COMPONENTS,
   CustomButtonComponent, CustomCrudListComponent,
   CustomDetailsComponent,
-  CustomFormComponent,
+  CustomFormComponent, CustomListComponent,
   CustomPageComponent
 } from "./custom";
 import {CrudComponentsModule} from "@smartsoft001/crud-shell-angular";
 
 @NgModule({
-  declarations: [AppComponent, TestComponent, ],
+  declarations: [AppComponent, TestComponent],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(

@@ -6,6 +6,7 @@ export * from "./button.component";
 export * from "./details.component";
 export * from "./crud-list.component";
 export * from "./crud-item.component";
+export * from "./list.component";
 
 export const CUSTOM_COMPONENTS = [
     CustomAppComponent

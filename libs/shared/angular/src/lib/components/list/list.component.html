@@ -1,17 +1,25 @@
-<ng-container [ngSwitch]="mode">
-    <smart-list-desktop *ngSwitchCase="ListMode.desktop" [options]="internalOptions"></smart-list-desktop>
-    <smart-list-mobile *ngSwitchCase="ListMode.mobile" [options]="internalOptions"></smart-list-mobile>
-    <smart-list-masonry-grid *ngSwitchCase="ListMode.masonryGrid" [options]="internalOptions"></smart-list-masonry-grid>
-</ng-container>
+<ng-container *ngIf="template === 'default'">
+    <ng-container [ngSwitch]="mode">
+        <smart-list-desktop *ngSwitchCase="ListMode.desktop" [options]="internalOptions"></smart-list-desktop>
+        <smart-list-mobile *ngSwitchCase="ListMode.mobile" [options]="internalOptions"></smart-list-mobile>
+        <smart-list-masonry-grid *ngSwitchCase="ListMode.masonryGrid" [options]="internalOptions"></smart-list-masonry-grid>
+    </ng-container>
 
-<ion-row>
-    <ion-col></ion-col>
-    <ion-col size="auto">
-        <smart-loader [show]="internalOptions?.provider?.loading$ | async"></smart-loader>
-        <h2 *ngIf="!(internalOptions?.provider?.loading$ | async) && !(internalOptions.provider.list$ | async)?.length">
-            <br/>
-             {{ 'noResults' | translate }}
-        </h2>
-    </ion-col>
-    <ion-col></ion-col>
-</ion-row>
+    <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="auto">
+            <smart-loader [show]="internalOptions?.provider?.loading$ | async"></smart-loader>
+            <h2 *ngIf="!(internalOptions?.provider?.loading$ | async) && !(internalOptions.provider.list$ | async)?.length">
+                <br/>
+                {{ 'noResults' | translate }}
+            </h2>
+        </ion-col>
+        <ion-col></ion-col>
+    </ion-row>
+
+    <ng-container [ngTemplateOutlet]="contentTpl"></ng-container>
+</ng-container>
+<ng-template #contentTpl>
+    <ng-content></ng-content>
+</ng-template>
+<div #customTpl></div>
