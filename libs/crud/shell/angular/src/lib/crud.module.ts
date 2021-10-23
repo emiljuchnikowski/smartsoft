@@ -22,6 +22,7 @@ import { CrudFullModule } from "./crud-full.module";
 import {NotSocketService, SocketService} from "./services/socket/socket.service";
 import { CrudListPaginationFactory } from "./factories/list-pagination/list-pagination.factory";
 import { CrudComponentsModule } from "./components/components.module";
+import {PageService} from "./services/page/page.service";
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { CrudComponentsModule } from "./components/components.module";
   exports: [CrudComponentsModule],
   providers: [
     CrudService,
+    PageService,
     CrudEffects,
     CrudFacade,
     SocketService,

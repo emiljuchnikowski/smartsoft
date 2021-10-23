@@ -16,7 +16,7 @@ import {environment} from "../../environments/environment";
 import {TodoFacade} from "./todo.facade";
 import {Observable, of} from "rxjs";
 import {Validators} from "@angular/forms";
-import {CustomButtonComponent, CustomFormComponent} from "../custom";
+import {CustomButtonComponent, CustomCrudListComponent, CustomFormComponent} from "../custom";
 import {CustomPageComponent} from "../custom/page.component";
 
 // export class CellPipe<T> implements IListCellPipe<T> {
@@ -150,20 +150,25 @@ export class ModelLabelProvider extends IModelLabelProvider {
             }
           },
           //mode: ListMode.mobile/
-          // group: {
-          //   key: "number",
-          //   items: [
-          //     { id: "xzc", text: "identykator1" },
-          //     { id: "234", text: "identykator2" },
-          //   ],
-          //  child: {
-          //     key: "name",
-          //     items: [
-          //       { id: "name1", text: "nazwa1" },
-          //       { id: "name2", text: "nazwa2" },
-          //     ],
-          //   }
-          // }
+          groups: [
+            {
+              key: "number",
+              value: "qwe",
+              text: "qwe",
+              children: [
+                {
+                  key: "number1",
+                  value: "qwe1",
+                  text: "qwe1",
+                },
+                {
+                  key: "number1",
+                  value: "qwe2",
+                  text: "qwe2",
+                }
+              ]
+            }
+          ]
         },
         search: true,
         pagination: { limit: 25 },
@@ -174,6 +179,7 @@ export class ModelLabelProvider extends IModelLabelProvider {
     //CustomFormComponent
       //CustomPageComponent
       //CustomButtonComponent
+    //CustomCrudListComponent
   ]
 })
 export class TodosModule {

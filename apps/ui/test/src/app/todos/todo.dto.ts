@@ -1,5 +1,5 @@
 import {Field, FieldType, IFieldModifyMetadata, IModelStep, ISpecification, Model} from "@smartsoft001/models";
-import {IDateRange, IEntity} from "@smartsoft001/domain-core";
+import {IEntity} from "@smartsoft001/domain-core";
 import {of} from "rxjs";
 
 const modifyMetdata : IFieldModifyMetadata = {
@@ -217,6 +217,7 @@ export class Todo implements IEntity<string> {
         create: modifyMetdata,
         update: modifyMetdata,
         details: true,
+        type: FieldType.ints,
         list: { order: 1 },
         info: `
             <b>Test</b> new
@@ -227,7 +228,7 @@ export class Todo implements IEntity<string> {
             maxLength: 5
         }
     })
-    number: string;
+    numberdsdsgefgfhghtreewwertyujhgrtyuilikjhtgrfddrth: string;
 
     // @Field({
     //     create: {

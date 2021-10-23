@@ -17,10 +17,13 @@ import { CrudService } from './services/crud/crud.service';
 import { CrudFacade } from './+state/crud.facade';
 import {CrudListPaginationFactory} from "./factories/list-pagination/list-pagination.factory";
 import {CrudComponentsModule} from "./components/components.module";
+import {PageService} from "./services/page/page.service";
+import {ListStandardComponent} from "./pages/list/standard/standard.component";
 
 const PAGES = [
     ItemComponent,
-    ListComponent
+    ListComponent,
+    ListStandardComponent
 ];
 
 @NgModule({
@@ -44,10 +47,12 @@ const PAGES = [
         CrudComponentsModule
     ],
     exports: [
-        ...PAGES
+        ...PAGES,
+        CrudComponentsModule
     ],
     providers: [
         CrudService,
+        PageService,
         CrudEffects,
         CrudFacade,
         CrudListPaginationFactory,

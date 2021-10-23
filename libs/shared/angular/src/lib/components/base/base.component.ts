@@ -29,7 +29,7 @@ export abstract class BaseComponent implements OnDestroy {
   }
 }
 
-export interface IDynamicComponent<T> {
+export interface IDynamicComponent<T> extends BaseComponent {
   baseInstance: T;
   template: "custom" | "default";
 

@@ -23,14 +23,15 @@ import {
 import { HttpClientModule } from "@angular/common/http";
 import {
   CUSTOM_COMPONENTS,
-  CustomButtonComponent,
+  CustomButtonComponent, CustomCrudListComponent,
   CustomDetailsComponent,
   CustomFormComponent,
   CustomPageComponent
 } from "./custom";
+import {CrudComponentsModule} from "@smartsoft001/crud-shell-angular";
 
 @NgModule({
-  declarations: [AppComponent, TestComponent],
+  declarations: [AppComponent, TestComponent, CustomCrudListComponent],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(
@@ -82,6 +83,7 @@ import {
     IonicModule.forRoot(),
     EffectsModule.forRoot([]),
     SharedModule,
+    CrudComponentsModule,
     AuthModule.forRoot({
       apiUrl:  environment.apiUrl + "auth",
       clientId: "admin",

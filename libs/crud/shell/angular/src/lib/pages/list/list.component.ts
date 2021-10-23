@@ -1,8 +1,8 @@
 import {
   ChangeDetectorRef,
   Component,
-  ComponentFactory, ElementRef,
-  Injector,
+  ComponentFactory, ComponentFactoryResolver, ElementRef,
+  Injector, NgModuleRef,
   OnInit,
   ViewChild,
   ViewContainerRef,
@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 
 import {
-  AuthService,
+  CreateDynamicComponent,
   DynamicComponentLoader,
   HardwareService,
   IIconButtonOptions,
@@ -33,18 +33,29 @@ import { CrudFacade } from "../../+state/crud.facade";
 import { CrudFullConfig } from "../../crud.config";
 import { ICrudFilter } from "../../models/interfaces";
 import { ExportComponent } from "../../components/export/export.component";
-import { PageBaseComponent } from "../base/base.component";
 import { FiltersComponent } from "../../components/filters/filters.component";
 import { MultiselectComponent } from "../../components/multiselect/multiselect.component";
 import { CrudListPaginationFactory } from "../../factories/list-pagination/list-pagination.factory";
+import {PageService} from "../../services/page/page.service";
+import {CrudListBaseComponent} from "./base/base.component";
 
 @Component({
   selector: "smart-crud-list-page",
-  templateUrl: "./list.component.html",
-  styleUrls: ["./list.component.scss"],
+  template: `
+    <smart-page [options]="pageOptions" *ngIf="filter$ | async">
+      <div #topTpl></div>
+      <smart-crud-list-standard-page *ngIf="template === 'default'" [listOptions]="listOptions">
+      <ng-container [ngTemplateOutlet]="contentTpl"></ng-container>
+      </smart-crud-list-standard-page>
+      <ng-template #contentTpl>
+        <ng-content></ng-content>
+      </ng-template>
+      <div #customTpl></div>
+    </smart-page>
+  `
 })
 export class ListComponent<T extends IEntity<string>>
-  extends PageBaseComponent<T>
+    extends CreateDynamicComponent<CrudListBaseComponent<any>>('crud-list-page')
   implements OnInit
 {
   pageOptions: IPageOptions;
@@ -72,18 +83,24 @@ export class ListComponent<T extends IEntity<string>>
     private paginationFacade: CrudListPaginationFactory<T>,
     private styleService: StyleService,
     private elementRef: ElementRef,
+    private pageService: PageService<T>,
     public config: CrudFullConfig<T>,
-    authService: AuthService
+    private moduleRef: NgModuleRef<any>,
+    private componentFactoryResolver: ComponentFactoryResolver
   ) {
-    super(authService, config);
+    super(cd, moduleRef, componentFactoryResolver);
 
     this.facade.links$.pipe(this.takeUntilDestroy).subscribe((links) => {
       this.links = links;
     });
   }
 
+  refreshProperties(): void {
+    this.baseInstance.listOptions = this.listOptions;
+  }
+
   async ngOnInit(): Promise<void> {
-    await super.ngOnInit();
+    await this.pageService.checkPermissions();
 
     this.facade.read({
       limit: this.config.pagination ? this.config.pagination.limit : null,
@@ -225,6 +242,8 @@ export class ListComponent<T extends IEntity<string>>
 
     this.initCloseMenu();
     this.initTopComponent(compiledComponents);
+
+    this.refreshDynamicInstance();
   }
 
   private initCloseMenu() {
