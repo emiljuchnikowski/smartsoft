@@ -29,9 +29,10 @@ import { CrudFullConfig } from "../../crud.config";
 import { CrudService } from "../../services/crud/crud.service";
 import { ICrudFilter } from "../../models/interfaces";
 import { IonContent } from "@ionic/angular";
-import {AbstractControl, FormArray, FormControl, FormGroup} from "@angular/forms";
-import {CrudItemPageBaseComponent, CrudListPageBaseComponent, PageService} from "@smartsoft001/crud-shell-angular";
+import {AbstractControl, FormArray, FormControl, FormGroup} from "@angular/forms"
 import {ItemStandardComponent} from "./standard/standard.component";
+import { CrudItemPageBaseComponent } from "./base/base.component";
+import { PageService } from "../../services/page/page.service";
 
 @Component({
   selector: "smart-crud-item-page",

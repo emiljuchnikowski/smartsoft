@@ -10,10 +10,8 @@ import {
     DynamicComponentType,
     IListOptions,
 } from "@smartsoft001/angular";
-import {
-    CrudFullConfig,
-} from "@smartsoft001/crud-shell-angular";
 import {IEntity} from "@smartsoft001/domain-core";
+import {CrudFullConfig} from "../../../crud.config";
 
 @Directive()
 export abstract class CrudListPageBaseComponent<T extends IEntity<string>> extends BaseComponent {
