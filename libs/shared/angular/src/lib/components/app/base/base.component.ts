@@ -51,7 +51,7 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
 
   @ViewChild("endMenuContainer", { read: ViewContainerRef }) endMenuContainer: ViewContainerRef;
 
-  protected constructor(
+  constructor(
     protected router: Router,
     protected cd: ChangeDetectorRef,
     protected elementRef: ElementRef,
