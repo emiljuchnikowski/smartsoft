@@ -46,6 +46,8 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
     this.username$ = this._options.provider.username$;
     this.logo = val.logo;
 
+    this.initLoader();
+    this.initPermissionClasses();
     this.refreshStyles();
   }
 
@@ -73,8 +75,6 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
   }
 
   async ngAfterContentInit(): Promise<void> {
-    this.initLoader();
-    this.initPermissionClasses();
     this.refreshStyles();
   }
 
