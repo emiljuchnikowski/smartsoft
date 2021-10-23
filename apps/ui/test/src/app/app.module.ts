@@ -31,7 +31,7 @@ import {
 import {CrudComponentsModule} from "@smartsoft001/crud-shell-angular";
 
 @NgModule({
-  declarations: [AppComponent, TestComponent, CustomCrudListComponent],
+  declarations: [AppComponent, TestComponent, ],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(

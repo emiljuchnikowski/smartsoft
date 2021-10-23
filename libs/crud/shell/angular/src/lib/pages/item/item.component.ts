@@ -1,7 +1,7 @@
 import {
   ChangeDetectorRef,
-  Component,
-  ElementRef,
+  Component, ComponentFactoryResolver,
+  ElementRef, NgModuleRef,
   OnDestroy,
   OnInit,
   QueryList,
@@ -14,7 +14,7 @@ import { Location } from "@angular/common";
 import {TranslateService} from "@ngx-translate/core";
 
 import {
-  AuthService,
+  AuthService, CreateDynamicComponent,
   DynamicComponentLoader, FormComponent, ICellPipe,
   IDetailsOptions,
   IIconButtonOptions,
@@ -28,17 +28,37 @@ import { CrudFacade } from "../../+state/crud.facade";
 import { CrudFullConfig } from "../../crud.config";
 import { CrudService } from "../../services/crud/crud.service";
 import { ICrudFilter } from "../../models/interfaces";
-import {PageBaseComponent} from "../base/base.component";
 import { IonContent } from "@ionic/angular";
 import {AbstractControl, FormArray, FormControl, FormGroup} from "@angular/forms";
+import {CrudItemPageBaseComponent, CrudListPageBaseComponent, PageService} from "@smartsoft001/crud-shell-angular";
+import {ItemStandardComponent} from "./standard/standard.component";
 
 @Component({
   selector: "smart-crud-item-page",
-  templateUrl: "./item.component.html",
-  styleUrls: ["./item.component.scss"],
+  template: `
+    <smart-page [options]="pageOptions">
+      <div #topTpl></div>
+      <smart-crud-item-standard-page *ngIf="template === 'default'"
+                                     [detailsOptions]="detailsOptions"
+                                     [mode]="mode"
+                                     [uniqueProvider]="uniqueProvider"
+                                     [onPartialChange]="onPartialChange"
+                                     [onChange]="onPartialChange"
+                                     [onValidChange]="onValidChange"
+      >
+        <ng-container [ngTemplateOutlet]="contentTpl"></ng-container>
+      </smart-crud-item-standard-page>
+      <ng-template #contentTpl>
+        <ng-content></ng-content>
+      </ng-template>
+      <div #customTpl></div>
+    </smart-page>
+  `
 })
-export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<T>
-  implements OnInit, OnDestroy {
+export class ItemComponent<T extends IEntity<string>>
+    extends CreateDynamicComponent<CrudItemPageBaseComponent<any>>('crud-item-page')
+  implements OnInit {
+  private _mode: string;
 
   pageOptions: IPageOptions = {
     title: "",
@@ -46,7 +66,6 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
     hideMenuButton: true,
   };
   detailsOptions: IDetailsOptions<T>;
-  mode: string;
   id: string;
   formValue: T;
   formValid = false;
@@ -54,9 +73,18 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   formPartialValue: Partial<T>;
   uniqueProvider: (values: Record<keyof T, any>) => Promise<boolean>;
 
+  set mode(val: string) {
+    this._mode = val;
+    this.refreshDynamicInstance();
+  }
+  get mode(): string {
+    return this._mode;
+  }
+
+
   selected$: Observable<T>;
 
-  @ViewChildren(FormComponent, { read: FormComponent }) formComponents = new QueryList<FormComponent<any>>();
+  @ViewChildren(ItemStandardComponent, { read: ItemStandardComponent }) standardComponents = new QueryList<ItemStandardComponent<any>>();
   @ViewChild(IonContent, { static: true }) content: IonContent;
 
   constructor(
@@ -73,17 +101,29 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
     authService: AuthService,
     private styleService: StyleService,
     private elementRef: ElementRef,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private pageService: PageService<T>,
+    private moduleRef: NgModuleRef<any>,
+    private componentFactoryResolver: ComponentFactoryResolver
   ) {
-    super(authService, config);
+    super(cd, moduleRef, componentFactoryResolver);
 
     this.selected$ = this.facade.selected$;
+  }
+
+  refreshProperties() {
+    this.baseInstance.detailsOptions = this.detailsOptions;
+    this.baseInstance.mode = this.mode;
+    this.baseInstance.uniqueProvider = this.uniqueProvider;
+    this.baseInstance.onPartialChange = this.onPartialChange;
+    this.baseInstance.onChange = this.onChange;
+    this.baseInstance.onValidChange = this.onValidChange;
   }
 
   async ngOnInit() {
     this.styleService.init(this.elementRef);
 
-    await super.ngOnInit();
+    this.pageService.checkPermissions();
 
     if (this.router.routerState.snapshot.url.endsWith("/add")) {
       this.mode = "create";
@@ -174,6 +214,8 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
       this.initPageOptions();
       this.cd.detectChanges();
     });
+
+    this.refreshDynamicInstance();
   }
 
   onPartialChange(val: Partial<T>) {
@@ -292,7 +334,9 @@ export class ItemComponent<T extends IEntity<string>> extends PageBaseComponent<
   }
 
   private checkFirstInvalid(): boolean {
-    const form = this.formComponents.first.form;
+    const form = this.template === 'default'
+        ? this.standardComponents.first.formComponents.first.form
+        : this.baseInstance.formComponents.first.form;
 
     if (form.valid) return false;
 

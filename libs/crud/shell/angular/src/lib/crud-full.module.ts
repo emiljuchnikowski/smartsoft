@@ -19,11 +19,13 @@ import {CrudListPaginationFactory} from "./factories/list-pagination/list-pagina
 import {CrudComponentsModule} from "./components/components.module";
 import {PageService} from "./services/page/page.service";
 import {ListStandardComponent} from "./pages/list/standard/standard.component";
+import {ItemStandardComponent} from "./pages/item/standard/standard.component";
 
 const PAGES = [
     ItemComponent,
     ListComponent,
-    ListStandardComponent
+    ListStandardComponent,
+    ItemStandardComponent
 ];
 
 @NgModule({

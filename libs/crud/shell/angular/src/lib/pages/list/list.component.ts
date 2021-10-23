@@ -37,7 +37,7 @@ import { FiltersComponent } from "../../components/filters/filters.component";
 import { MultiselectComponent } from "../../components/multiselect/multiselect.component";
 import { CrudListPaginationFactory } from "../../factories/list-pagination/list-pagination.factory";
 import {PageService} from "../../services/page/page.service";
-import {CrudListBaseComponent} from "./base/base.component";
+import {CrudListPageBaseComponent} from "./base/base.component";
 
 @Component({
   selector: "smart-crud-list-page",
@@ -55,7 +55,7 @@ import {CrudListBaseComponent} from "./base/base.component";
   `
 })
 export class ListComponent<T extends IEntity<string>>
-    extends CreateDynamicComponent<CrudListBaseComponent<any>>('crud-list-page')
+    extends CreateDynamicComponent<CrudListPageBaseComponent<any>>('crud-list-page')
   implements OnInit
 {
   pageOptions: IPageOptions;

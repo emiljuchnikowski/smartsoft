@@ -150,25 +150,25 @@ export class ModelLabelProvider extends IModelLabelProvider {
             }
           },
           //mode: ListMode.mobile/
-          groups: [
-            {
-              key: "number",
-              value: "qwe",
-              text: "qwe",
-              children: [
-                {
-                  key: "number1",
-                  value: "qwe1",
-                  text: "qwe1",
-                },
-                {
-                  key: "number1",
-                  value: "qwe2",
-                  text: "qwe2",
-                }
-              ]
-            }
-          ]
+          // groups: [
+          //   {
+          //     key: "number",
+          //     value: "qwe",
+          //     text: "qwe",
+          //     children: [
+          //       {
+          //         key: "number1",
+          //         value: "qwe1",
+          //         text: "qwe1",
+          //       },
+          //       {
+          //         key: "number1",
+          //         value: "qwe2",
+          //         text: "qwe2",
+          //       }
+          //     ]
+          //   }
+          // ]
         },
         search: true,
         pagination: { limit: 25 },

@@ -1,0 +1,17 @@
+<ng-container *ngIf="mode === 'details'; else editTpl">
+    <smart-details *ngIf="detailsOptions" [options]='detailsOptions'></smart-details>
+</ng-container>
+
+<ng-template #editTpl>
+    <smart-form
+            [options]="
+          (selected$ | async)
+          | smartFormOptions : mode:config?.type:uniqueProvider : config.inputComponents
+        "
+            (valuePartialChange)="onPartialChange($event)"
+            (valueChange)="onChange($event)"
+            (validChange)="onValidChange($event)"
+    ></smart-form>
+</ng-template>
+
+<br/><br/>

@@ -16,7 +16,7 @@ import {
 import {IEntity} from "@smartsoft001/domain-core";
 
 @Directive()
-export abstract class CrudListBaseComponent<T extends IEntity<string>> extends BaseComponent {
+export abstract class CrudListPageBaseComponent<T extends IEntity<string>> extends BaseComponent {
     static smartType: DynamicComponentType = "crud-list-page";
 
     @ViewChild("contentTpl", { read: ViewContainerRef, static: true })
