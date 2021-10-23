@@ -45,16 +45,16 @@ function runSetNgConfig(target) {
 function runNgAdd(target) {
     log('NG add');
     const plugins = [
-        '@nrwl/angular --style=scss',
+        '@nrwl/angular',
         '@nrwl/node',
         '@nrwl/nest',
         '@nrwl/cypress',
-        '@nrwl/storybook --uiFramework=@storybook/angular',
+        '@nrwl/storybook',
         '@nrwl/jest',
     ];
 
     plugins.forEach(plugin => {
-        runCommand("ng add " + plugin + " --skip-confirmation=true", target);
+        runCommand(`npm i ${plugin} && npx nx g ${plugin}:ng-add --skip-confirmation=true`, target);
     })
 }
 
