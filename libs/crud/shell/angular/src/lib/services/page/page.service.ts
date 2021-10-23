@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
 import {AuthService} from "@smartsoft001/angular";
-import {CrudFullConfig} from "@smartsoft001/crud-shell-angular";
 import {getModelOptions} from "@smartsoft001/models";
+
+import { CrudFullConfig } from "../../crud.config";
 
 @Injectable()
 export class PageService<T> {
