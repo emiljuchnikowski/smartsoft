@@ -160,6 +160,13 @@ export class ItemComponent<T extends IEntity<string>>
         });
       });
 
+      if (this.id) {
+        filter.query.push({
+          key: "_id",
+          value: this.id,
+          type: "!=",
+        });
+      }
       const { totalCount } = await this.service.getList(filter).toPromise();
 
       return !totalCount;
