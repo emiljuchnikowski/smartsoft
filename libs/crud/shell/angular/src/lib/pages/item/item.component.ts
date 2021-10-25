@@ -43,9 +43,9 @@ import { PageService } from "../../services/page/page.service";
                                      [detailsOptions]="detailsOptions"
                                      [mode]="mode"
                                      [uniqueProvider]="uniqueProvider"
-                                     [onPartialChange]="onPartialChange"
-                                     [onChange]="onPartialChange"
-                                     [onValidChange]="onValidChange"
+                                     (onPartialChange)="onPartialChange($event)"
+                                     (onChange)="onPartialChange($event)"
+                                     (onValidChange)="onValidChange($event)"
       >
         <ng-container [ngTemplateOutlet]="contentTpl"></ng-container>
       </smart-crud-item-standard-page>
@@ -116,9 +116,9 @@ export class ItemComponent<T extends IEntity<string>>
     this.baseInstance.detailsOptions = this.detailsOptions;
     this.baseInstance.mode = this.mode;
     this.baseInstance.uniqueProvider = this.uniqueProvider;
-    this.baseInstance.onPartialChange = this.onPartialChange;
-    this.baseInstance.onChange = this.onChange;
-    this.baseInstance.onValidChange = this.onValidChange;
+    this.baseInstance.onPartialChange.pipe(this.takeUntilDestroy).subscribe(val => this.onPartialChange(val));
+    this.baseInstance.onChange.pipe(this.takeUntilDestroy).subscribe(val => this.onChange(val));
+    this.baseInstance.onValidChange.pipe(this.takeUntilDestroy).subscribe(val => this.onValidChange(val));
   }
 
   async ngOnInit() {
@@ -335,9 +335,13 @@ export class ItemComponent<T extends IEntity<string>>
   }
 
   private checkFirstInvalid(): boolean {
+    this.cd.detectChanges();
+
     const form = this.template === 'default'
         ? this.standardComponents.first.formComponents.first.form
         : this.baseInstance.formComponents.first.form;
+
+    this.cd.detectChanges();
 
     if (form.valid) return false;
 

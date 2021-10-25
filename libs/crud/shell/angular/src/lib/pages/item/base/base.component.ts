@@ -1,6 +1,6 @@
 import {
-    Directive,
-    Input, QueryList,
+    Directive, EventEmitter,
+    Input, Output, QueryList,
     ViewChild, ViewChildren,
     ViewContainerRef
 } from "@angular/core";
@@ -34,14 +34,14 @@ export abstract class CrudItemPageBaseComponent<T extends IEntity<string>> exten
     @Input()
     uniqueProvider: (values: Record<keyof T, any>) => Promise<boolean>;
 
-    @Input()
-    onPartialChange: (val: Partial<T>) => void;
+    @Output()
+    onPartialChange = new EventEmitter<Partial<T>>();
 
-    @Input()
-    onChange: (val: T) => void;
+    @Output()
+    onChange = new EventEmitter<T>();
 
-    @Input()
-    onValidChange: (val: boolean) => void;
+    @Output()
+    onValidChange = new EventEmitter<boolean>();
 
     constructor(
         public config: CrudFullConfig<T>,

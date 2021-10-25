@@ -8,9 +8,9 @@
           (selected$ | async)
           | smartFormOptions : mode:config?.type:uniqueProvider : config.inputComponents
         "
-            (valuePartialChange)="onPartialChange($event)"
-            (valueChange)="onChange($event)"
-            (validChange)="onValidChange($event)"
+            (valuePartialChange)="onPartialChange.emit($event)"
+            (valueChange)="onChange.emit($event)"
+            (validChange)="onValidChange.emit($event)"
     ></smart-form>
 </ng-template>
 
