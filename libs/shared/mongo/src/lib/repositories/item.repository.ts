@@ -365,6 +365,8 @@ export class MongoItemRepository<
             repoOptions.transaction as IMongoTransaction
           ).connection.db(this.config.database);
 
+          this.convertIdInCriteria(criteria);
+
           db.collection(this.config.collection).updateMany(
             criteria,
             {
@@ -413,6 +415,8 @@ export class MongoItemRepository<
 
           const db = client.db(this.config.database);
           const collection = db.collection(this.config.collection);
+
+            this.convertIdInCriteria(criteria);
 
           db.collection(this.config.collection).updateMany(
             criteria,
@@ -586,6 +590,8 @@ export class MongoItemRepository<
             return;
           }
 
+          this.convertIdInCriteria(criteria);
+
           this.generateSearch(criteria);
 
           const db = client.db(this.config.database);
@@ -669,7 +675,9 @@ export class MongoItemRepository<
     );
   }
 
-  protected getContext<TResult>(handler: (db: Db) => Promise<TResult>): Promise<TResult> {
+  protected getContext<TResult>(
+    handler: (db: Db) => Promise<TResult>
+  ): Promise<TResult> {
     return new Promise<TResult>((res, rej) => {
       MongoClient.connect(
         this.getUrl(),
@@ -697,6 +705,8 @@ export class MongoItemRepository<
 
   private getCount(criteria: any, collection): Promise<any> {
     return new Promise<any>((res, rej) => {
+        this.convertIdInCriteria(criteria);
+
       collection.countDocuments(criteria, (err, count) => {
         if (err) {
           rej(err);
@@ -870,5 +880,12 @@ export class MongoItemRepository<
       ...criteria,
       ...customCriteria,
     };
+  }
+
+  private convertIdInCriteria(criteria: any) {
+    if (criteria["id"]) {
+      criteria["_id"] = criteria["id"];
+      delete criteria["id"];
+    }
   }
 }

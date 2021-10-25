@@ -162,7 +162,7 @@ export class ItemComponent<T extends IEntity<string>>
 
       if (this.id) {
         filter.query.push({
-          key: "_id",
+          key: "id",
           value: this.id,
           type: "!=",
         });
