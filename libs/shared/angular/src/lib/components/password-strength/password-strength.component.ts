@@ -23,7 +23,15 @@ export class PasswordStrengthComponent implements OnChanges {
   msg = '';
   msgColor: string;
 
+  result = {
+    lowerLetters: false,
+    upperLetters: false,
+    symbols: false,
+    passLength: false
+  };
+
   @Input() public passwordToCheck: string;
+  @Input() public showHint: boolean;
 
   @Output() passwordStrength = new EventEmitter<boolean>();
 
@@ -51,12 +59,20 @@ export class PasswordStrengthComponent implements OnChanges {
     force += passedMatches * 10;
 
     // 6
-    force = p?.length <= 6 ? Math.min(force, 10) : force;
+    const passLength = !(p?.length <= 6);
+    force = !passLength ? Math.min(force, 10) : force;
 
     // 7
     force = passedMatches === 1 ? Math.min(force, 10) : force;
     force = passedMatches === 2 ? Math.min(force, 20) : force;
     force = passedMatches === 3 ? Math.min(force, 30) : force;
+
+    this.result = {
+      lowerLetters,
+      upperLetters,
+      symbols,
+      passLength
+    };
 
     return force;
   }

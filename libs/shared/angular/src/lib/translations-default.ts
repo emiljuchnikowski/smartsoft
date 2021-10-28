@@ -119,6 +119,9 @@ export interface ITranslateData {
             invalidMaxLength: string,
             invalidMin: string,
             invalidMax: string,
+            upperLetters: string,
+            lowerLetters: string,
+            symbols: string
         },
         'PASSWORD-STRENGTH': {
             poor: string,
@@ -235,6 +238,9 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
             invalidMaxLength: "max length",
             invalidMin: 'min value',
             invalidMax: 'max value',
+            upperLetters: "upper letters",
+            lowerLetters: "lower letters",
+            symbols: "string"
         },
         'PASSWORD-STRENGTH': {
             poor: 'poor',
@@ -351,6 +357,9 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
             invalidMaxLength: "maksymalna długość",
             invalidMin: "minimalna wartość",
             invalidMax: "maksymalna wartość",
+            upperLetters: "duże litery",
+            lowerLetters: "małe litery",
+            symbols: "znaki specjalne"
         },
         'PASSWORD-STRENGTH': {
             poor: 'bardzo słabe',

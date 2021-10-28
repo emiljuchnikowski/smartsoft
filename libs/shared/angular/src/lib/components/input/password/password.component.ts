@@ -10,6 +10,7 @@ import {InputBaseComponent} from "../base/base.component";
 })
 export class InputPasswordComponent<T> extends InputBaseComponent<T> implements OnInit {
   valid = true;
+  focus = false;
 
   constructor(cd: ChangeDetectorRef) {
     super(cd);
