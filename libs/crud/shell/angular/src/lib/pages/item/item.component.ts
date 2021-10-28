@@ -44,7 +44,7 @@ import { PageService } from "../../services/page/page.service";
                                      [mode]="mode"
                                      [uniqueProvider]="uniqueProvider"
                                      (onPartialChange)="onPartialChange($event)"
-                                     (onChange)="onPartialChange($event)"
+                                     (onChange)="onChange($event)"
                                      (onValidChange)="onValidChange($event)"
       >
         <ng-container [ngTemplateOutlet]="contentTpl"></ng-container>

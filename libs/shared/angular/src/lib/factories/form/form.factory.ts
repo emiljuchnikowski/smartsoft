@@ -252,9 +252,7 @@ export class FormFactory {
       result.push(Validators.max(options.possibilities?.max));
     }
 
-    if (options.unique) {
-      if (!uniqueProvider) throw Error("Required uniqueProvider");
-
+    if (options.unique && uniqueProvider) {
       asyncResult.push(async (c: AbstractControl) => {
         const record: Record<string, any> = {
           [key]: options.type === FieldType.int ? c.value : `'${ c.value }'`
