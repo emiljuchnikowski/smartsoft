@@ -41,12 +41,14 @@ export class PasswordStrengthComponent implements OnChanges {
 
     // 2
     const regex = /[$-/:-?{-~!"^_@`\[\]]/g;
-    const lowerLetters = /[a-z]+/.test(p);
+    const lowerLetters = p && (/[a-z]+/.test(p));
     const upperLetters = /[A-Z]+/.test(p);
     const symbols = regex.test(p);
 
     // 3
     const flags = [lowerLetters, upperLetters, symbols];
+
+    console.log(flags);
 
     // 4
     let passedMatches = 0;
@@ -59,7 +61,7 @@ export class PasswordStrengthComponent implements OnChanges {
     force += passedMatches * 10;
 
     // 6
-    const passLength = !(p?.length <= 6);
+    const passLength = !(!p || p?.length <= 6);
     force = !passLength ? Math.min(force, 10) : force;
 
     // 7
