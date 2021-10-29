@@ -48,8 +48,6 @@ export class PasswordStrengthComponent implements OnChanges {
     // 3
     const flags = [lowerLetters, upperLetters, symbols];
 
-    console.log(flags);
-
     // 4
     let passedMatches = 0;
     for (const flag of flags) {
