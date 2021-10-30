@@ -1,9 +1,9 @@
 import { MonoTypeOperatorFunction, Subject } from "rxjs";
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectorRef,
   ComponentFactoryResolver,
-  Directive,
+  Directive, DoCheck,
   NgModuleRef,
   OnDestroy, QueryList,
   TemplateRef,
@@ -48,8 +48,9 @@ export function CreateDynamicComponent<
   componentFactoryResolver: ComponentFactoryResolver
 ) => IDynamicComponent<T> {
   @Directive()
-  abstract class Component extends BaseComponent implements AfterViewInit {
+  abstract class Component extends BaseComponent implements DoCheck {
     private _renderCustom = false;
+    private _findDynamicContent = false;
 
     baseInstance: T;
 
@@ -70,15 +71,6 @@ export function CreateDynamicComponent<
       super();
     }
 
-    ngAfterViewInit(): void {
-      this.dynamicContents.changes.pipe(
-          this.takeUntilDestroy
-      ).subscribe(() => {
-        this.init();
-      });
-      this.init();
-    }
-
     refreshDynamicInstance() {
       this.init();
 
@@ -87,6 +79,19 @@ export function CreateDynamicComponent<
     }
 
     abstract refreshProperties(): void;
+
+    ngDoCheck(): void {
+      if (this._findDynamicContent || !this.dynamicContents) return;
+
+      this._findDynamicContent = true;
+
+      this.dynamicContents.changes.pipe(
+          this.takeUntilDestroy
+      ).subscribe(() => {
+        this.init();
+      });
+      this.init();
+    }
 
     private init(): void {
       const component = DynamicComponentStorageService.get(
