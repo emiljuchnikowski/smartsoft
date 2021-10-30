@@ -34,6 +34,9 @@ export interface IDynamicComponent<T> extends BaseComponent {
   baseInstance: T;
   template: "custom" | "default";
 
+  contentTpl: TemplateRef<any>;
+  dynamicContents: QueryList<DynamicContentDirective>;
+
   refreshProperties(): void;
   refreshDynamicInstance();
 }
@@ -57,11 +60,8 @@ export function CreateDynamicComponent<
     dynamicType: Readonly<DynamicComponentType> = type;
     template: "custom" | "default";
 
-    @ViewChild("contentTpl", { read: TemplateRef, static: false })
-    contentTpl: TemplateRef<any>;
-
-    @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
-    dynamicContents = new QueryList<DynamicContentDirective>();
+    abstract contentTpl: TemplateRef<any>;
+    abstract dynamicContents: QueryList<DynamicContentDirective>;
 
     protected constructor(
       private cd: ChangeDetectorRef,

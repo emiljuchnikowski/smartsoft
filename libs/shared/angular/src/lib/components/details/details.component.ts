@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnDestroy,
+  OnDestroy, QueryList, TemplateRef, ViewChild, ViewChildren,
 } from "@angular/core";
 import { Subscription } from "rxjs";
 
@@ -10,6 +10,7 @@ import { IDetailsOptions } from "../../models";
 import { IEntity } from "@smartsoft001/domain-core";
 import { CreateDynamicComponent } from "../base";
 import { DetailsBaseComponent } from "./base/base.component";
+import {DynamicContentDirective} from "../../directives";
 
 @Component({
   selector: "smart-details",
@@ -45,6 +46,12 @@ export class DetailsComponent<T extends IEntity<string>>
   get options(): IDetailsOptions<T> {
     return this._options;
   }
+
+  @ViewChild("contentTpl", { read: TemplateRef, static: false })
+  contentTpl: TemplateRef<any>;
+
+  @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
+  dynamicContents = new QueryList<DynamicContentDirective>();
 
   ngOnDestroy(): void {
     if (this._subscription) {

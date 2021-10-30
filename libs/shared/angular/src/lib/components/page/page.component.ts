@@ -4,8 +4,8 @@ import {
     Component, ComponentFactoryResolver, ComponentRef,
     ElementRef,
     Input, NgModuleRef,
-    OnInit,
-    Renderer2, TemplateRef, ViewChild, ViewContainerRef,
+    OnInit, QueryList,
+    Renderer2, TemplateRef, ViewChild, ViewChildren, ViewContainerRef,
 } from "@angular/core";
 
 import {IPageOptions} from "../../models/interfaces";
@@ -13,6 +13,7 @@ import {DynamicComponentStorageService} from "../../services/dynamic-component-s
 import {FormBaseComponent} from "../form";
 import {PageBaseComponent} from "./base/base.component";
 import {CreateDynamicComponent} from "../base";
+import {DynamicContentDirective} from "../../directives";
 
 @Component({
     selector: 'smart-page',
@@ -37,6 +38,12 @@ export class PageComponent extends CreateDynamicComponent<PageBaseComponent>('pa
     get options(): IPageOptions {
         return this._options;
     }
+
+    @ViewChild("contentTpl", { read: TemplateRef, static: false })
+    contentTpl: TemplateRef<any>;
+
+    @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
+    dynamicContents = new QueryList<DynamicContentDirective>();
 
     constructor(
         private el: ElementRef,

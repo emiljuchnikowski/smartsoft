@@ -3,7 +3,7 @@ import {
   Component, ComponentFactoryResolver,
   ElementRef, NgModuleRef,
   OnInit,
-  QueryList,
+  QueryList, TemplateRef,
   ViewChild,
   ViewChildren
 } from "@angular/core";
@@ -14,7 +14,7 @@ import {TranslateService} from "@ngx-translate/core";
 
 import {
   AuthService, CreateDynamicComponent,
-  DynamicComponentLoader, FormComponent, ICellPipe,
+  DynamicComponentLoader, DynamicContentDirective, FormComponent, ICellPipe,
   IDetailsOptions,
   IIconButtonOptions,
   InputComponent,
@@ -86,6 +86,12 @@ export class ItemComponent<T extends IEntity<string>>
 
   @ViewChildren(ItemStandardComponent, { read: ItemStandardComponent }) standardComponents = new QueryList<ItemStandardComponent<any>>();
   @ViewChild(IonContent, { static: true }) content: IonContent;
+
+  @ViewChild("contentTpl", { read: TemplateRef, static: false })
+  contentTpl: TemplateRef<any>;
+
+  @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
+  dynamicContents = new QueryList<DynamicContentDirective>();
 
   constructor(
     private router: Router,

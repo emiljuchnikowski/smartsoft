@@ -1,13 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
+  Input, QueryList, TemplateRef, ViewChild, ViewChildren,
   ViewEncapsulation
 } from '@angular/core';
 
 import {IButtonOptions} from "../../models/interfaces";
 import {ButtonBaseComponent} from "./base/base.component";
 import {CreateDynamicComponent} from "../base";
+import {DynamicContentDirective} from "../../directives";
 
 @Component({
   selector: 'smart-button',
@@ -40,6 +41,12 @@ export class ButtonComponent extends CreateDynamicComponent<ButtonBaseComponent>
     this.refreshDynamicInstance();
   }
   get disabled(): boolean { return this._disabled; }
+
+  @ViewChild("contentTpl", { read: TemplateRef, static: false })
+  contentTpl: TemplateRef<any>;
+
+  @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
+  dynamicContents = new QueryList<DynamicContentDirective>();
 
   refreshProperties(): void {
     this.baseInstance.options = this.options;

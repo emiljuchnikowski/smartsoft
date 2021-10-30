@@ -3,8 +3,8 @@ import {
   Component,
   ComponentFactory, ComponentFactoryResolver, ElementRef,
   Injector, NgModuleRef,
-  OnInit,
-  ViewChild,
+  OnInit, QueryList, TemplateRef,
+  ViewChild, ViewChildren,
   ViewContainerRef,
 } from "@angular/core";
 import { map, tap } from "rxjs/operators";
@@ -13,7 +13,7 @@ import { Observable } from "rxjs";
 
 import {
   CreateDynamicComponent,
-  DynamicComponentLoader,
+  DynamicComponentLoader, DynamicContentDirective,
   HardwareService,
   IIconButtonOptions,
   IListOptions,
@@ -71,6 +71,12 @@ export class ListComponent<T extends IEntity<string>>
 
   @ViewChild("topTpl", { read: ViewContainerRef, static: false })
   topTpl: ViewContainerRef;
+
+  @ViewChild("contentTpl", { read: TemplateRef, static: false })
+  contentTpl: TemplateRef<any>;
+
+  @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
+  dynamicContents = new QueryList<DynamicContentDirective>();
 
   constructor(
     private facade: CrudFacade<T>,

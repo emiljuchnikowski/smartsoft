@@ -4,7 +4,7 @@ import {
   Component, ComponentFactoryResolver,
   Input,
   NgModuleRef,
-  OnInit,
+  OnInit, QueryList, TemplateRef, ViewChild, ViewChildren,
   ViewEncapsulation
 } from '@angular/core';
 import * as _ from 'lodash';
@@ -14,6 +14,7 @@ import {IListOptions, ListMode} from "../../models/interfaces";
 import {HardwareService} from "../../services/hardware/hardware.service";
 import {CreateDynamicComponent} from "../base";
 import {ListBaseComponent} from "./base/base.component";
+import {DynamicContentDirective} from "../../directives";
 
 @Component({
   selector: 'smart-list',
@@ -39,6 +40,12 @@ export class ListComponent<T> extends CreateDynamicComponent<ListBaseComponent<a
   get internalOptions(): IListInternalOptions<T> {
     return this._options;
   }
+
+  @ViewChild("contentTpl", { read: TemplateRef, static: false })
+  contentTpl: TemplateRef<any>;
+
+  @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
+  dynamicContents = new QueryList<DynamicContentDirective>();
 
   constructor(
       private hardwareService: HardwareService,

@@ -4,8 +4,8 @@ import {
   Component, ComponentFactoryResolver, ElementRef,
   EventEmitter, Inject,
   Input, NgModuleRef, OnDestroy, Optional,
-  Output,
-  Type, ViewChild, ViewContainerRef,
+  Output, QueryList, TemplateRef,
+  Type, ViewChild, ViewChildren, ViewContainerRef,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import {Subscription} from "rxjs";
@@ -23,6 +23,7 @@ import {DynamicComponentStorageService} from "../../services/dynamic-component-s
 import {FormBaseComponent} from "./base/base.component";
 import {CreateDynamicComponent} from "../base";
 import {ButtonBaseComponent} from "../button";
+import {DynamicContentDirective} from "../../directives";
 
 @Component({
   selector: "smart-form",
@@ -120,6 +121,12 @@ export class FormComponent<T> extends CreateDynamicComponent<FormBaseComponent<a
   @Output() valueChange = new EventEmitter<T>();
   @Output() valuePartialChange = new EventEmitter<Partial<T>>();
   @Output() validChange = new EventEmitter<boolean>();
+
+  @ViewChild("contentTpl", { read: TemplateRef, static: false })
+  contentTpl: TemplateRef<any>;
+
+  @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
+  dynamicContents = new QueryList<DynamicContentDirective>();
 
   constructor(
       private formFactory: FormFactory,
