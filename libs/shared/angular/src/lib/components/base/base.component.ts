@@ -61,7 +61,7 @@ export function CreateDynamicComponent<
     contentTpl: TemplateRef<any>;
 
     @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
-    dynamicContents: QueryList<DynamicContentDirective>;
+    dynamicContents = new QueryList<DynamicContentDirective>();
 
     protected constructor(
       private cd: ChangeDetectorRef,
