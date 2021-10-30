@@ -54,7 +54,7 @@ import {ButtonBaseComponent} from "../button";
           ></smart-form-stepper>
         </ng-container>
         
-        <div #customTpl></div>
+        <div class="dynamic-content"></div>
       </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

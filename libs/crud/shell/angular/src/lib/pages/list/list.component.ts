@@ -50,7 +50,7 @@ import {CrudListPageBaseComponent} from "./base/base.component";
       <ng-template #contentTpl>
         <ng-content></ng-content>
       </ng-template>
-      <div #customTpl></div>
+      <div class="dynamic-content"></div>
     </smart-page>
   `
 })

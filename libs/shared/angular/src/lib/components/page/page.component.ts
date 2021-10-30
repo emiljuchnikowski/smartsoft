@@ -23,7 +23,7 @@ import {CreateDynamicComponent} from "../base";
         <ng-template #contentTpl>
             <ng-content></ng-content>
         </ng-template>
-        <div #customTpl></div>
+        <div class="dynamic-content"></div>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

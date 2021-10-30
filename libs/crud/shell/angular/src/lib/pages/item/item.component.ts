@@ -2,14 +2,13 @@ import {
   ChangeDetectorRef,
   Component, ComponentFactoryResolver,
   ElementRef, NgModuleRef,
-  OnDestroy,
   OnInit,
   QueryList,
   ViewChild,
   ViewChildren
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Location } from "@angular/common";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -52,7 +51,7 @@ import { PageService } from "../../services/page/page.service";
       <ng-template #contentTpl>
         <ng-content></ng-content>
       </ng-template>
-      <div #customTpl></div>
+      <div class="dynamic-content"></div>
     </smart-page>
   `
 })

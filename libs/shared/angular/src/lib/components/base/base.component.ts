@@ -5,15 +5,16 @@ import {
   ComponentFactoryResolver,
   Directive,
   NgModuleRef,
-  OnDestroy,
+  OnDestroy, QueryList,
   TemplateRef,
-  ViewChild,
+  ViewChild, ViewChildren,
   ViewContainerRef,
 } from "@angular/core";
 import { takeUntil } from "rxjs/operators";
 
 import { DynamicComponentType } from "../../models";
 import { DynamicComponentStorageService } from "../../services/dynamic-component-storage/dynamic-component-storage.service";
+import {DynamicContentDirective} from "../../directives";
 
 @Directive()
 export abstract class BaseComponent implements OnDestroy {
@@ -48,16 +49,18 @@ export function CreateDynamicComponent<
 ) => IDynamicComponent<T> {
   @Directive()
   abstract class Component extends BaseComponent implements AfterViewInit {
+    private _renderCustom = false;
+
     baseInstance: T;
 
     dynamicType: Readonly<DynamicComponentType> = type;
     template: "custom" | "default";
 
-    @ViewChild("customTpl", { read: ViewContainerRef, static: false })
-    customTpl: ViewContainerRef;
-
     @ViewChild("contentTpl", { read: TemplateRef, static: false })
     contentTpl: TemplateRef<any>;
+
+    @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
+    dynamicContents: QueryList<DynamicContentDirective>;
 
     protected constructor(
       private cd: ChangeDetectorRef,
@@ -68,6 +71,11 @@ export function CreateDynamicComponent<
     }
 
     ngAfterViewInit(): void {
+      this.dynamicContents.changes.pipe(
+          this.takeUntilDestroy
+      ).subscribe(() => {
+        this.init();
+      });
       this.init();
     }
 
@@ -81,25 +89,24 @@ export function CreateDynamicComponent<
     abstract refreshProperties(): void;
 
     private init(): void {
-      setTimeout(() => {
-        const component = DynamicComponentStorageService.get(
-            this.dynamicType,
-            this.moduleRef
-        )[0];
-        this.template = component ? "custom" : "default";
+      const component = DynamicComponentStorageService.get(
+          this.dynamicType,
+          this.moduleRef
+      )[0];
+      this.template = component ? "custom" : "default";
 
-        if (component) {
-          const factory =
-              this.componentFactoryResolver.resolveComponentFactory(component);
-          if (this.customTpl && !this.customTpl.get(0)) {
-            this.baseInstance = this.customTpl.createComponent(factory).instance;
-            this.refreshDynamicInstance();
-            this.baseInstance.contentTpl?.createEmbeddedView(this.contentTpl);
-          }
+      if (component && !this._renderCustom) {
+        const factory =
+            this.componentFactoryResolver.resolveComponentFactory(component);
+        if (this.dynamicContents.first) {
+          this._renderCustom = true;
+          this.baseInstance = this.dynamicContents.first.container.createComponent(factory).instance;
+          this.refreshDynamicInstance();
+          this.baseInstance.contentTpl?.createEmbeddedView(this.contentTpl);
         }
+      }
 
-        if (this.cd) this.cd.detectChanges();
-      });
+      if (this.cd) this.cd.detectChanges();
     }
   }
 
