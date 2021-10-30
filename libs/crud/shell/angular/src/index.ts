@@ -2,6 +2,7 @@ export * from "./lib/+state/crud.selectors";
 export * from "./lib/components";
 export * from "./lib/crud.config";
 export * from "./lib/crud.module";
+export * from "./lib/crud-full.module";
 export * from "./lib/factories/list-pagination/list-pagination.factory";
 export * from "./lib/pipes";
 export * from "./lib/providers/model-possibilities/model-possibilities.provider";
