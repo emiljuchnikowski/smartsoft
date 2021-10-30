@@ -10,7 +10,7 @@ import { IDetailsOptions } from "../../models";
 import { IEntity } from "@smartsoft001/domain-core";
 import { CreateDynamicComponent } from "../base";
 import { DetailsBaseComponent } from "./base/base.component";
-import {DynamicContentDirective} from "../../directives";
+import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
 
 @Component({
   selector: "smart-details",

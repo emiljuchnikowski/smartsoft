@@ -9,11 +9,9 @@ import {
 } from "@angular/core";
 
 import {IPageOptions} from "../../models/interfaces";
-import {DynamicComponentStorageService} from "../../services/dynamic-component-storage/dynamic-component-storage.service";
-import {FormBaseComponent} from "../form";
+import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
 import {PageBaseComponent} from "./base/base.component";
 import {CreateDynamicComponent} from "../base";
-import {DynamicContentDirective} from "../../directives";
 
 @Component({
     selector: 'smart-page',

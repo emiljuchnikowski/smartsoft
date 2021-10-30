@@ -14,7 +14,7 @@ import {IListOptions, ListMode} from "../../models/interfaces";
 import {HardwareService} from "../../services/hardware/hardware.service";
 import {CreateDynamicComponent} from "../base";
 import {ListBaseComponent} from "./base/base.component";
-import {DynamicContentDirective} from "../../directives";
+import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
 
 @Component({
   selector: 'smart-list',

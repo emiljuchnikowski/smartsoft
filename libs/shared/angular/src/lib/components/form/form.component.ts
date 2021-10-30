@@ -7,7 +7,6 @@ import {
   Output, QueryList, TemplateRef,
   Type, ViewChild, ViewChildren, ViewContainerRef,
 } from "@angular/core";
-import { FormGroup } from "@angular/forms";
 import {Subscription} from "rxjs";
 import {filter} from "rxjs/operators";
 
@@ -23,7 +22,7 @@ import {DynamicComponentStorageService} from "../../services/dynamic-component-s
 import {FormBaseComponent} from "./base/base.component";
 import {CreateDynamicComponent} from "../base";
 import {ButtonBaseComponent} from "../button";
-import {DynamicContentDirective} from "../../directives";
+import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
 
 @Component({
   selector: "smart-form",

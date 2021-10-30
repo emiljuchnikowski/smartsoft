@@ -8,7 +8,7 @@ import {
 import {IButtonOptions} from "../../models/interfaces";
 import {ButtonBaseComponent} from "./base/base.component";
 import {CreateDynamicComponent} from "../base";
-import {DynamicContentDirective} from "../../directives";
+import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
 
 @Component({
   selector: 'smart-button',
