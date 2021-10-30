@@ -81,23 +81,25 @@ export function CreateDynamicComponent<
     abstract refreshProperties(): void;
 
     private init(): void {
-      const component = DynamicComponentStorageService.get(
-          this.dynamicType,
-          this.moduleRef
-      )[0];
-      this.template = component ? "custom" : "default";
+      setTimeout(() => {
+        const component = DynamicComponentStorageService.get(
+            this.dynamicType,
+            this.moduleRef
+        )[0];
+        this.template = component ? "custom" : "default";
 
-      if (component) {
-        const factory =
-            this.componentFactoryResolver.resolveComponentFactory(component);
-        if (this.customTpl && !this.customTpl.get(0)) {
-          this.baseInstance = this.customTpl.createComponent(factory).instance;
-          this.refreshDynamicInstance();
-          this.baseInstance.contentTpl?.createEmbeddedView(this.contentTpl);
+        if (component) {
+          const factory =
+              this.componentFactoryResolver.resolveComponentFactory(component);
+          if (this.customTpl && !this.customTpl.get(0)) {
+            this.baseInstance = this.customTpl.createComponent(factory).instance;
+            this.refreshDynamicInstance();
+            this.baseInstance.contentTpl?.createEmbeddedView(this.contentTpl);
+          }
         }
-      }
 
-      if (this.cd) this.cd.detectChanges();
+        if (this.cd) this.cd.detectChanges();
+      });
     }
   }
 
