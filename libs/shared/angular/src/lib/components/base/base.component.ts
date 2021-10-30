@@ -103,7 +103,7 @@ export function CreateDynamicComponent<
       if (component && !this._renderCustom) {
         const factory =
             this.componentFactoryResolver.resolveComponentFactory(component);
-        if (this.dynamicContents.first) {
+        if (this.dynamicContents?.first) {
           this._renderCustom = true;
           this.baseInstance = this.dynamicContents.first.container.createComponent(factory).instance;
           this.refreshDynamicInstance();
