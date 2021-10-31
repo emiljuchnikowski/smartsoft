@@ -21,6 +21,8 @@ export class ErrorService {
     if (!message)
       message = await  this.translateService.get('ERRORS.other').toPromise();
 
+    console.error(obj);
+
     await this.toastService.error({message});
   }
 }
