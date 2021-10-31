@@ -4,7 +4,7 @@ import { map } from "rxjs/operators";
 import { combineLatest } from "rxjs";
 
 import { IEntity } from "@smartsoft001/domain-core";
-import { IListPaginationOptions } from "@smartsoft001/angular";
+import {IListPaginationOptions, PaginationMode} from "@smartsoft001/angular";
 
 import {CrudFacade} from "../../+state/crud.facade";
 import {ICrudFilter} from "../../models/interfaces";
@@ -14,6 +14,7 @@ export class CrudListPaginationFactory<T extends IEntity<string>> {
   constructor(private readonly facade: CrudFacade<T>) {}
 
   async create(options: {
+    mode?: PaginationMode,
     limit: number;
     provider: {
       getLinks(): any;
@@ -21,6 +22,7 @@ export class CrudListPaginationFactory<T extends IEntity<string>> {
     };
   }): Promise<IListPaginationOptions> {
     return {
+      mode: options.mode,
       limit: options.limit,
       loadNextPage: () => {
         if (!options.provider.getLinks() || !options.provider.getLinks().next)

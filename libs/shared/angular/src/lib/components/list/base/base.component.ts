@@ -17,7 +17,7 @@ import {
   IDetailsOptions,
   IListProvider,
   IButtonOptions,
-  ICellPipe, DynamicComponentType,
+  ICellPipe, DynamicComponentType, PaginationMode,
 } from "../../../models/interfaces";
 import { IListInternalOptions } from "../list.component";
 import { AlertService } from "../../../services/alert/alert.service";
@@ -43,8 +43,8 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
   removed: Set<string> = new Set<string>();
   keys: Array<string>;
   cellPipe: ICellPipe<T>;
-  loadPrevPage: (event) => void;
-  loadNextPage: (event) => void;
+  loadPrevPage: (event?) => void;
+  loadNextPage: (event?) => void;
 
   list$: Observable<T[]>;
   loading$: Observable<boolean>;
@@ -52,6 +52,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
   totalPages$: Observable<number>;
 
   FieldType = FieldType;
+  PaginationMode = PaginationMode;
 
   type: Type<T>;
   sort:
@@ -121,18 +122,18 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     }
 
     if (val.pagination) {
-      this.loadNextPage = async (event) => {
+      this.loadNextPage = async (event = null) => {
         await val.pagination.loadNextPage();
-        event.target.complete();
+        if (event) event.target.complete();
 
         setTimeout(() => {
           window.scrollTo(0, 0);
         });
       };
 
-      this.loadPrevPage = async (event) => {
+      this.loadPrevPage = async (event = null) => {
         await val.pagination.loadPrevPage();
-        event.target.complete();
+        if (event) event.target.complete();
 
         setTimeout(() => {
           window.scrollTo(0, 10000);

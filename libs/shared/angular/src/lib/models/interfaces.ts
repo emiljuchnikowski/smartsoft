@@ -123,11 +123,17 @@ export interface IInputFromFieldOptions<T> {
 }
 
 export interface IListPaginationOptions {
+  mode?: PaginationMode,
   limit: number,
   loadNextPage: () => Promise<boolean>,
   loadPrevPage: () => Promise<boolean>,
   page$: Observable<number>,
   totalPages$: Observable<number>
+}
+
+export enum PaginationMode {
+  infiniteScroll = "infiniteScroll",
+  singlePage = "singlePage"
 }
 
 export enum ListMode {

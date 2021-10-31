@@ -24,5 +24,6 @@ export * from './date-edit';
 export * from './error-context';
 export * from './export';
 export * from './import';
+export * from './paging';
 
 export * from './components.module';

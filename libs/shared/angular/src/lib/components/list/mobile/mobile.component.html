@@ -26,7 +26,17 @@
     </ion-item-sliding>
 </ion-list>
 
-<ion-infinite-scroll threshold="100px" *ngIf="loadNextPage && (list$ | async)?.length" (ionInfinite)="loadNextPage($event)">
+<ion-infinite-scroll threshold="100px"
+                     *ngIf="loadNextPage && (list$ | async)?.length && options.pagination?.mode !== PaginationMode.singlePage"
+                     (ionInfinite)="loadNextPage($event)"
+>
     <ion-infinite-scroll-content loadingSpinner="circles">
     </ion-infinite-scroll-content>
 </ion-infinite-scroll>
+
+<smart-paging *ngIf="options?.pagination?.mode === PaginationMode.singlePage"
+              [page]="page$ | async"
+              [totalPages]="totalPages$ | async"
+              (prevPage)="loadPrevPage()"
+              (nextPage)="loadNextPage()"
+></smart-paging>

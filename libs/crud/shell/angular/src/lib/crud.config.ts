@@ -1,7 +1,7 @@
 import {Injectable, Type} from "@angular/core";
 
 import {
-    IIconButtonOptions, ICellPipe, InputBaseComponent, ListMode
+    IIconButtonOptions, ICellPipe, InputBaseComponent, ListMode, PaginationMode
 } from "@smartsoft001/angular";
 
 import {ICrudFilterQueryItem, ICrudListGroup} from "./models";
@@ -31,7 +31,9 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     remove?: boolean;
     search?: boolean;
     export?: boolean;
-    pagination?: { limit: number };
+    pagination?: {
+        limit: number,
+    };
     sort?: boolean | {
         default?: string;
         defaultDesc?: boolean;
@@ -42,6 +44,7 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
             top: any
         },
         mode?: ListMode,
+        paginationMode?: PaginationMode,
         groups?: Array<ICrudListGroup>
     };
     buttons?: Array<IIconButtonOptions>;

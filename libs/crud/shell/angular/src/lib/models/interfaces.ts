@@ -1,4 +1,5 @@
 import {IModelFilter} from "@smartsoft001/models";
+import {PaginationMode} from "@smartsoft001/angular";
 
 export interface ICrudFilter {
     searchText?: string;
@@ -6,6 +7,7 @@ export interface ICrudFilter {
     sortDesc?: boolean;
     offset?: number;
     limit?: number;
+    paginationMode?: PaginationMode;
     query?: Array<ICrudFilterQueryItem>
 }
 

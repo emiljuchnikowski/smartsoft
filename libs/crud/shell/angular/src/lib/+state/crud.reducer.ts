@@ -1,5 +1,6 @@
 import {IEntity} from "@smartsoft001/domain-core";
 import {Action} from "@ngrx/store";
+import {PaginationMode} from "@smartsoft001/angular";
 
 import {ICrudFilter} from "../models/interfaces";
 
@@ -94,7 +95,12 @@ const crudReducer = (state = initialState, action, entity) => {
 
             let list = [];
 
-            if (action.filter && action.filter.offset && state.list) {
+            if (
+                action.filter
+                && action.filter.offset
+                && state.list
+                && action.filter.paginationMode !== PaginationMode.singlePage
+            ) {
                 state.list.forEach(i => {
                    list.push(i);
                 });

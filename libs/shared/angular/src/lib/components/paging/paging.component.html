@@ -1,0 +1,13 @@
+<ion-grid>
+    <ion-row>
+        <ion-col>
+            <ion-button [disabled]="page <= 1" (click)="prevPage.emit()">{{ 'prev' | translate }}</ion-button>
+        </ion-col>
+        <ion-col>
+            {{ 'page' | translate }} {{ page }} / {{ totalPages }}
+        </ion-col>
+        <ion-col>
+            <ion-button [disabled]="page >= totalPages" (click)="nextPage.emit()">{{ 'next' | translate }}</ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>

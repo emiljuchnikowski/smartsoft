@@ -109,6 +109,7 @@ export class ListComponent<T extends IEntity<string>>
     await this.pageService.checkPermissions();
 
     this.facade.read({
+      paginationMode: this.config.list.paginationMode,
       limit: this.config.pagination ? this.config.pagination.limit : null,
       offset: this.config.pagination ? 0 : null,
       sortBy: this.config.sort ? this.config.sort["default"] : null,
@@ -235,9 +236,12 @@ export class ListComponent<T extends IEntity<string>>
           }
         : null,
       pagination: await this.paginationFacade.create({
+        mode: this.config.list.paginationMode,
         limit: this.config.pagination.limit,
         provider: {
-          getFilter: () => this.filter,
+          getFilter: () => {
+            return this.filter;
+          },
           getLinks: () => this.links,
         },
       }),

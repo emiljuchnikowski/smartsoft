@@ -102,6 +102,7 @@ import {ListMasonryGridComponent} from "./list/masonry-grid/masonry-grid.compone
 import {FormStepperComponent} from "./form/stepper/stepper.component";
 import {DateEditComponent} from "./date-edit/date-edit.component";
 import {ButtonStandardComponent} from "./button/standard/standard.component";
+import {PagingComponent} from "./paging/paging.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -227,6 +228,7 @@ export const COMPONENTS = [
     ...DATE_EDIT_COMPONENTS,
     ErrorContextComponent,
     ExportComponent,
+    PagingComponent,
   ImportComponent
 ];
 
