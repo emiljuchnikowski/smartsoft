@@ -71,11 +71,13 @@ export class MenuService {
   }): Promise<void> {
     this._openedEnd = true;
 
-    const resolver = options.injector.get(ComponentFactoryResolver);
+    if (this._endContainer) {
+      const resolver = options.injector.get(ComponentFactoryResolver);
 
-    this._endContainer.clear();
-    const factory = resolver.resolveComponentFactory(options.component);
-    this._endContainer.createComponent(factory, 0, options.injector);
+      this._endContainer.clear();
+      const factory = resolver.resolveComponentFactory(options.component);
+      this._endContainer.createComponent(factory, 0, options.injector);
+    }
 
     await this.menuCtrl.enable(true, "end");
     await this.menuCtrl.open("end");
@@ -100,6 +102,6 @@ export class MenuService {
     await this.menuCtrl.close("end");
     await this.menuCtrl.enable(false, "end");
 
-    this._endContainer.clear();
+    this._endContainer?.clear();
   }
 }
