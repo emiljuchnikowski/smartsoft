@@ -12,10 +12,10 @@ node {
             checkout scm
         }
 
-        stage('Clear data') {
-            sh("rm -rf node_modules")
-            sh("rm package-lock.json")
-        }
+//         stage('Clear data') {
+//             sh("rm -rf node_modules")
+//             sh("rm package-lock.json")
+//         }
 
         stage('Install packages') {
             withCredentials([string(credentialsId: 'NpmToken', variable: 'TOKEN')]) {
