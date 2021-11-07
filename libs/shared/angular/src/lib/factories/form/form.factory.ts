@@ -70,7 +70,7 @@ export class FormFactory {
     ops: {
       mode?: "create" | "update" | "multiUpdate" | string;
       uniqueProvider?: (values: Record<string, any>) => Promise<boolean>;
-      root?: SmartFormGroup
+      root?: AbstractControl
     } = {}
   ): Promise<SmartFormGroup> {
     FormFactory.checkModelMeta(obj);
@@ -176,7 +176,7 @@ export class FormFactory {
       }
     }
 
-    let rootCheck: SmartFormGroup = null;
+    let rootCheck: AbstractControl = null;
     if (
         enabledDefinitions.some(d =>
             d?.enabled?.criteria &&

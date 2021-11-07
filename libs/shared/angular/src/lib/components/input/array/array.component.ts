@@ -21,7 +21,11 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
             const options = this.getOptions();
             const modelOptions = getModelOptions(options.classType);
             const control = await this.factory.create(
-                new this.fieldOptions.classType(), { mode: this.internalOptions.mode }
+                new this.fieldOptions.classType(),
+                {
+                    mode: this.internalOptions.mode,
+                    root: this.internalOptions.control.root
+                }
             );
             (this.internalOptions.control as FormArray).push(control);
             this.childOptions.push({
