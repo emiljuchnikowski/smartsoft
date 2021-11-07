@@ -15,17 +15,18 @@ import {
   SYMBOL_FIELD,
   SYMBOL_MODEL,
 } from "@smartsoft001/models";
-import {PeselService, SpecificationService, ZipCodeService} from "@smartsoft001/utils";
+import {PeselService, SPECIFICATION_ROOT_KEY, SpecificationService, ZipCodeService} from "@smartsoft001/utils";
 
 import {AuthService} from "../../services/auth/auth.service";
 import {IModelValidatorsProvider, MODEL_VALIDATORS_PROVIDER} from "../../providers/model-validators.provider";
-import {SmartFormGroup} from "../../services";
+import {DetailsService, SmartFormGroup} from "../../services";
 
 @Injectable()
 export class FormFactory {
   constructor(
       private fb: FormBuilder,
       private authService: AuthService,
+      private detailsService: DetailsService,
       @Optional() @Inject(MODEL_VALIDATORS_PROVIDER) private validatorsProvider: IModelValidatorsProvider
   ) {}
 
@@ -68,6 +69,7 @@ export class FormFactory {
     ops: {
       mode?: "create" | "update" | "multiUpdate" | string;
       uniqueProvider?: (values: Record<string, any>) => Promise<boolean>;
+      root?: SmartFormGroup
     } = {}
   ): Promise<SmartFormGroup> {
     FormFactory.checkModelMeta(obj);
@@ -100,12 +102,18 @@ export class FormFactory {
       }
 
       if (field.options.type === FieldType.object) {
-        control = await this.create(obj[field.key], ops);
+        control = await this.create(obj[field.key], {
+          ...ops,
+          root: ops.root ? ops.root : result
+        });
       } else if (field.options.type === FieldType.array) {
         control = this.fb.array([]);
         if (obj[field.key]) {
           for (let indexField = 0; indexField < (obj[field.key] as []).length; indexField ++) {
-            (control as FormArray).push(await this.create(obj[field.key][indexField], ops))
+            (control as FormArray).push(await this.create(obj[field.key][indexField], {
+              ...ops,
+              root: ops.root ? ops.root : result
+            }))
           }
         }
       } else {
@@ -167,15 +175,29 @@ export class FormFactory {
       }
     }
 
-    result.valueChanges.pipe(
-        tap(value => {
+    let rootCheck: SmartFormGroup = null;
+    if (
+        enabledDefinitions.some(d =>
+            Object.keys(d.enabled.criteria).some(k => k.indexOf(SPECIFICATION_ROOT_KEY) === 0)
+        ) && ops.root
+    ) {
+      rootCheck = ops.root;
+    }
+
+    (rootCheck ? rootCheck : result).valueChanges.pipe(
+        tap(() => {
           enabledDefinitions.forEach(def => {
-            const enabled = SpecificationService.valid(value, def.enabled);
+            const enabled = SpecificationService.valid(result.value, def.enabled, {
+              $root: rootCheck.value
+            });
+            console.log(rootCheck.value, result.value);
             def.control['__smartDisabled'] = !enabled;
           });
         }),
         delay(0)
-    ).subscribe(value => {
+    ).subscribe(() => {
+      if (rootCheck) this.detailsService.setRoot(rootCheck.value, true);
+
       enabledDefinitions.forEach(def => {
         if (!def.control['__smartDisabled'] && !result.controls[def.key]) {
           result.addControl(def.key, def.control);

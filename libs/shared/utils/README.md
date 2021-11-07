@@ -93,11 +93,11 @@ Methods:
 Methods:
 <table>
     <tr>
-        <td>valid<T>(value: T, spec: { criteria: any }): boolean</td>
+        <td>valid<T>(value: T, spec: { criteria: any }, custom: ISpecificationCustom = null): boolean</td>
         <td>checking if the value meets the specifications</td>
     </tr>
     <tr>
-        <td>invalid<T>(value: T, spec: { criteria: any }): boolean</td>
+        <td>invalid<T>(value: T, spec: { criteria: any }, custom: ISpecificationCustom = null): boolean</td>
         <td>checking if the object does not meet the specifications</td>
     </tr>
     <tr>

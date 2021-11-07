@@ -19,6 +19,7 @@ import { ObjectService, SpecificationService } from "@smartsoft001/utils";
 
 import {DynamicComponentType, ICellPipe, IDetailsComponentFactories, IDetailsOptions} from "../../../models";
 import { AuthService } from "../../../services/auth/auth.service";
+import {DetailsService} from "../../../services/details/details.service";
 
 @Directive()
 export abstract class DetailsBaseComponent<T extends IEntity<string>>
@@ -92,7 +93,9 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
         else result = ObjectService.createByType(item, obj.type);
 
         const removeFields = enabledDefinitions.filter((def) => {
-          return SpecificationService.invalid(result, def.spec);
+          return SpecificationService.invalid(result, def.spec, {
+            $root: this.detailsService.$root
+          });
         }).map(def => def.key);
 
         this._fields = this._fields.filter(f => !removeFields.some(rf => rf === f.key));
@@ -107,7 +110,7 @@ export abstract class DetailsBaseComponent<T extends IEntity<string>>
     this.generateDynamicComponents();
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private detailsService: DetailsService) {}
 
   ngAfterViewInit(): void {
     this.generateDynamicComponents();

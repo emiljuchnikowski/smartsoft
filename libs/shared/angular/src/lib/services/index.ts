@@ -18,3 +18,4 @@ export * from './ui/ui.service';
 export * from './app/app.service';
 export * from './form/form.group';
 export * from './alert/alert.service';
+export * from './details/details.service';

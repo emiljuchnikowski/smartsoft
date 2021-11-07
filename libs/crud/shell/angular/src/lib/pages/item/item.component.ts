@@ -13,11 +13,10 @@ import { Location } from "@angular/common";
 import {TranslateService} from "@ngx-translate/core";
 
 import {
-  AuthService, CreateDynamicComponent,
-  DynamicComponentLoader, DynamicContentDirective, FormComponent, ICellPipe,
+  AuthService, CreateDynamicComponent, DetailsService,
+  DynamicComponentLoader, DynamicContentDirective, ICellPipe,
   IDetailsOptions,
   IIconButtonOptions,
-  InputComponent,
   IPageOptions, StyleService, ToastService,
 } from "@smartsoft001/angular";
 import { IEntity } from "@smartsoft001/domain-core";
@@ -110,7 +109,8 @@ export class ItemComponent<T extends IEntity<string>>
     private toastService: ToastService,
     private pageService: PageService<T>,
     private moduleRef: NgModuleRef<any>,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private detailsService: DetailsService
   ) {
     super(cd, moduleRef, componentFactoryResolver);
 
@@ -127,6 +127,7 @@ export class ItemComponent<T extends IEntity<string>>
   }
 
   async ngOnInit() {
+    this.detailsService.init();
     this.styleService.init(this.elementRef);
 
     this.pageService.checkPermissions();

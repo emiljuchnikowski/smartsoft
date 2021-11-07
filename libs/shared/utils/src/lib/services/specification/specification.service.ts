@@ -1,17 +1,27 @@
+export interface ISpecificationCustom {
+    $root?: any;
+}
+
+export const SPECIFICATION_ROOT_KEY = "$root.";
+
 export class SpecificationService {
     /**
      * Checking if the value meets the specifications
      * @param value {object} - object to check
      * @param spec {ISpecificatio} - specification
+     * @param custom {ISpecificationCustom} - custom data for valid
      */
-    static valid<T>(value: T, spec: { criteria: any }): boolean {
+    static valid<T>(value: T, spec: { criteria: any }, custom: ISpecificationCustom = null): boolean {
         const keys = Object.keys(spec.criteria);
 
         if (!value) return false;
 
         for (let index = 0; index < keys.length; index++) {
             const key = keys[index];
-            if (spec.criteria[key] !== value[key]) return false;
+
+            if (key.indexOf(SPECIFICATION_ROOT_KEY) === 0 && custom?.$root) {
+                if (spec.criteria[key] !== custom?.$root[key.replace(SPECIFICATION_ROOT_KEY, '')]) return false;
+            } else if (spec.criteria[key] !== value[key]) return false;
         }
 
         return true;
@@ -21,9 +31,10 @@ export class SpecificationService {
      * Checking if the object does not meet the specifications
      * @param value {object} - object to check
      * @param spec {ISpecificatio} - specification
+     * @param custom {ISpecificationCustom} - custom data for invalid
      */
-    static invalid<T>(value: T, spec: { criteria: any }): boolean {
-        return !SpecificationService.valid(value, spec);
+    static invalid<T>(value: T, spec: { criteria: any }, custom: ISpecificationCustom = null): boolean {
+        return !SpecificationService.valid(value, spec, custom);
     }
 
     /**

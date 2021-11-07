@@ -1,7 +1,7 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
+  ChangeDetectionStrategy, ChangeDetectorRef,
+  Component, ComponentFactoryResolver,
+  Input, NgModuleRef,
   OnDestroy, QueryList, TemplateRef, ViewChild, ViewChildren,
 } from "@angular/core";
 import { Subscription } from "rxjs";
@@ -11,6 +11,7 @@ import { IEntity } from "@smartsoft001/domain-core";
 import { CreateDynamicComponent } from "../base";
 import { DetailsBaseComponent } from "./base/base.component";
 import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
+import {DetailsService} from "../../services/details/details.service";
 
 @Component({
   selector: "smart-details",
@@ -37,6 +38,7 @@ export class DetailsComponent<T extends IEntity<string>>
 
     this._subscription.add(
       this._options.item$.subscribe((item) => {
+        this.detailsService.setRoot(item);
         this.item = item;
       })
     );
@@ -52,6 +54,15 @@ export class DetailsComponent<T extends IEntity<string>>
 
   @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
   dynamicContents = new QueryList<DynamicContentDirective>();
+
+  constructor(
+      cd: ChangeDetectorRef,
+      moduleRef: NgModuleRef<any>,
+      cfr: ComponentFactoryResolver,
+      private detailsService: DetailsService
+  ) {
+    super(cd, moduleRef, cfr);
+  }
 
   ngOnDestroy(): void {
     if (this._subscription) {
