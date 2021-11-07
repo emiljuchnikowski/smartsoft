@@ -179,6 +179,7 @@ export class FormFactory {
     let rootCheck: SmartFormGroup = null;
     if (
         enabledDefinitions.some(d =>
+            d?.enabled?.criteria &&
             Object.keys(d.enabled.criteria).some(k => k.indexOf(SPECIFICATION_ROOT_KEY) === 0)
         ) && ops.root
     ) {
