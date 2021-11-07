@@ -192,7 +192,6 @@ export class FormFactory {
             const enabled = SpecificationService.valid(result.value, def.enabled, {
               $root: rootCheck?.value
             });
-            console.log(rootCheck.value, result.value);
             def.control['__smartDisabled'] = !enabled;
           });
         }),
