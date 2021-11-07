@@ -19,7 +19,8 @@ import {PeselService, SPECIFICATION_ROOT_KEY, SpecificationService, ZipCodeServi
 
 import {AuthService} from "../../services/auth/auth.service";
 import {IModelValidatorsProvider, MODEL_VALIDATORS_PROVIDER} from "../../providers/model-validators.provider";
-import {DetailsService, SmartFormGroup} from "../../services";
+import {SmartFormGroup} from "../../services/form/form.group";
+import {DetailsService} from "../../services/details/details.service";
 
 @Injectable()
 export class FormFactory {
