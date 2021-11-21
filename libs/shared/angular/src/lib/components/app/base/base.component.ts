@@ -24,6 +24,7 @@ import { IAppOptions, IMenuItem } from "../../../models/interfaces";
 import { StyleService } from "../../../services/style/style.service";
 import {MenuService} from "../../../services/menu/menu.service";
 import {AuthService} from "../../../services/auth/auth.service";
+import {AppService} from "../../../services/app/app.service";
 
 @Directive()
 export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, AfterViewInit {
@@ -60,6 +61,7 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
     protected styleService: StyleService,
     protected menuService: MenuService,
     protected authService: AuthService,
+    protected appService: AppService,
     @Inject(PLATFORM_ID) protected readonly platformId,
     @Inject(DOCUMENT) protected document: any
   ) {
@@ -67,6 +69,7 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
 
     if (isPlatformBrowser(this.platformId)) {
       this.styleService.init(elementRef);
+      this.appService.initTitle();
     }
   }
 
