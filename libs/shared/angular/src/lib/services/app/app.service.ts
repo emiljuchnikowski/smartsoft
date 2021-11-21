@@ -13,9 +13,11 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class AppService {
     private static _endButtonsSource$ = new BehaviorSubject<AppEndButton[]>([]);
+    private static _titleSource$ = new BehaviorSubject<string>('');
     private _baseTitle: string;
 
     endButtons$ = AppService._endButtonsSource$.asObservable();
+    title$ = AppService._titleSource$.asObservable();
 
     constructor(
         private titleService: Title,
@@ -61,8 +63,7 @@ export class AppService {
             if (event instanceof NavigationEnd) {
                 const data: NavigationEnd = event;
 
-                this.titleService.setTitle(
-                    this._baseTitle + ' | '
+                const title = this._baseTitle + ' | '
                     + data.urlAfterRedirects.split('/')
                         .filter(x => x && x.trim())
                         .map(x => {
@@ -70,8 +71,10 @@ export class AppService {
                             const translate = this.translate.instant(key);
                             return key === translate ? x : translate;
                         })
-                        .join(' | ')
-                );
+                        .join(' | ');
+
+                this.titleService.setTitle(title);
+                AppService._titleSource$.next(title);
             }
         });
     }
