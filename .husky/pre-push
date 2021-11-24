@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+node libs/shared/core/src/lib/git-hooks/pre-push.js
+
+exit 1;
