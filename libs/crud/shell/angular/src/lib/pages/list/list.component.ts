@@ -2,7 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   ComponentFactory, ComponentFactoryResolver, ElementRef,
-  Injector, NgModuleRef,
+  Injector, NgModuleRef, OnDestroy,
   OnInit, QueryList, TemplateRef,
   ViewChild, ViewChildren,
   ViewContainerRef,
@@ -56,7 +56,7 @@ import {CrudListPageBaseComponent} from "./base/base.component";
 })
 export class ListComponent<T extends IEntity<string>>
     extends CreateDynamicComponent<CrudListPageBaseComponent<any>>('crud-list-page')
-  implements OnInit
+  implements OnInit, OnDestroy
 {
   pageOptions: IPageOptions;
   listOptions: IListOptions<T>;
@@ -108,13 +108,24 @@ export class ListComponent<T extends IEntity<string>>
   async ngOnInit(): Promise<void> {
     await this.pageService.checkPermissions();
 
-    this.facade.read({
-      paginationMode: this.config.list.paginationMode,
-      limit: this.config.pagination ? this.config.pagination.limit : null,
-      offset: this.config.pagination ? 0 : null,
-      sortBy: this.config.sort ? this.config.sort["default"] : null,
-      sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null,
-    });
+    if (this.config.list.resetQuery === 'beforeInit') {
+      this.facade.read({
+        query: [ ...this.config.baseQuery ],
+        paginationMode: this.config.list.paginationMode,
+        limit: this.config.pagination ? this.config.pagination.limit : null,
+        offset: this.config.pagination ? 0 : null,
+        sortBy: this.config.sort ? this.config.sort["default"] : null,
+        sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null,
+      });
+    } else {
+      this.facade.read({
+        paginationMode: this.config.list.paginationMode,
+        limit: this.config.pagination ? this.config.pagination.limit : null,
+        offset: this.config.pagination ? 0 : null,
+        sortBy: this.config.sort ? this.config.sort["default"] : null,
+        sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null,
+      });
+    }
 
     const endButtons = this.getEndButtons();
 

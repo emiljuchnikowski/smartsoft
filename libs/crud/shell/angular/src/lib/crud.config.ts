@@ -45,6 +45,7 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
         },
         mode?: ListMode,
         paginationMode?: PaginationMode,
+        resetQuery?: "beforeInit"
         groups?: Array<ICrudListGroup>
     };
     buttons?: Array<IIconButtonOptions>;
