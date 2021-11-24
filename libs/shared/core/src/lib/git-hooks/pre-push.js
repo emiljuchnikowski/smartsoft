@@ -1,5 +1,5 @@
 const osvar = process.platform;
 
 if (osvar === "darwin" || osvar === "win64") {
-    require("openurl").open("https://smartsoft.biz.pl");
+    require("openurl").open("https://yt.smartsoft.biz.pl/timesheets");
 }
