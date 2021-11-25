@@ -66,8 +66,8 @@ export class ListComponent<T> extends CreateDynamicComponent<ListBaseComponent<a
 
   private initFields(): void {
     this._options.fields = _.sortBy(
-        getModelFieldsWithOptions(new this._options.type()).filter(item => item.options.list),
-        item => (item.options.list as IFieldListMetadata).order
+        getModelFieldsWithOptions(new this._options.type()).filter(item => item?.options?.list),
+        item => (item?.options?.list as IFieldListMetadata).order
     );
   }
 
