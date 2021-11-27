@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable, combineLatest} from "rxjs";
-import {ICrudFilter} from "@smartsoft001/crud-shell-angular";
 import {map} from "rxjs/operators";
+
+import {ICrudFilter} from "../../models/interfaces";
 
 @Injectable({
     providedIn: 'root'
