@@ -8,6 +8,7 @@ export * from "./lib/pipes";
 export * from "./lib/providers/model-possibilities/model-possibilities.provider";
 export * from "./lib/services/crud/crud.service";
 export * from "./lib/services/page/page.service";
+export * from "./lib/services/search/search.service";
 export * from './lib/+state/crud.actions';
 export * from './lib/+state/crud.effects';
 export * from './lib/+state/crud.facade';

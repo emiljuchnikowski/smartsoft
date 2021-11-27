@@ -38,6 +38,7 @@ import { MultiselectComponent } from "../../components/multiselect/multiselect.c
 import { CrudListPaginationFactory } from "../../factories/list-pagination/list-pagination.factory";
 import {PageService} from "../../services/page/page.service";
 import {CrudListPageBaseComponent} from "./base/base.component";
+import {CrudSearchService} from "../../services/search/search.service";
 
 @Component({
   selector: "smart-crud-list-page",
@@ -91,6 +92,7 @@ export class ListComponent<T extends IEntity<string>>
     private elementRef: ElementRef,
     private pageService: PageService<T>,
     public config: CrudFullConfig<T>,
+    private searchService: CrudSearchService,
     private moduleRef: NgModuleRef<any>,
     private componentFactoryResolver: ComponentFactoryResolver
   ) {
@@ -116,6 +118,7 @@ export class ListComponent<T extends IEntity<string>>
         offset: this.config.pagination ? 0 : null,
         sortBy: this.config.sort ? this.config.sort["default"] : null,
         sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null,
+        ...this.searchService.filter
       });
     } else {
       this.facade.read({
@@ -124,6 +127,7 @@ export class ListComponent<T extends IEntity<string>>
         offset: this.config.pagination ? 0 : null,
         sortBy: this.config.sort ? this.config.sort["default"] : null,
         sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null,
+        ...this.searchService.filter
       });
     }
 
