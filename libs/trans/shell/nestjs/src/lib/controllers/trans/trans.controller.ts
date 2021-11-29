@@ -10,7 +10,7 @@ export class TransController {
 
     @Post()
     async create<T>(@Body() obj: ITransCreate<T>, @Req() req) {
-        obj.clientIp = req.connection.remoteAddress;
+        obj.clientIp = req.connection.remoteAddress.indexOf("::") === 0 ? "10.0.0.1" : req.connection.remoteAddress;
         const { redirectUrl, orderId } = await this.service.create(obj);
         return {
             url: redirectUrl,
