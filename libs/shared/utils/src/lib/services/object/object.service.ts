@@ -1,4 +1,4 @@
-import {stringify} from 'flatted/esm';
+import {stringify} from 'flatted';
 
 export class ObjectService {
     /***
