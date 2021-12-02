@@ -110,7 +110,7 @@ export class ListComponent<T extends IEntity<string>>
   async ngOnInit(): Promise<void> {
     await this.pageService.checkPermissions();
 
-    if (this.config.list.resetQuery === 'beforeInit') {
+    if (this.config.list?.resetQuery === 'beforeInit') {
       this.facade.read({
         query: [ ...this.config.baseQuery ],
         paginationMode: this.config.list.paginationMode,
