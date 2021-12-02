@@ -1,3 +1,5 @@
+import {stringify} from 'flatted/esm';
+
 export class ObjectService {
     /***
      * Create object with data
@@ -31,7 +33,13 @@ export class ObjectService {
 
         Object.keys(obj).forEach(key => {
             if (obj[key] && obj[key].constructor && !(obj[key] instanceof Date)) {
-                const stringValue = JSON.stringify(obj[key]);
+                let stringValue = "";
+                try {
+                    stringValue = JSON.stringify(obj[key])
+                } catch (e) {
+                    console.warn("can't stringify without circular package");
+                    stringValue = stringify(obj[key]);
+                }
                 result[key] = JSON.parse(stringValue);
             } else {
                 result[key] = obj[key];
