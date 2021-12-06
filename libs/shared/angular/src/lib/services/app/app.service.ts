@@ -63,15 +63,21 @@ export class AppService {
             if (event instanceof NavigationEnd) {
                 const data: NavigationEnd = event;
 
-                const title = this._baseTitle + ' | '
+                let title = this._baseTitle + '|'
                     + data.urlAfterRedirects.split('/')
                         .filter(x => x && x.trim())
                         .map(x => {
+                            x = x.split('?')[0];
                             const key = 'ROUTES.' + x;
                             const translate = this.translate.instant(key);
                             return key === translate ? x : translate;
                         })
-                        .join(' | ');
+                        .join('|');
+
+                title = title
+                    .split('|')
+                    .filter(x => x && x.trim())
+                    .join('|');
 
                 this.titleService.setTitle(title);
                 AppService._titleSource$.next(title);
