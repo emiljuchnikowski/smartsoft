@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { EMPTY, from, Observable, of } from "rxjs";
+import { EMPTY, from, Observable, of, throwError } from "rxjs";
 import decode from "jwt-decode";
 import { concatMap, first, switchMap, tap } from "rxjs/operators";
 
@@ -170,12 +170,10 @@ export class AuthService extends SharedAuthService {
   }
 
   refreshToken(): Observable<IAuthToken> {
-    if (!this.token) return of(null);
-
     return this.http
       .post<IAuthToken>(this.config.apiUrl + "/token", {
         grant_type: "refresh_token",
-        refresh_token: this.token.refresh_token,
+        refresh_token: this.token?.refresh_token,
       })
       .pipe(
         tap((token) => {
