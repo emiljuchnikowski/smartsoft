@@ -1,5 +1,5 @@
 <p *ngIf="address$ | async; let address">
-    {{ address.street }}
-  {{ address.flatNumber ? address.buildingNumber + "/" + address.flatNumber : address.buildingNumber }}
-    <br/>{{ address.zipCode }} {{ address.city }}
+    {{ address?.street }}
+  {{ address?.flatNumber ? address?.buildingNumber + "/" + address?.flatNumber : address?.buildingNumber }}
+    <br/>{{ address?.zipCode }} {{ address?.city }}
 </p>

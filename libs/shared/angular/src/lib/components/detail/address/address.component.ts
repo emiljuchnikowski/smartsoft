@@ -16,7 +16,7 @@ export class DetailAddressComponent<T> extends DetailBaseComponent<T> {
 
   protected afterSetOptionsHandler() {
     this.address$ = this.options.item$.pipe(
-      map((item) => (this.options ? item[this.options.key] : null))
+      map((item) => (this.options && item ? item[this.options.key] : null))
     );
   }
 }
