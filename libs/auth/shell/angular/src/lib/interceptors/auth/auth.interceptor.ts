@@ -88,7 +88,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private logout(): void {
     this.authService.removeToken();
-    document.location.hash = "login";
-    document.location.reload();
+
+    if (document.location.hash !== "login") {
+      document.location.hash = "login";
+      document.location.reload();
+    }
   }
 }

@@ -170,10 +170,14 @@ export class AuthService extends SharedAuthService {
   }
 
   refreshToken(): Observable<IAuthToken> {
+    if (!this.token) return throwError({
+        status: 401
+    });
+
     return this.http
       .post<IAuthToken>(this.config.apiUrl + "/token", {
         grant_type: "refresh_token",
-        refresh_token: this.token?.refresh_token,
+        refresh_token: this.token.refresh_token,
       })
       .pipe(
         tap((token) => {
