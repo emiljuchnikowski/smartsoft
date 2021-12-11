@@ -112,7 +112,7 @@ export class ListComponent<T extends IEntity<string>>
 
     if (this.config.list?.resetQuery === 'beforeInit') {
       this.facade.read({
-        query: [ ...this.config.baseQuery ],
+        query: this.config.baseQuery ? [ ...this.config.baseQuery ] : [],
         paginationMode: this.config.list.paginationMode,
         limit: this.config.pagination ? this.config.pagination.limit : null,
         offset: this.config.pagination ? 0 : null,
