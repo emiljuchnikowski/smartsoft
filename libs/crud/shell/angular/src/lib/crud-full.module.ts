@@ -49,6 +49,9 @@ const PAGES = [
         ...PAGES,
         CrudComponentsModule
     ],
+    entryComponents: [
+        ...PAGES
+    ],
     providers: [
         CrudService,
         PageService,
