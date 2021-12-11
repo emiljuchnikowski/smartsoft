@@ -189,10 +189,10 @@ export class TodoInfo {
             type: '!=',
         },
         {
-            label: 'fromDate',
+            label: 'date',
             key: 'createDate',
-            type: '<=',
-            fieldType: FieldType.dateWithEdit
+            type: '=',
+            fieldType: FieldType.int
         },
         {
             label: 'select',
@@ -254,7 +254,6 @@ export class Todo implements IEntity<string> {
             ...modifyMetdata,
             multi: true
         },
-        type: FieldType.file,
         details: true,
         list: {
             order: 2,

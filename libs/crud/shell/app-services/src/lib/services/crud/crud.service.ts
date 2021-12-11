@@ -20,7 +20,7 @@ import {GuidService, PasswordService} from "@smartsoft001/utils";
 
 @Injectable()
 export class CrudService<T extends IEntity<string>> {
-  private _logger = new Logger(CrudService.name, { timestamp: true });
+  private _logger = new Logger(CrudService.name, true);
 
   constructor(
       protected readonly permissionService: PermissionService,
