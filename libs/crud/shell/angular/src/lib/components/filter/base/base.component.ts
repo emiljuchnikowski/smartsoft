@@ -39,6 +39,44 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     this.refresh(val);
   }
 
+  get minValue(): any {
+    if (this.isArrayType()) {
+      return this.filter.query
+          .filter(
+              (q) => q.key === this.item.key && q.type === "<="
+          )
+          .map(q => q.value);
+    }
+
+    const query = this.filter.query.find(
+        (q) => q.key === this.item.key && q.type === "<="
+    );
+    return query?.value;
+  }
+
+  set minValue(val: any) {
+    this.refresh(val, "<=");
+  }
+
+  get maxValue(): any {
+    if (this.isArrayType()) {
+      return this.filter.query
+          .filter(
+              (q) => q.key === this.item.key && q.type === ">="
+          )
+          .map(q => q.value);
+    }
+
+    const query = this.filter.query.find(
+        (q) => q.key === this.item.key && q.type === ">="
+    );
+    return query?.value;
+  }
+
+  set maxValue(val: any) {
+    this.refresh(val, ">=");
+  }
+
   constructor(
     protected facade: CrudFacade<T>,
     private config: CrudConfig<T>,
@@ -48,14 +86,16 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
   ) {}
 
   @Debounce(500)
-  refresh(val: any): void {
+  refresh(val: any, type = null): void {
+    if (!type) type = this.item.type;
+
     if (this.isArrayType()) {
-      this.refreshForArray(val as []);
+      this.refreshForArray(val as [], type);
       return;
     }
 
     let query = this.filter.query.find(
-        (q) => q.key === this.item.key && q.type === this.item.type
+        (q) => q.key === this.item.key && q.type === type
     );
 
     if (val === null || val === undefined || val === '') {
@@ -71,7 +111,7 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     if (!query) {
       query = {
         key: this.item.key,
-        type: this.item.type,
+        type: type,
         value: null,
       };
 
@@ -104,9 +144,9 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     return (this.item?.fieldType === FieldType.check);
   }
 
-  private refreshForArray(vals: []): void {
+  private refreshForArray(vals: [], type): void {
     const queries = this.filter.query.filter(
-        (q) => q.key === this.item.key && q.type === this.item.type
+        (q) => q.key === this.item.key && q.type === type
     );
 
     queries.forEach(query => {
@@ -124,7 +164,7 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     vals.forEach(val => {
       const query = {
         key: this.item.key,
-        type: this.item.type,
+        type: type,
         value: val,
       };
 

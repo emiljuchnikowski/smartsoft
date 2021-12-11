@@ -41,6 +41,8 @@ export interface ITranslateData {
     edit: string,
     save: string,
     noResults: string,
+    from: string,
+    to: string,
 
     CALENDAR: {
         DAY_OF_WEEK: {
@@ -160,6 +162,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
     edit: "edit",
     save: "save",
     noResults: "no results",
+    from: "from",
+    to: "to",
 
     CALENDAR: {
         DAY_OF_WEEK: {
@@ -279,6 +283,8 @@ export const TRANSLATE_DATA_PL: ITranslateData = {
     edit: "edycja",
     save: "zapisz",
     noResults: "brak wyników",
+    from: "od",
+    to: "do",
 
     CALENDAR: {
         DAY_OF_WEEK: {

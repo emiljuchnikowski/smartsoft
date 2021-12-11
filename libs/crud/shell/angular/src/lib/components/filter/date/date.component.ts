@@ -11,6 +11,10 @@ import {BaseComponent} from "../base/base.component";
   styleUrls: ['./date.component.scss']
 })
 export class FilterDateComponent<T extends IEntity<string>> extends BaseComponent<T> {
+  get allowAdvanced(): boolean {
+    return this.item?.type === '=';
+  }
+
   set customValue(val) {
     const momentDate = moment(val);
     this.value = (val as string)?.length >= 10 && momentDate.isValid() ? momentDate.format('YYYY-MM-DD') : val;
@@ -18,5 +22,23 @@ export class FilterDateComponent<T extends IEntity<string>> extends BaseComponen
 
   get customValue(): any {
     return this.value;
+  }
+
+  set customMinValue(val) {
+    const momentDate = moment(val);
+    this.minValue = (val as string)?.length >= 10 && momentDate.isValid() ? momentDate.format('YYYY-MM-DD') : val;
+  }
+
+  get customMinValue(): any {
+    return this.minValue;
+  }
+
+  set customMaxValue(val) {
+    const momentDate = moment(val);
+    this.maxValue = (val as string)?.length >= 10 && momentDate.isValid() ? momentDate.format('YYYY-MM-DD') : val;
+  }
+
+  get customMaxValue(): any {
+    return this.maxValue;
   }
 }

@@ -15,6 +15,8 @@ export class FilterDateWithEditComponent<T extends IEntity<string>> extends Filt
 implements OnInit, OnDestroy {
   private _subscriptions = new Subscription();
 
+  advanced = false;
+
   @ViewChild(IonDatetime, { read: IonDatetime, static: false }) dateTimePicker: IonDatetime;
 
   open(): void {
