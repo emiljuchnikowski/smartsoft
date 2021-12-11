@@ -24,7 +24,7 @@ export class MongoItemRepository<
 > extends IItemRepository<T> {
   readonly useUnifiedTopology = false;
 
-  constructor(private config: MongoConfig) {
+  constructor(protected config: MongoConfig) {
     super();
   }
 
