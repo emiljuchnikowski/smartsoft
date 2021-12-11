@@ -5,3 +5,4 @@ export * from "./radio/radio.component";
 export * from "./text/text.component";
 export * from "./flag/flag.component";
 export * from "./check/check.component";
+export * from "./int/int.component";

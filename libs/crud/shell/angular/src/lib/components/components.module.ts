@@ -12,7 +12,8 @@ import {
     FilterDateWithEditComponent, FilterFlagComponent,
     FilterRadioComponent,
     FilterTextComponent,
-    FilterCheckComponent
+    FilterCheckComponent,
+    FilterIntComponent
 } from "./filter";
 import {FiltersConfigComponent} from "./filters-config/filters-config.component";
 import {FiltersComponent} from "./filters/filters.component";
@@ -36,6 +37,7 @@ const COMPONENTS = [
     FiltersComponent,
     FilterFlagComponent,
     FilterCheckComponent,
+    FilterIntComponent,
     MultiselectComponent,
     GroupComponent
 ];

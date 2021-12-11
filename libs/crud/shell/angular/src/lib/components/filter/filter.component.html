@@ -29,6 +29,12 @@
           [filter]="filter"
   ></smart-crud-filter-flag>
 
+  <smart-crud-filter-int
+          *ngSwitchCase="FieldType.int"
+          [item]="item"
+          [filter]="filter"
+  ></smart-crud-filter-int>
+
   <smart-crud-filter-text
     *ngSwitchDefault
     [item]="item"
