@@ -416,7 +416,7 @@ export class MongoItemRepository<
           const db = client.db(this.config.database);
           const collection = db.collection(this.config.collection);
 
-            this.convertIdInCriteria(criteria);
+          this.convertIdInCriteria(criteria);
 
           db.collection(this.config.collection).updateMany(
             criteria,
@@ -703,9 +703,9 @@ export class MongoItemRepository<
     });
   }
 
-  private getCount(criteria: any, collection): Promise<any> {
+  protected getCount(criteria: any, collection): Promise<any> {
     return new Promise<any>((res, rej) => {
-        this.convertIdInCriteria(criteria);
+      this.convertIdInCriteria(criteria);
 
       collection.countDocuments(criteria, (err, count) => {
         if (err) {
@@ -718,7 +718,7 @@ export class MongoItemRepository<
     });
   }
 
-  private getInfo(id: string, collection): Promise<any> {
+  protected getInfo(id: string, collection): Promise<any> {
     return new Promise<any>((res, rej) => {
       collection
         .aggregate([{ $match: { _id: id } }, { $project: { __info: 1 } }])
@@ -737,7 +737,7 @@ export class MongoItemRepository<
     });
   }
 
-  private getModelToCreate(item: T, user: IUser): T {
+  protected getModelToCreate(item: T, user: IUser): T {
     const result = ObjectService.removeTypes(item);
     result["_id"] = result.id;
     delete result.id;
@@ -752,7 +752,7 @@ export class MongoItemRepository<
     return result;
   }
 
-  private mapChangeType(dbType: string) {
+  protected mapChangeType(dbType: string) {
     const map = {
       insert: "create",
       update: "update",
@@ -762,7 +762,7 @@ export class MongoItemRepository<
     return map[dbType];
   }
 
-  private getModelToUpdate(
+  protected getModelToUpdate(
     item: { id: string },
     user: IUser,
     info
@@ -782,7 +782,7 @@ export class MongoItemRepository<
     return result;
   }
 
-  private getModelToResult(item: T): T {
+  protected getModelToResult(item: T): T {
     if (!item) return null;
 
     const result = ObjectService.removeTypes(item) as any;
@@ -794,11 +794,11 @@ export class MongoItemRepository<
     return result as T;
   }
 
-  private getUrl(): string {
+  protected getUrl(): string {
     return getMongoUrl(this.config);
   }
 
-  private logChange(type, item, options, user, error) {
+  protected logChange(type, item, options, user, error) {
     MongoClient.connect(
       this.getUrl(),
       { useUnifiedTopology: this.useUnifiedTopology },
@@ -833,7 +833,7 @@ export class MongoItemRepository<
     );
   }
 
-  private generateSearch(criteria: any): void {
+  protected generateSearch(criteria: any): void {
     if (!criteria["$search"]) return;
 
     if (this.config.type) {
@@ -882,7 +882,7 @@ export class MongoItemRepository<
     };
   }
 
-  private convertIdInCriteria(criteria: any) {
+  protected convertIdInCriteria(criteria: any) {
     if (criteria["id"]) {
       criteria["_id"] = criteria["id"];
       delete criteria["id"];
