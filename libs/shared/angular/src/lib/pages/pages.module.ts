@@ -20,9 +20,6 @@ const COMPONENTS = [
     declarations: [
         ...COMPONENTS
     ],
-    entryComponents: [
-        ...COMPONENTS
-    ],
     exports: [
         ...COMPONENTS
     ]

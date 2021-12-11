@@ -257,11 +257,10 @@ export const IMPORTS = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
-  entryComponents: [...COMPONENTS],
-  exports: [...COMPONENTS],
-  imports: [
-    ...IMPORTS,
-  ]
+    declarations: [...COMPONENTS],
+    exports: [...COMPONENTS],
+    imports: [
+        ...IMPORTS,
+    ]
 })
 export class SharedComponentsModule {}

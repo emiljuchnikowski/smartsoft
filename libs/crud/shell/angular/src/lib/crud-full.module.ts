@@ -32,17 +32,14 @@ const PAGES = [
     declarations: [
         ...PAGES
     ],
-    entryComponents: [
-        ...PAGES
-    ],
     imports: [
         StoreModule,
         SharedModule,
         CrudPipesModule,
         RouterModule.forChild([
-            {path: '', component: ListComponent}
-            , {path: 'add', component: ItemComponent}
-            , {path: ':id', component: ItemComponent}
+            { path: '', component: ListComponent },
+            { path: 'add', component: ItemComponent },
+            { path: ':id', component: ItemComponent }
         ]),
         FormsModule,
         CommonModule,
