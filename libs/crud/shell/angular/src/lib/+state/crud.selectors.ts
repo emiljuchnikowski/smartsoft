@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 
-export const getCrudState = (entity) => createFeatureSelector<any, any>(entity);
+export const getCrudState = (entity) => createFeatureSelector< any>(entity);
 
 export const getCrudSelected = (entity) => createSelector(
     getCrudState(entity),

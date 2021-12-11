@@ -20,12 +20,12 @@ const COMPONENTS = [
     declarations: [
         ...COMPONENTS
     ],
+    exports: [
+        ...COMPONENTS
+    ],
     entryComponents: [
         ...COMPONENTS
     ],
-    exports: [
-        ...COMPONENTS
-    ]
 })
 export class SharedPagesModule {
 

@@ -6,7 +6,7 @@ import {
 } from "./auth.reducer";
 
 // Lookup the 'Auth' feature state managed by NgRx
-export const getAuthState = createFeatureSelector<AuthPartialState, State>(
+export const getAuthState = createFeatureSelector< State>(
   AUTH_FEATURE_KEY
 );
 

@@ -65,16 +65,15 @@ export const initializer = (
 
 // @dynamic
 @NgModule({
-  imports: [
-      TranslateModule,
-    SharedModule,
-    StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer) as ModuleWithProviders<StoreFeatureModule>,
-    EffectsModule.forFeature([AuthEffects]) as ModuleWithProviders<EffectsModule>
-  ],
-  providers: [AuthEffects, AuthFacade, AuthService],
-  declarations: [LoginComponent, AuthDirective],
-  entryComponents: [LoginComponent],
-  exports: [LoginComponent, AuthDirective]
+    imports: [
+        TranslateModule,
+        SharedModule,
+        StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducer) as ModuleWithProviders<StoreFeatureModule>,
+        EffectsModule.forFeature([AuthEffects]) as ModuleWithProviders<EffectsModule>
+    ],
+    providers: [AuthEffects, AuthFacade, AuthService],
+    declarations: [LoginComponent, AuthDirective],
+    exports: [LoginComponent, AuthDirective]
 })
 export class AuthModule {
   static forRoot(config: AuthConfig): ModuleWithProviders<AuthModule> {

@@ -44,9 +44,6 @@ const COMPONENTS = [
     declarations: [
         ...COMPONENTS
     ],
-    entryComponents: [
-        ...COMPONENTS
-    ],
     imports: [
         //AuthSharedModule,
         StoreModule,
@@ -59,12 +56,15 @@ const COMPONENTS = [
         CrudPipesModule,
         ...COMPONENTS
     ],
+    entryComponents: [
+        ...COMPONENTS
+    ],
     providers: [
         CrudService,
         CrudEffects,
         CrudFacade,
         SocketService,
         CrudListPaginationFactory,
-    ],
+    ]
 })
 export class CrudComponentsModule { }
