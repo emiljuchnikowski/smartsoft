@@ -2,7 +2,13 @@ import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 
 import {AuthService, MenuService, StyleService} from "@smartsoft001/angular";
-import {getModelFieldsWithOptions, getModelOptions, IFieldListMetadata, IModelFilter} from "@smartsoft001/models";
+import {
+    FieldType,
+    getModelFieldsWithOptions,
+    getModelOptions,
+    IFieldListMetadata,
+    IModelFilter
+} from "@smartsoft001/models";
 import {IEntity} from "@smartsoft001/domain-core";
 
 import {ICrudFilter} from "../../models/interfaces";
@@ -107,7 +113,8 @@ export class FiltersComponent<T extends IEntity<string>> implements OnInit {
             .filter(item => (item.options?.list as IFieldListMetadata)?.filter)
             .map(item => ({
               key: item.key,
-              type: '=' as '=',
+              type: item.options.type === FieldType.text || item.options.type === FieldType.longText
+                  ? '~=' as '~=' : '=' as '=',
               label: 'MODEL.' + item.key,
               fieldType: item.options.type
             }))

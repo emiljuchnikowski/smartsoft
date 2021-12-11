@@ -40,7 +40,7 @@ export interface IModelFilter {
     label?: string;
     fieldType?: FieldType;
     key: string;
-    type: '=' | '!=' | '>=' | '<=' | '<' | '>';
+    type: '=' | '!=' | '>=' | '<=' | '<' | '>' | '~=';
     possibilities$?: Observable<{ id: any, text: string }[]>;
 }
 

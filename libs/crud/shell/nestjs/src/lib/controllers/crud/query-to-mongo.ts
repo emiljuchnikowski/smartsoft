@@ -84,7 +84,7 @@ function typedValues(svalue) {
 // + f('key','op:value') => {key: 'key', value:{ $op: value}}
 function comparisonToMongo(key, value) {
     const join = (value === '') ? key : key.concat('=', value)
-    const parts = join.match(/^(!?[^><!=:]+)(?:=?([><]=?|!?=|:.+=)(.+))?$/)
+    const parts = join.match(/^(!?[^><~!=:]+)(?:=?([><]=?|~?=|!?=|:.+=)(.+))?$/)
     let op;
     const hash = {} as any;
     if (!parts) return null
@@ -135,7 +135,10 @@ function comparisonToMongo(key, value) {
         if (op === '>') value = {'$gt': value}
         else if (op === '>=') value = {'$gte': value}
         else if (op === '<') value = {'$lt': value}
-        else if (op === '<=') value = { '$lte': value}
+        else if (op === '~=') value = {
+            $regex: value ? value.toString() : '',
+            $options: "i",
+        }
     }
 
     hash.key = key
