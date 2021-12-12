@@ -135,6 +135,7 @@ function comparisonToMongo(key, value) {
         if (op === '>') value = {'$gt': value}
         else if (op === '>=') value = {'$gte': value}
         else if (op === '<') value = {'$lt': value}
+        else if (op === '<=') value = {'$lte': value}
         else if (op === '~=') value = {
             $regex: value ? value.toString() : '',
             $options: "i",
