@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/core",
-  "version": "1.0.469",
+  "version": "1.0.470",
   "dependencies": {
     "openurl": "^1.1.1"
   }
