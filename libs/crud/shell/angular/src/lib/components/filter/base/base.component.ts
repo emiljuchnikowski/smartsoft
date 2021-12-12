@@ -43,25 +43,6 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     if (this.isArrayType()) {
       return this.filter.query
           .filter(
-              (q) => q.key === this.item.key && q.type === "<="
-          )
-          .map(q => q.value);
-    }
-
-    const query = this.filter.query.find(
-        (q) => q.key === this.item.key && q.type === "<="
-    );
-    return query?.value;
-  }
-
-  set minValue(val: any) {
-    this.refresh(val, "<=");
-  }
-
-  get maxValue(): any {
-    if (this.isArrayType()) {
-      return this.filter.query
-          .filter(
               (q) => q.key === this.item.key && q.type === ">="
           )
           .map(q => q.value);
@@ -73,8 +54,27 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     return query?.value;
   }
 
-  set maxValue(val: any) {
+  set minValue(val: any) {
     this.refresh(val, ">=");
+  }
+
+  get maxValue(): any {
+    if (this.isArrayType()) {
+      return this.filter.query
+          .filter(
+              (q) => q.key === this.item.key && q.type === "<="
+          )
+          .map(q => q.value);
+    }
+
+    const query = this.filter.query.find(
+        (q) => q.key === this.item.key && q.type === "<="
+    );
+    return query?.value;
+  }
+
+  set maxValue(val: any) {
+    this.refresh(val, "<=");
   }
 
   constructor(

@@ -27,7 +27,7 @@
         </ion-item>
     </ion-col>
     <ion-col size="auto" *ngIf="minValue">
-        <ion-button color="danger" (click)="refresh(null, '<=')" class="squere-button">
+        <ion-button color="danger" (click)="refresh(null, '>=')" class="squere-button">
             <ion-icon slot="icon-only" name="close-outline"></ion-icon>
         </ion-button>
     </ion-col>
@@ -40,7 +40,7 @@
         </ion-item>
     </ion-col>
     <ion-col size="auto" *ngIf="maxValue">
-        <ion-button color="danger" (click)="refresh(null, '>=')" class="squere-button">
+        <ion-button color="danger" (click)="refresh(null, '<=')" class="squere-button">
             <ion-icon slot="icon-only" name="close-outline"></ion-icon>
         </ion-button>
     </ion-col>
