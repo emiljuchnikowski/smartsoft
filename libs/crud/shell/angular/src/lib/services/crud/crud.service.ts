@@ -4,7 +4,6 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
 import { IEntity } from "@smartsoft001/domain-core";
-import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
 
 import { CrudConfig } from "../../crud.config";
 import { ICrudCreateManyOptions, ICrudFilter } from "../../models/interfaces";
@@ -155,6 +154,9 @@ export class CrudService<T extends IEntity<string>> {
 
     if (filter && filter.query) {
       filter.query.forEach((q) => {
+          if (q.value && (typeof q.value === 'string') && q.value[0] !== "'" && q.value[0] !== '"') {
+              q.value = `'${q.value}'`;
+          }
         query += "&" + q.key + q.type + q.value;
       });
     }
