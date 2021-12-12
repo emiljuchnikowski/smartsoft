@@ -155,9 +155,10 @@ export class CrudService<T extends IEntity<string>> {
     if (filter && filter.query) {
       filter.query.forEach((q) => {
           if (q.value && (typeof q.value === 'string') && q.value[0] !== "'" && q.value[0] !== '"') {
-              q.value = `'${q.value}'`;
+              query += "&" + q.key + q.type + `'${q.value}'`;
+          } else {
+              query += "&" + q.key + q.type + q.value;
           }
-        query += "&" + q.key + q.type + q.value;
       });
     }
 
