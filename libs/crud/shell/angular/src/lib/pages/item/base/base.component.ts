@@ -49,5 +49,7 @@ export abstract class CrudItemPageBaseComponent<T extends IEntity<string>> exten
     ) {
         super();
         this.selected$ = facade.selected$;
+
+
     }
 }

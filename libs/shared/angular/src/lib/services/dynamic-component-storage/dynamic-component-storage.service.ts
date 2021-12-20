@@ -1,13 +1,17 @@
-import {ApplicationRef, NgModuleRef, Type} from "@angular/core";
+import {ApplicationRef, InjectionToken, NgModuleRef, Type} from "@angular/core";
 
 import {DynamicComponentType} from "../../models";
+
+export const DYNAMIC_COMPONENTS_STORE = new InjectionToken<[Type<any>]>("DYNAMIC_COMPONENTS_STORE");
 
 export class DynamicComponentStorageService {
     static get(key: DynamicComponentType, moduleRef: NgModuleRef<any>): Type<any>[] {
         const getComponents = (k: DynamicComponentType, m: NgModuleRef<any>): Type<any>[] => {
             if (!m) return [];
 
-            return  m.instance.constructor['ɵmod'].declarations
+            const fromStore = m.injector.get(DYNAMIC_COMPONENTS_STORE, null);
+
+            return (fromStore ? fromStore :  m.instance.constructor['ɵmod'].declarations)
                 .filter(c => c['smartType'] === k)
         }
 
