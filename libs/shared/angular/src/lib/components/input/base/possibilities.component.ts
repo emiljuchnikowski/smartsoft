@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Directive, Inject, Optional} from "@angular/core";
+import {ChangeDetectorRef, Directive, Inject, Optional, Type} from "@angular/core";
 import {Observable} from "rxjs";
 
 import {
@@ -28,6 +28,7 @@ export abstract class InputPossibilitiesBaseComponent<T> extends InputBaseCompon
         if (!this.modelPossibilitiesProvider) return null;
 
         return this.modelPossibilitiesProvider.get({
+            type: this.internalOptions?.model?.constructor as Type<any>,
             key: this.internalOptions.fieldKey,
             instance: this.internalOptions.control.parent?.value
         });
