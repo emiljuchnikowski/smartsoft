@@ -1,5 +1,5 @@
 tr {
-    &.mat-row {
+    &.cdk-row {
         &:nth-child(even) {
             background-color: #fdfdfd;
         }
@@ -10,7 +10,7 @@ tr {
 }
 
 td {
-    &.mat-cell {
+    &.cdk-cell {
         padding-left: .6rem !important;
         border-right: .1rem solid #f6f6f6;
         border-bottom: .1rem solid #e6e6e6;
@@ -27,13 +27,14 @@ td {
 th {
     background-color: var(--smart-color-light);
     padding-left: .6rem !important;
-    &.mat-header-cell {
+    text-align: left !important;
+    &.cdk-header-cell {
         color: var(--smart-color-secondary) !important;
     }
     &:first-child {
         padding-left: 1.2rem !important;
     }
-    .mat-sort-header-button {
+    .cdk-sort-header-button {
         color: var(--smart-color-secondary);
     }
 }

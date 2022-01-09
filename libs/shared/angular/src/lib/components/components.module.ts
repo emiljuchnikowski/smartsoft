@@ -17,6 +17,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MomentDateModule} from "@angular/material-moment-adapter";
+import {CdkTableModule} from '@angular/cdk/table';
 
 import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { AccordionComponent } from "./accordion/accordion.component";
@@ -253,7 +254,8 @@ export const IMPORTS = [
   MatButtonModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MomentDateModule
+  MomentDateModule,
+  CdkTableModule
 ];
 
 @NgModule({

@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ElementRef, HostListener,
   OnDestroy,
   OnInit,
-  ViewChild,
+  QueryList,
+  ViewChild, ViewChildren,
   ViewContainerRef,
 } from "@angular/core";
 import { Router } from "@angular/router";
@@ -19,6 +21,8 @@ import { AlertService } from "../../../services/alert/alert.service";
 import { IListComponentFactories } from "../../../models";
 import { IListInternalOptions } from "../list.component";
 import { AuthService } from "../../../services/auth/auth.service";
+import {ViewportShowDirective} from "../../../directives";
+import {ScrollDispatcher} from "@angular/cdk/overlay";
 
 @Component({
   selector: "smart-list-desktop",
@@ -32,6 +36,9 @@ export class ListDesktopComponent<T extends IEntity<string>>
   private _multiSelected = [];
 
   componentFactories: IListComponentFactories<T>;
+
+  @ViewChildren("[smartViewportShow]", { read: ViewportShowDirective })
+  viewportShows = new QueryList<ViewportShowDirective>();
 
   get desktopKeys(): Array<string> {
     if (this.keys) {
@@ -57,7 +64,8 @@ export class ListDesktopComponent<T extends IEntity<string>>
     router: Router,
     alertService: AlertService,
     cd: ChangeDetectorRef,
-    translateService: TranslateService
+    translateService: TranslateService,
+    private scrollDispatcher: ScrollDispatcher
   ) {
     super(authService, router, alertService, cd, translateService);
   }
@@ -68,6 +76,10 @@ export class ListDesktopComponent<T extends IEntity<string>>
     this.componentFactories = val.componentFactories;
 
     this.generateDynamicComponents();
+
+    this.viewportShows.changes.subscribe(() => {
+      console.log(this.viewportShows.last);
+    })
   }
 
   onChangeMultiselect(checked: boolean, element: T, list: T[]) {
@@ -85,6 +97,10 @@ export class ListDesktopComponent<T extends IEntity<string>>
     if (this.provider.onChangeMultiSelected) {
       this.provider.onChangeMultiSelected(this._multiSelected);
     }
+  }
+
+  myTrackById(val: any){
+    return val?.id;
   }
 
   ngAfterViewInit(): void {
@@ -110,6 +126,10 @@ export class ListDesktopComponent<T extends IEntity<string>>
     } else {
       this.sortObj.disabled = true;
     }
+
+    this.scrollDispatcher.scrolled().subscribe(x => {
+      console.log(this.viewportShows.toArray());
+    });
   }
 
   ngOnDestroy(): void {
@@ -126,5 +146,9 @@ export class ListDesktopComponent<T extends IEntity<string>>
         this.topTpl.createComponent(this.componentFactories.top);
       }
     }
+  }
+
+  projectContentChanged() {
+    console.log("dupa");
   }
 }

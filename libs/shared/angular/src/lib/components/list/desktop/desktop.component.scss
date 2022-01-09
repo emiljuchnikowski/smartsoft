@@ -1,3 +1,19 @@
 .cell-details {
   width: 20px;
 }
+
+table {
+  width: 100%;
+  .mat-row, .mat-header-row {
+    background: white;
+    min-width: 1200px;
+  }
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.mat-row, .mat-header-row {
+  min-width: 1200px;
+}
