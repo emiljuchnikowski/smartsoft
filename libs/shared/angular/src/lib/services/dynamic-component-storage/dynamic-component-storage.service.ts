@@ -27,7 +27,7 @@ export class DynamicComponentStorageService {
             }
 
             if (!appComponentInjector) {
-                throw new Error(DynamicComponentStorageService.name + " not found AppComponent");
+                return [];
             }
 
             const appModuleRef = appComponentInjector.get(NgModuleRef);
