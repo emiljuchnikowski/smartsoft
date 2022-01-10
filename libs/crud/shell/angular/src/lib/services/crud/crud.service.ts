@@ -60,14 +60,6 @@ export class CrudService<T extends IEntity<string>> {
   ): Observable<{ data: T[]; totalCount: number; links }> {
     return this.http.get<{ data: T[]; totalCount: number; links }>(
       this.config.apiUrl + this.getQuery(filter)
-    ).pipe(
-        map(r => {
-            for (let index = 0; index < 8; index++) {
-                r.data = [...r.data, ...r.data]
-            }
-
-            return r;
-        })
     );
   }
 
