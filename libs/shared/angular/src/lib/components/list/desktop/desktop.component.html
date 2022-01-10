@@ -59,7 +59,7 @@
         </ng-container>
 
         <ng-container *ngSwitchDefault>
-          <th cdk-header-cell *matHeaderCellDef cdk-sort-header="{{ key }}">
+          <th cdk-header-cell *matHeaderCellDef mat-sort-header="{{ key }}">
             {{ (list$ | async) | smartListHeader : key : type | async }}
             <ng-container *ngTemplateOutlet="pagination"></ng-container>
           </th>
