@@ -11,7 +11,7 @@ import {
 } from "@smartsoft001/domain-core";
 import { IUser } from "@smartsoft001/users";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
-import { ObjectService } from "@smartsoft001/utils";
+import {GuidService, ObjectService} from "@smartsoft001/utils";
 import { getModelFieldsWithOptions } from "@smartsoft001/models";
 
 import { MongoConfig } from "../mongo.config";
@@ -848,7 +848,7 @@ export class MongoItemRepository<
           const res = {};
 
           res[val.key] = {
-            $regex: criteria["$search"].toString(),
+            $regex: this.convertRegex(criteria["$search"]),
             $options: "i",
           };
 
@@ -871,7 +871,7 @@ export class MongoItemRepository<
     }
 
     const customCriteria = {
-      $text: { $search: ' "' + criteria["$search"].toString() + '" ' },
+      $text: { $search: ' "' + this.convertRegex(criteria["$search"]) + '" ' },
     };
 
     delete criteria["$search"];
@@ -887,5 +887,9 @@ export class MongoItemRepository<
       criteria["_id"] = criteria["id"];
       delete criteria["id"];
     }
+  }
+
+  protected convertRegex(val: string): string {
+      return  val.toString().replace(/\*/g, '[*]');
   }
 }
