@@ -12,6 +12,10 @@ function fieldsToMongo(fields) {
     return hash
 }
 
+function convertRegex(val: string): string {
+    return  val.toString().replace(/\*/g, '[*]');
+}
+
 // Convert comma separated list to a mongo projection which specifies fields to omit.
 // for example f('field2') -> {field2:false}
 function omitFieldsToMongo(omitFields) {
@@ -137,7 +141,7 @@ function comparisonToMongo(key, value) {
         else if (op === '<') value = {'$lt': value}
         else if (op === '<=') value = {'$lte': value}
         else if (op === '~=') value = {
-            $regex: value ? value.toString() : '',
+            $regex: value ? convertRegex(value) : '',
             $options: "i",
         }
     }
