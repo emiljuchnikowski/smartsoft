@@ -1,5 +1,6 @@
 <div #topTpl></div>
 
+<div style="width: 100%; overflow-y: auto">
   <table cdk-table matSort [dataSource]="(list$ | async)" recycleRows  [trackBy]="myTrackById" style="overflow-y: auto">
     <ng-container
             *ngFor="let key of desktopKeys; let last = last"
@@ -90,6 +91,7 @@
     <tr cdk-header-row *matHeaderRowDef="desktopKeys; sticky: true"></tr>
     <tr cdk-row *matRowDef="let row; columns: desktopKeys"></tr>
   </table>
+</div>
 
 <ion-infinite-scroll
   threshold="100px"
