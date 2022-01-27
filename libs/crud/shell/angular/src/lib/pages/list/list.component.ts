@@ -120,13 +120,17 @@ export class ListComponent<T extends IEntity<string>>
         sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null,
         ...this.searchService.filter
       });
-    } else {
+    } else if (!this.searchService.filter) {
       this.facade.read({
         paginationMode: this.config.list.paginationMode,
         limit: this.config.pagination ? this.config.pagination.limit : null,
         offset: this.config.pagination ? 0 : null,
         sortBy: this.config.sort ? this.config.sort["default"] : null,
         sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null,
+        ...this.searchService.filter
+      });
+    } else {
+      this.facade.read({
         ...this.searchService.filter
       });
     }
