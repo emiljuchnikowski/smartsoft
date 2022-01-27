@@ -10,6 +10,7 @@ import {
 import { map, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import * as _ from "lodash";
 
 import {
   CreateDynamicComponent,
@@ -110,8 +111,10 @@ export class ListComponent<T extends IEntity<string>>
   async ngOnInit(): Promise<void> {
     await this.pageService.checkPermissions();
 
+    let newFilter = null;
+
     if (this.config.list?.resetQuery === 'beforeInit') {
-      this.facade.read({
+      newFilter = {
         query: this.config.baseQuery ? [ ...this.config.baseQuery ] : [],
         paginationMode: this.config.list.paginationMode,
         limit: this.config.pagination ? this.config.pagination.limit : null,
@@ -119,9 +122,9 @@ export class ListComponent<T extends IEntity<string>>
         sortBy: this.config.sort ? this.config.sort["default"] : null,
         sortDesc: this.config.sort ? this.config.sort["defaultDesc"] : null,
         ...this.searchService.filter
-      });
+      };
     } else {
-      this.facade.read({
+      newFilter = {
         paginationMode: this.config.list.paginationMode,
         limit: this.searchService.filter?.limit ? this.searchService.filter.limit : this.config.pagination ? this.config.pagination.limit : null,
         offset: this.searchService.filter?.offset || this.searchService.filter?.offset === 0
@@ -129,7 +132,11 @@ export class ListComponent<T extends IEntity<string>>
         sortBy: this.searchService.filter?.sortBy ? this.searchService.filter.sortBy : this.config.sort ? this.config.sort["default"] : null,
         sortDesc: this.searchService.filter?.sortDesc ? this.searchService.filter.sortDesc :  this.config.sort ? this.config.sort["defaultDesc"] : null,
         ...this.searchService.filter
-      });
+      };
+    }
+
+    if (!this.searchService.filter || !_.isEqual(newFilter, this.searchService.filter)) {
+      this.facade.read(newFilter);
     }
 
     const endButtons = this.getEndButtons();
