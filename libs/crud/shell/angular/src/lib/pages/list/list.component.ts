@@ -135,7 +135,7 @@ export class ListComponent<T extends IEntity<string>>
       };
     }
 
-    if (!this.searchService.filter || !_.isEqual(newFilter, this.searchService.filter)) {
+    if (!this.searchService.filter || !_.isEqual(newFilter, this.filter)) {
       this.facade.read(newFilter);
     }
 
