@@ -126,11 +126,15 @@ export class ListComponent<T extends IEntity<string>>
     } else {
       newFilter = {
         paginationMode: this.config.list.paginationMode,
-        limit: this.searchService.filter?.limit ? this.searchService.filter.limit : this.config.pagination ? this.config.pagination.limit : null,
+        limit: this.searchService.filter?.limit ? this.searchService.filter.limit : this.config.pagination
+            ? this.config.pagination.limit : null,
         offset: this.searchService.filter?.offset || this.searchService.filter?.offset === 0
             ? this.searchService.filter.offset : this.config.pagination ? 0 : null,
-        sortBy: this.searchService.filter?.sortBy ? this.searchService.filter.sortBy : this.config.sort ? this.config.sort["default"] : null,
-        sortDesc: this.searchService.filter?.sortDesc ? this.searchService.filter.sortDesc :  this.config.sort ? this.config.sort["defaultDesc"] : null,
+        sortBy: this.searchService.filter?.sortBy ? this.searchService.filter.sortBy : this.config.sort
+            ? this.config.sort["default"] : null,
+        sortDesc: this.searchService.filter?.sortDesc ? this.searchService.filter.sortDesc :  this.config.sort
+            ? this.config.sort["defaultDesc"] : null,
+        query: this.searchService.filter?.query ? this.searchService : [],
         ...this.searchService.filter
       };
     }
