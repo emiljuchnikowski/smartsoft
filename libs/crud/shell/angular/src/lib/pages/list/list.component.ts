@@ -134,7 +134,7 @@ export class ListComponent<T extends IEntity<string>>
             ? this.config.sort["default"] : null,
         sortDesc: this.searchService.filter?.sortDesc ? this.searchService.filter.sortDesc :  this.config.sort
             ? this.config.sort["defaultDesc"] : null,
-        query: this.searchService.filter?.query ? this.searchService : [],
+        query: this.searchService.filter?.query ? this.searchService.filter : [],
         ...this.searchService.filter
       };
     }
