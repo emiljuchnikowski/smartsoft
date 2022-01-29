@@ -72,7 +72,7 @@
             >
               <ng-container [ngSwitch]="cell.type">
                 <img *ngSwitchCase="FieldType.image" height="50" [lazyLoad]="cell.value | smartFileUrl">
-                <div *ngSwitchDefault [innerHTML]="cell.value"></div>
+                <div *ngSwitchDefault class="cell-html" [innerHTML]="cell.value"></div>
               </ng-container>
             </td>
             <ng-template #blankCellTpl><td cdk-cell></td></ng-template>
