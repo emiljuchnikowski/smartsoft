@@ -1,6 +1,8 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 
 import {InputBaseComponent} from "../base/base.component";
+import {NipService} from "@smartsoft001/utils";
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'smart-input-phone-number-pl',
@@ -15,4 +17,14 @@ export class InputPhoneNumberPlComponent<T> extends InputBaseComponent<T> implem
 
   ngOnInit() {}
 
+  afterSetOptionsHandler() {
+    const validators = this.control.validator ? [ this.control.validator ] : [];
+
+    validators.push(Validators.minLength(9));
+    validators.push(Validators.maxLength(9));
+
+    this.control.setValidators(validators);
+
+    this.control.updateValueAndValidity();
+  }
 }
