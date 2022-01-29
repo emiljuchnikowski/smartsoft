@@ -23,6 +23,7 @@ export enum FieldType {
     logo = "logo",
     check = "check",
     phoneNumber = "phoneNumber",
+    phoneNumberPl = "phoneNumberPl",
     pesel = "pesel",
     pdf = "pdf",
     video = "video",

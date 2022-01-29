@@ -5,5 +5,5 @@
             <span *ngIf="required">*</span>
         </ion-text>
     </ion-label>
-    <ion-input [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-input>
+    <ion-input type="tel" [formControl]="control" [attr.autofocus]="fieldOptions?.focused"></ion-input>
 </ng-container>

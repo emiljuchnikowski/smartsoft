@@ -83,6 +83,7 @@ import { InfoComponent, InfoModalComponent } from "./info/info.component";
 import { ExportComponent } from "./export/export.component";
 import { ImportComponent } from "./import/import.component";
 import {InputPhoneNumberComponent} from "./input/phone-number/phone-number.component";
+import {InputPhoneNumberPlComponent} from "./input/phone-number-pl/phone-number-pl.component";
 import {InputPeselComponent} from "./input/pesel/pesel.component";
 import {ErrorContextComponent} from "./error-context/error-context.component";
 import {InputArrayComponent} from "./input/array/array.component";
@@ -169,6 +170,7 @@ export const INPUT_COMPONENTS = [
   InputCheckComponent,
   InputIntsComponent,
   InputPhoneNumberComponent,
+  InputPhoneNumberPlComponent,
   InputPeselComponent,
   InputArrayComponent,
   InputPdfComponent,
