@@ -290,7 +290,7 @@ export class CrudController<T extends IEntity<string>> {
           item[key] = item[key].replace(/<[^>]*>?/gm, '')
         }
 
-        let val = item[key];
+        const val = item[key];
 
         if (_.isArray(val)) {
           return;
