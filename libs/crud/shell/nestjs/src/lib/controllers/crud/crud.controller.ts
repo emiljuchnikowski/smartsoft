@@ -286,14 +286,18 @@ export class CrudController<T extends IEntity<string>> {
 
     const execute = (item, baseKey, baseItem) => {
       Object.keys(item).forEach((key) => {
-        const val = item[key];
+        if (item[key] && (typeof item[key] === 'string')) {
+          item[key] = item[key].replace(/<[^>]*>?/gm, '')
+        }
+
+        let val = item[key];
 
         if (_.isArray(val)) {
           return;
         } else if (_.isObject(val) && Object.keys(val).length) {
           execute(val, baseKey + key + "_", baseItem);
         } else if (baseKey) {
-          baseItem[baseKey + key] = val ? val.replace(/<[^>]*>?/gm, '') : '';
+          baseItem[baseKey + key] = val=;
           if (!fields.some((f) => f === baseKey + key))
             fields.push(baseKey + key);
         } else {
