@@ -293,7 +293,7 @@ export class CrudController<T extends IEntity<string>> {
         } else if (_.isObject(val) && Object.keys(val).length) {
           execute(val, baseKey + key + "_", baseItem);
         } else if (baseKey) {
-          baseItem[baseKey + key] = val;
+          baseItem[baseKey + key] = val ? val.replace(/<[^>]*>?/gm, '') : '';
           if (!fields.some((f) => f === baseKey + key))
             fields.push(baseKey + key);
         } else {
