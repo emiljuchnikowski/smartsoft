@@ -38,6 +38,10 @@
     <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.invalidMax' | translate }}: {{ errors?.max?.max }}
 </span>
 
+<span *ngIf="errors?.customMessage">
+    <ion-icon name="alert-circle-outline"></ion-icon> {{ errors?.customMessage }}
+</span>
+
 <ng-template #checkConfirm>
     <span *ngIf="errors?.confirm">
         <ion-icon name="alert-circle-outline"></ion-icon> {{ 'INPUT.ERRORS.confirm' | translate }}
