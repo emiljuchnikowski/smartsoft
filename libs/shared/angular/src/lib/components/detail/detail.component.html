@@ -1,5 +1,7 @@
 <ion-item *ngIf="options">
-    <smart-info style="float: right" *ngIf="options?.options?.info" [text]="options?.options?.info"></smart-info>
+    <div class="container-right">
+        <smart-info *ngIf="options?.options?.info" [text]="options?.options?.info"></smart-info>
+    </div>
     <ion-label color="medium" position="stacked">
         {{ (options.item$ | async) | smartModelLabel : options.key : type | async}}
     </ion-label>

@@ -1,5 +1,8 @@
 <ion-item  *ngIf="!fieldOptions?.hide">
-    <smart-info style="float: right" *ngIf="fieldOptions?.info" [text]="fieldOptions.info"></smart-info>
+    <div class="container-right">
+        <smart-info *ngIf="fieldOptions?.info" [text]="fieldOptions.info"></smart-info>
+        <smart-loader [show]="options?.control?.status === 'PENDING'"></smart-loader>
+    </div>
     <ng-container *ngIf="!options.component" [ngSwitch]="fieldOptions?.type">
         <smart-input-currency class="input-type" *ngSwitchCase="FieldType.currency" [options]="options" [fieldOptions]="fieldOptions"></smart-input-currency>
         <smart-input-date class="input-type" *ngSwitchCase="FieldType.date" [options]="options" [fieldOptions]="fieldOptions"></smart-input-date>

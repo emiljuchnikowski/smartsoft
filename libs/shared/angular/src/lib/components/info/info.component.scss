@@ -1,12 +1,7 @@
 :host {
     cursor: pointer;
     font-size: 2.4rem;
-    height: 2.4rem;
-    position: absolute;
-    right: 2.1rem;
-    top: 50%;
     transform: translate(0, -50%);
-    z-index: 666;
     ion-icon {
         color: var(--smart-color-primary);
     }
