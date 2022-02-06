@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ComponentFactoryResolver, ElementRef, Injector,
   Input,
@@ -58,7 +58,13 @@ export class InputComponent<T> implements OnInit {
 
     this.fieldOptions = fieldOptions;
 
-    this.initCustomComponent();
+    this.initCustomComponent().then();
+
+    this.options.control.statusChanges.subscribe(() => {
+      setTimeout(() => {
+        (this.injector.get(ChangeDetectorRef) as ChangeDetectorRef).detectChanges();
+      });
+    });
   }
   get options(): InputOptions<T> {
     return this._options;
