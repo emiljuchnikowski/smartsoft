@@ -20,6 +20,9 @@
             <smart-detail-attachment *ngSwitchCase="FieldType.attachment" [options]="options"></smart-detail-attachment>
             <smart-detail-date-range *ngSwitchCase="FieldType.dateRange" [options]="options"></smart-detail-date-range>
             <smart-detail-image *ngSwitchCase="FieldType.image" [options]="options"></smart-detail-image>
+            <smart-detail-phone-number-pl *ngSwitchCase="FieldType.phoneNumberPl"
+                                          [options]="options"
+            ></smart-detail-phone-number-pl>
             <smart-detail-text *ngSwitchDefault [options]="options"></smart-detail-text>
         </ng-container>
     </ng-container>

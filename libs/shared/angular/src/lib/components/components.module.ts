@@ -105,6 +105,7 @@ import {FormStepperComponent} from "./form/stepper/stepper.component";
 import {DateEditComponent} from "./date-edit/date-edit.component";
 import {ButtonStandardComponent} from "./button/standard/standard.component";
 import {PagingComponent} from "./paging/paging.component";
+import {DetailPhoneNumberPlComponent} from "./detail/phone-number-pl/phone-number-pl.component";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -141,7 +142,8 @@ export const DETAIL_COMPONENTS = [
   DetailVideoComponent,
   DetailAttachmentComponent,
   DetailDateRangeComponent,
-  DetailImageComponent
+  DetailImageComponent,
+  DetailPhoneNumberPlComponent
 ];
 
 export const FORM_COMPONENTS = [FormStandardComponent, FormStepperComponent, FormComponent];
