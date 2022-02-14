@@ -2,7 +2,7 @@
 
     <ion-card-header *ngIf="options?.title; let title">
         <ion-card-title>
-            <div [innerHTML]="title"></div>
+            {{ title }}
             <ion-buttons style="float: right" *ngIf="options?.buttons">
                 <ion-button *ngFor="let btn of options.buttons" (click)="btn.handler()" [disabled]="btn.disabled$ | async">
                     <ion-icon slot="icon-only" [name]="btn.icon"></ion-icon>
