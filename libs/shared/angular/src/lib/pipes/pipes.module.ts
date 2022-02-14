@@ -6,9 +6,10 @@ import {FileUrlPipe} from "./file-url/file-url.pipe";
 import {ListHeaderPipe} from "./list-header/list-header.pipe";
 import {ModelLabelPipe} from "./model-label/model-label.pipe";
 import {VirtualDataSourcePipe} from "./virtual-data-source/virtual-data-source.pipe";
+import {TrustHtmlPipe} from "./trust-html/trust-html.pipe";
 
 export const PIPES = [
-    EnumToListPipe, ListCellPipe, FileUrlPipe, ListHeaderPipe, ModelLabelPipe, VirtualDataSourcePipe
+    EnumToListPipe, ListCellPipe, FileUrlPipe, ListHeaderPipe, ModelLabelPipe, VirtualDataSourcePipe, TrustHtmlPipe
 ];
 
 @NgModule({
