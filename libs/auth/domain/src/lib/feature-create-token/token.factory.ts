@@ -38,7 +38,7 @@ export class TokenFactory
     private googleService: GoogleService
   ) {}
 
-  static getQuery(config: IAuthTokenRequest): Partial<User> {
+  static getQuery(config: IAuthTokenRequest, customProvider = false): Partial<User> {
     switch (config.grant_type) {
       case "fb":
         return { facebookUserId: config.fb_user_id };
@@ -49,7 +49,10 @@ export class TokenFactory
       case "refresh_token":
         return { authRefreshToken: config.refresh_token };
       default:
-        throw new DomainValidationError('Invalid grand type')
+        if (!customProvider) {
+          throw new DomainValidationError('Invalid grand type');
+        }
+        return null;
     }
   }
 
@@ -75,7 +78,8 @@ export class TokenFactory
 
     this.valid(options.request);
 
-    const query = TokenFactory.getQuery(options.request);
+    const query = TokenFactory.getQuery(options.request, !!options.userProvider);
+
     const user = options.userProvider
       ? await options.userProvider.get(query, options.request)
       : await this.repository.findOne(query);
