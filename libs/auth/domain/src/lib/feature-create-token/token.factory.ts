@@ -173,8 +173,6 @@ export class TokenFactory
 
       if (!req.google_user_id)
         throw new DomainValidationError("google_user_id is empty");
-    } else {
-      throw new DomainValidationError("grant_type is incorrect");
     }
   }
 }
