@@ -546,7 +546,7 @@ export class MongoItemRepository<
     });
   }
 
-  getById(id: string): Promise<T> {
+  getById(id: string, repoOptions?: IItemRepositoryOptions): Promise<T> {
     return new Promise<T>((res, rej) => {
       MongoClient.connect(
         this.getUrl(),
@@ -558,6 +558,22 @@ export class MongoItemRepository<
           }
 
           const db = client.db(this.config.database);
+
+            if (repoOptions && repoOptions.transaction) {
+                db.collection(this.config.collection).findOne(
+                    { _id: id },
+                    { session: (repoOptions.transaction as IMongoTransaction).session },
+                    (errDelete, item) => {
+                        if (errDelete) {
+                            rej(errDelete);
+                            return;
+                        }
+
+                        client.close();
+                        res(this.getModelToResult(item));
+                    }
+                );
+            }
 
           db.collection(this.config.collection).findOne(
             { _id: id },

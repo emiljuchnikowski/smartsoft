@@ -45,7 +45,7 @@ export abstract class IItemRepository<T extends IEntity<string>> {
 
   abstract delete(id: string, user: IUser, options?: IItemRepositoryOptions): Promise<void>;
 
-  abstract getById(id: string): Promise<T>;
+  abstract getById(id: string, repoOptions?: IItemRepositoryOptions): Promise<T>;
 
   abstract getByCriteria(
     criteria: any,
