@@ -130,13 +130,20 @@ export class AuthService extends SharedAuthService {
       );
   }
 
-  createToken(userCreds: IUserCredentials): Observable<IAuthToken> {
-    const baseBody = {
+  createToken(userCreds: IUserCredentials, customData?): Observable<IAuthToken> {
+    let baseBody = {
       grant_type: "password",
       username: userCreds.username,
       password: userCreds.password,
       client_id: this.config.clientId,
     };
+
+    if (customData) {
+        baseBody = {
+            ...baseBody,
+            ...customData
+        };
+    }
 
     const obsBody$ = this.bodyProvider
       ? from(this.bodyProvider.get(baseBody))

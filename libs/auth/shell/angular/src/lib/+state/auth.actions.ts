@@ -24,7 +24,7 @@ export const initTokenFailure = createAction(
  */
 export const createToken = createAction(
     "[Auth] Create token",
-    props<{ username: string, password: string }>()
+    props<{ username: string, password: string, customData? }>()
 );
 
 export const createTokenSuccess = createAction(

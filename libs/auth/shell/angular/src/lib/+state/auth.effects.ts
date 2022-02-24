@@ -37,8 +37,8 @@ export class AuthEffects {
         this.service
           .createToken({
             username: action.username,
-            password: action.password,
-          })
+            password: action.password
+          }, action.customData)
           .pipe(
             map(
               (token) =>
