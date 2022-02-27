@@ -375,6 +375,11 @@ export class ItemComponent<T extends IEntity<string>>
 
     const field = key ? baseField + ' > ' + this.translateService.instant('MODEL.' + key) : baseField;
 
+    if (control.errors?.customMessage) {
+      invalidFields.push(field + ` (${control.errors.customMessage})`);
+      return;
+    }
+
     if (control instanceof FormControl) {
       invalidFields.push(field);
     }
