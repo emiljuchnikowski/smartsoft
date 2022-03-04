@@ -189,7 +189,11 @@ export class FormFactory {
     (rootCheck ? rootCheck : result).valueChanges.pipe(
         tap(() => {
           enabledDefinitions.forEach(def => {
-            const enabled = SpecificationService.valid(result.value, def.enabled, {
+            const enabled = SpecificationService.valid(
+                {
+                  ...(obj ? obj : {}),
+                  ...result.value
+                }, def.enabled, {
               $root: rootCheck?.value
             });
             def.control['__smartDisabled'] = !enabled;
