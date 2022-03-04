@@ -20,8 +20,13 @@ export class SpecificationService {
             const key = keys[index];
 
             if (key.indexOf(SPECIFICATION_ROOT_KEY) === 0 && custom?.$root) {
-                if (spec.criteria[key] !== custom?.$root[key.replace(SPECIFICATION_ROOT_KEY, '')]) return false;
-            } else if (spec.criteria[key] !== value[key]) return false;
+                if (
+                    !SpecificationService.check(
+                        custom?.$root[key.replace(SPECIFICATION_ROOT_KEY, '')],
+                        spec.criteria[key]
+                    )
+                ) return false;
+            } else if (!SpecificationService.check(value[key], spec.criteria[key])) return false;
         }
 
         return true;
@@ -56,5 +61,13 @@ export class SpecificationService {
         }
 
         return result;
+    }
+
+    private static check(value: any, criteriaValue): boolean {
+        if (value && Array.isArray(value)) {
+            return value.some(i => i === criteriaValue);
+        }
+
+        return value === criteriaValue;
     }
 }

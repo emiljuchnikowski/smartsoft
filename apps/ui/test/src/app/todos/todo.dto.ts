@@ -269,6 +269,22 @@ export class Todo implements IEntity<string> {
             ...modifyMetdata,
             multi: true
         },
+        type: FieldType.phoneNumberPl,
+        details: true,
+        list: {
+            order: 2,
+            filter: true
+        },
+        step: steps[0]
+    })
+    phoneNumberPl: string;
+
+    @Field({
+        create: modifyMetdata,
+        update: {
+            ...modifyMetdata,
+            multi: true
+        },
         type: FieldType.longText,
         details: true,
         list: {

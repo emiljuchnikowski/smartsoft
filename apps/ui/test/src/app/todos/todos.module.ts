@@ -136,7 +136,7 @@ export class ModelLabelProvider extends IModelLabelProvider {
         },
         edit: true,
         add: true,
-        remove: true,
+        //remove: true,
         export: true,
         list: {
           // components: {
