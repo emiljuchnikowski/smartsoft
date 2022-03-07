@@ -6,6 +6,7 @@ import {
     MODEL_POSSIBILITIES_PROVIDER
 } from "../../../providers/model-possibilities.provider";
 import {InputBaseComponent} from "./base.component";
+import {debounceTime} from "rxjs/operators";
 
 @Directive()
 export abstract class InputPossibilitiesBaseComponent<T> extends InputBaseComponent<T> {
@@ -27,7 +28,9 @@ export abstract class InputPossibilitiesBaseComponent<T> extends InputBaseCompon
 
         refreshPossibilities();
 
-        this.internalOptions.control.parent.valueChanges.subscribe(() => {
+        this.internalOptions.control.parent.valueChanges.pipe(
+            debounceTime(500)
+        ).subscribe(() => {
             refreshPossibilities();
         });
     }
