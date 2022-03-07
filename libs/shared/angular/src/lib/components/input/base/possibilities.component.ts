@@ -32,6 +32,7 @@ export abstract class InputPossibilitiesBaseComponent<T> extends InputBaseCompon
             debounceTime(500)
         ).subscribe(() => {
             refreshPossibilities();
+            this.cd.detectChanges();
         });
     }
 
