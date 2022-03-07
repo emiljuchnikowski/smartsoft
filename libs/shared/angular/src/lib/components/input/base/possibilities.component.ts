@@ -20,8 +20,16 @@ export abstract class InputPossibilitiesBaseComponent<T> extends InputBaseCompon
     protected afterSetOptionsHandler() {
         super.afterSetOptionsHandler();
 
-        const possibilitiesFromProvider$ = this.getPossibilitiesFromProvider();
-        if (possibilitiesFromProvider$) this.possibilities$ = possibilitiesFromProvider$;
+        const refreshPossibilities = () => {
+            const possibilitiesFromProvider$ = this.getPossibilitiesFromProvider();
+            if (possibilitiesFromProvider$) this.possibilities$ = possibilitiesFromProvider$
+        };
+
+        refreshPossibilities();
+
+        this.internalOptions.control.parent.valueChanges.subscribe(() => {
+            refreshPossibilities();
+        });
     }
 
     protected getPossibilitiesFromProvider(): Observable<{ id: any, text: string }[]> {
