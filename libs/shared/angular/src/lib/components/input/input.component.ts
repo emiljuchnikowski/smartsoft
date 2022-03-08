@@ -25,6 +25,7 @@ export class InputComponent<T> implements OnInit {
 
   private _options: InputOptions<T>;
 
+  status: any;
   fieldOptions: IFieldOptions;
   FieldType = FieldType;
 
@@ -60,10 +61,9 @@ export class InputComponent<T> implements OnInit {
 
     this.initCustomComponent().then();
 
-    this.options.control.statusChanges.subscribe(() => {
-      setTimeout(() => {
-        (this.injector.get(ChangeDetectorRef) as ChangeDetectorRef).detectChanges();
-      });
+    this.options.control.statusChanges.subscribe(status => {
+      this.status = status;
+      (this.injector.get(ChangeDetectorRef) as ChangeDetectorRef).detectChanges();
     });
   }
   get options(): InputOptions<T> {
