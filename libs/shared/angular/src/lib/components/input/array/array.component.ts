@@ -38,6 +38,10 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
                 show: true
             });
             this.control.markAsDirty();
+
+            setTimeout(() => {
+                this.cd.detectChanges();
+            });
         }
     };
 
