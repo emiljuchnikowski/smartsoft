@@ -27,6 +27,7 @@ export interface ICrudListGroup {
     value: string;
     text: string;
     show?: boolean;
+    changed?: boolean;
     children?: Array<ICrudListGroup>;
 }
 

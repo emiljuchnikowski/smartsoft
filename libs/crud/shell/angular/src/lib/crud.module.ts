@@ -23,6 +23,7 @@ import {NotSocketService, SocketService} from "./services/socket/socket.service"
 import { CrudListPaginationFactory } from "./factories/list-pagination/list-pagination.factory";
 import { CrudComponentsModule } from "./components/components.module";
 import {PageService} from "./services/page/page.service";
+import {CrudListGroupService} from "./services/list-group/list-group.service";
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import {PageService} from "./services/page/page.service";
   exports: [CrudComponentsModule],
   providers: [
     CrudService,
+    CrudListGroupService,
     PageService,
     CrudEffects,
     CrudFacade,

@@ -20,6 +20,7 @@ import {CrudComponentsModule} from "./components/components.module";
 import {PageService} from "./services/page/page.service";
 import {ListStandardComponent} from "./pages/list/standard/standard.component";
 import {ItemStandardComponent} from "./pages/item/standard/standard.component";
+import {CrudListGroupService} from "./services/list-group/list-group.service";
 
 const PAGES = [
     ItemComponent,
@@ -54,6 +55,7 @@ const PAGES = [
     ],
     providers: [
         CrudService,
+        CrudListGroupService,
         PageService,
         CrudEffects,
         CrudFacade,
