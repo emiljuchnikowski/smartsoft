@@ -1,10 +1,9 @@
 import {IEntity} from "@smartsoft001/domain-core";
-import {CrudFacade} from "@smartsoft001/crud-shell-angular";
 import {Injectable} from "@angular/core";
 import { debounce } from "lodash-decorators";
-import * as _ from "lodash";
 
 import {ICrudListGroup} from "../../models/interfaces";
+import { CrudFacade } from "../../+state/crud.facade";
 
 @Injectable()
 export class CrudListGroupService<T extends IEntity<string>> {
