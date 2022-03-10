@@ -58,7 +58,5 @@ export class CrudListGroupService<T extends IEntity<string>> {
             ...this.facade.filter,
             query: newQuery,
         })
-
-        console.log(list, newQuery);
     }
 }
