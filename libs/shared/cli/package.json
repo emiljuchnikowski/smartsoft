@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/cli",
-  "version": "1.0.484",
+  "version": "1.0.485",
   "bin": {
     "smart": "smart.js"
   },
