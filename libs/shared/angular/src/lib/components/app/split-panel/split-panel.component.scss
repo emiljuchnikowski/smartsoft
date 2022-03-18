@@ -72,6 +72,21 @@ ion-menu {
             font-size: 1.6rem;
             --ion-text-color: var(--ion-color-primary);
         }
+        span {
+            width: 100%;
+            word-break: normal;
+        }
+        ion-label.label {
+            max-height: 2.8rem;
+            white-space: normal;
+            overflow: hidden;
+            text-align: left;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            margin-left: .6rem;
+        }
         ion-label {
             margin-left: 1.6rem;
             --padding: var(--smart-button-padding-left)/2 var(--smart-button-padding-top)/2 var(--smart-button-padding-right)/2 var(--smart-button-padding-bottom)/2;
