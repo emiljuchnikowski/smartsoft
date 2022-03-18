@@ -52,9 +52,12 @@
 
         <ion-footer>
             <ion-list *ngIf="logged$ | async">
-                <ion-item-divider>
+                <ion-item-divider title="{{username$ | async}}">
                     <ion-icon name="person" slot="start"></ion-icon>
-                    {{ "APP.logged" | translate }}:&nbsp;<b>{{ username$ | async }}</b>
+                    <ion-label class="label">
+                        {{ "APP.logged" | translate }}{{': '}}
+                        <strong>{{username$ | async}}</strong>
+                    </ion-label>
                 </ion-item-divider>
                 <ion-item button (click)="logout()">
                     <ion-icon name="log-out" slot="start"></ion-icon>
