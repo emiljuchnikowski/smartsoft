@@ -9,8 +9,8 @@
                 <ng-container *ngFor="let key of keys; let index = index">
                     <ng-container *ngIf="item.data | smartListCell : key : cellPipe : type; let cell">
                         <ng-container *ngIf="cell.value != item.image">
-                            <h3 [attr.smart-item-key]="key" *ngIf='index < 2' [innerHTML]="cell.value"></h3>
-                            <p [attr.smart-item-key]="key" *ngIf='index >= 2' [innerHTML]="cell.value"></p>
+                            <h3 [attr.smart-item-key]="key" *ngIf='index < 2' [innerHTML]="cell.type === 'enum' ? (cell.value | translate) : cell.value"></h3>
+                            <p [attr.smart-item-key]="key" *ngIf='index >= 2' [innerHTML]="cell.type === 'enum' ? (cell.value | translate) : cell.value"></p>
                         </ng-container>
                     </ng-container>
                 </ng-container>
