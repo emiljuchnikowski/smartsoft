@@ -15,8 +15,8 @@
                         <ng-container [ngSwitch]="cell.type">
                             <img [attr.smart-item-key]="key" *ngSwitchCase="FieldType.image" height="100" [lazyLoad]="cell.value | smartFileUrl">                           
                                 <ng-container *ngSwitchDefault>
-                                    <h2 [attr.smart-item-key]="key" *ngIf='first' [innerHTML]="cell.type === 'enum' ? (cell.value | translate) : cell.value"></h2>
-                                    <p  [attr.smart-item-key]="key" *ngIf='!first' [innerHTML]="cell.type === 'enum' ? (cell.value | translate) : cell.value"></p>
+                                    <h2 [attr.smart-item-key]="key" *ngIf='first' [innerHTML]="cell.value"></h2>
+                                    <p  [attr.smart-item-key]="key" *ngIf='!first' [innerHTML]="cell.value"></p>
                                 </ng-container>                           
                         </ng-container>
                     </ng-container>

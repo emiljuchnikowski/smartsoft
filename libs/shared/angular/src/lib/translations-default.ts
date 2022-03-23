@@ -17,8 +17,10 @@ export function setDefaultTranslationsAndLang(service: TranslateService) {
 }
 
 export interface ITranslateData {
-    details: string,
+    details: string
     admin: string,
+    client: string,
+    guest: string,
     add: string,
     change: string,
     confirm: string,
@@ -139,7 +141,9 @@ export interface ITranslateData {
 
 export const TRANSLATE_DATA_ENG: ITranslateData = {
     details: 'details',
-    admin: 'admin',
+    admin: 'administrator',
+    client: 'client',
+    guest: 'guest',
     add: 'add',
     change: 'change',
     confirm: 'confirm',
@@ -261,6 +265,8 @@ export const TRANSLATE_DATA_ENG: ITranslateData = {
 export const TRANSLATE_DATA_PL: ITranslateData = {
     details: 'szczegóły',
     admin: 'administrator',
+    client: 'klient',
+    guest: 'gość',
     add: 'dodaj',
     change: 'zmień',
     confirm: 'potwierdź',

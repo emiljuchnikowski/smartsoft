@@ -12,6 +12,12 @@ export enum CourseSectionItemType {
     test = "test"
 }
 
+export enum PermissionType {
+    admin = "admin",
+    client = "client",
+    guest = "guest"
+}
+
 export class CoursesSectionsItemByTypeSpecification implements ISpecification {
     readonly criteria: Partial<CourseSectionItem>;
 
@@ -248,52 +254,68 @@ export class Todo implements IEntity<string> {
     // })
     // img: string;
 
-    @Field({
-        create: modifyMetdata,
-        update: {
-            ...modifyMetdata,
-            multi: true
-        },
-        details: true,
-        list: {
-            order: 2,
-            filter: true
-        },
-        step: steps[0]
-    })
-    test: File;
+    // @Field({
+    //     create: modifyMetdata,
+    //     update: {
+    //         ...modifyMetdata,
+    //         multi: true
+    //     },
+    //     details: true,
+    //     list: {
+    //         order: 2,
+    //         filter: true
+    //     },
+    //     step: steps[0]
+    // })
+    // test: File;
 
     @Field({
-        create: modifyMetdata,
+        create: {
+            ...modifyMetdata,
+            required: false
+        },
         update: {
             ...modifyMetdata,
-            multi: true
+            required: false
         },
-        type: FieldType.phoneNumberPl,
+        list: true,
         details: true,
-        list: {
-            order: 2,
-            filter: true
-        },
-        step: steps[0]
+        type: FieldType.enum,
+        possibilities: PermissionType
     })
-    phoneNumberPl: string;
+    permissions: Array<PermissionType>;
 
-    @Field({
-        create: modifyMetdata,
-        update: {
-            ...modifyMetdata,
-            multi: true
-        },
-        type: FieldType.longText,
-        details: true,
-        list: {
-            order: 2,
-            filter: true
-        },
-        step: steps[1]
-    })
-    body: string;
+    // @Field({
+    //     create: modifyMetdata,
+    //     update: {
+    //         ...modifyMetdata,
+    //         multi: true
+    //     },
+    //     type: FieldType.phoneNumberPl,
+    //     details: true,
+    //     list: {
+    //         order: 2,
+    //         filter: true
+    //     },
+    //     step: steps[0]
+    // })
+    // phoneNumberPl: string;
+
+    // @Field({
+    //     create: modifyMetdata,
+    //     update: {
+    //         ...modifyMetdata,
+    //         multi: true
+    //     },
+    //     type: FieldType.longText,
+    //     details: true,
+    //     list: {
+    //         order: 2,
+    //         filter: true
+    //     },
+    //     step: steps[1]
+    // })
+    // body: string;
 
     // @Field({
     //     create: modifyMetdata,
@@ -306,24 +328,24 @@ export class Todo implements IEntity<string> {
     // })
     // select: string;
 
-    @Field({
-        details: true,
-        create: true,
-        update: true,
-        list: {
-          dynamic: {
-              headerKey: 'info1',
-              rowKey: 'info2'
-          }
-        },
-        type: FieldType.array,
-        classType: TodoInfo,
-        possibilities: {
-            static: true
-        },
-        step: steps[2]
-    })
-    infos: Array<TodoInfo>;
+    // @Field({
+    //     details: true,
+    //     create: true,
+    //     update: true,
+    //     list: {
+    //       dynamic: {
+    //           headerKey: 'info1',
+    //           rowKey: 'info2'
+    //       }
+    //     },
+    //     type: FieldType.array,
+    //     classType: TodoInfo,
+    //     possibilities: {
+    //         static: true
+    //     },
+    //     step: steps[2]
+    // })
+    // infos: Array<TodoInfo>;
 
     // @Field({
     //     create: true,
@@ -345,35 +367,35 @@ export class Todo implements IEntity<string> {
     // })
     // password: string;
 
-    @Field({
-        create: modifyMetdata,
-        update: modifyMetdata,
-        details: true,
-        list: { order: 2 },
-        step: steps[0],
-        type: FieldType.check,
-        possibilities: [
-            {
-                id: { id: 1, name: "test" }, text: 'Test 1'
-            },
-            {
-                id: { id: 2, name: "test" }, text: 'Test 212323232225fdgfdg'
-            },
-            {
-                id: { id: 3, name: "test" }, text: 'Test 3fdg fdgdfgdfgfdgdf'
-            },
-            {
-                id: { id: 4, name: "test" }, text: 'Test 4fdgfdgfdgdfgdfgdffdg'
-            },
-            {
-                id: { id: 5, name: "test" }, text: 'Test 5'
-            },
-            {
-                id: { id: 6, name: "test" }, text: 'Test 6'
-            }
-        ]
-    })
-    tags: Array<string>;
+    // @Field({
+    //     create: modifyMetdata,
+    //     update: modifyMetdata,
+    //     details: true,
+    //     list: { order: 2 },
+    //     step: steps[0],
+    //     type: FieldType.check,
+    //     possibilities: [
+    //         {
+    //             id: { id: 1, name: "test" }, text: 'Test 1'
+    //         },
+    //         {
+    //             id: { id: 2, name: "test" }, text: 'Test 212323232225fdgfdg'
+    //         },
+    //         {
+    //             id: { id: 3, name: "test" }, text: 'Test 3fdg fdgdfgdfgfdgdf'
+    //         },
+    //         {
+    //             id: { id: 4, name: "test" }, text: 'Test 4fdgfdgfdgdfgdfgdffdg'
+    //         },
+    //         {
+    //             id: { id: 5, name: "test" }, text: 'Test 5'
+    //         },
+    //         {
+    //             id: { id: 6, name: "test" }, text: 'Test 6'
+    //         }
+    //     ]
+    // })
+    // tags: Array<string>;
 
     // @Field({
     //     create: modifyMetdata,
@@ -398,7 +420,7 @@ export class Todo implements IEntity<string> {
     //     type: FieldType.email
     // })
     // email: string;
-    //
+
     // @Field({
     //     create: modifyMetdata,
     //     update: {
@@ -410,7 +432,7 @@ export class Todo implements IEntity<string> {
     //     type: FieldType.phoneNumber
     // })
     // numberPersonal: string;
-    //
+
     // @Field({
     //     create: modifyMetdata,
     //     update: {
@@ -476,9 +498,9 @@ export class Todo implements IEntity<string> {
     // range: IDateRange;
 
     constructor() {
-        this.infos = [
-            new TodoInfo(),
-            new TodoInfo()
-        ]
+        // this.infos = [
+        //     new TodoInfo(),
+        //     new TodoInfo()
+        // ]
     }
 }
