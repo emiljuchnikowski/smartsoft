@@ -25,15 +25,21 @@ export class ListCellPipe<T> implements PipeTransform {
     const fieldType = this.getFieldType(type, key);
 
     if (!pipe) result = this.getValue(obj, key);
-    else
+    else {
       result = pipe.transform(obj, key, (val) => {
         return this.translateService.instant(val);
       });
-
+    }
     if (!result) return result;
 
     if (typeof result === "string") {
       result = this.translateService.instant(result);
+    }
+
+    if (fieldType === 'enum') {
+      result = result.map(item => {
+        return this.translateService.instant(item);
+      });
     }
 
     return {
