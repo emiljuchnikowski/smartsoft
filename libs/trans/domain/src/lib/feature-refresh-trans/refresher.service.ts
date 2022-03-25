@@ -46,7 +46,12 @@ export class RefresherService<T> extends TransBaseService<T> {
 
       this.addHistory(trans, internalRes);
 
-      await this.repository.update(trans, null);
+      await this.repository.updatePartial({
+        id: trans.id,
+        modifyDate: trans.modifyDate,
+        status: trans.status,
+        history: trans.history
+      }, null);
     } catch (err) {
       console.error(err);
 
