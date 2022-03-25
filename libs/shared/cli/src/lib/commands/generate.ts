@@ -7,11 +7,11 @@ export async function generate(args) {
         case 'library':
         case 'lib':
             log('Generate library')
-            runCommand(`ng g lib ${ res } ${ args.type ? '--type' + args.type : '' }`);
+            runCommand(`ng g @smartsoft001/schematics:lib ${ res } ${ args.type ? '--type' + args.type : '' }`);
             break;
         case 'domain':
             log('Generate domain')
-            runCommand(`ng g domain ${ res }`);
+            runCommand(`ng g @smartsoft001/schematics:domain ${ res }`);
             break;
         default:
             console.error('Invalid type', args);
