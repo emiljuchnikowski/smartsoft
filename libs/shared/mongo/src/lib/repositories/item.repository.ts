@@ -11,7 +11,7 @@ import {
 } from "@smartsoft001/domain-core";
 import { IUser } from "@smartsoft001/users";
 import { ItemChangedData } from "@smartsoft001/crud-shell-dtos";
-import {GuidService, ObjectService} from "@smartsoft001/utils";
+import { GuidService, ObjectService } from "@smartsoft001/utils";
 import { getModelFieldsWithOptions } from "@smartsoft001/models";
 
 import { MongoConfig } from "../mongo.config";
@@ -559,21 +559,23 @@ export class MongoItemRepository<
 
           const db = client.db(this.config.database);
 
-            if (repoOptions && repoOptions.transaction) {
-                db.collection(this.config.collection).findOne(
-                    { _id: id },
-                    { session: (repoOptions.transaction as IMongoTransaction).session },
-                    (errDelete, item) => {
-                        if (errDelete) {
-                            rej(errDelete);
-                            return;
-                        }
+          if (repoOptions && repoOptions.transaction) {
+            db.collection(this.config.collection).findOne(
+              { _id: id },
+              {
+                session: (repoOptions.transaction as IMongoTransaction).session,
+              },
+              (errDelete, item) => {
+                if (errDelete) {
+                  rej(errDelete);
+                  return;
+                }
 
-                        client.close();
-                        res(this.getModelToResult(item));
-                    }
-                );
-            }
+                client.close();
+                res(this.getModelToResult(item));
+              }
+            );
+          }
 
           db.collection(this.config.collection).findOne(
             { _id: id },
@@ -637,6 +639,36 @@ export class MongoItemRepository<
     options: any = {}
   ): Promise<{ data: T[]; totalCount: number }> {
     return this.getByCriteria(spec.criteria, options);
+  }
+
+  countByCriteria(criteria: any): Promise<number> {
+    return new Promise<number>((res, rej) => {
+      MongoClient.connect(
+        this.getUrl(),
+        { useUnifiedTopology: this.useUnifiedTopology },
+        async (err, client) => {
+          if (err) {
+            rej(err);
+            return;
+          }
+
+          this.convertIdInCriteria(criteria);
+
+          this.generateSearch(criteria);
+
+          const db = client.db(this.config.database);
+          const collection = db.collection(this.config.collection);
+
+          const result = await this.getCount(criteria, collection)
+            await client.close();
+          res(result);
+        }
+      );
+    });
+  }
+
+  countBySpecification(spec: ISpecification): Promise<number> {
+    return this.countByCriteria(spec.criteria);
   }
 
   changesByCriteria(criteria: { id?: string }): Observable<ItemChangedData> {
@@ -906,6 +938,6 @@ export class MongoItemRepository<
   }
 
   protected convertRegex(val: string): string {
-      return  val.toString().replace(/\*/g, '[*]');
+    return val.toString().replace(/\*/g, "[*]");
   }
 }

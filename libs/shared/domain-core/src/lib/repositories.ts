@@ -57,6 +57,10 @@ export abstract class IItemRepository<T extends IEntity<string>> {
     options?: any
   ): Promise<{ data: T[]; totalCount: number }>;
 
+  abstract countByCriteria(criteria: any): Promise<number>;
+
+  abstract countBySpecification(spec: ISpecification): Promise<number>;
+
   abstract clear(user: IUser | IItemRepositoryOptions): Promise<void>;
 
   abstract changesByCriteria(criteria: { id?: string }): Observable<any>;
