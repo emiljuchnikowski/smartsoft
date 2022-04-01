@@ -26,8 +26,19 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
             bottom?: any
         }
     };
-    edit?: boolean;
-    add?: boolean;
+    edit?: boolean | {
+        cellPipe?: ICellPipe<T>;
+        components?: {
+            top?: any,
+            bottom?: any
+        }
+    };
+    add?: boolean | {
+        components?: {
+            top?: any,
+            bottom?: any
+        }
+    };
     remove?: boolean;
     search?: boolean;
     export?: boolean;

@@ -247,11 +247,11 @@ export class ListComponent<T extends IEntity<string>>
           }
         : null,
       item:
-        this.config.edit || this.config.details
+        !!this.config.edit || this.config.details
           ? {
               options: {
                 routingPrefix: "/" + this.router.routerState.snapshot.url + "/",
-                edit: this.config.edit,
+                edit: !!this.config.edit,
               },
             }
           : null,

@@ -2,6 +2,6 @@
 .github
 .storybook
 coverage
-dist
+
 tools
 node_modules

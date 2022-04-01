@@ -5,7 +5,7 @@ import {
   OnInit,
   QueryList, TemplateRef,
   ViewChild,
-  ViewChildren
+  ViewChildren, ViewContainerRef
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
@@ -36,7 +36,7 @@ import { PageService } from "../../services/page/page.service";
   selector: "smart-crud-item-page",
   template: `
     <smart-page [options]="pageOptions">
-      <div #topTpl></div>
+      <div #topTpl class="top-content"></div>
       <smart-crud-item-standard-page *ngIf="template === 'default'"
                                      [detailsOptions]="detailsOptions"
                                      [mode]="mode"
@@ -51,6 +51,7 @@ import { PageService } from "../../services/page/page.service";
         <ng-content></ng-content>
       </ng-template>
       <div class="dynamic-content"></div>
+      <div #bottomTpl class="bottom-content"></div>
     </smart-page>
   `
 })
@@ -88,6 +89,12 @@ export class ItemComponent<T extends IEntity<string>>
 
   @ViewChild("contentTpl", { read: TemplateRef, static: false })
   contentTpl: TemplateRef<any>;
+
+  @ViewChild("topTpl", { read: ViewContainerRef, static: true })
+  topTpl: ViewContainerRef;
+
+  @ViewChild("bottomTpl", { read: ViewContainerRef, static: true })
+  bottomTpl: ViewContainerRef;
 
   @ViewChildren(DynamicContentDirective, { read: DynamicContentDirective })
   dynamicContents = new QueryList<DynamicContentDirective>();
@@ -134,8 +141,13 @@ export class ItemComponent<T extends IEntity<string>>
 
     if (this.router.routerState.snapshot.url.endsWith("/add")) {
       this.mode = "create";
+      await this.generateComponents('add');
     } else {
       this.mode = this.config.details ? "details" : "update";
+
+      if (this.mode === 'update') {
+        await this.generateComponents('edit');
+      }
 
       this.activeRoute.params
         .pipe(this.takeUntilDestroy)
@@ -149,6 +161,7 @@ export class ItemComponent<T extends IEntity<string>>
           .subscribe(({ edit }) => {
             if (edit) {
               this.mode = "update";
+              this.generateComponents('edit');
             }
           });
     }
@@ -232,6 +245,41 @@ export class ItemComponent<T extends IEntity<string>>
     this.refreshDynamicInstance();
   }
 
+  private async generateComponents(mode: 'add' | 'edit') {
+    const compiledComponents = await this.dynamicComponentLoader.getComponentsWithFactories(
+        {
+          components: [
+            ...(this.config[mode] &&
+            this.config[mode]["components"] &&
+            this.config[mode]["components"].top
+                ? [this.config[mode]["components"].top]
+                : []),
+            ...(this.config[mode] &&
+            this.config[mode]["components"] &&
+            this.config[mode]["components"].bottom
+                ? [this.config[mode]["components"].bottom]
+                : []),
+          ],
+        }
+    );
+
+    const topComponentFactory = compiledComponents.find(
+        (cc) => cc.component === this.config[mode]["components"]?.top
+    )?.factory;
+
+    const bottomComponentFactory = compiledComponents.find(
+        (cc) => cc.component === this.config[mode]["components"]?.bottom
+    )?.factory;
+
+    if (!this.topTpl.get(0) && topComponentFactory) {
+      this.topTpl.createComponent(topComponentFactory);
+    }
+
+    if (!this.bottomTpl.get(0) && bottomComponentFactory) {
+      this.bottomTpl.createComponent(bottomComponentFactory);
+    }
+  }
+
   onPartialChange(val: Partial<T>) {
     this.formPartialValue = val;
   }
@@ -279,6 +327,8 @@ export class ItemComponent<T extends IEntity<string>>
                   handler: () => {
                     this.mode = "details";
                     this.initPageOptions();
+                    this.topTpl.clear();
+                    this.bottomTpl.clear();
                   },
                   disabled$: new BehaviorSubject(false),
                 },
@@ -312,6 +362,7 @@ export class ItemComponent<T extends IEntity<string>>
                 text: "edit",
                 handler: () => {
                   this.mode = "update";
+                  this.generateComponents('edit');
                   this.initPageOptions();
                 },
                 disabled$: new BehaviorSubject(false),

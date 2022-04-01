@@ -1,20 +1,4 @@
-
-###############################################################################
-# Step 1 : Builder image
-#
-FROM node:12-alpine AS builder
-
-# Define working directory and copy source
-WORKDIR /home/node/app
-COPY . .
-# Install dependencies and build whatever you have to build
-# (babel, grunt, webpack, etc.)
-RUN npm install && npm run build api-crud --prod
-
-###############################################################################
-# Step 2 : Run image
-#
-FROM node:12-alpine
+FROM node:14-alpine
 ENV NODE_ENV=production
 WORKDIR /home/node/app
 
@@ -23,7 +7,7 @@ COPY ./package* ./
 RUN npm install && \
     npm cache clean --force
 # Copy builded source from the upper builder stage
-COPY --from=builder /home/node/app/dist/apps/api/crud .
+COPY dist/apps/api/crud .
 
 # Expose ports (for orchestrators and dynamic reverse proxies)
 EXPOSE 3334
