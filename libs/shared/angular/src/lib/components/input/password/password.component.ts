@@ -33,6 +33,17 @@ export class InputPasswordComponent<T> extends InputBaseComponent<T> implements 
 
   onChangePasswordStrength(valid: boolean) {
     this.valid = valid;
-    this.control.updateValueAndValidity();
+    if (this.valid) {
+      if (this.control.errors?.passwordStrength) {
+        this.control.setErrors(
+            Object.keys(this.control.errors).length === 1 ?
+                null : { ...this.control.errors, passwordStrength: null }
+        )
+      }
+    } else {
+      const errors = this.control.errors ?
+          { ...this.control.errors, passwordStrength: true } : { passwordStrength: true };
+      this.control.setErrors(errors);
+    }
   }
 }
