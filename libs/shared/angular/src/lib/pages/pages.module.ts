@@ -22,10 +22,7 @@ const COMPONENTS = [
     ],
     exports: [
         ...COMPONENTS
-    ],
-    entryComponents: [
-        ...COMPONENTS
-    ],
+    ]
 })
 export class SharedPagesModule {
 

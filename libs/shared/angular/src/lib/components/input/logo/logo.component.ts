@@ -28,7 +28,7 @@ export class InputLogoComponent<T> extends InputBaseComponent<T> implements OnIn
       reader.onload = ((theFile) => {
         return (e) => {
           const binaryData = e.target.result;
-          const base64String = window.btoa(binaryData);
+          const base64String = window.btoa(binaryData as any);
 
           this.control.markAsDirty();
           this.control.markAsTouched();

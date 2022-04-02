@@ -58,9 +58,6 @@ const COMPONENTS = [
         CrudPipesModule,
         ...COMPONENTS
     ],
-    entryComponents: [
-        ...COMPONENTS
-    ],
     providers: [
         CrudService,
         CrudEffects,

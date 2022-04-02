@@ -1,6 +1,6 @@
 {
   "cli": {
-    "analytics": "33c42003-7cf2-4b98-a523-fccad55d45b2"
+    "analytics": "ba427e50-d7c3-42ba-80eb-8c99371ea66a"
   },
   "version": 1,
   "projects": {
@@ -12,7 +12,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "options": {
             "outputPath": "dist/apps/api/auth",
             "main": "apps/api/auth/src/main.ts",
@@ -42,7 +42,7 @@
           ]
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "options": {
             "buildTarget": "api-auth:build"
           }
@@ -70,7 +70,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "options": {
             "outputPath": "dist/apps/api/crud",
             "main": "apps/api/crud/src/main.ts",
@@ -98,7 +98,7 @@
           ]
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "options": {
             "buildTarget": "api-crud:build"
           }
@@ -126,7 +126,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "options": {
             "outputPath": "dist/apps/api/files",
             "main": "apps/api/files/src/main.ts",
@@ -154,7 +154,7 @@
           ]
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "options": {
             "buildTarget": "api-files:build"
           }
@@ -182,7 +182,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "options": {
             "outputPath": "dist/apps/api/stream",
             "main": "apps/api/stream/src/main.ts",
@@ -210,7 +210,7 @@
           ]
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "options": {
             "buildTarget": "api-stream:build"
           }
@@ -238,7 +238,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "options": {
             "outputPath": "dist/apps/api/trans",
             "main": "apps/api/trans/src/main.ts",
@@ -266,7 +266,7 @@
           ]
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "options": {
             "buildTarget": "api-trans:build"
           }
@@ -310,7 +310,7 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "outputs": [
             "{options.outputPath}"
           ],
@@ -391,7 +391,7 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "outputs": [
             "{options.outputPath}"
           ],
@@ -432,7 +432,7 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "outputs": [
             "{options.outputPath}"
           ],
@@ -473,7 +473,7 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "outputs": [
             "{options.outputPath}"
           ],
@@ -524,7 +524,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/crud/domain",
             "tsConfig": "libs/crud/domain/tsconfig.lib.json",
@@ -639,7 +639,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/crud/shell/app-services",
             "tsConfig": "libs/crud/shell/app-services/tsconfig.lib.json",
@@ -690,7 +690,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/crud/shell/dtos",
             "tsConfig": "libs/crud/shell/dtos/tsconfig.lib.json",
@@ -741,7 +741,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/crud/shell/nestjs",
             "tsConfig": "libs/crud/shell/nestjs/tsconfig.lib.json",
@@ -792,7 +792,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/shared/angular/.storybook"
-            }
+            },
+            "projectBuildConfig": "shared-angular:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -807,7 +808,8 @@
             "outputPath": "dist/storybook/shared-angular",
             "config": {
               "configFolder": "libs/shared/angular/.storybook"
-            }
+            },
+            "projectBuildConfig": "shared-angular:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -877,7 +879,7 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "outputs": [
             "{options.outputPath}"
           ],
@@ -919,7 +921,7 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "outputs": [
             "{options.outputPath}"
           ],
@@ -995,7 +997,7 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "outputs": [
             "{options.outputPath}"
           ],
@@ -1058,7 +1060,7 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "outputs": [
             "{options.outputPath}"
           ],
@@ -1141,7 +1143,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/shared/mongo",
             "tsConfig": "libs/shared/mongo/tsconfig.lib.json",
@@ -1192,7 +1194,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/shared/nestjs",
             "tsConfig": "libs/shared/nestjs/tsconfig.lib.json",
@@ -1237,7 +1239,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/shared/paypal",
             "tsConfig": "libs/shared/paypal/tsconfig.lib.json",
@@ -1282,7 +1284,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/shared/payu",
             "tsConfig": "libs/shared/payu/tsconfig.lib.json",
@@ -1327,7 +1329,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/shared/revolut",
             "tsConfig": "libs/shared/revolut/tsconfig.lib.json",
@@ -1371,7 +1373,7 @@
           }
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "outputs": [
             "{options.outputPath}"
           ],
@@ -1498,7 +1500,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/shared/utils",
             "tsConfig": "libs/shared/utils/tsconfig.lib.json",
@@ -1549,7 +1551,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/stream/domain",
             "tsConfig": "libs/stream/domain/tsconfig.lib.json",
@@ -1592,7 +1594,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/stream/shell/angular/.storybook"
-            }
+            },
+            "projectBuildConfig": "stream-shell-angular:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1607,7 +1610,8 @@
             "outputPath": "dist/storybook/stream-shell-angular",
             "config": {
               "configFolder": "libs/stream/shell/angular/.storybook"
-            }
+            },
+            "projectBuildConfig": "stream-shell-angular:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1679,7 +1683,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/stream/shell/app-services",
             "tsConfig": "libs/stream/shell/app-services/tsconfig.lib.json",
@@ -1800,7 +1804,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/trans/domain",
             "tsConfig": "libs/trans/domain/tsconfig.lib.json",
@@ -1867,7 +1871,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/trans/shell/app-services",
             "tsConfig": "libs/trans/shell/app-services/tsconfig.lib.json",
@@ -1912,7 +1916,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/trans/shell/dtos",
             "tsConfig": "libs/trans/shell/dtos/tsconfig.lib.json",
@@ -1957,7 +1961,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/js:tsc",
           "options": {
             "outputPath": "dist/libs/trans/shell/nestjs",
             "tsConfig": "libs/trans/shell/nestjs/tsconfig.lib.json",
