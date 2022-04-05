@@ -6,5 +6,7 @@
         </ion-text>
     </ion-label>
     <br/>
-    <smart-form [options]="childOptions"></smart-form>
+    <ng-template [ngComponentOutlet]="formComponent"
+                 [ndcDynamicInputs]="{ options: childOptions }"
+    ></ng-template>
 </ng-container>

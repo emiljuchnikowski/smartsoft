@@ -6,9 +6,9 @@ import {
 } from "@angular/core";
 import { Subscription } from "rxjs";
 
-import { IDetailsOptions } from "../../models";
+import { IDetailsOptions } from "../../models/interfaces";
 import { IEntity } from "@smartsoft001/domain-core";
-import { CreateDynamicComponent } from "../base";
+import { CreateDynamicComponent } from "../base/base.component";
 import { DetailsBaseComponent } from "./base/base.component";
 import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
 import {DetailsService} from "../../services/details/details.service";

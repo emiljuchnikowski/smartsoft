@@ -3,7 +3,7 @@ import {AuthGuard} from "@nestjs/passport";
 
 @Injectable()
 export class AuthJwtGuard extends AuthGuard('jwt') {
-    private readonly logger = new Logger(AuthJwtGuard.name, true);
+    private readonly logger = new Logger(AuthJwtGuard.name, { timestamp: true });
 
     handleRequest(err: any, user: any, info: any): any {
         if (err || !user) {

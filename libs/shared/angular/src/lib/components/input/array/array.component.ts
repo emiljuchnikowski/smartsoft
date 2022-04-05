@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {FormArray} from "@angular/forms";
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 
@@ -8,6 +8,7 @@ import {InputBaseComponent} from "../base/base.component";
 import {IButtonOptions, IFormOptions} from "../../../models";
 import {FormFactory} from "../../../factories/form/form.factory";
 import {FieldType, getModelFieldOptions, getModelOptions, IFieldOptions, IModelOptions} from "@smartsoft001/models";
+import {FORM_COMPONENT_TOKEN} from "../../../shared.inectors";
 
 @Component({
     selector: 'smart-input-array',
@@ -49,7 +50,9 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
 
     constructor(
         cd: ChangeDetectorRef,
-        private factory: FormFactory) {
+        private factory: FormFactory,
+        @Inject(FORM_COMPONENT_TOKEN) public formComponent: any
+    ) {
         super(cd);
     }
 

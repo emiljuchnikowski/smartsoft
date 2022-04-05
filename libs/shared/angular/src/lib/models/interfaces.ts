@@ -7,7 +7,7 @@ import { IEntity } from "@smartsoft001/domain-core";
 
 import { IAppProvider } from "../providers/interfaces";
 import {IStyle} from "./style";
-import {InputBaseComponent} from "../components";
+import {InputBaseComponent} from "../components/input/base/base.component";
 
 export interface IAppOptions {
   provider: IAppProvider;
@@ -216,4 +216,8 @@ export interface IDynamicComponentData {
   key: DynamicComponentType;
   component: Type<any>;
   data?: any;
+}
+
+export interface IListInternalOptions<T> extends IListOptions<T> {
+  fields?: Array<{ key: string, options: IFieldOptions }>;
 }

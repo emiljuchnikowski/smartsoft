@@ -10,9 +10,10 @@ import {
 import * as _ from 'lodash';
 
 import {getModelFieldsWithOptions, IFieldListMetadata, IFieldOptions} from "@smartsoft001/models";
-import {IListOptions, ListMode} from "../../models/interfaces";
+
+import {IListInternalOptions, IListOptions, ListMode} from "../../models/interfaces";
 import {HardwareService} from "../../services/hardware/hardware.service";
-import {CreateDynamicComponent} from "../base";
+import {CreateDynamicComponent} from "../base/base.component";
 import {ListBaseComponent} from "./base/base.component";
 import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
 
@@ -78,8 +79,4 @@ export class ListComponent<T> extends CreateDynamicComponent<ListBaseComponent<a
       this.mode = this.hardwareService.isMobileWeb ? ListMode.mobile : ListMode.desktop
     }
   }
-}
-
-export interface IListInternalOptions<T> extends IListOptions<T> {
-  fields?: Array<{ key: string, options: IFieldOptions }>;
 }

@@ -10,8 +10,7 @@ import {FieldType, getModelFieldsWithOptions} from "@smartsoft001/models";
 import {ListBaseComponent} from "../base/base.component";
 import { AlertService } from "../../../services/alert/alert.service";
 import {AuthService} from "../../../services/auth/auth.service";
-import {IListComponentFactories} from "../../../models";
-import {IListInternalOptions} from "../list.component";
+import {IListComponentFactories, IListInternalOptions} from "../../../models";
 
 @Component({
     selector: "smart-list-masonry-grid",

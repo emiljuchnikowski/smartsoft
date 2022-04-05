@@ -22,7 +22,7 @@ import {ListStandardComponent} from "./pages/list/standard/standard.component";
 import {ItemStandardComponent} from "./pages/item/standard/standard.component";
 import {CrudListGroupService} from "./services/list-group/list-group.service";
 
-const PAGES = [
+export const PAGES = [
     ItemComponent,
     ListComponent,
     ListStandardComponent,

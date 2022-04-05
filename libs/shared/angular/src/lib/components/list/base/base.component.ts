@@ -17,9 +17,8 @@ import {
   IDetailsOptions,
   IListProvider,
   IButtonOptions,
-  ICellPipe, DynamicComponentType, PaginationMode,
+  ICellPipe, DynamicComponentType, PaginationMode, IListInternalOptions,
 } from "../../../models/interfaces";
-import { IListInternalOptions } from "../list.component";
 import { AlertService } from "../../../services/alert/alert.service";
 import { AuthService } from "../../../services/auth/auth.service";
 

@@ -7,8 +7,7 @@ import { IEntity } from "@smartsoft001/domain-core";
 import { ListBaseComponent } from "../base/base.component";
 import { AlertService } from "../../../services/alert/alert.service";
 import { AuthService } from "../../../services/auth/auth.service";
-import {IListInternalOptions} from "../list.component";
-import {IListComponentFactories} from "../../../models";
+import {IListComponentFactories, IListInternalOptions} from "../../../models";
 
 @Component({
   selector: "smart-list-mobile",

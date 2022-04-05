@@ -27,7 +27,9 @@
                             </smart-accordion-header>
                             <smart-accordion-body>
                                 <ion-card-content>
-                                    <smart-form [options]="options"></smart-form>
+                                    <ng-template [ngComponentOutlet]="formComponent"
+                                                 [ndcDynamicInputs]="{ options: options }"
+                                    ></ng-template>
                                 </ion-card-content>
                             </smart-accordion-body>
                         </smart-accordion>
@@ -36,7 +38,9 @@
                     <ng-template #staticCardTpl>
                         <ion-card>
                             <ion-card-content>
-                                <smart-form [options]="options"></smart-form>
+                                <ng-template [ngComponentOutlet]="formComponent"
+                                             [ndcDynamicInputs]="{ options: options }"
+                                ></ng-template>
                             </ion-card-content>
                         </ion-card>
                     </ng-template>

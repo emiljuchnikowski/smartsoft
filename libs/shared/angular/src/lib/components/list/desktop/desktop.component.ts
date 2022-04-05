@@ -19,8 +19,7 @@ import { IEntity } from "@smartsoft001/domain-core";
 
 import { ListBaseComponent } from "../base/base.component";
 import { AlertService } from "../../../services/alert/alert.service";
-import { IListComponentFactories } from "../../../models";
-import { IListInternalOptions } from "../list.component";
+import {IListComponentFactories, IListInternalOptions} from "../../../models/interfaces";
 import { AuthService } from "../../../services/auth/auth.service";
 
 @Component({

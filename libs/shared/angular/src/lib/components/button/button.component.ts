@@ -7,7 +7,7 @@ import {
 
 import {IButtonOptions} from "../../models/interfaces";
 import {ButtonBaseComponent} from "./base/base.component";
-import {CreateDynamicComponent} from "../base";
+import {CreateDynamicComponent} from "../base/base.component";
 import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
 
 @Component({

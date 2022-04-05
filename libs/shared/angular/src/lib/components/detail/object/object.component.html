@@ -1,5 +1,7 @@
 <br/>
 
 <ng-container *ngIf="childOptions$ | async; let childOptions">
-    <smart-details [options]="childOptions"></smart-details>
+    <ng-template [ngComponentOutlet]="detailsComponent"
+                 [ndcDynamicInputs]="{ options: childOptions }"
+    ></ng-template>
 </ng-container>

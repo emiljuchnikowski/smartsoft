@@ -18,10 +18,8 @@ import {FormFactory} from "../../factories/form/form.factory";
 import {IModelExportProvider, MODEL_EXPORT_PROVIDER} from "../../providers/model-export.provider";
 import {IModelImportProvider, MODEL_IMPORT_PROVIDER} from "../../providers/model-import.provider";
 import {SmartFormGroup} from "../../services/form/form.group";
-import {DynamicComponentStorageService} from "../../services/dynamic-component-storage/dynamic-component-storage.service";
 import {FormBaseComponent} from "./base/base.component";
-import {CreateDynamicComponent} from "../base";
-import {ButtonBaseComponent} from "../button";
+import {CreateDynamicComponent} from "../base/base.component";
 import {DynamicContentDirective} from "../../directives/dynamic-content/dynamic-content.directive";
 
 @Component({

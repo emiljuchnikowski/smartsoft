@@ -18,6 +18,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MomentDateModule} from "@angular/material-moment-adapter";
 import {CdkTableModule} from '@angular/cdk/table';
+import { DynamicModule } from 'ng-dynamic-component';
 
 import { AccordionBodyComponent } from "./accordion/body/body.component";
 import { AccordionComponent } from "./accordion/accordion.component";
@@ -106,6 +107,7 @@ import {DateEditComponent} from "./date-edit/date-edit.component";
 import {ButtonStandardComponent} from "./button/standard/standard.component";
 import {PagingComponent} from "./paging/paging.component";
 import {DetailPhoneNumberPlComponent} from "./detail/phone-number-pl/phone-number-pl.component";
+import {DETAILS_COMPONENT_TOKEN, FORM_COMPONENT_TOKEN} from "../shared.inectors";
 
 export const APP_COMPONENTS = [AppSplitPanelComponent];
 
@@ -259,12 +261,23 @@ export const IMPORTS = [
   MatDatepickerModule,
   MatNativeDateModule,
   MomentDateModule,
-  CdkTableModule
+  CdkTableModule,
+  DynamicModule
 ];
 
 @NgModule({
     declarations: [...COMPONENTS],
     exports: [...COMPONENTS],
+    providers: [
+      {
+        provide: FORM_COMPONENT_TOKEN,
+        useValue: FormComponent
+      },
+      {
+        provide: DETAILS_COMPONENT_TOKEN,
+        useValue: DetailsComponent
+      }
+    ],
     imports: [
         ...IMPORTS,
     ]
