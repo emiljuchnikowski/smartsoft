@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonDatetime} from "@ionic/angular";
 import {Subscription} from "rxjs";
 
 import {IEntity} from "@smartsoft001/domain-core";
+import { GuidService } from '@smartsoft001/utils';
 
 import {FilterDateComponent} from "../date/date.component";
 
@@ -16,12 +17,9 @@ implements OnInit, OnDestroy {
   private _subscriptions = new Subscription();
 
   advanced = false;
+  id = GuidService.create();
 
   @ViewChild(IonDatetime, { read: IonDatetime, static: false }) dateTimePicker: IonDatetime;
-
-  open(): void {
-    this.dateTimePicker.open();
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

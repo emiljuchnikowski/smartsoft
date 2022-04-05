@@ -8,14 +8,19 @@
                    [(ngModel)]="customValue"
                    [pattern]="'([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))'"
         ></ion-input>
-        <ion-datetime [hidden]="true"
-                      displayFormat="YYYY-MM-DD"
-                      pickerFormat="YYYY-MM-DD"
-                      [(ngModel)]="customValue"></ion-datetime>
     </ion-col>
     <ion-col size="auto">
-        <ion-button (click)="open()" class="squere-button">
+        <ion-button id="open-date-input-{{ id }}" class="squere-button">
             <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+            <ion-popover trigger="open-date-input-{{ id }}" show-backdrop="false">
+                <ng-template>
+                    <ion-datetime displayFormat="YYYY-MM-DD"
+                                  pickerFormat="YYYY-MM-DD"
+                                  [(ngModel)]="customValue"
+                                  presentation="date"
+                    ></ion-datetime>
+                </ng-template>
+            </ion-popover>
         </ion-button>
     </ion-col>
     <ion-col size="auto" *ngIf="allowAdvanced">
@@ -40,10 +45,6 @@
                        [(ngModel)]="customMinValue"
                        [pattern]="'([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))'"
             ></ion-input>
-            <ion-datetime [hidden]="true"
-                          [(ngModel)]="customMinValue"
-                          displayFormat="YYYY-MM-DD"
-                          pickerFormat="YYYY-MM-DD"></ion-datetime>
         </ion-item>
     </ion-col>
     <ion-col size="auto" *ngIf="customMinValue">
@@ -60,10 +61,6 @@
                        [(ngModel)]="customMaxValue"
                        [pattern]="'([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))'"
             ></ion-input>
-            <ion-datetime [hidden]="true"
-                          displayFormat="YYYY-MM-DD"
-                          pickerFormat="YYYY-MM-DD"
-                          [(ngModel)]="customMaxValue"></ion-datetime>
         </ion-item>
     </ion-col>
     <ion-col size="auto" *ngIf="customMaxValue">
