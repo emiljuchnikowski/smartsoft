@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import * as moment from "moment";
+import {GuidService} from "@smartsoft001/utils";
 
 import {IEntity} from "@smartsoft001/domain-core";
 
@@ -11,6 +12,8 @@ import {BaseComponent} from "../base/base.component";
   styleUrls: ['./date.component.scss']
 })
 export class FilterDateComponent<T extends IEntity<string>> extends BaseComponent<T> {
+  id = GuidService.create();
+
   get allowAdvanced(): boolean {
     return this.item?.type === '=';
   }
