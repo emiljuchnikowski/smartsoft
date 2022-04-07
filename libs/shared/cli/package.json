@@ -1,8 +1,8 @@
 {
   "name": "@smartsoft001/cli",
-  "version": "1.0.496",
+  "version": "1.0.499",
   "bin": {
-    "smart": "smart.js"
+    "smart": "bin/smart.js"
   },
   "dependencies": {
     "fs-extra": "^9.0.1",
