@@ -16,7 +16,7 @@ import {NgrxStoreService} from "@smartsoft001/angular";
 @Injectable()
 export class CrudFacade<T extends IEntity<string>> {
   selected: T;
-  multiSelected: T;
+  multiSelected: Array<T>;
   list: Array<T>;
   filter: ICrudFilter;
 
