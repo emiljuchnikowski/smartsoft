@@ -23,7 +23,7 @@
             <ng-container *ngTemplateOutlet="pagination"></ng-container>
           </th>
           <td cdk-cell *matCellDef="let element">
-            <ion-button (click)="removeHandler(element)">
+            <ion-button (click)="removeHandler(element)" *ngIf="!checkRemoveHandler || checkRemoveHandler(element)">
               <ion-icon slot="icon-only" name="trash"></ion-icon>
             </ion-button>
           </td>

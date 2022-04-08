@@ -2,7 +2,9 @@
 
 <ion-list>
     <ion-item-sliding *ngFor="let item of list$ | async">
-        <ion-item-options side="start" (ionSwipe)="removeHandler && removeHandler(item)" *ngIf="removeHandler">
+        <ion-item-options side="start" (ionSwipe)="removeHandler && removeHandler(item)"
+                          *ngIf="removeHandler && (!checkRemoveHandler || checkRemoveHandler(item))"
+        >
             <ion-item-option color="danger" expandable (click)="removeHandler && removeHandler(item)">
                 {{ 'delete' | translate }}
             </ion-item-option>

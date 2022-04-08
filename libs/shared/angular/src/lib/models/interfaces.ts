@@ -208,6 +208,7 @@ export interface IListProvider<T> {
 
 export interface IRemoveProvider<T> {
   invoke: (id: string) => void;
+  check?: (item: T) => boolean;
 }
 
 export type DynamicComponentType =

@@ -40,6 +40,7 @@ import { CrudListPaginationFactory } from "../../factories/list-pagination/list-
 import {PageService} from "../../services/page/page.service";
 import {CrudListPageBaseComponent} from "./base/base.component";
 import {CrudSearchService} from "../../services/search/search.service";
+import { SpecificationService } from "@smartsoft001/utils";
 
 @Component({
   selector: "smart-crud-list-page",
@@ -112,6 +113,8 @@ export class ListComponent<T extends IEntity<string>>
 
   async ngOnInit(): Promise<void> {
     await this.pageService.checkPermissions();
+
+    const options = getModelOptions(this.config.type);
 
     let newFilter = null;
 
@@ -262,6 +265,9 @@ export class ListComponent<T extends IEntity<string>>
         ? {
             provider: {
               invoke: (id) => this.facade.delete(id),
+              check: (item: T) => {
+                return options?.remove?.enabled ? SpecificationService.valid(item, options?.remove?.enabled) : true;
+              }
             },
           }
         : null,

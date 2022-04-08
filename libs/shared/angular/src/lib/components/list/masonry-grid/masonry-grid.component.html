@@ -18,7 +18,9 @@
 
             <ion-row>
                 <ion-col size="auto" *ngIf="removeHandler">
-                    <ion-button (click)="removeHandler && removeHandler(item.data)">
+                    <ion-button (click)="removeHandler && removeHandler(item.data)"
+                                *ngIf="!checkRemoveHandler || checkRemoveHandler(item.data)"
+                    >
                         <ion-icon slot="icon-only" name="trash"></ion-icon>
                     </ion-button>
                 </ion-col>

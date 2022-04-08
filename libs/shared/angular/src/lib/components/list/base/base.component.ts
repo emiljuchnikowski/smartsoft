@@ -38,6 +38,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
   unselect: () => void;
   itemHandler: (id: string) => void;
   removeHandler: (item: T) => void;
+  checkRemoveHandler: (item: T) => boolean;
   detailsButtonOptions: IButtonOptions;
   removed: Set<string> = new Set<string>();
   keys: Array<string>;
@@ -74,6 +75,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     this.initLoading();
 
     if (val.remove) {
+      this.checkRemoveHandler = val.remove["provider"].check;
       this.removeHandler = async (obj: T) => {
         const alertResult = await this.alertService.show({
           header: this.translateService.instant("OBJECT.confirmDelete"),
