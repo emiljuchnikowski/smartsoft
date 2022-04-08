@@ -328,14 +328,17 @@ export class ListComponent<T extends IEntity<string>>
               icon: "checkbox-outline",
               text: "multi",
               handler: async () => {
-                this.listOptions = {
-                  ...this.listOptions,
-                  select: this.listOptions.select === "multi" ? null : "multi",
-                };
                 this.facade.multiSelect([]);
-                if (this.menuService.openedEnd)
-                  await this.menuService.closeEnd();
-                this.cd.detectChanges();
+
+                setTimeout(() => {
+                  this.listOptions = {
+                    ...this.listOptions,
+                    select: this.listOptions.select === "multi" ? null : "multi",
+                  };
+                  if (this.menuService.openedEnd)
+                    await this.menuService.closeEnd();
+                  this.cd.detectChanges();
+                });
               },
             },
           ]
