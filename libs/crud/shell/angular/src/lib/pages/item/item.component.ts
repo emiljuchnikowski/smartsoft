@@ -21,6 +21,7 @@ import {
 } from "@smartsoft001/angular";
 import { IEntity } from "@smartsoft001/domain-core";
 import {getModelOptions} from "@smartsoft001/models";
+import { SpecificationService } from "@smartsoft001/utils";
 
 import { CrudFacade } from "../../+state/crud.facade";
 import { CrudFullConfig } from "../../crud.config";
@@ -301,6 +302,8 @@ export class ItemComponent<T extends IEntity<string>>
   }
 
   private getButtons(): Array<IIconButtonOptions> {
+    const options = getModelOptions(this.config.type);
+
     switch (this.mode) {
       case "create":
         return [
@@ -355,7 +358,9 @@ export class ItemComponent<T extends IEntity<string>>
           },
         ];
       case "details":
-        return this.config.edit
+        return this.config.edit && (
+            !options?.update?.enabled || SpecificationService.valid(this.item, options?.update?.enabled)
+        )
           ? [
               {
                 icon: "create",

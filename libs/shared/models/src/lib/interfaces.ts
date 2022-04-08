@@ -120,6 +120,7 @@ export interface IModelOptions {
 
 export interface IModelModeOptions {
     permissions?: Array<string>;
+    enabled?: ISpecification;
 }
 
 export interface IModelModeOptionsCustom extends IModelModeOptions {
