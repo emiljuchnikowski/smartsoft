@@ -139,7 +139,7 @@ export class ItemComponent<T extends IEntity<string>>
 
     this.pageService.checkPermissions();
 
-    if (this.router.routerState.snapshot.url.endsWith("/add")) {
+    if (this.router.routerState.snapshot.url.split('?')[0].endsWith("/add")) {
       this.mode = "create";
       await this.generateComponents('add');
     } else {
