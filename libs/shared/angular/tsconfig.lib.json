@@ -17,6 +17,7 @@
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
+    "allowSyntheticDefaultImports": true,
     "enableResourceInlining": true,
     "enableIvy": false,
     "compilationMode": "full"

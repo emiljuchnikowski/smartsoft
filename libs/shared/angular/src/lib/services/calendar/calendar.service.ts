@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
+// @ts-ignore
+import moment from 'moment';
 
 // tslint:disable-next-line:class-name
 export interface month {
@@ -17,34 +18,32 @@ interface state {
 
 @Injectable()
 export class CalendarService {
+    state: state;
 
-    state: state = {
-        date: moment().add(2, 'year'),
-        calendar: [
-            {
-                dates: null,
-                monthName: null,
-                number: null,
-                year: null
-            }
-        ]
-    };
+    constructor() {
+        this.state = {
+            date: moment().add(2, 'year'),
+            calendar: [
+                {
+                    dates: null,
+                    monthName: null,
+                    number: null,
+                    year: null
+                }
+            ]
+        };
+        this.initCalendar();
+    }
 
     setState = (nextState: Partial<state>) => {
         this.state = { ...this.state, ...nextState };
     }
 
-    constructor() {
-        //this service is a singleton therefore its constructor will only
-        //be called once during the application life cycle
-        this.initCalendar();
-    }
-
-    public getCalendar() {
+    getCalendar() {
         return [...this.state.calendar];
     }
 
-    public generatePrevMonths(): void {
+    generatePrevMonths(): void {
         const calendar = this.state.calendar;
 
         let date = moment(calendar[0].year + '-' + calendar[0].number + '-01');

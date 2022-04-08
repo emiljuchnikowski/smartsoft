@@ -7,5 +7,6 @@
       "../../../libs/shared/angular/src/lib",
       "../../../apps/ui/test/src"
     ]
-  }
+  },
+  "allowedNonPeerDependencies": ["moment"]
 }
