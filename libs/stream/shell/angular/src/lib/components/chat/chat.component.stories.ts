@@ -1,6 +1,7 @@
 import {storiesOf} from "@storybook/angular";
 import {TranslateModule} from "@ngx-translate/core";
-import * as moment from "moment";
+// @ts-ignore
+import moment from "moment";
 
 import {ChatComponent} from "./chat.component";
 import {StreamModule} from "../../stream.module";

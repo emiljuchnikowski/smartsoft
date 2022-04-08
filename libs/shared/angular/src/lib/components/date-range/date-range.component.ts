@@ -11,7 +11,8 @@ import {DomController, IonContent, ModalController, NavParams} from "@ionic/angu
 import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
 import {Subject, Subscription} from "rxjs";
 import {distinctUntilChanged, filter, tap} from "rxjs/operators";
-import * as moment from "moment";
+// @ts-ignore
+import moment from "moment";
 
 import {IDateRange} from "@smartsoft001/domain-core";
 

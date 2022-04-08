@@ -1,6 +1,7 @@
 import {Directive, ExistingProvider, forwardRef} from "@angular/core";
 import {AbstractControl, NG_VALIDATORS, Validator} from "@angular/forms";
-import * as moment from "moment";
+// @ts-ignore
+import moment from "moment";
 
 const DATE_VALIDATOR : ExistingProvider = {
     provide: NG_VALIDATORS,

@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Memoize} from "lodash-decorators";
-import * as momentObj from "moment";
+// @ts-ignore
+import moment from "moment";
 
 import {IStreamComment, StreamComment} from "@smartsoft001/stream-shell-dtos";
 import {IButtonOptions, IFormOptions} from "@smartsoft001/angular";
-
-const moment = momentObj;
 
 @Component({
   selector: 'smart-stream-chat',

@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output} from "@angular/core";
-import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
-import * as moment from "moment";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+// @ts-ignore
+import moment from "moment";
 import {IonInput} from "@ionic/angular";
 
 @Component({
