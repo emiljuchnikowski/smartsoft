@@ -9,7 +9,7 @@ import {
 } from "@angular/core";
 import { map, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import {Observable, Subject} from "rxjs";
 import * as _ from "lodash";
 
 import {
@@ -60,6 +60,8 @@ export class ListComponent<T extends IEntity<string>>
     extends CreateDynamicComponent<CrudListPageBaseComponent<any>>('crud-list-page')
   implements OnInit, OnDestroy
 {
+  private _cleanMultiSelected$ = new Subject<void>();
+
   pageOptions: IPageOptions;
   listOptions: IListOptions<T>;
   filter: ICrudFilter;
@@ -207,6 +209,7 @@ export class ListComponent<T extends IEntity<string>>
         },
         list$: this.facade.list$,
         loading$: this.facade.loaded$.pipe(map((l) => !l)),
+        onCleanMultiSelected$: this._cleanMultiSelected$
       },
       cellPipe: this.config.list ? this.config.list.cellPipe : null,
       mode: this.config.list?.mode,
@@ -327,10 +330,11 @@ export class ListComponent<T extends IEntity<string>>
             {
               icon: "checkbox-outline",
               text: "multi",
-              handler: async () => {
+              handler: () => {
                 this.facade.multiSelect([]);
+                this._cleanMultiSelected$.next();
 
-                setTimeout(() => {
+                setTimeout(async () => {
                   this.listOptions = {
                     ...this.listOptions,
                     select: this.listOptions.select === "multi" ? null : "multi",

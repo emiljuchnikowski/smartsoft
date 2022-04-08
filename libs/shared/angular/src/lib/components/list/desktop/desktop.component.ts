@@ -71,6 +71,12 @@ export class ListDesktopComponent<T extends IEntity<string>>
     this.componentFactories = val.componentFactories;
 
     this.generateDynamicComponents();
+
+    if (this.provider?.onCleanMultiSelected$) {
+      this._subscriptions.add(this.provider.onCleanMultiSelected$.subscribe(() => {
+        this._multiSelected = [];
+      }));
+    }
   }
 
   onChangeMultiselect(checked: boolean, element: T, list: T[]) {

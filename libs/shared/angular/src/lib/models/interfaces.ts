@@ -201,6 +201,7 @@ export type ItemOptions = IItemOptionsForPage | IItemOptionsForCustom;
 export interface IListProvider<T> {
   getData: (filter) => void;
   onChangeMultiSelected?: (list: Array<T>) => void;
+  onCleanMultiSelected$?: Observable<void>;
   list$: Observable<T[]>;
   loading$: Observable<boolean>;
 }
