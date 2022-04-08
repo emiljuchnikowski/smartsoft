@@ -944,23 +944,38 @@
       "sourceRoot": "libs/shared/domain-core/src",
       "prefix": "smart",
       "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": "libs/shared/domain-core/tsconfig.lib.json",
-            "project": "libs/shared/domain-core/ng-package.json",
-            "buildableProjectDepsInPackageJsonType": "dependencies"
+            "lintFilePatterns": [
+              "libs/shared/domain-core/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/domain-core/core"
+          ],
           "options": {
             "jestConfig": "libs/shared/domain-core/jest.config.js",
             "passWithNoTests": true
-          },
+          }
+        },
+        "build": {
+          "builder": "@nrwl/js:tsc",
           "outputs": [
-            "coverage/libs/shared/domain-core"
-          ]
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/libs/shared/domain-core",
+            "tsConfig": "libs/shared/domain-core/tsconfig.lib.json",
+            "packageJson": "libs/shared/domain-core/package.json",
+            "main": "libs/shared/domain-core/src/index.ts",
+            "assets": [
+              "libs/shared/domain-core/*.md"
+            ]
+          }
         }
       },
       "schematics": {
@@ -1083,23 +1098,38 @@
       "sourceRoot": "libs/shared/models/src",
       "prefix": "smart",
       "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": "libs/shared/models/tsconfig.lib.json",
-            "project": "libs/shared/models/ng-package.json",
-            "buildableProjectDepsInPackageJsonType": "dependencies"
+            "lintFilePatterns": [
+              "libs/shared/models/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/models"
+          ],
           "options": {
             "jestConfig": "libs/shared/models/jest.config.js",
             "passWithNoTests": true
-          },
+          }
+        },
+        "build": {
+          "builder": "@nrwl/js:tsc",
           "outputs": [
-            "coverage/libs/shared/models"
-          ]
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/libs/shared/models",
+            "tsConfig": "libs/shared/models/tsconfig.lib.json",
+            "packageJson": "libs/shared/models/package.json",
+            "main": "libs/shared/models/src/index.ts",
+            "assets": [
+              "libs/shared/models/*.md"
+            ]
+          }
         }
       },
       "schematics": {
@@ -1440,23 +1470,38 @@
       "sourceRoot": "libs/shared/users/src",
       "prefix": "smart",
       "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": "libs/shared/users/tsconfig.lib.json",
-            "project": "libs/shared/users/ng-package.json",
-            "buildableProjectDepsInPackageJsonType": "dependencies"
+            "lintFilePatterns": [
+              "libs/shared/users/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/users"
+          ],
           "options": {
             "jestConfig": "libs/shared/users/jest.config.js",
             "passWithNoTests": true
-          },
+          }
+        },
+        "build": {
+          "builder": "@nrwl/js:tsc",
           "outputs": [
-            "coverage/libs/shared/users"
-          ]
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/libs/shared/users",
+            "tsConfig": "libs/shared/users/tsconfig.lib.json",
+            "packageJson": "libs/shared/users/package.json",
+            "main": "libs/shared/users/src/index.ts",
+            "assets": [
+              "libs/shared/users/*.md"
+            ]
+          }
         }
       },
       "schematics": {
