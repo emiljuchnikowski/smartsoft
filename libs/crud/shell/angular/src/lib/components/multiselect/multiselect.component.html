@@ -10,7 +10,13 @@
         </ion-toolbar>
     </ion-header>
 
-    <div *ngIf="item">
+    <div *ngIf="config?.list?.components?.multi">
+        <ng-template [ngComponentOutlet]="config?.list?.components?.multi"
+                     [ndcDynamicInputs]="{ items: list }"
+        ></ng-template>
+    </div>
+
+    <div *ngIf="showForm && item">
         <smart-form [options]="item | smartFormOptions : 'multiUpdate' : config.type" (valuePartialChange)="onPartialChange($event, list)" (validChange)="onValidChange($event)"></smart-form>
 
         <smart-button style="float: right" [disabled]="lock || !valid" [options]="buttonOptions">{{ 'change' | translate }}</smart-button>

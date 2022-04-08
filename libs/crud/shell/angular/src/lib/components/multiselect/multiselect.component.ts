@@ -8,7 +8,7 @@ import {getModelFieldsWithOptions, IFieldEditMetadata} from "@smartsoft001/model
 import {IButtonOptions, MenuService} from "@smartsoft001/angular";
 
 import {CrudFacade} from "../../+state/crud.facade";
-import {CrudConfig} from "../../crud.config";
+import {CrudConfig, CrudFullConfig} from "../../crud.config";
 
 @Component({
     selector: 'smart-crud-multiselect',
@@ -36,12 +36,13 @@ export class MultiselectComponent<T extends IEntity<string>> implements OnInit {
         confirm: true
     }
     lock: boolean;
+    showForm = false;
 
     list$: Observable<T[]>;
 
     constructor(
         private facade: CrudFacade<T>,
-        public config: CrudConfig<T>,
+        public config: CrudFullConfig<T>,
         private menuService: MenuService
     ) {
         this.list$ = this.facade.multiSelected$.pipe(
@@ -51,6 +52,8 @@ export class MultiselectComponent<T extends IEntity<string>> implements OnInit {
 
                 const fieldsWithOptions = getModelFieldsWithOptions(model)
                     .filter(f => (f.options.update as IFieldEditMetadata)?.multi);
+
+                this.showForm = !!fieldsWithOptions.length;
 
                 fieldsWithOptions.forEach(({ key }) => {
                     const uniques = _.uniq(list.map(i => i[key]));

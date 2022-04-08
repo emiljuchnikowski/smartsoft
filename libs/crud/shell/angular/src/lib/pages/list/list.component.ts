@@ -310,13 +310,16 @@ export class ListComponent<T extends IEntity<string>>
       ) || modelOptions?.filters?.length;
 
     const showMultiEdit =
-      this.config.edit &&
-      fieldsWithOptions.some(
-        (x) => (x.options?.update as IFieldEditMetadata)?.multi
-      ) &&
-      !this.hardwareService.isMobile &&
-      (!this.config?.list?.mode ||
-        this.config?.list?.mode === ListMode.desktop);
+        this.config.list?.components?.multi ||
+        (
+            this.config.edit &&
+            fieldsWithOptions.some(
+                (x) => (x.options?.update as IFieldEditMetadata)?.multi
+            ) &&
+            !this.hardwareService.isMobile &&
+            (!this.config?.list?.mode ||
+                this.config?.list?.mode === ListMode.desktop)
+        );
 
     return [
       ...(showMultiEdit

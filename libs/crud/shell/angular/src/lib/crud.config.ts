@@ -52,7 +52,8 @@ export class CrudFullConfig<T> extends CrudConfig<T> {
     list?: {
         cellPipe?: ICellPipe<T>;
         components?: {
-            top: any
+            top?: any,
+            multi?: any
         },
         mode?: ListMode,
         paginationMode?: PaginationMode,

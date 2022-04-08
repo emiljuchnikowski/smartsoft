@@ -2,6 +2,7 @@ import {NgModule} from "@angular/core";
 import {StoreModule} from "@ngrx/store";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import {DynamicIoModule} from "ng-dynamic-component";
 
 import {SharedModule} from "@smartsoft001/angular";
 
@@ -52,7 +53,8 @@ const COMPONENTS = [
         SharedModule,
         CrudPipesModule,
         FormsModule,
-        CommonModule
+        CommonModule,
+        DynamicIoModule
     ],
     exports: [
         CrudPipesModule,
