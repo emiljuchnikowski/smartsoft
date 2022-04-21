@@ -38,12 +38,16 @@ export class InputPasswordComponent<T> extends InputBaseComponent<T> implements 
         this.control.setErrors(
             Object.keys(this.control.errors).length === 1 ?
                 null : { ...this.control.errors, passwordStrength: null }
-        )
+        );
       }
     } else {
       const errors = this.control.errors ?
           { ...this.control.errors, passwordStrength: true } : { passwordStrength: true };
       this.control.setErrors(errors);
     }
+
+    setTimeout(() => {
+      this.control.updateValueAndValidity();
+    });
   }
 }
