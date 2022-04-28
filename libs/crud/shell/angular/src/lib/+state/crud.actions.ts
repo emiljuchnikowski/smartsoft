@@ -112,6 +112,17 @@ export const readFailure = function<F>(
 };
 
 /*
+ * Clear
+ */
+export const clear = function(
+    entity: string,
+): Action {
+  return {
+    type: `[${entity}] Clear`
+  };
+};
+
+/*
  * Export
  */
 export const exportList = function(

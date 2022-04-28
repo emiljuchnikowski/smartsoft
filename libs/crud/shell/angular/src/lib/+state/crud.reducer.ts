@@ -122,6 +122,9 @@ const crudReducer = (state = initialState, action, entity) => {
                 error: null
             };
 
+        case `[${entity}] Clear`:
+            return { ...initialState };
+
         case `[${entity}] Read Failure`:
             return {
                 ...state,

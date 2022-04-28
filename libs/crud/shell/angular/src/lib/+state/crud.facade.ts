@@ -90,6 +90,10 @@ export class CrudFacade<T extends IEntity<string>> {
     this.store.dispatch(CrudActions.read(this.config.entity, fullFilter));
   }
 
+  clear(): void {
+    this.store.dispatch(CrudActions.clear(this.config.entity));
+  }
+
   select(id: string): void {
     this.store.dispatch(CrudActions.select(this.config.entity, id));
   }
