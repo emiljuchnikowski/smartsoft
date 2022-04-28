@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 
 import {InputBaseComponent} from "../base/base.component";
 
@@ -8,7 +8,7 @@ import {InputBaseComponent} from "../base/base.component";
   styleUrls: ["./password.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputPasswordComponent<T> extends InputBaseComponent<T> implements OnInit {
+export class InputPasswordComponent<T> extends InputBaseComponent<T> {
   valid = true;
   focus = false;
 
@@ -16,7 +16,8 @@ export class InputPasswordComponent<T> extends InputBaseComponent<T> implements 
     super(cd);
   }
 
-  ngOnInit() {
+  afterSetOptionsHandler() {
+    super.afterSetOptionsHandler();
     this.control.setValidators([
         this.control.validator,
       (c) => {
@@ -28,7 +29,7 @@ export class InputPasswordComponent<T> extends InputBaseComponent<T> implements 
 
         return null;
       }
-    ])
+    ]);
   }
 
   onChangePasswordStrength(valid: boolean) {
@@ -46,8 +47,6 @@ export class InputPasswordComponent<T> extends InputBaseComponent<T> implements 
       this.control.setErrors(errors);
     }
 
-    setTimeout(() => {
-      this.control.updateValueAndValidity();
-    });
+    this.control.updateValueAndValidity();
   }
 }
