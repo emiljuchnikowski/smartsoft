@@ -31,5 +31,10 @@ implements OnInit, OnDestroy {
       this._subscriptions.unsubscribe();
     }
   }
+
+  toggleAdvanced(): void {
+    this.advanced = !this.advanced;
+    if (this.advanced) this.value = null;
+  }
 }
 

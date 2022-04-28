@@ -3,16 +3,16 @@
         <ion-label>
             {{ item.label | translate }}
         </ion-label>
-        <ion-input [(ngModel)]="value" type="number" step="1"></ion-input>
+        <ion-input [(ngModel)]="value" type="number" step="1" *ngIf="!advanced"></ion-input>
     </ion-col>
     <ion-col size="auto" *ngIf="allowAdvanced">
-        <ion-button (click)="advanced = !advanced" class="squere-button" [disabled]="minValue || maxValue">
+        <ion-button (click)="toggleAdvanced()" class="squere-button" [disabled]="minValue || maxValue">
             <ion-icon *ngIf="!advanced" slot="icon-only" name="settings-outline"></ion-icon>
             <ion-icon *ngIf="advanced" slot="icon-only" name="settings"></ion-icon>
         </ion-button>
     </ion-col>
-    <ion-col size="auto" *ngIf="value">
-        <ion-button color="danger" (click)="refresh(null)" class="squere-button">
+    <ion-col size="auto" *ngIf="value || minValue || maxValue">
+        <ion-button color="danger" (click)="clear()" class="squere-button">
             <ion-icon slot="icon-only" name="close-outline"></ion-icon>
         </ion-button>
     </ion-col>

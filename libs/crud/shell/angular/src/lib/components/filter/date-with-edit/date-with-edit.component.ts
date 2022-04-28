@@ -21,6 +21,11 @@ implements OnInit, OnDestroy {
 
   @ViewChild(IonDatetime, { read: IonDatetime, static: false }) dateTimePicker: IonDatetime;
 
+  toggleAdvanced(): void {
+    this.advanced = !this.advanced;
+    if (this.advanced) this.value = null;
+  }
+
   ngOnInit(): void {
     super.ngOnInit();
 

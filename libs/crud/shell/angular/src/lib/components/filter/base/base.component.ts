@@ -12,6 +12,7 @@ import {
   ICrudModelPossibilitiesProvider,
 } from "../../../providers/model-possibilities/model-possibilities.provider";
 import {CrudConfig} from "../../../crud.config";
+import {TranslateService} from "@ngx-translate/core";
 
 @Directive()
 export class BaseComponent<T extends IEntity<string>> implements OnInit {
@@ -77,12 +78,17 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     this.refresh(val, "<=");
   }
 
+  get lang(): string {
+    return this.translateService.currentLang;
+  }
+
   constructor(
     protected facade: CrudFacade<T>,
     private config: CrudConfig<T>,
     @Optional()
     @Inject(CRUD_MODEL_POSSIBILITIES_PROVIDER)
-    private modelPossibilitiesProvider: ICrudModelPossibilitiesProvider
+    private modelPossibilitiesProvider: ICrudModelPossibilitiesProvider,
+    protected translateService: TranslateService
   ) {}
 
   @Debounce(500)
@@ -120,6 +126,14 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
 
     query.value = val;
     query.label = this.item.label;
+
+    this.facade.read(this.filter);
+  }
+
+  clear(): void {
+    this.filter.query = this.filter.query.filter(
+        (q) => q.key !== this.item.key
+    );
 
     this.facade.read(this.filter);
   }
