@@ -72,12 +72,7 @@ export function smartNgAdd(options: Schema): Rule {
             logRule('Add base files'),
             (t: Tree) => {
                 // tslint:disable-next-line:no-non-null-assertion
-                const sourceTextJest = t.read('jest.preset-smart.js')!.toString();
-                // tslint:disable-next-line:no-non-null-assertion
                 const sourceTextReadme = t.read('SMART.md')!.toString();
-
-                t.overwrite('jest.preset.js', sourceTextJest);
-                t.delete('jest.preset-smart.js');
 
                 t.overwrite('README.md', sourceTextReadme);
                 t.delete('SMART.md');

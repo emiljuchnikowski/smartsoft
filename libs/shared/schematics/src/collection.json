@@ -5,20 +5,20 @@
   "schematics": {
     "ng-add": {
       "description": "Smartsoft schematic",
-      "schema": "./src/ng-add/schema.json",
-      "factory": "./src/ng-add/index#smartNgAdd"
+      "schema": "./ng-add/schema.json",
+      "factory": "./ng-add/index#smartNgAdd"
     },
     "library": {
       "aliases": [
         "lib"
       ],
-      "factory": "./src/ng-g/library",
-      "schema": "./src/ng-g/library/schema.json",
+      "factory": "./ng-g/library",
+      "schema": "./ng-g/library/schema.json",
       "description": "Add library"
     },
     "domain": {
-      "factory": "./src/ng-g/domain",
-      "schema": "./src/ng-g/domain/schema.json",
+      "factory": "./ng-g/domain",
+      "schema": "./ng-g/domain/schema.json",
       "description": "Add domain"
     }
   }

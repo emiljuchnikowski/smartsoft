@@ -38,7 +38,6 @@ export default function (options: Schema): Rule {
                 externalSchematic('@nrwl/angular', 'library', {
                     name: projectName,
                     directory: "shared",
-                    style: "scss",
                     unitTestRunner: "jest",
                     linter: "eslint",
                     buildable: true

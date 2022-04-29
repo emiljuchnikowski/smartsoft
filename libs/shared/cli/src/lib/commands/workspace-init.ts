@@ -53,8 +53,10 @@ function runNgAdd(target) {
         '@nrwl/jest',
     ];
 
+    runCommand(`npm i ${plugins.join(' ')} --save`, target);
+
     plugins.forEach(plugin => {
-        runCommand(`npm i ${plugin} && npx nx g ${plugin}:ng-add`, target);
+        runCommand(`npx nx g ${plugin}:ng-add`, target);
     })
 }
 
@@ -66,7 +68,7 @@ function createNxWorkspace(name: string) {
         '--cli=angular',
         '--package-manager=npm',
     ]
-    const createCommand = `npx create-nx-workspace@latest ${name} ${params.join(' ')}`
+    const createCommand = `npx create-nx-workspace@14.0.5 ${name} ${params.join(' ')}`
     runCommand(createCommand);
 }
 
