@@ -1,5 +1,5 @@
 import {Field, FieldType, IFieldModifyMetadata, IModelStep, ISpecification, Model} from "@smartsoft001/models";
-import {IEntity} from "@smartsoft001/domain-core";
+import {IDateRange, IEntity} from "@smartsoft001/domain-core";
 import {of} from "rxjs";
 
 const modifyMetdata : IFieldModifyMetadata = {
@@ -198,6 +198,12 @@ export class TodoInfo {
             label: 'date',
             key: 'createDate',
             type: '=',
+            fieldType: FieldType.dateWithEdit
+        },
+        {
+            label: 'int',
+            key: 'int',
+            type: '=',
             fieldType: FieldType.int
         },
         {
@@ -214,27 +220,30 @@ export class TodoInfo {
                 }
             ])
         }
-    ]
+    ],
+    update: {
+        enabled: {
+            criteria: {
+                phoneNumberPl:"123123123"
+            }
+        }
+    }
 })
 export class Todo implements IEntity<string> {
     id: string;
 
-    @Field({
-        create: modifyMetdata,
-        update: modifyMetdata,
-        details: true,
-        type: FieldType.ints,
-        list: { order: 1 },
-        info: `
-            <b>Test</b> new
-        `,
-        step: steps[0],
-        possibilities: {
-            minLength: 3,
-            maxLength: 5
-        }
-    })
-    numberdsdsgefgfhghtreewwertyujhgrtyuilikjhtgrfddrth: string;
+    // @Field({
+    //     create: modifyMetdata,
+    //     update: modifyMetdata,
+    //     details: true,
+    //     type: FieldType.dateRange,
+    //     list: { order: 1, filter: true },
+    //     info: `
+    //         <b>Test</b> new
+    //     `,
+    //     step: steps[0]
+    // })
+    // numberdsdsgefgfhghtreewwertyujhgrtyuilikjhtgrfddrth: string;
 
     // @Field({
     //     create: {
@@ -269,21 +278,21 @@ export class Todo implements IEntity<string> {
     // })
     // test: File;
 
-    @Field({
-        create: {
-            ...modifyMetdata,
-            required: false
-        },
-        update: {
-            ...modifyMetdata,
-            required: false
-        },
-        list: true,
-        details: true,
-        type: FieldType.enum,
-        possibilities: PermissionType
-    })
-    permissions: Array<PermissionType>;
+    // @Field({
+    //     create: {
+    //         ...modifyMetdata,
+    //         required: false
+    //     },
+    //     update: {
+    //         ...modifyMetdata,
+    //         required: false
+    //     },
+    //     list: true,
+    //     details: true,
+    //     type: FieldType.enum,
+    //     possibilities: PermissionType
+    // })
+    // permissions: Array<PermissionType>;
 
     // @Field({
     //     create: modifyMetdata,
@@ -355,17 +364,17 @@ export class Todo implements IEntity<string> {
     // })
     // sections: Array<CourseSection>;
 
-    // @Field({
-    //     create: modifyMetdata,
-    //     update: modifyMetdata,
-    //     details: true,
-    //     confirm: true,
-    //     possibilities: {
-    //         strength: true
-    //     },
-    //     list: { order: 2 }
-    // })
-    // password: string;
+    @Field({
+        create: modifyMetdata,
+        update: modifyMetdata,
+        details: true,
+        confirm: true,
+        possibilities: {
+            strength: true
+        },
+        list: { order: 2 }
+    })
+    password: string;
 
     // @Field({
     //     create: modifyMetdata,
@@ -463,11 +472,13 @@ export class Todo implements IEntity<string> {
     //         required: true
     //     },
     //     update: {
-    //         ...modifyMetdata,
-    //         multi: true
+    //         ...modifyMetdata
+    //     },
+    //     list: {
+    //         filter: true
     //     },
     //     details: true,
-    //     type: FieldType.video
+    //     type: FieldType.dateWithEdit
     // })
     // media: any;
 
@@ -483,14 +494,14 @@ export class Todo implements IEntity<string> {
     //     type: FieldType.attachment
     // })
     // newFile: any;
-
+    //
     // @Field({
     //     create: {
     //         required: true
     //     },
     //     update: {
     //         ...modifyMetdata,
-    //         multi: true
+    //         //multi: true
     //     },
     //     details: true,
     //     type: FieldType.dateRange

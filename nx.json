@@ -9,7 +9,7 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/src/tasks-runner/tasks-runner-v2",
+      "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": [
           "build",
@@ -17,7 +17,8 @@
           "lint"
         ],
         "cacheDirectory": "/tmp/nx",
-        "parallel": 3
+        "parallel": 3,
+        "accessToken": "MTZmYzI2ODItOWMxZC00MDgzLTg3NTAtNzg0OWZmNWE2MGZkfHJlYWQtd3JpdGU="
       }
     }
   },

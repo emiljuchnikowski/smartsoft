@@ -1,4 +1,4 @@
-import {Component, Injectable, NgModule, Type} from "@angular/core";
+import {Component, Injectable, Input, NgModule, Type} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
 import {
@@ -11,13 +11,14 @@ import {
 } from "@smartsoft001/angular";
 import {AuthModule, AuthSharedModule} from "@smartsoft001/auth-shell-angular";
 import {Todo} from "./todo.dto";
-import {CrudModule} from "@smartsoft001/crud-shell-angular";
+import {CrudFacade, CrudModule} from "@smartsoft001/crud-shell-angular";
 import {environment} from "../../environments/environment";
 import {TodoFacade} from "./todo.facade";
-import {Observable, of} from "rxjs";
+import {Observable, of, tap} from "rxjs";
 import {Validators} from "@angular/forms";
 import {CustomButtonComponent, CustomCrudListComponent, CustomFormComponent} from "../custom";
 import {CustomPageComponent} from "../custom/page.component";
+import { IEntity } from "@smartsoft001/domain-core";
 
 // export class CellPipe<T> implements IListCellPipe<T> {
 //   transform(value: T, columnName): string {
@@ -27,10 +28,24 @@ import {CustomPageComponent} from "../custom/page.component";
 //   }
 // }
 
-// @Component({
-//   template: `test top`
-// })
-// export class FakeListTopComponent {}
+@Component({
+  template: `
+    {{ list$ }}
+  `
+})
+export class FakeListTopComponent<T extends IEntity<string>> {
+  constructor(private readonly facade: CrudFacade<T>) {
+    this.facade.multiSelected$.subscribe(list => {
+      console.log(list);
+    });
+  }
+
+  list$ = this.facade.multiSelected$.pipe(
+      tap(i => {
+        console.log(i);
+      })
+  );
+}
 
 @Injectable()
 export class ModelValidatorsProvider extends IModelValidatorsProvider {
@@ -139,9 +154,9 @@ export class ModelLabelProvider extends IModelLabelProvider {
         //remove: true,
         export: true,
         list: {
-          // components: {
-          //   top: FakeListTopComponent
-          // },
+          components: {
+            multi: FakeListTopComponent
+          },
           cellPipe: {
             transform(value, columnName): string {
               if (columnName === 'body') return '<b>test</b>';

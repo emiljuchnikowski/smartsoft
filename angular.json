@@ -1,6 +1,6 @@
 {
   "cli": {
-    "analytics": "ba427e50-d7c3-42ba-80eb-8c99371ea66a"
+    "analytics": "7e4c22bc-2c5f-4ac3-9cc6-97eaee31a268"
   },
   "version": 1,
   "projects": {
@@ -50,7 +50,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/api/auth/jest.config.js",
+            "jestConfig": "apps/api/auth/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -106,7 +106,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/api/crud/jest.config.js",
+            "jestConfig": "apps/api/crud/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -162,7 +162,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/api/files/jest.config.js",
+            "jestConfig": "apps/api/files/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -218,7 +218,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/api/stream/jest.config.js",
+            "jestConfig": "apps/api/stream/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -274,7 +274,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/api/trans/jest.config.js",
+            "jestConfig": "apps/api/trans/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -305,7 +305,7 @@
             "coverage/libs/auth/domain"
           ],
           "options": {
-            "jestConfig": "libs/auth/domain/jest.config.js",
+            "jestConfig": "libs/auth/domain/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -349,7 +349,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/auth/shell/angular/jest.config.js",
+            "jestConfig": "libs/auth/shell/angular/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -386,7 +386,7 @@
             "coverage/libs/auth/shell/app-services"
           ],
           "options": {
-            "jestConfig": "libs/auth/shell/app-services/jest.config.js",
+            "jestConfig": "libs/auth/shell/app-services/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -427,7 +427,7 @@
             "coverage/libs/auth/shell/dtos"
           ],
           "options": {
-            "jestConfig": "libs/auth/shell/dtos/jest.config.js",
+            "jestConfig": "libs/auth/shell/dtos/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -468,7 +468,7 @@
             "coverage/libs/auth/shell/nestjs"
           ],
           "options": {
-            "jestConfig": "libs/auth/shell/nestjs/jest.config.js",
+            "jestConfig": "libs/auth/shell/nestjs/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -516,7 +516,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/crud/domain/jest.config.js",
+            "jestConfig": "libs/crud/domain/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -566,7 +566,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/crud/shell/angular/jest.config.js",
+            "jestConfig": "libs/crud/shell/angular/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -631,7 +631,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/crud/shell/app-services/jest.config.js",
+            "jestConfig": "libs/crud/shell/app-services/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -682,7 +682,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/crud/shell/dtos/jest.config.js",
+            "jestConfig": "libs/crud/shell/dtos/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -733,7 +733,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/crud/shell/nestjs/jest.config.js",
+            "jestConfig": "libs/crud/shell/nestjs/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -778,7 +778,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/shared/angular/jest.config.js",
+            "jestConfig": "libs/shared/angular/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -874,7 +874,7 @@
             "coverage/libs/shared/cli"
           ],
           "options": {
-            "jestConfig": "libs/shared/cli/jest.config.js",
+            "jestConfig": "libs/shared/cli/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -916,7 +916,7 @@
             "coverage/libs/shared/core"
           ],
           "options": {
-            "jestConfig": "libs/shared/core/jest.config.js",
+            "jestConfig": "libs/shared/core/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -958,7 +958,7 @@
             "coverage/libs/domain-core/core"
           ],
           "options": {
-            "jestConfig": "libs/shared/domain-core/jest.config.js",
+            "jestConfig": "libs/shared/domain-core/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -1007,7 +1007,7 @@
             "coverage/libs/shared/fb"
           ],
           "options": {
-            "jestConfig": "libs/shared/fb/jest.config.js",
+            "jestConfig": "libs/shared/fb/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -1038,7 +1038,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/shared/files/nestjs/jest.config.js",
+            "jestConfig": "libs/shared/files/nestjs/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1070,7 +1070,7 @@
             "coverage/libs/shared/google"
           ],
           "options": {
-            "jestConfig": "libs/shared/google/jest.config.js",
+            "jestConfig": "libs/shared/google/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -1112,7 +1112,7 @@
             "coverage/libs/shared/models"
           ],
           "options": {
-            "jestConfig": "libs/shared/models/jest.config.js",
+            "jestConfig": "libs/shared/models/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -1165,7 +1165,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/shared/mongo/jest.config.js",
+            "jestConfig": "libs/shared/mongo/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1216,7 +1216,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/shared/nestjs/jest.config.js",
+            "jestConfig": "libs/shared/nestjs/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1261,7 +1261,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/shared/paypal/jest.config.js",
+            "jestConfig": "libs/shared/paypal/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1306,7 +1306,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/shared/payu/jest.config.js",
+            "jestConfig": "libs/shared/payu/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1351,7 +1351,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/shared/revolut/jest.config.js",
+            "jestConfig": "libs/shared/revolut/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1398,7 +1398,7 @@
             "coverage/libs/shared/schematics"
           ],
           "options": {
-            "jestConfig": "libs/shared/schematics/jest.config.js",
+            "jestConfig": "libs/shared/schematics/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -1457,7 +1457,7 @@
             "coverage/libs/shared/test"
           ],
           "options": {
-            "jestConfig": "libs/shared/test/jest.config.js",
+            "jestConfig": "libs/shared/test/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -1484,7 +1484,7 @@
             "coverage/libs/shared/users"
           ],
           "options": {
-            "jestConfig": "libs/shared/users/jest.config.js",
+            "jestConfig": "libs/shared/users/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -1537,7 +1537,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/shared/utils/jest.config.js",
+            "jestConfig": "libs/shared/utils/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1588,7 +1588,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/stream/domain/jest.config.js",
+            "jestConfig": "libs/stream/domain/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1625,7 +1625,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/stream/shell/angular/jest.config.js",
+            "jestConfig": "libs/stream/shell/angular/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1720,7 +1720,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/stream/shell/app-services/jest.config.js",
+            "jestConfig": "libs/stream/shell/app-services/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1757,7 +1757,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/stream/shell/dtos/jest.config.js",
+            "jestConfig": "libs/stream/shell/dtos/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1779,7 +1779,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/stream/shell/nestjs/jest.config.js",
+            "jestConfig": "libs/stream/shell/nestjs/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1809,7 +1809,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/test/jest.config.js",
+            "jestConfig": "libs/test/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1841,7 +1841,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/trans/domain/jest.config.js",
+            "jestConfig": "libs/trans/domain/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1878,7 +1878,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/trans/shell/angular/jest.config.js",
+            "jestConfig": "libs/trans/shell/angular/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1908,7 +1908,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/trans/shell/app-services/jest.config.js",
+            "jestConfig": "libs/trans/shell/app-services/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1953,7 +1953,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/trans/shell/dtos/jest.config.js",
+            "jestConfig": "libs/trans/shell/dtos/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -1998,7 +1998,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/trans/shell/nestjs/jest.config.js",
+            "jestConfig": "libs/trans/shell/nestjs/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
@@ -2172,7 +2172,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/ui/test/jest.config.js",
+            "jestConfig": "apps/ui/test/jest.config.ts",
             "passWithNoTests": true
           },
           "outputs": [
