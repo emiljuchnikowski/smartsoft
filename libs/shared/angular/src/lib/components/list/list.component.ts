@@ -76,7 +76,7 @@ export class ListComponent<T> extends CreateDynamicComponent<ListBaseComponent<a
     if (this._options.mode) {
       this.mode = this._options.mode;
     } else {
-      this.mode = this.hardwareService.isMobileWeb ? ListMode.mobile : ListMode.desktop
+      this.mode = this.hardwareService.isMobile ? ListMode.mobile : ListMode.desktop
     }
   }
 }
