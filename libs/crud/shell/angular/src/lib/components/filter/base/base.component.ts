@@ -95,6 +95,8 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
   refresh(val: any, type = null): void {
     if (!type) type = this.item.type;
 
+    this.filter.offset = 0;
+
     if (this.isArrayType()) {
       this.refreshForArray(val as [], type);
       return;
@@ -134,7 +136,7 @@ export class BaseComponent<T extends IEntity<string>> implements OnInit {
     this.filter.query = this.filter.query.filter(
         (q) => q.key !== this.item.key
     );
-
+    this.filter.offset = 0;
     this.facade.read(this.filter);
   }
 
