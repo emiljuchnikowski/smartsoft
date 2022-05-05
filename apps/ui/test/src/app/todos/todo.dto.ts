@@ -193,6 +193,7 @@ export class TodoInfo {
             label: 'testNegation',
             key: 'body',
             type: '!=',
+            fieldType: FieldType.flag
         },
         {
             label: 'date',
