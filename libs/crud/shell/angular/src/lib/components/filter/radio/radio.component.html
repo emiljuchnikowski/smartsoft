@@ -6,7 +6,7 @@
                 <ion-label>
                     {{ item.label | translate }}
                 </ion-label>
-                <ion-button *ngIf="value" slot="end" color="danger" (click)="refresh(null)" class="squere-button">
+                <ion-button *ngIf="value || value === false" slot="end" color="danger" (click)="refresh(null)" class="squere-button">
                     <ion-icon slot="icon-only" name="close-outline"></ion-icon>
                 </ion-button>
             </ion-item-divider>
