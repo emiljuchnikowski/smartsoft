@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   
   coverageDirectory: "../../../coverage/apps/api/files",
   globals: { "ts-jest": { tsConfig: "<rootDir>/tsconfig.spec.json" } },

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   
   coverageDirectory: "../../../coverage/apps/ui/test",
   snapshotSerializers: [

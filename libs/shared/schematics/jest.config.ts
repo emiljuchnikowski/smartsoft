@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: "shared-schematics",
   
   globals: {

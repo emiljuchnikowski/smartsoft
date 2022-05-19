@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   
   setupFilesAfterEnv: ["<rootDir>/src/test-setup.ts"],
   globals: {

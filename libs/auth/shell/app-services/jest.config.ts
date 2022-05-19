@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: "auth-shell-app-services",
   
   globals: {
