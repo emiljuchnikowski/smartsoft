@@ -110,6 +110,7 @@ export class TransShellNestjsCoreModule {
         payuConfig?: PayuConfig;
         paypalConfig?: PaypalConfig;
         revolutConfig?: RevolutConfig;
+        paynowConfig?: PaynowConfig;
       } & {
         db: {
           host: string;
@@ -137,6 +138,12 @@ export class TransShellNestjsCoreModule {
               PaypalService,
             ]
           : []),
+        ...(config.paynowConfig
+            ? [
+              { provide: PaynowConfig, useValue: config.paynowConfig },
+              PaynowService,
+            ]
+            : []),
       ],
       imports: [
         CrudShellNestjsModule.forRoot({
@@ -162,6 +169,7 @@ export class TransShellNestjsCoreModule {
         ...(config.payuConfig ? [PayuConfig, PayuService] : []),
         ...(config.paypalConfig ? [PaypalConfig, PaypalService] : []),
         ...(config.revolutConfig ? [RevolutConfig, RevolutService] : []),
+        ...(config.paynowConfig ? [PaynowConfig, PaynowService] : []),
       ],
     };
   }
