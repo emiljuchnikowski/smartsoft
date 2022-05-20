@@ -92,6 +92,7 @@
     "class-validator": "0.13.0",
     "combined-stream": "^1.0.8",
     "core-js": "3.7.0",
+    "crypto-js": "^4.1.1",
     "fastify-multipart": "^3.3.1",
     "fastify-swagger": "^3.5.0",
     "flatted": "^3.2.4",
@@ -200,4 +201,3 @@
   },
   "sideEffects": true
 }
-

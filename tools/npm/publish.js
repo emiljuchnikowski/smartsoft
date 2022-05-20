@@ -50,6 +50,10 @@ const libs = [
         path: "libs/shared/payu"
     },
     {
+        name: "shared-paynow",
+        path: "libs/shared/paynow"
+    },
+    {
         name: "shared-paypal",
         path: "libs/shared/paypal"
     },

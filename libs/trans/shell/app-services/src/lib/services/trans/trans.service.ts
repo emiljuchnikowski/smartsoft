@@ -13,9 +13,10 @@ import {
 import { PayuService } from "@smartsoft001/payu";
 import { PaypalService } from "@smartsoft001/paypal";
 import { RevolutService } from "@smartsoft001/revolut";
+import {IItemRepository} from "@smartsoft001/domain-core";
+import {PaynowService} from "@smartsoft001/paynow";
 
 import { TRANS_TOKEN_INTERNAL_SERVICE } from "../internal/internal.service";
-import {IItemRepository} from "@smartsoft001/domain-core";
 
 @Injectable()
 export class TransService {
@@ -24,11 +25,17 @@ export class TransService {
   } = {
     payu: this.payuService,
     paypal: this.paypalService,
+    paynow: this.paynowService,
     revolut: this.revolutService,
   };
 
   private _internalService = {
     create: (trans: Trans<any>) => {
+      if (!this.config.internalApiUrl) return Promise.resolve({
+        date: new Date(),
+        req: trans
+      });
+
       return this.httpService
         .post(this.config.internalApiUrl, trans)
         .toPromise()
@@ -36,6 +43,12 @@ export class TransService {
     },
 
     refresh: (trans: Trans<any>) => {
+      if (!this.config.internalApiUrl) return Promise.resolve({
+        date: new Date(),
+        req: trans,
+        id: trans.id
+      });
+
       return this.httpService
         .put(this.config.internalApiUrl + "/" + trans.id, trans)
         .toPromise()
@@ -52,6 +65,7 @@ export class TransService {
     private config: TransConfig,
     private repository: IItemRepository<Trans<any>>,
     @Optional() private payuService: PayuService,
+    @Optional() private paynowService: PaynowService,
     @Optional() private paypalService: PaypalService,
     @Optional() private revolutService: RevolutService
   ) {}

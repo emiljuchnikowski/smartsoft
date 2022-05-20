@@ -1,4 +1,4 @@
-import {Body, Controller, HttpCode, Post, Get, Param, Query, Res, HttpStatus} from "@nestjs/common";
+import {Body, Controller, HttpCode, Post, Get, Param, Query, Res, HttpStatus, Optional} from "@nestjs/common";
 
 import { TransService } from "@smartsoft001/trans-shell-app-services";
 import {PaypalConfig, PaypalService} from "@smartsoft001/paypal";
@@ -7,8 +7,8 @@ import {PaypalConfig, PaypalService} from "@smartsoft001/paypal";
 export class PaypalController {
   constructor(
       private readonly service: TransService,
-      private readonly config: PaypalConfig,
-      private readonly paypalService: PaypalService
+      @Optional() private readonly config: PaypalConfig,
+      @Optional() private readonly paypalService: PaypalService
   ) {}
 
   @Post()

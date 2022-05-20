@@ -1334,6 +1334,51 @@
         "type:util"
       ]
     },
+    "shared-paynow": {
+      "root": "libs/shared/paynow",
+      "sourceRoot": "libs/shared/paynow/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/paynow/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/paynow/jest.config.ts",
+            "passWithNoTests": true
+          },
+          "outputs": [
+            "coverage/libs/shared/paynow"
+          ]
+        },
+        "build": {
+          "builder": "@nrwl/js:tsc",
+          "options": {
+            "outputPath": "dist/libs/shared/paynow",
+            "tsConfig": "libs/shared/paynow/tsconfig.lib.json",
+            "packageJson": "libs/shared/paynow/package.json",
+            "main": "libs/shared/paynow/src/index.ts",
+            "assets": [
+              "libs/shared/paynow/*.md"
+            ]
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
+        }
+      },
+      "tags": [
+        "scope:shared",
+        "type:util"
+      ]
+    },
     "shared-revolut": {
       "root": "libs/shared/revolut",
       "sourceRoot": "libs/shared/revolut/src",

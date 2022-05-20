@@ -11,30 +11,36 @@ import { PaypalConfig, PaypalService } from "@smartsoft001/paypal";
 import { RevolutConfig, RevolutService } from "@smartsoft001/revolut";
 
 import { CONTROLLERS } from "./controllers";
-import {CrudModule} from "@smartsoft001/crud-shell-angular";
-import {CrudShellNestjsCoreModule, CrudShellNestjsModule} from "@smartsoft001/crud-shell-nestjs";
-import {SharedConfig} from "@smartsoft001/nestjs";
+import { CrudModule } from "@smartsoft001/crud-shell-angular";
+import {
+  CrudShellNestjsCoreModule,
+  CrudShellNestjsModule,
+} from "@smartsoft001/crud-shell-nestjs";
+import { SharedConfig } from "@smartsoft001/nestjs";
+import {PaynowConfig, PaynowService} from "@smartsoft001/paynow";
 
 @Module({
   imports: [HttpModule],
 })
 export class TransShellNestjsModule {
   static forRoot(
-    config: SharedConfig & TransConfig & {
-      payuConfig?: PayuConfig;
-      paypalConfig?: PaypalConfig;
-      revolutConfig?: RevolutConfig;
-    } & {
-      db: {
-        host: string;
-        port: number;
-        database: string;
-        username?: string;
-        password?: string;
-        collection?: string;
-        type?: any;
-      };
-    }
+    config: SharedConfig &
+      TransConfig & {
+        payuConfig?: PayuConfig;
+        paypalConfig?: PaypalConfig;
+        revolutConfig?: RevolutConfig;
+        paynowConfig?: PaynowConfig;
+      } & {
+        db: {
+          host: string;
+          port: number;
+          database: string;
+          username?: string;
+          password?: string;
+          collection?: string;
+          type?: any;
+        };
+      }
   ): DynamicModule {
     return {
       module: TransShellNestjsModule,
@@ -58,16 +64,22 @@ export class TransShellNestjsModule {
               RevolutService,
             ]
           : []),
+        ...(config.paynowConfig
+          ? [
+              { provide: PaynowConfig, useValue: config.paynowConfig },
+              PaynowService,
+            ]
+          : []),
       ],
       imports: [
         CrudShellNestjsModule.forRoot({
           ...config,
           db: {
             ...config.db,
-            collection: "trans"
+            collection: "trans",
           },
           restApi: false,
-          socket: false
+          socket: false,
         }),
         PassportModule.register({ defaultStrategy: "jwt", session: false }),
         JwtModule.register({
@@ -93,7 +105,8 @@ export class TransShellNestjsModule {
 })
 export class TransShellNestjsCoreModule {
   static forRoot(
-      config: SharedConfig & TransConfig & {
+    config: SharedConfig &
+      TransConfig & {
         payuConfig?: PayuConfig;
         paypalConfig?: PaypalConfig;
         revolutConfig?: RevolutConfig;
@@ -130,10 +143,10 @@ export class TransShellNestjsCoreModule {
           ...config,
           db: {
             ...config.db,
-            collection: "trans"
+            collection: "trans",
           },
           restApi: false,
-          socket: false
+          socket: false,
         }),
         PassportModule.register({ defaultStrategy: "jwt", session: false }),
         JwtModule.register({

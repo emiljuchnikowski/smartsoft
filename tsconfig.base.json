@@ -87,6 +87,9 @@
       "@smartsoft001/payu": [
         "libs/shared/payu/src/index.ts"
       ],
+      "@smartsoft001/paynow": [
+        "libs/shared/paynow/src/index.ts"
+      ],
       "@smartsoft001/revolut": [
         "libs/shared/revolut/src/index.ts"
       ],

@@ -8,7 +8,7 @@ import { AppExceptionFilter } from "@smartsoft001/nestjs";
 import { InternalController } from "./internal.controller";
 import {TransShellNestjsModule} from "@smartsoft001/trans-shell-nestjs";
 
-const dbOptions: Partial<ConnectionOptions> = {
+const dbOptions = {
   type: "mongodb",
   host: process.env.DB_SERVER,
   port: Number(process.env.DB_PORT),
@@ -50,6 +50,9 @@ if (process.env.DB_USERNAME) {
  * - PAYPAL_TEST
  * - REVOLUT_TOKEN
  * - REVOLUT_TEST
+ * - PAYNOW_API_KEY
+ * - PAYNOW_API_SIGNATURE_KEY
+ * - PAYNOW_CONTINUE_URL
  * - TEST
  */
 
@@ -57,6 +60,7 @@ if (process.env.DB_USERNAME) {
   imports: [
     TransShellNestjsModule.forRoot({
       internalApiUrl: process.env.INTERNAL_API_URL,
+        db: dbOptions,
       tokenConfig: {
         secretOrPrivateKey: process.env.TOKEN_CONFIG_SECRET_OR_PRIVATE_KEY,
         expiredIn: Number(process.env.TOKEN_CONFIG_EXPIRED_IN_SECONDS),
@@ -88,8 +92,16 @@ if (process.env.DB_USERNAME) {
             test: process.env.REVOLUT_TEST === "1" || process.env.TEST === "1",
           }
         : null,
+        paynowConfig: process.env.PAYNOW_API_KEY
+            ? {
+                apiKey: process.env.PAYNOW_API_KEY,
+                apiSignatureKey: process.env.PAYNOW_API_SIGNATURE_KEY,
+                continueUrl: process.env.PAYNOW_CONTINUE_URL,
+                test: process.env.PAYNOW_TEST === "1" || process.env.TEST === "1",
+            }
+            : null,
     }),
-    TypeOrmModule.forRoot(dbOptions),
+    TypeOrmModule.forRoot(dbOptions as any),
   ],
   providers: [
     {
