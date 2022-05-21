@@ -97,8 +97,6 @@ export class PaynowService implements ITransPaymentSingleService {
       })
       .toPromise();
 
-    if (!response.data.orders) return null;
-
     return {
       status: this.getStatusFromExternal(response.data.status),
       data: response.data,
