@@ -101,10 +101,9 @@ export default function (options: Schema): Rule {
             externalSchematic('@nrwl/angular', 'library', {
                 name: 'angular',
                 directory: domainNamePluralize + '/shell',
-                style: "scss",
                 unitTestRunner: "jest",
                 linter: "eslint",
-                buildable: true
+                buildable: true,
             }),
             clearModules,
             mergeWith(templateSource, MergeStrategy.Overwrite),
