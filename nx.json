@@ -34,7 +34,6 @@
     ]
   },
   "cli": {
-    "defaultCollection": "@nrwl/nest",
     "analytics": false
   },
   "defaultProject": "api-auth",
