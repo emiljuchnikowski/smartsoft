@@ -66,7 +66,7 @@ import {CrudComponentsModule} from "@smartsoft001/crud-shell-angular";
         },
         { path: "", redirectTo: "/todos", pathMatch: "full" },
       ],
-      { initialNavigation: "enabled", useHash: true, relativeLinkResolution: 'legacy' }
+      { initialNavigation: 'enabledBlocking', useHash: true, relativeLinkResolution: 'legacy' }
     ),
     StoreModule.forRoot(
       {},
