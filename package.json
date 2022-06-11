@@ -132,7 +132,7 @@
   "devDependencies": {
     "@angular-devkit/architect": "0.1400.1",
     "@angular-devkit/build-angular": "14.0.1",
-    "@angular/cli": "13.3.2",
+    "@angular/cli": "~14.0.0",
     "@angular/compiler-cli": "14.0.1",
     "@angular/language-service": "14.0.1",
     "@babel/core": "7.12.3",
@@ -201,4 +201,3 @@
   },
   "sideEffects": true
 }
-
