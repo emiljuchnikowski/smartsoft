@@ -1,7 +1,7 @@
 import "reflect-metadata";
 
 import {Inject, Injectable, Optional} from "@angular/core";
-import {AbstractControl, FormArray, FormBuilder, Validators,} from "@angular/forms";
+import {AbstractControl, UntypedFormArray, UntypedFormBuilder, Validators,} from "@angular/forms";
 import * as _ from "lodash";
 import {delay, tap} from "rxjs/operators";
 
@@ -25,7 +25,7 @@ import {DetailsService} from "../../services/details/details.service";
 @Injectable()
 export class FormFactory {
   constructor(
-      private fb: FormBuilder,
+      private fb: UntypedFormBuilder,
       private authService: AuthService,
       private detailsService: DetailsService,
       @Optional() @Inject(MODEL_VALIDATORS_PROVIDER) private validatorsProvider: IModelValidatorsProvider
@@ -111,7 +111,7 @@ export class FormFactory {
         control = this.fb.array([]);
         if (obj[field.key]) {
           for (let indexField = 0; indexField < (obj[field.key] as []).length; indexField ++) {
-            (control as FormArray).push(await this.create(obj[field.key][indexField], {
+            (control as UntypedFormArray).push(await this.create(obj[field.key][indexField], {
               ...ops,
               root: ops.root ? ops.root : result
             }))

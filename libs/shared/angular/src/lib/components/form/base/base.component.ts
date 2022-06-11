@@ -8,7 +8,7 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {UntypedFormGroup} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
 import {delay} from "rxjs/operators";
 
@@ -23,7 +23,7 @@ export abstract class FormBaseComponent<T> extends BaseComponent {
   private _fields: Array<string>;
   private _subscription: Subscription;
   private _model: any;
-  private _form: FormGroup;
+  private _form: UntypedFormGroup;
   private _possibilities: {
     [key: string]: Observable<{ id: any, text: string }[]>;
   };
@@ -50,7 +50,7 @@ export abstract class FormBaseComponent<T> extends BaseComponent {
     return this._inputComponents;
   }
 
-  @Input() set form(val: FormGroup) {
+  @Input() set form(val: UntypedFormGroup) {
     if (this._subscription) {
       this._subscription.unsubscribe();
     }
@@ -68,7 +68,7 @@ export abstract class FormBaseComponent<T> extends BaseComponent {
 
     this.afterSetForm();
   }
-  get form(): FormGroup {
+  get form(): UntypedFormGroup {
     return this._form;
   }
 

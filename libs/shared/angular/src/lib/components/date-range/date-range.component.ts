@@ -8,7 +8,7 @@ import {
     ViewChild, EventEmitter, forwardRef, ElementRef, HostListener
 } from "@angular/core";
 import {DomController, IonContent, ModalController, NavParams} from "@ionic/angular";
-import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
+import {ControlValueAccessor, UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
 import {Subject, Subscription} from "rxjs";
 import {distinctUntilChanged, filter, tap} from "rxjs/operators";
 // @ts-ignore
@@ -146,7 +146,7 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
     @Input() restrictSelectionTo: number;
     @ViewChild('scrollMe', { static: true }) scrollMe: IonContent;
     public currentDate = moment().clone();
-    public dateForm: FormGroup;
+    public dateForm: UntypedFormGroup;
     calendar: month[] = [{ dates: null, monthName: null, year: null, number: null }];
     selectedButtonName = FilterBtnConstants.empthyString;
     scrollPositionValue = 0;
@@ -161,7 +161,7 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
     subjectSubscription: Subscription;
 
 
-    constructor(private fb: FormBuilder,
+    constructor(private fb: UntypedFormBuilder,
                 private modalController: ModalController,
                 private navParams: NavParams,
                 private uiService: UIService,
@@ -187,8 +187,8 @@ export class DateRangeModalComponent implements OnInit, AfterContentInit {
         });
     }
 
-    get datesRefGroup(): FormGroup {
-        return this.dateForm.get('datesRefGroup') as FormGroup;
+    get datesRefGroup(): UntypedFormGroup {
+        return this.dateForm.get('datesRefGroup') as UntypedFormGroup;
     }
 
     ngOnInit() {

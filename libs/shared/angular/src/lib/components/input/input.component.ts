@@ -12,7 +12,7 @@ import {InputOptions} from "../../models/interfaces";
 import {FieldType, getModelFieldOptions, getModelFieldsWithOptions, IFieldOptions} from "@smartsoft001/models";
 import {InputBaseComponent} from "./base/base.component";
 import {StyleService} from "../../services";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormArray, FormControl, FormGroup} from "@angular/forms";
 import {ObjectService} from "@smartsoft001/utils";
 
 @Component({
@@ -78,7 +78,7 @@ export class InputComponent<T> implements OnInit {
   oSetValue($event: any): void {
     if (!$event) return;
 
-    if (this.options.control instanceof FormArray) {
+    if (this.options.control instanceof UntypedFormArray) {
       this.options.control.clear();
     }
 

@@ -9,7 +9,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { Subscription } from "rxjs";
 import {IonSearchbar} from "@ionic/angular";
 import {debounceTime} from "rxjs/operators";
@@ -24,7 +24,7 @@ import {debounceTime} from "rxjs/operators";
 export class SearchbarComponent implements OnDestroy, AfterViewInit {
   private _subscriptions = new Subscription();
 
-  control: FormControl;
+  control: UntypedFormControl;
   @Input() show: boolean;
 
   @Input() set text(val: string) {
@@ -36,7 +36,7 @@ export class SearchbarComponent implements OnDestroy, AfterViewInit {
   @ViewChild("searchbar", { static: true, read: IonSearchbar }) searchEl: IonSearchbar;
 
   constructor() {
-    this.control = new FormControl();
+    this.control = new UntypedFormControl();
   }
 
   async setShow(): Promise<void> {

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup} from "@angular/forms";
 
 import {getModelFieldsWithOptions, IModelStep} from "@smartsoft001/models";
 import {ArrayService} from "@smartsoft001/utils";
@@ -13,9 +13,9 @@ import {FormBaseComponent} from "../base/base.component";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormStepperComponent<T> extends FormBaseComponent<T> implements OnInit {
-    steps: Array<IModelStep & { fields: Array<string>, form: FormGroup }>;
+    steps: Array<IModelStep & { fields: Array<string>, form: UntypedFormGroup }>;
 
-    constructor(cd: ChangeDetectorRef, private fb: FormBuilder) {
+    constructor(cd: ChangeDetectorRef, private fb: UntypedFormBuilder) {
         super(cd);
     }
 
@@ -36,7 +36,7 @@ export class FormStepperComponent<T> extends FormBaseComponent<T> implements OnI
         if (!this.model || !this.form) return;
 
         const fieldWithOptions = getModelFieldsWithOptions(this.model).filter(fwo => fwo.options.step);
-        const steps: Array<IModelStep & { fields: Array<string>, form: FormGroup }> = [];
+        const steps: Array<IModelStep & { fields: Array<string>, form: UntypedFormGroup }> = [];
 
         ArrayService.sort(fieldWithOptions, fwo => fwo.options.step.number).forEach(fwo => {
             let step = steps.find(s => s.number === fwo.options.step.number);

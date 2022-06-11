@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 
 import {InputBaseComponent} from "../base/base.component";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl} from "@angular/forms";
 
 @Component({
   selector: 'smart-input-ints',
@@ -9,9 +9,9 @@ import {FormBuilder, FormControl} from "@angular/forms";
   styleUrls: ['./ints.component.scss'],
 })
 export class InputIntsComponent<T> extends InputBaseComponent<T> implements OnInit {
-  list: Array<FormControl> = [];
+  list: Array<UntypedFormControl> = [];
 
-  constructor(cd: ChangeDetectorRef, private fb: FormBuilder) {
+  constructor(cd: ChangeDetectorRef, private fb: UntypedFormBuilder) {
     super(cd);
   }
 
@@ -55,7 +55,7 @@ export class InputIntsComponent<T> extends InputBaseComponent<T> implements OnIn
     this.list.push(this.fb.control(val));
   }
 
-  removeItem(item: FormControl) {
+  removeItem(item: UntypedFormControl) {
     const index = this.list.indexOf(item);
     if (index > -1) {
       this.list.splice(index, 1);

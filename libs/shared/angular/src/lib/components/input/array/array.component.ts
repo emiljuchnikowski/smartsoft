@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
-import {FormArray} from "@angular/forms";
+import {UntypedFormArray} from "@angular/forms";
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 
 import {ObjectService} from "@smartsoft001/utils";
@@ -28,7 +28,7 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
                     root: this.internalOptions.control.root
                 }
             );
-            (this.internalOptions.control as FormArray).push(control);
+            (this.internalOptions.control as UntypedFormArray).push(control);
             this.childOptions.push({
                 treeLevel: this.internalOptions.treeLevel + 1,
                 mode: this.internalOptions.mode,
@@ -61,7 +61,7 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
     }
 
     onRemove(index: number) {
-        (this.internalOptions.control as FormArray).removeAt(index);
+        (this.internalOptions.control as UntypedFormArray).removeAt(index);
         this.initData();
         this.control.markAsDirty();
         this.control.setValue(this.childOptions.map(o => o.control.value));
@@ -70,7 +70,7 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
     ngOnInit() {}
 
     private initData(): void {
-        this.childOptions = (this.internalOptions.control as FormArray).controls.map(control => {
+        this.childOptions = (this.internalOptions.control as UntypedFormArray).controls.map(control => {
             const options = this.getOptions();
             const modelOptions = getModelOptions(options.classType);
 
@@ -105,14 +105,14 @@ export class InputArrayComponent<T, TChild> extends InputBaseComponent<T> implem
         }
         swapArray(this.childOptions, event.previousIndex, event.currentIndex);
 
-        const swapFormArray = function (arr: FormArray, index1, index2) {
+        const swapFormArray = function (arr: UntypedFormArray, index1, index2) {
             const c1 = arr.at(index1);
             const c2 = arr.at(index2);
 
             arr.controls[index2] = c1;
             arr.controls[index1] = c2;
         }
-        swapFormArray(this.control as FormArray, event.previousIndex, event.currentIndex);
+        swapFormArray(this.control as UntypedFormArray, event.previousIndex, event.currentIndex);
 
         this.control.updateValueAndValidity();
     }

@@ -28,7 +28,7 @@ import { CrudFullConfig } from "../../crud.config";
 import { CrudService } from "../../services/crud/crud.service";
 import { ICrudFilter } from "../../models/interfaces";
 import { IonContent } from "@ionic/angular";
-import {AbstractControl, FormArray, FormControl, FormGroup} from "@angular/forms"
+import {AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from "@angular/forms"
 import {ItemStandardComponent} from "./standard/standard.component";
 import { CrudItemPageBaseComponent } from "./base/base.component";
 import { PageService } from "../../services/page/page.service";
@@ -436,17 +436,17 @@ export class ItemComponent<T extends IEntity<string>>
       return;
     }
 
-    if (control instanceof FormControl) {
+    if (control instanceof UntypedFormControl) {
       invalidFields.push(field);
     }
 
-    if (control instanceof FormGroup) {
+    if (control instanceof UntypedFormGroup) {
       Object.keys(control.controls).forEach(groupKey => {
         this.getInvalidFields(control.controls[groupKey], invalidFields, field, groupKey);
       });
     }
 
-    if (control instanceof FormArray) {
+    if (control instanceof UntypedFormArray) {
       control.controls.forEach((c, index) => {
         this.getInvalidFields(c, invalidFields, field + `(${index + 1})`);
       });
