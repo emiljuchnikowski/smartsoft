@@ -2,6 +2,7 @@
   "version": 1,
   "projects": {
     "api-auth": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/api/auth",
       "sourceRoot": "apps/api/auth/src",
       "projectType": "application",
@@ -60,6 +61,7 @@
       ]
     },
     "api-crud": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/api/crud",
       "sourceRoot": "apps/api/crud/src",
       "projectType": "application",
@@ -116,6 +118,7 @@
       ]
     },
     "api-files": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/api/files",
       "sourceRoot": "apps/api/files/src",
       "projectType": "application",
@@ -172,6 +175,7 @@
       ]
     },
     "api-stream": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/api/stream",
       "sourceRoot": "apps/api/stream/src",
       "projectType": "application",
@@ -228,6 +232,7 @@
       ]
     },
     "api-trans": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/api/trans",
       "sourceRoot": "apps/api/trans/src",
       "projectType": "application",
@@ -284,6 +289,7 @@
       ]
     },
     "auth-domain": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/auth/domain",
       "sourceRoot": "libs/auth/domain/src",
       "projectType": "library",
@@ -325,6 +331,7 @@
       "tags": []
     },
     "auth-shell-angular": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/auth/shell/angular",
       "sourceRoot": "libs/auth/shell/angular/src",
@@ -365,6 +372,7 @@
       ]
     },
     "auth-shell-app-services": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/auth/shell/app-services",
       "sourceRoot": "libs/auth/shell/app-services/src",
       "projectType": "library",
@@ -406,6 +414,7 @@
       "tags": []
     },
     "auth-shell-dtos": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/auth/shell/dtos",
       "sourceRoot": "libs/auth/shell/dtos/src",
       "projectType": "library",
@@ -447,6 +456,7 @@
       "tags": []
     },
     "auth-shell-nestjs": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/auth/shell/nestjs",
       "sourceRoot": "libs/auth/shell/nestjs/src",
       "projectType": "library",
@@ -491,6 +501,7 @@
       ]
     },
     "crud-domain": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/crud/domain",
       "sourceRoot": "libs/crud/domain/src",
       "projectType": "library",
@@ -542,6 +553,7 @@
       ]
     },
     "crud-shell-angular": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/crud/shell/angular",
       "sourceRoot": "libs/crud/shell/angular/src",
@@ -582,6 +594,7 @@
       ]
     },
     "crud-shell-angular-e2e": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/crud-shell-angular-e2e",
       "sourceRoot": "apps/crud-shell-angular-e2e/src",
       "projectType": "application",
@@ -606,6 +619,7 @@
       ]
     },
     "crud-shell-app-services": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/crud/shell/app-services",
       "sourceRoot": "libs/crud/shell/app-services/src",
       "projectType": "library",
@@ -657,6 +671,7 @@
       ]
     },
     "crud-shell-dtos": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/crud/shell/dtos",
       "sourceRoot": "libs/crud/shell/dtos/src",
       "projectType": "library",
@@ -708,6 +723,7 @@
       ]
     },
     "crud-shell-nestjs": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/crud/shell/nestjs",
       "sourceRoot": "libs/crud/shell/nestjs/src",
       "projectType": "library",
@@ -759,6 +775,7 @@
       ]
     },
     "shared-angular": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/shared/angular",
       "sourceRoot": "libs/shared/angular/src",
@@ -825,6 +842,7 @@
       ]
     },
     "shared-angular-e2e": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/shared-angular-e2e",
       "sourceRoot": "apps/shared-angular-e2e/src",
       "projectType": "application",
@@ -849,6 +867,7 @@
       ]
     },
     "shared-cli": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/cli",
       "sourceRoot": "libs/shared/cli/src",
       "projectType": "library",
@@ -891,6 +910,7 @@
       "tags": []
     },
     "shared-core": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/core",
       "sourceRoot": "libs/shared/core/src",
       "projectType": "library",
@@ -932,6 +952,7 @@
       "tags": []
     },
     "shared-domain-core": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/shared/domain-core",
       "sourceRoot": "libs/shared/domain-core/src",
@@ -982,6 +1003,7 @@
       ]
     },
     "shared-fb": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/fb",
       "sourceRoot": "libs/shared/fb/src",
       "projectType": "library",
@@ -1023,6 +1045,7 @@
       "tags": []
     },
     "shared-files-nestjs": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/files/nestjs",
       "sourceRoot": "libs/shared/files/nestjs/src",
       "projectType": "library",
@@ -1045,6 +1068,7 @@
       ]
     },
     "shared-google": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/google",
       "sourceRoot": "libs/shared/google/src",
       "projectType": "library",
@@ -1086,6 +1110,7 @@
       "tags": []
     },
     "shared-models": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/shared/models",
       "sourceRoot": "libs/shared/models/src",
@@ -1136,6 +1161,7 @@
       ]
     },
     "shared-mongo": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/mongo",
       "sourceRoot": "libs/shared/mongo/src",
       "projectType": "library",
@@ -1187,6 +1213,7 @@
       ]
     },
     "shared-nestjs": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/nestjs",
       "sourceRoot": "libs/shared/nestjs/src",
       "projectType": "library",
@@ -1238,6 +1265,7 @@
       ]
     },
     "shared-paynow": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/paynow",
       "sourceRoot": "libs/shared/paynow/src",
       "projectType": "library",
@@ -1283,6 +1311,7 @@
       ]
     },
     "shared-paypal": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/paypal",
       "sourceRoot": "libs/shared/paypal/src",
       "projectType": "library",
@@ -1328,6 +1357,7 @@
       ]
     },
     "shared-payu": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/payu",
       "sourceRoot": "libs/shared/payu/src",
       "projectType": "library",
@@ -1373,6 +1403,7 @@
       ]
     },
     "shared-revolut": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/revolut",
       "sourceRoot": "libs/shared/revolut/src",
       "projectType": "library",
@@ -1418,6 +1449,7 @@
       ]
     },
     "shared-schematics": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/schematics",
       "sourceRoot": "libs/shared/schematics/src",
       "projectType": "library",
@@ -1484,6 +1516,7 @@
       "tags": []
     },
     "shared-test": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/shared/test",
       "sourceRoot": "libs/shared/test/src",
@@ -1503,6 +1536,7 @@
       "tags": []
     },
     "shared-users": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/shared/users",
       "sourceRoot": "libs/shared/users/src",
@@ -1553,6 +1587,7 @@
       ]
     },
     "shared-utils": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/shared/utils",
       "sourceRoot": "libs/shared/utils/src",
       "projectType": "library",
@@ -1604,6 +1639,7 @@
       ]
     },
     "stream-domain": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/stream/domain",
       "sourceRoot": "libs/stream/domain/src",
       "projectType": "library",
@@ -1655,6 +1691,7 @@
       ]
     },
     "stream-shell-angular": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/stream/shell/angular",
       "sourceRoot": "libs/stream/shell/angular/src",
       "projectType": "library",
@@ -1708,6 +1745,7 @@
       ]
     },
     "stream-shell-angular-e2e": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/stream-shell-angular-e2e",
       "sourceRoot": "apps/stream-shell-angular-e2e/src",
       "projectType": "application",
@@ -1732,6 +1770,7 @@
       ]
     },
     "stream-shell-app-services": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/stream/shell/app-services",
       "sourceRoot": "libs/stream/shell/app-services/src",
       "projectType": "library",
@@ -1783,6 +1822,7 @@
       ]
     },
     "stream-shell-dtos": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/stream/shell/dtos",
       "sourceRoot": "libs/stream/shell/dtos/src",
       "projectType": "library",
@@ -1805,6 +1845,7 @@
       ]
     },
     "stream-shell-nestjs": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/stream/shell/nestjs",
       "sourceRoot": "libs/stream/shell/nestjs/src",
       "projectType": "library",
@@ -1827,6 +1868,7 @@
       ]
     },
     "test": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/test",
       "sourceRoot": "libs/test/src",
@@ -1859,6 +1901,7 @@
       "tags": []
     },
     "trans-domain": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/trans/domain",
       "sourceRoot": "libs/trans/domain/src",
       "projectType": "library",
@@ -1904,6 +1947,7 @@
       ]
     },
     "trans-shell-angular": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/trans/shell/angular",
       "sourceRoot": "libs/trans/shell/angular/src",
       "projectType": "library",
@@ -1926,6 +1970,7 @@
       ]
     },
     "trans-shell-app-services": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/trans/shell/app-services",
       "sourceRoot": "libs/trans/shell/app-services/src",
       "projectType": "library",
@@ -1971,6 +2016,7 @@
       ]
     },
     "trans-shell-dtos": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/trans/shell/dtos",
       "sourceRoot": "libs/trans/shell/dtos/src",
       "projectType": "library",
@@ -2016,6 +2062,7 @@
       ]
     },
     "trans-shell-nestjs": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/trans/shell/nestjs",
       "sourceRoot": "libs/trans/shell/nestjs/src",
       "projectType": "library",
@@ -2061,6 +2108,7 @@
       ]
     },
     "ui-test": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
@@ -2241,6 +2289,7 @@
       "tags": []
     },
     "ui-test-e2e": {
+      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/ui/test-e2e",
       "sourceRoot": "apps/ui/test-e2e/src",
       "projectType": "application",

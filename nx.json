@@ -49,5 +49,6 @@
     "@nrwl/angular:component": {
       "style": "css"
     }
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }
