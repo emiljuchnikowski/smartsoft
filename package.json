@@ -38,6 +38,7 @@
     "schematics:publish": "nx run shared-schematics:publish",
     "schematics:dev": "nx run shared-schematics:dev",
     "cli:build": "nx run shared-cli:build --with-deps",
+    "all:build": "nx run-many --target=build --projects=shared-core,shared-cli --parallel=1  --with-deps",
     "prepare": "husky install",
     "publish": "export NODE_OPTIONS=--max_old_space_size=16192 && node tools/npm/publish.js"
   },

@@ -167,8 +167,7 @@ console.log('publish schematics');
 runCommand('npm run schematics:publish');
 
 console.log('build');
-runCommand('npm run core:build');
-runCommand('npm run cli:build');
+runCommand('npm run all:build');
 
 console.log('npm publish');
 for (let index = 0; index < libs.length; index++) {
