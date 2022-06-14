@@ -1,6 +1,5 @@
 stages:
   - install
-  - build
   - push
   - deploy
 
@@ -11,8 +10,23 @@ cache:
     - .npm/
     - cache/Cypress
 
+variables:
+  NPM_TOKEN: $NPM_TOKEN
+
 install:
   image: node:14.18.1
   stage: install
   script:
     - npm install --prefer-offline --no-audit --cache .npm
+
+push_npm:
+  image: node:14.18.1
+  stage: push
+  script:
+    - npm install --prefer-offline --no-audit --cache .npm
+    - export NODE_OPTIONS="--max-old-space-size=8192" && npm run publish
+    - git add libs
+    - git commit -m "build npm publish [skip ci]"
+    - git push origin HEAD:$CI_COMMIT_BRANCH -o ci.skip
+  dependencies:
+    - install
