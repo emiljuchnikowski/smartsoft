@@ -1,0 +1,18 @@
+stages:
+  - install
+  - build
+  - push
+  - deploy
+
+cache:
+  untracked: true
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .npm/
+    - cache/Cypress
+
+install:
+  image: node:14.18.1
+  stage: install
+  script:
+    - npm install --prefer-offline --no-audit --cache .npm
