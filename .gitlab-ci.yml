@@ -20,7 +20,7 @@ install:
   script:
     - npm install --prefer-offline --no-audit --cache .npm
 
-push_npm:
+push:npm:
   image: node:14.18.1
   stage: push
   script:
