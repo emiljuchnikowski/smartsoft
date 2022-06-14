@@ -12,6 +12,7 @@ cache:
 
 variables:
   NPM_TOKEN: $NPM_TOKEN
+  GITHUB_TOKEN: $GITHUB_TOKEN
 
 install:
   image: node:14.18.1
@@ -28,5 +29,7 @@ push_npm:
     - git add libs
     - git commit -m "build npm publish [skip ci]"
     - git push origin HEAD:$CI_COMMIT_BRANCH -o ci.skip
+    - git remote add github "https://oauth2:$GITHUB_TOKEN@github.com/emiljuchnikowski/smartsoft"
+    - git push github HEAD:$CI_COMMIT_BRANCH
   dependencies:
     - install
