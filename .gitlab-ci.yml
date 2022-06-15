@@ -26,6 +26,8 @@ push:npm:
   script:
     - npm install --prefer-offline --no-audit --cache .npm
     - export NODE_OPTIONS="--max-old-space-size=8192" && npm run publish
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git add libs
     - git commit -m "build npm publish [skip ci]"
     - git push origin HEAD:$CI_COMMIT_BRANCH -o ci.skip
