@@ -163,17 +163,17 @@ for (let index = 0; index < libs.length; index++) {
 // })
 
 
-// console.log('publish schematics');
-// runCommand('npm run schematics:publish');
-//
-// console.log('build');
-// runCommand('npm run all:build');
-//
-// console.log('npm publish');
-// for (let index = 0; index < libs.length; index++) {
-//     const lib = libs[index];
-//
-//     if (lib.path) {
-//         runCommand('npm publish dist/' + lib.path + ' --access public');
-//     }
-// }
+console.log('publish schematics');
+runCommand('npm run schematics:publish');
+
+console.log('build');
+runCommand('npm run all:build');
+
+console.log('npm publish');
+for (let index = 0; index < libs.length; index++) {
+    const lib = libs[index];
+
+    if (lib.path) {
+        runCommand('npm publish dist/' + lib.path + ' --access public');
+    }
+}
