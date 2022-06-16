@@ -13,6 +13,7 @@ cache:
 variables:
   NPM_TOKEN: $NPM_TOKEN
   GITHUB_TOKEN: $GITHUB_TOKEN
+  GITLAB_TOKEN: $GITLAB_TOKEN
 
 install:
   image: node:14.18.1
@@ -31,7 +32,8 @@ push:npm:
     - project_url=$(echo $CI_PROJECT_URL | sed 's/https:\/\///')
     - git add libs
     - git commit -m "build npm publish [skip ci]"
-    - git push origin HEAD:$CI_COMMIT_BRANCH -o ci.skip
+    - git remote add smart "https://oauth2:$GITLAB_TOKEN@gitlab.smartsoft.biz.pl/core/framework"
+    - git push smart HEAD:$CI_COMMIT_BRANCH -o ci.skip
     - git remote add github "https://oauth2:$GITHUB_TOKEN@github.com/emiljuchnikowski/smartsoft"
     - git push github HEAD:$CI_COMMIT_BRANCH
   dependencies:
