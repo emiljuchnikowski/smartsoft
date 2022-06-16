@@ -130,11 +130,10 @@ const libs = [
         name: "trans-shell-nestjs",
         path: "libs/trans/shell/nestjs"
     },
-
-    {
-        cmd: "schematics:publish",
-        path: "libs/shared/schematics"
-    },
+    // {
+    //     cmd: "schematics:publish",
+    //     path: "libs/shared/schematics"
+    // },
     {
         name: "shared-core",
         path: "libs/shared/core"
@@ -164,8 +163,8 @@ for (let index = 0; index < libs.length; index++) {
 // })
 
 
-console.log('publish schematics');
-runCommand('npm run schematics:publish');
+// console.log('publish schematics');
+// runCommand('npm run schematics:publish');
 
 console.log('build');
 runCommand('npm run all:build');
