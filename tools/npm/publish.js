@@ -132,7 +132,8 @@ const libs = [
     },
 
     {
-        cmd: "schematics:publish"
+        cmd: "schematics:publish",
+        path: "libs/shared/schematics"
     },
     {
         name: "shared-core",
