@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import {
   StoreRouterConnectingModule,
-  DefaultRouterStateSerializer,
+  FullRouterStateSerializer,
 } from "@ngrx/router-store";
 import { RouterModule } from "@angular/router";
 import { StoreModule } from "@ngrx/store";
@@ -92,7 +92,7 @@ import {CrudComponentsModule} from "@smartsoft001/crud-shell-angular";
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({
-      serializer: DefaultRouterStateSerializer,
+      serializer: FullRouterStateSerializer,
     }),
     NgrxSharedModule,
   ],
