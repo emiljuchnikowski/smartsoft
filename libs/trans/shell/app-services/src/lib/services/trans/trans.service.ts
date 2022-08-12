@@ -1,5 +1,6 @@
-import { HttpService, Injectable, Optional } from "@nestjs/common";
+import { Injectable, Optional } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
+import {HttpService} from "@nestjs/axios";
 
 import {
   ITransCreate,

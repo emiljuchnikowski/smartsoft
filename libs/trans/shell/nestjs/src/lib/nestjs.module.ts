@@ -1,23 +1,18 @@
-import { DynamicModule, HttpModule, Module } from "@nestjs/common";
+import { DynamicModule, Module } from "@nestjs/common";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { HttpModule } from "@nestjs/axios";
 
 import { SERVICES } from "@smartsoft001/trans-shell-app-services";
 import { DOMAIN_SERVICES, TransConfig } from "@smartsoft001/trans-domain";
-import { ENTITIES } from "@smartsoft001/trans-domain";
 import { PayuConfig, PayuService } from "@smartsoft001/payu";
 import { PaypalConfig, PaypalService } from "@smartsoft001/paypal";
 import { RevolutConfig, RevolutService } from "@smartsoft001/revolut";
+import { CrudShellNestjsModule } from "@smartsoft001/crud-shell-nestjs";
+import { SharedConfig } from "@smartsoft001/nestjs";
+import { PaynowConfig, PaynowService } from "@smartsoft001/paynow";
 
 import { CONTROLLERS } from "./controllers";
-import { CrudModule } from "@smartsoft001/crud-shell-angular";
-import {
-  CrudShellNestjsCoreModule,
-  CrudShellNestjsModule,
-} from "@smartsoft001/crud-shell-nestjs";
-import { SharedConfig } from "@smartsoft001/nestjs";
-import {PaynowConfig, PaynowService} from "@smartsoft001/paynow";
 
 @Module({
   imports: [HttpModule],
@@ -139,11 +134,11 @@ export class TransShellNestjsCoreModule {
             ]
           : []),
         ...(config.paynowConfig
-            ? [
+          ? [
               { provide: PaynowConfig, useValue: config.paynowConfig },
               PaynowService,
             ]
-            : []),
+          : []),
       ],
       imports: [
         CrudShellNestjsModule.forRoot({

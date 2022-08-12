@@ -1,5 +1,6 @@
-import { HttpService, Injectable, Logger, Optional } from "@nestjs/common";
+import { Injectable, Logger, Optional } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
+import {HttpService} from "@nestjs/axios";
 
 import {
   ITransPaymentSingleService,

@@ -1,12 +1,10 @@
 import {
-  HttpService,
-  Inject,
   Injectable,
   Logger,
-  Optional,
 } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 import * as CryptoJS from "crypto-js";
+import {HttpService} from "@nestjs/axios";
 
 import {
   ITransPaymentSingleService,

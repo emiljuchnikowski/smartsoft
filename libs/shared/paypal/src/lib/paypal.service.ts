@@ -1,6 +1,7 @@
-import { HttpService, Inject, Injectable, Logger, Optional } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import * as paypal from "paypal-rest-sdk";
 import {ModuleRef} from "@nestjs/core";
+import {HttpService} from "@nestjs/axios";
 
 import {
   ITransPaymentSingleService,
@@ -13,7 +14,6 @@ import {
   PAYPAL_CONFIG_PROVIDER,
   PaypalConfig,
 } from "./paypal.config";
-import {PAYU_CONFIG_PROVIDER} from "@smartsoft001/payu";
 
 @Injectable()
 export class PaypalService implements ITransPaymentSingleService {

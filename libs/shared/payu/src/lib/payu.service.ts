@@ -1,11 +1,11 @@
 import {
-  HttpService,
   Inject,
   Injectable,
   Logger,
   Optional,
 } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
+import {HttpService} from "@nestjs/axios";
 
 import {
   ITransPaymentSingleService,
