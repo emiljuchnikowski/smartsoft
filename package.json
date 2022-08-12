@@ -63,6 +63,7 @@
     "@ionic/angular": "^6.1.9",
     "@ionic/storage": "^2.3.1",
     "@logisticinfotech/ionic4-datepicker": "^1.4.4",
+    "@nestjs/axios": "^0.1.0",
     "@nestjs/common": "9.0.9",
     "@nestjs/core": "9.0.9",
     "@nestjs/cqrs": "^7.0.1",

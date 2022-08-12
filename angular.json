@@ -2313,5 +2313,8 @@
         "ui-test"
       ]
     }
+  },
+  "cli": {
+    "analytics": "be3cd1d3-6f8a-4f76-92d2-0355a7bf0c13"
   }
 }
