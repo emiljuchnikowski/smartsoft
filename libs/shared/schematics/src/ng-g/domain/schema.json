@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "SchematicsSmartDomain",
+  "id": "SchematicsSmartDomain",
   "title": "Smart Domain Options Schema",
   "type": "object",
   "properties": {

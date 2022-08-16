@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "SchematicsSmartLibrary",
+  "id": "SchematicsSmartLibrary",
   "title": "Smart Library Options Schema",
   "type": "object",
   "properties": {
