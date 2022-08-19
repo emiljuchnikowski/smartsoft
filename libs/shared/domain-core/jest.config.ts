@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
   
   setupFilesAfterEnv: ["<rootDir>/src/test-setup.ts"],
