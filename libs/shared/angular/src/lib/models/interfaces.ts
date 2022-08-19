@@ -82,6 +82,7 @@ export interface IFormOptions<T> {
 export interface IMenuItem {
   mode?: 'divider' | 'default';
   route?: string;
+  click?: (IMenuItem) => void;
   caption?: string;
   component?: any;
   icon?: string;
