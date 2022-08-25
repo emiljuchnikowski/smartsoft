@@ -41,7 +41,7 @@ export class InputRadioComponent<T> extends InputPossibilitiesBaseComponent<T>
             if (!possibilities || _.isArray(possibilities)) return possibilities;
 
             return Object.keys(possibilities).map(key => ({
-              id: key,
+              id: possibilities[key],
               text: key
             }));
           })
