@@ -11,5 +11,5 @@ export default {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../coverage/libs/crud/domain",
-  displayName: "crud-domain","testEnvironment": "node","preset": "../../../jest.preset.ts"
+  displayName: "crud-domain","testEnvironment": "node","preset": "../../../jest.preset.js"
 };

@@ -11,5 +11,5 @@ export default {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../coverage/libs/shared/mongo",
-  displayName: "shared-mongo","testEnvironment": "node","preset": "../../../jest.preset.ts"
+  displayName: "shared-mongo","testEnvironment": "node","preset": "../../../jest.preset.js"
 };

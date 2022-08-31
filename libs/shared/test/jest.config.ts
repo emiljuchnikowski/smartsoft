@@ -15,5 +15,5 @@ export default {
     "jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js",
     "jest-preset-angular/build/AngularSnapshotSerializer.js",
     "jest-preset-angular/build/HTMLCommentSerializer.js",
-  ],"transform": {"^.+\\.(ts|js|html)$":"jest-preset-angular"},"preset": "../../../jest.preset.ts"
+  ],"transform": {"^.+\\.(ts|js|html)$":"jest-preset-angular"},"preset": "../../../jest.preset.js"
 };

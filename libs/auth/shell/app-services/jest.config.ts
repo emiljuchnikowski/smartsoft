@@ -12,5 +12,5 @@ export default {
     "^.+\\.[tj]sx?$": "ts-jest",
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
-  coverageDirectory: "../../../../coverage/libs/auth/shell/app-services","preset": "../../../../jest.preset.ts"
+  coverageDirectory: "../../../../coverage/libs/auth/shell/app-services","preset": "../../../../jest.preset.js"
 };

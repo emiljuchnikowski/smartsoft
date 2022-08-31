@@ -12,5 +12,5 @@ export default {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../coverage/libs/shared/utils",
-  displayName: "shared-utils","preset": "../../../jest.preset.ts"
+  displayName: "shared-utils","preset": "../../../jest.preset.js"
 };

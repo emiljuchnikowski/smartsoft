@@ -11,5 +11,5 @@ export default {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../../coverage/libs/crud/shell/dtos",
-  displayName: "crud-shell-dtos","testEnvironment": "node","preset": "../../../../jest.preset.ts"
+  displayName: "crud-shell-dtos","testEnvironment": "node","preset": "../../../../jest.preset.js"
 };

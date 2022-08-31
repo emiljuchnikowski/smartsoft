@@ -9,10 +9,6 @@ export default {
     },
   },
   coverageDirectory: "../../../coverage/libs/shared/angular",
-  snapshotSerializers: [
-    "jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js",
-    "jest-preset-angular/build/AngularSnapshotSerializer.js",
-    "jest-preset-angular/build/HTMLCommentSerializer.js",
-  ],
-  displayName: "shared-angular","transform": {"^.+\\.(ts|js|html)$":"jest-preset-angular"},"preset": "../../../jest.preset.ts"
+  snapshotSerializers: ["jest-preset-angular/build/serializers/no-ng-attributes","jest-preset-angular/build/serializers/ng-snapshot","jest-preset-angular/build/serializers/html-comment"],
+  displayName: "shared-angular","transform": {"^.+\\.(ts|js|html)$":"jest-preset-angular"},"preset": "../../../jest.preset.js"
 };

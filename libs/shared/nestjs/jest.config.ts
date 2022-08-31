@@ -12,5 +12,5 @@ export default {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../coverage/libs/shared/nestjs",
-  displayName: "shared-nestjs","preset": "../../../jest.preset.ts"
+  displayName: "shared-nestjs","preset": "../../../jest.preset.js"
 };

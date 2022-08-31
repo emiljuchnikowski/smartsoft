@@ -1,5 +1,6 @@
 stages:
   - install
+  - test
   - push
   - deploy
 
@@ -20,6 +21,13 @@ install:
   stage: install
   script:
     - npm install --prefer-offline --no-audit --cache .npm
+
+test:
+  image: node:14.18.1
+  stage: test
+  script:
+    - npm install --prefer-offline --no-audit --cache .npm
+    - npm test
 
 push:npm:
   image: node:14.18.1

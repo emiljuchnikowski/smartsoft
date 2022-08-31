@@ -12,5 +12,5 @@ export default {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../coverage/libs/stream/domain",
-  displayName: "stream-domain","preset": "../../../jest.preset.ts"
+  displayName: "stream-domain","preset": "../../../jest.preset.js"
 };

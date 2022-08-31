@@ -7,5 +7,5 @@ export default {
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "html"],
   coverageDirectory: "../../../../coverage/libs/trans/shell/angular",
   globals: { "ts-jest": { tsConfig: "<rootDir>/tsconfig.spec.json" } },
-  displayName: "trans-shell-angular","preset": "../../../../jest.preset.ts"
+  displayName: "trans-shell-angular","preset": "../../../../jest.preset.js"
 };

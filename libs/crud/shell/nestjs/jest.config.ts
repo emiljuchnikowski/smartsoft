@@ -11,5 +11,5 @@ export default {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../../coverage/libs/crud/shell/nestjs",
-  displayName: "crud-shell-nestjs","testEnvironment": "node","preset": "../../../../jest.preset.ts"
+  displayName: "crud-shell-nestjs","testEnvironment": "node","preset": "../../../../jest.preset.js"
 };

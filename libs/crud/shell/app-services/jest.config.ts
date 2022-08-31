@@ -11,5 +11,5 @@ export default {
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   coverageDirectory: "../../../../coverage/libs/crud/shell/app-services",
-  displayName: "crud-shell-app-services","testEnvironment": "node","preset": "../../../../jest.preset.ts"
+  displayName: "crud-shell-app-services","testEnvironment": "node","preset": "../../../../jest.preset.js"
 };

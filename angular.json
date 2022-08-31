@@ -1515,26 +1515,6 @@
       },
       "tags": []
     },
-    "shared-test": {
-      "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-      "projectType": "library",
-      "root": "libs/shared/test",
-      "sourceRoot": "libs/shared/test/src",
-      "prefix": "smartsoft",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/test"
-          ],
-          "options": {
-            "jestConfig": "libs/shared/test/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
     "shared-users": {
       "$schema": "../../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
@@ -1866,39 +1846,6 @@
         "scope:stream",
         "type:shell"
       ]
-    },
-    "test": {
-      "$schema": "../../node_modules/nx/schemas/project-schema.json",
-      "projectType": "library",
-      "root": "libs/test",
-      "sourceRoot": "libs/test/src",
-      "prefix": "smart",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/test/tsconfig.lib.json",
-            "project": "libs/test/ng-package.json",
-            "buildableProjectDepsInPackageJsonType": "dependencies"
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/test/jest.config.ts",
-            "passWithNoTests": true
-          },
-          "outputs": [
-            "coverage/libs/test"
-          ]
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "tags": []
     },
     "trans-domain": {
       "$schema": "../../../node_modules/nx/schemas/project-schema.json",
@@ -2313,5 +2260,8 @@
         "ui-test"
       ]
     }
+  },
+  "cli": {
+    "analytics": "9ca72797-8656-4058-8d37-8f94b4a35c5c"
   }
 }
