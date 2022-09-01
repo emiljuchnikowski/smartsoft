@@ -1,3 +1,6 @@
-module.exports = {
-    addons: ['@storybook/addon-essentials', '@storybook/addon-viewport'],
-};
+
+    module.exports = {
+      stories: [],
+      addons: ['@storybook/addon-essentials'],
+    };
+    

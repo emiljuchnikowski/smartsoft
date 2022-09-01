@@ -805,7 +805,14 @@
             "port": 4400,
             "configDir": "libs/shared/angular/.storybook",
             "browserTarget": "shared-angular:build-storybook",
-            "compodoc": false
+            "compodoc": false,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/shared/angular/src/lib",
+                "apps/ui/test/src"
+              ]
+            },
+            "styles": []
           },
           "configurations": {
             "ci": {
@@ -815,9 +822,6 @@
         },
         "build-storybook": {
           "builder": "@storybook/angular:build-storybook",
-          "outputs": [
-            "{options.outputPath}"
-          ],
           "options": {
             "outputDir": "dist/storybook/shared-angular",
             "configDir": "libs/shared/angular/.storybook",
