@@ -8,13 +8,13 @@
         <ion-title>{{ 'filters' | translate }}</ion-title>
     </ion-toolbar>
 </ion-header>
-<div class="filter-content">
-    <ng-container *ngIf="filter$ | async; let filter">
+<ion-content style="height: 100vh;">
+    <ion-list>
         <ng-container *ngFor="let item of list">
-            <smart-crud-filter [item]="item" [filter]="filter"></smart-crud-filter>
+            <smart-crud-filter [item]="item" [filter]="filter$ | async"></smart-crud-filter>
         </ng-container>
-    </ng-container>
+    </ion-list>
     <div class="menu-bottom-space">
         &nbsp;
     </div>
-</div>
+</ion-content>
