@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/revolut/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/revolut/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/shared/revolut/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/libs/shared/revolut"
+      ]
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/libs/shared/revolut",
+        "tsConfig": "libs/shared/revolut/tsconfig.lib.json",
+        "packageJson": "libs/shared/revolut/package.json",
+        "main": "libs/shared/revolut/src/index.ts",
+        "assets": [
+          "libs/shared/revolut/*.md"
+        ]
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    }
+  },
+  "tags": [
+    "scope:shared",
+    "type:util"
+  ]
+}

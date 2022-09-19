@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/paynow/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/paynow/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/shared/paynow/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/libs/shared/paynow"
+      ]
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/libs/shared/paynow",
+        "tsConfig": "libs/shared/paynow/tsconfig.lib.json",
+        "packageJson": "libs/shared/paynow/package.json",
+        "main": "libs/shared/paynow/src/index.ts",
+        "assets": [
+          "libs/shared/paynow/*.md"
+        ]
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    }
+  },
+  "tags": [
+    "scope:shared",
+    "type:util"
+  ]
+}

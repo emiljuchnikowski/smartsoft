@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/stream/domain/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:lint",
+      "options": {
+        "linter": "eslint",
+        "tsConfig": [
+          "libs/stream/domain/tsconfig.lib.json",
+          "libs/stream/domain/tsconfig.spec.json"
+        ],
+        "exclude": [
+          "**/node_modules/**",
+          "!libs/stream/domain/**/*"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/stream/domain/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/libs/stream/domain"
+      ]
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/libs/stream/domain",
+        "tsConfig": "libs/stream/domain/tsconfig.lib.json",
+        "packageJson": "libs/stream/domain/package.json",
+        "main": "libs/stream/domain/src/index.ts",
+        "assets": [
+          "libs/stream/domain/*.md"
+        ]
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    }
+  },
+  "tags": [
+    "scope:stream",
+    "type:domain"
+  ]
+}

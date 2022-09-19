@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/api/crud/src",
+  "projectType": "application",
+  "prefix": "api-crud",
+  "generators": {},
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "options": {
+        "outputPath": "dist/apps/api/crud",
+        "main": "apps/api/crud/src/main.ts",
+        "tsConfig": "apps/api/crud/tsconfig.app.json",
+        "assets": [
+          "apps/api/crud/src/assets"
+        ],
+        "buildLibsFromSource": true
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/api/crud/src/environments/environment.ts",
+              "with": "apps/api/crud/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "api-crud:build"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/api/crud/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/apps/api/crud"
+      ]
+    }
+  },
+  "tags": [
+    "scope:app"
+  ]
+}

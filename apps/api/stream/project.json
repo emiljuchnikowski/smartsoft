@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/api/stream/src",
+  "projectType": "application",
+  "prefix": "api-stream",
+  "generators": {},
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "options": {
+        "outputPath": "dist/apps/api/stream",
+        "main": "apps/api/stream/src/main.ts",
+        "tsConfig": "apps/api/stream/tsconfig.app.json",
+        "assets": [
+          "apps/api/stream/src/assets"
+        ],
+        "buildLibsFromSource": true
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/api/stream/src/environments/environment.ts",
+              "with": "apps/api/stream/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "api-stream:build"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/api/stream/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/apps/api/stream"
+      ]
+    }
+  },
+  "tags": [
+    "scope:app"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/fb/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/fb/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/shared/fb"
+      ],
+      "options": {
+        "jestConfig": "libs/shared/fb/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/libs/shared/fb",
+        "tsConfig": "libs/shared/fb/tsconfig.lib.json",
+        "packageJson": "libs/shared/fb/package.json",
+        "main": "libs/shared/fb/src/index.ts",
+        "assets": [
+          "libs/shared/fb/*.md"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

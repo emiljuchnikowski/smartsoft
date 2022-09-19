@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/crud/shell/dtos/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:lint",
+      "options": {
+        "linter": "eslint",
+        "tsConfig": [
+          "libs/crud/shell/dtos/tsconfig.lib.json",
+          "libs/crud/shell/dtos/tsconfig.spec.json"
+        ],
+        "exclude": [
+          "**/node_modules/**",
+          "!libs/crud/shell/dtos/**/*"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/crud/shell/dtos/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/libs/crud/shell/dtos"
+      ]
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/libs/crud/shell/dtos",
+        "tsConfig": "libs/crud/shell/dtos/tsconfig.lib.json",
+        "packageJson": "libs/crud/shell/dtos/package.json",
+        "main": "libs/crud/shell/dtos/src/index.ts",
+        "assets": [
+          "libs/crud/shell/dtos/*.md"
+        ]
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    }
+  },
+  "tags": [
+    "scope:crud",
+    "type:shell"
+  ]
+}

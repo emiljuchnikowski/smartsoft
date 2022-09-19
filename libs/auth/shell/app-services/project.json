@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/auth/shell/app-services/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/auth/shell/app-services/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/auth/shell/app-services"
+      ],
+      "options": {
+        "jestConfig": "libs/auth/shell/app-services/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/libs/auth/shell/app-services",
+        "tsConfig": "libs/auth/shell/app-services/tsconfig.lib.json",
+        "packageJson": "libs/auth/shell/app-services/package.json",
+        "main": "libs/auth/shell/app-services/src/index.ts",
+        "assets": [
+          "libs/auth/shell/app-services/*.md"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

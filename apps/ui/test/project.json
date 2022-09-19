@@ -1,0 +1,180 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "sourceRoot": "apps/ui/test/src",
+  "prefix": "smart",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/ui/test",
+        "index": "apps/ui/test/src/index.html",
+        "main": "apps/ui/test/src/main.ts",
+        "polyfills": "apps/ui/test/src/polyfills.ts",
+        "tsConfig": "apps/ui/test/tsconfig.app.json",
+        "aot": true,
+        "assets": [
+          "apps/ui/test/src/favicon.ico",
+          "apps/ui/test/src/assets",
+          {
+            "glob": "**/*.svg",
+            "input": "node_modules/ionicons/dist/ionicons/svg",
+            "output": "./svg"
+          }
+        ],
+        "styles": [
+          "apps/ui/test/src/styles.scss",
+          {
+            "input": "node_modules/@ionic/angular/css/normalize.css",
+            "inject": true
+          },
+          {
+            "input": "node_modules/@ionic/angular/css/structure.css",
+            "inject": true
+          },
+          {
+            "input": "node_modules/@ionic/angular/css/typography.css",
+            "inject": true
+          },
+          {
+            "input": "node_modules/@ionic/angular/css/core.css",
+            "inject": true
+          },
+          {
+            "input": "node_modules/@ionic/angular/css/padding.css",
+            "inject": true
+          },
+          {
+            "input": "node_modules/@ionic/angular/css/float-elements.css",
+            "inject": true
+          },
+          {
+            "input": "node_modules/@ionic/angular/css/text-alignment.css",
+            "inject": true
+          },
+          {
+            "input": "node_modules/@ionic/angular/css/text-transformation.css",
+            "inject": true
+          },
+          {
+            "input": "node_modules/@ionic/angular/css/flex-utils.css",
+            "inject": true
+          },
+          {
+            "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+            "inject": true
+          },
+          {
+            "input": "src/theme/variables.css",
+            "inject": true
+          }
+        ],
+        "scripts": [],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "libs/shared/angular/src/lib",
+            "apps/ui/test/src"
+          ]
+        },
+        "allowedCommonJsDependencies": [
+          "lodash",
+          "jwt-decode",
+          "chart.js",
+          "socket.io-client",
+          "md5",
+          "lodash-decorators"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/ui/test/src/environments/environment.ts",
+              "with": "apps/ui/test/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": false,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": false,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "100mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "100kb"
+            }
+          ]
+        }
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "ui-test:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "ui-test:build:production"
+        },
+        "development": {}
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "ui-test:build"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/ui/test/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/apps/ui/test"
+      ]
+    },
+    "ionic-cordova-serve": {
+      "executor": "@ionic/angular-toolkit:cordova-serve",
+      "options": {
+        "cordovaBuildTarget": "app:ionic-cordova-build",
+        "devServerTarget": "app:serve"
+      },
+      "configurations": {
+        "production": {
+          "cordovaBuildTarget": "app:ionic-cordova-build:production",
+          "devServerTarget": "app:serve:production"
+        }
+      }
+    },
+    "ionic-cordova-build": {
+      "executor": "@ionic/angular-toolkit:cordova-build",
+      "options": {
+        "browserTarget": "app:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "app:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

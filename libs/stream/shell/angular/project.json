@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/stream/shell/angular/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/stream/shell/angular/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/libs/stream/shell/angular"
+      ]
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/stream/shell/angular/.storybook",
+        "browserTarget": "stream-shell-angular:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputDir": "dist/storybook/stream-shell-angular",
+        "configDir": "libs/stream/shell/angular/.storybook",
+        "browserTarget": "stream-shell-angular:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "scope:stream",
+    "type:shell"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/auth/shell/nestjs/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/auth/shell/nestjs/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/auth/shell/nestjs"
+      ],
+      "options": {
+        "jestConfig": "libs/auth/shell/nestjs/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/libs/auth/shell/nestjs",
+        "tsConfig": "libs/auth/shell/nestjs/tsconfig.lib.json",
+        "packageJson": "libs/auth/shell/nestjs/package.json",
+        "main": "libs/auth/shell/nestjs/src/index.ts",
+        "assets": [
+          "libs/auth/shell/nestjs/*.md"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "scope:auth",
+    "type:shell"
+  ]
+}

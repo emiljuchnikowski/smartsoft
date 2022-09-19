@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/stream/shell/app-services/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:lint",
+      "options": {
+        "linter": "eslint",
+        "tsConfig": [
+          "libs/stream/shell/app-services/tsconfig.lib.json",
+          "libs/stream/shell/app-services/tsconfig.spec.json"
+        ],
+        "exclude": [
+          "**/node_modules/**",
+          "!libs/stream/shell/app-services/**/*"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/stream/shell/app-services/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/libs/stream/shell/app-services"
+      ]
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/libs/stream/shell/app-services",
+        "tsConfig": "libs/stream/shell/app-services/tsconfig.lib.json",
+        "packageJson": "libs/stream/shell/app-services/package.json",
+        "main": "libs/stream/shell/app-services/src/index.ts",
+        "assets": [
+          "libs/stream/shell/app-services/*.md"
+        ]
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    }
+  },
+  "tags": [
+    "scope:stream",
+    "type:shell"
+  ]
+}

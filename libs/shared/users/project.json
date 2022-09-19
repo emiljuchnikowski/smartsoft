@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/users/src",
+  "prefix": "smart",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/users/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/shared/users"
+      ],
+      "options": {
+        "jestConfig": "libs/shared/users/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/libs/shared/users",
+        "tsConfig": "libs/shared/users/tsconfig.lib.json",
+        "packageJson": "libs/shared/users/package.json",
+        "main": "libs/shared/users/src/index.ts",
+        "assets": [
+          "libs/shared/users/*.md"
+        ]
+      }
+    }
+  },
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "tags": [
+    "scope:shared",
+    "type:shell"
+  ]
+}

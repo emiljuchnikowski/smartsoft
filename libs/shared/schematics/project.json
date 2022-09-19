@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/schematics/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/schematics/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/shared/schematics"
+      ],
+      "options": {
+        "jestConfig": "libs/shared/schematics/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/libs/shared/schematics",
+        "tsConfig": "libs/shared/schematics/tsconfig.lib.json",
+        "packageJson": "libs/shared/schematics/package.json",
+        "main": "libs/shared/schematics/src/index.ts",
+        "assets": [
+          "libs/shared/schematics/*.md",
+          "libs/shared/schematics/src/collection.json"
+        ]
+      }
+    },
+    "publish": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "npm version patch --prefix libs/shared/schematics",
+          "nx run shared-schematics:build --with-deps",
+          "node libs/shared/schematics/prepare.js",
+          "npm publish dist/libs/shared/schematics --access public"
+        ],
+        "parallel": false
+      }
+    },
+    "dev": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "npm version patch --prefix libs/shared/schematics",
+          "nx run shared-schematics:build --with-deps",
+          "node libs/shared/schematics/prepare.js",
+          "node libs/shared/schematics/dev.js"
+        ],
+        "parallel": false
+      }
+    }
+  },
+  "tags": []
+}
