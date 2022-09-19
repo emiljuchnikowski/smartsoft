@@ -6,7 +6,7 @@
   "generators": {},
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "options": {
         "outputPath": "dist/apps/api/auth",
         "main": "apps/api/auth/src/main.ts",
@@ -16,7 +16,9 @@
         ],
         "styles": [],
         "scripts": [],
-        "buildLibsFromSource": true
+        "buildLibsFromSource": true,
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "production": {

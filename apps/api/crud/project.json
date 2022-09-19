@@ -6,7 +6,7 @@
   "generators": {},
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "options": {
         "outputPath": "dist/apps/api/crud",
         "main": "apps/api/crud/src/main.ts",
@@ -14,7 +14,9 @@
         "assets": [
           "apps/api/crud/src/assets"
         ],
-        "buildLibsFromSource": true
+        "buildLibsFromSource": true,
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "production": {

@@ -6,7 +6,7 @@
   "generators": {},
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "options": {
         "outputPath": "dist/apps/api/trans",
         "main": "apps/api/trans/src/main.ts",
@@ -14,7 +14,9 @@
         "assets": [
           "apps/api/trans/src/assets"
         ],
-        "buildLibsFromSource": true
+        "buildLibsFromSource": true,
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "production": {
