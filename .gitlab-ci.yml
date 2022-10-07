@@ -39,7 +39,7 @@ push:npm:
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - project_url=$(echo $CI_PROJECT_URL | sed 's/https:\/\///')
     - git add libs
-    - git commit -m "build npm publish [skip ci]"
+    - export HUSKY=0 && git commit -m "build npm publish [skip ci]"
     - git remote add smart "https://oauth2:$GITLAB_TOKEN@gitlab.smartsoft.biz.pl/core/framework"
     - git push smart HEAD:$CI_COMMIT_BRANCH -o ci.skip
     - git remote add github "https://oauth2:$GITHUB_TOKEN@github.com/emiljuchnikowski/smartsoft"
