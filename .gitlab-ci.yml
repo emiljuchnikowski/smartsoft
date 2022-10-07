@@ -17,20 +17,20 @@ variables:
   GITLAB_TOKEN: $GITLAB_TOKEN
 
 install:
-  image: node:14.18.1
+  image: node:16.10.0
   stage: install
   script:
     - npm install --prefer-offline --no-audit --cache .npm
 
 test:
-  image: node:14.18.1
+  image: node:16.10.0
   stage: test
   script:
     - npm install --prefer-offline --no-audit --cache .npm
     - npm test
 
 push:npm:
-  image: node:14.18.1
+  image: node:16.10.0
   stage: push
   script:
     - npm install --prefer-offline --no-audit --cache .npm
