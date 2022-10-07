@@ -26,7 +26,7 @@ test:
   image: node:16.10.0
   stage: test
   script:
-    - npm install --prefer-offline --no-audit--legacy-peer-deps --cache  .npm
+    - npm install --prefer-offline --no-audit --legacy-peer-deps --cache  .npm
     - npm test
 
 push:npm:
