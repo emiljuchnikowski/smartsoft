@@ -81,10 +81,14 @@
       </div>
 
       <ng-template #pagination>
-        <ng-container *ngIf="last && loadNextPage && (totalPages$ | async)">
-          {{ "page" | translate }}:
-          <b>{{ page$ | async }}/{{ totalPages$ | async }}</b>
-        </ng-container>
+          <ng-container *ngIf="last && loadNextPage && (totalPages$ | async)">
+            <div style="float: right">
+              <ion-chip>
+                {{ "page" | translate }}:
+                <b>{{ page$ | async }}/{{ totalPages$ | async }}</b>
+              </ion-chip>
+            </div>
+          </ng-container>
       </ng-template>
     </ng-container>
 
