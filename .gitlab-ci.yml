@@ -20,20 +20,20 @@ install:
   image: node:16.10.0
   stage: install
   script:
-    - npm install --prefer-offline --no-audit --cache --legacy-peer-deps .npm
+    - npm install --prefer-offline --no-audit --legacy-peer-deps --cache .npm
 
 test:
   image: node:16.10.0
   stage: test
   script:
-    - npm install --prefer-offline --no-audit --cache --legacy-peer-deps .npm
+    - npm install --prefer-offline --no-audit--legacy-peer-deps --cache  .npm
     - npm test
 
 push:npm:
   image: node:16.10.0
   stage: push
   script:
-    - npm install --prefer-offline --no-audit --cache --legacy-peer-deps .npm
+    - npm install --prefer-offline --no-audit --legacy-peer-deps --cache .npm
     - export NODE_OPTIONS="--max-old-space-size=8192" && npm run publish
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
