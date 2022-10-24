@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from "@angular/core";
-import { DataPersistence } from "@nrwl/angular";
+//import { DataPersistence } from "@nrwl/angular";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {StoreFeatureModule, StoreModule} from "@ngrx/store";
@@ -85,7 +85,7 @@ export class AuthModule {
         AuthService,
         AuthEffects,
         AuthFacade,
-        DataPersistence,
+        // DataPersistence,
         {
           provide: APP_INITIALIZER,
           useFactory: initializer,

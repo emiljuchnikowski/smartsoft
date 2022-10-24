@@ -24,7 +24,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/auth/shell/angular"
+        "{workspaceRoot}/coverage/libs/auth/shell/angular"
       ]
     }
   },

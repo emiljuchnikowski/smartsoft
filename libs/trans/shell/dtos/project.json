@@ -19,7 +19,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/trans/shell/dtos"
+        "{workspaceRoot}/coverage/libs/trans/shell/dtos"
       ]
     },
     "build": {

@@ -25,7 +25,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/stream/domain"
+        "{workspaceRoot}/coverage/libs/stream/domain"
       ]
     },
     "build": {

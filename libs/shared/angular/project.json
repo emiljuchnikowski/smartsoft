@@ -19,7 +19,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/shared/angular"
+        "{workspaceRoot}/coverage/libs/shared/angular"
       ]
     },
     "storybook": {

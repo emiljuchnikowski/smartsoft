@@ -14,7 +14,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [
-        "coverage/libs/auth/shell/dtos"
+        "{workspaceRoot}/coverage/libs/auth/shell/dtos"
       ],
       "options": {
         "jestConfig": "libs/auth/shell/dtos/jest.config.ts",

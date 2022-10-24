@@ -148,7 +148,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/apps/ui/test"
+        "{workspaceRoot}/coverage/apps/ui/test"
       ]
     },
     "ionic-cordova-serve": {

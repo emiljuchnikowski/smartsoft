@@ -48,7 +48,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/apps/api/crud"
+        "{workspaceRoot}/coverage/apps/api/crud"
       ]
     }
   },

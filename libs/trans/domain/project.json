@@ -19,7 +19,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/trans/domain"
+        "{workspaceRoot}/coverage/libs/trans/domain"
       ]
     },
     "build": {

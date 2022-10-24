@@ -25,7 +25,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/shared/utils"
+        "{workspaceRoot}/coverage/libs/shared/utils"
       ]
     },
     "build": {

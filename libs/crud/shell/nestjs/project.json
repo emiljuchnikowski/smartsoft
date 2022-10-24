@@ -25,7 +25,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/crud/shell/nestjs"
+        "{workspaceRoot}/coverage/libs/crud/shell/nestjs"
       ]
     },
     "build": {

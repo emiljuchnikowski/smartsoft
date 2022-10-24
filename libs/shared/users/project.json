@@ -15,7 +15,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [
-        "coverage/libs/shared/users"
+        "{workspaceRoot}/coverage/libs/shared/users"
       ],
       "options": {
         "jestConfig": "libs/shared/users/jest.config.ts",

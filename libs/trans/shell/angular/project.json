@@ -11,7 +11,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/trans/shell/angular"
+        "{workspaceRoot}/coverage/libs/trans/shell/angular"
       ]
     }
   },

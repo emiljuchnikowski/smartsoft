@@ -25,7 +25,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/stream/shell/app-services"
+        "{workspaceRoot}/coverage/libs/stream/shell/app-services"
       ]
     },
     "build": {

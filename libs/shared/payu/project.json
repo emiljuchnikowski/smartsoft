@@ -19,7 +19,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/shared/payu"
+        "{workspaceRoot}/coverage/libs/shared/payu"
       ]
     },
     "build": {

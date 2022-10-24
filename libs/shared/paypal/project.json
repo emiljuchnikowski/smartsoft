@@ -19,7 +19,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/shared/paypal"
+        "{workspaceRoot}/coverage/libs/shared/paypal"
       ]
     },
     "build": {

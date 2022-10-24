@@ -11,7 +11,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/stream/shell/angular"
+        "{workspaceRoot}/coverage/libs/stream/shell/angular"
       ]
     },
     "storybook": {

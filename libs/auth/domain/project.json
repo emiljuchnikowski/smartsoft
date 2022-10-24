@@ -14,7 +14,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [
-        "coverage/libs/auth/domain"
+        "{workspaceRoot}/coverage/libs/auth/domain"
       ],
       "options": {
         "jestConfig": "libs/auth/domain/jest.config.ts",

@@ -25,7 +25,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/shared/nestjs"
+        "{workspaceRoot}/coverage/libs/shared/nestjs"
       ]
     },
     "build": {

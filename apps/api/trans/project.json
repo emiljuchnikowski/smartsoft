@@ -48,7 +48,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/apps/api/trans"
+        "{workspaceRoot}/coverage/apps/api/trans"
       ]
     }
   },

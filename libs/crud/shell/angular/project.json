@@ -24,7 +24,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/crud/shell/angular"
+        "{workspaceRoot}/coverage/libs/crud/shell/angular"
       ]
     }
   },

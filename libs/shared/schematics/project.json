@@ -14,7 +14,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [
-        "coverage/libs/shared/schematics"
+        "{workspaceRoot}/coverage/libs/shared/schematics"
       ],
       "options": {
         "jestConfig": "libs/shared/schematics/jest.config.ts",

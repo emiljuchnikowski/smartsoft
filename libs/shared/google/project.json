@@ -14,7 +14,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [
-        "coverage/libs/shared/google"
+        "{workspaceRoot}/coverage/libs/shared/google"
       ],
       "options": {
         "jestConfig": "libs/shared/google/jest.config.ts",

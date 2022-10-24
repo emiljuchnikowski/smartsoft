@@ -14,7 +14,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [
-        "coverage/libs/shared/fb"
+        "{workspaceRoot}/coverage/libs/shared/fb"
       ],
       "options": {
         "jestConfig": "libs/shared/fb/jest.config.ts",

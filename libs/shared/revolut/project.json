@@ -19,7 +19,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/shared/revolut"
+        "{workspaceRoot}/coverage/libs/shared/revolut"
       ]
     },
     "build": {

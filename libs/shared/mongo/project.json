@@ -25,7 +25,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/shared/mongo"
+        "{workspaceRoot}/coverage/libs/shared/mongo"
       ]
     },
     "build": {

@@ -25,7 +25,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/crud/shell/dtos"
+        "{workspaceRoot}/coverage/libs/crud/shell/dtos"
       ]
     },
     "build": {

@@ -50,7 +50,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/apps/api/auth"
+        "{workspaceRoot}/coverage/apps/api/auth"
       ]
     }
   },

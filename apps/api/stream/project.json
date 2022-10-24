@@ -48,7 +48,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/apps/api/stream"
+        "{workspaceRoot}/coverage/apps/api/stream"
       ]
     }
   },
