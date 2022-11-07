@@ -26,7 +26,7 @@ import { CrudService } from "@smartsoft001/crud-shell-app-services";
 import { IUser } from "@smartsoft001/users";
 import { User } from "@smartsoft001/nestjs";
 import { IEntity } from "@smartsoft001/domain-core";
-import { AuthJwtGuard } from "../../guards/auth/auth.guard";
+import {AuthJwtGuard, AuthOrAnonymousJwtGuard} from "../../guards/auth/auth.guard";
 import { CreateManyMode } from "@smartsoft001/crud-domain";
 import {GuidService} from "@smartsoft001/utils";
 
@@ -65,7 +65,7 @@ export class CrudController<T extends IEntity<string>> {
     return res.send(result);
   }
 
-  @UseGuards(AuthJwtGuard)
+  @UseGuards(AuthOrAnonymousJwtGuard)
   @Get(":id")
   async readById(
     @Param() params: { id: string },
@@ -80,7 +80,7 @@ export class CrudController<T extends IEntity<string>> {
     return result;
   }
 
-  @UseGuards(AuthJwtGuard)
+  @UseGuards(AuthOrAnonymousJwtGuard)
   @Get()
   async read(
     @User() user: IUser,
