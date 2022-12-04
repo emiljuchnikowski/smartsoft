@@ -49,5 +49,6 @@
   "tags": [
     "scope:stream",
     "type:shell"
-  ]
+  ],
+  "name": "stream-shell-angular"
 }

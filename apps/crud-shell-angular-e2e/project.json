@@ -20,5 +20,6 @@
   "tags": [],
   "implicitDependencies": [
     "crud-shell-angular"
-  ]
+  ],
+  "name": "crud-shell-angular-e2e"
 }

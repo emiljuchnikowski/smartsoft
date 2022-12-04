@@ -56,5 +56,6 @@
   },
   "tags": [
     "scope:app"
-  ]
+  ],
+  "name": "api-auth"
 }

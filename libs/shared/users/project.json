@@ -46,5 +46,6 @@
   "tags": [
     "scope:shared",
     "type:shell"
-  ]
+  ],
+  "name": "shared-users"
 }

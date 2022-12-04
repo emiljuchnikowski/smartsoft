@@ -18,5 +18,6 @@
   "tags": [
     "scope:shared",
     "type:util"
-  ]
+  ],
+  "name": "shared-files-nestjs"
 }

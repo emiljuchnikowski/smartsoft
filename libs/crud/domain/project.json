@@ -47,5 +47,6 @@
   "tags": [
     "scope:crud",
     "type:domain"
-  ]
+  ],
+  "name": "crud-domain"
 }

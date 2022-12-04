@@ -41,5 +41,6 @@
   "tags": [
     "scope:trans",
     "type:shell"
-  ]
+  ],
+  "name": "trans-shell-app-services"
 }

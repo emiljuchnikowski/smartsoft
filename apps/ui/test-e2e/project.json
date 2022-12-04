@@ -20,5 +20,6 @@
   "tags": [],
   "implicitDependencies": [
     "ui-test"
-  ]
+  ],
+  "name": "ui-test-e2e"
 }

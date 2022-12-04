@@ -20,5 +20,6 @@
   "tags": [],
   "implicitDependencies": [
     "shared-angular"
-  ]
+  ],
+  "name": "shared-angular-e2e"
 }

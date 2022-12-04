@@ -47,5 +47,6 @@
   "tags": [
     "scope:crud",
     "type:shell"
-  ]
+  ],
+  "name": "crud-shell-dtos"
 }

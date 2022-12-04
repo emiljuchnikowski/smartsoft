@@ -54,5 +54,6 @@
   },
   "tags": [
     "scope:app"
-  ]
+  ],
+  "name": "api-stream"
 }

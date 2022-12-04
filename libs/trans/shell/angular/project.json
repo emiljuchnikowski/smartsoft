@@ -18,5 +18,6 @@
   "tags": [
     "scope:trans",
     "type:shell"
-  ]
+  ],
+  "name": "trans-shell-angular"
 }

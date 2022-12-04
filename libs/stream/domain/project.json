@@ -47,5 +47,6 @@
   "tags": [
     "scope:stream",
     "type:domain"
-  ]
+  ],
+  "name": "stream-domain"
 }

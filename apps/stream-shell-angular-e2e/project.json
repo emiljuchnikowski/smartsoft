@@ -20,5 +20,6 @@
   "tags": [],
   "implicitDependencies": [
     "stream-shell-angular"
-  ]
+  ],
+  "name": "stream-shell-angular-e2e"
 }

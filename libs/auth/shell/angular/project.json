@@ -36,5 +36,6 @@
   "tags": [
     "scope:auth",
     "type:shell"
-  ]
+  ],
+  "name": "auth-shell-angular"
 }

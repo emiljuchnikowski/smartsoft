@@ -41,5 +41,6 @@
   "tags": [
     "scope:shared",
     "type:util"
-  ]
+  ],
+  "name": "shared-paynow"
 }
