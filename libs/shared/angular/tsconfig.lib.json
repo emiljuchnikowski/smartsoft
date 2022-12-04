@@ -21,7 +21,7 @@
     "allowSyntheticDefaultImports": true,
     "enableResourceInlining": true,
     "enableIvy": false,
-    "compilationMode": "full"
+    "compilationMode": "partial"
   },
   "exclude": [
     "src/test-setup.ts",
