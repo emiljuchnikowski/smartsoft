@@ -10,7 +10,11 @@ export class ObjectService {
     static createByType<T>(data: any, type: any): T {
         if (!data) return;
 
-        if (data instanceof type) return data;
+        try {
+            if (data instanceof type) return data;
+        } catch (e) {
+            console.warn(e);
+        }
 
         const result = new type();
 
