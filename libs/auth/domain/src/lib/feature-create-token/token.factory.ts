@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Guid } from "guid-typescript";
+import { Request } from "express";
 
 import { DomainValidationError, IFactory } from "@smartsoft001/domain-core";
 import { PasswordService } from "@smartsoft001/utils";
@@ -22,6 +23,7 @@ export class TokenFactory
     IFactory<
       IAuthToken,
       {
+        httpReq?: Request,
         request: IAuthTokenRequest;
         payloadProvider?: ITokenPayloadProvider;
         validationProvider?: ITokenValidationProvider;
@@ -61,6 +63,7 @@ export class TokenFactory
   }
 
   async create(options: {
+    httpReq?: Request,
     request: IAuthTokenRequest;
     payloadProvider?: ITokenPayloadProvider;
     validationProvider?: ITokenValidationProvider;
@@ -81,7 +84,7 @@ export class TokenFactory
     const query = TokenFactory.getQuery(options.request, !!options.userProvider);
 
     const user = options.userProvider
-      ? await options.userProvider.get(query, options.request)
+      ? await options.userProvider.get(query, options.request, options.httpReq)
       : await this.repository.findOne(query);
 
     if (!options.validationProvider || !options.validationProvider.replace) {

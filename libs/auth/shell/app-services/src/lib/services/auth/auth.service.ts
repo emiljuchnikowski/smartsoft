@@ -1,5 +1,6 @@
 import {Injectable, Logger} from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
+import { Request } from "express";
 
 import {
   AUTH_TOKEN_PAYLOAD_PROVIDER, AUTH_TOKEN_USER_PROVIDER,
@@ -18,8 +19,9 @@ export class AuthService {
       private moduleRef: ModuleRef
   ) {}
 
-  create(req: IAuthTokenRequest): Promise<IAuthToken> {
+    create(req: IAuthTokenRequest, httpReq?: Request): Promise<IAuthToken> {
     return this.factory.create({
+      httpReq: httpReq,
       request: req,
       payloadProvider: this.getPayloadProvider(),
       validationProvider: this.getValidationProvider(),
