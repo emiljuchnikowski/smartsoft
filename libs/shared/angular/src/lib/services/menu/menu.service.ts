@@ -18,8 +18,10 @@ export class MenuService {
   private _endContainer: ViewContainerRef;
   private _openedEnd = false;
   private _menuItemsSource = new BehaviorSubject<IMenuItem[]>([]);
+  private _disableSource = new BehaviorSubject<boolean>(false);
 
   menuItems$ = this._menuItemsSource.asObservable();
+  disable$ = this._disableSource.asObservable();
 
   /**
    * @desc checking if the menu is open (menu on the right side of the screen)
@@ -32,6 +34,14 @@ export class MenuService {
     private readonly menuCtrl: MenuController,
     private readonly resolver: ComponentFactoryResolver
   ) {}
+
+  enable(): void {
+    this._disableSource.next(false);
+  }
+
+  disable(): void {
+    this._disableSource.next(true);
+  }
 
   changeMenuItemByRoute(route: string, changes: Partial<IMenuItem>): void {
     const items = this._menuItemsSource.value.map(i => {

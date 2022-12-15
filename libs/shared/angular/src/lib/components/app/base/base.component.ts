@@ -8,7 +8,7 @@ import {
   PLATFORM_ID,
   Inject, ViewChild, ViewContainerRef, AfterContentInit,
 } from "@angular/core";
-import { Observable, Subscription } from "rxjs";
+import {combineLatest, Observable, Subscription} from "rxjs";
 import {filter, map, tap} from "rxjs/operators";
 import { DOCUMENT } from "@angular/common";
 import {
@@ -90,13 +90,16 @@ export abstract class AppBaseComponent implements OnDestroy, AfterContentInit, A
   }
 
   private initMenu(): void {
-    this.showMenu$ = this._options.provider.logged$.pipe(
-      map((logged) => {
-        return (
-          logged || (this._options.menu && this._options.menu.showForAnonymous)
-        );
-      })
-    );
+    this.showMenu$ =
+      combineLatest(this._options.provider.logged$, this.menuService.disable$).pipe(
+          map(([logged, disable]) => {
+            if (disable) return false;
+
+            return (
+                logged || (this._options.menu && this._options.menu.showForAnonymous)
+            );
+          })
+      );
     if (this._options.menu) {
       this.menuService.setMenuItems(this._options.menu.items);
       this.menuItems$ = this.menuService.menuItems$;

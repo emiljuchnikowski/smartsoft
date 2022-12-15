@@ -6,10 +6,9 @@ import {AuthService} from "../../services/auth/auth.service";
 export class AuthGuard implements CanActivate {
   constructor(@Optional() private injector: Injector, private router: Router) {}
 
-  async canActivate(): Promise<boolean> {
+  canActivate(): boolean {
     if (!this.injector.get(AuthService).isAuthenticated()) {
-      await this.router.navigate(["`login`"]);
-      document.location.reload();
+      this.router.navigate(["login"]);
       return false;
     }
     return true;

@@ -1,19 +1,19 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
 
-import {FormComponent, IButtonOptions, IFormOptions} from "@smartsoft001/angular";
+import {FormComponent, IButtonOptions, IFormOptions, MenuService} from "@smartsoft001/angular";
 import {LoginDto} from "@smartsoft001/auth-shell-dtos";
 
 import {AuthFacade} from "../../+state/auth.facade";
 import {AuthConfig} from "../../auth.config";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'smart-auth-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   private _loading$ = this.facade.loaded$.pipe(map(l => !l));
 
   buttonOptions: IButtonOptions = {
@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
   constructor(
       private facade: AuthFacade,
       private cd: ChangeDetectorRef,
-      private config: AuthConfig
+      private config: AuthConfig,
+      private menuService: MenuService
   ) {
     this.$error = this.facade.error$;
   }
@@ -70,10 +71,16 @@ export class LoginComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.menuService.disable();
+
     setTimeout(() => {
       this.isSetFingerprint = this.facade.isSetFingerprint;
       this.cd.detectChanges();
     }, 1000);
+  }
+
+  ngOnDestroy() {
+    this.menuService.enable();
   }
 
   private loginFb(): void {
