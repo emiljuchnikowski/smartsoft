@@ -71,7 +71,6 @@
     "@nestjs/mongoose": "^7.2.0",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "9.0.9",
-    "@nestjs/platform-fastify": "^8.0.0",
     "@nestjs/platform-socket.io": "^7.6.3",
     "@nestjs/platform-ws": "^7.6.3",
     "@nestjs/swagger": "6.0.5",
@@ -95,8 +94,6 @@
     "combined-stream": "^1.0.8",
     "core-js": "3.7.0",
     "crypto-js": "^4.1.1",
-    "fastify-multipart": "^3.3.1",
-    "fastify-swagger": "^3.5.0",
     "flatted": "^3.2.4",
     "guid-typescript": "1.0.9",
     "json2csv": "^5.0.5",
@@ -205,4 +202,3 @@
   },
   "sideEffects": true
 }
-
