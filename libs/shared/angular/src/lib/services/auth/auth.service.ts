@@ -10,7 +10,18 @@ export class AuthService {
   constructor(protected storageService: StorageService) {}
 
   isAuthenticated(): boolean {
-    const token = this.getToken();
+    const token: { access_token: string } = this.getToken();
+
+    if (!token) return false;
+
+    const tokenPayload: { exp: number } = decode(
+        token.access_token
+    ) as any;
+
+    if (Date.now() >= tokenPayload.exp * 1000) {
+      return false;
+    }
+
     return !!token;
   }
 
