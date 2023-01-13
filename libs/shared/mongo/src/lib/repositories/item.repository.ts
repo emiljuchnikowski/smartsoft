@@ -617,18 +617,59 @@ export class MongoItemRepository<
 
           const totalCount = await this.getCount(criteria, collection);
 
-          collection.find(criteria, options).toArray((errDelete, list) => {
-            if (errDelete) {
-              rej(errDelete);
-              return;
+          let cursor = null;
+
+          const aggregate = [];
+
+          if (criteria) {
+            aggregate.push({ $match: criteria });
+          }
+
+          if (options.sort) {
+            aggregate.push({ $sort: options.sort });
+          }
+
+          if (options.skip) {
+            aggregate.push({ $skip: options.skip });
+          }
+
+          if (options.limit) {
+            aggregate.push({ $limit: options.limit });
+          }
+
+          if (options.project) {
+            aggregate.push({ $project: options.project });
+          }
+
+          if (options.min) {
+            aggregate.push({ $min: options.min });
+          }
+
+            if (options.max) {
+                aggregate.push({ $max: options.max });
             }
 
-            client.close();
-            res({
-              data: list.map((item) => this.getModelToResult(item)),
-              totalCount,
+          if (options.group) {
+            aggregate.push({ $group: options.group });
+          }
+
+          collection
+            .aggregate(aggregate, {
+              allowDiskUse: options.allowDiskUse,
+              session: options.session,
+            })
+            .toArray((errDelete, list) => {
+              if (errDelete) {
+                rej(errDelete);
+                return;
+              }
+
+              client.close();
+              res({
+                data: list.map((item) => this.getModelToResult(item)),
+                totalCount,
+              });
             });
-          });
         }
       );
     });
@@ -659,8 +700,8 @@ export class MongoItemRepository<
           const db = client.db(this.config.database);
           const collection = db.collection(this.config.collection);
 
-          const result = await this.getCount(criteria, collection)
-            await client.close();
+          const result = await this.getCount(criteria, collection);
+          await client.close();
           res(result);
         }
       );

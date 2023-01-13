@@ -91,7 +91,11 @@ export class CrudController<T extends IEntity<string>> {
 
     const { data, totalCount } = await this.service.read(
       object.criteria,
-      object.options,
+        {
+            ...object.options,
+          allowDiskUse:
+              req.headers["content-type"] === "text/csv" || req.headers["content-type"] === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        },
       user
     );
 
