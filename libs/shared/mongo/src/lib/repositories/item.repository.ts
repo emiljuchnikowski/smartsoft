@@ -625,38 +625,38 @@ export class MongoItemRepository<
             aggregate.push({ $match: criteria });
           }
 
-          if (options.sort) {
+          if (options?.sort) {
             aggregate.push({ $sort: options.sort });
           }
 
-          if (options.skip) {
+          if (options?.skip) {
             aggregate.push({ $skip: options.skip });
           }
 
-          if (options.limit) {
+          if (options?.limit) {
             aggregate.push({ $limit: options.limit });
           }
 
-          if (options.project) {
+          if (options?.project) {
             aggregate.push({ $project: options.project });
           }
 
-          if (options.min) {
+          if (options?.min) {
             aggregate.push({ $min: options.min });
           }
 
-            if (options.max) {
+            if (options?.max) {
                 aggregate.push({ $max: options.max });
             }
 
-          if (options.group) {
+          if (options?.group) {
             aggregate.push({ $group: options.group });
           }
 
           collection
             .aggregate(aggregate, {
-              allowDiskUse: options.allowDiskUse,
-              session: options.session,
+              allowDiskUse: options?.allowDiskUse,
+              session: options?.session,
             })
             .toArray((errDelete, list) => {
               if (errDelete) {
