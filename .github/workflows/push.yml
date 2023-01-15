@@ -1,12 +1,10 @@
 name: Push
 
-# Controls when the action will run. 
 on:
   push:
     branches: master
 
 jobs:
-  # This workflow contains a single job called "build"
   build:
     name: Build
     environment: prod
@@ -28,6 +26,6 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=8192"
         run: npm run publish
       - name: Commit
-        usage: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "build npm publish [skip ci]"
