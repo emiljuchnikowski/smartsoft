@@ -9,6 +9,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     name: Build
+    environment: prod
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,9 +22,12 @@ jobs:
         run: npm install --prefer-offline --no-audit --legacy-peer-deps
       - name: Test
         run: npm test
-#      - name: Push NPM
-#        image: node:16.10.0
-#        run: export NODE_OPTIONS="--max-old-space-size=8192" && npm run publish
-#      - name: Push GIT
-#        usage: stefanzweifel/git-auto-commit-action@v4
-#        run: export NODE_OPTIONS="--max-old-space-size=8192" && npm run publish
+      - name: Publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_OPTIONS: "--max-old-space-size=8192"
+        run: npm run publish
+      - name: Commit
+        usage: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "build npm publish [skip ci]"
