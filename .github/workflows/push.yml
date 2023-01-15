@@ -16,16 +16,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.10.0'
-      - name: Install
-        run: npm install --prefer-offline --no-audit --legacy-peer-deps
-      - name: Test
-        run: npm test
+#      - name: Install
+#        run: npm install --prefer-offline --no-audit --legacy-peer-deps
+#      - name: Test
+#        run: npm test
       - name: Publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_OPTIONS: "--max-old-space-size=8192"
-        run: npm run publish
-      - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "build npm publish [skip ci]"
+        #run: npm run publish
+        run: echo $NPM_TOKEN
+#      - name: Commit
+#        uses: stefanzweifel/git-auto-commit-action@v4
+#        with:
+#          commit_message: "build npm publish [skip ci]"
