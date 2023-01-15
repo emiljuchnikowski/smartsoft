@@ -9,13 +9,23 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     name: Build
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     steps:
-    - name: trigger Job
-      uses: appleboy/jenkins-action@master
-      with:
-        url: "http://jenkins.smartsoft.biz.pl"
-        user: "emiljuchnikowski"
-        token: ${{ secrets.JENKINS_TOKEN }}
-        job: "smartsoft"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install
+        uses: actions/setup-node@v3
+        run: npm install --prefer-offline --no-audit --legacy-peer-deps
+        with:
+          node-version: '16.10.0'
+      - name: Test
+        uses: actions/setup-node@v3
+        run: npm test
+        with:
+          node-version: '16.10.0'
+#      - name: Push NPM
+#        image: node:16.10.0
+#        run: export NODE_OPTIONS="--max-old-space-size=8192" && npm run publish
+#      - name: Push GIT
+#        usage: stefanzweifel/git-auto-commit-action@v4
+#        run: export NODE_OPTIONS="--max-old-space-size=8192" && npm run publish
