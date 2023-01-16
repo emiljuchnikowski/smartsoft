@@ -21,6 +21,7 @@ jobs:
       - name: Test
         run: npm test
       - name: Publish
+        continue-on-error: true
         env:
           NODE_OPTIONS: "--max-old-space-size=8192"
         run: |
