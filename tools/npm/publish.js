@@ -130,10 +130,10 @@ const libs = [
         name: "trans-shell-nestjs",
         path: "libs/trans/shell/nestjs"
     },
-    // {
-    //     cmd: "schematics:publish",
-    //     path: "libs/shared/schematics"
-    // },
+    {
+        cmd: "schematics:publish",
+        path: "libs/shared/schematics"
+    },
     // {
     //     name: "shared-core",
     //     path: "libs/shared/core"
