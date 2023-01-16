@@ -56,3 +56,4 @@
 /libs/shared/users/dist/
 /yarn.lock
 /.env
+/.npmrc
