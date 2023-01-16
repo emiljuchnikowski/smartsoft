@@ -136,7 +136,7 @@ const libs = [
     },
     // {
     //     name: "shared-core",
-    //     path: "libs/shared/core"
+    //     path: "libs/shared/core "
     // },
     {
         name: "shared-cli",
