@@ -68,7 +68,7 @@ function createNxWorkspace(name: string) {
         '--cli=angular',
         '--package-manager=npm',
     ]
-    const createCommand = `npx create-nx-workspace@14.0.5 ${name} ${params.join(' ')}`
+    const createCommand = `npx create-nx-workspace@latest ${name} ${params.join(' ')}`
     runCommand(createCommand);
 }
 
