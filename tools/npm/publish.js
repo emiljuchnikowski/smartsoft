@@ -173,7 +173,9 @@ console.log('npm publish');
 for (let index = 0; index < libs.length; index++) {
     const lib = libs[index];
 
-    if (lib.path) {
+    if (lib.cmd) {
+        runCommand('npm run ' + lib.cmd);
+    } else if (lib.path) {
         runCommand('npm publish dist/' + lib.path + ' --access public');
     }
 }

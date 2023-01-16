@@ -1,5 +1,21 @@
 {
   "name": "@smartsoft001/schematics",
-  "version": "1.1.13",
-  "schematics": "./src/collection.json"
+  "version": "1.1.14",
+  "schematics": "./src/collection.json",
+  "description": "schematics",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiljuchnikowski/smartsoft.git"
+  },
+  "keywords": [
+    "smartsoft",
+    "oauth",
+    "schematics"
+  ],
+  "author": "Emil Juchnikowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emiljuchnikowski/smartsoft/issues"
+  },
+  "homepage": "https://github.com/emiljuchnikowski/smartsoft#readme"
 }
