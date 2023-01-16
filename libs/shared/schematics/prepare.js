@@ -2,6 +2,7 @@ const execSync = require("child_process").execSync;
 const cwd = process.cwd();
 const fse = require('fs-extra');
 
+execSync("copyfiles --all libs/shared/schematics/*.json dist", { cwd, stdio: 'inherit'});
 execSync("copyfiles --all libs/shared/schematics/src/**/*.json dist", { cwd, stdio: 'inherit'});
 execSync("copyfiles --all libs/shared/schematics/src/**/**/*.json dist", { cwd, stdio: 'inherit' });
 execSync("copyfiles --all libs/shared/schematics/src/**/files/**/* dist", { cwd, stdio: 'inherit' });
