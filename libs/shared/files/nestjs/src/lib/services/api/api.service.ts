@@ -9,9 +9,10 @@ import { ObjectId } from "bson";
 import * as mongoose from "mongoose";
 
 import { File } from '../../models';
+import {Readable} from "typeorm/browser/platform/BrowserPlatformTools";
 
 type Request = FastifyRequest;
-type Response = FastifyReply<Http2ServerResponse>;
+type Response = FastifyReply<any>;
 
 @Injectable()
 export class ApiService {
@@ -62,13 +63,13 @@ export class ApiService {
   }
 
   private getLink(req: Request): string {
-    return req.headers.origin + req.raw.url;
+    return process.env.URL_CUSTOM_LINK ? process.env.URL_CUSTOM_LINK : req.headers.origin + req.raw.url;
   }
 
   async update(id: string, request: any, response: Response) {
     await this.delete(id);
 
-    return await new Promise((res, rej) => {
+    return await new Promise<void>((res, rej) => {
       try {
         request.multipart(
           (field, file: Stream, filename, encoding, mimetype) => {
@@ -107,7 +108,7 @@ export class ApiService {
   }
 
   async delete(id: string): Promise<void> {
-    await new Promise((res, rej) => {
+    await new Promise<void>((res, rej) => {
       const _id = mongoose.mongo.ObjectId.createFromHexString(id);
 
       this._bucket.delete(_id, err => {
@@ -143,6 +144,14 @@ export class ApiService {
           end,
         })
 
+        const buffers = [];
+
+        for await (const data of readstream) {
+          buffers.push(data);
+        }
+
+        const buffer = Buffer.concat(buffers);
+
         response.status(206)
         response.headers({
           'Accept-Ranges': 'bytes',
@@ -152,19 +161,19 @@ export class ApiService {
           }`,
           'Content-Length': (end ? end : fileInfo.length) - start,
           'Content-Disposition': `attachment; filename="${encodeURI(fileInfo.filename)}"`,
-        })
+        });
 
-        response.res.on('close', () => {
-          readstream.destroy()
-        })
-
-        response.send(readstream)
+        response.send(buffer)
       } else {
-        const readstream = this._bucket.openDownloadStream(oId)
+        const readstream = this._bucket.openDownloadStream(oId);
 
-        response.res.on('close', () => {
-          readstream.destroy()
-        })
+        const buffers = [];
+
+        for await (const data of readstream) {
+          buffers.push(data);
+        }
+
+        const buffer = Buffer.concat(buffers);
 
         response.status(200)
         response.headers({
@@ -174,7 +183,7 @@ export class ApiService {
           'Content-Disposition': `attachment; filename="${ encodeURI(fileInfo.filename) }"`,
         })
 
-        response.send(readstream)
+        response.send(buffer);
       }
     } catch (e) {
       if (e) {

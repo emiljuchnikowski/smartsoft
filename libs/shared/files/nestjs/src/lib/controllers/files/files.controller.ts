@@ -1,5 +1,4 @@
 import {Controller, Delete, Get, Param, Post, Put, Req, Res} from "@nestjs/common";
-import { Response } from "express";
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { Http2ServerResponse } from 'http2'
 import {
@@ -11,7 +10,7 @@ import {
 import {ApiService} from "../../services/api/api.service";
 
 type Request = FastifyRequest;
-type Response = FastifyReply<Http2ServerResponse>;
+type Response = FastifyReply<any>;
 
 @Controller()
 export class FilesController {

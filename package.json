@@ -39,7 +39,6 @@
     "schematics:dev": "nx run shared-schematics:dev",
     "cli:build": "nx run shared-cli:build --with-deps",
     "all:build": "nx run-many --target=build --projects=shared-core,shared-cli --parallel=1  --with-deps",
-    "prepare": "husky install",
     "publish": "export NODE_OPTIONS=--max_old_space_size=16192 && node tools/npm/publish.js"
   },
   "private": true,
@@ -58,6 +57,7 @@
     "@angular/router": "15.1.1",
     "@auth0/angular-jwt": "^5.0.1",
     "@capacitor/core": "^2.4.2",
+    "@fastify/static": "^6.9.0",
     "@ionic-native/core": "^5.30.0",
     "@ionic-native/fingerprint-aio": "^5.30.0",
     "@ionic/angular": "^6.1.9",
@@ -71,6 +71,7 @@
     "@nestjs/mongoose": "^7.2.0",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "9.0.9",
+    "@nestjs/platform-fastify": "^9.3.9",
     "@nestjs/platform-socket.io": "^7.6.3",
     "@nestjs/platform-ws": "^7.6.3",
     "@nestjs/swagger": "6.0.5",
@@ -94,6 +95,8 @@
     "combined-stream": "^1.0.8",
     "core-js": "3.7.0",
     "crypto-js": "^4.1.1",
+    "fastify": "^4.13.0",
+    "fastify-multipart": "^5.4.0",
     "flatted": "^3.2.4",
     "guid-typescript": "1.0.9",
     "json2csv": "^5.0.5",
@@ -203,4 +206,3 @@
   },
   "sideEffects": true
 }
-
