@@ -117,7 +117,7 @@
     "ngx-cookie": "^5.0.2",
     "ngx-editor": "9.0.2",
     "openurl": "^1.1.1",
-    "passport": "0.4.1",
+    "passport": "0.6.0",
     "passport-jwt": "4.0.0",
     "paypal-rest-sdk": "^1.8.1",
     "popups": "^1.1.3",
