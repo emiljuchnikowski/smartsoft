@@ -115,6 +115,7 @@ export class TokenFactory
       await options.payloadProvider.change(payload, {
         user,
         request: options.request,
+        httpReq: options.httpReq
       });
     }
 

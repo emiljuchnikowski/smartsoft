@@ -1,3 +1,5 @@
+import {Request} from "express";
+
 import { IAuthTokenRequest } from "./interfaces";
 import { User } from "../entities/user.entity";
 
@@ -9,6 +11,7 @@ export abstract class ITokenPayloadProvider {
     data: {
       request?: IAuthTokenRequest;
       user?: User;
+      httpReq?: Request;
     }
   ): Promise<void>;
 }
