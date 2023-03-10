@@ -72,7 +72,7 @@
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "9.0.9",
     "@nestjs/platform-fastify": "^9.3.9",
-    "@nestjs/platform-socket.io": "^7.6.3",
+    "@nestjs/platform-socket.io": "^9.3.9",
     "@nestjs/platform-ws": "^7.6.3",
     "@nestjs/swagger": "6.0.5",
     "@nestjs/typeorm": "^7.1.5",
