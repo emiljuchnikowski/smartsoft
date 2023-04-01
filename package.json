@@ -84,7 +84,7 @@
     "@ngrx/store": "15.0.0",
     "@ngx-translate/core": "^13.0.0",
     "@revolut/checkout": "^1.0.7",
-    "@storybook/core-server": "6.5.15",
+    "@storybook/core-server": "7.0.0",
     "@types/gapi.auth2": "^0.0.54",
     "angular": "1.8.2",
     "body-parser": "1.19.0",
