@@ -1,4 +1,5 @@
 {
+  "name": "crud-shell-app-services",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/crud/shell/app-services/src",
   "projectType": "library",
@@ -12,41 +13,28 @@
           "libs/crud/shell/app-services/tsconfig.lib.json",
           "libs/crud/shell/app-services/tsconfig.spec.json"
         ],
-        "exclude": [
-          "**/node_modules/**",
-          "!libs/crud/shell/app-services/**/*"
-        ]
+        "exclude": ["**/node_modules/**", "!libs/crud/shell/app-services/**/*"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/crud/shell/app-services/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/crud/shell/app-services"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/crud/shell/app-services"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/libs/crud/shell/app-services",
         "tsConfig": "libs/crud/shell/app-services/tsconfig.lib.json",
         "packageJson": "libs/crud/shell/app-services/package.json",
         "main": "libs/crud/shell/app-services/src/index.ts",
-        "assets": [
-          "libs/crud/shell/app-services/*.md"
-        ]
+        "assets": ["libs/crud/shell/app-services/*.md"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     }
   },
-  "tags": [
-    "scope:crud",
-    "type:shell"
-  ],
-  "name": "crud-shell-app-services"
+  "tags": ["scope:crud", "type:shell"]
 }

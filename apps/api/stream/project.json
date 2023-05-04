@@ -1,4 +1,5 @@
 {
+  "name": "api-stream",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/api/stream/src",
   "projectType": "application",
@@ -11,9 +12,7 @@
         "outputPath": "dist/apps/api/stream",
         "main": "apps/api/stream/src/main.ts",
         "tsConfig": "apps/api/stream/tsconfig.app.json",
-        "assets": [
-          "apps/api/stream/src/assets"
-        ],
+        "assets": ["apps/api/stream/src/assets"],
         "buildLibsFromSource": true,
         "target": "node",
         "compiler": "tsc"
@@ -31,29 +30,22 @@
           ]
         }
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@nrwl/node:node",
+      "executor": "@nx/node:node",
       "options": {
         "buildTarget": "api-stream:build"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/api/stream/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/apps/api/stream"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/apps/api/stream"]
     }
   },
-  "tags": [
-    "scope:app"
-  ],
-  "name": "api-stream"
+  "tags": ["scope:app"]
 }

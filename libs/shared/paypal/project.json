@@ -1,4 +1,5 @@
 {
+  "name": "shared-paypal",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/paypal/src",
   "projectType": "library",
@@ -7,40 +8,28 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/shared/paypal/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/shared/paypal/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/shared/paypal/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/shared/paypal"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/paypal"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/libs/shared/paypal",
         "tsConfig": "libs/shared/paypal/tsconfig.lib.json",
         "packageJson": "libs/shared/paypal/package.json",
         "main": "libs/shared/paypal/src/index.ts",
-        "assets": [
-          "libs/shared/paypal/*.md"
-        ]
+        "assets": ["libs/shared/paypal/*.md"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:util"
-  ],
-  "name": "shared-paypal"
+  "tags": ["scope:shared", "type:util"]
 }

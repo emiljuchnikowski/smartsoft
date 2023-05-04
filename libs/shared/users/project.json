@@ -1,4 +1,5 @@
 {
+  "name": "shared-users",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/users/src",
@@ -7,34 +8,26 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/shared/users/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/shared/users/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/shared/users"
-      ],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/users"],
       "options": {
         "jestConfig": "libs/shared/users/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/shared/users",
         "tsConfig": "libs/shared/users/tsconfig.lib.json",
         "packageJson": "libs/shared/users/package.json",
         "main": "libs/shared/users/src/index.ts",
-        "assets": [
-          "libs/shared/users/*.md"
-        ]
+        "assets": ["libs/shared/users/*.md"]
       }
     }
   },
@@ -43,9 +36,5 @@
       "style": "scss"
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:shell"
-  ],
-  "name": "shared-users"
+  "tags": ["scope:shared", "type:shell"]
 }

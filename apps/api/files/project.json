@@ -1,4 +1,5 @@
 {
+  "name": "api-files",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/api/files/src",
   "projectType": "application",
@@ -11,9 +12,7 @@
         "outputPath": "dist/apps/api/files",
         "main": "apps/api/files/src/main.ts",
         "tsConfig": "apps/api/files/tsconfig.app.json",
-        "assets": [
-          "apps/api/files/src/assets"
-        ],
+        "assets": ["apps/api/files/src/assets"],
         "buildLibsFromSource": true,
         "target": "node",
         "compiler": "tsc"
@@ -31,29 +30,22 @@
           ]
         }
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@nrwl/node:node",
+      "executor": "@nx/node:node",
       "options": {
         "buildTarget": "api-files:build"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/api/files/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/apps/api/files"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/apps/api/files"]
     }
   },
-  "tags": [
-    "scope:app"
-  ],
-  "name": "api-files"
+  "tags": ["scope:app"]
 }

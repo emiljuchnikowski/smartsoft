@@ -1,4 +1,5 @@
 {
+  "name": "stream-shell-app-services",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/stream/shell/app-services/src",
   "projectType": "library",
@@ -19,34 +20,24 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/stream/shell/app-services/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/stream/shell/app-services"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/stream/shell/app-services"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/libs/stream/shell/app-services",
         "tsConfig": "libs/stream/shell/app-services/tsconfig.lib.json",
         "packageJson": "libs/stream/shell/app-services/package.json",
         "main": "libs/stream/shell/app-services/src/index.ts",
-        "assets": [
-          "libs/stream/shell/app-services/*.md"
-        ]
+        "assets": ["libs/stream/shell/app-services/*.md"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     }
   },
-  "tags": [
-    "scope:stream",
-    "type:shell"
-  ],
-  "name": "stream-shell-app-services"
+  "tags": ["scope:stream", "type:shell"]
 }

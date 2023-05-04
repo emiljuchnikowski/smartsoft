@@ -1,11 +1,12 @@
 {
+  "name": "shared-angular",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/angular/src",
   "prefix": "smart",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:package",
+      "executor": "@nx/angular:package",
       "options": {
         "tsConfig": "libs/shared/angular/tsconfig.lib.json",
         "project": "libs/shared/angular/ng-package.json",
@@ -13,14 +14,12 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/shared/angular/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/shared/angular"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/angular"]
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
@@ -30,10 +29,7 @@
         "browserTarget": "shared-angular:build-storybook",
         "compodoc": false,
         "stylePreprocessorOptions": {
-          "includePaths": [
-            "libs/shared/angular/src/lib",
-            "apps/ui/test/src"
-          ]
+          "includePaths": ["libs/shared/angular/src/lib", "apps/ui/test/src"]
         },
         "styles": []
       },
@@ -63,9 +59,5 @@
       "style": "scss"
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:shell"
-  ],
-  "name": "shared-angular"
+  "tags": ["scope:shared", "type:shell"]
 }

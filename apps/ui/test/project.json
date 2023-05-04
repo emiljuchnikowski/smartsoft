@@ -1,8 +1,9 @@
 {
+  "name": "ui-test",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "generators": {
-    "@nrwl/angular:component": {
+    "@nx/angular:component": {
       "style": "scss"
     }
   },
@@ -76,10 +77,7 @@
         ],
         "scripts": [],
         "stylePreprocessorOptions": {
-          "includePaths": [
-            "libs/shared/angular/src/lib",
-            "apps/ui/test/src"
-          ]
+          "includePaths": ["libs/shared/angular/src/lib", "apps/ui/test/src"]
         },
         "allowedCommonJsDependencies": [
           "lodash",
@@ -119,9 +117,7 @@
           ]
         }
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
@@ -142,14 +138,12 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/ui/test/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/apps/ui/test"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/apps/ui/test"]
     },
     "ionic-cordova-serve": {
       "executor": "@ionic/angular-toolkit:cordova-serve",
@@ -176,6 +170,5 @@
       }
     }
   },
-  "tags": [],
-  "name": "ui-test"
+  "tags": []
 }

@@ -1,4 +1,5 @@
 {
+  "name": "api-trans",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/api/trans/src",
   "projectType": "application",
@@ -11,9 +12,7 @@
         "outputPath": "dist/apps/api/trans",
         "main": "apps/api/trans/src/main.ts",
         "tsConfig": "apps/api/trans/tsconfig.app.json",
-        "assets": [
-          "apps/api/trans/src/assets"
-        ],
+        "assets": ["apps/api/trans/src/assets"],
         "buildLibsFromSource": true,
         "target": "node",
         "compiler": "tsc"
@@ -31,29 +30,22 @@
           ]
         }
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@nrwl/node:node",
+      "executor": "@nx/node:node",
       "options": {
         "buildTarget": "api-trans:build"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/api/trans/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/apps/api/trans"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/apps/api/trans"]
     }
   },
-  "tags": [
-    "scope:app"
-  ],
-  "name": "api-trans"
+  "tags": ["scope:app"]
 }

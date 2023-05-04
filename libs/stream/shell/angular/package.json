@@ -33,7 +33,7 @@
     "@smartsoft001/domain-core": "^1.0.5",
     "@smartsoft001/models": "^1.0.11",
     "@smartsoft001/stream-shell-dtos": "^1.0.1",
-    "moment": "^2.26.0"
-  ,    "tslib": "^2.0.0"
-}
+    "moment": "^2.26.0",
+    "tslib": "^2.0.0"
+  }
 }

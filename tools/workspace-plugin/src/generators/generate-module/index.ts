@@ -1,5 +1,5 @@
-import { Tree, formatFiles, installPackagesTask } from "@nrwl/devkit";
-import { libraryGenerator } from "@nrwl/workspace";
+import { Tree, formatFiles, installPackagesTask } from '@nrwl/devkit';
+import { libraryGenerator } from '@nx/workspace';
 
 export default async function (host: Tree, schema: any) {
   await libraryGenerator(host, { name: schema.name });

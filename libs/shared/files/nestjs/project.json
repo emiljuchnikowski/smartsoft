@@ -1,23 +1,18 @@
 {
+  "name": "shared-files-nestjs",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/files/nestjs/src",
   "projectType": "library",
   "generators": {},
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/shared/files/nestjs/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/shared/files/nestjs"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/files/nestjs"]
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:util"
-  ],
-  "name": "shared-files-nestjs"
+  "tags": ["scope:shared", "type:util"]
 }

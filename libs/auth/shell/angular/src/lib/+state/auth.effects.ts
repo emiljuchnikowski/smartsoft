@@ -1,6 +1,6 @@
 import { Injectable, Optional } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
-import { pessimisticUpdate } from "@nrwl/angular";
+import { pessimisticUpdate } from "@nx/angular";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
@@ -35,10 +35,13 @@ export class AuthEffects {
       ofType(AuthActions.createToken.type),
       switchMap((action: ReturnType<typeof AuthActions.createToken>) =>
         this.service
-          .createToken({
-            username: action.username,
-            password: action.password
-          }, action.customData)
+          .createToken(
+            {
+              username: action.username,
+              password: action.password,
+            },
+            action.customData
+          )
           .pipe(
             map(
               (token) =>

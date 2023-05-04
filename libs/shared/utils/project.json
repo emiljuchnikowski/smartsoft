@@ -1,4 +1,5 @@
 {
+  "name": "shared-utils",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/utils/src",
   "projectType": "library",
@@ -12,41 +13,28 @@
           "libs/shared/utils/tsconfig.lib.json",
           "libs/shared/utils/tsconfig.spec.json"
         ],
-        "exclude": [
-          "**/node_modules/**",
-          "!libs/shared/utils/**/*"
-        ]
+        "exclude": ["**/node_modules/**", "!libs/shared/utils/**/*"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/shared/utils/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/shared/utils"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/utils"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/libs/shared/utils",
         "tsConfig": "libs/shared/utils/tsconfig.lib.json",
         "packageJson": "libs/shared/utils/package.json",
         "main": "libs/shared/utils/src/index.ts",
-        "assets": [
-          "libs/shared/utils/*.md"
-        ]
+        "assets": ["libs/shared/utils/*.md"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:shell"
-  ],
-  "name": "shared-utils"
+  "tags": ["scope:shared", "type:shell"]
 }

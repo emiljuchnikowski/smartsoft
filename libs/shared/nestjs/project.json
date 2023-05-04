@@ -1,4 +1,5 @@
 {
+  "name": "shared-nestjs",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/nestjs/src",
   "projectType": "library",
@@ -12,41 +13,28 @@
           "libs/shared/nestjs/tsconfig.lib.json",
           "libs/shared/nestjs/tsconfig.spec.json"
         ],
-        "exclude": [
-          "**/node_modules/**",
-          "!libs/shared/nestjs/**/*"
-        ]
+        "exclude": ["**/node_modules/**", "!libs/shared/nestjs/**/*"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/shared/nestjs/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/shared/nestjs"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/nestjs"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/libs/shared/nestjs",
         "tsConfig": "libs/shared/nestjs/tsconfig.lib.json",
         "packageJson": "libs/shared/nestjs/package.json",
         "main": "libs/shared/nestjs/src/index.ts",
-        "assets": [
-          "libs/shared/nestjs/*.md"
-        ]
+        "assets": ["libs/shared/nestjs/*.md"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:shell"
-  ],
-  "name": "shared-nestjs"
+  "tags": ["scope:shared", "type:shell"]
 }

@@ -1,4 +1,5 @@
 {
+  "name": "shared-domain-core",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared/domain-core/src",
@@ -7,34 +8,26 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/shared/domain-core/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/shared/domain-core/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/domain-core/core"
-      ],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/domain-core/core"],
       "options": {
         "jestConfig": "libs/shared/domain-core/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/shared/domain-core",
         "tsConfig": "libs/shared/domain-core/tsconfig.lib.json",
         "packageJson": "libs/shared/domain-core/package.json",
         "main": "libs/shared/domain-core/src/index.ts",
-        "assets": [
-          "libs/shared/domain-core/*.md"
-        ]
+        "assets": ["libs/shared/domain-core/*.md"]
       }
     }
   },
@@ -43,9 +36,5 @@
       "style": "scss"
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:shell"
-  ],
-  "name": "shared-domain-core"
+  "tags": ["scope:shared", "type:shell"]
 }

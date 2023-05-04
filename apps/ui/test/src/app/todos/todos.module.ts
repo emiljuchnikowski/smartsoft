@@ -186,7 +186,7 @@ export class ModelLabelProvider extends IModelLabelProvider {
           // ]
         },
         search: true,
-        pagination: { limit: 25 },
+        pagination: { limit: 4 },
       }
     }),
   ],

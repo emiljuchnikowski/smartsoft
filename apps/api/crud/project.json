@@ -1,4 +1,5 @@
 {
+  "name": "api-crud",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/api/crud/src",
   "projectType": "application",
@@ -11,9 +12,7 @@
         "outputPath": "dist/apps/api/crud",
         "main": "apps/api/crud/src/main.ts",
         "tsConfig": "apps/api/crud/tsconfig.app.json",
-        "assets": [
-          "apps/api/crud/src/assets"
-        ],
+        "assets": ["apps/api/crud/src/assets"],
         "buildLibsFromSource": true,
         "target": "node",
         "compiler": "tsc"
@@ -31,29 +30,22 @@
           ]
         }
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@nrwl/node:node",
+      "executor": "@nx/node:node",
       "options": {
         "buildTarget": "api-crud:build"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/api/crud/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/apps/api/crud"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/apps/api/crud"]
     }
   },
-  "tags": [
-    "scope:app"
-  ],
-  "name": "api-crud"
+  "tags": ["scope:app"]
 }

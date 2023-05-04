@@ -1,11 +1,12 @@
 {
+  "name": "crud-shell-angular",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/crud/shell/angular/src",
   "prefix": "smart",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:package",
+      "executor": "@nx/angular:package",
       "options": {
         "tsConfig": "libs/crud/shell/angular/tsconfig.lib.json",
         "project": "libs/crud/shell/angular/ng-package.json",
@@ -18,14 +19,12 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/crud/shell/angular/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/crud/shell/angular"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/crud/shell/angular"]
     }
   },
   "generators": {
@@ -33,9 +32,5 @@
       "style": "scss"
     }
   },
-  "tags": [
-    "scope:crud",
-    "type:shell"
-  ],
-  "name": "crud-shell-angular"
+  "tags": ["scope:crud", "type:shell"]
 }

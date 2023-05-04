@@ -1,10 +1,11 @@
 {
+  "name": "stream-shell-angular-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/stream-shell-angular-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/cypress:cypress",
+      "executor": "@nx/cypress:cypress",
       "options": {
         "cypressConfig": "apps/stream-shell-angular-e2e/cypress.json",
         "tsConfig": "apps/stream-shell-angular-e2e/tsconfig.e2e.json",
@@ -18,8 +19,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": [
-    "stream-shell-angular"
-  ],
-  "name": "stream-shell-angular-e2e"
+  "implicitDependencies": ["stream-shell-angular"]
 }

@@ -1,11 +1,12 @@
 {
+  "name": "auth-shell-angular",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/auth/shell/angular/src",
   "prefix": "smartsoft",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:package",
+      "executor": "@nx/angular:package",
       "options": {
         "tsConfig": "libs/auth/shell/angular/tsconfig.lib.json",
         "project": "libs/auth/shell/angular/ng-package.json",
@@ -18,14 +19,12 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/auth/shell/angular/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/auth/shell/angular"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/auth/shell/angular"]
     }
   },
   "generators": {
@@ -33,9 +32,5 @@
       "style": "scss"
     }
   },
-  "tags": [
-    "scope:auth",
-    "type:shell"
-  ],
-  "name": "auth-shell-angular"
+  "tags": ["scope:auth", "type:shell"]
 }

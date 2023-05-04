@@ -1,23 +1,18 @@
 {
+  "name": "stream-shell-dtos",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/stream/shell/dtos/src",
   "projectType": "library",
   "generators": {},
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/stream/shell/dtos/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/stream/shell/dtos"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/stream/shell/dtos"]
     }
   },
-  "tags": [
-    "scope:stream",
-    "type:shell"
-  ],
-  "name": "stream-shell-dtos"
+  "tags": ["scope:stream", "type:shell"]
 }

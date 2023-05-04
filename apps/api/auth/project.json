@@ -1,4 +1,5 @@
 {
+  "name": "api-auth",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/api/auth/src",
   "projectType": "application",
@@ -11,9 +12,7 @@
         "outputPath": "dist/apps/api/auth",
         "main": "apps/api/auth/src/main.ts",
         "tsConfig": "apps/api/auth/tsconfig.app.json",
-        "assets": [
-          "apps/api/auth/src/assets"
-        ],
+        "assets": ["apps/api/auth/src/assets"],
         "styles": [],
         "scripts": [],
         "buildLibsFromSource": true,
@@ -33,29 +32,22 @@
           ]
         }
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@nrwl/node:node",
+      "executor": "@nx/node:node",
       "options": {
         "buildTarget": "api-auth:build"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/api/auth/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/apps/api/auth"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/apps/api/auth"]
     }
   },
-  "tags": [
-    "scope:app"
-  ],
-  "name": "api-auth"
+  "tags": ["scope:app"]
 }

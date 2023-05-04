@@ -1,4 +1,5 @@
 {
+  "name": "crud-domain",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/crud/domain/src",
   "projectType": "library",
@@ -12,41 +13,28 @@
           "libs/crud/domain/tsconfig.lib.json",
           "libs/crud/domain/tsconfig.spec.json"
         ],
-        "exclude": [
-          "**/node_modules/**",
-          "!libs/crud/domain/**/*"
-        ]
+        "exclude": ["**/node_modules/**", "!libs/crud/domain/**/*"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/crud/domain/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/crud/domain"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/crud/domain"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/libs/crud/domain",
         "tsConfig": "libs/crud/domain/tsconfig.lib.json",
         "packageJson": "libs/crud/domain/package.json",
         "main": "libs/crud/domain/src/index.ts",
-        "assets": [
-          "libs/crud/domain/*.md"
-        ]
+        "assets": ["libs/crud/domain/*.md"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     }
   },
-  "tags": [
-    "scope:crud",
-    "type:domain"
-  ],
-  "name": "crud-domain"
+  "tags": ["scope:crud", "type:domain"]
 }

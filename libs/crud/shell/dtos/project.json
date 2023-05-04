@@ -1,4 +1,5 @@
 {
+  "name": "crud-shell-dtos",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/crud/shell/dtos/src",
   "projectType": "library",
@@ -12,41 +13,28 @@
           "libs/crud/shell/dtos/tsconfig.lib.json",
           "libs/crud/shell/dtos/tsconfig.spec.json"
         ],
-        "exclude": [
-          "**/node_modules/**",
-          "!libs/crud/shell/dtos/**/*"
-        ]
+        "exclude": ["**/node_modules/**", "!libs/crud/shell/dtos/**/*"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/crud/shell/dtos/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/crud/shell/dtos"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/crud/shell/dtos"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/libs/crud/shell/dtos",
         "tsConfig": "libs/crud/shell/dtos/tsconfig.lib.json",
         "packageJson": "libs/crud/shell/dtos/package.json",
         "main": "libs/crud/shell/dtos/src/index.ts",
-        "assets": [
-          "libs/crud/shell/dtos/*.md"
-        ]
+        "assets": ["libs/crud/shell/dtos/*.md"]
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     }
   },
-  "tags": [
-    "scope:crud",
-    "type:shell"
-  ],
-  "name": "crud-shell-dtos"
+  "tags": ["scope:crud", "type:shell"]
 }
