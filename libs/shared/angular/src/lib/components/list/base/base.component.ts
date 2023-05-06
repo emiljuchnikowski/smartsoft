@@ -12,6 +12,7 @@ import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from "@angular/router";
 
 import {
   FieldType,
@@ -44,7 +45,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
 
   protected provider: IListProvider<T>;
   protected authService = inject(AuthService);
-  protected navCtrl = inject(NavController);
+  protected router = inject(Router);
   protected alertService = inject(AlertService);
   protected cd = inject(ChangeDetectorRef);
   protected translateService = inject(TranslateService);
@@ -117,13 +118,17 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     if (val.item) {
       if (!val.item['options']) throw Error('Must set edit options');
 
-      this.itemHandler = async (id) => {
-        if (val.item['options'].routingPrefix)
-          await this.navCtrl.navigateForward([
-            val.item['options'].routingPrefix.replace('//', '/'),
-            id,
-          ]);
-        if (val.item['options'].select) val.item['options'].select(id);
+      this.itemHandler = (id) => {
+        if (val.item['options'].routingPrefix) {
+          setTimeout(async () => {
+            await this.router.navigate([
+              val.item['options'].routingPrefix.replace('//', '/'),
+              id,
+            ]);
+            this.cd.detectChanges();
+          });
+        }
+        else if (val.item['options'].select) val.item['options'].select(id);
       };
     }
 
