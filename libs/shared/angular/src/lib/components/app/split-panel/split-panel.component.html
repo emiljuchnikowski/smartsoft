@@ -69,7 +69,9 @@
     </ion-menu>
 
     <!-- the main content -->
-    <ion-router-outlet id="menu-content"></ion-router-outlet>
+    <div class="ion-page" id="menu-content">
+        <ion-router-outlet></ion-router-outlet>
+    </div>
 
     <ion-progress-bar *ngIf="loadingPage" color="primary" type="indeterminate"></ion-progress-bar>
 
