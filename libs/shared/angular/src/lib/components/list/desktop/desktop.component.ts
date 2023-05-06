@@ -1,19 +1,13 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
-  ElementRef, HostListener,
   OnDestroy,
   OnInit,
-  QueryList,
-  ViewChild, ViewChildren,
+  ViewChild,
   ViewContainerRef,
 } from "@angular/core";
-import { Router } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 import { MatSort } from "@angular/material/sort";
-import {ScrollDispatcher} from "@angular/cdk/overlay";
 
 import { IEntity } from "@smartsoft001/domain-core";
 
@@ -53,17 +47,6 @@ export class ListDesktopComponent<T extends IEntity<string>>
   @ViewChild(MatSort, { static: true }) sortObj: MatSort;
   @ViewChild("topTpl", { read: ViewContainerRef, static: true })
   topTpl: ViewContainerRef;
-
-  constructor(
-    authService: AuthService,
-    router: Router,
-    alertService: AlertService,
-    cd: ChangeDetectorRef,
-    translateService: TranslateService,
-    private scrollDispatcher: ScrollDispatcher
-  ) {
-    super(authService, router, alertService, cd, translateService);
-  }
 
   protected initList(val: IListInternalOptions<T>): void {
     super.initList(val);

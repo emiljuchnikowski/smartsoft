@@ -1,35 +1,53 @@
-import {ChangeDetectorRef, Input, OnInit, Directive, Type, ViewChild, ViewContainerRef} from "@angular/core";
-
-import { Observable } from "rxjs";
-import { Router } from "@angular/router";
-import { map } from "rxjs/operators";
-import { TranslateService } from "@ngx-translate/core";
+import {
+  ChangeDetectorRef,
+  Input,
+  OnInit,
+  Directive,
+  Type,
+  ViewChild,
+  ViewContainerRef,
+  inject,
+} from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 import {
   FieldType,
   IFieldListMetadata,
   IFieldOptions,
-} from "@smartsoft001/models";
-import { IEntity } from "@smartsoft001/domain-core";
+} from '@smartsoft001/models';
+import { IEntity } from '@smartsoft001/domain-core';
 
-import { DetailsPage } from "../../../pages/details/details.page";
+import { DetailsPage } from '../../../pages/details/details.page';
 import {
   IDetailsOptions,
   IListProvider,
   IButtonOptions,
-  ICellPipe, DynamicComponentType, PaginationMode, IListInternalOptions,
-} from "../../../models/interfaces";
-import { AlertService } from "../../../services/alert/alert.service";
-import { AuthService } from "../../../services/auth/auth.service";
+  ICellPipe,
+  DynamicComponentType,
+  PaginationMode,
+  IListInternalOptions,
+} from '../../../models/interfaces';
+import { AlertService } from '../../../services/alert/alert.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Directive()
 export abstract class ListBaseComponent<T extends IEntity<string>>
-  implements OnInit {
-  static smartType: DynamicComponentType = "list";
+  implements OnInit
+{
+  static smartType: DynamicComponentType = 'list';
 
-  protected provider: IListProvider<T>;
   private _fields: Array<{ key: string; options: IFieldOptions }>;
   private _internalOptions: IListInternalOptions<T>;
+
+  protected provider: IListProvider<T>;
+  protected authService = inject(AuthService);
+  protected navCtrl = inject(NavController);
+  protected alertService = inject(AlertService);
+  protected cd = inject(ChangeDetectorRef);
+  protected translateService = inject(TranslateService);
 
   detailsComponent;
   selectMode?: 'multi';
@@ -75,51 +93,55 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     this.initLoading();
 
     if (val.remove) {
-      this.checkRemoveHandler = val.remove["provider"].check;
+      this.checkRemoveHandler = val.remove['provider'].check;
       this.removeHandler = async (obj: T) => {
         const alertResult = await this.alertService.show({
-          header: this.translateService.instant("OBJECT.confirmDelete"),
+          header: this.translateService.instant('OBJECT.confirmDelete'),
           buttons: [
             {
-              text: this.translateService.instant("cancel"),
-              role: "cancel"
+              text: this.translateService.instant('cancel'),
+              role: 'cancel',
             },
             {
-              text: this.translateService.instant("confirm"),
+              text: this.translateService.instant('confirm'),
               handler: () => {
-                val.remove["provider"].invoke(obj.id);
-              }
-            }
+                val.remove['provider'].invoke(obj.id);
+              },
+            },
           ],
-          backdropDismiss: false
+          backdropDismiss: false,
         });
       };
     }
 
     if (val.item) {
-      if (!val.item["options"]) throw Error("Must set edit options");
+      if (!val.item['options']) throw Error('Must set edit options');
 
-      this.itemHandler = (id) => {
-        if (val.item["options"].routingPrefix) this.router.navigate([val.item["options"].routingPrefix, id]);
-        if (val.item["options"].select) val.item["options"].select(id);
+      this.itemHandler = async (id) => {
+        if (val.item['options'].routingPrefix)
+          await this.navCtrl.navigateForward([
+            val.item['options'].routingPrefix.replace('//', '/'),
+            id,
+          ]);
+        if (val.item['options'].select) val.item['options'].select(id);
       };
     }
 
     if (val.details) {
-      if (!val.details["provider"]) throw Error("Must set details provider");
+      if (!val.details['provider']) throw Error('Must set details provider');
 
       this.detailsComponent = DetailsPage;
       this.detailsComponentProps = {
-        item$: val.details["provider"].item$,
+        item$: val.details['provider'].item$,
         type: val.type,
-        loading$: val.details["provider"].loading$,
+        loading$: val.details['provider'].loading$,
         itemHandler: this.itemHandler,
         removeHandler: this.removeHandler,
-        componentFactories: val.details["componentFactories"],
+        componentFactories: val.details['componentFactories'],
       };
 
-      this.select = val.details["provider"].getData;
-      this.unselect = val.details["provider"].clearData;
+      this.select = val.details['provider'].getData;
+      this.unselect = val.details['provider'].clearData;
     }
 
     if (val.pagination) {
@@ -152,17 +174,10 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     return this._internalOptions;
   }
 
-
-  @ViewChild("contentTpl", { read: ViewContainerRef, static: true })
+  @ViewChild('contentTpl', { read: ViewContainerRef, static: true })
   contentTpl: ViewContainerRef;
 
-  constructor(
-    protected authService: AuthService,
-    protected router: Router,
-    protected alertService: AlertService,
-    protected cd: ChangeDetectorRef,
-    protected translateService: TranslateService
-  ) {
+  constructor() {
     this.detailsButtonOptions = {
       loading$: this.loading$,
       click: () => {
@@ -192,12 +207,18 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
           if (!data?.length) return;
 
           (data[0][field.key] as [])
-              .map((_, index) =>
-                  '__array.' + field.key + '.' + index
-                  + '.' + (field.options.list as IFieldListMetadata).dynamic.headerKey
-                  + '.' + (field.options.list as IFieldListMetadata).dynamic.rowKey
-              )
-              .forEach(item => result.push(item));
+            .map(
+              (_, index) =>
+                '__array.' +
+                field.key +
+                '.' +
+                index +
+                '.' +
+                (field.options.list as IFieldListMetadata).dynamic.headerKey +
+                '.' +
+                (field.options.list as IFieldListMetadata).dynamic.rowKey
+            )
+            .forEach((item) => result.push(item));
 
           return;
         }
@@ -212,7 +233,7 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
     this.list$ = this.provider.list$.pipe(
       map((list) => {
         if (!list) return list;
-        const result =  list.filter((item) => !this.removed.has(item.id));
+        const result = list.filter((item) => !this.removed.has(item.id));
         this.initKeys(list);
 
         return result;
@@ -226,7 +247,5 @@ export abstract class ListBaseComponent<T extends IEntity<string>>
 
   ngOnInit() {}
 
-  protected afterInitOptions(): void {
-
-  }
+  protected afterInitOptions(): void {}
 }
