@@ -1,6 +1,7 @@
 export * from "./filter.component";
 export * from "./date/date.component";
 export * from "./date-with-edit/date-with-edit.component";
+export * from "./date-time/date-time.component";
 export * from "./radio/radio.component";
 export * from "./text/text.component";
 export * from "./flag/flag.component";

@@ -4,6 +4,7 @@ export enum FieldType {
     address = "address",
     currency = "currency",
     date = "date",
+    dateTime = "dateTime",
     dateWithEdit = "dateWithEdit",
     email = "email",
     enum = "enum",
