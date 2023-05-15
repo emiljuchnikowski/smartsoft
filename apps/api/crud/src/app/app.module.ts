@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { APP_FILTER } from "@nestjs/core";
 
 import { CrudShellNestjsModule } from "@smartsoft001/crud-shell-nestjs";
-import { AppExceptionFilter } from "@smartsoft001/nestjs";
+import { AppExceptionFilter, SharedModule } from "@smartsoft001/nestjs";
 
 const dbOptions = {
   host: process.env.DB_SERVER,
@@ -16,6 +16,22 @@ if (process.env.DB_USERNAME) {
   (dbOptions as any).password = process.env.DB_PASSWORD;
 }
 
+const options = {
+  tokenConfig: {
+    secretOrPrivateKey: process.env.TOKEN_CONFIG_SECRET_OR_PRIVATE_KEY,
+    expiredIn: Number(process.env.TOKEN_CONFIG_EXPIRED_IN_SECONDS)
+  },
+  permissions: {
+    create: process.env.PERMISSION_CREATE ? process.env.PERMISSION_CREATE.split(',') : null,
+    read: process.env.PERMISSION_READ ? process.env.PERMISSION_READ.split(',') : null,
+    update: process.env.PERMISSION_UPDATE ? process.env.PERMISSION_UPDATE.split(',') : null,
+    delete: process.env.PERMISSION_DELETE ? process.env.PERMISSION_DELETE.split(',') : null
+  },
+  db: dbOptions,
+  restApi: true,
+  socket: true
+};
+
 /**
  * Required node.js environment variables:
  * - TOKEN_CONFIG_SECRET_OR_PRIVATE_KEY
@@ -23,7 +39,7 @@ if (process.env.DB_USERNAME) {
  * - DB_SERVER
  * - DB_PORT
  * - DB_NAME
- * - DB_ENTITY
+ * - DB_COLLECTION
  *
  * Optional node.js environment variables:
  * - PERMISSION_CREATE
@@ -36,21 +52,8 @@ if (process.env.DB_USERNAME) {
  */
 @Module({
   imports: [
-    CrudShellNestjsModule.forRoot({
-      tokenConfig: {
-        secretOrPrivateKey: process.env.TOKEN_CONFIG_SECRET_OR_PRIVATE_KEY,
-        expiredIn: Number(process.env.TOKEN_CONFIG_EXPIRED_IN_SECONDS)
-      },
-      permissions: {
-        create: process.env.PERMISSION_CREATE ? process.env.PERMISSION_CREATE.split(',') : null,
-        read: process.env.PERMISSION_READ ? process.env.PERMISSION_READ.split(',') : null,
-        update: process.env.PERMISSION_UPDATE ? process.env.PERMISSION_UPDATE.split(',') : null,
-        delete: process.env.PERMISSION_DELETE ? process.env.PERMISSION_DELETE.split(',') : null
-      },
-      db: dbOptions,
-      restApi: true,
-      socket: true
-    })
+    SharedModule.forRoot(options),
+    CrudShellNestjsModule.forRoot(options)
   ],
   providers: [
     {

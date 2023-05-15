@@ -53,7 +53,7 @@ export class CrudShellNestjsModule {
               }),
             ]
           : []),
-        SharedModule.forRoot(options),
+        SharedModule.forFeature(options),
         MongoModule.forRoot(options.db)
       ],
       exports: [
