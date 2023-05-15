@@ -1,4 +1,4 @@
-import { HealthIndicator, HealthIndicatorResult } from '@nestjs/terminus';
+import { HealthIndicator, HealthIndicatorResult, HealthCheckError } from '@nestjs/terminus';
 import { Injectable } from "@nestjs/common";
 
 import { IItemRepository } from '@smartsoft001/domain-core';
@@ -28,7 +28,7 @@ export class HealthDbService extends HealthIndicator {
 
       return this.getStatus(key, true);
     } catch (e) {
-      return this.getStatus(key, false, { message: e.message });
+      throw new HealthCheckError('Database check failed', e);
     }
   }
 }
