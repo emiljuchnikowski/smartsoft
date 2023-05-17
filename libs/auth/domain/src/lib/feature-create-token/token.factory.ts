@@ -101,7 +101,10 @@ export class TokenFactory
     }
 
     const refreshToken = Guid.raw();
-    await this.repository.update(query, {
+    await this.repository.update({
+      ...query,
+      disabled: { $ne: true },
+    } as any, {
       lastLoginDate: new Date(),
       authRefreshToken: refreshToken,
     });
