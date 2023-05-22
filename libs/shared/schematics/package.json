@@ -1,6 +1,6 @@
 {
   "name": "@smartsoft001/schematics",
-  "version": "1.1.51",
+  "version": "1.1.53",
   "schematics": "./src/collection.json",
   "description": "schematics",
   "repository": {
