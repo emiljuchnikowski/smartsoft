@@ -21,7 +21,7 @@ import * as _ from "lodash";
 import * as XLSX from "xlsx";
 import * as Busboy from "busboy";
 import { Readable } from "stream";
-import * as moment from "moment";
+import * as moment from "moment-timezone";
 
 import { CrudService } from "@smartsoft001/crud-shell-app-services";
 import { IUser } from "@smartsoft001/users";
@@ -296,7 +296,7 @@ export class CrudController<T extends IEntity<string>> {
         }
 
         if (item[key] && (item[key] instanceof Date)) {
-          item[key] = moment(item[key]).format('YYYY-MM-DD HH:mm:ss')
+          item[key] = moment(item[key]).tz("Europe/Warsaw").format('YYYY-MM-DD HH:mm:ss')
         }
 
         const val = item[key];
