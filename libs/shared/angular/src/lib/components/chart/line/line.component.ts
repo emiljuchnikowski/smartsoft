@@ -1,6 +1,4 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {ChartDataSets} from "chart.js";
-import {Color} from "ng2-charts";
 import * as chartJs from "chart.js";
 
 import {ChartBaseComponent} from "../base/base.component";
@@ -13,22 +11,20 @@ import {IChartOptions} from "../../../models";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartLineComponent<T> extends ChartBaseComponent<T> {
-  data: ChartDataSets[];
+  data: any[];
   labels: Array<string>;
   lineOptions = {
     responsive: true,
     scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
+      y: {
+        min: 0,
+      }
     }
   };
   legend = true;
   plugins = [];
   type = 'line' as chartJs.ChartType;
-  colors: Color[];
+  colors: any[];
 
   @Input() set options(val: IChartOptions<T>) {
     this.setData(val);

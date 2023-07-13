@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     model: new LoginDto(),
     loading$: this._loading$
   };
-  isSetFingerprint: boolean;
 
   $error: Observable<any>;
 
@@ -66,17 +65,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  async onCheckFingerprint(): Promise<void> {
-    await this.facade.checkFingerprint({ force: true });
-  }
-
   async ngOnInit(): Promise<void> {
     this.menuService.disable();
-
-    setTimeout(() => {
-      this.isSetFingerprint = this.facade.isSetFingerprint;
-      this.cd.detectChanges();
-    }, 1000);
   }
 
   ngOnDestroy() {

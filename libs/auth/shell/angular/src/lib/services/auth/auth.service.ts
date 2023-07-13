@@ -10,7 +10,6 @@ import {
   StorageService,
   AuthService as SharedAuthService,
   AUTH_TOKEN,
-  FingerprintService,
 } from "@smartsoft001/angular";
 
 import { AuthConfig } from "../../auth.config";
@@ -50,7 +49,6 @@ export class AuthService extends SharedAuthService {
     @Optional() private config: AuthConfig,
     private http: HttpClient,
     storageService: StorageService,
-    private fingerprintService: FingerprintService,
     @Optional()
     @Inject(AUTH_REQUEST_BODY_PROVIDER)
     private bodyProvider: IAuthRequestBodyProvider
@@ -154,12 +152,6 @@ export class AuthService extends SharedAuthService {
         this.http.post<IAuthToken>(this.config.apiUrl + "/token", body).pipe(
           tap((token) => {
             this.storageService.setItem(AUTH_TOKEN, JSON.stringify(token));
-
-            try {
-              this.fingerprintService.setData(userCreds);
-            } catch (e) {
-              console.warn(e);
-            }
           }),
           // TODO : fix
           first()

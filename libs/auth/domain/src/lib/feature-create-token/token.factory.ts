@@ -85,7 +85,7 @@ export class TokenFactory
 
     const user = options.userProvider
       ? await options.userProvider.get(query, options.request, options.httpReq)
-      : await this.repository.findOne(query);
+      : await this.repository.findOne(query as any);
 
     if (!options.validationProvider || !options.validationProvider.replace) {
       this.checkUser(options.request, user);

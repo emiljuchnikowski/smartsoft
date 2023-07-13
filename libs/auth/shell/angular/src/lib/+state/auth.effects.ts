@@ -1,14 +1,11 @@
 import { Injectable, Optional } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
-import { pessimisticUpdate } from "@nx/angular";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
-import { Router } from "@angular/router";
+import { NavController, Platform } from "@ionic/angular";
 import { Observable, of } from "rxjs";
 
 import * as AuthActions from "./auth.actions";
 import { AuthService } from "../services/auth/auth.service";
-import { NavController, Platform } from "@ionic/angular";
-import { FingerprintService } from "@smartsoft001/angular";
 
 @Injectable()
 export class AuthEffects {
@@ -23,7 +20,6 @@ export class AuthEffects {
           });
         } catch (error) {
           console.error("Error", error);
-          this.fingerprintService.clearData();
           return AuthActions.initTokenFailure({ error });
         }
       })
@@ -51,7 +47,6 @@ export class AuthEffects {
                 }) as any
             ),
             catchError((error) => {
-              this.fingerprintService.clearData();
               return of(AuthActions.createTokenFailure({ error }));
             })
           )
@@ -72,7 +67,6 @@ export class AuthEffects {
               }) as any
           ),
           catchError((error) => {
-            this.fingerprintService.clearData();
             return of(AuthActions.createTokenFailure({ error }));
           })
         )
@@ -93,7 +87,6 @@ export class AuthEffects {
               }) as any
           ),
           catchError((error) => {
-            this.fingerprintService.clearData();
             return of(AuthActions.createTokenFailure({ error }));
           })
         )
@@ -143,7 +136,6 @@ export class AuthEffects {
     private actions$: Actions,
     @Optional() private service: AuthService,
     private navCtrl: NavController,
-    private platform: Platform,
-    private fingerprintService: FingerprintService
+    private platform: Platform
   ) {}
 }

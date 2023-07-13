@@ -1,10 +1,9 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 
 import {ChartBaseComponent} from "../base/base.component";
-import {ChartDataSets} from "chart.js";
 import * as chartJs from "chart.js";
-import {Color} from "ng2-charts";
 import {IChartOptions} from "../../../models";
+import { ChartConfiguration } from "chart.js";
 
 @Component({
   selector: 'smart-chart-bar',
@@ -13,22 +12,20 @@ import {IChartOptions} from "../../../models";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartBarComponent<T> extends ChartBaseComponent<T> {
-  data: ChartDataSets[];
+  data: any[];
   labels: Array<string>;
-  barOptions = {
+  barOptions: ChartConfiguration['options'] = {
     responsive: true,
     scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
+      y: {
+        min: 0,
+      }
     }
   };
   legend = true;
   plugins = [];
   type = 'bar' as chartJs.ChartType;
-  colors: Color[];
+  colors: any[];
 
   @Input() set options(val: IChartOptions<T>) {
     this.setData(val);

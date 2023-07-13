@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
-import { ChartsModule } from "ng2-charts";
+import { NgChartsModule } from "ng2-charts";
 import { MatLegacyTableModule as MatTableModule } from "@angular/material/legacy-table";
 import { MatSortModule } from "@angular/material/sort";
 import { ColorPickerModule } from "ngx-color-picker";
@@ -251,7 +251,7 @@ export const IMPORTS = [
   HttpClientModule,
   MatTableModule,
   MatSortModule,
-  ChartsModule,
+  NgChartsModule,
   ColorPickerModule,
   NgxEditorModule,
   LazyLoadImageModule,

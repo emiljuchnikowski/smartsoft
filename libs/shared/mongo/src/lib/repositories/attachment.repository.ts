@@ -21,117 +21,82 @@ export class MongoAttachmentRepository<
         super();
     }
 
-    upload(
+    async upload(
         data: { id: string, fileName: string; stream: Stream; mimeType: string; encoding: string },
         options?: { streamCallback?: (r) => void }
     ): Promise<void> {
-        return new Promise<void>((res, rej) => {
-            MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
-                if (err) {
-                    rej(err);
-                    return;
-                }
+        const client = await MongoClient.connect(this.getUrl());
 
-                const db = client.db(this.config.database);
-                const bucket = new mongo.GridFSBucket(db, {
-                    bucketName: this.config.collection
-                });
+        return await new Promise<void>((res, rej) => {
 
-                const writeStream = bucket.openUploadStreamWithId(data.id, data.fileName, {
-                    contentType: data.mimeType,
-                });
+            const db = client.db(this.config.database);
+            const bucket = new mongo.GridFSBucket(db, {
+                bucketName: this.config.collection
+            });
 
-                if (options?.streamCallback) options.streamCallback(writeStream);
+            const writeStream = bucket.openUploadStreamWithId(data.id as any, data.fileName, {
+                contentType: data.mimeType,
+            });
 
-                data.stream.pipe(writeStream);
+            if (options?.streamCallback) options.streamCallback(writeStream);
 
-                writeStream.on('error', error => {
-                    rej(error);
-                });
+            data.stream.pipe(writeStream);
 
-                writeStream.on("finish", () => {
-                    res();
-                });
+            writeStream.on('error', error => {
+                rej(error);
+            });
+
+            writeStream.on("finish", () => {
+                res();
             });
         });
     }
 
-    getInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }> {
-        return new Promise<{ fileName: string, contentType: string, length: number }>((res, rej) => {
-            MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
-                if (err) {
-                    rej(err);
-                    return;
-                }
+    async getInfo(id: string): Promise<{ fileName: string, contentType: string, length: number }> {
+        const client = await MongoClient.connect(this.getUrl());
 
-                const db = client.db(this.config.database);
+        const db = client.db(this.config.database);
 
-                const bucket = new mongo.GridFSBucket(db, {
-                    bucketName: this.config.collection
-                });
-
-                bucket.find({
-                    _id: id
-                }).toArray(
-                    (errDelete, items) => {
-                        if (errDelete) {
-                            rej(errDelete);
-                            return;
-                        }
-
-                        client.close();
-
-                        if (!items[0]) res(items[0]);
-                        else res({
-                            fileName: items[0].filename,
-                            contentType: items[0].contentType,
-                            length: items[0].length
-                        });
-                    }
-                );
-            });
+        const bucket = new mongo.GridFSBucket(db, {
+            bucketName: this.config.collection
         });
+
+        const items = await bucket.find({
+            _id: id as any
+        }).toArray();
+
+        await client
+
+        if (!items[0]) return null;
+
+        return {
+            fileName: items[0].filename,
+            contentType: items[0].contentType,
+            length: items[0].length
+        }
     }
 
-    getStream(id: string, options: { start: number; end: number } | undefined): Promise<Readable> {
-        return new Promise<Readable>((res, rej) => {
-            MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
-                if (err) {
-                    rej(err);
-                    return;
-                }
+    async getStream(id: string, options: { start: number; end: number } | undefined): Promise<Readable> {
+        const client = await MongoClient.connect(this.getUrl());
 
-                const db = client.db(this.config.database);
-                const bucket = new mongo.GridFSBucket(db, {
-                    bucketName: this.config.collection
-                });
-
-                res(bucket.openDownloadStream(id as any, options));
-            });
+        const db = client.db(this.config.database);
+        const bucket = new mongo.GridFSBucket(db, {
+            bucketName: this.config.collection
         });
+
+        return bucket.openDownloadStream(id as any, options)
     }
 
-    delete(id: string): Promise<void> {
-        return new Promise<void>((res, rej) => {
-            MongoClient.connect(this.getUrl(), { useUnifiedTopology: true }, async (err, client) => {
-                if (err) {
-                    rej(err);
-                    return;
-                }
+    async delete(id: string): Promise<void> {
+        const client = await MongoClient.connect(this.getUrl());
 
-                const db = client.db(this.config.database);
-                const bucket = new mongo.GridFSBucket(db, {
-                    bucketName: this.config.collection
-                });
-
-                bucket.delete(id as any, (err2) => {
-                    if (err2) rej(err2);
-                    else res();
-
-                    client.close();
-                });
-            });
+        const db = client.db(this.config.database);
+        const bucket = new mongo.GridFSBucket(db, {
+            bucketName: this.config.collection
         });
+
+        await bucket.delete(id as any);
+        await client.close();
     }
 
     private getUrl(): string {
