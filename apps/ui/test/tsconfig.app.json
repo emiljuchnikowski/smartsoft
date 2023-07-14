@@ -6,6 +6,7 @@
     "target": "ES2022",
     "useDefineForClassFields": false
   },
+  "module": "commonjs",
   "files": [
     "src/main.ts",
     "src/polyfills.ts"

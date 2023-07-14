@@ -2,11 +2,12 @@
 <!-- <ion-split-pane contentId="menu-content" [ngStyle]="{'margin-top': loadingPage ? '4px' : '0'}"> -->
 <ion-split-pane contentId="menu-content">
     <!--  our side menu  -->
-    <ion-menu menuId="start" contentId="menu-content" [hidden]="!(showMenu$ | async) || (!(menuItems$ | async)?.length && !(logged$ | async))">
+    <ion-menu menuId="start" contentId="menu-content" [disabled]="!(showMenu$ | async) || (!(menuItems$ | async)?.length && !(logged$ | async))">
         <ion-header>
             <ion-toolbar>
                 <ion-title>
                     <ion-col size="auto" *ngIf="logo" class="smart-logo-container">
+                        ({{ !(showMenu$ | async) || (!(menuItems$ | async)?.length && !(logged$ | async)) }})
                         <ion-img *ngIf="logo" [src]="logo" class="smart-logo"></ion-img>
                     </ion-col>
                     <ng-container *ngIf="!logo">MENU</ng-container>
