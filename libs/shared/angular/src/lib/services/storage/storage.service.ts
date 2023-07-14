@@ -31,9 +31,9 @@ export class StorageService implements Storage {
 
                 StorageService.data[key] = await this.injector.get(IonicStorage).get(key);
             }
+        } else {
+            StorageService.data = this.cookieService.getAll();
         }
-
-        StorageService.data = this.cookieService.getAll();
     }
 
     public clear(): void {
