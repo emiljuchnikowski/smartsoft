@@ -42,7 +42,7 @@ export class SearchbarComponent implements OnDestroy, AfterViewInit {
     this.control = new UntypedFormControl();
   }
 
-  async setShow(searchEl: IonSearchbar): Promise<void> {
+  async setShow(): Promise<void> {
     this.show = true;
   }
 
