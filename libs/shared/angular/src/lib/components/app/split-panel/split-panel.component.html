@@ -7,7 +7,6 @@
             <ion-toolbar>
                 <ion-title>
                     <ion-col size="auto" *ngIf="logo" class="smart-logo-container">
-                        ({{ !(showMenu$ | async) || (!(menuItems$ | async)?.length && !(logged$ | async)) }})
                         <ion-img *ngIf="logo" [src]="logo" class="smart-logo"></ion-img>
                     </ion-col>
                     <ng-container *ngIf="!logo">MENU</ng-container>
@@ -70,7 +69,7 @@
     </ion-menu>
 
     <!-- the main content -->
-    <div class="ion-page" id="menu-content">
+    <div id="menu-content">
         <router-outlet></router-outlet>
     </div>
 

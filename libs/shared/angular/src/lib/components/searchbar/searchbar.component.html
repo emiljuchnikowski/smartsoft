@@ -1,6 +1,6 @@
 <ion-searchbar
   #searchbar
-  [hidden]="!control || !show"
+  *ngIf="!(!control || !show)"
   animated
   (ionBlur)="tryHide()"
   [formControl]="control"
