@@ -1,28 +1,30 @@
 @import "styles/smart-styles.scss";
-:host {
+:host, .container {
     width: 100%;
     height: 100%;
     margin: 0;
-    background: linear-gradient(33deg, var(--smart-color-secondary), var(--smart-color-tertiary));
-    .smart-bg-container {
-        overflow-y: auto;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 12% 33%;
-        //
-        // @media (max-width: var(--tablet-breakpoint)) {
-        //     padding: 20% 20%;
-        // }
-        // @media (max-width: var(--phone-breakpoint)) {
-        //     padding: 20% 5%;
-        // }
-        @media only screen and (max-width: 992px) {
-            padding: 20% 16%;
-        }
-        @media only screen and (max-width: 420px) {
-            padding: 20% 5%;
-        }
+    background: var(--smart-color-secondary);
+    background: linear-gradient(33deg, var(--smart-color-secondary) 33%, var(--smart-color-tertiary) 100%);
+}
+
+.smart-bg-container {
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 12% 33%;
+    //
+    // @media (max-width: var(--tablet-breakpoint)) {
+    //     padding: 20% 20%;
+    // }
+    // @media (max-width: var(--phone-breakpoint)) {
+    //     padding: 20% 5%;
+    // }
+    @media only screen and (max-width: 992px) {
+        padding: 20% 16%;
+    }
+    @media only screen and (max-width: 420px) {
+        padding: 20% 5%;
     }
 }
 

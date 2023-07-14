@@ -1,57 +1,59 @@
-<div class="smart-bg-container">
-    <ng-content select='.header-container'></ng-content>
-    <smart-card>
-        <ng-content select='.card-title'></ng-content>
+<div class="container">
+    <div class="smart-bg-container">
+        <ng-content select='.header-container'></ng-content>
+        <smart-card>
+            <ng-content select='.card-title'></ng-content>
 
-        <smart-error-context>
-            <div *ngIf="$error | async">
-                {{ 'ERRORS.invalidUsernameOrPassword' | translate }}
+            <smart-error-context>
+                <div *ngIf="$error | async">
+                    {{ 'ERRORS.invalidUsernameOrPassword' | translate }}
+                </div>
+            </smart-error-context>
+
+            <smart-form (invokeSubmit)="login()" [options]="formOptions" class="login-form"></smart-form>
+            <ng-content select='.card-middle'></ng-content>
+            <div class="default-login">
+                <smart-button class="login-button" [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
+                </smart-button>
             </div>
-        </smart-error-context>
 
-        <smart-form (invokeSubmit)="login()" [options]="formOptions" class="login-form"></smart-form>
-        <ng-content select='.card-middle'></ng-content>
-        <div class="default-login">
-            <smart-button class="login-button" [disabled]="formComponent?.form?.invalid" [options]="buttonOptions">{{ "FORM.login" | translate }}
-            </smart-button>
-        </div>
-
-        <div class="social-login" *ngIf="showFb || showGoogle">
-            <ion-grid>
-                <ion-row>
-                    <ion-col>
-                        <p>{{ 'or' | translate }}<br> {{ 'signInQuicklyWith' | translate }}</p>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                        <ng-container *ngIf="showFb">
-                            <smart-button class="fb-login-button" [options]="buttonFbOptions" title="{{ 'FORM.login' | translate }}">
-                                <ion-icon name="logo-facebook"></ion-icon>
-                            </smart-button>
-                        </ng-container>
-                    </ion-col>
-                    <ion-col>
-                        <ng-container *ngIf="showGoogle">
-                            <smart-button class="g-login-button" [options]="buttonGoogleOptions" title="{{ 'FORM.login' | translate }}">
-                                <ion-icon name="logo-google"></ion-icon>
-                            </smart-button>
-                        </ng-container>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+            <div class="social-login" *ngIf="showFb || showGoogle">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <p>{{ 'or' | translate }}<br> {{ 'signInQuicklyWith' | translate }}</p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ng-container *ngIf="showFb">
+                                <smart-button class="fb-login-button" [options]="buttonFbOptions" title="{{ 'FORM.login' | translate }}">
+                                    <ion-icon name="logo-facebook"></ion-icon>
+                                </smart-button>
+                            </ng-container>
+                        </ion-col>
+                        <ion-col>
+                            <ng-container *ngIf="showGoogle">
+                                <smart-button class="g-login-button" [options]="buttonGoogleOptions" title="{{ 'FORM.login' | translate }}">
+                                    <ion-icon name="logo-google"></ion-icon>
+                                </smart-button>
+                            </ng-container>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
 
 
 
 
 
 
-        </div>
+            </div>
 
-        <ng-content select='.card-bottom'></ng-content>
-        <!-- TODO:reset password option -->
-        <!--        <a href="#">-->
-        <!--            <ion-icon name="help-circle-outline"></ion-icon> {{ 'passwordReset' | translate }}</a> -->
-    </smart-card>
-    <ng-content select='.footer-container'></ng-content>
+            <ng-content select='.card-bottom'></ng-content>
+            <!-- TODO:reset password option -->
+            <!--        <a href="#">-->
+            <!--            <ion-icon name="help-circle-outline"></ion-icon> {{ 'passwordReset' | translate }}</a> -->
+        </smart-card>
+        <ng-content select='.footer-container'></ng-content>
+    </div>
 </div>
