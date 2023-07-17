@@ -36,7 +36,7 @@ export class MongoItemRepository<
     await this.collectionContext(async (collection) => {
       try {
         await collection.insertOne(this.getModelToCreate(item as T, user), {
-          session: (repoOptions.transaction as IMongoTransaction).session,
+          session: (repoOptions?.transaction as IMongoTransaction)?.session,
         });
         this.logChange('create', item, repoOptions, user, null);
       } catch (errInsert) {
@@ -54,7 +54,7 @@ export class MongoItemRepository<
       try {
         await collection.deleteMany(
           {},
-          { session: (repoOptions.transaction as IMongoTransaction).session }
+          { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
         this.logChange('clear', null, repoOptions, user, null);
       } catch (errClear) {
@@ -73,7 +73,7 @@ export class MongoItemRepository<
       try {
         await collection.insertMany(
           list.map((item) => this.getModelToCreate(item as T, user)),
-          { session: (repoOptions.transaction as IMongoTransaction).session }
+          { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
         this.logChange('createMany', null, repoOptions, user, null);
       } catch (errInsert) {
@@ -95,7 +95,7 @@ export class MongoItemRepository<
         await collection.replaceOne(
           { _id: item.id as any },
           this.getModelToUpdate(item as T, user, info),
-          { session: (repoOptions.transaction as IMongoTransaction).session }
+          { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
         this.logChange('update', item, repoOptions, user, null);
       } catch (errInsert) {
@@ -119,7 +119,7 @@ export class MongoItemRepository<
           {
             $set: this.getModelToUpdate(item as T, user, info),
           },
-          { session: (repoOptions.transaction as IMongoTransaction).session }
+          { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
         this.logChange('updatePartial', item, repoOptions, user, null);
       } catch (errUpdate) {
@@ -150,7 +150,7 @@ export class MongoItemRepository<
               },
             },
           },
-          { session: (repoOptions.transaction as IMongoTransaction).session }
+          { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
         this.logChange(
           'updatePartialManyByCriteria',
@@ -201,7 +201,7 @@ export class MongoItemRepository<
       try {
         await collection.deleteOne(
           { _id: id as any },
-          { session: (repoOptions.transaction as IMongoTransaction).session }
+          { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
         this.logChange(
           'delete',
@@ -232,7 +232,7 @@ export class MongoItemRepository<
       const item =  await collection.findOne<T>(
         { _id: id as any },
         {
-          session: (repoOptions.transaction as IMongoTransaction).session,
+          session: (repoOptions?.transaction as IMongoTransaction)?.session,
         }
       );
 
