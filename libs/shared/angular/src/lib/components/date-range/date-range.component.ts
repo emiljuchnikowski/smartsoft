@@ -112,7 +112,7 @@ export class DateRangeComponent implements ControlValueAccessor {
     }
 }
 
-export enum FilterBtnConstants {
+export const enum FilterBtnConstants {
     empthyString = '',
     today = 'Today',
     yesterday = 'Yesterday',

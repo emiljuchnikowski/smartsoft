@@ -132,12 +132,12 @@ export interface IListPaginationOptions {
   totalPages$: Observable<number>
 }
 
-export enum PaginationMode {
+export const enum PaginationMode {
   infiniteScroll = "infiniteScroll",
   singlePage = "singlePage"
 }
 
-export enum ListMode {
+export const enum ListMode {
   mobile = "mobile",
   desktop = "desktop",
   masonryGrid = "masonryGrid"

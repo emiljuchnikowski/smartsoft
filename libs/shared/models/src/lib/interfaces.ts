@@ -1,6 +1,6 @@
 import {Observable} from "rxjs";
 
-enum FieldType {
+export const enum FieldType {
     address = "address",
     currency = "currency",
     date = "date",
@@ -34,11 +34,11 @@ enum FieldType {
     float = "float"
 }
 
-interface ISpecification {
+export interface ISpecification {
     criteria: any;
 }
 
-interface IModelFilter {
+export interface IModelFilter {
     label?: string;
     fieldType?: FieldType;
     key: string;
@@ -46,24 +46,24 @@ interface IModelFilter {
     possibilities$?: Observable<{ id: any, text: string }[]>;
 }
 
-interface IModelStep {
+export interface IModelStep {
     number: number;
     name: string;
 }
 
-interface IModelMetadata {
+export interface IModelMetadata {
     titleKey?: string;
     permissions?: Array<string>;
     filters?: Array<IModelFilter>;
 }
 
-interface IFieldMetadata extends IFieldModifyMetadata {
+export interface IFieldMetadata extends IFieldModifyMetadata {
     type?: FieldType;
     classType?: any;
     possibilities?: Array<any> | any;
 }
 
-interface IFieldModifyMetadata {
+export interface IFieldModifyMetadata {
     required?: boolean;
     focused?: boolean;
     confirm?: boolean;
@@ -78,11 +78,11 @@ interface IFieldModifyMetadata {
     step?: IModelStep;
 }
 
-interface IFieldEditMetadata extends IFieldModifyMetadata {
+export interface IFieldEditMetadata extends IFieldModifyMetadata {
     multi?: boolean;
 }
 
-interface IFieldListMetadata {
+export interface IFieldListMetadata {
     order?: number;
     filter?: boolean;
     permissions?: Array<string>;
@@ -94,13 +94,13 @@ interface IFieldListMetadata {
     dynamic?: { headerKey: string, rowKey: string }
 }
 
-interface IFieldDetailsMetadata {
+export interface IFieldDetailsMetadata {
     order?: number;
     permissions?: Array<string>;
     enabled?: ISpecification;
 }
 
-interface IModelOptions {
+export interface IModelOptions {
     titleKey?: string;
     filters?: Array<IModelFilter>;
     create?: IModelModeOptions;
@@ -110,7 +110,7 @@ interface IModelOptions {
     remove?: IModelModeOptions;
     customs?: Array<IModelModeOptionsCustom>;
     /**
-     * @desc - Allow field data
+     * @desc - Allow export field data
      */
     export?: boolean;
     /**
@@ -119,16 +119,16 @@ interface IModelOptions {
     import?: boolean;
 }
 
-interface IModelModeOptions {
+export interface IModelModeOptions {
     permissions?: Array<string>;
     enabled?: ISpecification;
 }
 
-interface IModelModeOptionsCustom extends IModelModeOptions {
+export interface IModelModeOptionsCustom extends IModelModeOptions {
     mode: string;
 }
 
-interface IFieldOptions extends IFieldMetadata {
+export interface IFieldOptions extends IFieldMetadata {
     create?: IFieldModifyMetadata | boolean;
     update?: IFieldEditMetadata | boolean;
     list?: IFieldListMetadata | boolean;
@@ -138,34 +138,14 @@ interface IFieldOptions extends IFieldMetadata {
     info?: string;
 }
 
-interface IModelMetadataCustom extends IModelMetadata {
+export interface IModelMetadataCustom extends IModelMetadata {
     mode: string
 }
 
-interface IFieldUniqueMetadata {
+export interface IFieldUniqueMetadata {
     withFields?: Array<string>;
 }
 
-interface IFieldCustomMetadata extends IFieldModifyMetadata, IFieldListMetadata {
+export interface IFieldCustomMetadata extends IFieldModifyMetadata, IFieldListMetadata {
     mode: string;
 }
-
-export {
-    FieldType,
-    ISpecification,
-    IModelFilter,
-    IModelStep,
-    IModelMetadata,
-    IFieldMetadata,
-    IFieldModifyMetadata,
-    IFieldEditMetadata,
-    IFieldListMetadata,
-    IFieldDetailsMetadata,
-    IModelOptions,
-    IModelModeOptions,
-    IModelModeOptionsCustom,
-    IFieldOptions,
-    IModelMetadataCustom,
-    IFieldUniqueMetadata,
-    IFieldCustomMetadata
-};
