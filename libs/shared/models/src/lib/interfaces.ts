@@ -1,6 +1,6 @@
 import {Observable} from "rxjs";
 
-export const enum FieldType {
+enum FieldTypeDef {
     address = "address",
     currency = "currency",
     date = "date",
@@ -33,6 +33,7 @@ export const enum FieldType {
     image = "image",
     float = "float"
 }
+export const FieldType: typeof FieldTypeDef = FieldTypeDef;
 
 export interface ISpecification {
     criteria: any;
@@ -40,7 +41,7 @@ export interface ISpecification {
 
 export interface IModelFilter {
     label?: string;
-    fieldType?: FieldType;
+    fieldType?: FieldTypeDef;
     key: string;
     type: '=' | '!=' | '>=' | '<=' | '<' | '>' | '~=';
     possibilities$?: Observable<{ id: any, text: string }[]>;
@@ -58,7 +59,7 @@ export interface IModelMetadata {
 }
 
 export interface IFieldMetadata extends IFieldModifyMetadata {
-    type?: FieldType;
+    type?: FieldTypeDef;
     classType?: any;
     possibilities?: Array<any> | any;
 }
