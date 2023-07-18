@@ -15,7 +15,7 @@ export interface IChartColor {
     background?: string;
 }
 
-export const enum ChartType {
+export enum ChartType {
     line = 'line',
     bar = 'bar'
 }

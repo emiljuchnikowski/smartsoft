@@ -2,7 +2,7 @@ import { Pipe, PipeTransform, Type } from "@angular/core";
 import { Memoize } from "lodash-decorators";
 import { TranslateService } from "@ngx-translate/core";
 
-import { FieldType, getModelFieldOptions } from "@smartsoft001/models";
+import { FieldType, FieldTypeDef, getModelFieldOptions } from "@smartsoft001/models";
 
 import { ICellPipe } from "../../models/interfaces";
 
@@ -17,7 +17,7 @@ export class ListCellPipe<T> implements PipeTransform {
     key: string,
     pipe: ICellPipe<T>,
     type?: Type<T>
-  ): { value?: any; type?: FieldType } {
+  ): { value?: any; type?: FieldTypeDef } {
     if (!obj) return {};
 
     let result;
@@ -49,7 +49,7 @@ export class ListCellPipe<T> implements PipeTransform {
   }
 
   @Memoize()
-  private getFieldType(type: Type<T>, key: string): FieldType {
+  private getFieldType(type: Type<T>, key: string): FieldTypeDef {
     if (!type) return null;
 
     const options = getModelFieldOptions(new type(), key);
