@@ -1,8 +1,9 @@
 import 'reflect-metadata';
 
+import {ObjectService} from "@smartsoft001/utils";
+
 import * as symbols from "../../symbols";
 import {FieldType, IFieldOptions} from "../../interfaces";
-import {ObjectService} from "@smartsoft001/utils";
 
 export const Field = FieldDecorator;
 export function FieldDecorator(options?: IFieldOptions) {

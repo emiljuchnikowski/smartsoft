@@ -1,6 +1,6 @@
 import {Observable} from "rxjs";
 
-export enum FieldType {
+export declare enum FieldType {
     address = "address",
     currency = "currency",
     date = "date",
