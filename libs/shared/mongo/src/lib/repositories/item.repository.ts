@@ -11,7 +11,7 @@ import {
 } from '@smartsoft001/domain-core';
 import { IUser } from '@smartsoft001/users';
 import { ItemChangedData } from '@smartsoft001/crud-shell-dtos';
-import { GuidService, ObjectService } from '@smartsoft001/utils';
+import { ObjectService } from '@smartsoft001/utils';
 import { getModelFieldsWithOptions } from '@smartsoft001/models';
 
 import { MongoConfig } from '../mongo.config';
@@ -22,8 +22,6 @@ import { IMongoTransaction } from '../mongo.unitofwork';
 export class MongoItemRepository<
   T extends IEntity<string>
 > extends IItemRepository<T> {
-  readonly useUnifiedTopology = false;
-
   constructor(protected config: MongoConfig) {
     super();
   }
@@ -38,9 +36,9 @@ export class MongoItemRepository<
         await collection.insertOne(this.getModelToCreate(item as T, user), {
           session: (repoOptions?.transaction as IMongoTransaction)?.session,
         });
-        this.logChange('create', item, repoOptions, user, null);
+        this.logChange('create', item, repoOptions, user, null).then();
       } catch (errInsert) {
-        this.logChange('create', item, repoOptions, user, errInsert);
+        this.logChange('create', item, repoOptions, user, errInsert).then();
         throw errInsert;
       }
     });
@@ -56,9 +54,9 @@ export class MongoItemRepository<
           {},
           { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
-        this.logChange('clear', null, repoOptions, user, null);
+        this.logChange('clear', null, repoOptions, user, null).then();
       } catch (errClear) {
-        this.logChange('clear', null, repoOptions, user, errClear);
+        this.logChange('clear', null, repoOptions, user, errClear).then();
         throw errClear;
       }
     });
@@ -75,9 +73,9 @@ export class MongoItemRepository<
           list.map((item) => this.getModelToCreate(item as T, user)),
           { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
-        this.logChange('createMany', null, repoOptions, user, null);
+        this.logChange('createMany', null, repoOptions, user, null).then();
       } catch (errInsert) {
-        this.logChange('createMany', null, repoOptions, user, errInsert);
+        this.logChange('createMany', null, repoOptions, user, errInsert).then();
         throw errInsert;
       }
     });
@@ -97,9 +95,9 @@ export class MongoItemRepository<
           this.getModelToUpdate(item as T, user, info),
           { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
-        this.logChange('update', item, repoOptions, user, null);
+        this.logChange('update', item, repoOptions, user, null).then();
       } catch (errInsert) {
-        this.logChange('update', item, repoOptions, user, errInsert);
+        this.logChange('update', item, repoOptions, user, errInsert).then();
         throw errInsert;
       }
     });
@@ -121,9 +119,9 @@ export class MongoItemRepository<
           },
           { session: (repoOptions?.transaction as IMongoTransaction)?.session }
         );
-        this.logChange('updatePartial', item, repoOptions, user, null);
+        this.logChange('updatePartial', item, repoOptions, user, null).then();
       } catch (errUpdate) {
-        this.logChange('updatePartial', item, repoOptions, user, errUpdate);
+        this.logChange('updatePartial', item, repoOptions, user, errUpdate).then();
         throw errUpdate;
       }
     });
@@ -161,7 +159,7 @@ export class MongoItemRepository<
           repoOptions,
           user,
           null
-        );
+        ).then();
       } catch (errUpdate) {
         this.logChange(
           'updatePartialManyByCriteria',
@@ -172,7 +170,7 @@ export class MongoItemRepository<
           repoOptions,
           user,
           errUpdate
-        );
+        ).then();
         throw errUpdate;
       }
     });
@@ -211,7 +209,7 @@ export class MongoItemRepository<
           repoOptions,
           user,
           null
-        );
+        ).then();
       } catch (errDelete) {
         this.logChange(
           'delete',
@@ -221,7 +219,7 @@ export class MongoItemRepository<
           repoOptions,
           user,
           errDelete
-        );
+        ).then();
         throw errDelete;
       }
     });
@@ -381,28 +379,17 @@ export class MongoItemRepository<
     }
   }
 
-  protected async  getCount(criteria: any, collection): Promise<any> {
+  protected async  getCount(criteria: any, collection: any): Promise<any> {
     this.convertIdInCriteria(criteria);
     return await collection.countDocuments(criteria);
   }
 
-  protected getInfo(id: string, collection): Promise<any> {
-    return new Promise<any>((res, rej) => {
-      collection
-        .aggregate([{ $match: { _id: id } }, { $project: { __info: 1 } }])
-        .toArray((err, array) => {
-          if (err) {
-            rej(err);
-            return;
-          }
+  protected getInfo(id: string, collection: Collection<any>): Promise<any> {
+    const array = collection
+      .aggregate([{ $match: { _id: id } }, { $project: { __info: 1 } }])
+      .toArray();
 
-          if (!array || !array[0]) {
-            res(null);
-          }
-
-          res(array[0]['__info']);
-        });
-    });
+    return array[0]['__info'];
   }
 
   protected getModelToCreate(item: T, user: IUser): T {
@@ -433,7 +420,7 @@ export class MongoItemRepository<
   protected getModelToUpdate(
     item: { id: string },
     user: IUser,
-    info
+    info: any
   ): { id: string } {
     const result = ObjectService.removeTypes(item);
     result['_id'] = result.id;
@@ -466,7 +453,7 @@ export class MongoItemRepository<
     return getMongoUrl(this.config);
   }
 
-  protected async  logChange(type, item, options, user, error) {
+  protected async  logChange(type: any, item: any, options: any, user: any, error: any) {
     const client = await MongoClient.connect(this.getUrl());
 
     const db = client.db(this.config.database);
