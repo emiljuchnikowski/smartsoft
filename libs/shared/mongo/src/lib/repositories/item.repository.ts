@@ -384,12 +384,12 @@ export class MongoItemRepository<
     return await collection.countDocuments(criteria);
   }
 
-  protected getInfo(id: string, collection: Collection<any>): Promise<any> {
-    const array = collection
+  protected async getInfo(id: string, collection: Collection<any>): Promise<any> {
+    const array = await collection
       .aggregate([{ $match: { _id: id } }, { $project: { __info: 1 } }])
       .toArray();
 
-    return array[0]['__info'];
+    return array[0] ? array[0]['__info'] : {};
   }
 
   protected getModelToCreate(item: T, user: IUser): T {
