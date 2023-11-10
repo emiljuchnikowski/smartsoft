@@ -94,7 +94,7 @@
     "class-validator": "0.13.0",
     "combined-stream": "^1.0.8",
     "core-js": "3.7.0",
-    "crypto-js": "^4.1.1",
+    "crypto-js": "^4.2.0",
     "fastify": "^4.13.0",
     "fastify-multipart": "^5.4.0",
     "flatted": "^3.2.4",
