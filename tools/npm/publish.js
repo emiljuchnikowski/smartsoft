@@ -9,18 +9,18 @@ const libs = [
     /*
      * SHARED
      */
-    {
-        name: "shared-utils",
-        path: "libs/shared/utils"
-    },
-    {
-        name: "shared-users",
-        path: "libs/shared/users"
-    },
-    {
-        name: "shared-models",
-        path: "libs/shared/models"
-    },
+    // {
+    //     name: "shared-utils",
+    //     path: "libs/shared/utils"
+    // },
+    // {
+    //     name: "shared-users",
+    //     path: "libs/shared/users"
+    // },
+    // {
+    //     name: "shared-models",
+    //     path: "libs/shared/models"
+    // },
     {
         name: "shared-domain-core",
         path: "libs/shared/domain-core"
