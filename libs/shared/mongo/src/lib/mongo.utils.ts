@@ -6,5 +6,12 @@ export function getMongoUrl(config: MongoConfig): string {
         url = `mongodb://${config.username}:${config.password}@${config.host}:${config.port}`;
     else url = `mongodb://${config.host}:${config.port}`;
 
-    return url + "?authSource=" + config.database;
+    url = url + "?authSource=" + config.database;
+
+    if (config.host.indexOf("ondigitalocean.com") > -1) {
+        url = url.replace("mongodb://", "mongodb+srv://");
+        url = url + "&tls=true";
+    }
+
+    return url;
 }
