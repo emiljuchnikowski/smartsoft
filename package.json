@@ -69,7 +69,7 @@
     "@nestjs/mongoose": "^10.0.0",
     "@nestjs/passport": "^10.0.0",
     "@nestjs/platform-express": "^10.0.5",
-    "@nestjs/platform-fastify": "^10.0.5",
+    "@nestjs/platform-fastify": "^11.1.12",
     "@nestjs/platform-socket.io": "^10.0.5",
     "@nestjs/platform-ws": "^10.0.5",
     "@nestjs/swagger": "7.1.1",
