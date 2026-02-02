@@ -95,7 +95,7 @@
     "combined-stream": "^1.0.8",
     "core-js": "3.7.0",
     "crypto-js": "^4.1.1",
-    "fastify": "^4.13.0",
+    "fastify": "^5.7.3",
     "fastify-multipart": "^5.4.0",
     "flatted": "^3.2.4",
     "guid-typescript": "1.0.9",
